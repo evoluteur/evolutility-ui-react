@@ -13,72 +13,30 @@ import NavLink from '../../Widgets/NavLink'
 
 export default React.createClass({
 
-	fields: {},
-
-	getInitialState: function() {
-  
-	  	 return {
-	  	 	defaultData:this.props.data || {}
-	  	 }
-/*
-	  	var s={}
-	  	debugger
-	    this.props.fields.forEach(function(f) {
-	    	s[f.id] = this.props.data[f.id]
-	    })
-	    return s*/
-	},
-
 	clickSave(evt){
 		var data=this.getFormData()
+		// todo:
 		console.log(data)
-		//alert('test aaaaa')
-	},
-
-	fieldChange(evt) {
-		var fid=evt.target.id
-		var f=this.fields[fid]
-		var s={}
-
-		var v = evt.target.value
-		if(f.type==='boolean'){
-			s[fid]=evt.target.checked
-		}else{
-			s[fid]=v
-		}
-		this.setState(s)
-	},
-	fieldClick(i, props) {
-		 //debugger
-		//this.refs.title
-	},
-	fieldLeave(i, props) {
-		//debugger
 	},
 
 	getFormData() {
-var v= this.props
-//var v=deepCopy(this.props);
-
-//v[]=this.state
-	    return v
+	  	var s={}
+	    this.fields.forEach((f) => {
+	    	s[f.id] = this.refs[f.id].getValue()
+	    })
+	    return s
   	},
 
   render() {
-  	 debugger
+    console.log('render Edit')
     var id = this.props.params.id || 0
     var e=this.props.params.entity
     var ep='/'+e+'/'
 
     var props=this.props.data
-    //this.props.callbacks
-    var cbs={
-          //this.handleClick.bind(this, i);
-			click: this.fieldClick, //.bind(this, i, props),
-			change: this.fieldChange, //.bind(this, i, props),
-			leave: this.fieldLeave //.bind(this, i, props)//this.fieldLeave.bind(this)
-			//click=handleClick.bind(this, i, props)
-		}
+	this.fields= []
+	this.fieldsH= {}
+
 	var that=this
 
     return (
@@ -88,12 +46,14 @@ var v= this.props
 		    	<div className="evol-fset">
 				  {
 				  	demo[e].fields.map(function(f, idx){
-					  	that.fields[f.id]=f
+					  	that.fields.push(f)
+					  	that.fieldsH[f.id]=f
 				  		return (
-					    	<Field key={f.id} 
+					    	<Field 
+					    		key={f.id} 
+					    		ref={f.id}
 					    		meta={f} 
-					    		data={id ? demo[e].data[id-1][f.id] : null} 
-					    		callbacks={cbs}
+					    		data={id ? demo[e].data[id-1][f.id] : null}
 					    		pixPath={'../../'+e+'/'}
 					    		entity={e}
 					    	/>

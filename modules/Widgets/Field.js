@@ -14,34 +14,25 @@ export default React.createClass({
 
 	_fieldElem(f, d, cbs){
 		if(f.type==='boolean'){
-			this.fElem = <input 
-							key={f.id} 
-							id={f.id} 
-							type="checkbox" 
-							defaultChecked={d?true:false}
-					        onChange={cbs.change || null}
-					        onClick={cbs.click || null}
-					        onBlur={cbs.leave || null}
-					    />
+			return <input key={f.id} 
+						ref='e'
+						type="checkbox" 
+						defaultChecked={d?true:false}
+				    />
 		}else if(f.type==='text' && f.height>1){
-			this.fElem = <textarea 
-							key={f.id} 
-							id={f.id} 
-							rows={f.height} 
-							defaultValue={d} 
-							className="form-control" 
-					        onChange={cbs.change || null}
-					        onClick={cbs.click || null}
-					        onBlur={cbs.leave || null}
-						/>
+			return <textarea 
+						key={f.id} 
+						ref='e'
+						rows={f.height} 
+						defaultValue={d} 
+						className="form-control" 
+					/>
 		}else if(f.type==='lov'||f.type==='list'){
-			this.fElem = (
-				<select key={f.id} 
-							id={f.id} className="form-control" defaultValue={d}
-					        onChange={cbs.change || null}
-					        onClick={cbs.click || null}
-					        onBlur={cbs.leave || null}
-					        >
+			return (
+				<select ref='e' 
+						className="form-control" 
+						defaultValue={d}
+				>
 					<option/>
 					{f.list.map(function(i,idx){
 					  return <option key={idx} value={i.id}>{i.text}</option>
@@ -49,19 +40,19 @@ export default React.createClass({
 				</select>
 			)
 		}else if(f.type==='image'){
-			this.fElem = (
-				<img src={(this.props.pixPath || '')+d} className="img-thumbnail" />
+			return (
+				<img src={(this.props.pixPath || '')+d} 
+					ref='e'
+					className="img-thumbnail" 
+				/>
 			)
 		} else{
-			this.fElem = <input 
+			return <input 
 				key={f.id} 
-				id={f.id}
+				ref='e'
 				type={f.type==='integer' || f.type==='decimal' ? 'number' : f.type} 
 				defaultValue={d} 
 		        //value={this.state.value}
-		        onChange={cbs.change || null}
-		        onClick={cbs.click || null}
-		        onBlur={cbs.leave || null}
 				className="form-control"
 			/>
 		}
@@ -79,7 +70,12 @@ export default React.createClass({
 	},
 
 	getValue(){
-		return this.fElem.value
+		var e=this.refs.e
+		if(e.type==='checkbox'){
+			return e.checked ? true : false
+		}else{
+			return e.value
+		}
 	},
 
  	render() {
