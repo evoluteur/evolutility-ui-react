@@ -1,6 +1,6 @@
 import React from 'react'
 
-import demo from '../../Models/demo'
+import models from '../../Models/all_models'
 import Field from '../../Widgets/Field'
 import Panel from '../../Widgets/Panel'
 import NavLink from '../../Widgets/NavLink'
@@ -37,7 +37,9 @@ export default React.createClass({
                           <tr>
                             <td></td>
                             <td> 
-                                <NavLink to={ep+"edit/"+id} className="btn btn-primary"><i className="glyphicon glyphicon-edit"></i> edit</NavLink>
+                                <NavLink to={ep+"edit/"+id} className="btn btn-primary">
+                                  <i className="glyphicon glyphicon-edit"></i> edit
+                                </NavLink>
                                 <button className="btn btn-secondary">Cancel</button>
                             </td>
                          </tr>

@@ -6,7 +6,7 @@
 
 import React from 'react'
 
-import demo from '../../Models/demo'
+import models from '../../Models/all_models'
 import Field from '../../Widgets/Field'
 import Panel from '../../Widgets/Panel'
 import NavLink from '../../Widgets/NavLink'
