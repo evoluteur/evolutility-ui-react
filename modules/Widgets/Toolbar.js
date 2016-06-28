@@ -61,7 +61,7 @@ var mm = {
 	],
 	actions:[
 	    //{id:'browse', label: i18nTool.bBrowse, icon:'eye', n:'1', readonly:false},
-	    {id:'edit', label: i18nTool.bEdit, icon:'edit', n:'1', readonly:false},
+	    //{id:'edit', label: i18nTool.bEdit, icon:'edit', n:'1', readonly:false},
 	    {id:'save', label: i18nTool.bSave, icon:'floppy-disk', n:'1', readonly:false},
 	    {id:'del', label: i18nTool.bDelete, icon:'trash', n:'1', readonly:false}
 	],
