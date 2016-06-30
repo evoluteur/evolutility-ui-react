@@ -5,38 +5,44 @@ import Format from '../utils/Format'
 export default React.createClass({
 	
 	propTypes: {
-		meta: React.PropTypes.object,
-		//data: React.PropTypes.array,
+		meta: React.PropTypes.object.isRequired,
+		//data: React.PropTypes.???,
 		entity: React.PropTypes.string,
 	},
 
-	fElem: {},
-
 	getInitialState: function() {
-		//var f=this.props.meta
-		return {data: this.props.data}//{value: 'Hello!'};
+		return {data: this.props.data}
 	},
 
 	_fieldElem(f, d, cbs){
 		if(f.type==='boolean'){
-			return <input key={f.id} 
+			return <input 
+						id={f.id} 
+						key={f.id} 
 						ref='e'
 						type="checkbox" 
-						defaultChecked={d?true:false}
+						checked={d?true:false}
+						onChange={cbs.change}//.bind(this)
 				    />
 		}else if(f.type==='text' && f.height>1){
 			return <textarea 
+						id={f.id} 
 						key={f.id} 
 						ref='e'
 						rows={f.height} 
-						defaultValue={d} 
 						className="form-control" 
+						value={d} 
+						onChange={cbs.change}//.bind(this)
 					/>
 		}else if(f.type==='lov'||f.type==='list'){
 			return (
-				<select ref='e' 
+				<select 
+						id={f.id} 
+						key={f.id}
+						ref='e' 
 						className="form-control" 
-						defaultValue={d}
+						value={d}
+						onChange={cbs.change}
 				>
 					<option/>
 					{f.list.map(function(i,idx){
@@ -45,23 +51,49 @@ export default React.createClass({
 				</select>
 			)
 		}else if(f.type==='image'){
-			return (
-				<img src={(this.props.pixPath || '')+d} 
+			var txtField = ''/*<input 
+					id={f.id} 
 					ref='e'
-					className="img-thumbnail" 
-				/>
-			)
-		} else{
-			return <input 
-				key={f.id} 
-				ref='e'
-				type={f.type==='integer' || f.type==='decimal' ? 'number' : f.type} 
-				defaultValue={d} 
-		        //value={this.state.value}
-				className="form-control"
-			/>
+					type='text' 
+					value={d}
+					onChange={cbs.change}
+					className="form-control"
+				/>*/
+			if(d){
+				return (
+					<div>
+						{txtField}
+						<img 
+							id={f.id} 
+						 	key={f.id}
+							ref='e'
+							className="img-thumbnail" 
+							src={(this.props.pixPath || '')+d} 
+						/>
+					</div>
+				)	
+			}else{
+				return (
+					<div>
+						{txtField}
+					<div 
+						id={f.id} 
+					 	key={f.id}
+						ref='e'
+					>N/A</div>
+					</div>
+				)
+			}
 		}
-		return this.fElem
+		return <input 
+			id={f.id} 
+			ref='e'
+			type={f.type==='integer' || f.type==='decimal' ? 'number' : f.type} 
+			value={d}
+			onChange={cbs.change}
+			className="form-control"
+		/>
+
 	},
 
 	_fieldElemReadOnly(f, d){
@@ -85,7 +117,6 @@ export default React.createClass({
 
  	render() {
 		var f = this.props.meta || {type: 'text'}
-		var data = this.state.data || null //this.props.data || 
 	 	var readOnly = this.props.readOnly || f.readOnly
 	 	var cbs = this.props.callbacks || {}
 
@@ -96,8 +127,8 @@ export default React.createClass({
 						{f.required && !(f.readOnly || readOnly) ? <span className="evol-required">*</span> : null}
 					</label>
 				</div>
-				{readOnly ? this._fieldElemReadOnly(f, data)
-								 : this._fieldElem(f, data, cbs)}
+				{readOnly ? this._fieldElemReadOnly(f, this.props.data || null )
+								 : this._fieldElem(f, this.props.data || null , cbs)}
 			</div>
 		)
 	  }
