@@ -1,32 +1,37 @@
 import React from 'react'
 
 import models from '../../Models/all_models'
+import One from './One'
 import Field from '../../Widgets/Field'
 import Panel from '../../Widgets/Panel'
 import NavLink from '../../Widgets/NavLink'
 
 export default React.createClass({
 
+  mixins: [One()],
+
   clickCancel(evt){
 
   },
 
   render() {
-    var e=this.props.params.entity
+    var e=this.props.params.entity || null
     var ep='/'+e+'/'
     var id=this.props.params.id || 1
-    //var d=
+    var data = this.state.data || {}
+
     return (
       <div className="evo-one-browse">
         <div className="evol-pnls">
           <Panel>
             <div className="evol-fset">
-              {demo[e].fields.map(function(f, idx){
+              {models[e].fields.map(function(f, idx){
+                console.log(f.id+' = '+data[f.id])
                 return (
                     <Field 
                       key={idx} 
                       meta={f} 
-                      data={demo[e].data[id-1][f.id]} 
+                      data={data[f.id]} 
                       readOnly={true}
                       entity={e}
                     />
