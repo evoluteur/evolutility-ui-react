@@ -1,9 +1,16 @@
 import React from 'react'
 
-import Format from '../../Core/Format'
+import Format from '../../utils/Format'
 import NavLink from '../../Widgets/NavLink'
 
 export default React.createClass({
+
+  propTypes: {
+    fields: React.PropTypes.array,
+    //data: React.PropTypes.string,
+    entity: React.PropTypes.string
+  },
+
   render() {
   	var d=this.props.data || {}
     var fs = this.props.fields || []

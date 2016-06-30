@@ -1,12 +1,12 @@
 import React from 'react'
 
-import Format from '../Core/Format'
+import Format from '../utils/Format'
 
 export default React.createClass({
 	
 	propTypes: {
 		meta: React.PropTypes.object,
-		data: React.PropTypes.array,
+		//data: React.PropTypes.array,
 		entity: React.PropTypes.string,
 	},
 

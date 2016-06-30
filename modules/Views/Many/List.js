@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Format from '../../Core/Format'
 import Dico from '../../utils/dico'
+import Format from '../../utils/Format'
 import NavLink from '../../Widgets/NavLink'
 import Many from './Many'
 import models from '../../Models/all_models'
