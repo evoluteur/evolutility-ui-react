@@ -33,7 +33,7 @@ var i18nTool = {
     //bRefresh: 'Refresh',
     //bPrint: 'Print',
     bSave: 'Save',
-    bSaveAdd: 'Save and Add Another',
+    //bSaveAdd: 'Save and Add Another',
     bOK: 'OK',
     bCancel: 'Cancel',
 
@@ -62,7 +62,7 @@ var mm = {
 	actions:[
 	    //{id:'browse', label: i18nTool.bBrowse, icon:'eye', n:'1', readonly:false},
 	    //{id:'edit', label: i18nTool.bEdit, icon:'edit', n:'1', readonly:false},
-	    {id:'save', label: i18nTool.bSave, icon:'floppy-disk', n:'1', readonly:false},
+	    //{id:'save', label: i18nTool.bSave, icon:'floppy-disk', n:'1', readonly:false},
 	    {id:'del', label: i18nTool.bDelete, icon:'trash', n:'1', readonly:false}
 	],
 	moreActions:[
@@ -105,8 +105,8 @@ export default React.createClass({
   },
 
   render() {
-    var id =this.props.oid || ''
     var e=this.props.entity || 'todo'
+    var id = this.props.params.id || ''
     var ep='/'+e+'/'
     var cStyle={ 
         color: 'black',
@@ -118,9 +118,9 @@ export default React.createClass({
             return <li key={idx}><a href="javascript:void(0)"><i className={'glyphicon glyphicon-'+m.icon}></i> {m.label}</a></li>
         }
         return <li key={idx}><NavLink to={ep+m.id} activeStyle={cStyle}><i className={'glyphicon glyphicon-'+m.icon}></i> {m.label}</NavLink></li>
-    }
-    function button(m, idx, cb){
-        return <li key={idx} onClick={cb}><div><i className={'glyphicon glyphicon-'+m.icon}></i> {m.label}</div></li>
+    } 
+    function buttonLink(label, view, icon){
+        return <li><NavLink to={ep+view+'/'+id} activeStyle={cStyle}><i className={'glyphicon glyphicon-'+icon}></i> {label}</NavLink></li>
     }
 
     return (
@@ -128,16 +128,17 @@ export default React.createClass({
         <ul role="nav" className="nav nav-pills pull-left">
             { mm.always.map(buttonRoute)}
         </ul>
-        <ul role="nav" className="nav nav-pills pull-left">
-            <li className="divider-h" />
-            {mm.actions.map(buttonRoute)}
-        </ul>
+        {id ? (<ul role="nav" className="nav nav-pills pull-left">
+                    <li className="divider-h" />
+                    {mm.actions.map(buttonRoute)}
+                </ul>) : ''
+        }
         <ul role="nav" className="nav nav-pills pull-right">
-          <li><NavLink to={ep+"browse/"+id} activeStyle={cStyle}><i className="glyphicon glyphicon-eye-open"></i> browse</NavLink></li>
-          <li><NavLink to={ep+"edit/"+id} activeStyle={cStyle}><i className="glyphicon glyphicon-edit"></i> edit</NavLink></li>
           <li className="divider-h" />
-          <li><NavLink to={ep+"list"} activeStyle={cStyle}><i className="glyphicon glyphicon-th-list"></i> list</NavLink></li>
-          <li><NavLink to={ep+"cards"} activeStyle={cStyle}><i className="glyphicon glyphicon-th-large"></i> cards</NavLink></li>
+            {id?buttonLink('Browse', 'browse', 'eye-open'):''}
+            {id?buttonLink('Edit', 'edit', 'edit'):''}
+            {id?'':buttonLink('List', 'list', 'th-list')}
+            {id?'':buttonLink('Cards', 'cards', 'th-large')}
         </ul>
         <div className="clearfix"/>
       </div>
