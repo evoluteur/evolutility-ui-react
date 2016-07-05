@@ -1,0 +1,29 @@
+.active {
+  color: green;
+}
+.TopNav{
+	background-color: #2072a7;
+	color: white;
+	position: fixed;
+	padding:0 10px;
+	top:0;
+	left:0;
+	width:100%;
+	z-index: 1000;
+}
+.TopNavComplement{
+	display: block;
+	height: 130px;
+}
+.RightNav{
+	padding: 20px 10px;
+}
+.RightNav a{
+	color: white;
+}
+.RightNav a.active{
+	color: orange;
+}
+.clearer{
+	clear:both;
+}

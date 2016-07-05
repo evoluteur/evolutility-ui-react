@@ -1,29 +1,36 @@
 import React from 'react'
 import NavLink from './Widgets/NavLink'
+import { Link } from 'react-router'
 import Toolbar from './Widgets/Toolbar'
+import TopNav from './Widgets/TopNav'
 
 export default React.createClass({
 
-  clickEntity(evt){
-    var ent=evt.target.id
-    this.setState({entity: ent})
+  propTypes: {
+    params: React.PropTypes.object
   },
 
   render() {
-    var id =this.props.oid || 1 
-    //var e=this.props.params.entity
-    var e=this.props.params ? this.props.params.entity : 'todo'
+    var id='', e='';
+    if(this.props.params){
+      id = this.props.params.id || ''
+      e = this.props.params.entity || ''
+    }
     var ep='/'+e+'/'
 
     return (
       <div>
-        <h1>React-Evolutility</h1>
-
-          <NavLink to="/todo" onClick={this.clickEntity} id="todo"> todo</NavLink> - 
-          <NavLink to="/contact" onClick={this.clickEntity} id="contact"> contacts</NavLink> - 
-          <NavLink to="/comics" onClick={this.clickEntity} id="comics"> comics</NavLink>
-         
-        <Toolbar entity={e} params={this.props.params} oid={id}/>
+        <TopNav>
+          <div className="pull-right RightNav">
+            <Link to="/todo/list" id="todo" className={e==='todo'?'active':''}> todo</Link> - 
+            <Link to="/contact/list" id="contact" className={e==='contact'?'active':''}> contacts</Link> - 
+            <Link to="/comics/list" id="comics" className={e==='comics'?'active':''}> comics</Link>
+          </div>
+          <h2>React-Evolutility</h2>
+          <div className="clearer"/>
+          <Toolbar key="tb" entity={e} params={this.props.params}/>
+        </TopNav>
+        <div className="TopNavComplement"/>
         {this.props.children}
       </div>
     )
