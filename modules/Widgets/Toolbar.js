@@ -105,7 +105,7 @@ export default React.createClass({
   },
 
   render() {
-    var e=this.props.entity || 'todo'
+    var e=this.props.entity || ''
     var id = this.props.params.id || ''
     var ep='/'+e+'/'
     var cStyle={ 

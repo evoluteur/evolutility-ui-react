@@ -1,15 +1,19 @@
 import React from 'react'
 
-import Dico from '../../utils/dico'
-import Format from '../../utils/Format'
+import dico from '../../utils/dico'
+import format from '../../utils/format'
+import many from './many'
+import models from '../../models/all_models'
 import NavLink from '../../Widgets/NavLink'
-import Many from './Many'
-import models from '../../Models/all_models'
 
 
 export default React.createClass({
 
-	mixins: [Many()],
+	propTypes: {
+		params: React.PropTypes.object
+	}, 
+
+	mixins: [many()],
 
 	render() {
 		var e=this.props.params.entity
@@ -28,16 +32,18 @@ export default React.createClass({
 				if(idx===0){
 					return <td key={idx}><NavLink key={idx} to={ep+'browse/'+d.id}>{d[f.id]}</NavLink></td>
 				}else{
-					return <td key={idx}>{Format.fieldValue(f, d[f.id])}</td>
+					return <td key={idx}>{format.fieldValue(f, d[f.attribute||f.id])}</td>
 				}
 			}
-			var fieldCols = m.fields.filter(Dico.isFieldMany) 
+			
+			var fieldCols = dico.getFields(m).filter(dico.isFieldMany) 
 			var title = m.title
 			var data = (this.state.data && this.state.data.length>0) ? this.state.data : []
 
 			return (
 				<div>
-					<h1>{title}</h1>
+					{title ? <h1>title</h1>
+							: ''}
 					<div className="evol-many-list">
 						<div>
 							<table className="table table-bordered table-hover">

@@ -1,13 +1,13 @@
 import React from 'react'
 
-import Format from '../utils/Format'
+import format from '../utils/format'
 
 export default React.createClass({
 	
 	propTypes: {
+		entity: React.PropTypes.string.isRequired,
 		meta: React.PropTypes.object.isRequired,
-		//data: React.PropTypes.???,
-		entity: React.PropTypes.string,
+		data: React.PropTypes.any
 	},
 
 	getInitialState: function() {
@@ -45,8 +45,8 @@ export default React.createClass({
 						onChange={cbs.change}
 				>
 					<option/>
-					{f.list.map(function(i,idx){
-					  return <option key={idx} value={i.id}>{i.text}</option>
+					{f.list.map(function(i, idx){
+					  return <option key={i.id} value={''+i.id}>{i.text}</option>
 					})}
 				</select>
 			)
@@ -68,7 +68,7 @@ export default React.createClass({
 						 	key={f.id}
 							ref='e'
 							className="img-thumbnail" 
-							src={(this.props.pixPath || '')+d} 
+							src={'http://localhost:8080/'+d} 
 						/>
 					</div>
 				)	
@@ -100,8 +100,7 @@ export default React.createClass({
 		var e=this.props.entity
 		return (
 			<div key={f.id} className="disabled evo-rdonly">
-			{(f.type==='image' && d) ? Format.image('../../'+e+'/'+d) : Format.fieldValue(f, d)}
- 
+			{(f.type==='image' && d) ? format.image('http://localhost:8080/'+d) : format.fieldValue(f, d)}
 			</div>
 		)
 	},
@@ -119,16 +118,21 @@ export default React.createClass({
 		var f = this.props.meta || {type: 'text'}
 	 	var readOnly = this.props.readOnly || f.readOnly
 	 	var cbs = this.props.callbacks || {}
+	 	var msg = '' // TODO: invalid
 
 		return (
-			<div className="evol-fld" style={{width: (f.width || 100)+'%'}}>
+			<div className={"evol-fld"+(this.props.invalid?' has-error':'')} style={{width: (f.width || 100)+'%'}}>
+
 				<div className="evol-field-label">
 					<label className="control-label">{f.label}
 						{f.required && !(f.readOnly || readOnly) ? <span className="evol-required">*</span> : null}
 					</label>
 				</div>
+
 				{readOnly ? this._fieldElemReadOnly(f, this.props.data || null )
 								 : this._fieldElem(f, this.props.data || null , cbs)}
+
+ 				{this.props.invalid ? <div className="text-danger">{msg}</div> : ''}
 			</div>
 		)
 	  }

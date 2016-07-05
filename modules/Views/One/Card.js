@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Format from '../../utils/Format'
+import format from '../../utils/format'
 import NavLink from '../../Widgets/NavLink'
 
 export default React.createClass({
@@ -24,9 +24,9 @@ export default React.createClass({
           {fs.map(function(f, idx){
             return (
               <div key={idx}>
-                {idx===0 ? <h4><NavLink key={f.id} to={ep+"browse/"+d.id}>{d[f.id]}</NavLink></h4>
+                {idx===0 ? <h4><NavLink key={f.id} to={ep+"browse/"+d.id}>{d[f.attribute||f.id]}</NavLink></h4>
                   : <label>{f.label}: </label>}{' '}
-                {idx===0 ? null : Format.fieldValue(f, d[f.id])}
+                {idx===0 ? null : format.fieldValue(f, d[f.attribute||f.id])}
               </div>
             )
           })} 

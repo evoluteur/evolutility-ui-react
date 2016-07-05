@@ -1,18 +1,22 @@
 import React from 'react'
 
-import models from '../../Models/all_models'
-import Dico from '../../utils/dico'
-import Many from './Many'
+import models from '../../models/all_models'
+import dico from '../../utils/dico'
+import many from './many'
 import Card from '../One/Card'
 
 
 export default React.createClass({
 
-	mixins: [Many()],
+	propTypes: {
+		params: React.PropTypes.object
+	},
+
+	mixins: [many()],
 
 	render() {
 	    var e=this.props.params.entity
-	  	var fieldCols = models[e].fields.filter(Dico.isFieldMany) 
+	  	var fieldCols = models[e].fields.filter(dico.isFieldMany) 
 
 	    return (
 			<div data-vid="evolw-cards" style={{display: 'block'}}>

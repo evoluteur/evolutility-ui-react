@@ -1,14 +1,18 @@
 import React from 'react'
 
-import models from '../../Models/all_models'
-import One from './One'
+import models from '../../models/all_models'
+import one from './one'
 import Field from '../../Widgets/Field'
 import Panel from '../../Widgets/Panel'
 import NavLink from '../../Widgets/NavLink'
 
 export default React.createClass({
 
-  mixins: [One()],
+  propTypes: {
+    params: React.PropTypes.object
+  },
+
+  mixins: [one()],
 
   clickCancel(evt){
 
@@ -26,12 +30,12 @@ export default React.createClass({
           <Panel>
             <div className="evol-fset">
               {models[e].fields.map(function(f, idx){
-                console.log(f.id+' = '+data[f.id])
+                //console.log(f.id+' = '+data[f.id])
                 return (
                     <Field 
                       key={idx} 
                       meta={f} 
-                      data={data[f.id]} 
+                      data={data[f.attribute||f.id]} 
                       readOnly={true}
                       entity={e}
                     />
@@ -50,7 +54,6 @@ export default React.createClass({
                          </tr>
                     </tbody>
                 </table>
-                  
              </div>
             </Panel>
           </div>
