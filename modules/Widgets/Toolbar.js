@@ -90,7 +90,7 @@ var mm = {
 	    //{id:'bubbles', label: i18nTool.bBubbles, icon:'adjust', n:'n'},
 	    //{id:'scatter', label: i18nTool.bScatter, icon:'certificate',n:'n'},
 	    //{id:'sunburst', label: i18nTool.bSunburst, icon:'record',n:'n'},
-	    //{id:'charts', label: i18nTool.bCharts, icon:'stats', n:'n'}
+	    {id:'charts', label: i18nTool.bCharts, icon:'stats', n:'n'}
 	],
 	//search: true
 }
@@ -139,6 +139,7 @@ export default React.createClass({
             {id?buttonLink('Edit', 'edit', 'edit'):''}
             {id?'':buttonLink('List', 'list', 'th-list')}
             {id?'':buttonLink('Cards', 'cards', 'th-large')}
+            {id?'':buttonLink('Charts', 'charts', 'stats')}
         </ul>
         <div className="clearfix"/>
       </div>
