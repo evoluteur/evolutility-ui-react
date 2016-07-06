@@ -25,8 +25,6 @@ module.exports = {
             v=this.dateString(d)
         }else if(f.type==='image'){
             v = this.image('http://localhost:8080/'+d)
-        }else if(f.type==='lov'){
-            v = d
         }else{
             v = d
         }

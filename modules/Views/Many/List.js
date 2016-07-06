@@ -29,10 +29,11 @@ export default React.createClass({
 			}
 
 			function cell(d, f, idx){
+				var value = d[(f.type==='lov' && f.lovtable) ? f.id+'_txt' : f.id]
 				if(idx===0){
-					return <td key={idx}><NavLink key={idx} to={ep+'browse/'+d.id}>{d[f.id]}</NavLink></td>
+					return <td key={idx}><NavLink key={idx} to={ep+'browse/'+d.id}>{value}</NavLink></td>
 				}else{
-					return <td key={idx}>{format.fieldValue(f, d[f.attribute||f.id])}</td>
+					return <td key={idx}>{format.fieldValue(f, value)}</td>
 				}
 			}
 			

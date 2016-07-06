@@ -31,11 +31,12 @@ export default React.createClass({
             <div className="evol-fset">
               {models[e].fields.map(function(f, idx){
                 //console.log(f.id+' = '+data[f.id])
+                var attr=(f.type==='lov' && f.lovtable) ? f.id+'_txt' : f.id
                 return (
                     <Field 
                       key={idx} 
                       meta={f} 
-                      data={data[f.attribute||f.id]} 
+                      data={data[attr]} 
                       readOnly={true}
                       entity={e}
                     />
