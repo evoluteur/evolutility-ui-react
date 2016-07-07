@@ -19,15 +19,11 @@ export default React.createClass({
 	  	var fieldCols = models[e].fields.filter(dico.isFieldMany) 
 
 	    return (
-			<div data-vid="evolw-cards" style={{display: 'block'}}>
+			<div data-entity={e} style={{display: 'block'}}>
 			    <div className="evol-many-cards">
-			        <div className="evol-cards-body">
-
-			    		{this.state.data.map(function(d, idx){
-			    			return <Card key={idx} data={d} fields={fieldCols} entity={e}/>
-			    		})}
-			            
-			        </div>
+		    		{this.state.data.map(function(d, idx){
+		    			return <Card key={idx} data={d} fields={fieldCols} entity={e}/>
+		    		})}
 			    </div>
 			</div>
 	    )

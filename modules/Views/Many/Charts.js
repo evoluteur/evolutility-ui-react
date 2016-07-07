@@ -17,7 +17,7 @@ export default React.createClass({
         var m=models[e]
     
         return (
-            <div className={'evol-many-'+e}>
+            <div className={'evol-many-charts'}>
                 {dico.getFields(m).filter(dico.fieldChartable).map(function(f){
                     return <Chart entity={e} key={f.id} field={f} title={f.label} className="panel-info"/> 
                 })} 

@@ -96,7 +96,7 @@ export default React.createClass({
 		var that=this
 
 		return (
-			<div className="evo-one-browse">
+			<div data-entity={e} className="evo-one-browse">
 				<div className="evol-pnls">
 					<Panel>
 						<div className="evol-fset">

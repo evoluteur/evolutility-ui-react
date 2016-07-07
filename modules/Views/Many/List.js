@@ -42,9 +42,7 @@ export default React.createClass({
 			var data = (this.state.data && this.state.data.length>0) ? this.state.data : []
 
 			return (
-				<div>
-					{title ? <h1>title</h1>
-							: ''}
+				<div data-entity={e}>
 					<div className="evol-many-list">
 						<div>
 							<table className="table table-bordered table-hover">

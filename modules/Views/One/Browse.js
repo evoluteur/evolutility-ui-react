@@ -25,7 +25,7 @@ export default React.createClass({
     var data = this.state.data || {}
 
     return (
-      <div className="evo-one-browse">
+      <div data-entity={e} className="evo-one-browse">
         <div className="evol-pnls">
           <Panel>
             <div className="evol-fset">
