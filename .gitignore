@@ -1,0 +1,17 @@
+node_modules
+bower_components
+dist
+
+*-nogit/
+less
+public/comics/
+
+# Windows stuff
+Thumbs.db
+Desktop.ini
+
+# Mac stuff
+.DS_Store
+
+# WebStorm stuff
+.idea

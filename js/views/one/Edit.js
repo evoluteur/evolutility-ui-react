@@ -1,9 +1,3 @@
-/*  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
-	react-evolutility/modules/Views/One/Edit.js
-
-&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
-
 import React from 'react'
 
 import dico from '../../utils/dico'

@@ -1,15 +1,15 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
-import App from './modules/App'
-import Home from './modules/Home'
-import PageNotFound from './modules/widgets/PageNotFound'
+import App from './js/App'
+import Home from './js/Home'
+import PageNotFound from './js/widgets/PageNotFound'
 
-import Browse from './modules/Views/One/Browse'
-import Edit from './modules/Views/One/Edit'
-import List from './modules/Views/Many/List'
-import Cards from './modules/Views/Many/Cards'
-import Charts from './modules/Views/Many/Charts'
+import Browse from './js/views/one/Browse'
+import Edit from './js/views/one/Edit'
+import List from './js/views/many/List'
+import Cards from './js/views/many/Cards'
+import Charts from './js/views/many/Charts'
 
 render((
   <Router history={browserHistory}>
