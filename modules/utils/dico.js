@@ -39,35 +39,45 @@ var fieldIsNumber= function(f){
         			f.type===fts.bool || fieldIsNumber(f);
     };
 
+function hById(arr){
+	var objH={};
+	_.forEach(arr, function(o){
+		objH[o.id] = o; 
+	});
+	return objH;
+}
+
+function getFields(uiModel) {
+	var fs = [];
+
+	function collectFields(te) {
+		if (te && te.elements && te.elements.length > 0) {
+			te.elements.forEach(function(te) {
+				if (te.type != 'panel-list') {
+					collectFields(te);
+				}
+			});
+		} else { 
+			if(te.type && te.type!== 'formula'){
+				fs.push(te);
+			}
+		}
+	}
+
+	if(uiModel.fields){
+		return uiModel.fields;
+	}else{
+		collectFields(uiModel);
+		uiModel.fields=fs;
+		return fs;
+	}
+}
+
 module.exports = {  
 
 	fieldTypes: fts,
 
-	getFields: function(uiModel) {
-		var fs = [];
-
-		function collectFields(te) {
-			if (te && te.elements && te.elements.length > 0) {
-				te.elements.forEach(function(te) {
-					if (te.type != 'panel-list') {
-						collectFields(te);
-					}
-				});
-			} else { 
-				if(te.type && te.type!== 'formula'){
-					fs.push(te);
-				}
-			}
-		}
-
-		if(uiModel.fields){
-			return uiModel.fields;
-		}else{
-			collectFields(uiModel);
-			uiModel.fields=fs;
-			return fs;
-		}
-	},
+	getFields: getFields,
 
 	getSubCollecs: function(uiModel) {
 		var ls = {};
@@ -92,6 +102,15 @@ module.exports = {
 		return ls;
 	},
 
+	prepareModel: function(m){
+		if(!m.fields){
+			m.fields = getFields(m);
+		}
+		if(!m.fieldsH){
+			m.fieldsH = hById(m.fields);
+		}
+	},
+
     isFieldMany:function(f){
         return f.inList || f.inMany
     },
@@ -105,12 +124,6 @@ module.exports = {
     fieldInCharts: fieldInCharts,
     fieldChartable: fieldChartable,
 
-	hById: function(arr){
-		var objH={};
-		_.forEach(arr, function(o){
-			objH[o.id] = o; 
-		});
-		return objH;
-	}
+	hById: hById
     
 }

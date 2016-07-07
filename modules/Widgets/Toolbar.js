@@ -123,27 +123,30 @@ export default React.createClass({
         return <li><NavLink to={ep+view+'/'+id} activeStyle={cStyle}><i className={'glyphicon glyphicon-'+icon}></i> {label}</NavLink></li>
     }
 
-    return (
-      <div className="evo-toolbar">
-        <ul role="nav" className="nav nav-pills pull-left">
-            { mm.always.map(buttonRoute)}
-        </ul>
-        {id ? (<ul role="nav" className="nav nav-pills pull-left">
-                    <li className="divider-h" />
-                    {mm.actions.map(buttonRoute)}
-                </ul>) : ''
-        }
-        <ul role="nav" className="nav nav-pills pull-right">
-          <li className="divider-h" />
-            {id?buttonLink('Browse', 'browse', 'eye-open'):''}
-            {id?buttonLink('Edit', 'edit', 'edit'):''}
-            {id?'':buttonLink('List', 'list', 'th-list')}
-            {id?'':buttonLink('Cards', 'cards', 'th-large')}
-            {id?'':buttonLink('Charts', 'charts', 'stats')}
-        </ul>
-        <div className="clearfix"/>
-      </div>
-    )
+    if(e){
+        return (
+          <div className="evo-toolbar">
+            <ul role="nav" className="nav nav-pills pull-left">
+                { mm.always.map(buttonRoute)}
+            </ul>
+            {id ? (<ul role="nav" className="nav nav-pills pull-left">
+                        <li className="divider-h" />
+                        {mm.actions.map(buttonRoute)}
+                    </ul>) : ''
+            }
+            <ul role="nav" className="nav nav-pills pull-right">
+              <li className="divider-h" />
+                {id?buttonLink('Browse', 'browse', 'eye-open'):''}
+                {id?buttonLink('Edit', 'edit', 'edit'):''}
+                {id?'':buttonLink('List', 'list', 'th-list')}
+                {id?'':buttonLink('Cards', 'cards', 'th-large')}
+                {id?'':buttonLink('Charts', 'charts', 'stats')}
+            </ul>
+            <div className="clearfix"/>
+          </div>
+        )
+    }
+    return null
   }
 })
 

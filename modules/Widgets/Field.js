@@ -31,7 +31,7 @@ export default React.createClass({
 						ref='e'
 						rows={f.height} 
 						className="form-control" 
-						value={d} 
+						value={d?d:''} 
 						onChange={cbs.change}//.bind(this)
 					/>
 		}else if(f.type==='lov'||f.type==='list'){
@@ -85,11 +85,14 @@ export default React.createClass({
 				)
 			}
 		}
+		if(f.type==='date' && d){
+			d=d.substring(0, 10)
+		}
 		return <input 
 			id={f.id} 
 			ref='e'
 			type={f.type==='integer' || f.type==='decimal' ? 'number' : f.type} 
-			value={d}
+			value={d?d:''}
 			onChange={cbs.change}
 			className="form-control"
 		/>
