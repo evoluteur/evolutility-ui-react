@@ -115,8 +115,7 @@ export default React.createClass({
 									<tr>
 										<td></td>
 										<td>
-											<button className="btn btn-primary" onClick={this.clickSave}>Save</button>
-											<button className="btn btn-secondary">Cancel</button>
+											<button className="btn btn-primary" onClick={this.clickSave}>Save</button> 
 											<NavLink to={ep+"browse/"+id} className="btn btn-secondary">Cancel</NavLink>
 										</td>
 									</tr>

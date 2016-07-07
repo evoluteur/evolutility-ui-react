@@ -24,13 +24,12 @@ export default function(){
 			var id = this.props.params.id || ''
 			var data=this.delta
 
-				var that=this
 				$.ajax({
 					url: apiPath+e+'/'+id, 
 					type: id?'PUT':'POST',
 					data: data,
-					success: function (data) {
-						that.setState({
+					success: (data) => {
+						this.setState({
 							data: data
 						});
 					}
