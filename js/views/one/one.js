@@ -1,6 +1,7 @@
 
 import $ from 'jquery' 
 import {apiPath} from '../../../config.js'
+import { browserHistory } from 'react-router'
 
 export default function(){
 
@@ -24,16 +25,22 @@ export default function(){
 			var id = this.props.params.id || ''
 			var data=this.delta
 
-				$.ajax({
-					url: apiPath+e+'/'+id, 
-					type: id?'PUT':'POST',
-					data: data,
-					success: (data) => {
-						this.setState({
-							data: data
-						});
+			$.ajax({
+				url: apiPath+e+'/'+id, 
+				type: id?'PUT':'POST',
+				data: data,
+				success: (data) => {
+					this.setState({
+						data: data
+					});
+					if(id){
+	                    alert('Item updated.')
+					}else{
+	                    alert('Item added.')
+						browserHistory.push('/'+e+'/edit/'+data.id)
 					}
-				})
+				}
+			})
 		},
 
 		getInitialState: function() {
