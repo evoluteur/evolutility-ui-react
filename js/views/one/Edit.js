@@ -33,8 +33,12 @@ export default React.createClass({
 		//console.log(this.getFormData())
 
 		//debugger
-		//this.validate()
-		this.upsertOne()
+		var v=this.validate()
+		if(v.valid){
+			this.upsertOne()
+		}else{
+
+		}
 	},
 
 	fieldChange(evt) {
@@ -70,7 +74,14 @@ export default React.createClass({
 	},
 
 	validate: function (fields) {
+		var flags=[]
 
+		//TODO
+		
+		return {
+			valid: !flags.length,
+			flags: flags
+		}
 	},
 
 	render() {
@@ -79,15 +90,11 @@ export default React.createClass({
 		var ep='/'+e+'/'
 
 		var data = this.state.data || {}
-		//this.props.callbacks
 		var cbs={
-			  //this.handleClick.bind(this, i);
-				click: this.fieldClick, //.bind(this, i, props),
-				change: this.fieldChange, //.bind(this, i, props),
-				leave: this.fieldLeave //.bind(this, i, props)//this.fieldLeave.bind(this)
-				//click=handleClick.bind(this, i, props)
-			}
-		var that=this
+			click: this.fieldClick,
+			change: this.fieldChange,
+			leave: this.fieldLeave
+		}
 
 		return (
 			<div data-entity={e} className="evo-one-browse">
@@ -102,9 +109,8 @@ export default React.createClass({
 											key={f.id} 
 											ref={f.id} 
 											meta={f} 
-											data={id ? data[f.id] : null} 
+											data={data[f.id]} 
 											callbacks={cbs}
-											pixPath={'../../'+e+'/'}
 											entity={e}
 										/>
 									)
