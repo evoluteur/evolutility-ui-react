@@ -30,15 +30,15 @@ export default function(){
 				type: id?'PUT':'POST',
 				data: data,
 				success: (data) => {
-					this.setState({
-						data: data
-					});
 					if(id){
 	                    alert('Item updated.')
 					}else{
 	                    alert('Item added.')
 						browserHistory.push('/'+e+'/edit/'+data.id)
 					}
+					this.setState({
+						data: data
+					});
 				}
 			})
 		},

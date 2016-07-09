@@ -2,9 +2,9 @@ import React from 'react'
 
 import models from '../../models/all_models'
 import one from './one'
-import Field from '../../Widgets/Field'
-import Panel from '../../Widgets/Panel'
-import NavLink from '../../Widgets/NavLink'
+import Field from '../../widgets/Field'
+import Panel from '../../widgets/Panel'
+import NavLink from '../../widgets/NavLink'
 
 export default React.createClass({
 
@@ -30,8 +30,7 @@ export default React.createClass({
           <Panel>
             <div className="evol-fset">
               {models[e].fields.map(function(f, idx){
-                //console.log(f.id+' = '+data[f.id])
-                var attr=(f.type==='lov' && f.lovtable) ? f.id+'_txt' : f.id
+                var attr = (f.type==='lov' && f.lovtable) ? f.id+'_txt' : f.id
                 return (
                     <Field 
                       key={idx} 
@@ -42,22 +41,15 @@ export default React.createClass({
                     />
                 )
               })}
-                <table className="edit-form">
-                    <tbody>
-                          <tr>
-                            <td></td>
-                            <td> 
-                                <NavLink to={ep+"edit/"+id} className="btn btn-primary">
-                                  <i className="glyphicon glyphicon-edit"></i> edit
-                                </NavLink>
-                                <button className="btn btn-secondary">Cancel</button>
-                            </td>
-                         </tr>
-                    </tbody>
-                </table>
-             </div>
-            </Panel>
-          </div>
+            </div>
+            <div className="formButtons"> 
+                <NavLink to={ep+"edit/"+id} className="btn btn-primary">
+                  <i className="glyphicon glyphicon-edit"></i> edit
+                </NavLink>
+                <button className="btn btn-secondary">Cancel</button>
+            </div>
+          </Panel>
+        </div>
       </div>
     )
   }

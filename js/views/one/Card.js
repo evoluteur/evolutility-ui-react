@@ -1,7 +1,7 @@
 import React from 'react'
 
 import format from '../../utils/format'
-import NavLink from '../../Widgets/NavLink'
+import NavLink from '../../widgets/NavLink'
 
 export default React.createClass({
 

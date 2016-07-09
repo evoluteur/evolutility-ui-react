@@ -15,18 +15,19 @@ const colorsList = function(nbColors){
     return colors.slice(0, nbColors).join(',');
 }
 
-var m = many()
-m.getData = function(entity, fid){
-    var e = entity || this.props.entity
-    var fid = fid || this.props.field.id
-    
-    //if(id){
-        $.get(apiPath+'chart/'+e+'/'+fid, function (data) {
+var many2 = many()
+many2.getData = function(){
+    var e = this.props.entity
+    var fid = this.props.field.id
+    var urlparams = '?token='+localStorage.token
+
+    if(fid){
+        $.get(apiPath+'chart/'+e+'/'+fid+urlparams, function (data) {
             this.setState({
                 data: data
             });
         }.bind(this));
-    //}
+    }
 }
 
 function fnLabel(d){
@@ -38,7 +39,7 @@ function fnValue(d){
 
 export default React.createClass({
 
-    mixins: [m],
+    mixins: [many2],
 
     urlPie: function (data, sizes){
         var p=this.props

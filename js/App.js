@@ -1,8 +1,8 @@
 import React from 'react'
-import NavLink from './Widgets/NavLink'
+import NavLink from './widgets/NavLink'
 import { Link } from 'react-router'
-import Toolbar from './Widgets/Toolbar'
-import TopNav from './Widgets/TopNav'
+import Toolbar from './widgets/Toolbar'
+import TopNav from './widgets/TopNav'
 
 export default React.createClass({
 

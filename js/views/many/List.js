@@ -4,7 +4,7 @@ import dico from '../../utils/dico'
 import format from '../../utils/format'
 import many from './many'
 import models from '../../models/all_models'
-import NavLink from '../../Widgets/NavLink'
+import NavLink from '../../widgets/NavLink'
 
 
 export default React.createClass({

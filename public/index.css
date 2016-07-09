@@ -28,7 +28,12 @@
 	clear:both;
 }
 
-
+.formButtons {
+	padding: 10px 0;
+}
+.formButtons > * {
+	margin-left: 10px;
+}
 
 
 [data-entity="comics"] .evol-cards-body>div {

@@ -1,11 +1,13 @@
+
 import React from 'react'
 
 import dico from '../../utils/dico'
 import models from '../../models/all_models'
+
 import one from './one'
-import Field from '../../Widgets/Field'
-import Panel from '../../Widgets/Panel'
-import NavLink from '../../Widgets/NavLink'
+import Field from '../../widgets/Field'
+import Panel from '../../widgets/Panel'
+import NavLink from '../../widgets/NavLink'
 
 export default React.createClass({
 
@@ -18,27 +20,19 @@ export default React.createClass({
 	getDataDelta: function(){
 		return this.delta || null
 	},
-	
+
 	getFormData() {
-	  	var s={}
+		var s={}
 		this.fields.forEach((f) => {
-			s[f.attribute||f.id] = this.refs[f.id].getValue()
+			s[f.id] = this.refs[f.id].getValue()
 		})
 		return s
-  	},
+	},
 
 	clickSave(evt){
-		//console.log(this.state.data)
-		//console.log(this.delta||'no delta')
-		//console.log(this.getFormData())
-
 		//debugger
-		var v=this.validate()
-		if(v.valid){
-			this.upsertOne()
-		}else{
-
-		}
+		//this.validate()
+		this.upsertOne()
 	},
 
 	fieldChange(evt) {
@@ -64,15 +58,14 @@ export default React.createClass({
 	fieldLeave(i, props) {
 		//debugger
 	},
-
+/*
 	componentWillReceiveProps: function(nextProps) {
-		debugger
 		this.delta={}
 		this.setState({
-		data: nextProps.data
-	  });
+			data: nextProps.data || {}
+		})
 	},
-
+*/
 	validate: function (fields) {
 		var flags=[]
 
@@ -97,7 +90,7 @@ export default React.createClass({
 		}
 
 		return (
-			<div data-entity={e} className="evo-one-browse">
+			<div className="evo-one-edit">
 				<div className="evol-pnls">
 					<Panel>
 						<div className="evol-fset">
@@ -116,17 +109,10 @@ export default React.createClass({
 									)
 								})
 							}
-							<table className="edit-form">
-								<tbody>
-									<tr>
-										<td></td>
-										<td>
-											<button className="btn btn-primary" onClick={this.clickSave}>Save</button> 
-											<NavLink to={ep+"browse/"+id} className="btn btn-secondary">Cancel</NavLink>
-										</td>
-									</tr>
-								</tbody>
-							</table>
+						</div>
+						<div className="formButtons">
+							<button className="btn btn-primary" onClick={this.clickSave}>Save</button> 
+							<NavLink to={ep+"browse/"+id} className="btn btn-secondary">Cancel</NavLink>
 						</div>
 					</Panel>
 				</div>
