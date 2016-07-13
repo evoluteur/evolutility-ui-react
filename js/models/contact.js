@@ -313,283 +313,83 @@ var contact_LOVs = {
 
 module.exports = {
     fields:[
-                {
-                    type: 'text', id: 'lastname', attribute: 'lastname', 
-                    label: 'Lastname', maxLength: 50,
-                    required: true, width: 62, inMany: true
-                },
-                {
-                    type: 'text', id: 'firstname', attribute: 'firstname', 
-                     label: 'Firstname', maxLength: 50,
-                    required: true, width: 38, inMany: true
-                },
-                {
-                    type: 'text', id: 'jobtitle', attribute: 'jobtitle', 
-                     label: 'Title', maxLength: 50,
-                    width: 62
-                },
-                {
-                    type: 'text', id: 'company', attribute: 'company', 
-                     label: 'Company', maxLength: 50,
-                    width: 38, inMany: true
-                },
-                {
-                    type: 'email', id: 'email', attribute: 'email', 
-                     label: 'email', maxLength: 255,
-                    width: 100 
-                },
-                {
-                    type: 'url', id: 'web', attribute: 'web', 
-                     label: 'web', maxLength: 255, width: 100
-                },
-                {
-                    type: 'text', id: 'phone', attribute: 'phone', 
-                     label: 'Work Phone', maxLength: 20, width: 100, mini:'1'
-                },
-                {
-                    type: 'text', id: 'phonehome', attribute: 'phonehome', 
-                     label: 'Home Phone', maxLength: 20, width: 100
-                },
-                {
-                    type: 'text', id: 'phonecell', attribute: 'phonecell', 
-                     label: 'Cell.', maxLength: 20, width: 100, mini:'1'
-                },
-                {
-                    type: 'text', id: 'fax', attribute: 'fax', 
-                     label: 'Fax', maxLength: 20, width: 100
-                },
-                {
-                    type: 'text', id: 'address1', attribute: 'address1', 
-                     label: 'Address', maxLength: 150, width: 100
-                },
-                {
-                    type: 'text', id: 'address2', attribute: 'address2', 
-                     label: '', labelMany: 'Address 2', maxLength: 150, width: 100
-                },
-                {
-                    type: 'text', id: 'city', attribute: 'city', 
-                     label: 'City', maxLength: 100, width: 62
-                },
-                {
-                    type: 'lov', id: 'state', attribute: 'state', 
-                     label: 'State', width: 23,
-                    list: contact_LOVs.states
-                },
-                {
-                    type: 'text', id: 'zip', attribute: 'zip', 
-                     label: 'Zip', maxLength: 12, width: 15
-                },
-                {
-                    type: 'lov', id: 'country', attribute: 'country', 
-                     label: 'Country', maxLength: 60, width: 100,
-                    list: contact_LOVs.countries
-                },
-                {
-                    type: 'lov', id: 'category', attribute: 'category', 
-                     label: 'Category', width: 100,
-                    inMany: true,
-                    list: contact_LOVs.categories
-                },
-                {
-                    type: 'text', id: 'custom1', attribute: 'custom1', 
-                     label: 'Custom 1', maxLength: 250,
-                    width: 100
-                },
-                {
-                    type: 'text', id: 'custom2', attribute: 'custom2', 
-                     label: 'Custom 2', maxLength: 250,
-                    width: 100
-                },
-                {
-                    type: 'text', id: 'custom3', attribute: 'custom3', 
-                     label: 'Custom 3', maxLength: 250,
-                    width: 100
-                }
-            ],
-
-    data: [
         {
-          "id": "1",
-          "lastname": "Smallwood",
-          "firstname": "Diane",
-          "jobtitle": "Director",
-          "company": "EasyDoesIt",
-          "email": "vsw@EasyDoesIt.com",
-          "web": "http://EasyDoesIt.com",
-          "phone": "415 234 4323",
-          "phonehome": "415 378 3577",
-          "phonecell": "415 135 3454",
-          "address1": "12, Liverpool Street",
-          "city": "San Francisco",
-          "state": "CA",
-          "zip": "94123",
-          "country": "US",
-          "category": "4"
+            type: 'text', id: 'lastname', attribute: 'lastname', 
+            label: 'Lastname', maxLength: 50,
+            required: true, width: 62, inMany: true
         },
         {
-          "id": "2",
-          "lastname": "Shackleford ",
-          "firstname": "Rusty ",
-          "email": "rustyshackleford@gmail.com",
-          "address1": "123 Main Street",
-          "city": "Dallas",
-          "state": "TX",
-          "country": "US",
-          "category": "3"
+            type: 'text', id: 'firstname', attribute: 'firstname', 
+             label: 'Firstname', maxLength: 50,
+            required: true, width: 38, inMany: true
         },
         {
-          "id": "3",
-          "lastname": "Inoue",
-          "firstname": "Akemi",
-          "jobtitle": "QA Engineer",
-          "company": "Testing evol-utility",
-          "email": "test@test.com",
-          "phone": "423 233 3523",
-          "phonehome": "423 523 4523",
-          "address1": "5665 Poplar Street",
-          "city": "San Jose",
-          "state": "CA",
-          "zip": "93112",
-          "country": "US",
-          "category": "3"
+            type: 'text', id: 'jobtitle', attribute: 'jobtitle', 
+             label: 'Title', maxLength: 50,
+            width: 62
         },
         {
-          "id": "4",
-          "lastname": "Reina Moyano",
-          "firstname": "Sergio",
-          "jobtitle": "Mr",
-          "company": "Innova Creaciones",
-          "email": "sreina@innovacreaciones.es",
-          "phone": "411 444 2222",
-          "phonehome": "411 576 4566",
-          "phonecell": "411 579 4566",
-          "fax": "411 444 2224",
-          "address1": "654 Union Street",
-          "address2": "#203",
-          "city": "San Francisco",
-          "state": "CA",
-          "zip": "94567",
-          "country": "US",
-          "category": "3"
+            type: 'text', id: 'company', attribute: 'company', 
+             label: 'Company', maxLength: 50,
+            width: 38, inMany: true
         },
         {
-          "id": "5",
-          "lastname": "Paulus",
-          "firstname": "Henry",
-          "company": "TEST the TEST",
-          "phone": "652 491 2345",
-          "address1": "1234 That Street",
-          "city": "San Mateo",
-          "state": "CA",
-          "zip": "94401",
-          "country": "US",
-          "category": "2"
+            type: 'email', id: 'email', attribute: 'email', 
+             label: 'email', maxLength: 255,
+            width: 100 
         },
         {
-          "id": "6",
-          "lastname": "Dupond",
-          "firstname": "Patrick",
-          "jobtitle": "Sales Manager",
-          "company": "Au Bon Pain",
-          "email": "pdupond@aubonpain.fr",
-          "web": "http://aubonpain.fr",
-          "phone": "45 456 414 45",
-          "city": "Paris",
-          "state": "",
-          "country": "FR",
-          "category": "1"
+            type: 'url', id: 'web', attribute: 'web', 
+             label: 'web', maxLength: 255, width: 100
         },
         {
-          "id": "7",
-          "lastname": "Giulieri",
-          "firstname": "Olivier",
-          "company": "Evolutility",
-          "email": "olivier@evolutility.org",
-          "web": "http://www.evolutility.org",
-          "city": "San Mateo",
-          "state": "CA",
-          "country": "US"
+            type: 'text', id: 'phone', attribute: 'phone', 
+             label: 'Work Phone', maxLength: 20, width: 100, mini:'1'
         },
         {
-          "id": "8",
-          "lastname": "Martin",
-          "firstname": "Mary",
-          "jobtitle": "President",
-          "company": "Acme Corp",
-          "email": "pm@acme.com",
-          "phone": "444 580 7007",
-          "phonehome": "449 512 0230",
-          "phonecell": "589 499 2065",
-          "address1": "123 Redville Lane",
-          "city": "Musnonville",
-          "state": "NH",
-          "zip": "03434",
-          "category": "1"
+            type: 'text', id: 'phonehome', attribute: 'phonehome', 
+             label: 'Home Phone', maxLength: 20, width: 100
         },
         {
-          "id": "9",
-          "lastname": "Munar",
-          "firstname": "Roman",
-          "jobtitle": "Mr",
-          "company": "Informatics",
-          "email": "romano@informatics.com",
-          "web": "http://roman.munar.com",
-          "phone": "322 234 5143",
-          "phonehome": "322 784 3453",
-          "phonecell": "322 538 2568",
-          "fax": "322 234 5345",
-          "address1": "Washington",
-          "address2": "Buendia",
-          "city": "Makati",
-          "state": "",
-          "zip": "1300",
-          "country": "PH",
-          "category": "3"
+            type: 'text', id: 'phonecell', attribute: 'phonecell', 
+             label: 'Cell.', maxLength: 20, width: 100, mini:'1'
         },
         {
-          "id": "10",
-          "lastname": "Smith",
-          "firstname": "George",
-          "company": "Blabla",
-          "email": "george@blabla.com",
-          "web": "http://www.blabla.com",
-          "phone": "415 123 1234",
-          "phonecell": "415 789 4556",
-          "address1": "768 5th Ave",
-          "city": "San Francisco",
-          "state": "CA",
-          "zip": "93123",
-          "country": "US",
-          "category": "1"
+            type: 'text', id: 'fax', attribute: 'fax', 
+             label: 'Fax', maxLength: 20, width: 100
         },
         {
-          "id": "11",
-          "lastname": "Kumar",
-          "firstname": "Madhukar",
-          "jobtitle": "CEO",
-          "company": "CoolWeb",
-          "email": "mkumar@coolweb.com",
-          "web": "http://www.coolweb.com",
-          "phone": "7225 8252",
-          "phonecell": "7325 8245",
-          "address1": "434 Cool Place",
-          "city": "Bengaluru",
-          "state": "",
-          "country": "IN",
-          "category": "4"
+            type: 'text', id: 'address1', attribute: 'address1', 
+             label: 'Address', maxLength: 150, width: 100
         },
         {
-          "id": "12",
-          "lastname": "Cheng",
-          "firstname": "Chris",
-          "jobtitle": "CTO",
-          "company": "MyGreatCorporation",
-          "email": "ccheng@MyGreatCorporation.com",
-          "phonecell": "650 234 8245",
-          "city": "Sunnyvalle",
-          "state": "CA",
-          "country": "US",
-          "category": "4"
+            type: 'text', id: 'address2', attribute: 'address2', 
+             label: '', labelMany: 'Address 2', maxLength: 150, width: 100
+        },
+        {
+            type: 'text', id: 'city', attribute: 'city', 
+             label: 'City', maxLength: 100, width: 62
+        },
+        {
+            type: 'lov', id: 'state', attribute: 'state', 
+             label: 'State', width: 23,
+            list: contact_LOVs.states
+        },
+        {
+            type: 'text', id: 'zip', attribute: 'zip', 
+             label: 'Zip', maxLength: 12, width: 15
+        },
+        {
+            type: 'lov', id: 'country', attribute: 'country', 
+             label: 'Country', maxLength: 60, width: 100,
+            list: contact_LOVs.countries
+        },
+        {
+            type: 'lov', id: 'category', attribute: 'category', 
+             label: 'Category', width: 100,
+            inMany: true,
+            list: contact_LOVs.categories, 
+            lovtable: 'contact_category'
         }
     ]
 }
