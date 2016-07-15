@@ -24,7 +24,7 @@ export default React.createClass({
           <div className="pull-right RightNav">
             <Link to="/todo/list" id="todo" className={e==='todo'?'active':''}> todo</Link> - 
             <Link to="/contact/list" id="contact" className={e==='contact'?'active':''}> contacts</Link> - 
-            <Link to="/comics/list" id="comics" className={e==='comics'?'active':''}> comics</Link>
+            <Link to="/comics/cards" id="comics" className={e==='comics'?'active':''}> comics</Link>
           </div>
           <h2>React-Evolutility</h2>
           <div className="clearer"/>

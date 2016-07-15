@@ -22,17 +22,27 @@ export default React.createClass({
 	},
 
 	getFormData() {
+		var fs=models[this.props.params.entity].fields
 		var s={}
-		this.fields.forEach((f) => {
+		fs.forEach((f) => {
 			s[f.id] = this.refs[f.id].getValue()
 		})
 		return s
 	},
 
-	clickSave(evt){
-		//debugger
-		//this.validate()
-		this.upsertOne()
+	clickSave(evt){ 
+		var fs=models[this.props.params.entity].fields
+		var v=this.validate(fs);
+		if(v.valid){
+			this.upsertOne()
+		}else{
+			alert(v.messages.join('. \n')+'.')
+/*
+			//TODO:
+			fs.forEach((f)=>{ 
+				this.refs[f.id].setState({invalid: true})//v.invalids[f.id]
+			}) */
+		}
 	},
 
 	fieldChange(evt) {
@@ -47,7 +57,9 @@ export default React.createClass({
 		}
 		var newData=JSON.parse(JSON.stringify(this.state.data||{}))
 		newData[fid]=v
-		if (!this.delta){this.delta={}}
+		if (!this.delta){
+			this.delta={}
+		}
 		this.delta[fid]=v
 		this.setState({data: newData})
 	},
@@ -66,16 +78,6 @@ export default React.createClass({
 		})
 	},
 */
-	validate: function (fields) {
-		var flags=[]
-
-		//TODO
-		
-		return {
-			valid: !flags.length,
-			flags: flags
-		}
-	},
 
 	render() {
 		var id = this.props.params.id || 0
@@ -118,6 +120,26 @@ export default React.createClass({
 				</div>
 			</div>
 		)
-	}
+	},
+
+	validate: function (fields, data) {
+		var messages=[],
+			invalids={};
+		var data=this.getFormData()
+
+		fields.forEach((f) => {
+			if(f.required && !data[f.id]){
+				messages.push(f.label+' must have a value')
+				invalids[f.id]=true
+			}
+		})
+		//TODO
+		
+		return {
+			valid: messages.length<1,
+			messages: messages,
+			invalids: invalids
+		}
+	},
 
 })

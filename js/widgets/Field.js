@@ -21,10 +21,10 @@ export default React.createClass({
 						key={f.id} 
 						ref='e'
 						type="checkbox" 
-						checked={d?true:false}
-						onChange={cbs.change}//.bind(this)
+						value={d?true:false}
+						onChange={cbs.change}
 				    />
-		}else if(f.type==='text' && f.height>1){
+		}else if(f.type==='textmultiline' && f.height>1){
 			return <textarea 
 						id={f.id} 
 						key={f.id} 
@@ -32,11 +32,10 @@ export default React.createClass({
 						rows={f.height} 
 						className="form-control" 
 						value={d?d:''} 
-						onChange={cbs.change}//.bind(this)
+						onChange={cbs.change}
 					/>
 		}else if(f.type==='lov'||f.type==='list'){
-			return (
-				<select 
+			return <select 
 						id={f.id} 
 						key={f.id}
 						ref='e' 
@@ -49,7 +48,6 @@ export default React.createClass({
 					  return <option key={i.id} value={''+i.id}>{i.text}</option>
 					})}
 				</select>
-			)
 		}else if(f.type==='image'){
 			var txtField = ''/*<input 
 					id={f.id} 
@@ -76,11 +74,11 @@ export default React.createClass({
 				return (
 					<div>
 						{txtField}
-					<div 
-						id={f.id} 
-					 	key={f.id}
-						ref='e'
-					>N/A</div>
+						<div 
+							id={f.id} 
+						 	key={f.id}
+							ref='e'
+						>N/A</div>
 					</div>
 				)
 			}
@@ -100,10 +98,19 @@ export default React.createClass({
 	},
 
 	_fieldElemReadOnly(f, d){
-		var e=this.props.entity
+		var fw
+
+		if(f.type==='image' && d){
+			fw = format.image('http://localhost:8080/'+d)
+		}else if(f.type==='textmultilines'){
+			// TODO: height
+			fw = format.fieldValue(f, d)
+		}else{
+			fw = format.fieldValue(f, d)
+		}
 		return (
 			<div key={f.id} className="disabled evo-rdonly">
-			{(f.type==='image' && d) ? format.image('http://localhost:8080/'+d) : format.fieldValue(f, d)}
+				{fw}
 			</div>
 		)
 	},
@@ -112,15 +119,15 @@ export default React.createClass({
 		var e=this.refs.e
 		if(e.type==='checkbox'){
 			return e.checked ? true : false
-		}else{
-			return e.value
 		}
+		return e.value
 	},
 
  	render() {
 		var f = this.props.meta || {type: 'text'}
 	 	var readOnly = this.props.readOnly || f.readOnly
 	 	var cbs = this.props.callbacks || {}
+	 	var data = this.props.data || null
 	 	var msg = '' // TODO: invalid
 
 		return (
@@ -132,10 +139,11 @@ export default React.createClass({
 					</label>
 				</div>
 
-				{readOnly ? this._fieldElemReadOnly(f, this.props.data || null )
-								 : this._fieldElem(f, this.props.data || null , cbs)}
+				{readOnly ? this._fieldElemReadOnly(f, data)
+								 : this._fieldElem(f, data, cbs)}
 
- 				{this.props.invalid ? <div className="text-danger">{msg}</div> : ''}
+ 				{this.state.invalid ? <div className="text-danger">{msg}</div> : null}
+
 			</div>
 		)
 	  }

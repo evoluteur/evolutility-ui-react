@@ -2,4 +2,6 @@
 
 This is a proto of [Evolutility](https://github.com/evoluteur/evolutility) using React. 
 
-I don't know much React yet so be patient.
+The views query Evolutility-server by themselves. I'll build a store soon.
+
+I'm learning React as I go.
