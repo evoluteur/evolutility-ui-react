@@ -117,7 +117,7 @@ module.exports = {
         deleted: '{0} "{1}" deleted.'
         //error: 'Error',
     },
-
+*/
     // --- validation ---
     validation:{
         incomplete: 'Some information is missing or invalid.',
@@ -148,7 +148,7 @@ module.exports = {
         aByB: '{0} by {1}',
         aB: '{0}: {1}'
     },
-
+/*
     // --- export ---
     export:{
         exportOne: 'Export {0}', // {0}=entity

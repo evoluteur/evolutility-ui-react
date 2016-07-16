@@ -19,17 +19,19 @@ export default React.createClass({
   },
 
   render() {
+    var id=this.props.params.id || 0
     var e=this.props.params.entity || null
     var ep='/'+e+'/'
-    var id=this.props.params.id || 1
+    var m=models[e]
     var data = this.state.data || {}
+    var title = m.label || m.title || ''
 
     return (
       <div data-entity={e} className="evo-one-browse">
         <div className="evol-pnls">
-          <Panel>
+          <Panel title={title}>
             <div className="evol-fset">
-              {models[e].fields.map(function(f, idx){
+              {m.fields.map(function(f, idx){
                 var attr = (f.type==='lov' && f.lovtable) ? f.id+'_txt' : f.id
                 return (
                     <Field 

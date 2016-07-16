@@ -2,6 +2,8 @@
 import React from 'react'
 
 import dico from '../../utils/dico'
+import i18n from '../../utils/i18n-en'
+import validation from '../../utils/validation'
 import models from '../../models/all_models'
 
 import one from './one'
@@ -21,27 +23,13 @@ export default React.createClass({
 		return this.delta || null
 	},
 
-	getFormData() {
-		var fs=models[this.props.params.entity].fields
-		var s={}
-		fs.forEach((f) => {
-			s[f.id] = this.refs[f.id].getValue()
-		})
-		return s
-	},
-
 	clickSave(evt){ 
 		var fs=models[this.props.params.entity].fields
-		var v=this.validate(fs);
+		var v=this.validate(fs, this.state.data);
 		if(v.valid){
 			this.upsertOne()
 		}else{
 			alert(v.messages.join('. \n')+'.')
-/*
-			//TODO:
-			fs.forEach((f)=>{ 
-				this.refs[f.id].setState({invalid: true})//v.invalids[f.id]
-			}) */
 		}
 	},
 
@@ -83,21 +71,22 @@ export default React.createClass({
 		var id = this.props.params.id || 0
 		var e=this.props.params.entity
 		var ep='/'+e+'/'
-
+		var m=models[e]
 		var data = this.state.data || {}
 		var cbs={
 			click: this.fieldClick,
 			change: this.fieldChange,
 			leave: this.fieldLeave
 		}
+    	var title = m.label || m.title || ''
 
 		return (
 			<div className="evo-one-edit">
 				<div className="evol-pnls">
-					<Panel>
+					<Panel title={title}>
 						<div className="evol-fset">
 							{
-								models[e].fields.map(function(f, idx){
+								m.fields.map(function(f, idx){
 									return (
 										<Field 
 											id={f.id} 
@@ -113,8 +102,8 @@ export default React.createClass({
 							}
 						</div>
 						<div className="formButtons">
-							<button className="btn btn-primary" onClick={this.clickSave}>Save</button> 
-							<NavLink to={ep+"browse/"+id} className="btn btn-secondary">Cancel</NavLink>
+							<button className="btn btn-primary" onClick={this.clickSave}>{i18n.tools.bSave}</button> 
+							<NavLink to={ep+"browse/"+id} className="btn btn-secondary">{i18n.tools.bCancel}</NavLink>
 						</div>
 					</Panel>
 				</div>
@@ -124,17 +113,25 @@ export default React.createClass({
 
 	validate: function (fields, data) {
 		var messages=[],
-			invalids={};
-		var data=this.getFormData()
+			invalids={},
+			cMsg;
 
 		fields.forEach((f) => {
-			if(f.required && !data[f.id]){
-				messages.push(f.label+' must have a value')
+			cMsg = validation.validateField(f, data[f.id])
+			if(cMsg){
+				messages.push(cMsg)
 				invalids[f.id]=true
+				this.refs[f.id].setState({
+					invalid: true,
+					message: f.label+' must have a value'
+				})
+			}else if(this.refs[f.id].state.invalid===true){
+				this.refs[f.id].setState({
+					invalid: false,
+					message: null
+				})
 			}
 		})
-		//TODO
-		
 		return {
 			valid: messages.length<1,
 			messages: messages,

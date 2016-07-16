@@ -128,10 +128,10 @@ export default React.createClass({
 	 	var readOnly = this.props.readOnly || f.readOnly
 	 	var cbs = this.props.callbacks || {}
 	 	var data = this.props.data || null
-	 	var msg = '' // TODO: invalid
+	 	var invalid = this.state.invalid
 
 		return (
-			<div className={"evol-fld"+(this.props.invalid?' has-error':'')} style={{width: (f.width || 100)+'%'}}>
+			<div className={"evol-fld"+(invalid?' has-error':'')} style={{width: (f.width || 100)+'%'}}>
 
 				<div className="evol-field-label">
 					<label className="control-label">{f.label}
@@ -142,7 +142,7 @@ export default React.createClass({
 				{readOnly ? this._fieldElemReadOnly(f, data)
 								 : this._fieldElem(f, data, cbs)}
 
- 				{this.state.invalid ? <div className="text-danger">{msg}</div> : null}
+ 				{invalid ? <div className="text-danger">{this.state.message}</div> : null}
 
 			</div>
 		)
