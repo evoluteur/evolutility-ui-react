@@ -1,4 +1,6 @@
 import React from 'react'
+import Datepicker from 'react-datepicker'
+import moment from 'moment'
 
 import format from '../utils/format'
 
@@ -57,6 +59,18 @@ export default React.createClass({
 					  return <option key={i.id} value={''+i.id}>{i.text}</option>
 					})}
 				</select>
+		}else if(f.type==='date'){
+			var d=d?moment(d, "YYYY-MM-DD"):null;
+			return <Datepicker
+						id={f.id} 
+						key={f.id}
+						ref='e' 
+						className="form-control" 
+						selected={d}//{d?d:''}
+						onChange={
+							this.getDateFieldChange(f.id)
+						}
+					/>
 		}else if(f.type==='image'){
 			var txtField = ''/*<input 
 					id={f.id} 
@@ -91,9 +105,6 @@ export default React.createClass({
 					</div>
 				)
 			}
-		}
-		if(f.type==='date' && d){
-			d=d.substring(0, 10)
 		}
 		return <input 
 			id={f.id} 
@@ -160,6 +171,18 @@ export default React.createClass({
 
 			</div>
 		)
-	  }
+	},
+
+	getDateFieldChange(fid) {
+		var that=this
+		return function(v){
+			that.props.callbacks.change({
+				target:{
+					id: fid, 
+					value: v ? v.format() : null
+				}
+			})
+		}
+	}
 
 })

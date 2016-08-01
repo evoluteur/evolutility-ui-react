@@ -24,27 +24,23 @@ export default React.createClass({
 	},
 
 	clickSave(evt){ 
-		var fs=models[this.props.params.entity].fields
-		var v=this.validate(fs, this.state.data);
+		var fs = models[this.props.params.entity].fields
+		var v = this.validate(fs, this.state.data);
 		if(v.valid){
 			this.upsertOne()
 		}else{
-			alert(v.messages.join('. \n')+'.')
+			alert(v.messages.join('\n'))
 		}
 	},
-
 	fieldChange(evt) {
 		var fid=evt.target.id
-		var s={}
-
 		var v = evt.target.value
-		if(evt.target.type==='checkbox'){
-			s[fid]=evt.target.checked
-		}else{
-			s[fid]=v
-		}
 		var newData=JSON.parse(JSON.stringify(this.state.data||{}))
-		newData[fid]=v
+		if(evt.target.type==='checkbox'){
+			newData[fid]=evt.target.checked
+		}else{
+			newData[fid]=v
+		}
 		if (!this.delta){
 			this.delta={}
 		}

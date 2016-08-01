@@ -17,6 +17,8 @@
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-router": "^2.0.0",
+    "react-datepicker": "^0.28.2",
+    "moment": "^2.14.1",
     "jquery": "^3.0.0",
     "underscore": "1.8.3"
   },
