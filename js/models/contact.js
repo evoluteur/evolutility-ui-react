@@ -312,6 +312,14 @@ var contact_LOVs = {
 };
 
 module.exports = {
+    id: 'contact',
+    label: 'Address book',
+    icon: 'contact.gif',
+    name: 'contact', namePlural: 'contacts',
+    fnTitle: function(model){
+        return model.get('firstname')+' '+model.get('lastname');
+    },
+    fnSearch: ['lastname', 'firstname', 'jobtitle', 'company'],
     fields:[
         {
             type: 'text', id: 'lastname', attribute: 'lastname', 

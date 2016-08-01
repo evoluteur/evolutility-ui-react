@@ -1,4 +1,11 @@
 module.exports = {
+    id: 'todo',
+    label: 'To Do',
+    name: 'task',
+    namePlural: 'tasks',
+    icon: 'todo.gif',
+    fnTitle:'title',
+    fnSearch: ['title', 'description', 'notes'],
 	fields:[
     {
       id: 'title',
@@ -13,6 +20,7 @@ module.exports = {
       type: 'date', 
       label: 'Due Date', 
       width: 30,
+      required: true,
       inList: true
     },
     {
@@ -27,8 +35,21 @@ module.exports = {
         {id: 4, text: 'Others'},
         {id: 5, text: 'Misc.'}
       ], 
-      width: 70,
+      width: 40,
+      required: true,
       inList: true
+    },
+    {
+        id: 'priority', type: 'lov', label: 'Priority', 
+        width: 30,  inMany: true,
+        lovtable: 'todo_priority',
+        list: [
+            {id: 1, text: '1 - ASAP'},
+            {id: 2, text: '2 - Urgent'},
+            {id: 3, text: '3 - Important'},
+            {id: 4, text: '4 - Medium'},
+            {id: 5, text: '5 - Low'}
+        ]
     },
     {
       id: 'complete', 
@@ -43,7 +64,12 @@ module.exports = {
       label: 'Description', 
       height: 5
     }
-	]
+	],
+  elements: [
+    {id:'p1', type:'panel', fields: ['title', 'duedate', 'category',]},
+    {id:'p2', type:'panel', fields: []},
+    {id:'p3', type:'panel', fields: ['description']}
+  ]
 
 }
 

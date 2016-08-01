@@ -1,4 +1,19 @@
 module.exports = {
+    id: 'comics',
+    label: 'Graphic Novels',
+    name: 'graphic novel serie',
+    namePlural: 'graphic novel series',
+    //icon: 'serie.gif',
+    fnTitle: 'title',
+    fnSearch: ['title', 'authors', 'notes'],
+    fnBadge: function(m){
+        if(m){
+            var hNb=m.get('have_nb'),
+                sNb=m.get('serie_nb');
+            return (hNb==sNb)?hNb:(hNb||'-')+'/'+(sNb||'-');
+        }
+        return '';
+    },
 	fields:[
       {
           id: 'title', attribute: 'title', type: 'text', label: 'Title', required: true, 
@@ -37,8 +52,16 @@ module.exports = {
           label: 'Owned', inCharts:false 
       },
       {
-          id: 'have', attribute: 'have', type: 'text', width: 32, inMany: false,
+          id: 'have', attribute: 'have', type: 'text', width: 15, inMany: false,
           label: 'Have' 
+      },
+      {
+          id: 'language', attribute: 'language', type: 'lov', label: 'Language', width: 17, inMany: true,
+          list: [
+            {id: 2, text: 'French', icon:'flag_fr.gif'},
+            {id: 1, text: 'American', icon:'flag_us.gif'}
+          ],
+          lovtable: 'comics_language'
       },
       {
           id: 'complete', attribute: 'complete', type: 'boolean', width: 19, inMany: false,
@@ -47,15 +70,6 @@ module.exports = {
       {
           id: 'finished', attribute: 'finished', type: 'boolean', width: 19, inMany: false,
           label: 'Finished', labelTrue:'Finished', labelFalse:'Not finished', css:'cBlue'
-      },
-
-      {
-          id: 'language', attribute: 'language', type: 'lov', label: 'Language', width: 30, inMany: true,
-          list: [
-            {id: 2, text: 'French', icon:'flag_fr.gif'},
-            {id: 1, text: 'American', icon:'flag_us.gif'}
-          ],
-          lovtable: 'comics_language'
       },/*
       {
           id:'amazon', label:'Amazon', type:'formula', width:32, css:'evol-ellipsis',
@@ -82,12 +96,12 @@ module.exports = {
           }
       },*/
       {
-          id: 'notes', attribute: 'notes', type: 'textmultiline', label: 'Notes', maxLength: 1000,
-          width: 100, height: 7, inMany: false
+          id: 'pix', attribute: 'pix', type: 'image', width: 30, inMany: true,
+          label: 'Album Cover', labelList:'Cover', labelBrowse:'', labelCards:''
       },
       {
-          id: 'pix', attribute: 'pix', type: 'image', width: 100, inMany: true,
-          label: 'Album Cover', labelList:'Cover', labelBrowse:'', labelCards:''
+          id: 'notes', attribute: 'notes', type: 'textmultiline', label: 'Notes', maxLength: 1000,
+          width: 70, height: 12, inMany: false
       }
   ]
 
