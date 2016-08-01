@@ -39,7 +39,7 @@ export default React.createClass({
 			
 			var fieldCols = dico.getFields(m).filter(dico.isFieldMany) 
 			var title = m.title
-			var data = (this.state.data && this.state.data.length>0) ? this.state.data : []
+			var data = this.state.data ? this.state.data : []
 
 			return (
 				<div data-entity={e}>

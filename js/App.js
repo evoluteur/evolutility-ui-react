@@ -13,10 +13,8 @@ export default React.createClass({
   render() {
     var id='', e='';
     if(this.props.params){
-      id = this.props.params.id || ''
       e = this.props.params.entity || ''
     }
-    var ep='/'+e+'/'
 
     return (
       <div>

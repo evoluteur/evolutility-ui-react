@@ -23,7 +23,8 @@ module.exports = {
             v = d ? <i className="glyphicon glyphicon-ok"></i> : ''
         }else if(f.type==='date'){
             v=this.dateString(d)
-        }else if(f.type==='image'){
+        }else if(f.type==='image' && d){
+            //TODO: param for domain
             v = this.image('http://localhost:8080/'+d)
         }else{
             v = d
