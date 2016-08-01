@@ -8,7 +8,7 @@ export default function(){
 
 		getData: function(entity){
 			var e = entity || this.props.params.entity
-			var urlparams=''
+			var urlparams = ''
 			//urlparams += '&order=name.desc'
 
 			$.get(apiPath+e+urlparams, function (data) {
@@ -29,7 +29,7 @@ export default function(){
 		},
 
 		componentWillReceiveProps(nextProps){
-			if(nextProps.params.entity != this.props.params.entity){
+			if(nextProps.params && nextProps.params.entity != this.props.params.entity){
 				this.setState({
 					data: []
 				})

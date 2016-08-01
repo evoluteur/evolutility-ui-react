@@ -54,7 +54,7 @@ export default function(){
 		},
 
 		componentWillReceiveProps(nextProps){
-			if(nextProps.params.entity != this.props.params.entity
+			if(nextProps.params && nextProps.params.entity != this.props.params.entity
 				|| nextProps.params.id != this.props.params.id){
 				this.setState({
 					data: {}
