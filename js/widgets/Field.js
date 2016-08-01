@@ -2,6 +2,15 @@ import React from 'react'
 
 import format from '../utils/format'
 
+
+function emHeight(f){
+	var fh = parseInt(f.height || 2, 10);
+	if(fh<2){
+		fh=2;
+	}
+	return Math.trunc(fh*1.6);
+}
+
 export default React.createClass({
 	
 	propTypes: {
@@ -99,12 +108,17 @@ export default React.createClass({
 
 	_fieldElemReadOnly(f, d){
 		var fw
-
 		if(f.type==='image' && d){
 			fw = format.image('http://localhost:8080/'+d)
-		}else if(f.type==='textmultilines'){
-			// TODO: height
-			fw = format.fieldValue(f, d)
+		}else if(f.type==='textmultiline'){
+			function createMarkup() {
+				// TODO: what about XSS?
+				return {__html: d?d.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br/>'):''}
+			}
+			var height = emHeight(f)+'em'
+			return <div key={f.id} className="disabled evo-rdonly" style={{height:height}}
+					dangerouslySetInnerHTML={createMarkup()}
+				/> 
 		}else{
 			fw = format.fieldValue(f, d)
 		}
