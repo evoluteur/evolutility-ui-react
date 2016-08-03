@@ -89,6 +89,7 @@ export default React.createClass({
 						 	key={f.id}
 							ref='e'
 							className="img-thumbnail" 
+							//TODO: don't hardcode url
 							src={'http://localhost:8080/'+d} 
 						/>
 					</div>
@@ -119,9 +120,7 @@ export default React.createClass({
 
 	_fieldElemReadOnly(f, d){
 		var fw
-		if(f.type==='image' && d){
-			fw = format.image('http://localhost:8080/'+d)
-		}else if(f.type==='textmultiline'){
+		if(f.type==='textmultiline'){
 			function createMarkup() {
 				// TODO: what about XSS?
 				return {__html: d?d.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br/>'):''}
@@ -130,7 +129,9 @@ export default React.createClass({
 			return <div key={f.id} className="disabled evo-rdonly" style={{height:height}}
 					dangerouslySetInnerHTML={createMarkup()}
 				/> 
-		}else{
+		}else if(f.type==='image' && d){
+			fw = format.image('http://localhost:8080/'+d)
+		}else {
 			fw = format.fieldValue(f, d)
 		}
 		return (

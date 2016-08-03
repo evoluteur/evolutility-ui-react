@@ -17,24 +17,26 @@ export default React.createClass({
 
 	render() {
 		var e=this.props.params.entity
-		var ep='/'+e+'/'
 		var m = models[e]
+		var ep='/'+e+'/'
 
 		if(e){
 
 			function colHeader(f){
 				return (
-					<th key={f.id}>{f.label}</th>
+					<th id={f.id} key={f.id}>{f.label}</th>
 				)
 			}
 
 			function cell(d, f, idx){
 				var value = d[(f.type==='lov' && f.lovtable) ? f.id+'_txt' : f.id]
 				if(idx===0){
-					return <td key={idx}><NavLink key={idx} to={ep+'browse/'+d.id}>{value}</NavLink></td>
-				}else{
-					return <td key={idx}>{format.fieldValue(f, value)}</td>
+					return <td key={idx}><NavLink to={ep+'browse/'+d.id}>{value}</NavLink></td>
+				}else if(f.type==='color'){
+					return <td key={idx}><div className="evo-color-box" id={f.id} 
+                            style={{backgroundColor: value}} title={value}/></td>
 				}
+				return <td key={idx}>{format.fieldValue(f, value, true)}</td>
 			}
 			
 			var fieldCols = dico.getFields(m).filter(dico.isFieldMany) 

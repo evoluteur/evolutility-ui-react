@@ -17,19 +17,25 @@ function notUndefined(v){
 
 module.exports = {
 
-    fieldValue(f, d){
-        var v
+    fieldValue(f, d, abbr){
         if(f.type==='boolean'){
-            v = d ? <i className="glyphicon glyphicon-ok"></i> : ''
+            return d ? <i className="glyphicon glyphicon-ok"></i> : ''
         }else if(f.type==='date'){
-            v=this.dateString(d)
+            return this.dateString(d)
+        }else if(f.type==='color'){
+            return (
+                <div>
+                    <div className="evo-color-box" id={f.id} 
+                            style={{backgroundColor: d}} title={d}>
+                    {!abbr && d ? <span>{d}</span>:null}
+                    </div>
+                </div>
+            )
         }else if(f.type==='image' && d){
             //TODO: param for domain
-            v = this.image('http://localhost:8080/'+d)
-        }else{
-            v = d
+            return this.image('http://localhost:8080/'+d)
         }
-        return v
+        return d
     },
 
     image(d){
