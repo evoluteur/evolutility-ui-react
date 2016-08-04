@@ -4,7 +4,7 @@ React-Evolutility provides a set of generic React Views to manage objects of dif
 
 React-Evolutility works hand-in-hand with [Evolutility-Server](https://github.com/evoluteur/evolutility-server) which provides a matching RESTfull API based on the same metadata.
 
-This project is a *work in progress*. I'm still learning React.
+This project is a **work in progress**. I'm still learning React.
 
 
 ## License
