@@ -1,11 +1,10 @@
 # React-Evolutility
 
-This is a proto of [Evolutility](https://github.com/evoluteur/evolutility) using React. 
+React-Evolutility provides a set of generic React Views to manage objects of different data structures. These views work together to provide full apps. With it you can quickly make web applications by configuring views with metadata instead of hand-coding Javascript, CSS, and HTML.
 
-The views query Evolutility-server by themselves. I'll build a store soon.
+React-Evolutility works hand-in-hand with [Evolutility-Server](https://github.com/evoluteur/evolutility-server) which provides a matching RESTfull API based on the same metadata.
 
-I'm learning React as I go.
-
+This project is a *work in progress*. I'm still learning React.
 
 
 ## License
