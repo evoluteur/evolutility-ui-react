@@ -1,5 +1,6 @@
 import React from 'react'
 
+import i18n from '../../utils/i18n-en'
 import models from '../../models/all_models'
 import one from './one'
 import Field from '../../widgets/Field'
@@ -13,10 +14,6 @@ export default React.createClass({
   },
 
   mixins: [one()],
-
-  clickCancel(evt){
-
-  },
 
   render() {
     var id=this.props.params.id || 0
@@ -46,9 +43,9 @@ export default React.createClass({
             </div>
             <div className="formButtons"> 
                 <NavLink to={ep+"edit/"+id} className="btn btn-primary">
-                  <i className="glyphicon glyphicon-edit"></i> edit
+                  <i className="glyphicon glyphicon-edit"></i> {i18n.tools.bEdit}
                 </NavLink>
-                <button className="btn btn-secondary">Cancel</button>
+                <button className="btn btn-default" onClick={this.navigateBack}>{i18n.tools.bCancel}</button>
             </div>
           </Panel>
         </div>

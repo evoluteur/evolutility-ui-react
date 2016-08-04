@@ -63,5 +63,9 @@ export default function(){
 			}
 		},
 
+		navigateBack(){
+			browserHistory.goBack()
+		}
+
  	}
 }

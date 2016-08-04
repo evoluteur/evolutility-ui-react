@@ -1,8 +1,8 @@
 
 import React from 'react'
 
-import dico from '../../utils/dico'
 import i18n from '../../utils/i18n-en'
+import dico from '../../utils/dico'
 import validation from '../../utils/validation'
 import models from '../../models/all_models'
 
@@ -37,10 +37,9 @@ export default React.createClass({
 		var v = evt.target.value
 		var newData=JSON.parse(JSON.stringify(this.state.data||{}))
 		if(evt.target.type==='checkbox'){
-			newData[fid]=evt.target.checked
-		}else{
-			newData[fid]=v
+			v=evt.target.checked
 		}
+		newData[fid]=v
 		if (!this.delta){
 			this.delta={}
 		}
@@ -98,8 +97,8 @@ export default React.createClass({
 							}
 						</div>
 						<div className="formButtons">
-							<button className="btn btn-primary" onClick={this.clickSave}>{i18n.tools.bSave}</button> 
-							<NavLink to={ep+"browse/"+id} className="btn btn-secondary">{i18n.tools.bCancel}</NavLink>
+							<button className="btn btn-primary" onClick={this.clickSave}>{i18n.tools.bSave}</button>
+							<button className="btn btn-default" onClick={this.navigateBack}>{i18n.tools.bCancel}</button>
 						</div>
 					</Panel>
 				</div>
