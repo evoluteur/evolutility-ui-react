@@ -16,7 +16,6 @@ function emHeight(f){
 export default React.createClass({
 	
 	propTypes: {
-		entity: React.PropTypes.string.isRequired,
 		meta: React.PropTypes.object.isRequired,
 		data: React.PropTypes.any
 	},
@@ -32,7 +31,7 @@ export default React.createClass({
 						key={f.id} 
 						ref='e'
 						type="checkbox" 
-						value={d?true:false}
+						checked={d?true:false}
 						onChange={cbs.change}
 				    />
 		}else if(f.type==='textmultiline' && f.height>1){
@@ -130,6 +129,7 @@ export default React.createClass({
 					dangerouslySetInnerHTML={createMarkup()}
 				/> 
 		}else if(f.type==='image' && d){
+			// TODO: get correct url
 			fw = format.image('http://localhost:8080/'+d)
 		}else {
 			fw = format.fieldValue(f, d)
