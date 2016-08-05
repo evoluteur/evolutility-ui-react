@@ -1,7 +1,7 @@
 
 import React from 'react'
 
-import i18n from '../../utils/i18n-en'
+import {i18n_tools} from '../../utils/i18n-en'
 import dico from '../../utils/dico'
 import validation from '../../utils/validation'
 import models from '../../models/all_models'
@@ -97,8 +97,8 @@ export default React.createClass({
 							}
 						</div>
 						<div className="formButtons">
-							<button className="btn btn-primary" onClick={this.clickSave}>{i18n.tools.bSave}</button>
-							<button className="btn btn-default" onClick={this.navigateBack}>{i18n.tools.bCancel}</button>
+							<button className="btn btn-primary" onClick={this.clickSave}>{i18n_tools.bSave}</button>
+							<button className="btn btn-default" onClick={this.navigateBack}>{i18n_tools.bCancel}</button>
 						</div>
 					</Panel>
 				</div>

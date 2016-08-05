@@ -25,7 +25,7 @@ module.exports = {
     },
 */
     // --- toolbar & buttons ---
-    tools:{
+    i18n_tools:{
         View: 'View',
         bBrowse: 'Browse',
         bEdit: 'Edit',
@@ -119,7 +119,7 @@ module.exports = {
     },
 */
     // --- validation ---
-    validation:{
+    i18n_validation:{
         incomplete: 'Some information is missing or invalid.',
         invalid: 'Invalid format.',
         invalidList: '{0} values in "{1}" are invalid.',

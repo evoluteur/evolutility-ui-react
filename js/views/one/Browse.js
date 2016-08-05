@@ -1,6 +1,6 @@
 import React from 'react'
 
-import i18n from '../../utils/i18n-en'
+import {i18n_tools} from '../../utils/i18n-en'
 import models from '../../models/all_models'
 import one from './one'
 import Field from '../../widgets/Field'
@@ -43,9 +43,9 @@ export default React.createClass({
             </div>
             <div className="formButtons"> 
                 <NavLink to={ep+"edit/"+id} className="btn btn-primary">
-                  <i className="glyphicon glyphicon-edit"></i> {i18n.tools.bEdit}
+                  <i className="glyphicon glyphicon-edit"></i> {i18n_tools.bEdit}
                 </NavLink>
-                <button className="btn btn-default" onClick={this.navigateBack}>{i18n.tools.bCancel}</button>
+                <button className="btn btn-default" onClick={this.navigateBack}>{i18n_tools.bCancel}</button>
             </div>
           </Panel>
         </div>
