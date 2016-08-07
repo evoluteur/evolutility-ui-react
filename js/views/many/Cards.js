@@ -21,9 +21,11 @@ export default React.createClass({
 	    return (
 			<div data-entity={e} style={{display: 'block'}}>
 			    <div className="evol-many-cards">
-		    		{this.state.data.map(function(d, idx){
-		    			return <Card key={idx} data={d} fields={fieldCols} entity={e}/>
-		    		})}
+      				<div className="evol-cards-body">
+			    		{this.state.data.map(function(d, idx){
+			    			return <Card key={idx} data={d} fields={fieldCols} entity={e}/>
+			    		})}
+			    	</div>
 			    </div>
 			</div>
 	    )
