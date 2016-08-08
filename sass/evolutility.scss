@@ -1,0 +1,26 @@
+// sass for evolutility.css
+
+@import 'variables';
+
+@import 'header';
+//@import 'navbar';
+@import 'toolbar';
+
+@import 'one';
+//@import 'one-mini';
+//@import 'one-wizard';
+
+@import 'many';
+@import 'many-cards';
+@import 'many-charts';
+
+//@import 'action-export';
+//@import 'action-import';
+@import 'action-filter';
+
+@import 'print';
+
+//@import 'dico';
+//@import 'doc';
+
+@import 'custom';

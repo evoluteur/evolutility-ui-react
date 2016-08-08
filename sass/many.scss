@@ -1,0 +1,155 @@
+//  evolutility : many.css
+
+//  https://github.com/evoluteur/evolutility
+//  Copyright (c) 2016 Olivier Giulieri
+
+/* --- list --- */
+
+.evol-many-icon{
+	margin-right: 6px !important;
+}
+
+.evol-many-list{
+
+  > div {
+    overflow-x: auto;
+    overflow-y: hidden;
+    > .table {
+
+      margin-bottom: 0;
+
+      textarea{
+        min-width:200px;
+      }
+
+      img {
+        max-height: 60px;
+        padding:0;
+      }
+      tr{
+        transition: all 0.3s ease;
+      }
+      td{
+        position: relative;
+      }
+      th {
+        font-weight: $weight-label !important;
+        background-color: $toolbar-background-color;
+
+        .glyphicon {
+          display:none;
+          position:absolute;
+          opacity: .8;
+          margin-left: 6px;
+          background-color: white;
+          cursor: pointer;
+          width:22px;
+          height: 22px;
+        }
+
+        &:hover .glyphicon {
+          display: inline !important;
+        }
+
+      }
+      .evol-ellipsis{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 120px;
+      }
+    }
+  }
+
+  .glyphicon.evol-last-sort {
+    display:none;
+    position:absolute;
+  }
+
+}
+.evol-r-align{
+  text-align: right;
+}
+
+.badge-list{
+  position: relative;
+  top:-2px;
+  margin-left:5px;
+}
+
+/* --- list > sort icons --- */
+
+.evol-sort-icons {
+  position: relative;
+  top:3px;
+  padding: 3px;
+  width:300px;
+  > .glyphicon {
+    color:$color-icon;
+    position: absolute;
+    top:2px;
+    &:hover{
+      color:$color-icon-hover;
+    }
+  }
+  > .glyphicon-chevron-up {
+    left:7px;
+  }
+  > .glyphicon-chevron-down {
+    left:24px;
+  }
+}
+
+.panel-heading {
+
+  > .evol-title-toggle{
+    display: none;
+  }
+
+  &:hover > .evol-title-toggle{
+    display: inline;
+  }
+
+}
+
+.list-td-sel{
+  width:30px;
+}
+
+.evo-col-pix{
+  width: 100px;
+}
+// from Bootstrap normalize.less (only pieces needed for Evolutility views)
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+
+//
+// 1. Set default font family to sans-serif.
+// 2. Prevent iOS text size adjust after orientation change, without disabling
+//    user zoom.
+//
+
+html {
+  font-family: sans-serif; // 1
+  -ms-text-size-adjust: 100%; // 2
+  -webkit-text-size-adjust: 100%; // 2
+}
+
+//
+// Remove default margin.
+//
+
+body {
+  margin: 0;
+}
+
+// Tables
+// ==========================================================================
+
+//
+// Remove most spacing between table cells.
+//
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}

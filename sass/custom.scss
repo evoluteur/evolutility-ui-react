@@ -1,0 +1,15 @@
+.active {
+  color: green;
+}
+
+[data-entity="comics"] .evol-cards-body>div {
+	height:500px;
+}
+[data-entity="contact"] .evol-cards-body>div{
+	height:120px;
+}
+[data-entity="todo"] .evol-cards-body>div {
+	height:140px;
+}
+
+

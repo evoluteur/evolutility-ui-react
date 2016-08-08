@@ -17,6 +17,7 @@
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-router": "^2.0.0",
+    "bootstrap-sass": "3.3.7",
     "react-datepicker": "^0.28.2",
     "moment": "^2.14.1",
     "jquery": "^3.0.0",
@@ -29,6 +30,11 @@
     "babel-preset-react": "^6.5.0",
     "http-server": "^0.8.5",
     "webpack": "^1.12.13",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-header": "^1.8.7",
+    "gulp-rename": "^1.2.2"
   }
 }

@@ -1,6 +1,3 @@
-.active {
-  color: green;
-}
 .TopNav{
 	background-color: #2072a7;
 	color: white;
@@ -14,6 +11,10 @@
 .TopNavComplement{
 	display: block;
 	height: 130px;
+}
+.evol-entity{
+	margin-left: 20px;
+	color: orange;
 }
 .RightNav{
 	padding: 20px 10px;
@@ -35,16 +36,10 @@
 	margin-left: 10px;
 }
 
-
-[data-entity="comics"] .evol-cards-body>div {
-	height:500px;
+.evo-filters{
+	color: #333;
 }
-[data-entity="contact"] .evol-cards-body>div{
-	height:120px;
+.evo-filters.panel{
+	padding:6px 1px 1px 6px !important;
 }
-[data-entity="todo"] .evol-cards-body>div {
-	height:140px;
-}
-
-
 

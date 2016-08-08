@@ -1,0 +1,147 @@
+//  evolutility : toolbar.css
+
+//  https://github.com/evoluteur/evolutility
+//  Copyright (c) 2016 Olivier Giulieri
+
+#title{
+  >i{
+    color: #c6d9f0;
+    margin-right: 0.4em;
+  }
+}
+
+.evo-toolbar{
+  border: 1px solid $toolbar-border-color;
+  @include border-radius(4px);
+  margin-bottom:10px;
+  padding:3px;
+  background-color: $toolbar-background-color;
+
+  > [data-cid="views"]{
+    color:black;
+  }
+
+  > ul {
+    > .evo-sel .glyphicon:before{
+      color:black;
+    }
+    > li {
+      &.divider-h{
+        height: 41px;
+        width: 1px;
+        background-color: $toolbar-border-color;
+      }
+      >a {
+        transition: all 0.5s ease;
+        padding: 10px 6px 10px 8px
+      }
+    }
+  }
+/*
+  [data-id="prev"].nav-disabled,
+  [data-id="next"].nav-disabled{
+    a {
+      color: $color-disabled;
+      &:hover{
+        background-color: transparent;
+        cursor:default;
+      }
+    }
+  }
+*/
+  .evo-dropdown-icons{
+    min-width: 50px;
+  }
+
+  // bootstrap override
+  .dropdown-menu>li>a{
+    padding: 3px 10px;
+  }
+
+}
+
+.evo-filter-on{
+  background-color: #e0f2f1;
+}
+.evo-view-on{
+  color: $color-icon-hover;
+}
+
+.evo-tb-status{
+  color: #0f0f0f !important;
+  min-height: 35px;
+  line-height: 35px;
+  margin-top: 2px;
+  margin-right: 5px;
+  //max-width:200px;
+  //@include evol-ellipsis();
+
+}
+
+// -- search
+.evo-search{
+  position:relative;
+  width:200px; 
+  margin: auto;
+  padding: 3px 4px 2px 2px;
+.evo-field{
+    &:not(:valid) ~ .clear-icon {
+      opacity: 0;
+    }
+  }
+  >.btn{
+    position: relative;
+    top:0;
+  }
+}
+
+.clear-icon {
+  z-index: 3;
+  position: absolute;
+  top: 14px;
+  right: 47px;
+  color: #90a4ae;
+  cursor: pointer;
+}
+
+// -- mini vertical toolbar in views
+.evol-actions,
+.evol-actions-nxtTd{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  background-color: $toolbar-background-color;
+  border: 1px solid #bce8f1;
+  >i{
+    color: $color-icon;
+    padding: 10px;
+    cursor: pointer;
+    @include border-radius(4px);
+    &:hover{
+      color: $color-icon-hover;
+      background-color: $color-icon-background-hover;
+    }
+  }
+}
+.evol-actions{
+  top: 35px;
+  right: 1px;
+  border-right: none;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.evol-actions-nxtTd{
+  top:0;
+  left: 0;
+  z-index: 2;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.evol-many-list{
+  .evol-actions{
+    top:0;
+    flex-direction: row;
+  }
+}

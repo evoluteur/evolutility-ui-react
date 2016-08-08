@@ -1,0 +1,32 @@
+//  evolutility : many-charts.css
+
+//  https://github.com/evoluteur/evolutility
+//  Copyright (c) 2016 Olivier Giulieri
+
+/* --- charts --- */
+.evol-many-charts{
+	@include flex-holder();
+}
+.evol-chart-holder{
+	@include flex-item();
+	position: relative;
+	text-align: center;
+	background-color :#FFFFFF;
+	margin:10px 10px 10px 5px;
+	width: 400px;
+	min-height:286px;
+}
+.chart-holder{
+	>label{
+		display:block;
+	}
+}
+.evol-chart-title{
+	text-align:center;
+	padding:10px 20px 30px;
+}
+/*
+.evo-chart-table{
+	overflow-y: auto;
+}
+*/
