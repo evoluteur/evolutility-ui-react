@@ -85,6 +85,7 @@ export default React.createClass({
             color: 'black',
             backgroundColor: '#eeeeee'
         }
+        var isNew = this.props.isNew
 
         function iicon(icon){
             return <i className={'glyphicon glyphicon-'+icon}></i>
@@ -105,14 +106,17 @@ export default React.createClass({
                 <ul role="nav" className="nav nav-pills pull-left">
                     <li className="divider-h" />
                     {id?buttonAction(menuItems.actions.del, this.deleteOne):null}
-                    {id?null:buttonAction(menuItems.actions.export, this.exportMany)}
+                    {id||isNew?null:buttonAction(menuItems.actions.export, this.exportMany)}
                 </ul>
-                <ul role="nav" className="nav nav-pills pull-right">
-                    <li className="divider-h" />
-                    {menuItems.views[id?'one':'many'].map(function(m){
-                        return buttonLink(m, id)
-                    })}
-                </ul>
+                {isNew ? null : (
+                        <ul role="nav" className="nav nav-pills pull-right">
+                            <li className="divider-h" />
+                            {menuItems.views[id?'one':'many'].map(function(m){
+                                return buttonLink(m, id)
+                            })}
+                        </ul>
+                    )}
+
                 <div className="clearfix"/>
               </div>
             )

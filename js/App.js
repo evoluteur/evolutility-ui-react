@@ -15,6 +15,7 @@ export default React.createClass({
     if(this.props.params){
       e = this.props.params.entity || ''
     }
+    var isNew = window.location.pathname.endsWith('/new/')
 
     return (
       <div>
@@ -24,9 +25,13 @@ export default React.createClass({
             <Link to="/contact/list" id="contact" className={e==='contact'?'active':''}> contacts</Link> - 
             <Link to="/comics/cards" id="comics" className={e==='comics'?'active':''}> comics</Link>
           </div>
-          <h2>React-Evolutility</h2>
+          <h2 className="pull-left">React-Evolutility</h2>
+          {models[e] ? (
+            <h2 className="pull-left evol-entity">{models[e].title || models[e].label}</h2>
+          ):null}
+
           <div className="clearer"/>
-          <Toolbar key="tb" entity={e} params={this.props.params}/>
+          <Toolbar key="tb" entity={e} params={this.props.params} isNew={isNew}/>
         </TopNav>
         <div className="TopNavComplement"/>
         {this.props.children}
