@@ -607,6 +607,20 @@ table {
   .evo-editFilter input.hasDatepicker {
     width: 7em; }
 
+@media print {
+  .evol-buttons,
+  .evo-toolbar,
+  .evo-noprint {
+    display: none !important; }
+  .evo-filters {
+    border: none; }
+    .evo-filters > .btn {
+      display: none !important; }
+  .evo-filters {
+    min-height: 0; }
+  .tab-pane {
+    display: block !important; } }
+
 .active {
   color: green; }
 
