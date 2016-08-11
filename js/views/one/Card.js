@@ -12,16 +12,16 @@ export default React.createClass({
   },
 
   render() {
-  	var d=this.props.data || {}
-    var fs = this.props.fields || []
-    var e=this.props.entity
-    var ep='/'+e+'/'
+  	const d = this.props.data || {},
+        fs = this.props.fields || [],
+        e = this.props.entity,
+        ep = '/'+e+'/'
 
   	return (
         <div className="panel panel-info"> 
           {fs.map(function(f, idx){
-            var attr=(f.type==='lov' && f.lovtable) ? f.id+'_txt' : f.id
-            var fv=format.fieldValue(f, d[attr])
+            const attr=(f.type==='lov' && f.lovtable) ? f.id+'_txt' : f.id
+            const fv=format.fieldValue(f, d[attr])
             return (
               <div key={idx}>
                 {idx===0 ? <h4><NavLink key={f.id} to={ep+"browse/"+d.id}>{fv}</NavLink></h4>

@@ -1,3 +1,4 @@
+import React from 'react'
 
 import $ from 'jquery' 
 import {apiPath} from '../../../config.js'
@@ -35,6 +36,14 @@ export default function(){
 				})
 				this.getData(nextProps.params.entity)
 			}
+		},
+
+		badRoute(entity){
+			return (
+				<div className="alert alert-danger" role="alert">
+					Invalid route. "{entity}" is not a valid entity.
+				</div>
+			)
 		}
 
 	}

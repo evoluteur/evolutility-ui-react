@@ -16,11 +16,11 @@ export default React.createClass({
 	mixins: [many()],
 
 	render() {
-		var e=this.props.params.entity
-		var m = models[e]
-		var ep='/'+e+'/'
+		const e = this.props.params.entity,
+			m = models[e],
+			ep = '/'+e+'/'
 
-		if(e){
+		if(m){
 
 			function colHeader(f){
 				return (
@@ -29,7 +29,7 @@ export default React.createClass({
 			}
 
 			function cell(d, f, idx){
-				var value = d[(f.type==='lov' && f.lovtable) ? f.id+'_txt' : f.id]
+				const value = d[(f.type==='lov' && f.lovtable) ? f.id+'_txt' : f.id]
 				if(idx===0){
 					return <td key={idx}><NavLink to={ep+'browse/'+d.id}>{value}</NavLink></td>
 				}else if(f.type==='color'){
@@ -39,9 +39,9 @@ export default React.createClass({
 				return <td key={idx}>{format.fieldValue(f, value, true)}</td>
 			}
 			
-			var fieldCols = dico.getFields(m).filter(dico.isFieldMany) 
-			var title = m.title
-			var data = this.state.data ? this.state.data : []
+			const fieldCols = m.fields.filter(dico.isFieldMany),
+				title = m.title,
+				data = this.state.data ? this.state.data : []
 
 			return (
 				<div data-entity={e}>
@@ -72,9 +72,7 @@ export default React.createClass({
 				</div>
 			)
 		}else{
-			return (
-				<p>Invalid route.</p>
-			)
+			return this.badRoute(e)
 		}
 	}
 
