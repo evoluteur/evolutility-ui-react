@@ -8,8 +8,8 @@ export default function(){
 	return {
 
 		getData: function(entity){
-			var e = entity || this.props.params.entity
-			var id = this.props.params.id
+			const e = entity || this.props.params.entity,
+				id = this.props.params.id
 			
 			if(id){
 				$.get(apiPath+e+'/'+id, function (data) {
@@ -21,9 +21,9 @@ export default function(){
 		},
 
 		upsertOne: function(entity){
-			var e = entity || this.props.params.entity
-			var id = this.props.params.id || ''
-			var data=this.delta
+			const e = entity || this.props.params.entity,
+				id = this.props.params.id || '',
+				data=this.delta
 
 			$.ajax({
 				url: apiPath+e+'/'+id, 

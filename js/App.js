@@ -3,6 +3,7 @@ import NavLink from './widgets/NavLink'
 import { Link } from 'react-router'
 import Toolbar from './widgets/Toolbar'
 import TopNav from './widgets/TopNav'
+import models from './models/all_models'
 
 export default React.createClass({
 

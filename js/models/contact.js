@@ -351,6 +351,13 @@ module.exports = {
              label: 'web', maxLength: 255, width: 100
         },
         {
+            type: 'lov', id: 'category', attribute: 'category', 
+             label: 'Category', width: 100,
+            inMany: true,
+            list: contact_LOVs.categories, 
+            lovtable: 'contact_category'
+        },
+        {
             type: 'text', id: 'phone', attribute: 'phone', 
              label: 'Work Phone', maxLength: 20, width: 100, mini:'1'
         },
@@ -391,13 +398,6 @@ module.exports = {
             type: 'lov', id: 'country', attribute: 'country', 
              label: 'Country', maxLength: 60, width: 100,
             list: contact_LOVs.countries
-        },
-        {
-            type: 'lov', id: 'category', attribute: 'category', 
-             label: 'Category', width: 100,
-            inMany: true,
-            list: contact_LOVs.categories, 
-            lovtable: 'contact_category'
         }
     ]
 }

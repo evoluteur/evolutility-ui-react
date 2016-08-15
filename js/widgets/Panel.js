@@ -18,7 +18,7 @@ export default React.createClass({
 	},
 
 	render() {
-		var title = this.props.title ? (
+		const title = this.props.title ? (
 				<div className="panel-heading">
 					{this.props.collapsible ? (
 						<i className={'evol-title-toggle glyphicon glyphicon-chevron-'+(this.state.opened ? 'up':'down')} 
@@ -27,6 +27,7 @@ export default React.createClass({
 					<h3 className="panel-title">{this.props.title}</h3>
 				</div>
 			) : null
+		
 		return (
 			<div className="evol-pnl">
 				<div className="panel panel-info">

@@ -14,7 +14,7 @@
 
 .evol-entity {
   margin-left: 20px;
-  color: orange; }
+  color: #ffc107; }
 
 .RightNav {
   padding: 20px 10px; }
@@ -23,7 +23,7 @@
   color: white; }
 
 .RightNav a.active {
-  color: orange; }
+  color: #ffc107; }
 
 .clearer {
   clear: both; }
@@ -621,11 +621,8 @@ table {
   .tab-pane {
     display: block !important; } }
 
-.active {
-  color: green; }
-
 [data-entity="comics"] .evol-cards-body > div {
-  height: 500px; }
+  height: 470px; }
 
 [data-entity="contact"] .evol-cards-body > div {
   height: 120px; }

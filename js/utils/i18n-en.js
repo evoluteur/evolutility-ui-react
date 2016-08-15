@@ -47,32 +47,32 @@ module.exports = {
         //bAll: 'All',
         bList: 'List',
         bCards: 'Cards',
-        bJSON: 'JSON',
+        //bJSON: 'JSON',
         bFilter: 'Filter',
         //bBubbles: 'Bubbles',
         //bSunburst: 'Sunburst',
         //bScatter:'Scatter',
         bCharts: 'Charts',
         //bRefresh: 'Refresh',
-        //bPrint: 'Print',
+        bPrint: 'Print',
         bSave: 'Save',
-        bSaveAdd: 'Save and Add Another',
+        //bSaveAdd: 'Save and Add Another',
         bOK: 'OK',
         bCancel: 'Cancel',
 
         // --- data visualization ---
-        vizGroupBy: 'Group by',
-        vizColorBy: 'Color by',
-        vizSizeBy: 'Size by',
+        //vizGroupBy: 'Group by',
+        //vizColorBy: 'Color by',
+        //vizSizeBy: 'Size by',
 
-        xAxis: 'X Axis',
-        yAxis: 'Y Axis',
+        //xAxis: 'X Axis',
+        //yAxis: 'Y Axis',
         //zAxis: 'Z Axis',
 
         // --- wizard ---
         prev: 'Previous',
         next: 'Next',
-        finish: 'Finish !'
+        //finish: 'Finish !'
     },
 /*
     // --- msg & status ---
@@ -196,7 +196,7 @@ module.exports = {
     },
 
     // --- filters ---
-    filters:{
+    i18n_filters:{
         sEqual: 'equals',
         sNotEqual: 'not equal',
         sStart: 'starts with',

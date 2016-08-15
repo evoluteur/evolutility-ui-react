@@ -6,7 +6,7 @@ import format from '../utils/format'
 
 
 function emHeight(f){
-	var fh = parseInt(f.height || 2, 10);
+	let fh = parseInt(f.height || 2, 10);
 	if(fh<2){
 		fh=2;
 	}
@@ -17,7 +17,8 @@ export default React.createClass({
 	
 	propTypes: {
 		meta: React.PropTypes.object.isRequired,
-		data: React.PropTypes.any
+		data: React.PropTypes.any,
+		label: React.PropTypes.string, //override label in prop meta
 	},
 
 	getInitialState: function() {
@@ -52,14 +53,14 @@ export default React.createClass({
 						className="form-control" 
 						value={d}
 						onChange={cbs.change}
-				>
+					>
 					<option/>
 					{f.list.map(function(i, idx){
 					  return <option key={i.id} value={''+i.id}>{i.text}</option>
 					})}
 				</select>
 		}else if(f.type==='date'){
-			var d=d?moment(d, "YYYY-MM-DD"):null;
+			var d = d ? moment(d, "YYYY-MM-DD") : null;
 			return <Datepicker
 						id={f.id} 
 						key={f.id}
@@ -155,12 +156,13 @@ export default React.createClass({
 	 	var cbs = this.props.callbacks || {}
 	 	var data = this.props.data || null
 	 	var invalid = this.state.invalid
+	 	var label = this.props.label || f.label
 
 		return (
 			<div className={"evol-fld"+(invalid?' has-error':'')} style={{width: (f.width || 100)+'%'}}>
 
 				<div className="evol-field-label">
-					<label className="control-label">{f.label}
+					<label className="control-label">{label}
 						{f.required && !(f.readOnly || readOnly) ? <span className="evol-required">*</span> : null}
 					</label>
 				</div>

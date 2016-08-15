@@ -24,8 +24,8 @@ export default React.createClass({
 	},
 
 	clickSave(evt){ 
-		var fs = models[this.props.params.entity].fields
-		var v = this.validate(fs, this.state.data);
+		const fs = models[this.props.params.entity].fields
+		const v = this.validate(fs, this.state.data);
 		if(v.valid){
 			this.upsertOne()
 		}else{
@@ -33,9 +33,9 @@ export default React.createClass({
 		}
 	},
 	fieldChange(evt) {
-		var fid=evt.target.id
-		var v = evt.target.value
-		var newData=JSON.parse(JSON.stringify(this.state.data||{}))
+		const fid=evt.target.id
+		let v = evt.target.value
+		const newData=JSON.parse(JSON.stringify(this.state.data||{}))
 		if(evt.target.type==='checkbox'){
 			v=evt.target.checked
 		}
@@ -63,17 +63,17 @@ export default React.createClass({
 */
 
 	render() {
-		var id = this.props.params.id || 0
-		var e=this.props.params.entity
-		var ep='/'+e+'/'
-		var m=models[e]
-		var data = this.state.data || {}
-		var cbs={
-			click: this.fieldClick,
-			change: this.fieldChange,
-			leave: this.fieldLeave
-		}
-    	var title = m.label || m.title || ''
+		const id = this.props.params.id || 0,
+			e = this.props.params.entity,
+			ep = '/'+e+'/',
+			m = models[e],
+			data = this.state.data || {},
+			cbs = {
+				click: this.fieldClick,
+				change: this.fieldChange,
+				leave: this.fieldLeave
+			},
+	    	title = m.label || m.title || ''
 
 		return (
 			<div className="evo-one-edit">
@@ -107,7 +107,7 @@ export default React.createClass({
 	},
 
 	validate: function (fields, data) {
-		var messages=[],
+		let messages=[],
 			invalids={},
 			cMsg;
 

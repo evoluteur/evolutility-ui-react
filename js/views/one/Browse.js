@@ -16,12 +16,12 @@ export default React.createClass({
   mixins: [one()],
 
   render() {
-    var id=this.props.params.id || 0
-    var e=this.props.params.entity || null
-    var ep='/'+e+'/'
-    var m=models[e]
-    var data = this.state.data || {}
-    var title = m.label || m.title || ''
+    const id = this.props.params.id || 0,
+      e = this.props.params.entity || null,
+      ep = '/'+e+'/',
+      m = models[e],
+      data = this.state.data || {},
+      title = m.label || m.title || ''
 
     return (
       <div data-entity={e} className="evo-one-browse">
@@ -29,7 +29,7 @@ export default React.createClass({
           <Panel title={title}>
             <div className="evol-fset">
               {m.fields.map(function(f, idx){
-                var attr = (f.type==='lov' && f.lovtable) ? f.id+'_txt' : f.id
+                const attr = (f.type==='lov' && f.lovtable) ? f.id+'_txt' : f.id
                 return (
                     <Field 
                       key={idx} 
