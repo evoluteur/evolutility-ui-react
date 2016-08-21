@@ -14,7 +14,7 @@ function emHeight(f){
 }
 
 export default React.createClass({
-	
+
 	propTypes: {
 		meta: React.PropTypes.object.isRequired,
 		data: React.PropTypes.any,
@@ -60,19 +60,18 @@ export default React.createClass({
 					})}
 				</select>
 		}else if(f.type==='date'){
-			var d = d ? moment(d, "YYYY-MM-DD") : null;
 			return <Datepicker
 						id={f.id} 
 						key={f.id}
 						ref='e' 
 						className="form-control" 
-						selected={d}//{d?d:''}
+						selected={d ? moment(d, "YYYY-MM-DD") : null}
 						onChange={
 							this.getDateFieldChange(f.id)
 						}
 					/>
 		}else if(f.type==='image'){
-			var txtField = ''/*<input 
+			const txtField = ''/*<input 
 					id={f.id} 
 					ref='e'
 					type='text' 
@@ -119,13 +118,13 @@ export default React.createClass({
 	},
 
 	_fieldElemReadOnly(f, d){
-		var fw
+		let fw
 		if(f.type==='textmultiline'){
 			function createMarkup() {
 				// TODO: what about XSS?
 				return {__html: d?d.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br/>'):''}
 			}
-			var height = emHeight(f)+'em'
+			const height = emHeight(f)+'em'
 			return <div key={f.id} className="disabled evo-rdonly" style={{height:height}}
 					dangerouslySetInnerHTML={createMarkup()}
 				/> 
@@ -143,7 +142,7 @@ export default React.createClass({
 	},
 
 	getValue(){
-		var e=this.refs.e
+		const e=this.refs.e
 		if(e.type==='checkbox'){
 			return e.checked ? true : false
 		}
@@ -151,12 +150,12 @@ export default React.createClass({
 	},
 
  	render() {
-		var f = this.props.meta || {type: 'text'}
-	 	var readOnly = this.props.readOnly || f.readOnly
-	 	var cbs = this.props.callbacks || {}
-	 	var data = this.props.data || null
-	 	var invalid = this.state.invalid
-	 	var label = this.props.label || f.label
+		const f = this.props.meta || {type: 'text'},
+			readOnly = this.props.readOnly || f.readOnly,
+			cbs = this.props.callbacks || {},
+			data = this.props.data || null,
+			invalid = this.state.invalid,
+			label = this.props.label || f.label
 
 		return (
 			<div className={"evol-fld"+(invalid?' has-error':'')} style={{width: (f.width || 100)+'%'}}>
@@ -177,9 +176,8 @@ export default React.createClass({
 	},
 
 	getDateFieldChange(fid) {
-		var that=this
-		return function(v){
-			that.props.callbacks.change({
+		return (v)=>{
+			this.props.callbacks.change({
 				target:{
 					id: fid, 
 					value: v ? v.format() : null
