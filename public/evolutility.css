@@ -1,3 +1,12 @@
+/**
+  React-Evolutility v0.0.1
+
+  (c) 2016 Olivier Giulieri
+  https://github.com/evoluteur/react-evolutility
+*/
+/*
+  react-evolutility : topnav
+*/
 .TopNav {
   background-color: #2072a7;
   color: white;
@@ -40,6 +49,9 @@
 .evo-filters.panel {
   padding: 6px 1px 1px 6px !important; }
 
+/*
+  react-evolutility : toolbar
+*/
 #title > i {
   color: #c6d9f0;
   margin-right: 0.4em; }
@@ -151,6 +163,9 @@
   top: 0;
   flex-direction: row; }
 
+/*
+  react-evolutility : one
+*/
 /* --- panels & tabs --- */
 .evol-pnls {
   display: -webkit-box;
@@ -388,6 +403,9 @@ label {
 .evol-cards-body .evo-f-list > div {
   margin-bottom: 5px; }
 
+/*
+  react-evolutility : many
+*/
 /* --- list --- */
 .evol-many-icon {
   margin-right: 6px !important; }
@@ -480,7 +498,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-/* --- cards --- */
+/*
+  react-evolutility : many-cards
+*/
 .evol-cards-body > .panel {
   float: left;
   position: relative;
@@ -500,7 +520,9 @@ table {
   text-align: center;
   margin: 5px 2px; }
 
-/* --- charts --- */
+/*
+  react-evolutility : many-charts
+*/
 .evol-many-charts {
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6 */
@@ -535,7 +557,11 @@ table {
 	overflow-y: auto;
 }
 */
+/*
+  evolutility : action-filter
+*/
 .evo-bNew, .evo-bAdd, .evo-bDel, .evo-bSubmit {
+  display: inline-block;
   margin: 1px 6px 6px 1px; }
 
 .evo-lBold {
@@ -607,6 +633,12 @@ table {
   .evo-editFilter input.hasDatepicker {
     width: 7em; }
 
+.roOp {
+  border: solid 1px silver; }
+
+/*
+  react-evolutility : print
+*/
 @media print {
   .evol-buttons,
   .evo-toolbar,

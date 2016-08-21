@@ -1,11 +1,11 @@
-//  evolutility : action-filter.css
-
-//  https://github.com/evoluteur/evolutility
-//  Copyright (c) 2016 Olivier Giulieri
+/*
+  evolutility : action-filter
+*/
 
 $color-condition: #f0ad4e;
 
 .evo-bNew, .evo-bAdd, .evo-bDel, .evo-bSubmit {
+  display: inline-block;
 	margin:1px 6px 6px 1px;	
 }
 
@@ -108,4 +108,7 @@ $color-condition: #f0ad4e;
     width:7em;
   }
 
+}
+.roOp{
+  border: solid 1px silver;
 }

@@ -1,26 +1,21 @@
-// sass for evolutility.css
+//  react-evolutility
+
+//  https://github.com/evoluteur/react-evolutility
+//  Copyright (c) 2016 Olivier Giulieri
 
 @import 'variables';
 
-@import 'header';
-//@import 'navbar';
+@import 'topnav';
 @import 'toolbar';
 
 @import 'one';
-//@import 'one-mini';
-//@import 'one-wizard';
 
 @import 'many';
 @import 'many-cards';
 @import 'many-charts';
 
-//@import 'action-export';
-//@import 'action-import';
 @import 'action-filter';
 
 @import 'print';
-
-//@import 'dico';
-//@import 'doc';
 
 @import 'custom';
