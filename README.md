@@ -11,4 +11,4 @@ This project is a **work in progress**. I'm still learning React.
 
 Copyright (c) 2016 Olivier Giulieri.
 
-Evolutility.js is released under the GNU Affero General Public License version 3 [GNU AGPLv3](http://www.gnu.org/licenses/agpl-3.0.html).
+React-Evolutility.js is released under the [MIT license](http://github.com/evoluteur/react-evolutility/raw/master/LICENSE.md).

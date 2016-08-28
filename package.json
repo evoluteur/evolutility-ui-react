@@ -6,13 +6,22 @@
   "author": "Olivier Giulieri",
   "copyright": "(c) 2016 Olivier Giulieri",
   "homepage": "https://github.com/evoluteur/react-evolutility",
+  "license": "MIT",
 
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:dev": "webpack-dev-server --inline --content-base public/ --history-api-fallback",
     "start:prod": "webpack && node server.js"
   },
-  "license": "AGPL-3.0",
+
+  "keywords": [
+    "React.js",
+    "React",
+    "react-component",
+    "CRUD",
+    "UI",
+    "framework"
+  ],
 
   "dependencies": {
     "compression": "^1.6.1",
@@ -25,7 +34,7 @@
     "react-datepicker": "^0.28.2",
     "moment": "^2.14.1",
     "jquery": "^3.0.0",
-    "underscore": "1.8.3"
+    "underscore": "^1.8.3"
   },
   
   "devDependencies": {
