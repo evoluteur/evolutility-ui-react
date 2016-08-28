@@ -50,8 +50,7 @@ const menuItems = {
 export default React.createClass({
 
     propTypes: {
-        params: React.PropTypes.object.isRequired,
-        collapsible: React.PropTypes.bool
+        params: React.PropTypes.object.isRequired
     },
 
     deleteOne: function(){
@@ -78,14 +77,14 @@ export default React.createClass({
     },
 
     render() {
-        var e=this.props.params.entity || ''
-        var id = this.props.params.id || ''
-        var ep='/'+e+'/'
-        var cStyle={ 
+        const e = this.props.params.entity || ''
+        const id = this.props.params.id || ''
+        const ep='/'+e+'/'
+        const cStyle={ 
             color: 'black',
             backgroundColor: '#eeeeee'
         }
-        var isNew = this.props.isNew
+        const isNew = this.props.isNew
 
         function iicon(icon){
             return <i className={'glyphicon glyphicon-'+icon}></i>
