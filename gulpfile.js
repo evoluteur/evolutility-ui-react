@@ -13,6 +13,7 @@ gulp.task('css', function () {
   return gulp.src('./sass/evolutility.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(header(banner, { pkg : pkg }))
+    .pipe(rename('react-evolutility.css'))
     .pipe(gulp.dest('./public'));
 });
 
@@ -20,7 +21,7 @@ gulp.task('css-min', function () {
   return gulp.src('./sass/evolutility.scss')
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
     .pipe(header(banner, { pkg : pkg }))
-    .pipe(rename('evolutility.min.css'))
+    .pipe(rename('react-evolutility.min.css'))
     .pipe(gulp.dest('./public'));
 });
 

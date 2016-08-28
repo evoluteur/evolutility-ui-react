@@ -313,7 +313,7 @@ var contact_LOVs = {
 
 module.exports = {
     id: 'contact',
-    label: 'Address book',
+    label: 'Address Book',
     icon: 'contact.gif',
     name: 'contact', namePlural: 'contacts',
     fnTitle: function(model){

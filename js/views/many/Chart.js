@@ -39,6 +39,13 @@ function fnValue(d){
 
 export default React.createClass({
 
+    propTypes: {
+        entity: React.PropTypes.string.isRequired,
+        field: React.PropTypes.object.isRequired,
+        title: React.PropTypes.string,
+        sizes: React.PropTypes.string,
+    },
+
     mixins: [many2],
 
     urlPie: function (data, sizes){
@@ -55,8 +62,8 @@ export default React.createClass({
     },
 
     urlBars: function (data, sizes){
-        var size=sizes?sizes:'360x200';
-        var maxCount = 0,
+        const size=sizes?sizes:'360x200';
+        let maxCount = 0,
             ls=data.map(fnLabel),
             vs=data.map(fnValue);
 
@@ -66,17 +73,16 @@ export default React.createClass({
             }
         })
 
-        var urlGoogleChart = urlChart+'?chbh=a&chs='+size+'&cht=bvg&chco='+colorsList(data.length)+'&chds=0,'+maxCount+
+        return urlChart+'?chbh=a&chs='+size+'&cht=bvg&chco='+colorsList(data.length)+'&chds=0,'+maxCount+
                 '&chd=t:'+vs.join('|')+
                 '&chp=0.05&chts=676767,10.5&chdl='+ls.join('|');
-        return urlGoogleChart;
     },
 
     render: function (){
         var data=this.state.data || []
-        var url = this[data.length<5?'urlPie':'urlBars'](data)
+        var url = this[ this.state.chartType ? this.state.chartType : (data.length<5?'urlPie':'urlBars') ](data)
         return (
-            <div className=" evol-chart-holder panel panel-info">
+            <div className="evol-chart-holder panel panel-info">
                 <div className="chart-holder">
                     <label className="evol-chart-title">{this.props.title}</label> 
                     { url ? <img src={url} /> : null}

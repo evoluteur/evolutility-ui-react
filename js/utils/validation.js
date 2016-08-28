@@ -36,7 +36,7 @@ module.exports = {
         if(!f.readonly){
 
             // Check required and empty
-            if (f.required && (v==='' || _.isUndefined(v) ||
+            if (f.required && (v===null || v==='' || _.isUndefined(v) ||
                 (numberField && isNaN(v)) ||
                 (f.type===fts.lov && v==='0') ||
                 (f.type===fts.list && v && !v.length) //||

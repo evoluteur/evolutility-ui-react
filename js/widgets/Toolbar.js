@@ -73,8 +73,8 @@ export default React.createClass({
     },
 
     exportMany(){  
-        var e=this.props.entity || ''
-        window.open(apiPath+e+'?_format=csv', '_blank');
+        const e = this.props.entity || ''
+        window.open(apiPath+e+'?format=csv', '_blank');
     },
 
     render() {
