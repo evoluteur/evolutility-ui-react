@@ -15,16 +15,9 @@
 	min-height:286px;
 }
 .chart-holder{
-	>label{
+	>h3{
 		display:block;
+		text-align:center;
+		padding:10px 20px 30px;
 	}
 }
-.evol-chart-title{
-	text-align:center;
-	padding:10px 20px 30px;
-}
-/*
-.evo-chart-table{
-	overflow-y: auto;
-}
-*/

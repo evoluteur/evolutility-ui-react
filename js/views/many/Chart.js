@@ -84,7 +84,7 @@ export default React.createClass({
         return (
             <div className="evol-chart-holder panel panel-info">
                 <div className="chart-holder">
-                    <label className="evol-chart-title">{this.props.title}</label> 
+                    <h3 className="panel-title">{this.props.title}</h3>
                     { url ? <img src={url} /> : null}
                 </div>
             </div>

@@ -545,18 +545,11 @@ table {
   width: 400px;
   min-height: 286px; }
 
-.chart-holder > label {
-  display: block; }
-
-.evol-chart-title {
+.chart-holder > h3 {
+  display: block;
   text-align: center;
   padding: 10px 20px 30px; }
 
-/*
-.evo-chart-table{
-	overflow-y: auto;
-}
-*/
 /*
   evolutility : action-filter
 */
