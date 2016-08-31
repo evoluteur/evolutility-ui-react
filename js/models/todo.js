@@ -1,11 +1,11 @@
 module.exports = {
-    id: 'todo',
-    label: 'To Do',
-    name: 'task',
-    namePlural: 'tasks',
-    icon: 'todo.gif',
-    fnTitle:'title',
-    fnSearch: ['title', 'description', 'notes'],
+  id: 'todo',
+  label: 'To Do',
+  name: 'task',
+  namePlural: 'tasks',
+  icon: 'todo.gif',
+  titleField:'title',
+
 	fields:[
     {
       id: 'title',
@@ -41,7 +41,7 @@ module.exports = {
     },
     {
         id: 'priority', type: 'lov', label: 'Priority', 
-        width: 30,  inMany: true,
+        width: 100,  inMany: true,
         lovtable: 'todo_priority',
         list: [
             {id: 1, text: '1 - ASAP'},
@@ -55,7 +55,7 @@ module.exports = {
       id: 'complete', 
       type: 'boolean', 
       label: 'Complete', 
-      width: 30,
+      width: 100,
       inList: true
     },
     {
@@ -65,10 +65,17 @@ module.exports = {
       height: 5
     }
 	],
-  elements: [
-    {id:'p1', type:'panel', fields: ['title', 'duedate', 'category',]},
-    {id:'p2', type:'panel', fields: []},
-    {id:'p3', type:'panel', fields: ['description']}
+
+  groups: [
+    {id:'p1', type:'panel', label: 'Task', width: 62,
+      fields: ['title', 'duedate', 'category']
+    },
+    {id:'p2', type:'panel', label: 'Status', width: 38,
+      fields: ['priority', 'complete']
+    },
+    {id:'p3', type:'panel', label: 'Task Description', width: 100,
+      fields: ['description']
+    }
   ]
 
 }

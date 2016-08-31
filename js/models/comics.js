@@ -4,8 +4,8 @@ module.exports = {
     name: 'graphic novel serie',
     namePlural: 'graphic novel series',
     //icon: 'serie.gif',
-    fnTitle: 'title',
-    fnSearch: ['title', 'authors', 'notes'],
+    titleField: 'title',
+    searchFields: ['title', 'authors', 'notes'],
     fnBadge: function(m){
         if(m){
             var hNb=m.get('have_nb'),
@@ -103,7 +103,17 @@ module.exports = {
           id: 'notes', attribute: 'notes', type: 'textmultiline', label: 'Notes', maxLength: 1000,
           width: 70, height: 12, inMany: false
       }
-  ]
+  ],
 
+  groups: [
+        { id:'serie', type: 'panel', label: 'Serie', width: 70,
+            fields: ['title', 'authors', 'genre', 'serie_nb', 'have_nb', 'have', 
+                'complete', 'finished', 'language', 
+                'notes']
+        },
+        { id:'pix', type: 'panel', label: 'Cover', width: 30,
+            fields: ['pix' ]
+        }
+  ]
 }
 

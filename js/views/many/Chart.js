@@ -19,7 +19,7 @@ var many2 = many()
 many2.getData = function(){
     var e = this.props.entity
     var fid = this.props.field.id
-    var urlparams = '?token='+localStorage.token
+    var urlparams = ''//?token='+localStorage.token
 
     if(fid){
         $.get(apiPath+'chart/'+e+'/'+fid+urlparams, function (data) {

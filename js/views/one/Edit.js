@@ -75,35 +75,56 @@ export default React.createClass({
 			},
 	    	title = m.label || m.title || ''
 
+		function fnField(f){
+			return (
+				<Field 
+					id={f.id} 
+					key={f.id} 
+					ref={f.id} 
+					meta={f} 
+					data={data[f.id]} 
+					callbacks={cbs}
+					entity={e}
+				/>
+			)
+		}
+
 		return (
 			<div className="evo-one-edit">
 				<div className="evol-pnls">
-					<Panel title={title}>
-						<div className="evol-fset">
-							{
-								m.fields.map(function(f, idx){
-									return (
-										<Field 
-											id={f.id} 
-											key={f.id} 
-											ref={f.id} 
-											meta={f} 
-											data={data[f.id]} 
-											callbacks={cbs}
-											entity={e}
-										/>
-									)
-								})
-							}
-						</div>
+
+	    			{m.groups ? (
+							m.groups.map(function(g, idx){
+								const groupFields = dico.fieldId2Field(g.fields, m.fieldsH)
+								return (
+									<Panel key={g.id||('g'+idx)} title={g.label || gtitle || ''} width={g.width}>
+										<div className="evol-fset">
+											{groupFields.map(fnField)}
+										</div>
+									</Panel>
+								)
+							})
+					) : (
+
+						<Panel title={title}>
+							<div className="evol-fset"> 
+								{
+									m.fields.map(fnField)
+								}
+							</div>
+						</Panel>
+					)}
+
+					<Panel width={100}>
 						<div className="formButtons">
 							<button className="btn btn-primary" onClick={this.clickSave}>{i18n_tools.bSave}</button>
 							<button className="btn btn-default" onClick={this.navigateBack}>{i18n_tools.bCancel}</button>
 						</div>
 					</Panel>
+
 				</div>
 			</div>
-		)
+		) 
 	},
 
 	validate: function (fields, data) {

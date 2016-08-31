@@ -4,6 +4,7 @@ export default React.createClass({
 
 	propTypes: {
 		title: React.PropTypes.string,
+		width: React.PropTypes.number,
 		collapsible: React.PropTypes.bool
 	},
 
@@ -29,7 +30,7 @@ export default React.createClass({
 			) : null
 		
 		return (
-			<div className="evol-pnl">
+			<div className="evol-pnl" style={{width: (this.props.width || 100)+'%'}}>
 				<div className="panel panel-info">
 					{title}
 					<fieldset style={{display: (this.state.opened ? 'block':'none')}}>

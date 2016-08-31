@@ -133,6 +133,12 @@ module.exports = {
 		return [fts.text, fts.textml, fts.url, fts.html, fts.email].indexOf(f.type)>-1;
 	},
 
+	fieldId2Field: function(fieldIds, fieldsH){
+		return fieldIds ? fieldIds.map(function(id){
+			return fieldsH[id] || null
+		}) : null
+	},
+
 	fieldIsNumber: fieldIsNumber,
 
 	fieldInCharts: fieldInCharts,
