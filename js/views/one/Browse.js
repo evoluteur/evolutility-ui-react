@@ -17,10 +17,9 @@ export default React.createClass({
   mixins: [one()],
 
   render() {
-    const id = this.props.params.id || 0,
-      e = this.props.params.entity || null,
-      ep = '/'+e+'/',
-      m = models[e],
+    const {id=0, entity=null} = this.props.params
+    const ep = '/'+entity+'/',
+      m = models[entity],
       data = this.state.data || {},
       title = m.label || m.title || ''
 
@@ -33,7 +32,7 @@ export default React.createClass({
             meta={f} 
             data={data[attr]} 
             readOnly={true}
-            entity={e}
+            entity={entity}
           />
         )
       }
@@ -68,7 +67,7 @@ export default React.createClass({
                 <NavLink to={ep+"edit/"+id} className="btn btn-primary">
                   <i className="glyphicon glyphicon-edit"></i> {i18n_tools.bEdit}
                 </NavLink>
-                <button className="btn btn-default" onClick={this.navigateBack}>{i18n_tools.bCancel}</button>
+                <button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_tools.bCancel}</button>
             </div>
           </Panel>
 

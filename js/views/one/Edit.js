@@ -63,10 +63,9 @@ export default React.createClass({
 */
 
 	render() {
-		const id = this.props.params.id || 0,
-			e = this.props.params.entity,
-			ep = '/'+e+'/',
-			m = models[e],
+    	const {id=0, entity=null} = this.props.params
+		const ep = '/'+entity+'/',
+			m = models[entity],
 			data = this.state.data || {},
 			cbs = {
 				click: this.fieldClick,
@@ -84,7 +83,7 @@ export default React.createClass({
 					meta={f} 
 					data={data[f.id]} 
 					callbacks={cbs}
-					entity={e}
+					entity={entity}
 				/>
 			)
 		}
@@ -106,19 +105,17 @@ export default React.createClass({
 							})
 					) : (
 
-						<Panel title={title}>
+						<Panel title={title} key="pAllFields">
 							<div className="evol-fset"> 
-								{
-									m.fields.map(fnField)
-								}
+								{m.fields.map(fnField)}
 							</div>
 						</Panel>
 					)}
 
 					<Panel width={100}>
 						<div className="formButtons">
-							<button className="btn btn-primary" onClick={this.clickSave}>{i18n_tools.bSave}</button>
-							<button className="btn btn-default" onClick={this.navigateBack}>{i18n_tools.bCancel}</button>
+							<button className="btn btn-primary" onClick={this.clickSave}><i className="glyphicon glyphicon-ok"></i> {i18n_tools.bSave}</button>
+							<button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_tools.bCancel}</button>
 						</div>
 					</Panel>
 

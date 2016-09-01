@@ -16,16 +16,16 @@ module.exports = {
     },
 	fields:[
       {
-          id: 'title', attribute: 'title', type: 'text', label: 'Title', required: true, 
+          id: 'title', type: 'text', label: 'Title', required: true, 
           maxLength: 255,
           width: 100, inMany: true
       },
       {
-          id: 'authors', attribute: 'authors', type: 'text', width: 62, inMany: true,
+          id: 'authors', type: 'text', width: 62, inMany: true,
           label: 'Authors'
       },
       {
-          id: 'genre', attribute: 'genre', type: 'lov', label: 'Genre', width: 38, inMany: true,
+          id: 'genre', type: 'lov', label: 'Genre', width: 38, inMany: true,
           list: [
             {id: 1, text: 'Adventure'},
             {id: 2, text: 'Fairy tale'},
@@ -44,19 +44,19 @@ module.exports = {
           lovtable: 'comics_genre'
       },
       {
-          id: 'serie_nb', attribute: 'serie_nb', type: 'integer', width: 15, inMany: false,
+          id: 'serie_nb', type: 'integer', width: 15, inMany: false,
           label: 'Albums', inCharts:false 
       },
       {
-          id: 'have_nb', attribute: 'have_nb', type: 'integer', width: 15, inMany: false,
+          id: 'have_nb', type: 'integer', width: 15, inMany: false,
           label: 'Owned', inCharts:false 
       },
       {
-          id: 'have', attribute: 'have', type: 'text', width: 15, inMany: false,
+          id: 'have', type: 'text', width: 15, inMany: false,
           label: 'Have' 
       },
       {
-          id: 'language', attribute: 'language', type: 'lov', label: 'Language', width: 17, inMany: true,
+          id: 'language', type: 'lov', label: 'Language', width: 17, inMany: true,
           list: [
             {id: 2, text: 'French', icon:'flag_fr.gif'},
             {id: 1, text: 'American', icon:'flag_us.gif'}
@@ -64,11 +64,11 @@ module.exports = {
           lovtable: 'comics_language'
       },
       {
-          id: 'complete', attribute: 'complete', type: 'boolean', width: 19, inMany: false,
+          id: 'complete', type: 'boolean', width: 19, inMany: false,
           label: 'Complete', labelFalse:'Incomplete', labelTrue:'Complete'
       },
       {
-          id: 'finished', attribute: 'finished', type: 'boolean', width: 19, inMany: false,
+          id: 'finished', type: 'boolean', width: 19, inMany: false,
           label: 'Finished', labelTrue:'Finished', labelFalse:'Not finished', css:'cBlue'
       },/*
       {
@@ -96,11 +96,11 @@ module.exports = {
           }
       },*/
       {
-          id: 'pix', attribute: 'pix', type: 'image', width: 30, inMany: true,
+          id: 'pix', type: 'image', width: 30, inMany: true,
           label: 'Album Cover', labelList:'Cover', labelBrowse:'', labelCards:''
       },
       {
-          id: 'notes', attribute: 'notes', type: 'textmultiline', label: 'Notes', maxLength: 1000,
+          id: 'notes', type: 'textmultiline', label: 'Notes', maxLength: 1000,
           width: 70, height: 12, inMany: false
       }
   ],

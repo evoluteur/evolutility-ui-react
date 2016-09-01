@@ -23,86 +23,86 @@ module.exports = {
 
     fields:[
         {
-            type: 'text', id: 'lastname', attribute: 'lastname', 
+            type: 'text', id: 'lastname',
             label: 'Lastname', maxLength: 50,
             required: true, width: 62, inMany: true
         },
         {
-            type: 'text', id: 'firstname', attribute: 'firstname', 
+            type: 'text', id: 'firstname',
              label: 'Firstname', maxLength: 50,
             required: true, width: 38, inMany: true
         },
         {
-            type: 'text', id: 'jobtitle', attribute: 'jobtitle', 
+            type: 'text', id: 'jobtitle',
              label: 'Title', maxLength: 50,
             width: 62
         },
         {
-            type: 'text', id: 'company', attribute: 'company', 
+            type: 'text', id: 'company',
              label: 'Company', maxLength: 50,
             width: 38, inMany: true
         },
         {
-            type: 'email', id: 'email', attribute: 'email', 
+            type: 'email', id: 'email',
              label: 'email', maxLength: 255,
             width: 100 
         },
         {
-            type: 'url', id: 'web', attribute: 'web', 
+            type: 'url', id: 'web',
              label: 'web', maxLength: 255, width: 100
         },
         {
-            type: 'lov', id: 'category', attribute: 'category', 
+            type: 'lov', id: 'category',
              label: 'Category', width: 100,
             inMany: true,
             list: contact_LOVs.categories, 
             lovtable: 'contact_category'
         },
         {
-            type: 'text', id: 'phone', attribute: 'phone', 
+            type: 'text', id: 'phone',
              label: 'Work Phone', maxLength: 20, width: 100, mini:'1'
         },
         {
-            type: 'text', id: 'phonehome', attribute: 'phonehome', 
+            type: 'text', id: 'phonehome',
              label: 'Home Phone', maxLength: 20, width: 100
         },
         {
-            type: 'text', id: 'phonecell', attribute: 'phonecell', 
+            type: 'text', id: 'phonecell',
              label: 'Cell.', maxLength: 20, width: 100, mini:'1'
         },
         {
-            type: 'text', id: 'fax', attribute: 'fax', 
+            type: 'text', id: 'fax', 
              label: 'Fax', maxLength: 20, width: 100
         },
         {
-            type: 'text', id: 'address1', attribute: 'address1', 
+            type: 'text', id: 'address1',
              label: 'Address', maxLength: 150, width: 100
         },
         {
-            type: 'text', id: 'address2', attribute: 'address2', 
+            type: 'text', id: 'address2', 
              label: '', labelMany: 'Address 2', maxLength: 150, width: 100
         },
         {
-            type: 'text', id: 'city', attribute: 'city', 
+            type: 'text', id: 'city',
              label: 'City', maxLength: 100, width: 62
         },
         {
-            type: 'text', id: 'state', attribute: 'state', 
+            type: 'text', id: 'state',
              label: 'State', width: 23,
             //list: contact_LOVs.states
         },
         {
-            type: 'text', id: 'zip', attribute: 'zip', 
+            type: 'text', id: 'zip',
              label: 'Zip', maxLength: 12, width: 15
         },
         {
-            type: 'text', id: 'country', attribute: 'country', 
+            type: 'text', id: 'country',
              label: 'Country', maxLength: 60, width: 100,
             //list: contact_LOVs.countries
         },
         {
-            type: 'textmultiline', id: 'notes', attribute: 'notes', 
-             label: 'Notes', maxLength: 1000, width: 15, height: 6
+            type: 'textmultiline', id: 'notes',
+             label: 'Notes', maxLength: 1000, width: 15, height: 9
         }
     ],
 
