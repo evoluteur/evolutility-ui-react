@@ -25,7 +25,7 @@ export default React.createClass({
 
 	clickSave(evt){ 
 		const fs = models[this.props.params.entity].fields
-		const v = this.validate(fs, this.state.data);
+		const v = this.validate(fs, this.state.data)
 		if(v.valid){
 			this.upsertOne()
 		}else{

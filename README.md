@@ -68,14 +68,12 @@ module.exports = {
         },
         {
             id: 'category', type: 'lov', 
-            label: 'Category', inMany: true,
-            lovtable: 'task_category'
+            label: 'Category', inMany: true
         },
         {
             id: 'priority', type: 'lov', 
             label: 'Priority', required: true,
-            inMany: true,
-            lovtable: 'task_priority'
+            inMany: true
         },
         {
             id: 'complete', type: 'boolean',

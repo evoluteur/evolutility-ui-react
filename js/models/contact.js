@@ -54,9 +54,7 @@ module.exports = {
         {
             type: 'lov', id: 'category',
              label: 'Category', width: 100,
-            inMany: true,
-            list: contact_LOVs.categories, 
-            lovtable: 'contact_category'
+            inMany: true
         },
         {
             type: 'text', id: 'phone',
@@ -88,8 +86,7 @@ module.exports = {
         },
         {
             type: 'text', id: 'state',
-             label: 'State', width: 23,
-            //list: contact_LOVs.states
+             label: 'State', width: 23
         },
         {
             type: 'text', id: 'zip',
@@ -97,8 +94,7 @@ module.exports = {
         },
         {
             type: 'text', id: 'country',
-             label: 'Country', maxLength: 60, width: 100,
-            //list: contact_LOVs.countries
+             label: 'Country', maxLength: 60, width: 100
         },
         {
             type: 'textmultiline', id: 'notes',

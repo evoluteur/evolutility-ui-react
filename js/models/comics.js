@@ -40,8 +40,7 @@ module.exports = {
             {id: 11, text: 'Science-fiction'},
             {id: 12, text: 'Super Heros'},
             {id: 13, text: 'Western'} 
-          ],
-          lovtable: 'comics_genre'
+          ]
       },
       {
           id: 'serie_nb', type: 'integer', width: 15, inMany: false,
@@ -60,8 +59,7 @@ module.exports = {
           list: [
             {id: 2, text: 'French', icon:'flag_fr.gif'},
             {id: 1, text: 'American', icon:'flag_us.gif'}
-          ],
-          lovtable: 'comics_language'
+          ]
       },
       {
           id: 'complete', type: 'boolean', width: 19, inMany: false,

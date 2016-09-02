@@ -27,7 +27,6 @@ module.exports = {
       id: 'category', 
       type: 'lov', 
       label: 'Category',
-      lovtable: 'todo_category',
       list: [
         {id: 1, text: 'Home'},
         {id: 2, text: 'Work'},
@@ -42,7 +41,6 @@ module.exports = {
     {
         id: 'priority', type: 'lov', label: 'Priority', 
         width: 100,  inMany: true,
-        lovtable: 'todo_priority',
         list: [
             {id: 1, text: '1 - ASAP'},
             {id: 2, text: '2 - Urgent'},

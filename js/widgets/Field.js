@@ -17,8 +17,10 @@ export default React.createClass({
 
 	propTypes: {
 		meta: React.PropTypes.object.isRequired,
+		callbacks: React.PropTypes.object,
 		data: React.PropTypes.any,
-		label: React.PropTypes.string, //override label in prop meta
+		label: React.PropTypes.string, //override label in meta
+		readOnly: React.PropTypes.bool, //override label in meta
 	},
 
 	getInitialState: function() {

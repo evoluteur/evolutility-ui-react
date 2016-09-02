@@ -20,7 +20,7 @@ export default React.createClass({
   	return (
         <div className="panel panel-info"> 
           {fs.map(function(f, idx){
-            const attr=(f.type==='lov' && f.lovtable) ? f.id+'_txt' : f.id
+            const attr=(f.type==='lov') ? f.id+'_txt' : f.id
             const fv=format.fieldValue(f, d[attr])
             return (
               <div key={idx}>

@@ -29,7 +29,7 @@ export default React.createClass({
 			}
 
 			function cell(d, f, idx){
-				const value = d[(f.type==='lov' && f.lovtable) ? f.id+'_txt' : f.id]
+				const value = d[(f.type==='lov') ? f.id+'_txt' : f.id]
 				if(idx===0){
 					return <td key={idx}><NavLink to={ep+'browse/'+d.id}>{value}</NavLink></td>
 				}else if(f.type==='color'){
