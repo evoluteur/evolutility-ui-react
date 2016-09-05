@@ -22,7 +22,7 @@ many2.getData = function(){
     var urlparams = ''//?token='+localStorage.token
 
     if(fid){
-        $.get(apiPath+'chart/'+e+'/'+fid+urlparams, function (data) {
+        $.get(apiPath+''+e+'/chart/'+fid+urlparams, function (data) {
             this.setState({
                 data: data
             });
