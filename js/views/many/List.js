@@ -15,23 +15,31 @@ export default React.createClass({
 
 	mixins: [many()],
 
+	clickSort: function(evt){
+		const fid = evt.target.id
+		let direc = 'asc'
+
+		if(this._sortField===fid){
+			if(this._sortDirection === 'asc'){
+				direc = 'desc'
+			}
+		}else{
+			this._sortField = fid
+		}
+		this._sortDirection = direc
+		this.getData(null, fid, direc)
+	},
+
 	render() {
 		const e = this.props.params.entity,
-			m = models[e],
-			ep = '/'+e+'/'
+			m = models[e]
 
 		if(m){
-
-			function colHeader(f){
-				return (
-					<th id={f.id} key={f.id}>{f.label}</th>
-				)
-			}
 
 			function cell(d, f, idx){
 				const value = d[(f.type==='lov') ? f.id+'_txt' : f.id]
 				if(idx===0){
-					return <td key={idx}><NavLink to={ep+'browse/'+d.id}>{value}</NavLink></td>
+					return <td key={idx}><NavLink to={'/'+e+'/browse/'+d.id}>{value}</NavLink></td>
 				}else if(f.type==='color'){
 					return <td key={idx}><div className="evo-color-box" id={f.id} 
                             style={{backgroundColor: value}} title={value}/></td>
@@ -50,7 +58,10 @@ export default React.createClass({
 							<table className="table table-bordered table-hover">
 								<thead>
 									<tr>
-										{fieldCols.map(colHeader)}
+										{fieldCols.map((f)=> (
+												<th id={f.id} key={f.id} onClick={this.clickSort}>{f.label}</th>
+											)
+										)}
 									</tr>
 								</thead>
 								<tbody>

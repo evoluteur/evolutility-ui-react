@@ -1,17 +1,18 @@
-import React from 'react'
 
-import $ from 'jquery' 
+import $ from 'jquery'
+
 import {apiPath} from '../../../config.js'
 
 export default function(){
 
 	return {
 
-		getData: function(entity){
+		getData: function(entity, sortField, sortDirection){
 			var e = entity || this.props.params.entity
 			var urlparams = ''
-			//urlparams += '&order=name.desc'
-
+			if(sortField){
+				urlparams = '?order='+sortField+'.'+sortDirection
+			}
 			$.get(apiPath+e+urlparams, function (data) {
 				this.setState({
 					data: data
