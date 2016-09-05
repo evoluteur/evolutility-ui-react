@@ -1,15 +1,12 @@
-var contact_LOVs = {
-
-    categories: [
-        {id: '1', text: 'Work'},
-        {id: '2', text: 'Fun'},
-        {id: '3', text: 'Travel'},
-        {id: '4', text: 'Business'},
-        {id: '5', text: 'Cars'},
-        {id: '6', text: 'Sport'},
-        {id: '7', text: 'Misc.'}
-    ] 
-};
+var lov_categories = [
+    {id: '1', text: 'Work'},
+    {id: '2', text: 'Fun'},
+    {id: '3', text: 'Travel'},
+    {id: '4', text: 'Business'},
+    {id: '5', text: 'Cars'},
+    {id: '6', text: 'Sport'},
+    {id: '7', text: 'Misc.'}
+];
 
 module.exports = {
     id: 'contact',
@@ -54,6 +51,7 @@ module.exports = {
         {
             type: 'lov', id: 'category',
              label: 'Category', width: 100,
+             list: lov_categories,
             inMany: true
         },
         {
