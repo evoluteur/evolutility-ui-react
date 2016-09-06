@@ -55,7 +55,7 @@ function hById(arr){
 	return objH;
 }
 
-function getFields(uiModel) {
+function getFields(model) {
 	var fs = [];
 
 	function collectFields(te) {
@@ -72,16 +72,16 @@ function getFields(uiModel) {
 		}
 	}
 
-	if(uiModel.fields){
-		return uiModel.fields;
+	if(model.fields){
+		return model.fields;
 	}else{
-		collectFields(uiModel);
-		uiModel.fields=fs;
+		collectFields(model);
+		model.fields=fs;
 		return fs;
 	}
 }
 
-function getSubCollecs(uiModel) {
+function getSubCollecs(model) {
 	var ls = {};
 
 	function collectCollecs(te) {
@@ -100,7 +100,7 @@ function getSubCollecs(uiModel) {
 		}
 	}
 
-	collectCollecs(uiModel);
+	collectCollecs(model);
 	return ls;
 }
 

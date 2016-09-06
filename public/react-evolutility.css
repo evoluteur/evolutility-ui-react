@@ -1,5 +1,5 @@
 /**
-  React-Evolutility v0.0.2
+  React-Evolutility v0.0.3
 
   https://github.com/evoluteur/react-evolutility
   (c) 2016 Olivier Giulieri
@@ -374,42 +374,6 @@ label {
   .evo-color-box span {
     margin-left: 24px; }
 
-.badge-one {
-  position: relative;
-  top: -14px;
-  font-size: .5em;
-  margin-left: 5px; }
-
-.w-100 {
-  width: 100%; }
-
-.w-62 {
-  width: 62%; }
-
-.w-38 {
-  width: 38%; }
-
-.evo-f-list > div {
-  margin: 0 5px 0 0;
-  padding: 2px 4px !important;
-  border: 1px solid silver;
-  margin-bottom: 5px; }
-
-.evo-f-list > div,
-.select2-search-choice {
-  display: inline-block;
-  background-image: none !important;
-  background-color: aliceblue !important; }
-
-.select2-search-choice {
-  padding: 5px 10px 5px 20px !important; }
-
-.evol-many-list .evo-f-list > div {
-  font-size: 15px; }
-
-.evol-cards-body .evo-f-list > div {
-  margin-bottom: 5px; }
-
 /*
   react-evolutility : many
 */
@@ -421,25 +385,6 @@ label {
   position: relative;
   top:-2px;
   margin-left:5px;
-}
-
-.panel-heading {
-
-  > .evol-title-toggle{
-    display: none;
-  }
-  &:hover > .evol-title-toggle{
-    display: inline;
-  }
-
-}
-
-.list-td-sel{
-  width:30px;
-}
-
-.evo-col-pix{
-  width: 100px;
 }
 */
 /*
