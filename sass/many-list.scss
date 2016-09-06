@@ -1,0 +1,56 @@
+/*
+  react-evolutility : many-list
+*/
+
+.evol-many-icon{
+	margin-right: 6px !important;
+}
+
+.evol-many-list{
+
+  > div {
+    overflow-x: auto;
+    overflow-y: hidden;
+    > .table {
+
+      margin-bottom: 0;
+
+      textarea{
+        min-width:200px;
+      }
+
+      img {
+        max-height: 60px;
+        padding:0;
+      }
+      tr{
+        transition: all 0.3s ease;
+      }
+      td{
+        position: relative;
+      }
+      th {
+        cursor: pointer;
+        position: relative;
+        font-weight: $weight-label !important;
+        background-color: $toolbar-background-color;
+        &:hover{
+          color: #0099cc;
+        }
+        i{
+          position: absolute;
+          right: 5px;
+          top: 12px;
+          color: $color-border;
+        }
+      }
+      .evol-ellipsis{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 120px;
+      }
+    }
+  }
+
+}
