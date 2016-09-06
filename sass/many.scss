@@ -32,24 +32,12 @@
         position: relative;
       }
       th {
+        cursor: pointer;
         font-weight: $weight-label !important;
         background-color: $toolbar-background-color;
-
-        .glyphicon {
-          display:none;
-          position:absolute;
-          opacity: .8;
-          margin-left: 6px;
-          background-color: white;
-          cursor: pointer;
-          width:22px;
-          height: 22px;
+        &:hover{
+          color: #0099cc;
         }
-
-        &:hover .glyphicon {
-          display: inline !important;
-        }
-
       }
       .evol-ellipsis{
         overflow: hidden;
@@ -58,11 +46,6 @@
         max-width: 120px;
       }
     }
-  }
-
-  .glyphicon.evol-last-sort {
-    display:none;
-    position:absolute;
   }
 
 }
@@ -74,29 +57,6 @@
   position: relative;
   top:-2px;
   margin-left:5px;
-}
-
-/* --- list > sort icons --- */
-
-.evol-sort-icons {
-  position: relative;
-  top:3px;
-  padding: 3px;
-  width:300px;
-  > .glyphicon {
-    color:$color-icon;
-    position: absolute;
-    top:2px;
-    &:hover{
-      color:$color-icon-hover;
-    }
-  }
-  > .glyphicon-chevron-up {
-    left:7px;
-  }
-  > .glyphicon-chevron-down {
-    left:24px;
-  }
 }
 
 .panel-heading {
