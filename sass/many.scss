@@ -33,10 +33,17 @@
       }
       th {
         cursor: pointer;
+        position: relative;
         font-weight: $weight-label !important;
         background-color: $toolbar-background-color;
         &:hover{
           color: #0099cc;
+        }
+        i{
+          position: absolute;
+          right: 5px;
+          top: 12px;
+          color: $color-border;
         }
       }
       .evol-ellipsis{
@@ -64,7 +71,6 @@
   > .evol-title-toggle{
     display: none;
   }
-
   &:hover > .evol-title-toggle{
     display: inline;
   }

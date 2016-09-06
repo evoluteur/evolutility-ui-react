@@ -8,6 +8,8 @@
 }
 .evol-pnl {
   padding-left:10px !important;
+  min-width: 150px;
+  margin-bottom: -10px;
   .table {
     //margin-bottom: 0;
     img {
@@ -19,7 +21,7 @@
   .table .evol-money{
     //TODO: better fix
     width: 200px;
-  }
+  }/* // nested panel
   .evol-pnl {
      > .panel{
         margin-bottom: 12px;
@@ -27,7 +29,7 @@
     > div > fieldset{
       padding: 10px 10px 5px 2px;
     }
-  }
+  }*/
 }
 
 .evo-plist{
@@ -85,6 +87,7 @@
     @include flex-item();
     padding-left:10px !important;
     margin-bottom: 6px;
+    //min-width: 120px;
     > .evo-rdonly{
           // todo: use or remove line below?
           // border-bottom: 1px solid silver;

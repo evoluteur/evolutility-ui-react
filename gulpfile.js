@@ -7,7 +7,7 @@ var rename = require('gulp-rename');
 var pkg = require('./package.json');
 
 var banner = '/**\n  React-Evolutility v<%= pkg.version %>\n\n'+
-            '  <%= pkg.copyright %>\n  <%= pkg.homepage %>\n*/\n';
+            '  <%= pkg.homepage %>\n  <%= pkg.copyright %>\n*/\n';
 
 gulp.task('css', function () {
   return gulp.src('./sass/evolutility.scss')

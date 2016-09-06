@@ -16,7 +16,7 @@ export default React.createClass({
 	mixins: [many()],
 
 	clickSort: function(evt){
-		const fid = evt.target.id
+		const fid = evt.currentTarget.id
 		let direc = 'asc'
 
 		if(this._sortField===fid){
@@ -59,7 +59,13 @@ export default React.createClass({
 								<thead>
 									<tr>
 										{fieldCols.map((f)=> (
-												<th id={f.id} key={f.id} onClick={this.clickSort}>{f.label}</th>
+												<th id={f.id} key={f.id} onClick={this.clickSort}>
+													{f.label}
+													{f.id===this._sortField ? (
+															<i className={"glyphicon glyphicon-arrow-"+(this._sortDirection==='desc' ? 'down' : 'up')}></i>
+														) : null
+													}
+												</th>
 											)
 										)}
 									</tr>
