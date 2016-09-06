@@ -36,10 +36,16 @@ export default React.createClass({
 
 		if(m){
 
+			const ico = m.icon ? <img className="evol-many-icon" src={'/pix/'+m.icon}/> : null 
+
 			function cell(d, f, idx){
 				const value = d[(f.type==='lov') ? f.id+'_txt' : f.id]
 				if(idx===0){
-					return <td key={idx}><NavLink to={'/'+e+'/browse/'+d.id}>{value}</NavLink></td>
+					return <td key={idx}>
+						<NavLink to={'/'+e+'/browse/'+d.id}>
+							{ico}
+							{value}
+						</NavLink></td>
 				}else if(f.type==='color'){
 					return <td key={idx}><div className="evo-color-box" id={f.id} 
                             style={{backgroundColor: value}} title={value}/></td>
