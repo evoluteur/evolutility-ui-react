@@ -3,7 +3,7 @@ module.exports = {
     label: 'Graphic Novels',
     name: 'graphic novel serie',
     namePlural: 'graphic novel series',
-    //icon: 'serie.gif',
+    icon: 'comics.png',
     titleField: 'title',
     searchFields: ['title', 'authors', 'notes'],
     fnBadge: function(m){
