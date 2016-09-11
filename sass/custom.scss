@@ -1,12 +1,29 @@
+body {
+	font-size: $text-font-size;
+}
+
+.alert{
+	margin: 50px 10px;
+}
+
+.evol-fld{
+	input, textarea, select{
+		font-size: $text-font-size;
+	}
+}
+
+h1, h2 {
+	font-weight: 300;
+}
+
 
 [data-entity="comics"] .evol-cards-body>div {
-	height: 470px;
+	height: 480px;
 }
 [data-entity="contact"] .evol-cards-body>div{
-	height: 120px;
-}
-[data-entity="todo"] .evol-cards-body>div {
 	height: 140px;
 }
-
+[data-entity="todo"] .evol-cards-body>div {
+	height: 150px;
+}
 

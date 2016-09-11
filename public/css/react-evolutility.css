@@ -494,11 +494,23 @@ label {
   .tab-pane {
     display: block !important; } }
 
+body {
+  font-size: 16px; }
+
+.alert {
+  margin: 50px 10px; }
+
+.evol-fld input, .evol-fld textarea, .evol-fld select {
+  font-size: 16px; }
+
+h1, h2 {
+  font-weight: 300; }
+
 [data-entity="comics"] .evol-cards-body > div {
-  height: 470px; }
+  height: 480px; }
 
 [data-entity="contact"] .evol-cards-body > div {
-  height: 120px; }
+  height: 140px; }
 
 [data-entity="todo"] .evol-cards-body > div {
-  height: 140px; }
+  height: 150px; }
