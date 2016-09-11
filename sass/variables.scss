@@ -13,8 +13,8 @@ $screen1: 500px;
 $screen2: 900px;
 
 // golden ratio
-$widthR1: 38%;
-$widthR2: 62%;
+$golden-ratio-big: 62%;
+$golden-ratio-small: 38%;
 
 // top nav bar
 $color-header: #0099cc;//#1d365d
@@ -71,4 +71,11 @@ $color-text-footer: silver;
 			margin-left: 0;
 		}
 	}
+}
+
+@mixin ellipsis(){
+	// need "width" to use
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

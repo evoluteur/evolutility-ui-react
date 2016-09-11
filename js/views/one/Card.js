@@ -6,29 +6,42 @@ import NavLink from '../../widgets/NavLink'
 export default React.createClass({
 
   propTypes: {
+    entity: React.PropTypes.string.isRequired,
     fields: React.PropTypes.array,
-    data: React.PropTypes.object,
-    entity: React.PropTypes.string.isRequired
+    data: React.PropTypes.object
   },
 
   render() {
   	const d = this.props.data || {},
         fs = this.props.fields || [],
-        e = this.props.entity,
-        ep = '/'+e+'/'
+        e = this.props.entity
 
   	return (
         <div className="panel panel-info"> 
           {fs.map(function(f, idx){
             const attr=(f.type==='lov') ? f.id+'_txt' : f.id
             const fv=format.fieldValue(f, d[attr])
-            return (
-              <div key={idx}>
-                {idx===0 ? <h4><NavLink key={f.id} to={ep+"browse/"+d.id}>{fv}</NavLink></h4>
-                  : <label>{f.label}: </label>}{' '}
-                {idx===0 ? null : fv}
-              </div>
-            )
+
+            if(idx===0){
+              return (
+                <div key={idx}>
+                  <h4><NavLink key={f.id} to={'/'+e+'/browse/'+d.id}>{fv}</NavLink></h4>
+                </div>
+              )
+            }else if(f.type=='image'){
+              return (
+                <div key={idx}>
+                  {fv}
+                </div>
+              )
+            }else{
+              return (
+                <div key={idx}>
+                  <label>{f.label}: </label>
+                  <div>{' '}{fv}</div>
+                </div>
+              )
+            }
           })}
         </div>
   	)
