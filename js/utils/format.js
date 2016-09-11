@@ -34,6 +34,10 @@ module.exports = {
         }else if(f.type==='image' && d){
             //TODO: param for domain
             return this.image('http://localhost:8080/'+d)
+        }else if(f.type==='url' && d){
+            return <a href={d} target="_blank">{d}</a>
+        }else if(f.type==='email' && d){
+            return <a href={'mailto:'+d}>{d}</a>
         }
         return d
     },
