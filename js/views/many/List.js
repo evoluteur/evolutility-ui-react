@@ -4,6 +4,7 @@ import dico from '../../utils/dico'
 import format from '../../utils/format'
 import many from './many'
 import models from '../../models/all_models'
+import Alert from '../../widgets/Alert'
 import NavLink from '../../widgets/NavLink'
 
 
@@ -57,45 +58,49 @@ export default React.createClass({
 				title = m.title,
 				data = this.state.data ? this.state.data : []
 
-			return (
-				<div data-entity={e}>
-					<div className="evol-many-list">
-						<div>
-							<table className="table table-bordered table-hover">
-								<thead>
-									<tr>
-										{fieldCols.map((f)=> (
-												<th id={f.id} key={f.id} onClick={this.clickSort}>
-													{f.label}
-													{f.id===this._sortField ? (
-															<i className={"glyphicon glyphicon-arrow-"+(this._sortDirection==='desc' ? 'down' : 'up')}></i>
-														) : null
-													}
-												</th>
+			if(this.state.error){
+				return <Alert title="Error" message={this.state.error.message}/> 
+			}else{
+				return (
+					<div data-entity={e}>
+						<div className="evolutility evol-many-list">
+							<div>
+								<table className="table table-bordered table-hover">
+									<thead>
+										<tr>
+											{fieldCols.map((f)=> (
+													<th id={f.id} key={f.id} onClick={this.clickSort}>
+														{f.label}
+														{f.id===this._sortField ? (
+																<i className={"glyphicon glyphicon-arrow-"+(this._sortDirection==='desc' ? 'down' : 'up')}></i>
+															) : null
+														}
+													</th>
+												)
+											)}
+										</tr>
+									</thead>
+									<tbody>
+									{
+										data.length ? data.map(function(d){
+											return (
+												<tr key={d.id}>
+													{fieldCols.map(function(f, idx){
+														return cell(d, f, idx)
+													})}
+												</tr>
 											)
-										)}
-									</tr>
-								</thead>
-								<tbody>
-								{
-									data.length ? data.map(function(d){
-										return (
-											<tr key={d.id}>
-												{fieldCols.map(function(f, idx){
-													return cell(d, f, idx)
-												})}
-											</tr>
-										)
-									}) : null
-								}
-								</tbody>
-							</table>
-						</div>
+										}) : null
+									}
+									</tbody>
+								</table>
+							</div>
+						</div> 
 					</div>
-				</div>
-			)
+				)
+			}
 		}else{
-			return this.badRoute(e)
+			return <Alert message={'Invalid input parameter \"'+e+'\".'}/>
 		}
 	}
 

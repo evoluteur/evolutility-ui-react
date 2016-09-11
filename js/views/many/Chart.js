@@ -4,6 +4,8 @@ import _ from 'underscore'
 import $ from 'jquery'
 import {apiPath} from '../../../config.js'
 
+
+import Alert from '../../widgets/Alert'
 import models from '../../models/all_models'
 import dico from '../../utils/dico'
 import many from './many'
@@ -26,7 +28,15 @@ many2.getData = function(){
             this.setState({
                 data: data
             });
-        }.bind(this));
+        }.bind(this))
+            .fail(function() {
+                this.setState({
+                    error: {
+                        title: 'Error',
+                        message: 'Couldn\'t retrieve charts data.'
+                    }
+                })
+            }.bind(this))
     }
 }
 
@@ -79,13 +89,22 @@ export default React.createClass({
     },
 
     render: function (){
-        var data=this.state.data || []
-        var url = this[ this.state.chartType ? this.state.chartType : (data.length<5?'urlPie':'urlBars') ](data)
+
+        const data=this.state.data || []
+        const url = this[ this.state.chartType ? this.state.chartType : (data.length<5?'urlPie':'urlBars') ](data)
+        let body
+        if(this.state.error){
+            body = <Alert title={this.state.error.title} message={this.state.error.message}/> 
+        }else if(url){
+            body = <img src={url} />
+        }else{
+            body = null
+        }
         return (
             <div className="evol-chart-holder panel panel-info">
                 <div className="chart-holder">
                     <h3 className="panel-title">{this.props.title}</h3>
-                    { url ? <img src={url} /> : null}
+                    {body} 
                 </div>
             </div>
         )

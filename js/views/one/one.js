@@ -1,3 +1,4 @@
+// Mixin used in most Views for One (Browse, Edit but not Card).
 
 import $ from 'jquery' 
 import {apiPath} from '../../../config.js'
@@ -16,7 +17,15 @@ export default function(){
 					this.setState({
 						data: data
 					});
-				}.bind(this));
+				}.bind(this))
+				.fail(function (){
+					this.setState({
+						error: {
+							title: 'Error',
+							message: 'Couldn\'t retrieve data.'
+						}
+					})
+				}.bind(this))
 			}
 		},
 

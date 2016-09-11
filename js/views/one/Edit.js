@@ -6,6 +6,7 @@ import dico from '../../utils/dico'
 import validation from '../../utils/validation'
 import models from '../../models/all_models'
 
+import Alert from '../../widgets/Alert'
 import one from './one'
 import Field from '../../widgets/Field'
 import Panel from '../../widgets/Panel'
@@ -88,7 +89,7 @@ export default React.createClass({
 			)
 		}
 
-		return (
+		return !this.state.error ? (
 			<div className="evo-one-edit">
 				<div className="evol-pnls">
 
@@ -122,6 +123,8 @@ export default React.createClass({
 				</div>
 			</div>
 		) 
+		: 
+		<Alert title="Error" message={this.state.error.message}/> 
 	},
 
 	validate: function (fields, data) {

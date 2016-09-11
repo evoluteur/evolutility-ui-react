@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Alert from '../../widgets/Alert'
 import models from '../../models/all_models'
 import dico from '../../utils/dico'
 import many from './many'
@@ -19,20 +20,22 @@ export default React.createClass({
 	    	m = models[e]
 	  		
 	  	if(m){
-	  		const fieldCols = m.fields.filter(dico.isFieldMany)
-		    return (
-				<div data-entity={e} style={{display: 'block'}}>
-				    <div className="evol-many-cards">
-	      				<div className="evol-cards-body">
-				    		{this.state.data.map(function(d, idx){
-				    			return <Card key={idx} data={d} fields={fieldCols} entity={e}/>
-				    		})}
-				    	</div>
-				    </div>
-				</div>
-		    )
+			if(!this.state.error){
+		  		const fieldCols = m.fields.filter(dico.isFieldMany)
+			    return (
+					<div data-entity={e} className="evol-many-cards">
+							<div className="evol-cards-body">
+							{this.state.data.map(function(d, idx){
+								return <Card key={idx} data={d} fields={fieldCols} entity={e}/>
+							})}
+						</div>
+					</div>
+			    )
+			}else{
+				return <Alert title="Error" message={this.state.error.message}/> 
+			}
 	  	}else{
-			return this.badRoute(e)
+			return <Alert message={'Invalid input parameter \"'+e+'\".'}/>
 		}
   	}
 

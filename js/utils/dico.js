@@ -72,13 +72,17 @@ function getFields(model) {
 		}
 	}
 
-	if(model.fields){
-		return model.fields;
-	}else{
-		collectFields(model);
-		model.fields=fs;
-		return fs;
+	if(model){
+		if(model.fields){
+			return model.fields;
+		}else{
+			collectFields(model);
+			model.fields=fs;
+			return fs;
+		}
 	}
+	return []
+		
 }
 
 function getSubCollecs(model) {
@@ -113,16 +117,19 @@ module.exports = {
 	getSubCollecs: getSubCollecs,
 
 	prepModel: function(m){
-		if(!m.fields){
-			m.fields = getFields(m);
+		if(m){
+			if(!m.fields){
+				m.fields = getFields(m);
+			}
+			if(!m.fieldsH){
+				m.fieldsH = hById(m.fields);
+			}
+			if(!m.collecs){
+				m.collecs = getSubCollecs(m);
+			}
+			return m;
 		}
-		if(!m.fieldsH){
-			m.fieldsH = hById(m.fields);
-		}
-		if(!m.collecs){
-			m.collecs = getSubCollecs(m);
-		}
-		return m;
+		return null;
 	},
 
 	isFieldMany:function(f){

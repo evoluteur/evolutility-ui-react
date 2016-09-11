@@ -1,8 +1,9 @@
 import React from 'react'
 
+import Alert from '../../widgets/Alert'
+
 import models from '../../models/all_models'
 import dico from '../../utils/dico'
-import many from './many'
 import Chart from './Chart'
 
 
@@ -16,12 +17,16 @@ export default React.createClass({
         var e=this.props.params.entity
         var m=models[e]
     
-        return (
-            <div className={'evol-many-charts'}>
-                {dico.getFields(m).filter(dico.fieldChartable).map(function(f){
-                    return <Chart entity={e} key={f.id} field={f} title={f.label} className="panel-info"/> 
-                })} 
-            </div>
-        )
+        if(m){
+            return (
+                <div className="evolutility evol-many-charts">
+                    {dico.getFields(m).filter(dico.fieldChartable).map(function(f){
+                        return <Chart entity={e} key={f.id} field={f} title={f.label} className="panel-info"/> 
+                    })} 
+                </div>
+            )
+        }else{
+            return <Alert message={'Invalid input parameter \"'+e+'\".'}/>
+        }
     }
 })
