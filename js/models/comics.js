@@ -55,7 +55,8 @@ module.exports = {
           label: 'Have' 
       },
       {
-          id: 'language', type: 'lov', label: 'Language', width: 17, inMany: true,
+          id: 'language', type: 'lov', label: 'Languaged', width: 17, inMany: true,
+          lovicon: true,
           list: [
             {id: 2, text: 'French', icon:'flag_fr.gif'},
             {id: 1, text: 'American', icon:'flag_us.gif'}
@@ -106,7 +107,7 @@ module.exports = {
   groups: [
         { id:'serie', type: 'panel', label: 'Serie', width: 70,
             fields: ['title', 'authors', 'genre', 'serie_nb', 'have_nb', 'have', 
-                'complete', 'finished', 'language', 
+                'language', 'complete', 'finished', 
                 'notes']
         },
         { id:'pix', type: 'panel', label: 'Cover', width: 30,
