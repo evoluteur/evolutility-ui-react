@@ -31,7 +31,7 @@ export default React.createClass({
 		
 		return (
 			<div className="evol-pnl" style={{width: (this.props.width || 100)+'%'}}>
-				<div className="panel panel-info">
+				<div className="panel panel-default">
 					{title}
 					<fieldset style={{display: (this.state.opened ? 'block':'none')}}>
 						{this.props.children}

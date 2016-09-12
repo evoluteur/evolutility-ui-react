@@ -96,7 +96,7 @@ module.exports = {
         },
         {
             type: 'textmultiline', id: 'notes',
-             label: 'Notes', maxLength: 1000, width: 15, height: 9
+             label: 'Notes', maxLength: 1000, width: 100, height: 6
         }
     ],
 

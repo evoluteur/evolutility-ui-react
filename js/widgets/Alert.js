@@ -12,7 +12,9 @@ export default React.createClass({
 		const css = "alert alert-" + (this.props.type || 'danger')
 		return (
 			<div className={css} role="alert">
-				<strong>{this.props.title || 'Error'}: </strong>
+				<i className="glyphicon glyphicon-remove-sign"/>
+				<strong>{this.props.title || 'Error'}</strong>
+				<br/><br/> 
 				{this.props.message}
 			</div>
 		)

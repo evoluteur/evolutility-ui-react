@@ -17,7 +17,7 @@ export default React.createClass({
         e = this.props.entity
 
   	return (
-        <div className="panel panel-info"> 
+        <div className="panel panel-default"> 
           {fs.map(function(f, idx){
             const attr=(f.type==='lov') ? f.id+'_txt' : f.id
             const fv=format.fieldValue(f, d[attr])

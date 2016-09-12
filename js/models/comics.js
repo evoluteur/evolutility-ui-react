@@ -55,7 +55,7 @@ module.exports = {
           label: 'Have' 
       },
       {
-          id: 'language', type: 'lov', label: 'Languaged', width: 17, inMany: true,
+          id: 'language', type: 'lov', label: 'Language', width: 17, inMany: true,
           lovicon: true,
           list: [
             {id: 2, text: 'French', icon:'flag_fr.gif'},
@@ -100,7 +100,7 @@ module.exports = {
       },
       {
           id: 'notes', type: 'textmultiline', label: 'Notes', maxLength: 1000,
-          width: 70, height: 12, inMany: false
+          width: 70, height: 8, inMany: false
       }
   ],
 

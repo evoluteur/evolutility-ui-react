@@ -101,7 +101,7 @@ export default React.createClass({
             body = null
         }
         return (
-            <div className="evol-chart-holder panel panel-info">
+            <div className="evol-chart-holder panel panel-default">
                 <div className="chart-holder">
                     <h3 className="panel-title">{this.props.title}</h3>
                     {body} 

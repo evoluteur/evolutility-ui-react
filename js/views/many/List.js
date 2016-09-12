@@ -65,7 +65,7 @@ export default React.createClass({
 					<div data-entity={e}>
 						<div className="evolutility evol-many-list">
 							<div>
-								<table className="table table-bordered table-hover">
+								<table className="table table-hover">
 									<thead>
 										<tr>
 											{fieldCols.map((f)=> (

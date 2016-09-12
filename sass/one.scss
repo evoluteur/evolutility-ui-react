@@ -85,8 +85,8 @@
 }
 .evol-fld{
     @include flex-item();
-    padding-left:10px !important;
-    margin-bottom: 6px;
+    padding-left: 10px !important;
+    margin-bottom: 12px;
     //min-width: 120px;
     > .evo-rdonly{
           // todo: use or remove line below?
@@ -121,7 +121,7 @@
     font-weight:bold;
 }
 .evol-required{
-  color:#b94a48;
+  color: $color-red;
 }
 .evol-asterix{
   color:#0099cc;
