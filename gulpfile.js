@@ -10,7 +10,7 @@ var beginBanner = '/**\n  React-Evolutility v<%= pkg.version %>\n\n';
 var banner = beginBanner + 
     '  <%= pkg.homepage %>\n  <%= pkg.copyright %>\n*/\n';
 var bannerDep = beginBanner + 
-    '  dependencies: Bootstrap (partial), react-datepicker... %>\n*/\n';
+    '  dependencies: Bootstrap (partial), react-datepicker...\n*/\n';
 
 var sig='  ___             _\n'+
 ' | _ \\___ __ _ __| |_   ___\n'+

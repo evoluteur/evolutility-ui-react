@@ -96,7 +96,7 @@ module.exports = {
       },*/
       {
           id: 'pix', type: 'image', width: 30, inMany: true,
-          label: 'Album Cover', labelList:'Cover', labelBrowse:'', labelCards:''
+          label: 'Cover', labelList:'Cover', labelBrowse:'', labelCards:''
       },
       {
           id: 'notes', type: 'textmultiline', label: 'Notes', maxLength: 1000,
@@ -110,7 +110,7 @@ module.exports = {
                 'language', 'complete', 'finished', 
                 'notes']
         },
-        { id:'pix', type: 'panel', label: 'Cover', width: 30,
+        { id:'pix', type: 'panel', label: 'Album Cover', width: 30,
             fields: ['pix' ]
         }
   ]
