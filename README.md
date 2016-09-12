@@ -34,7 +34,8 @@ Models describe the object and its list of fields.
 | readonly     | Prevents field modification.          |                      
 | inMany       | Determines if the field is present (by default) in lists of records. |                     
 | height        | For fields of type "textmultiline", number of lines used in the field (in Browse and Edit views). |                 
-| width        | percentage width in Browse and Edit views. |
+| width        | Percentage width in Browse and Edit views. |
+| help        | Optional help on the field. |
 
 ### Group
 

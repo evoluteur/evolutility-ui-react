@@ -24,7 +24,10 @@ export default React.createClass({
 	},
 
 	getInitialState: function() {
-		return {data: this.props.data}
+		return {
+			data: this.props.data,
+			help: false
+		}
 	},
 
 	_fieldElem(f, d, cbs){
@@ -151,6 +154,12 @@ export default React.createClass({
 		return e.value
 	},
 
+	clickHelp(){
+		this.setState({
+			help: !this.state.help
+		})
+	},
+
  	render() {
 		const f = this.props.meta || {type: 'text'},
 			readOnly = this.props.readOnly || f.readOnly,
@@ -165,8 +174,11 @@ export default React.createClass({
 				<div className="evol-field-label">
 					<label className="control-label">{label}
 						{f.required && !(f.readOnly || readOnly) ? <span className="evol-required">*</span> : null}
+						{f.help ? <i className="glyphicon glyphicon-question-sign" onClick={this.clickHelp} /> : null}
 					</label>
 				</div>
+
+				{f.help && this.state.help ? <div className="help-block"><i>{f.help}</i></div> : null}
 
 				{readOnly ? this._fieldElemReadOnly(f, data)
 								 : this._fieldElem(f, data, cbs)}
