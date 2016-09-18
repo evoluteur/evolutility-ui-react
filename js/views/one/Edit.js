@@ -15,7 +15,10 @@ import NavLink from '../../widgets/NavLink'
 export default React.createClass({
 
 	propTypes: {
-		params: React.PropTypes.object
+		params: React.PropTypes.shape({
+			entity: React.PropTypes.string.isRequired,
+			id: React.PropTypes.string.isRequired
+		}),
 	},
 
 	mixins: [one()],

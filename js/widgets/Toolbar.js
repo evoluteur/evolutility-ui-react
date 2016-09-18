@@ -50,7 +50,11 @@ const menuItems = {
 export default React.createClass({
 
     propTypes: {
-        params: React.PropTypes.object.isRequired
+        params: React.PropTypes.shape({
+            entity: React.PropTypes.string.isRequired,
+            id: React.PropTypes.string.isRequired
+        }),
+    },
     },
 
     deleteOne: function(){
