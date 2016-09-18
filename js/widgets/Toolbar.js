@@ -1,6 +1,6 @@
 
 import React from 'react'
-import $ from 'jquery'
+import axios from 'axios'
 import { browserHistory } from 'react-router'
 import {apiPath} from '../../config.js'
 
@@ -60,14 +60,18 @@ export default React.createClass({
 
         // TODO: confirmation popup
         if(id){
-            $.ajax({
-                url: apiPath+e+'/'+id, 
-                type: 'DELETE',
-                success: function (data) {
+            axios.delete(apiPath+e+'/'+id)
+                .then(response => {
                     alert('Item deleted.')
                     browserHistory.push('/'+e+'/list')
-                }
-            })
+                })
+                .catch(() => {
+                    this.setState({
+                        error: {
+                            message: 'Couldn\'t delete record.'
+                        }
+                    })
+                });
         }
     },
 

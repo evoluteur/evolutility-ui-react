@@ -1,6 +1,9 @@
 // Mixin used in most Views for One (Browse, Edit but not Card).
 
-import $ from 'jquery' 
+import axios from 'axios'
+import {format} from 'util'
+
+import {i18n_tools, i18n_errors} from '../../utils/i18n-en'
 import {apiPath} from '../../../config.js'
 import { browserHistory } from 'react-router'
 
@@ -13,43 +16,44 @@ export default function(){
 				id = this.props.params.id
 			
 			if(id){
-				$.get(apiPath+e+'/'+id, function (data) {
+				axios.get(apiPath+e+'/'+id)
+				.then(function (response) {
 					this.setState({
-						data: data
+						data: response.data
 					});
 				}.bind(this))
-				.fail(function (){
+				.catch(() => {
 					this.setState({
 						error: {
-							title: 'Error',
-							message: 'Couldn\'t retrieve data.'
+							message: format(i18n_errors.badId, id)
 						}
 					})
-				}.bind(this))
+				})
 			}
 		},
 
 		upsertOne: function(entity){
 			const e = entity || this.props.params.entity,
 				id = this.props.params.id || '',
-				data=this.delta
+				data = this.delta
 
-			$.ajax({
-				url: apiPath+e+'/'+id, 
-				type: id?'PUT':'POST',
-				data: data,
-				success: (data) => {
-					if(id){
-	                    alert('Item updated.')
-					}else{
-	                    alert('Item added.')
-						browserHistory.push('/'+e+'/edit/'+data.id)
-					}
-					this.setState({
-						data: data
-					});
+			axios[id?'put':'post'](apiPath+e+'/'+id, data)
+			.then(response => {
+				if(id){
+                    alert('Item updated.')
+				}else{
+                    alert('Item added.')
+					browserHistory.push('/'+e+'/edit/'+data.id)
 				}
+				this.setState({
+					data: response.data
+				})
+				this.delta = {}
 			})
+			.catch(function (error) {
+				//TODO:
+				console.log(error);
+			});
 		},
 
 		getInitialState: function() {

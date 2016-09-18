@@ -1,9 +1,8 @@
 import React from 'react'
 
 import _ from 'underscore'
-import $ from 'jquery'
+import axios from 'axios'
 import {apiPath} from '../../../config.js'
-
 
 import Alert from '../../widgets/Alert'
 import models from '../../models/all_models'
@@ -24,19 +23,19 @@ many2.getData = function(){
     var urlparams = ''//?token='+localStorage.token
 
     if(fid){
-        $.get(apiPath+''+e+'/chart/'+fid+urlparams, function (data) {
-            this.setState({
-                data: data
-            });
-        }.bind(this))
-            .fail(function() {
+        axios.get(apiPath+''+e+'/chart/'+fid+urlparams)
+            .then(response => {
+                this.setState({
+                    data: response.data
+                });
+            })
+            .catch(() => {
                 this.setState({
                     error: {
-                        title: 'Error',
                         message: 'Couldn\'t retrieve charts data.'
                     }
                 })
-            }.bind(this))
+            });
     }
 }
 

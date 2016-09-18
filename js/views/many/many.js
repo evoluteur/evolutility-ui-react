@@ -1,6 +1,6 @@
 // Mixin used in most Views for Many (List, Cards but not Charts).
 
-import $ from 'jquery'
+import axios from 'axios'
 
 import {apiPath} from '../../../config.js'
 
@@ -9,28 +9,36 @@ export default function(){
 	return {
 
 		getData: function(entity, sortField, sortDirection, filters){
-			var e = entity || this.props.params.entity
-			var urlparams = '?'
+			const e = entity || this.props.params.entity
+			let url = apiPath + e
+			let urlparams = ''
+			const id = this.props.params.id
+
 			if(sortField){
 				urlparams += 'order='+sortField+'.'+sortDirection+'&'
 			}
-			if(true){
+			if(false){
 				urlparams += filters
 			}
 
-			$.get(apiPath+e+urlparams, function (data) {
-				this.setState({
-					data: data
+			if(urlparams){
+				url += '?'+urlparams
+			}
+
+			axios.get(url)
+				.then(response => {
+					this.setState({
+						data: response.data
+					})
 				})
-			}.bind(this))
-				.fail(function (){
+				.catch(() => {
 					this.setState({
 						error: {
 							title: 'Error',
 							message: 'Couldn\'t retrieve data.'
 						}
 					})
-				}.bind(this))
+				});
 		},
 
 		getInitialState: function() {

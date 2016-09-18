@@ -33,7 +33,7 @@
     "bootstrap-sass": "3.3.7",
     "react-datepicker": "^0.28.2",
     "moment": "^2.14.1",
-    "jquery": "^3.0.0",
+    "axios": "^0.14.0",
     "underscore": "^1.8.3"
   },
   
