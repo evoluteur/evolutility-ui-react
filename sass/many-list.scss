@@ -2,10 +2,6 @@
   react-evolutility : many-list
 */
 
-.evol-many-icon{
-	margin-right: 6px !important;
-}
-
 .evol-many-list{
 
   > div {
@@ -43,12 +39,6 @@
           top: 12px;
           color: $color-border;
         }
-      }
-      .evol-ellipsis{
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        max-width: 120px;
       }
     }
   }

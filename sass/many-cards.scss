@@ -16,6 +16,7 @@
     >div{
       >h4{
         margin-bottom: 12px;
+        @include ellipsis();
       }
       >label{
         width: $golden-ratio-small;

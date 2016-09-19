@@ -76,7 +76,6 @@ $color-text-footer: silver;
 }
 
 @mixin ellipsis(){
-	// need "width" to use
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

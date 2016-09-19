@@ -1,0 +1,22 @@
+/*
+  react-evolutility : common
+*/
+
+/* --- classes shared by most views --- */
+
+.evo-page-title{
+  margin: 0 10px 10px 10px;
+  //width: 100%;
+  @include ellipsis();
+}
+
+
+.w-100{
+  width:100%
+}
+.w-62{
+  width:62%
+}
+.w-38{
+  width:38%
+}
