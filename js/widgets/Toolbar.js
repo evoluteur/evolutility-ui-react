@@ -52,7 +52,8 @@ export default React.createClass({
     propTypes: {
         params: React.PropTypes.shape({
             entity: React.PropTypes.string.isRequired,
-            id: React.PropTypes.string.isRequired
+            view: React.PropTypes.string,
+            id: React.PropTypes.string
         }),
     },
     },
