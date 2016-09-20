@@ -4,7 +4,7 @@
 
 /* --- panels & tabs --- */
 .evol-pnls{
-  @include flex-holder()
+  @include flex-holder();
 }
 .evol-pnl {
   padding-left:10px !important;
@@ -129,6 +129,10 @@
 .evo-rdonly{
   min-height: 32px;
   padding-top: 5px;
+  >a{
+    display: block;
+    @include ellipsis();
+  }
 }
 .evol-buttons{
   clear:both;
