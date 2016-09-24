@@ -1,5 +1,6 @@
 import React from 'react'
 
+import {i18n_errors} from '../../utils/i18n-en'
 import dico from '../../utils/dico'
 import format from '../../utils/format'
 import many from './many'
@@ -102,7 +103,7 @@ export default React.createClass({
 				)
 			}
 		}else{
-			return <Alert message={'Invalid input parameter \"'+e+'\".'}/>
+			return <Alert message={i18n_errors.badEntity.replace('{0}', e)}/>
 		}
 	}
 

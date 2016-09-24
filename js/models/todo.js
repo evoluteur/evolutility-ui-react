@@ -1,6 +1,6 @@
 module.exports = {
   id: 'todo',
-  label: 'To Do',
+  label: 'To-Do List',
   name: 'task',
   namePlural: 'tasks',
   icon: 'todo.gif',
@@ -13,7 +13,7 @@ module.exports = {
       type: 'text',
       width: 70,
       required: true,
-      inList: true
+      inMany: true
     },
     {
       id: 'duedate', 
@@ -21,7 +21,7 @@ module.exports = {
       label: 'Due Date', 
       width: 30,
       required: true,
-      inList: true
+      inMany: true
     },
     {
       id: 'category', 
@@ -35,11 +35,11 @@ module.exports = {
         {id: 5, text: 'Misc.'}
       ], 
       width: 40,
-      required: true,
-      inList: true
+      inMany: true
     },
     {
-        id: 'priority', type: 'lov', label: 'Priority', 
+        id: 'priority', type: 'lov', 
+        label: 'Priority', 
         width: 100,  inMany: true,
         list: [
             {id: 1, text: '1 - ASAP'},
@@ -54,7 +54,7 @@ module.exports = {
       type: 'boolean', 
       label: 'Complete', 
       width: 100,
-      inList: true
+      inMany: true
     },
     {
       id: 'description', 
@@ -65,13 +65,19 @@ module.exports = {
 	],
 
   groups: [
-    {id:'p1', type:'panel', label: 'Task', width: 62,
+    {
+      id:'p1', type:'panel', 
+      label: 'Task', width: 62,
       fields: ['title', 'duedate', 'category']
     },
-    {id:'p2', type:'panel', label: 'Status', width: 38,
+    {
+      id:'p2', type:'panel', 
+      label: 'Status', width: 38,
       fields: ['priority', 'complete']
     },
-    {id:'p3', type:'panel', label: 'Task Description', width: 100,
+    {
+      id:'p3', type:'panel', 
+      label: 'Task Description', width: 100,
       fields: ['description']
     }
   ]

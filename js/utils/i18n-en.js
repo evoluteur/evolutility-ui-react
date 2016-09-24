@@ -233,6 +233,11 @@ module.exports = {
         entity: 'Entity',
         fields: 'Fields',
         uiModel: 'UI Model'
-    }*/
+    },*/
 
+    i18n_errors: {
+        badId: 'Couldn\'t retrieve data for id="$id".',
+        badEntity: 'Invalid parameter: entity=\"{0}\".',
+        badChart: 'Couldn\'t retrieve charts data.'
+    }
 };

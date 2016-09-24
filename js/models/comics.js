@@ -71,7 +71,7 @@ module.exports = {
           label: 'Finished', labelTrue:'Finished', labelFalse:'Not finished', css:'cBlue'
       },/*
       {
-          id:'amazon', label:'Amazon', type:'formula', width:32, css:'evol-ellipsis',
+          id:'amazon', label:'Amazon', type:'formula', width:32, 
           formula:function(m){
               if(m){
                   var urlData=m.get('title')+' '+(m.get('authors')||''),
@@ -84,7 +84,7 @@ module.exports = {
           }
       },
       {
-          id:'bdfugue', label:'BDFugue', type:'formula', width:38, css:'evol-ellipsis',
+          id:'bdfugue', label:'BDFugue', type:'formula', width:38, 
           formula:function(m){
               if(m){
                   var urlData=m.get('title')+' '+(m.get('authors')||''),
@@ -100,7 +100,7 @@ module.exports = {
       },
       {
           id: 'notes', type: 'textmultiline', label: 'Notes', maxLength: 1000,
-          width: 70, height: 8, inMany: false
+          width: 70, height: 7, inMany: false
       }
   ],
 
