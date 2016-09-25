@@ -56,7 +56,6 @@ export default React.createClass({
             id: React.PropTypes.string
         }),
     },
-    },
 
     deleteOne: function(){
         // TODO: SHOULD BE IN STORE BUT THERE IS NO STORE YET
