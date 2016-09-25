@@ -163,6 +163,35 @@
   top: 0;
   flex-direction: row; }
 
+.alert {
+  margin: 50px 10px;
+  text-align: left; }
+  .alert > i {
+    margin-right: 10px;
+    font-size: 20px; }
+  .alert > strong {
+    font-size: 20px; }
+
+/*
+  react-evolutility : common
+*/
+/* --- classes shared by most views --- */
+.evo-page-title {
+  margin: 0 10px 10px 10px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.w-100 {
+  width: 100%; }
+
+.w-62 {
+  width: 62%; }
+
+.w-38 {
+  width: 38%; }
+
 /*
   react-evolutility : one
 */
@@ -247,7 +276,7 @@
   box-sizing: border-box;
   flex-grow: 1;
   padding-left: 10px !important;
-  margin-bottom: 6px; }
+  margin-bottom: 12px; }
   .evol-fld > .evo-rdonly > img {
     position: relative;
     top: -2px;
@@ -278,17 +307,17 @@
 .evo-rdonly {
   min-height: 32px;
   padding-top: 5px; }
+  .evo-rdonly > a {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
 
 .evol-buttons {
   clear: both;
   margin-top: 0 !important; }
   .evol-buttons > button {
     margin: 1em; }
-
-.evol-ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; }
 
 .evol-title-toggle {
   cursor: pointer;
@@ -380,6 +409,11 @@ label {
 .evol-r-align {
   text-align: right; }
 
+.evol-many-icon {
+  position: relative;
+  top: -2px;
+  margin-right: 6px !important; }
+
 /* 
 .badge-list{
   position: relative;
@@ -390,9 +424,6 @@ label {
 /*
   react-evolutility : many-list
 */
-.evol-many-icon {
-  margin-right: 6px !important; }
-
 .evol-many-list > div {
   overflow-x: auto;
   overflow-y: hidden; }
@@ -419,11 +450,6 @@ label {
         right: 5px;
         top: 12px;
         color: silver; }
-    .evol-many-list > div > .table .evol-ellipsis {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      max-width: 120px; }
 
 /*
   react-evolutility : many-cards
@@ -440,7 +466,10 @@ label {
   -webkit-border-radius: 10px;
   overflow: auto; }
   .evol-cards-body > .panel > div > h4 {
-    margin-bottom: 12px; }
+    margin-bottom: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
   .evol-cards-body > .panel > div > label {
     width: 38%;
     white-space: nowrap;
@@ -489,6 +518,13 @@ label {
   text-align: center;
   padding: 10px 20px 30px; }
 
+.chart-actions i {
+  color: silver;
+  margin: 10px 10px 2px 0;
+  cursor: pointer; }
+  .chart-actions i:hover {
+    color: #428bca; }
+
 /*
   react-evolutility : print
 */
@@ -508,9 +544,6 @@ label {
 
 body {
   font-size: 16px; }
-
-.alert {
-  margin: 50px 10px; }
 
 .evol-fld input, .evol-fld textarea, .evol-fld select {
   font-size: 16px; }

@@ -38,9 +38,15 @@ many2.getData = function(){
             });
     }
 }
+many2.getInitialState = function() {
+    return {
+        data: [],
+        chartType: 'Bars' // "Pie" or "Bars"
+    }
+}
 
 function fnLabel(d){
-    return d.label + '('+d.count+')'
+    return (d.label==null ? 'N/A' : d.label) + '('+d.count+')'
 }
 function fnValue(d){
     return d.count
@@ -53,9 +59,21 @@ export default React.createClass({
         field: React.PropTypes.object.isRequired,
         title: React.PropTypes.string,
         sizes: React.PropTypes.string,
+        type: React.PropTypes.oneOf(['Bars', 'Pie'])
     },
 
     mixins: [many2],
+
+    click_pie(evt){
+        this.setState({
+            chartType: 'Pie'
+        })
+    },
+    click_bars(evt){
+        this.setState({
+            chartType: 'Bars'
+        })
+    },
 
     urlPie: function (data, sizes){
         var p=this.props
@@ -90,8 +108,13 @@ export default React.createClass({
     render: function (){
 
         const data=this.state.data || []
-        const url = this[ this.state.chartType ? this.state.chartType : (data.length<5?'urlPie':'urlBars') ](data)
+        const url = this['url'+(this.state.chartType||'Pie')](data)
         let body
+        let icon = this.state.chartType==='Pie'?(
+                <i className="glyphicon glyphicon-stats" onClick={this.click_bars}/>
+            ) : (
+                <i className="glyphicon glyphicon-cd" onClick={this.click_pie}/>
+            )
         if(this.state.error){
             body = <Alert title={this.state.error.title} message={this.state.error.message}/> 
         }else if(url){
@@ -102,6 +125,7 @@ export default React.createClass({
         return (
             <div className="evol-chart-holder panel panel-default">
                 <div className="chart-holder">
+                    <div className="chart-actions pull-right">{icon}</div>
                     <h3 className="panel-title">{this.props.title}</h3>
                     {body} 
                 </div>

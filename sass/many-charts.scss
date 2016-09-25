@@ -21,3 +21,13 @@
 		padding:10px 20px 30px;
 	}
 }
+.chart-actions{
+	i{
+		color: silver;
+		margin: 10px 10px 2px 0;
+		cursor: pointer;
+		&:hover{
+			color: $color-icon-hover;
+		}
+	}
+}
