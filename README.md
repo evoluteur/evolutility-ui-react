@@ -21,7 +21,7 @@ Models describe the object and its list of fields.
 | namePlural   | Object name (plural).  |
 | fields       | Array of fields.                        |
 | groups       | Array of groups. If not provided a single group will be used.   |
-| titleField    | Field id for the column value used as record title. |      
+| titleField    | Field id for the column value used as record title. titleField can also be a function. |      
 
 
 ### Field
