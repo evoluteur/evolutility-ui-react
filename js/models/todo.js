@@ -4,7 +4,7 @@ module.exports = {
   name: 'task',
   namePlural: 'tasks',
   icon: 'todo.gif',
-  titleField:'title',
+  titleField: 'title',
 
 	fields:[
     {

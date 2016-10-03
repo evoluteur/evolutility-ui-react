@@ -1,4 +1,4 @@
-﻿//   Evolutility Localization Library ENGLISH
+﻿//   React-Evolutility Localization Library ENGLISH
 //   (c) 2016 Olivier Giulieri
 
 module.exports = {
@@ -35,7 +35,6 @@ module.exports = {
         newEntity: 'New {0}', //'New Item',
         //NewUpload: 'New Upload',
         //Search: 'Search',
-        //AdvSearch: 'Advanced Search',
         //NewSearch: 'New Search',
         //Selections: 'Selections',
         //Selection: 'Selection',

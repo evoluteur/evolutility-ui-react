@@ -2,7 +2,7 @@ import React from 'react'
 
 import models from '../../models/all_models'
 import format from '../../utils/format'
-import NavLink from '../../widgets/NavLink'
+import { Link } from 'react-router'
 
 export default React.createClass({
 
@@ -29,7 +29,7 @@ export default React.createClass({
             if(idx===0){
               return (
                 <div key={idx}>
-                  <h4><NavLink key={f.id} to={link+d.id}>{icon}{fv}</NavLink></h4>
+                  <h4><Link key={f.id} to={link+d.id}>{icon}{fv}</Link></h4>
                 </div>
               )
             }else if(f.type=='image'){

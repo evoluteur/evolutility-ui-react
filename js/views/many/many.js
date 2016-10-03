@@ -10,19 +10,19 @@ export default function(){
 
 		getData: function(entity, sortField, sortDirection, filters){
 			const e = entity || this.props.params.entity
-			let url = apiPath + e
-			let urlparams = ''
 			const id = this.props.params.id
+			let url = apiPath + e
+			let urlparams = []
 
 			if(sortField){
-				urlparams += 'order='+sortField+'.'+sortDirection+'&'
+				urlparams.push('order='+sortField+'.'+sortDirection)
 			}
-			if(false){
-				urlparams += filters
+			if(window.location.search){
+				// TODO: possible dup order
+				urlparams.push(window.location.search.substring(1))
 			}
-
-			if(urlparams){
-				url += '?'+urlparams
+			if(urlparams.length){
+				url += '?'+urlparams.join('&')
 			}
 
 			axios.get(url)

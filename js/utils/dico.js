@@ -34,6 +34,10 @@ var fts = {
 	//widget: 'widget'
 };
 
+function isFunction(fn){
+  return typeof fn === "function"
+}
+
 function fieldIsNumber(f){
 	return [fts.int, fts.dec, fts.money].indexOf(f.type)>-1;
 }
@@ -58,11 +62,11 @@ function hById(arr){
 function getFields(model) {
 	var fs = [];
 
-	function collectFields(te) {
+	function collateFields(te) {
 		if (te && te.elements && te.elements.length > 0) {
 			te.elements.forEach(function(te) {
 				if (te.type != 'panel-list') {
-					collectFields(te);
+					collateFields(te);
 				}
 			});
 		} else { 
@@ -76,7 +80,7 @@ function getFields(model) {
 		if(model.fields){
 			return model.fields;
 		}else{
-			collectFields(model);
+			collateFields(model);
 			model.fields=fs;
 			return fs;
 		}
@@ -127,9 +131,22 @@ module.exports = {
 			if(!m.collecs){
 				m.collecs = getSubCollecs(m);
 			}
+			if(!m.titleField){
+				m.titleField = m.fields[0].id;
+			}
 			return m;
 		}
 		return null;
+	},
+
+	dataTitle: function(m, data, isNew){
+		if(isNew){
+			return 'New ' + (m.name || 'item')
+		}else if(m.titleField && isFunction(m.titleField)){
+			return m.titleField(data)
+	    }else{
+	     	return data[m.titleField] || m.label || m.title || ''
+	    }
 	},
 
 	isFieldMany:function(f){

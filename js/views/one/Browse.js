@@ -1,12 +1,13 @@
 import React from 'react'
 
-import {i18n_tools} from '../../utils/i18n-en'
+import {i18n_tools, i18n_errors} from '../../utils/i18n-en'
 import dico from '../../utils/dico'
 import models from '../../models/all_models'
 import one from './one'
+import Alert from '../../widgets/Alert'
 import Field from '../../widgets/Field'
 import Panel from '../../widgets/Panel'
-import NavLink from '../../widgets/NavLink'
+import { Link } from 'react-router'
 
 export default React.createClass({
 
@@ -22,9 +23,9 @@ export default React.createClass({
   render() {
     const {id=0, entity=null} = this.props.params
     const ep = '/'+entity+'/',
-      m = models[entity],
-      data = this.state.data || {},
-      title = m.label || m.title || ''
+        m = models[entity],
+        data = this.state.data || {},
+        title = dico.dataTitle(m, data, false)
 
     function fnFieldReadOnly(f){
       if(f){
@@ -42,41 +43,53 @@ export default React.createClass({
       return null
     }
 
-    return ( 
-      <div className="evo-one-edit">
-        <div className="evol-pnls">
+    if(!m){
+      return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
+    }else if(this.state.error){
+      return <Alert title="Error" message={this.state.error.message}/>
+    }else{
+        return ( 
+        <div className="evolutility">
 
-        {m.groups ? (
-            m.groups.map(function(g, idx){
-              const groupFields = dico.fieldId2Field(g.fields, m.fieldsH)
-              return (
-                <Panel key={g.id||('g'+idx)} title={g.label || gtitle || ''} width={g.width}>
-                  <div className="evol-fset">
-                    {groupFields.map(fnFieldReadOnly)}
-                  </div>
-                </Panel>
-              )
-            })
-        ) : (
-          <Panel title={title}>
-            <div className="evol-fset"> 
-              {m.fields.map(fnFieldReadOnly) }
-            </div>
-          </Panel>
-        )}
- 
-          <Panel width={100}>
-            <div className="formButtons"> 
-                <NavLink to={ep+"edit/"+id} className="btn btn-primary">
-                  <i className="glyphicon glyphicon-edit"></i> {i18n_tools.bEdit}
-                </NavLink>
-                <button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_tools.bCancel}</button>
-            </div>
-          </Panel>
+          <h2 className="evo-page-title">{title}</h2>
 
+          <div className="evo-one-edit">
+            <div className="evol-pnls">
+
+            {m.groups ? (
+                m.groups.map(function(g, idx){
+                  const groupFields = dico.fieldId2Field(g.fields, m.fieldsH)
+                  return (
+                    <Panel key={g.id||('g'+idx)} title={g.label || gtitle || ''} width={g.width}>
+                      <div className="evol-fset">
+                        {groupFields.map(fnFieldReadOnly)}
+                      </div>
+                    </Panel>
+                  )
+                })
+            ) : (
+              <Panel key="pOne" title={title}>
+                <div className="evol-fset"> 
+                  {m.fields.map(fnFieldReadOnly)}
+                </div>
+              </Panel>
+            )}
+
+              <Panel key="pButtons" width={100}>
+                <div className="formButtons"> 
+                    <Link to={ep+"edit/"+id} className="btn btn-info">
+                      <i className="glyphicon glyphicon-edit"></i> {i18n_tools.bEdit}
+                    </Link>
+                    <button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_tools.bCancel}</button>
+                </div>
+              </Panel>
+
+            </div>
+
+          </div>
         </div>
-      </div>
-    ) 
+        )      
+    }
   }
 
 })

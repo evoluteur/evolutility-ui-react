@@ -1,5 +1,5 @@
 /**
-  React-Evolutility v0.0.3
+  React-Evolutility v0.0.4
 
   https://github.com/evoluteur/react-evolutility
   (c) 2016 Olivier Giulieri
@@ -8,30 +8,40 @@
   react-evolutility : topnav
 */
 .TopNav {
-  background-color: #2072a7;
+  background-color: #00ACC1;
   color: white;
   position: fixed;
   padding: 0 10px;
   top: 0;
   left: 0;
+  min-height: 65px;
+  min-width: 465px;
   width: 100%;
-  z-index: 1000; }
+  z-index: 100; }
+  .TopNav > h2 {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    margin: 0; }
+    .TopNav > h2 a {
+      font-weight: 400;
+      text-decoration: none;
+      color: #80DEEA;
+      transition: all 0.4s ease; }
+      .TopNav > h2 a:hover {
+        color: #E0F7FA; }
+  .TopNav a.active {
+    color: #E0F7FA; }
+
+.ReactModal__Overlay {
+  z-index: 110; }
 
 .TopNavComplement {
   display: block;
-  height: 130px; }
+  height: 95px; }
 
 .evol-entity {
   margin-left: 20px;
-  color: #ffc107; }
-
-.RightNav {
-  padding: 20px 10px; }
-
-.RightNav a {
-  color: white; }
-
-.RightNav a.active {
   color: #ffc107; }
 
 .clearer {
@@ -57,13 +67,7 @@
   margin-right: 0.4em; }
 
 .evo-toolbar {
-  border: 1px solid #bce8f1;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  margin-bottom: 10px;
-  padding: 3px;
-  background-color: #fbfbfb;
+  margin: 0 5px;
   /*
   [data-id="prev"].nav-disabled,
   [data-id="next"].nav-disabled{
@@ -80,13 +84,25 @@
     color: black; }
   .evo-toolbar > ul > .evo-sel .glyphicon:before {
     color: black; }
-  .evo-toolbar > ul > li.divider-h {
-    height: 41px;
-    width: 1px;
-    background-color: #bce8f1; }
   .evo-toolbar > ul > li > a {
+    cursor: pointer;
+    color: #E0F7FA;
     transition: all 0.5s ease;
     padding: 10px 6px 10px 8px; }
+    .evo-toolbar > ul > li > a:hover {
+      color: #FFE0B2; }
+  .evo-toolbar .evo-nav-pills {
+    margin-bottom: 0; }
+    .evo-toolbar .evo-nav-pills > li {
+      list-style: none;
+      float: left; }
+      .evo-toolbar .evo-nav-pills > li > a {
+        display: inline-block;
+        text-decoration: none; }
+      .evo-toolbar .evo-nav-pills > li + li {
+        margin-left: 2px; }
+      .evo-toolbar .evo-nav-pills > li.active > a, .evo-toolbar .evo-nav-pills > li.active > a:hover, .evo-toolbar .evo-nav-pills > li.active > a:focus {
+        color: #E0F7FA; }
   .evo-toolbar .evo-dropdown-icons {
     min-width: 50px; }
   .evo-toolbar .dropdown-menu > li > a {
@@ -98,67 +114,17 @@
 .evo-view-on {
   color: #428bca; }
 
-.evo-tb-status {
+/*
+.evo-tb-status{
   color: #0f0f0f !important;
   min-height: 35px;
   line-height: 35px;
   margin-top: 2px;
-  margin-right: 5px; }
-
-.evo-search {
-  position: relative;
-  width: 200px;
-  margin: auto;
-  padding: 3px 4px 2px 2px; }
-  .evo-search .evo-field:not(:valid) ~ .clear-icon {
-    opacity: 0; }
-  .evo-search > .btn {
-    position: relative;
-    top: 0; }
-
-.clear-icon {
-  z-index: 3;
-  position: absolute;
-  top: 14px;
-  right: 47px;
-  color: #90a4ae;
-  cursor: pointer; }
-
-.evol-actions,
-.evol-actions-nxtTd {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  padding: 5px;
-  background-color: #fbfbfb;
-  border: 1px solid #bce8f1; }
-  .evol-actions > i,
-  .evol-actions-nxtTd > i {
-    color: #31708f;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 4px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px; }
-    .evol-actions > i:hover,
-    .evol-actions-nxtTd > i:hover {
-      color: #428bca;
-      background-color: #ECEFF1; }
-
-.evol-actions {
-  top: 35px;
-  right: 1px;
-  border-right: none;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px; }
-
-.evol-actions-nxtTd {
-  top: 0;
-  left: 0;
-  z-index: 2;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px; }
-
+  margin-right: 5px;
+  //max-width:200px;
+  //@include ellipsis();
+}
+*/
 .evol-many-list .evol-actions {
   top: 0;
   flex-direction: row; }
@@ -179,8 +145,9 @@
 .evo-page-title {
   margin: 0 10px 10px 10px;
   width: 100%;
+  height: 40px;
   white-space: nowrap;
-  overflow: hidden;
+  overflow-x: hidden;
   text-overflow: ellipsis; }
 
 .w-100 {
@@ -191,6 +158,19 @@
 
 .w-38 {
   width: 38%; }
+
+.grey {
+  color: silver; }
+
+.evo-home {
+  padding: 30px; }
+  .evo-home > h1 {
+    padding: 2px 0;
+    margin: -40px 10px 20px 0; }
+  .evo-home .block2 {
+    padding: 0 5px;
+    width: 50%;
+    float: left; }
 
 /*
   react-evolutility : one
@@ -229,20 +209,30 @@
   .evol-pnl .table .evol-money {
     width: 200px; }
 
-.evo-plist {
-  overflow-x: auto; }
-  .evo-plist input[type="date"] {
-    max-width: 160px; }
-  .evo-plist input[type="number"] {
-    min-width: 100px; }
-  .evo-plist input[type="text"],
-  .evo-plist input textarea {
-    min-width: 120px; }
-  .evo-plist select {
-    min-width: 120px; }
-  .evo-plist .table {
-    margin-bottom: 0; }
+/*
+.evo-plist{
+  overflow-x: auto;
+  input{
+    &[type="date"]{
+      max-width: 160px;
+    }
+    &[type="number"]{
+      min-width: 100px;
+    } 
+    &[type="text"], 
+    textarea{
+      min-width: 120px;
+    }
+  }
+  select{
+    min-width: 120px;
+  }
 
+  .table{
+    margin-bottom: 0;
+  }
+}
+*/
 .panel-heading > .panel-title {
   display: inline-block; }
 
@@ -310,7 +300,7 @@
   .evo-rdonly > a {
     display: block;
     white-space: nowrap;
-    overflow: hidden;
+    overflow-x: hidden;
     text-overflow: ellipsis; }
 
 .evol-buttons {
@@ -468,12 +458,12 @@ label {
   .evol-cards-body > .panel > div > h4 {
     margin-bottom: 12px;
     white-space: nowrap;
-    overflow: hidden;
+    overflow-x: hidden;
     text-overflow: ellipsis; }
   .evol-cards-body > .panel > div > label {
     width: 38%;
     white-space: nowrap;
-    overflow: hidden;
+    overflow-x: hidden;
     text-overflow: ellipsis;
     vertical-align: top; }
   .evol-cards-body > .panel > div > div {
@@ -484,7 +474,7 @@ label {
     .evol-cards-body > .panel > div > div > a {
       display: inline-block;
       white-space: nowrap;
-      overflow: hidden;
+      overflow-x: hidden;
       text-overflow: ellipsis;
       width: 100%; }
 

@@ -20,7 +20,6 @@ render((
       <Route path="/:entity/cards" component={Cards}/>
       <Route path="/:entity/charts" component={Charts}/>
 
-      <Route path="/:entity/new" component={Edit}/>
       <Route path="/:entity/browse" component={Browse}/>
       <Route path="/:entity/browse/:id" component={Browse}/>
       <Route path="/:entity/edit" component={Edit}/>

@@ -1,7 +1,7 @@
 
 import React from 'react'
 
-import {i18n_tools} from '../../utils/i18n-en'
+import {i18n_tools, i18n_errors} from '../../utils/i18n-en'
 import dico from '../../utils/dico'
 import validation from '../../utils/validation'
 import models from '../../models/all_models'
@@ -10,15 +10,15 @@ import Alert from '../../widgets/Alert'
 import one from './one'
 import Field from '../../widgets/Field'
 import Panel from '../../widgets/Panel'
-import NavLink from '../../widgets/NavLink'
 
 export default React.createClass({
 
 	propTypes: {
 		params: React.PropTypes.shape({
 			entity: React.PropTypes.string.isRequired,
-			id: React.PropTypes.string.isRequired
+			id: React.PropTypes.string
 		}),
+		//isNew: React.PropTypes.bool
 	},
 
 	mixins: [one()],
@@ -50,23 +50,23 @@ export default React.createClass({
 		this.delta[fid]=v
 		this.setState({data: newData})
 	},
+/*
 	fieldClick(i, props) {
 		 //debugger
-		//this.refs.title
 	},
 	fieldLeave(i, props) {
 		//debugger
 	},
-/*
-	componentWillReceiveProps: function(nextProps) {
-		this.delta={}
-		this.setState({
-			data: nextProps.data || {}
-		})
-	},
-*/
-
+*/	
 	render() {
+
+
+    const urlParts = window.location.pathname.split('/')
+    //const view = urlParts.length>1 ? urlParts[2] : false
+    const isNew = urlParts.length>2 ? urlParts[3]=='0' : false
+
+
+        // const isNew = this.props.isNew || id==0
     	const {id=0, entity=null} = this.props.params
 		const ep = '/'+entity+'/',
 			m = models[entity],
@@ -76,7 +76,8 @@ export default React.createClass({
 				change: this.fieldChange,
 				leave: this.fieldLeave
 			},
-	    	title = m.label || m.title || ''
+        	title = dico.dataTitle(m, data, isNew)
+    	this.isNew = isNew
 
 		function fnField(f){
 			return (
@@ -91,43 +92,51 @@ export default React.createClass({
 				/>
 			)
 		}
+		
+		if(!m){
+			return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
+		}else if(this.state.error){
+			return <Alert title="Error" message={this.state.error.message}/>
+		}else{
+			return (
+				<div className="evolutility">
+            		
+            		<h2 className="evo-page-title">{title}</h2>
 
-		return !this.state.error ? (
-			<div className="evo-one-edit">
-				<div className="evol-pnls">
+					<div className="evo-one-edit">
+						<div className="evol-pnls">
 
-	    			{m.groups ? (
-							m.groups.map(function(g, idx){
-								const groupFields = dico.fieldId2Field(g.fields, m.fieldsH)
-								return (
-									<Panel key={g.id||('g'+idx)} title={g.label || gtitle || ''} width={g.width}>
-										<div className="evol-fset">
-											{groupFields.map(fnField)}
-										</div>
-									</Panel>
-								)
-							})
-					) : (
+			    			{(m && m.groups) ? (
+									m.groups.map(function(g, idx){
+										const groupFields = dico.fieldId2Field(g.fields, m.fieldsH)
+										return (
+											<Panel key={g.id||('g'+idx)} title={g.label || gtitle || ''} width={g.width}>
+												<div className="evol-fset">
+													{groupFields.map(fnField)}
+												</div>
+											</Panel>
+										)
+									})
+							) : (
+								<Panel title={title} key="pAllFields">
+									<div className="evol-fset"> 
+										{m.fields.map(fnField)}
+									</div>
+								</Panel>
+							)}
 
-						<Panel title={title} key="pAllFields">
-							<div className="evol-fset"> 
-								{m.fields.map(fnField)}
-							</div>
-						</Panel>
-					)}
+							<Panel key="formButtons">
+								<div className="formButtons">
+									<button className="btn btn-info" onClick={this.clickSave}><i className="glyphicon glyphicon-ok"></i> {i18n_tools.bSave}</button>
+									<button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_tools.bCancel}</button>
+								</div>
+							</Panel>
 
-					<Panel width={100}>
-						<div className="formButtons">
-							<button className="btn btn-primary" onClick={this.clickSave}><i className="glyphicon glyphicon-ok"></i> {i18n_tools.bSave}</button>
-							<button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_tools.bCancel}</button>
 						</div>
-					</Panel>
-
+					</div>
 				</div>
-			</div>
-		) 
-		: 
-		<Alert title="Error" message={this.state.error.message}/> 
+			)
+		}
 	},
 
 	validate: function (fields, data) {

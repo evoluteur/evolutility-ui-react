@@ -6,7 +6,7 @@ import format from '../../utils/format'
 import many from './many'
 import models from '../../models/all_models'
 import Alert from '../../widgets/Alert'
-import NavLink from '../../widgets/NavLink'
+import { Link } from 'react-router'
 
 
 export default React.createClass({
@@ -41,15 +41,16 @@ export default React.createClass({
 		if(m){
 
 			const ico = m.icon ? <img className="evol-many-icon" src={'/pix/'+m.icon}/> : null 
+			const link = '/'+e+'/browse/'
 
 			function cell(d, f, idx){
 				const value = d[(f.type==='lov') ? f.id+'_txt' : f.id]
 				if(idx===0){
 					return <td key={idx}>
-						<NavLink to={'/'+e+'/browse/'+d.id}>
+						<Link to={link+d.id}>
 							{ico}
 							{value}
-						</NavLink></td>
+						</Link></td>
 				}else if(f.type==='color'){
 					return <td key={idx}><div className="evo-color-box" id={f.id} 
                             style={{backgroundColor: value}} title={value}/></td>
@@ -57,30 +58,30 @@ export default React.createClass({
 				return <td key={idx}>{format.fieldValue(f, value, true)}</td>
 			}
 			
-			const fieldCols = m.fields.filter(dico.isFieldMany),
-				title = m.title,
+			const fields = m.fields.filter(dico.isFieldMany)
+			const title = m.title || m.label,
 				data = this.state.data ? this.state.data : []
 
 			if(this.state.error){
 				return <Alert title="Error" message={this.state.error.message}/> 
 			}else{
 				return (
-					<div data-entity={e}>
+					<div data-entity={e} style={{width: '100%'}}>
+						<h2 className="evo-page-title">{title}</h2>
 						<div className="evolutility evol-many-list">
 							<div>
 								<table className="table table-hover">
 									<thead>
 										<tr>
-											{fieldCols.map((f)=> (
-													<th id={f.id} key={f.id} onClick={this.clickSort}>
-														{f.label}
-														{f.id===this._sortField ? (
-																<i className={"glyphicon glyphicon-arrow-"+(this._sortDirection==='desc' ? 'down' : 'up')}></i>
-															) : null
-														}
-													</th>
-												)
-											)}
+											{fields.map((f)=> (
+												<th id={f.id} key={f.id} onClick={this.clickSort}>
+													{f.label}
+													{f.id===this._sortField ? (
+															<i className={"glyphicon glyphicon-arrow-"+(this._sortDirection==='desc' ? 'down' : 'up')}></i>
+														) : null
+													}
+												</th>
+											))}
 										</tr>
 									</thead>
 									<tbody>
@@ -88,7 +89,7 @@ export default React.createClass({
 										data.length ? data.map(function(d){
 											return (
 												<tr key={d.id}>
-													{fieldCols.map(function(f, idx){
+													{fields.map(function(f, idx){
 														return cell(d, f, idx)
 													})}
 												</tr>
@@ -98,7 +99,7 @@ export default React.createClass({
 									</tbody>
 								</table>
 							</div>
-						</div> 
+						</div>
 					</div>
 				)
 			}

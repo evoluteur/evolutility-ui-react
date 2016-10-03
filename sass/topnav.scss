@@ -3,30 +3,45 @@
 */
 
 .TopNav{
-	background-color: #2072a7;
+	background-color: $color-background-nav;
 	color: white;
 	position: fixed;
 	padding:0 10px;
 	top:0;
 	left:0;
+	min-height:65px;
+	min-width: 465px;
 	width:100%;
-	z-index: 1000;
+	z-index: 100;
+	> h2{
+		position: absolute;
+		top: 20px;
+		right:20px;
+		margin: 0;
+		a{
+			font-weight: 400;
+			text-decoration: none;
+			color: #80DEEA;
+			    transition: all 0.4s ease;
+			&:hover{
+				color: $color-nav-active;
+			}
+		}
+	}
+	a.active{
+		color: $color-nav-active;
+		//font-size: 1.2em;
+	}
+}
+.ReactModal__Overlay{
+	z-index: 110;
 }
 .TopNavComplement{
 	display: block;
-	height: 130px;
+	height: 95px;
 }
 .evol-entity{
 	margin-left: 20px;
-	color: #ffc107;
-}
-.RightNav{
-	padding: 20px 10px;
-}
-.RightNav a{
-	color: white;
-}
-.RightNav a.active{
 	color: #ffc107;
 }
 .clearer{

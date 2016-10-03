@@ -12,10 +12,17 @@ module.exports = {
     id: 'contact',
     label: 'Address Book',
     icon: 'contact.gif',
-    name: 'contact', namePlural: 'contacts',/*
-    fnTitle: function(model){
-        return model.get('firstname')+' '+model.get('lastname');
-    },*/
+    name: 'contact', namePlural: 'contacts',
+    titleField: function(data){
+        var title = ''
+        if(data.firstname){
+            title += data.firstname+' ';
+        }
+        if(data.lastname){
+            title += data.lastname;
+        }
+        return title || 'N/A';
+    },
     searchFields: ['lastname', 'firstname', 'jobtitle', 'company'],
 
     fields:[

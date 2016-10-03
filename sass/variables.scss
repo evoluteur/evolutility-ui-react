@@ -18,12 +18,11 @@ $screen2: 900px;
 $golden-ratio-big: 62%;
 $golden-ratio-small: 38%;
 
-// top nav bar
-$color-header: #0099cc;//#1d365d
-$color-header2: #0099cc;//#1f497d; //#0077cc;
-$color-header-link: #c6d9f0;
-$color-header-link-hover: #ffc107;//#ed991a;
-
+// top nav bar including toolbar
+$color-background-nav: #00ACC1;
+$color-nav: #E0F7FA;
+$color-nav-hover: #FFE0B2;
+$color-nav-active: #E0F7FA;
 $color-icon: #31708f;
 $color-icon-hover: #428bca;
 $color-icon-background-hover: #ECEFF1;
@@ -77,6 +76,6 @@ $color-text-footer: silver;
 
 @mixin ellipsis(){
   white-space: nowrap;
-  overflow: hidden;
+  overflow-x: hidden;
   text-overflow: ellipsis;
 }

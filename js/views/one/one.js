@@ -11,10 +11,10 @@ export default function(){
 
 	return {
 
-		getData: function(entity){
+		getData: function(entity, nid){
 			const e = entity || this.props.params.entity,
-				id = this.props.params.id
-			
+				id = nid || this.props.params.id
+
 			if(id){
 				axios.get(apiPath+e+'/'+id)
 				.then(function (response) {
@@ -26,7 +26,8 @@ export default function(){
 					this.setState({
 						error: {
 							message: format(i18n_errors.badId, id)
-						}
+						},
+						data: []
 					})
 				})
 			}
@@ -34,16 +35,20 @@ export default function(){
 
 		upsertOne: function(entity){
 			const e = entity || this.props.params.entity,
-				id = this.props.params.id || '',
-				data = this.delta
+				id = parseInt(this.props.params.id || '', 10),
+				data = this.delta,
+				url = apiPath+e+'/'+(id?id:'')
 
-			axios[id?'put':'post'](apiPath+e+'/'+id, data)
+			axios[id?'put':'post'](url, data)
 			.then(response => {
+				// TODO: notification w/ toastr
 				if(id){
-                    alert('Item updated.')
+                    //alert('Item updated.')
+                    console.log('Item updated.')
 				}else{
-                    alert('Item added.')
-					browserHistory.push('/'+e+'/edit/'+data.id)
+                    //alert('Item added.')
+                    console.log('Item added.')
+					browserHistory.push('/'+e+'/edit/'+response.data.id)
 				}
 				this.setState({
 					data: response.data
@@ -52,6 +57,7 @@ export default function(){
 			})
 			.catch(function (error) {
 				//TODO:
+				alert('Error')
 				console.log(error);
 			});
 		},
@@ -63,7 +69,13 @@ export default function(){
 		},
 
 		componentDidMount: function() {
-			this.getData()
+			if(!this.props.params.id){
+				this.setState({
+					data: {}
+				})
+			}else{
+				this.getData()
+			}
 		},
 
 		componentWillReceiveProps(nextProps){
@@ -72,7 +84,9 @@ export default function(){
 				this.setState({
 					data: {}
 				})
-				this.getData(nextProps.params.entity)
+				if(!this.isNew){
+					this.getData(nextProps.params.entity, nextProps.params.id)
+				} 
 			}
 		},
 
