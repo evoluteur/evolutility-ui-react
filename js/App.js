@@ -27,10 +27,6 @@ export default React.createClass({
                       <li><Link to="/contact/list" id="contact" className={entity==='contact'?'active':''}> Address Book</Link></li>
                       <li><Link to="/comics/cards" id="comics" className={entity==='comics'?'active':''}> Comics</Link></li>
                   </ul>
-                  <ul role="nav" className="evo-nav-pills pull-left">
-                      <li><Link to="/entity/list" id="entity" className={entity==='entity'?'active':''}> entity</Link></li>
-                      <li><Link to="/field/list" id="field" className={entity==='field'?'active':''}> field</Link></li>
-                  </ul>
               </div>
               <h2><Link to="/">React-Evolutility</Link></h2>
               <div className="clearer"/>
