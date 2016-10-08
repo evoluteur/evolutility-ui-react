@@ -22,7 +22,7 @@ export default React.createClass({
 
   render() {
     const {id=0, entity=null} = this.props.params
-    const ep = '/'+entity+'/',
+    const link = '/'+entity+'/edit/',
         m = models[entity],
         data = this.state.data || {},
         title = dico.dataTitle(m, data, false)
@@ -77,7 +77,7 @@ export default React.createClass({
 
               <Panel key="pButtons" width={100}>
                 <div className="formButtons"> 
-                    <Link to={ep+"edit/"+id} className="btn btn-info">
+                    <Link to={link+id} className="btn btn-info">
                       <i className="glyphicon glyphicon-edit"></i> {i18n_tools.bEdit}
                     </Link>
                     <button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_tools.bCancel}</button>

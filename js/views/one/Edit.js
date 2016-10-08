@@ -1,7 +1,7 @@
 
 import React from 'react'
 
-import {i18n_tools, i18n_errors} from '../../utils/i18n-en'
+import {i18n_tools, i18n_validation, i18n_errors} from '../../utils/i18n-en'
 import dico from '../../utils/dico'
 import validation from '../../utils/validation'
 import models from '../../models/all_models'
@@ -28,14 +28,15 @@ export default React.createClass({
 	},
 
 	clickSave(evt){ 
-		const fs = models[this.props.params.entity].fields
-		const v = this.validate(fs, this.state.data)
+		const fields = models[this.props.params.entity].fields
+		const v = this.validate(fields, this.state.data)
 		if(v.valid){
 			this.upsertOne()
 		}else{
 			alert(v.messages.join('\n'))
 		}
 	},
+
 	fieldChange(evt) {
 		const fid=evt.target.id
 		let v = evt.target.value
@@ -59,13 +60,9 @@ export default React.createClass({
 	},
 */	
 	render() {
-
-
-    const urlParts = window.location.pathname.split('/')
-    //const view = urlParts.length>1 ? urlParts[2] : false
-    const isNew = urlParts.length>2 ? urlParts[3]=='0' : false
-
-
+		const urlParts = window.location.pathname.split('/')
+		//const view = urlParts.length>1 ? urlParts[2] : false
+		const isNew = urlParts.length>2 ? urlParts[3]=='0' : false
         // const isNew = this.props.isNew || id==0
     	const {id=0, entity=null} = this.props.params
 		const ep = '/'+entity+'/',
@@ -77,7 +74,6 @@ export default React.createClass({
 				leave: this.fieldLeave
 			},
         	title = dico.dataTitle(m, data, isNew)
-    	this.isNew = isNew
 
 		function fnField(f){
 			return (
@@ -93,6 +89,7 @@ export default React.createClass({
 			)
 		}
 		
+  		this.isNew = isNew
 		if(!m){
 			return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
 		}else if(this.state.error){
@@ -151,7 +148,7 @@ export default React.createClass({
 				invalids[f.id]=true
 				this.refs[f.id].setState({
 					invalid: true,
-					message: f.label+' must have a value'
+					message: i18n_validation.empty.replace('{0}', f.label)
 				})
 			}else if(this.refs[f.id].state.invalid===true){
 				this.refs[f.id].setState({

@@ -20,7 +20,6 @@ module.exports = {
       type: 'date', 
       label: 'Due Date', 
       width: 30,
-      required: true,
       inMany: true
     },
     {

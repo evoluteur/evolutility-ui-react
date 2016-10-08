@@ -161,7 +161,7 @@ export default React.createClass({
             return (
               <div className="evo-toolbar">
                 <ul role="nav" className="evo-nav-pills pull-left">
-                    { viewsList.map((m)=>m)}
+                    {viewsList}
                 </ul>
                 <ul role="nav" className="evo-nav-pills pull-left">
                     {buttonLink(menuItems.new, '')}
