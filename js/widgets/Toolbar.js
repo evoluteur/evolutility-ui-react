@@ -6,6 +6,7 @@ import Modal from 'react-modal'
 import {apiPath} from '../../config.js'
 
 import {i18n_tools} from '../utils/i18n-en'
+import models from '../models/all_models'
 
 
 const menuItems = { 
@@ -136,7 +137,7 @@ export default React.createClass({
         }
 
         if(e){
-            var delModal = this.state.deleteConfirmation ? (
+            const delModal = this.state.deleteConfirmation ? (
                 <Modal className="modal-dialog"
                     isOpen={this.state.deleteConfirmation}
                     onRequestClose={this.closeModal}
@@ -148,7 +149,7 @@ export default React.createClass({
                                     <h4 className="modal-title">Delete item</h4>
                                 </div>
                                 <div className="modal-body">
-                                Do you really want to delete the contact ?
+                                    Do you really want to delete the {models[this.props.params.entity].name}?
                                 </div>
                                 <div className="modal-footer">
                                     <button key="bDelCancel" onClick={this.closeModal} className="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -158,6 +159,7 @@ export default React.createClass({
                         </div>
                 </Modal>
                 ):null
+
             return (
               <div className="evo-toolbar">
                 <ul role="nav" className="evo-nav-pills pull-left">
@@ -181,4 +183,5 @@ export default React.createClass({
         }
         return null
     }
+
 })
