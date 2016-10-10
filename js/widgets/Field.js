@@ -56,7 +56,7 @@ export default React.createClass({
 						key={f.id}
 						ref='e' 
 						className="form-control" 
-						value={d}
+						value={d || ''}
 						onChange={cbs.change}
 					>
 					<option/>
