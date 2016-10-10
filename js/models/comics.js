@@ -5,15 +5,8 @@ module.exports = {
     namePlural: 'graphic novel series',
     icon: 'comics.png',
     titleField: 'title',
-    searchFields: ['title', 'authors', 'notes'],
-    fnBadge: function(m){
-        if(m){
-            var hNb=m.get('have_nb'),
-                sNb=m.get('serie_nb');
-            return (hNb==sNb)?hNb:(hNb||'-')+'/'+(sNb||'-');
-        }
-        return '';
-    },
+    searchFields: ['title', 'authors', 'notes']
+
 	fields:[
       {
           id: 'title', type: 'text', label: 'Title', required: true, 
@@ -25,7 +18,8 @@ module.exports = {
           label: 'Authors'
       },
       {
-          id: 'genre', type: 'lov', label: 'Genre', width: 38, inMany: true,
+          id: 'genre', type: 'lov', label: 'Genre', 
+          width: 38, inMany: true,
           list: [
             {id: 1, text: 'Adventure'},
             {id: 2, text: 'Fairy tale'},
@@ -43,19 +37,23 @@ module.exports = {
           ]
       },
       {
-          id: 'serie_nb', type: 'integer', width: 15, inMany: false,
+          id: 'serie_nb', type: 'integer', 
+          width: 15, inMany: false,
           label: 'Albums', noCharts: true 
       },
       {
-          id: 'have_nb', type: 'integer', width: 15, inMany: false,
+          id: 'have_nb', type: 'integer', 
+          width: 15, inMany: false,
           label: 'Owned', noCharts: true 
       },
       {
-          id: 'have', type: 'text', width: 15, inMany: false,
+          id: 'have', type: 'text', 
+          width: 15, inMany: false,
           label: 'Have' 
       },
       {
-          id: 'language', type: 'lov', label: 'Language', width: 17, inMany: true,
+          id: 'language', type: 'lov', label: 'Language', 
+          width: 17, inMany: true,
           lovicon: true,
           list: [
             {id: 2, text: 'French', icon:'flag_fr.gif'},
@@ -63,55 +61,37 @@ module.exports = {
           ]
       },
       {
-          id: 'complete', type: 'boolean', width: 19, inMany: false,
-          label: 'Complete', labelFalse:'Incomplete', labelTrue:'Complete'
+          id: 'complete', type: 'boolean', 
+          width: 19, inMany: false,
+          label: 'Complete'
       },
       {
-          id: 'finished', type: 'boolean', width: 19, inMany: false,
-          label: 'Finished', labelTrue:'Finished', labelFalse:'Not finished', css:'cBlue'
-      },/*
-      {
-          id:'amazon', label:'Amazon', type:'formula', width:32, 
-          formula:function(m){
-              if(m){
-                  var urlData=m.get('title')+' '+(m.get('authors')||''),
-                  link=m.get('language')=='FR' ?
-                      'http://www.amazon.fr/s/ref=sr_nr_n_1?keywords='
-                      :'http://www.amazon.com/s/ref=nb_sb_noss?field-keywords=';
-                  return '<a target="a" href="'+link+encodeURI(urlData)+'">'+_.escape(urlData)+'</a>';
-              }
-              return 'N/A';
-          }
+          id: 'finished', type: 'boolean', 
+          width: 19, inMany: false,
+          label: 'Finished'
       },
       {
-          id:'bdfugue', label:'BDFugue', type:'formula', width:38, 
-          formula:function(m){
-              if(m){
-                  var urlData=m.get('title')+' '+(m.get('authors')||''),
-                  link='http://www.bdfugue.com/catalogsearch/result/?q=';
-                  return '<a target="a" href="'+link+encodeURI(urlData)+'">'+_.escape(urlData)+'</a>';
-              }
-              return 'N/A';
-          }
-      },*/
-      {
-          id: 'pix', type: 'image', width: 30, inMany: true,
-          label: 'Cover', labelList:'Cover', labelBrowse:'', labelCards:''
+          id: 'pix', type: 'image', 
+          width: 30, inMany: true,
+          label: 'Cover'
       },
       {
-          id: 'notes', type: 'textmultiline', label: 'Notes', maxLength: 1000,
+          id: 'notes', type: 'textmultiline', 
+          label: 'Notes', maxLength: 1000,
           width: 70, height: 7, inMany: false
       }
   ],
 
   groups: [
-        { id:'serie', type: 'panel', label: 'Serie', width: 70,
-            fields: ['title', 'authors', 'genre', 'serie_nb', 'have_nb', 'have', 
-                'language', 'complete', 'finished', 
-                'notes']
+        { 
+          id:'serie', type: 'panel', label: 'Serie', width: 70,
+          fields: ['title', 'authors', 'genre', 
+                'serie_nb', 'have_nb', 'have', 
+                'language', 'complete', 'finished', 'notes']
         },
-        { id:'pix', type: 'panel', label: 'Album Cover', width: 30,
-            fields: ['pix' ]
+        { 
+          id:'pix', type: 'panel', label: 'Album Cover', width: 30,
+          fields: ['pix']
         }
   ]
 }

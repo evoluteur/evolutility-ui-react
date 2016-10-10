@@ -43,14 +43,12 @@ function fieldIsNumber(f){
 }
 
 function fieldInCharts(f) {
-	return //(_.isUndefined(f.inCharts) || f.inCharts) && 
-		fieldChartable(f);
+	return fieldChartable(f) && !f.noCharts;
 }
 
 function fieldChartable(f) { 
 	return  (f.type===fts.lov || f.type===fts.list || 
-				f.type===fts.bool || fieldIsNumber(f)) &&
-			!f.noCharts;
+				f.type===fts.bool || fieldIsNumber(f));
 }
 
 function hById(arr){
