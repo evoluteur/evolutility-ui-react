@@ -32,7 +32,7 @@
     "react-router": "^2.8.1",
     "bootstrap-sass": "3.3.7",
     "react-modal": "^1.5.2",
-    "react-datepicker": "^0.30.0",
+    "react-datepicker": "^0.29.0",
     "moment": "^2.15.1",
     "axios": "^0.14.0",
     "underscore": "^1.8.3"
