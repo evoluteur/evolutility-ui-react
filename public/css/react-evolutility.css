@@ -1,5 +1,5 @@
 /**
-  React-Evolutility v0.0.4
+  React-Evolutility v0.0.5
 
   https://github.com/evoluteur/react-evolutility
   (c) 2016 Olivier Giulieri
@@ -411,6 +411,13 @@ label {
   margin-left:5px;
 }
 */
+.evo-badge {
+  color: #aaa !important;
+  margin-left: 10px;
+  font-size: 16px;
+  color: black;
+  margin-left: 20px; }
+
 /*
   react-evolutility : many-list
 */
@@ -418,6 +425,8 @@ label {
   overflow-x: auto;
   overflow-y: hidden; }
   .evol-many-list > div > .table {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
     margin-bottom: 0; }
     .evol-many-list > div > .table textarea {
       min-width: 200px; }

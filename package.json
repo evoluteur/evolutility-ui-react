@@ -1,6 +1,6 @@
 {
   "name": "react-evolutility",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Model-driven Web UI for CRUD and more",
   "main": "index.js",
   "author": "Olivier Giulieri",
