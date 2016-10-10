@@ -44,11 +44,11 @@ module.exports = {
       },
       {
           id: 'serie_nb', type: 'integer', width: 15, inMany: false,
-          label: 'Albums', inCharts:false 
+          label: 'Albums', noCharts: true 
       },
       {
           id: 'have_nb', type: 'integer', width: 15, inMany: false,
-          label: 'Owned', inCharts:false 
+          label: 'Owned', noCharts: true 
       },
       {
           id: 'have', type: 'text', width: 15, inMany: false,
