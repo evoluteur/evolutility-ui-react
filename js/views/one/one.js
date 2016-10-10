@@ -3,7 +3,7 @@
 import axios from 'axios'
 import {format} from 'util'
 
-import {i18n_tools, i18n_errors} from '../../utils/i18n-en'
+import {i18n_errors} from '../../utils/i18n-en'
 import {apiPath} from '../../../config.js'
 import { browserHistory } from 'react-router'
 

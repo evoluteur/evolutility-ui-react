@@ -4,69 +4,41 @@
 module.exports = {
 
 	LOCALE: 'EN',    // ENGLISH
-/*
-    getLabel: function(label, string1, string2){
-        var l;
-        if(label.indexOf('.')>-1){
-            var ns=label.split('.');
-            l=this[ns[0]][ns[1]];
-        }else{
-            l=this[label];
-        }
-        if(string1 && l){
-            l = l.replace('{0}', string1);
-            //l = l.replace(/\{0\}/g, string1);
-            if(string2){
-                l = l.replace('{1}', string2);
-                //l = l.replace(/\{1\}/g, string2);
-            }
-        }
-        return l;
-    },
-*/
-    // --- toolbar & buttons ---
-    i18n_tools:{
-        View: 'View',
-        bBrowse: 'Browse',
-        bEdit: 'Edit',
-        //bMini: 'Mini', // 'Quick Edit'
-        // Login: 'Login',
-        bNew: 'New',
+    locale: 'English',
+
+    // --- toolbar & buttons for actions ---
+    i18n_actions:{
+        browse: 'Browse',
+        edit: 'Edit',
+        //mini: 'Mini', // 'Quick Edit'
+        // login: 'Login',
+        new: 'New',
         newEntity: 'New {0}', //'New Item',
-        //NewUpload: 'New Upload',
-        //Search: 'Search',
-        //NewSearch: 'New Search',
-        //Selections: 'Selections',
-        //Selection: 'Selection',
-        bExport: 'Export',
-        //bImport: 'Import',
-        //SearchRes: 'Search Result',
-        //MassUpdate: 'Mass Update',
-        bDelete: 'Delete',
+        //newUpload: 'New Upload',
+        //search: 'Search',
+        //newSearch: 'New Search',
+        //searchRes: 'Search Result',
+        //selection: 'Selection',
+        //selections: 'Selections',
+        export1: 'Export',
+        //import: 'Import',
+        //massUpdate: 'Mass Update',
+        delete1: 'Delete',
         //bAll: 'All',
-        bList: 'List',
-        bCards: 'Cards',
+        list: 'List',
+        cards: 'Cards',
         //bJSON: 'JSON',
-        bFilter: 'Filter',
+        filter: 'Filter',
         //bBubbles: 'Bubbles',
         //bSunburst: 'Sunburst',
         //bScatter:'Scatter',
-        bCharts: 'Charts',
-        //bRefresh: 'Refresh',
-        bPrint: 'Print',
-        bSave: 'Save',
-        //bSaveAdd: 'Save and Add Another',
-        bOK: 'OK',
-        bCancel: 'Cancel',
-
-        // --- data visualization ---
-        //vizGroupBy: 'Group by',
-        //vizColorBy: 'Color by',
-        //vizSizeBy: 'Size by',
-
-        //xAxis: 'X Axis',
-        //yAxis: 'Y Axis',
-        //zAxis: 'Z Axis',
+        charts: 'Charts',
+        //refresh: 'Refresh',
+        //print: 'Print',
+        save: 'Save',
+        //saveAdd: 'Save and Add Another',
+        //ok: 'OK',
+        cancel: 'Cancel',
 
         // --- wizard ---
         prev: 'Previous',
@@ -108,9 +80,9 @@ module.exports = {
     //},
     
     // --- status ---
-    msg:{
-        sgn_money: '$', // indicator for money
-        sgn_email: '@', // indicator for email
+    i18n_msg:{
+        //sgn_money: '$', // indicator for money
+        //sgn_email: '@', // indicator for email
         added: 'New {0} "{1}" added.',
         updated: '{0} "{1}" updated.',
         deleted: '{0} "{1}" deleted.'
@@ -129,8 +101,8 @@ module.exports = {
         integer: '"{0}" must only use numbers.',
         decimal: '"{0}" must be a valid decimal numbers.',
         money: '"{0}" must be a valid number.',
-        date: '"{0}" must be a valid date, format must be "MM/DD/YYYY" like "12/24/2015".',
-        datetime: '"{0}" must be a valid date/time, format must be "MM/DD/YYYY hh:mm AM/PM" like "12/24/2015 10:30 AM".',
+        date: '"{0}" must be a valid date, format must be "MM/DD/YYYY" like "12/24/2016".',
+        datetime: '"{0}" must be a valid date/time, format must be "MM/DD/YYYY hh:mm AM/PM" like "12/24/2016 10:30 AM".',
         time: '"{0}" must be a valid date/time, format must be "hh:mm AM/PM" like "10:30 AM".',
         json: '"{0}" must be a valid JSON expression like "{"a": 1}".',
         max: '"{0}" must be smaller or equal to {1}.',
@@ -147,6 +119,15 @@ module.exports = {
         aByB: '{0} by {1}',
         aB: '{0}: {1}'
     },
+
+        // --- data visualization ---
+        //vizGroupBy: 'Group by',
+        //vizColorBy: 'Color by',
+        //vizSizeBy: 'Size by',
+
+        //xAxis: 'X Axis',
+        //yAxis: 'Y Axis',
+        //zAxis: 'Z Axis',
 /*
     // --- export ---
     export:{
@@ -187,7 +168,7 @@ module.exports = {
         importOne: 'Import {0}', // {0}=entity
         importMany: 'Import {0}', // {0}=entities
         format: 'Source Format',
-        fSample: 'Sample',
+        sample: 'Sample',
         allowDups: 'Allow duplicates',
         data: 'Data to Import',
         success: 'Import done.',
@@ -207,17 +188,19 @@ module.exports = {
         sIsNotNull: 'is not empty',
         sBefore: 'before',
         sAfter: 'after',
-        sNumEqual: '&#61;',
-        sNumNotEqual: '!&#61;',
-        sGreater: '&#62;',
-        sSmaller: '&#60;',
+        sNumEqual: '=',
+        sNumNotEqual: '!=',
+        sGreater: '>',
+        sSmaller: '<',
         sOn: 'on',
         sNotOn: 'not on',
         sAt: 'at',
         sNotAt: 'not at',
         sBetween: 'between',
+
         opAnd: 'and',
         //opOr: 'or',
+
         yes: 'Yes',
         no: 'No',
         bNewCond: 'New filter condition',
@@ -231,7 +214,8 @@ module.exports = {
     doc:{
         entity: 'Entity',
         fields: 'Fields',
-        uiModel: 'UI Model'
+        uiModel: 'UI Model',
+        dbModel: 'DB Model'
     },*/
 
     i18n_errors: {

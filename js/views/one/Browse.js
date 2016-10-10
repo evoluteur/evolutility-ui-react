@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {i18n_tools, i18n_errors} from '../../utils/i18n-en'
+import {i18n_actions, i18n_errors} from '../../utils/i18n-en'
 import dico from '../../utils/dico'
 import models from '../../models/all_models'
 import one from './one'
@@ -78,9 +78,9 @@ export default React.createClass({
               <Panel key="pButtons" width={100}>
                 <div className="formButtons"> 
                     <Link to={link+id} className="btn btn-info">
-                      <i className="glyphicon glyphicon-edit"></i> {i18n_tools.bEdit}
+                      <i className="glyphicon glyphicon-edit"></i> {i18n_actions.edit}
                     </Link>
-                    <button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_tools.bCancel}</button>
+                    <button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_actions.cancel}</button>
                 </div>
               </Panel>
 

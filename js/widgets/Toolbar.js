@@ -5,30 +5,30 @@ import { browserHistory, Link } from 'react-router'
 import Modal from 'react-modal'
 import {apiPath} from '../../config.js'
 
-import {i18n_tools} from '../utils/i18n-en'
+import {i18n_actions} from '../utils/i18n-en'
 import models from '../models/all_models'
 
 
 const menuItems = { 
-    new: {id: 'edit/0', label: i18n_tools.bNew, icon:'plus', n:'x', readonly:false},
-    del: {id: 'del', label: i18n_tools.bDelete, icon:'trash', n:'1', readonly:false},
-    //filter: {id:'filter', label: i18n_tools.bFilter, icon:'filter', n:'n'},
-    export: {id: 'export', label: i18n_tools.bExport, icon:'cloud-download', n:'x'},
-    save: {id:'save', label: i18n_tools.bSave, icon:'floppy-disk', n:'1', readonly:false},
-    //import: {id:'import', label: i18n_tools.bImport, icon:'cloud-upload',n:'x'},
+    new: {id: 'edit/0', label: i18n_actions.new, icon:'plus', n:'x', readonly:false},
+    del: {id: 'del', label: i18n_actions.delete1, icon:'trash', n:'1', readonly:false},
+    //filter: {id:'filter', label: i18n_actions.filter, icon:'filter', n:'n'},
+    export: {id: 'export', label: i18n_actions.export1, icon:'cloud-download', n:'x'},
+    save: {id:'save', label: i18n_actions.save, icon:'floppy-disk', n:'1', readonly:false},
+    //import: {id:'import', label: i18n_actions.bImport, icon:'cloud-upload',n:'x'},
     //cog: {id:'cog',label: 'Customize', icon:'cog', n:'x'},
     //print: {id: 'print', label: '', icon:'print', n:'x'},
     //prev: {id:'prev', label: '', icon:'chevron-left', n:'x'},
     //next: {id:'next', label: '', icon:'chevron-right', n:'x'}
-    //sel: {id: 'selections', label: i18n_tools.Selections, icon:'star', n:'x'},
+    //sel: {id: 'selections', label: i18n_actions.Selections, icon:'star', n:'x'},
     views: {
-        browse: {id:'browse', label: i18n_tools.bBrowse, icon:'eye-open', n:'1'},// // ReadOnly
-        edit: {id:'edit', label: i18n_tools.bEdit, icon:'edit', n:'1', readonly:false},// // All Fields for editing
+        browse: {id:'browse', label: i18n_actions.browse, icon:'eye-open', n:'1'},// // ReadOnly
+        edit: {id:'edit', label: i18n_actions.edit, icon:'edit', n:'1', readonly:false},// // All Fields for editing
 
-        list: {id:'list', label: i18n_tools.bList, icon:'th-list', n:'n'},
-        cards: {id:'cards', label: i18n_tools.bCards, icon:'th-large', n:'n'},
-        //scatter: {id:'scatter', label: i18n_tools.bScatter, icon:'certificate',n:'n'},
-        charts: {id:'charts', label: i18n_tools.bCharts, icon:'stats', n:'n'}
+        list: {id:'list', label: i18n_actions.list, icon:'th-list', n:'n'},
+        cards: {id:'cards', label: i18n_actions.cards, icon:'th-large', n:'n'},
+        //scatter: {id:'scatter', label: i18n_actions.bScatter, icon:'certificate',n:'n'},
+        charts: {id:'charts', label: i18n_actions.charts, icon:'stats', n:'n'}
     },
     //search: true
 }
