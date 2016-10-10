@@ -1,11 +1,12 @@
 // Mixin used in most Views for One (Browse, Edit but not Card).
 
 import axios from 'axios'
-import {format} from 'util'
+import { browserHistory } from 'react-router'
 
 import {i18n_errors} from '../../utils/i18n-en'
 import {apiPath} from '../../../config.js'
-import { browserHistory } from 'react-router'
+import {format} from 'util'
+import models from '../../models/all_models'
 
 export default function(){
 
@@ -15,7 +16,7 @@ export default function(){
 			const e = entity || this.props.params.entity,
 				id = nid || this.props.params.id
 
-			if(id){
+			if(id && id!=='0'){
 				axios.get(apiPath+e+'/'+id)
 				.then(function (response) {
 					this.setState({
@@ -63,28 +64,30 @@ export default function(){
 		},
 
 		getInitialState: function() {
+			this.setModel()
 			return {
-				data: {}
+				data: this.model.defaultData
 			}
 		},
 
 		componentDidMount: function() {
-			if(!this.props.params.id){
-				this.setState({
-					data: {}
-				})
-			}else{
+			if(this.props.params.id && this.props.params.id!='0'){
 				this.getData()
+			}else{
+				this.setState({
+					data: this.model.defaultData
+				})
 			}
 		},
 
 		componentWillReceiveProps(nextProps){
-			if(nextProps.params && nextProps.params.entity != this.props.params.entity
-				|| nextProps.params.id != this.props.params.id){
+			if(nextProps.params && (nextProps.params.entity != this.props.params.entity
+				|| nextProps.params.id != this.props.params.id)){
+				this.setModel(nextProps.params.entity)
 				this.setState({
-					data: {}
+					data: this.model.defaultData
 				})
-				if(!this.isNew){
+				if(nextProps.params.id!=='0' && nextProps.params.id!==this.props.params.id){
 					this.getData(nextProps.params.entity, nextProps.params.id)
 				} 
 			}
@@ -92,6 +95,10 @@ export default function(){
 
 		navigateBack(){
 			browserHistory.goBack()
+		},
+
+		setModel(entity){
+			this.model=models[entity || this.props.params.entity]
 		}
 
  	}

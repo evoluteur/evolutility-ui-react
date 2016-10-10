@@ -4,7 +4,6 @@ import React from 'react'
 import {i18n_actions, i18n_validation, i18n_errors} from '../../utils/i18n-en'
 import dico from '../../utils/dico'
 import validation from '../../utils/validation'
-import models from '../../models/all_models'
 
 import Alert from '../../widgets/Alert'
 import one from './one'
@@ -28,7 +27,7 @@ export default React.createClass({
 	},
 
 	clickSave(evt){ 
-		const fields = models[this.props.params.entity].fields
+		const fields = this.model.fields
 		const v = this.validate(fields, this.state.data)
 		if(v.valid){
 			this.upsertOne()
@@ -66,7 +65,7 @@ export default React.createClass({
         // const isNew = this.props.isNew || id==0
     	const {id=0, entity=null} = this.props.params
 		const ep = '/'+entity+'/',
-			m = models[entity],
+			m = this.model,
 			data = this.state.data || {},
 			cbs = {
 				click: this.fieldClick,

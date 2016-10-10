@@ -114,6 +114,23 @@ function getSubCollecs(model) {
 	return ls;
 }
 
+function defaultData(m){
+	var obj = {};
+
+	if(m){
+		m.fields.forEach(function(f){
+			if(f.defaultValue!=null){
+				obj[f.id]=f.defaultValue;
+			}
+			if(f.type==='lov' && obj[f.id]==null){
+				obj[f.id]='0';
+			}
+		})
+	}
+	return obj;
+}
+
+
 module.exports = {  
 
 	fieldTypes: fts,
@@ -129,12 +146,15 @@ module.exports = {
 			}
 			if(!m.fieldsH){
 				m.fieldsH = hById(m.fields);
-			}
+			}/*
 			if(!m.collecs){
 				m.collecs = getSubCollecs(m);
-			}
+			}*/
 			if(!m.titleField){
 				m.titleField = m.fields[0].id;
+			}
+			if(m.defaultData==null){
+				m.defaultData=defaultData(m);
 			}
 			return m;
 		}
@@ -151,7 +171,7 @@ module.exports = {
 	    }
 	},
 
-	isFieldMany:function(f){
+	isFieldMany: function(f){
 		return f.inList || f.inMany
 	},
 
@@ -171,6 +191,22 @@ module.exports = {
 
 	fieldChartable: fieldChartable,
 
-	hById: hById
+	hById: hById,
+
+	dataCount: function(m, count, totalCount){
+		let txt
+		const tc = totalCount>count ? ' of '+totalCount+' ' : ' '
+
+		if(count===1){
+			txt = '1'+tc+m.name;
+		}else if(count){
+			txt = count+tc+m.namePlural;
+		}else{
+			txt = 'no '+m.namePlural
+		}
+		return txt
+	},
+
+	defaultData: defaultData
 
 }

@@ -46,7 +46,8 @@ module.exports = {
             {id: 3, text: '3 - Important'},
             {id: 4, text: '4 - Medium'},
             {id: 5, text: '5 - Low'}
-        ]
+        ],
+        defaultValue: 4
     },
     {
       id: 'complete', 

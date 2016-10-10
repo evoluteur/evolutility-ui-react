@@ -4,7 +4,6 @@ import {i18n_errors} from '../../utils/i18n-en'
 import dico from '../../utils/dico'
 import format from '../../utils/format'
 import many from './many'
-import models from '../../models/all_models'
 import Alert from '../../widgets/Alert'
 import { Link } from 'react-router'
 
@@ -36,7 +35,7 @@ export default React.createClass({
 
 	render() {
 		const e = this.props.params.entity,
-			m = models[e]
+			m = this.model
 
 		if(m){
 
@@ -58,16 +57,22 @@ export default React.createClass({
 				return <td key={idx}>{format.fieldValue(f, value, true)}</td>
 			}
 			
-			const fields = m.fields.filter(dico.isFieldMany)
-			const title = m.title || m.label,
-				data = this.state.data ? this.state.data : []
+				
 
 			if(this.state.error){
 				return <Alert title="Error" message={this.state.error.message}/> 
 			}else{
+				const fields = m.fields.filter(dico.isFieldMany),
+					data = this.state.data ? this.state.data : [],
+					full_count = this.dataCount(data),
+					title = m.title || m.label
+
 				return (
 					<div data-entity={e} style={{width: '100%'}}>
-						<h2 className="evo-page-title">{title}</h2>
+						<h2 className="evo-page-title">
+							{title}
+							<span className="evo-badge">{full_count}</span>
+						</h2>
 						<div className="evolutility evol-many-list">
 							<div>
 								<table className="table table-hover">

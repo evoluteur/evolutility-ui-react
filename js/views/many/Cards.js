@@ -2,7 +2,6 @@ import React from 'react'
 
 import {i18n_errors} from '../../utils/i18n-en'
 import Alert from '../../widgets/Alert'
-import models from '../../models/all_models'
 import dico from '../../utils/dico'
 import many from './many'
 import Card from '../One/Card'
@@ -18,7 +17,10 @@ export default React.createClass({
 
 	render() {
 	    const entity = this.props.params.entity,
-	    	m = models[entity]
+			m = this.model,
+			data = this.state.data ? this.state.data : [],
+			full_count = this.dataCount(data),
+			title = m.title || m.label
 	  		
 	  	if(m){
 	  		const title = m.title || m.label
@@ -27,7 +29,10 @@ export default React.createClass({
 			    return (
 					<div data-entity={entity} className="evol-many-cards">
 						
-						<h2 className="evo-page-title">{title}</h2>
+						<h2 className="evo-page-title">
+							{title}
+							<span className="evo-badge">{full_count}</span>
+						</h2>
 
 						<div className="evol-cards-body">
 							{this.state.data.map(function(d, idx){

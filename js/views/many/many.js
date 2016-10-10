@@ -3,6 +3,8 @@
 import axios from 'axios'
 
 import {apiPath} from '../../../config.js'
+import dico from '../../utils/dico'
+import models from '../../models/all_models'
 
 export default function(){
 
@@ -42,6 +44,7 @@ export default function(){
 		},
 
 		getInitialState: function() {
+			this.setModel()
 			return {
 				data: []
 			}
@@ -53,11 +56,21 @@ export default function(){
 
 		componentWillReceiveProps(nextProps){
 			if(nextProps.params && nextProps.params.entity != this.props.params.entity){
+				this.setModel(nextProps.params.entity)
 				this.setState({
 					data: []
 				})
 				this.getData(nextProps.params.entity)
 			}
+		},
+
+		dataCount(data){
+			const dl=data.length
+			return this.model ? dico.dataCount(this.model, dl, dl ? data[0]._full_count : 0) : ''
+		},
+
+		setModel(entity){
+			this.model=models[entity || this.props.params.entity]
 		}
 
 	}

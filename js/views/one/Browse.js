@@ -2,7 +2,6 @@ import React from 'react'
 
 import {i18n_actions, i18n_errors} from '../../utils/i18n-en'
 import dico from '../../utils/dico'
-import models from '../../models/all_models'
 import one from './one'
 import Alert from '../../widgets/Alert'
 import Field from '../../widgets/Field'
@@ -23,7 +22,7 @@ export default React.createClass({
   render() {
     const {id=0, entity=null} = this.props.params
     const link = '/'+entity+'/edit/',
-        m = models[entity],
+        m = this.model,
         data = this.state.data || {},
         title = dico.dataTitle(m, data, false)
 
