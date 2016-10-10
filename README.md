@@ -9,6 +9,30 @@ React-Evolutility works hand-in-hand with [Evolutility-Server](https://github.co
 This project is a **work in progress**. I'm still learning React.
 
 
+
+## Installation
+
+[**Download**](https://github.com/evoluteur/react-evolutility/archive/master.zip) or **clone** from GitHub.
+
+```bash
+# To get the latest stable version, use git from the command line.
+git clone https://github.com/evoluteur/react-evolutility
+```
+
+In the React-Evolutility directory, use the command line to type the following:
+
+```bash
+# Install dependencies
+npm install
+
+# Run the node.js server
+npm start
+
+```
+
+In a web browser, go to the url [http://localhost:8080/](http://localhost:8080/).
+
+
 ## Views
 
 For any object, a single model defines UI elements across views in a simple declarative way.
@@ -109,7 +133,7 @@ Models describe the object and its list of fields.
 
 ### Sample model
 
-The following example is a graphic novels collection app. The classic to-do app is also included in the demo. 
+The following example is a graphic novels collection app. The classic To-Do app is [also included](https://github.com/evoluteur/react-evolutility/blob/master/js/models/todo.js) in the demo. 
 
 ```javascript
 module.exports = {
