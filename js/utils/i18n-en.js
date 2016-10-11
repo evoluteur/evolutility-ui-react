@@ -219,7 +219,7 @@ module.exports = {
     },*/
 
     i18n_errors: {
-        badId: 'Couldn\'t retrieve data for id="$id".',
+        badId: 'Couldn\'t retrieve data for id="{0}".',
         badEntity: 'Invalid parameter: entity=\"{0}\".',
         badChart: 'Couldn\'t retrieve charts data.'
     }

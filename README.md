@@ -42,7 +42,7 @@ React-Evolutility provides 2 types of view:
 * Views for a model: [Browse](#browse), [Edit](#edit).
 * Views for a collection: [List](#list), [Cards](#cards), [Charts](#charts).
 
-Note: Views for actions will come later.
+Notes: Views for actions will come later.
 
 A large part of the API (methods, options and events) is common to all views. Some views have additional API.
 
@@ -98,13 +98,14 @@ Models describe the object and its list of fields.
 
 | Property     | Meaning                                 |
 |--------------|-----------------------------------------|
-| id           | Unique key to identify the entity (used as API parameter). |
-| name   | Object name (singular).  |
-| namePlural   | Object name (plural).  |
-| fields       | Array of fields.                        |
+| id           | Unique key to identify the entity (used as API parameter). |    
+| icon         | Icon file name for the entity (example: "cube.gif". |  
+| name         | Object name (singular).    |
+| namePlural   | Object name (plural).      |
+| title        | Application name.          |
+| fields       | Array of fields.           |
 | groups       | Array of groups. If not provided a single group will be used.   |
-| titleField    | Field id for the column value used as record title. titleField can also be a function. |      
-
+| titleField   | Field id for the column value used as record title. titleField can also be a function. | 
 
 ### Field
 
@@ -113,8 +114,8 @@ Models describe the object and its list of fields.
 | id           | Unique key for the field (can be the same as column but doesn't have to be). |
 | type         | Field type to show in the UI. Possible field types: <ul><li>boolean (yes/no)</li><li>date</li><li>datetime</li><li>decimal</li><li>document</li><li>email</li><li>image</li><li>integer</li><li>lov (list of values)</li><li>money</li><li>text</li><li>textmultiline</li><li>time</li><li>url</li></ul> |
 | required     | Determines if the field is required for saving.      |
-| readonly     | If set to true, the field value cannot be changed.          |       
-| defaultValue | Default field value for new records.          |                   
+| readonly     | If set to true, the field value cannot be changed.   |       
+| defaultValue | Default field value for new records.                 |                   
 | inMany       | Determines if the field is present (by default) in lists of records. |                     
 | height        | For fields of type "textmultiline", number of lines used in the field (in Browse and Edit views). |                 
 | width        | Percentage width in Browse and Edit views. |
@@ -126,9 +127,9 @@ Models describe the object and its list of fields.
 | Property     | Meaning                               |
 |--------------|---------------------------------------|
 | id           | Unique key for the group. It is optional.            |
-| type         | Only "panel" is currently supported ("tab" is next).  |
+| type         | Only "panel" is currently supported ("tab" is next). |
 | label        | Group title as displayed to the user.      |
-| fields       | Array of field ids.                   |
+| fields       | Array of field ids.                        |
 
 
 ### Sample model

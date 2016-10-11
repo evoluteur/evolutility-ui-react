@@ -26,7 +26,7 @@ export default function(){
 				.catch(() => {
 					this.setState({
 						error: {
-							message: format(i18n_errors.badId, id)
+							message: format(i18n_errors.badId.replace('{0}', id))
 						},
 						data: []
 					})

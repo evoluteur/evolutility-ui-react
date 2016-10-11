@@ -22,7 +22,7 @@
 			font-weight: 400;
 			text-decoration: none;
 			color: #80DEEA;
-			    transition: all 0.4s ease;
+			transition: all 0.4s ease;
 			&:hover{
 				color: $color-nav-active;
 			}
@@ -33,16 +33,9 @@
 		//font-size: 1.2em;
 	}
 }
-.ReactModal__Overlay{
-	z-index: 110;
-}
 .TopNavComplement{
 	display: block;
 	height: 95px;
-}
-.evol-entity{
-	margin-left: 20px;
-	color: #ffc107;
 }
 .clearer{
 	clear:both;
@@ -62,3 +55,7 @@
 	padding:6px 1px 1px 6px !important;
 }
 
+
+.ReactModal__Overlay{
+	z-index: 110;
+}
