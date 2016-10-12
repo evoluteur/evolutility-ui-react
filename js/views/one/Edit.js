@@ -12,6 +12,8 @@ import Panel from '../../widgets/Panel'
 
 export default React.createClass({
 
+	viewId: 'edit',
+
 	propTypes: {
 		params: React.PropTypes.shape({
 			entity: React.PropTypes.string.isRequired,

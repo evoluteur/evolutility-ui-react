@@ -9,6 +9,8 @@ import Chart from './Chart'
 
 export default React.createClass({
 
+    viewId: 'charts',
+
     propTypes: {
         params: React.PropTypes.shape({
             entity: React.PropTypes.string.isRequired

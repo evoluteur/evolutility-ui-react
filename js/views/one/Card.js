@@ -6,6 +6,8 @@ import { Link } from 'react-router'
 
 export default React.createClass({
 
+  viewId: 'card',
+
   propTypes: {
     entity: React.PropTypes.string.isRequired,
     fields: React.PropTypes.array,

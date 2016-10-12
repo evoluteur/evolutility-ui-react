@@ -54,6 +54,8 @@ function fnValue(d){
 
 export default React.createClass({
 
+    viewId: 'chart',
+
     propTypes: {
         entity: React.PropTypes.string.isRequired,
         field: React.PropTypes.object.isRequired,

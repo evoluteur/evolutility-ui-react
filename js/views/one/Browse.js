@@ -10,6 +10,8 @@ import { Link } from 'react-router'
 
 export default React.createClass({
 
+  viewId: 'browse',
+
   propTypes: {
     params: React.PropTypes.shape({
       entity: React.PropTypes.string.isRequired,

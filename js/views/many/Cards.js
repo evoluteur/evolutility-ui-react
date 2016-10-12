@@ -9,6 +9,8 @@ import Card from '../One/Card'
 
 export default React.createClass({
 
+	viewId: 'cards',
+
 	propTypes: {
 		params: React.PropTypes.object
 	},

@@ -10,11 +10,13 @@ export default function(){
 
 	return {
 
+		viewSuperType: 'n', // = many
+
 		getData: function(entity, sortField, sortDirection, filters){
-			const e = entity || this.props.params.entity
-			const id = this.props.params.id
-			let url = apiPath + e
-			let urlparams = []
+			const e = entity || this.props.params.entity,
+				id = this.props.params.id
+			let url = apiPath + e,
+				urlparams = []
 
 			if(sortField){
 				urlparams.push('order='+sortField+'.'+sortDirection)

@@ -10,6 +10,8 @@ import { Link } from 'react-router'
 
 export default React.createClass({
 
+	viewId: 'list',
+
 	propTypes: {
 		params: React.PropTypes.shape({
 			entity: React.PropTypes.string.isRequired
@@ -38,7 +40,6 @@ export default React.createClass({
 			m = this.model
 
 		if(m){
-
 			const ico = m.icon ? <img className="evol-many-icon" src={'/pix/'+m.icon}/> : null 
 			const link = '/'+e+'/browse/'
 
@@ -57,8 +58,6 @@ export default React.createClass({
 				return <td key={idx}>{format.fieldValue(f, value, true)}</td>
 			}
 			
-				
-
 			if(this.state.error){
 				return <Alert title="Error" message={this.state.error.message}/> 
 			}else{

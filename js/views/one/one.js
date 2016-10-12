@@ -12,6 +12,8 @@ export default function(){
 
 	return {
 
+		viewSuperType: '1', // = one
+
 		getData: function(entity, nid){
 			const e = entity || this.props.params.entity,
 				id = nid || this.props.params.id
