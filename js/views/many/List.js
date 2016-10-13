@@ -1,11 +1,19 @@
+
+// React-Evolutility :: /views/many/List.js
+
+// List view to display a collection as a list (table w/ sorting and paging).
+
+// https://github.com/evoluteur/react-evolutility
+// (c) 2016 Olivier Giulieri
+
 import React from 'react'
+import { Link } from 'react-router'
 
 import {i18n_errors} from '../../utils/i18n-en'
 import dico from '../../utils/dico'
 import format from '../../utils/format'
 import many from './many'
 import Alert from '../../widgets/Alert'
-import { Link } from 'react-router'
 
 
 export default React.createClass({

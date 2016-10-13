@@ -1,9 +1,18 @@
+
+// React-Evolutility :: /widgets/field.js
+
+// Model-driven field w/ possible types specifed in dico.fieldTypes.
+
+// https://github.com/evoluteur/react-evolutility
+// (c) 2016 Olivier Giulieri
+
 import React from 'react'
-import Datepicker from 'react-datepicker'
-import moment from 'moment'
 
 import format from '../utils/format'
 
+// - date
+import Datepicker from 'react-datepicker'
+import moment from 'moment'
 
 function emHeight(f){
 	let fh = parseInt(f.height || 2, 10);

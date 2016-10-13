@@ -1,13 +1,19 @@
 
+// React-Evolutility :: toolbar.js
+
+// Toolbar w/ icons for CRUD, export, and charts.
+
+// https://github.com/evoluteur/react-evolutility
+// (c) 2016 Olivier Giulieri
+
 import React from 'react'
 import axios from 'axios'
 import { browserHistory, Link } from 'react-router'
+
 import Modal from 'react-modal'
 import {apiPath} from '../../config.js'
-
 import {i18n_actions} from '../utils/i18n-en'
 import models from '../models/all_models'
-
 
 const menuItems = { 
     new: {id: 'edit/0', label: i18n_actions.new, icon:'plus', n:'x', readonly:false},
@@ -37,7 +43,6 @@ function isFunction(fn) {
     var getType = {};
     return fn && getType.toString.call(fn) === '[object Function]';
 }
-
 
 export default React.createClass({
 

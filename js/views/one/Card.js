@@ -1,3 +1,11 @@
+
+// React-Evolutility :: /views/one/Card.js
+
+// Single card (usually part of a set of Cards)
+
+// https://github.com/evoluteur/react-evolutility
+// (c) 2016 Olivier Giulieri
+
 import React from 'react'
 
 import models from '../../models/all_models'

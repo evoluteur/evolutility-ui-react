@@ -1,4 +1,10 @@
+
+// React-Evolutility :: /views/many.js
+
 // Mixin used in most Views for Many (List, Cards but not Charts).
+
+// https://github.com/evoluteur/react-evolutility
+// (c) 2016 Olivier Giulieri
 
 import axios from 'axios'
 

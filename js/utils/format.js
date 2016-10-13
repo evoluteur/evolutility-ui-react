@@ -1,13 +1,10 @@
-/*! ***************************************************************************
- *
- * evolutility :: format.js
- *
- * Helpers for string manipulation and date formats
- *
- * https://github.com/evoluteur/evolutility
- * Copyright (c) 2016 Olivier Giulieri
- *
- *************************************************************************** */
+
+// evolutility :: format.js
+
+// Helpers for string manipulation and date formats
+
+// https://github.com/evoluteur/react-evolutility
+// (c) 2016 Olivier Giulieri
 
 import React from 'react'
 

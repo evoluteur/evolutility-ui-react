@@ -1,4 +1,10 @@
+
+// React-Evolutility :: One
+
 // Mixin used in most Views for One (Browse, Edit but not Card).
+ 
+// https://github.com/evoluteur/react-evolutility
+// (c) 2016 Olivier Giulieri
 
 import axios from 'axios'
 import { browserHistory } from 'react-router'

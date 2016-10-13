@@ -1,10 +1,13 @@
-/*! ***************************************************************************
- *
- * evolutility :: utils/dico.js
- *
- * https://github.com/evoluteur/evolutility
- * Copyright (c) 2016 Olivier Giulieri
- *************************************************************************** */
+
+/*! 
+React-Evolutility
+https://github.com/evoluteur/react-evolutility
+(c) 2016 Olivier Giulieri
+*/
+
+// evolutility :: utils/dico.js
+
+// Helpers for models
 
 import _ from 'underscore'
 

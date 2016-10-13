@@ -1,3 +1,14 @@
+
+// React-Evolutility :: /views/many/Chart.js
+
+// Single Bars or Pie charts (usually part of a set of Charts).
+
+// https://github.com/evoluteur/react-evolutility
+// (c) 2016 Olivier Giulieri
+
+// Quick and easy implementation w/ the old version of google charts
+// must be re-written using D3.js or other cool charting library
+
 import React from 'react'
 
 import _ from 'underscore'

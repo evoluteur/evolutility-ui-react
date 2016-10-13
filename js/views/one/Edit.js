@@ -1,4 +1,11 @@
 
+// React-Evolutility :: /views/one/Edit.js
+
+// View to add or update one record at a time.
+
+// https://github.com/evoluteur/react-evolutility
+// (c) 2016 Olivier Giulieri
+
 import React from 'react'
 
 import {i18n_actions, i18n_validation, i18n_errors} from '../../utils/i18n-en'

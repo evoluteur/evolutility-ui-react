@@ -1,9 +1,19 @@
-import React from 'react'
 
-import Alert from '../../widgets/Alert'
+// React-Evolutility :: /views/many/Charts.js
+
+// Dashboard style set of charts (bars or pies).
+
+// https://github.com/evoluteur/react-evolutility
+// (c) 2016 Olivier Giulieri
+
+// Quick and easy implementation w/ the old version of google charts
+// must be re-written using D3.js or other cool charting library
+
+import React from 'react'
 
 import models from '../../models/all_models'
 import dico from '../../utils/dico'
+import Alert from '../../widgets/Alert'
 import Chart from './Chart'
 
 
