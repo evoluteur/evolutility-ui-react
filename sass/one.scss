@@ -88,7 +88,7 @@
     padding-left: 10px !important;
     margin-bottom: 12px;
     //min-width: 120px;
-    > .evo-rdonly{
+    .evo-rdonly{
           // todo: use or remove line below?
           // border-bottom: 1px solid silver;
       > img{
@@ -97,8 +97,14 @@
         margin-right: 3px;
       }
     }
+    >div{
+      width: 100%;
+    }
     > .text-danger{
         margin-bottom: 0 !important;
+    }
+    .img-thumbnail{
+      padding: 0 !important;
     }
 }
 .evol-field-label > label {

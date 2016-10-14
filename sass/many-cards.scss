@@ -12,7 +12,10 @@
     padding:2px 10px 10px;
     @include border-radius(10px);
     overflow: auto;
-
+    
+    .img-thumbnail{
+      padding: 0 !important;
+    }
     >div{
       >h4{
         margin-bottom: 12px;
