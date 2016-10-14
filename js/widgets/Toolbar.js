@@ -81,6 +81,7 @@ export default React.createClass({
                 .then(response => {
                     //alert('Item deleted.')
                     console.log('Item deleted.')
+                    window.evol_deleted=true // hack to skip navigation confirmation
                     browserHistory.push('/'+e+'/list')
                 })
                 .catch(() => {
@@ -94,19 +95,20 @@ export default React.createClass({
         this.closeModal()
     },
 
-    exportMany(){  
+    exportMany(){
+        // - export all records as a CSV file.
         const e = this.props.entity || ''
         window.open(apiPath+e+'?format=csv', '_blank');
     },
 
     render() {
-        const e = this.props.params.entity || ''
-        const id = this.props.params.id || ''
-        const ep='/'+e+'/'
-        const cStyle={ 
-            color: '#FFCC80',
-        }
-        const urlSearch = window.location.search ? window.location.search.substring(1) : ''
+        const e = this.props.params.entity || '',
+            id = this.props.params.id || '',
+            ep='/'+e+'/',
+            cStyle={ 
+                color: '#FFCC80',
+            },
+            urlSearch = window.location.search ? window.location.search.substring(1) : ''
         let idx=0
 
         function iicon(icon){

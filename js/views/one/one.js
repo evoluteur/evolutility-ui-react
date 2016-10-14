@@ -7,7 +7,7 @@
 // (c) 2016 Olivier Giulieri
 
 import axios from 'axios'
-import { browserHistory } from 'react-router'
+import { withRouter, browserHistory } from 'react-router'
 
 import {i18n_errors} from '../../utils/i18n-en'
 import {apiPath} from '../../../config.js'
@@ -38,6 +38,10 @@ export default function(){
 						},
 						data: []
 					})
+				})
+			}else if(id==='0'){
+				this.setState({
+					data: this.model.defaultData
 				})
 			}
 		},
@@ -79,6 +83,11 @@ export default function(){
 		},
 
 		componentDidMount: function() {
+			// - set hook to confirm navigation (on leave if dirty data)
+			if(this.props.router){
+				this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave)
+			}
+			// - get data or if new then clear data
 			if(this.props.params.id && this.props.params.id!='0'){
 				this.getData()
 			}else{
@@ -98,6 +107,20 @@ export default function(){
 				if(nextProps.params.id!=='0' && nextProps.params.id!==this.props.params.id){
 					this.getData(nextProps.params.entity, nextProps.params.id)
 				} 
+			}
+		},
+
+
+		routerWillLeave(nextLocation) {
+			// - return false to prevent a transition w/o prompting the user,
+			// - or return a string to allow the user to decide.
+			if (this.isDirty && this.isDirty()){
+				if(window.evol_deleted){
+					delete(window.evol_deleted)
+				}else{
+					// TODO: same msg and actions as SublimeText
+					return 'Your work is not saved! Are you sure you want to leave?'
+				}
 			}
 		},
 

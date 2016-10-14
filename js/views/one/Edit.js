@@ -7,6 +7,7 @@
 // (c) 2016 Olivier Giulieri
 
 import React from 'react'
+import { withRouter } from 'react-router'
 
 import {i18n_actions, i18n_validation, i18n_errors} from '../../utils/i18n-en'
 import dico from '../../utils/dico'
@@ -17,7 +18,7 @@ import one from './one'
 import Field from '../../widgets/Field'
 import Panel from '../../widgets/Panel'
 
-export default React.createClass({
+export default withRouter(React.createClass({
 
 	viewId: 'edit',
 
@@ -58,6 +59,13 @@ export default React.createClass({
 		}
 		this.delta[fid]=v
 		this.setState({data: newData})
+	},
+
+	isDirty(){
+		if(this.delta){
+			return Object.keys(this.delta).length>0
+		}
+		return false
 	},
 /*
 	fieldClick(i, props) {
@@ -170,6 +178,6 @@ export default React.createClass({
 			messages: messages,
 			invalids: invalids
 		}
-	},
+	}
 
-})
+}))
