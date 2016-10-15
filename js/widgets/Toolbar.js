@@ -110,6 +110,7 @@ export default React.createClass({
             },
             urlSearch = window.location.search ? window.location.search.substring(1) : ''
         let idx=0
+        let view = this.props.view
 
         function iicon(icon){
             return <i className={'glyphicon glyphicon-'+icon}></i>
@@ -131,14 +132,14 @@ export default React.createClass({
         if(id){
             const isNew = this.props.isNew || id==0
             if(!isNew){
-                if(this.props.view==='edit'){
+                if(view==='edit'){
                     actions.push(buttonLink(menuItems.views.browse, id));
-                }else if(this.props.view==='browse'){
+                }else if(view==='browse'){
                     actions.push(buttonLink(menuItems.views.edit, id, null, {minWidth: '88px'}));
                 }
                 actions.push(buttonLink(menuItems.del, this.confirmDelete));
             }
-        }else{
+        }else if(view!='charts'){
             //actions.push(buttonLink(menuItems.views.charts, ''));
             actions.push(buttonLink(menuItems.export, this.exportMany));
         }
