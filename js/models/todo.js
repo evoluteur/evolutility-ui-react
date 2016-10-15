@@ -11,7 +11,7 @@ module.exports = {
       id: 'title',
       label: 'Title',
       type: 'text',
-      width: 70,
+      width: 100,
       required: true,
       inMany: true
     },
@@ -19,7 +19,7 @@ module.exports = {
       id: 'duedate', 
       type: 'date', 
       label: 'Due Date', 
-      width: 30,
+      width: 38,
       inMany: true
     },
     {
@@ -33,7 +33,7 @@ module.exports = {
         {id: 4, text: 'Others'},
         {id: 5, text: 'Misc.'}
       ], 
-      width: 40,
+      width: 62,
       inMany: true
     },
     {
