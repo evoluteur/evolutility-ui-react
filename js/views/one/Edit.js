@@ -26,8 +26,7 @@ export default withRouter(React.createClass({
 		params: React.PropTypes.shape({
 			entity: React.PropTypes.string.isRequired,
 			id: React.PropTypes.string
-		}),
-		//isNew: React.PropTypes.bool
+		}).isRequired
 	},
 
 	mixins: [one()],
@@ -58,14 +57,12 @@ export default withRouter(React.createClass({
 			this.delta={}
 		}
 		this.delta[fid]=v
+		this._dirty=true
 		this.setState({data: newData})
 	},
 
 	isDirty(){
-		if(this.delta){
-			return Object.keys(this.delta).length>0
-		}
-		return false
+		return this._dirty
 	},
 /*
 	fieldClick(i, props) {

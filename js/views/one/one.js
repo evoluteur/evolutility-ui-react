@@ -27,6 +27,7 @@ export default function(){
 			if(id && id!=='0'){
 				axios.get(apiPath+e+'/'+id)
 				.then(function (response) {
+					this.emptyDelta(false)
 					this.setState({
 						data: response.data
 					});
@@ -40,8 +41,9 @@ export default function(){
 					})
 				})
 			}else if(id==='0'){
+				this.emptyDelta(true)
 				this.setState({
-					data: this.model.defaultData
+					data: this.getDefaultData()
 				})
 			}
 		},
@@ -55,6 +57,7 @@ export default function(){
 			axios[id?'put':'post'](url, data)
 			.then(response => {
 				// TODO: notification w/ toastr
+				this.emptyDelta(false)
 				if(id){
                     //alert('Item updated.')
                     console.log('Item updated.')
@@ -66,7 +69,6 @@ export default function(){
 				this.setState({
 					data: response.data
 				})
-				this.delta = {}
 			})
 			.catch(function (error) {
 				//TODO:
@@ -78,7 +80,7 @@ export default function(){
 		getInitialState: function() {
 			this.setModel()
 			return {
-				data: this.model.defaultData
+				data: this.props.params.id=='0' ? this.getDefaultData() : {}
 			}
 		},
 
@@ -91,25 +93,27 @@ export default function(){
 			if(this.props.params.id && this.props.params.id!='0'){
 				this.getData()
 			}else{
+				this.emptyDelta(true)
 				this.setState({
-					data: this.model.defaultData
+					data: this.props.params.id == '0' ? this.getDefaultData() : {}
 				})
 			}
 		},
 
 		componentWillReceiveProps(nextProps){
 			if(nextProps.params && (nextProps.params.entity != this.props.params.entity
-				|| nextProps.params.id != this.props.params.id)){
+					|| nextProps.params.id != this.props.params.id)){
 				this.setModel(nextProps.params.entity)
+				const isNew=nextProps.params.id == '0' 
+				this.emptyDelta(isNew)
 				this.setState({
-					data: this.model.defaultData
+					data: isNew ? this.getDefaultData() : {}
 				})
-				if(nextProps.params.id!=='0' && nextProps.params.id!==this.props.params.id){
+				if(!isNew && nextProps.params.id!==this.props.params.id){
 					this.getData(nextProps.params.entity, nextProps.params.id)
 				} 
 			}
 		},
-
 
 		routerWillLeave(nextLocation) {
 			// - return false to prevent a transition w/o prompting the user,
@@ -130,6 +134,26 @@ export default function(){
 
 		setModel(entity){
 			this.model=models[entity || this.props.params.entity]
+		},
+
+		getDefaultData(){
+			const obj = {};
+			if(this.model){
+				this.model.fields.forEach(function(f){
+					if(f.defaultValue!=null){
+						obj[f.id]=f.defaultValue;
+					}
+					if(f.type==='lov' && obj[f.id]==null){
+						obj[f.id]='';
+					}
+				})
+			}
+			return obj;
+		},
+
+		emptyDelta(useDefault){
+			this._dirty = false
+			this.delta = useDefault ? this.getDefaultData() : {}
 		}
 
  	}
