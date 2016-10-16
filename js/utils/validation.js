@@ -114,7 +114,7 @@ module.exports = {
             }
 
             // Check minLength and maxLength
-            if (_.isString(v)) {
+            if (_.isString(v) && !numberField) {
                 var len = v.length,
                     badMax = f.maxLength?len > f.maxLength:false,
                     badMin = f.minLength?len < f.minLength:false;

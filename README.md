@@ -115,12 +115,14 @@ Models describe the object and its list of fields.
 | type         | Field type to show in the UI. Possible field types: <ul><li>boolean (yes/no)</li><li>date</li><li>datetime</li><li>decimal</li><li>document</li><li>email</li><li>image</li><li>integer</li><li>lov (list of values)</li><li>money</li><li>text</li><li>textmultiline</li><li>time</li><li>url</li></ul> |
 | required     | Determines if the field is required for saving.      |
 | readonly     | If set to true, the field value cannot be changed.   |       
-| defaultValue | Default field value for new records.                 |                   
+| defaultValue | Default field value for new records.                 |     
+| max, min     | Maximum/Minimum value allowed (only applies to numeric fields).      |    
+| maxLength, minLength | Maximum/Minimum length allowed (only applies to text fields).      |                    
 | inMany       | Determines if the field is present (by default) in lists of records. |                     
-| height        | For fields of type "textmultiline", number of lines used in the field (in Browse and Edit views). |                 
+| height       | For fields of type "textmultiline", number of lines used in the field (in Browse and Edit views). |                 
 | width        | Percentage width in Browse and Edit views. |
 | help         | Optional help on the field. |
-| noCharts     | Prevent the field to have a charts (most fields are prevented based on thier type already). |
+| noCharts     | Prevent the field to have a charts (only necessary for fields of type integer, decimal, money, boolean, list of values which are "chartable"). |
 
 ### Group
 

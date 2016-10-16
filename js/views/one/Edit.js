@@ -161,7 +161,7 @@ export default withRouter(React.createClass({
 				invalids[f.id]=true
 				this.refs[f.id].setState({
 					invalid: true,
-					message: i18n_validation.empty.replace('{0}', f.label)
+					message: cMsg
 				})
 			}else if(this.refs[f.id].state.invalid===true){
 				this.refs[f.id].setState({
