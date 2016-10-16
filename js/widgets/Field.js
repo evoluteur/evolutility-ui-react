@@ -40,6 +40,7 @@ export default React.createClass({
 	},
 
 	_fieldElem(f, d, cbs){
+		// - return the widget needed for the specific field type
 		if(f.type==='boolean'){
 			return <input 
 						id={f.id} 
@@ -132,6 +133,7 @@ export default React.createClass({
 	},
 
 	_fieldElemReadOnly(f, d){
+		// - return the formated field value
 		let fw
 		if(f.type==='textmultiline'){
 			function createMarkup() {

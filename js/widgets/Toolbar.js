@@ -73,9 +73,7 @@ export default React.createClass({
 
     deleteOne(){
         // TODO: SHOULD BE IN STORE BUT THERE IS NO STORE YET
-        const e = this.props.params.entity
-        const id = this.props.params.id || ''
-
+        const {entity, id} = this.props.params
         if(e && id){
             axios.delete(apiPath+e+'/'+id)
                 .then(response => {
@@ -102,15 +100,14 @@ export default React.createClass({
     },
 
     render() {
-        const e = this.props.params.entity || '',
-            id = this.props.params.id || '',
-            ep='/'+e+'/',
+        const {entity, id} = this.props.params,
+            ep='/'+entity+'/',
             cStyle={ 
                 color: '#FFCC80',
             },
             urlSearch = window.location.search ? window.location.search.substring(1) : ''
-        let idx=0
-        let view = this.props.view
+        let idx = 0,
+            view = this.props.view
 
         function iicon(icon){
             return <i className={'glyphicon glyphicon-'+icon}></i>
@@ -144,7 +141,7 @@ export default React.createClass({
             actions.push(buttonLink(menuItems.export, this.exportMany));
         }
 
-        if(e){
+        if(entity){
             const delModal = this.state.deleteConfirmation ? (
                 <Modal className="modal-dialog"
                     isOpen={this.state.deleteConfirmation}
@@ -157,7 +154,7 @@ export default React.createClass({
                                     <h4 className="modal-title">Delete item</h4>
                                 </div>
                                 <div className="modal-body">
-                                    Do you really want to delete the {models[this.props.params.entity].name}?
+                                    Do you really want to delete the {models[entity].name}?
                                 </div>
                                 <div className="modal-footer">
                                     <button key="bDelCancel" onClick={this.closeModal} className="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -178,7 +175,7 @@ export default React.createClass({
                 </ul>
                 <ul role="nav" className="evo-nav-pills pull-left"
                     style={{minWidth:'220px'}}>
-                        { actions.map((m)=>m)}
+                        {actions}
                         <li/>
                 </ul>
 

@@ -24,7 +24,7 @@ export default React.createClass({
     params: React.PropTypes.shape({
       entity: React.PropTypes.string.isRequired,
       id: React.PropTypes.string.isRequired
-    }),
+    }).isRequired
   },
 
   mixins: [one()],

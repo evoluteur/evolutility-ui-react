@@ -9,8 +9,6 @@ https://github.com/evoluteur/react-evolutility
 
 // Helpers for models
 
-import _ from 'underscore'
-
 var fts = {
 	text: 'text',
 	textml: 'textmultiline',
@@ -56,9 +54,11 @@ function fieldChartable(f) {
 
 function hById(arr){
 	var objH={};
-	_.forEach(arr, function(o){
-		objH[o.id] = o; 
-	});
+	if(arr){
+		arr.forEach(function(o){
+			objH[o.id] = o; 
+		});
+	}
 	return objH;
 }
 
@@ -99,7 +99,7 @@ function getSubCollecs(model) {
 		if (te.type === 'panel-list') {
 			ls[te.attribute] = te;
 		} else if (te.type !== 'panel' && te.elements && te.elements.length > 0) {
-			_.each(te.elements, function(te) {
+			te.elements.forEach(function(te) {
 				if (te.type === 'panel-list') {
 					ls[te.attribute] = te;
 				} else if (te.type !== 'panel') {

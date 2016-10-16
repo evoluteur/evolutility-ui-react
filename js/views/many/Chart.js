@@ -43,7 +43,7 @@ many2.getData = function(){
             .catch(() => {
                 this.setState({
                     error: {
-                        message: 'Couldn\'t retrieve charts data.'
+                        message: 'Couldn\'t retrieve charts data for field "'+fid+'".'
                     }
                 })
             });

@@ -96,9 +96,9 @@ export default function(){
 		},
 
 		clickSort: function(evt){
-			const e = this.props.params.entity
-			const fid = evt.currentTarget.id
-			const query = this.props.location.query
+			const e = this.props.params.entity,
+				fid = evt.currentTarget.id,
+				query = this.props.location.query
 			let direc = 'asc'
 
 			if(this._sortField===fid){
@@ -119,9 +119,10 @@ export default function(){
 		},
 
 		clickPagination(evt){
-			const e = this.props.params.entity
-			let id = evt.currentTarget.textContent,
-				pageIdx
+			const e = this.props.params.entity,
+				id = evt.currentTarget.textContent,
+				query = this.props.location.query
+			let pageIdx
 
 			if(id==='»' || id==='«'){
 				pageIdx=url.searchParamInt('page', 0)
@@ -133,9 +134,12 @@ export default function(){
 			}else{
 				pageIdx = parseInt(id, 10)-1
 			}
-			const query = this.props.location.query
-			query.page=pageIdx
-			browserHistory.push('/'+e+'/'+this.viewId + url.querySearch(query))
+			if(query.page && !pageIdx){
+				delete(query.page)
+			}else{
+				query.page=pageIdx
+			}
+			browserHistory.push('/'+e+'/'+this.viewId+url.querySearch(query))
 			//TODO: scroll to top
 			this.getData()
 		}
