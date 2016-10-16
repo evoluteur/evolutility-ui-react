@@ -14,6 +14,7 @@ import dico from '../../utils/dico'
 import format from '../../utils/format'
 import many from './many'
 import Alert from '../../widgets/Alert'
+import Pagination from '../../widgets/Pagination'
 
 
 export default React.createClass({
@@ -27,21 +28,6 @@ export default React.createClass({
 	}, 
 
 	mixins: [many()],
-
-	clickSort: function(evt){
-		const fid = evt.currentTarget.id
-		let direc = 'asc'
-
-		if(this._sortField===fid){
-			if(this._sortDirection === 'asc'){
-				direc = 'desc'
-			}
-		}else{
-			this._sortField = fid
-		}
-		this._sortDirection = direc
-		this.getData(null, fid, direc)
-	},
 
 	render() {
 		const e = this.props.params.entity,
@@ -71,7 +57,8 @@ export default React.createClass({
 			}else{
 				const fields = m.fields.filter(dico.isFieldMany),
 					data = this.state.data ? this.state.data : [],
-					full_count = this.dataCount(data),
+					full_count = this.pageSummary(data),
+					fullCount = data.length ? (data[0]._full_count || 0) : 0,
 					title = m.title || m.label
 
 				return (
@@ -111,6 +98,10 @@ export default React.createClass({
 									</tbody>
 								</table>
 							</div>
+							<Pagination 
+								fullCount={fullCount} 
+								count={data.length} 
+								fnClick={this.clickPagination} />
 						</div>
 					</div>
 				)

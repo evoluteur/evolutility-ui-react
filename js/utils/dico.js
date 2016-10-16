@@ -172,21 +172,6 @@ module.exports = {
 
 	fieldChartable: fieldChartable,
 
-	hById: hById,
-
-	dataCount: function(m, count, totalCount){
-		let txt
-		const tc = totalCount>count ? ' of '+totalCount+' ' : ' '
-
-		if(count===1){
-			txt = '1'+tc+m.name;
-		}else if(count){
-			txt = count+tc+m.namePlural;
-		}else{
-			txt = 'no '+m.namePlural
-		}
-		return txt
-	},
-
+	hById: hById
 
 }

@@ -13,6 +13,7 @@ import Alert from '../../widgets/Alert'
 import dico from '../../utils/dico'
 import many from './many'
 import Card from '../One/Card'
+import Pagination from '../../widgets/Pagination'
 
 
 export default React.createClass({
@@ -29,7 +30,8 @@ export default React.createClass({
 	    const entity = this.props.params.entity,
 			m = this.model,
 			data = this.state.data ? this.state.data : [],
-			full_count = this.dataCount(data),
+			full_count = this.pageSummary(data),
+			fullCount = data.length ? (data[0]._full_count || 0) : 0,
 			title = m.title || m.label
 	  		
 	  	if(m){
@@ -49,6 +51,12 @@ export default React.createClass({
 								return <Card key={idx} data={d} fields={fieldCols} entity={entity}/>
 							})}
 						</div>
+
+						<Pagination 
+							fullCount={fullCount} 
+							count={data.length} 
+							fnClick={this.clickPagination} 
+						/>
 					</div>
 			    )
 			}else{

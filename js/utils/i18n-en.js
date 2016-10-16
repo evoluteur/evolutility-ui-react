@@ -75,12 +75,12 @@ module.exports = {
     nopix: 'No picture.',
     nochart: 'No charts available.',
     badchart: 'Not enough information provided to draw charts.',
-    range: '{0} - {1} of {2} {3}', //rangeBegin, '-', rangeEnd, ' of ', mSize, ' ', entities'
     selected: '{0} selected',
     //},
-    
+*/    
     // --- status ---
     i18n_msg:{
+        range: '{0} to {1} of {2} {3}',// 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'
         //sgn_money: '$', // indicator for money
         //sgn_email: '@', // indicator for email
         added: 'New {0} "{1}" added.',
@@ -88,7 +88,7 @@ module.exports = {
         deleted: '{0} "{1}" deleted.'
         //error: 'Error',
     },
-*/
+
     // --- validation ---
     i18n_validation:{
         incomplete: 'Some information is missing or invalid.',

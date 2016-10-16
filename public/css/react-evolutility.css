@@ -29,20 +29,13 @@
       color: #80DEEA;
       transition: all 0.4s ease; }
       .TopNav > h2 a:hover {
-        color: #E0F7FA; }
+        color: #FFCC80; }
   .TopNav a.active {
-    color: #E0F7FA; }
-
-.ReactModal__Overlay {
-  z-index: 110; }
+    color: #FFCC80; }
 
 .TopNavComplement {
   display: block;
   height: 95px; }
-
-.evol-entity {
-  margin-left: 20px;
-  color: #ffc107; }
 
 .clearer {
   clear: both; }
@@ -58,6 +51,9 @@
 
 .evo-filters.panel {
   padding: 6px 1px 1px 6px !important; }
+
+.ReactModal__Overlay {
+  z-index: 110; }
 
 /*
   react-evolutility : toolbar
@@ -102,7 +98,7 @@
       .evo-toolbar .evo-nav-pills > li + li {
         margin-left: 2px; }
       .evo-toolbar .evo-nav-pills > li.active > a, .evo-toolbar .evo-nav-pills > li.active > a:hover, .evo-toolbar .evo-nav-pills > li.active > a:focus {
-        color: #E0F7FA; }
+        color: #FFCC80; }
   .evo-toolbar .evo-dropdown-icons {
     min-width: 50px; }
   .evo-toolbar .dropdown-menu > li > a {
@@ -267,12 +263,16 @@
   flex-grow: 1;
   padding-left: 10px !important;
   margin-bottom: 12px; }
-  .evol-fld > .evo-rdonly > img {
+  .evol-fld .evo-rdonly > img {
     position: relative;
     top: -2px;
     margin-right: 3px; }
+  .evol-fld > div {
+    width: 100%; }
   .evol-fld > .text-danger {
     margin-bottom: 0 !important; }
+  .evol-fld .img-thumbnail {
+    padding: 0 !important; }
 
 .evol-field-label > label {
   color: #0d0d0d; }
@@ -464,6 +464,8 @@ label {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   overflow: auto; }
+  .evol-cards-body > .panel .img-thumbnail {
+    padding: 0 !important; }
   .evol-cards-body > .panel > div > h4 {
     margin-bottom: 12px;
     white-space: nowrap;

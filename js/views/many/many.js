@@ -7,9 +7,14 @@
 // (c) 2016 Olivier Giulieri
 
 import axios from 'axios'
+import _ from 'underscore'
 
-import {apiPath} from '../../../config.js'
+import {i18n_msg} from '../../utils/i18n-en'
+import {browserHistory} from 'react-router'
+import Router from 'react-router'
+import {apiPath,pageSize} from '../../../config.js'
 import dico from '../../utils/dico'
+import url from '../../utils/url'
 import models from '../../models/all_models'
 
 export default function(){
@@ -18,34 +23,21 @@ export default function(){
 
 		viewSuperType: 'n', // = many
 
-		getData: function(entity, sortField, sortDirection, filters){
+		getData: function(entity){
 			const e = entity || this.props.params.entity,
-				id = this.props.params.id
-			let url = apiPath + e,
-				urlparams = []
+				query = this.props.location.query
 
-			if(sortField){
-				urlparams.push('order='+sortField+'.'+sortDirection)
-			}
-			if(window.location.search){
-				// TODO: possible dup order
-				urlparams.push(window.location.search.substring(1))
-			}
-			if(urlparams.length){
-				url += '?'+urlparams.join('&')
-			}
-
-			axios.get(url)
+			axios.get(apiPath+e+url.querySearch(query))
 				.then(response => {
 					this.setState({
 						data: response.data
 					})
 				})
-				.catch(() => {
+				.catch((err) => {
 					this.setState({
 						error: {
 							title: 'Error',
-							message: 'Couldn\'t retrieve data.'
+							message: 'Couldn\'t retrieve data.' //err.message
 						}
 					})
 				});
@@ -54,7 +46,9 @@ export default function(){
 		getInitialState: function() {
 			this.setModel()
 			return {
-				data: []
+				data: [],
+				page: 0,
+				filters: []
 			}
 		},
 
@@ -72,13 +66,78 @@ export default function(){
 			}
 		},
 
-		dataCount(data){
-			const dl=data.length
-			return this.model ? dico.dataCount(this.model, dl, dl ? data[0]._full_count : 0) : ''
+		pageSummary(data){
+			const pageIdx = this.props.location.query.page||0,
+				totalSize = data.length ? data[0]._full_count : 0
+
+			if (totalSize === 0) {
+				return '';
+			} else if (totalSize === 1) {
+				return totalSize + ' ' + this.model.name;
+			} else if (pageSize >= totalSize) {
+				return totalSize + ' ' + this.model.namePlural;
+			} else {
+				let rangeBegin = (pageIdx || 0) * pageSize + 1, rangeEnd;
+				if (pageIdx < 1) {
+					rangeEnd = _.min([pageSize, totalSize]);
+				} else {
+					rangeEnd = _.min([rangeBegin + pageSize - 1, totalSize]);
+				}
+				return i18n_msg.range
+					.replace('{0}', rangeBegin)
+					.replace('{1}', rangeEnd)
+					.replace('{2}', totalSize)
+					.replace('{3}', this.model.namePlural);
+			}
 		},
 
 		setModel(entity){
 			this.model=models[entity || this.props.params.entity]
+		},
+
+		clickSort: function(evt){
+			const e = this.props.params.entity
+			const fid = evt.currentTarget.id
+			const query = this.props.location.query
+			let direc = 'asc'
+
+			if(this._sortField===fid){
+				if(this._sortDirection === 'asc'){
+					direc = 'desc'
+				}
+			}else{
+				this._sortField = fid
+			}
+			this._sortDirection = direc
+			query.order = fid+'.'+direc
+			if(query.page){
+				query.page=0
+			}
+			const link = '/'+e+'/'+this.viewId
+			browserHistory.push(link + url.querySearch(query))
+			this.getData()
+		},
+
+		clickPagination(evt){
+			const e = this.props.params.entity
+			let id = evt.currentTarget.textContent,
+				pageIdx
+
+			if(id==='»' || id==='«'){
+				pageIdx=url.searchParamInt('page', 0)
+				if(id==='«'){
+					pageIdx--
+				}else{
+					pageIdx++
+				}
+			}else{
+				pageIdx = parseInt(id, 10)-1
+			}
+			const query = this.props.location.query
+			query.page=pageIdx
+			browserHistory.push('/'+e+'/'+this.viewId + url.querySearch(query))
+			//TODO: scroll to top
+			this.getData()
 		}
 
 	}
