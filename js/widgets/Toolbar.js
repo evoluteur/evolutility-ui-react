@@ -74,13 +74,13 @@ export default React.createClass({
     deleteOne(){
         // TODO: SHOULD BE IN STORE BUT THERE IS NO STORE YET
         const {entity, id} = this.props.params
-        if(e && id){
-            axios.delete(apiPath+e+'/'+id)
+        if(entity && id){
+            axios.delete(apiPath+entity+'/'+id)
                 .then(response => {
                     //alert('Item deleted.')
                     console.log('Item deleted.')
                     window.evol_deleted=true // hack to skip navigation confirmation
-                    browserHistory.push('/'+e+'/list')
+                    browserHistory.push('/'+entity+'/list')
                 })
                 .catch(() => {
                     this.setState({
