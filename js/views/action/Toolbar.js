@@ -7,13 +7,13 @@
 // (c) 2016 Olivier Giulieri
 
 import React from 'react'
+import axios from 'axios'
 import { browserHistory, Link } from 'react-router'
 import Modal from 'react-modal'
-import axios from 'axios'
 
-import {apiPath} from '../../config.js'
 import evoGlobals from '../../utils/evoGlobals'
-import {i18n_actions} from '../../utils/i18n-en'
+import {apiPath} from '../../../config.js'
+import {i18n_actions, i18n_msg} from '../../utils/i18n-en'
 import models from '../../models/all_models'
 
 const menuItems = { 
