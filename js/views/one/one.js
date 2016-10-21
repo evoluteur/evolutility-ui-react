@@ -9,7 +9,8 @@
 import axios from 'axios'
 import { withRouter, browserHistory } from 'react-router'
 
-import {i18n_errors} from '../../utils/i18n-en'
+import evoGlobals from '../../utils/evoGlobals'
+import {i18n_errors, i18n_msg} from '../../utils/i18n-en'
 import {apiPath} from '../../../config.js'
 import {format} from 'util'
 import models from '../../models/all_models'
@@ -119,11 +120,11 @@ export default function(){
 			// - return false to prevent a transition w/o prompting the user,
 			// - or return a string to allow the user to decide.
 			if (this.isDirty && this.isDirty()){
-				if(window.evol_deleted){
-					delete(window.evol_deleted)
+				if(evoGlobals.skip_confirm){
+					delete(evoGlobals.skip_confirm)
 				}else{
 					// TODO: same msg and actions as SublimeText
-					return 'Your work is not saved! Are you sure you want to leave?'
+					return i18n_msg.confirmLeave
 				}
 			}
 		},

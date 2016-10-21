@@ -7,13 +7,14 @@
 // (c) 2016 Olivier Giulieri
 
 import React from 'react'
-import axios from 'axios'
 import { browserHistory, Link } from 'react-router'
-
 import Modal from 'react-modal'
+import axios from 'axios'
+
 import {apiPath} from '../../config.js'
-import {i18n_actions} from '../utils/i18n-en'
-import models from '../models/all_models'
+import evoGlobals from '../../utils/evoGlobals'
+import {i18n_actions} from '../../utils/i18n-en'
+import models from '../../models/all_models'
 
 const menuItems = { 
     new: {id: 'edit/0', label: i18n_actions.new, icon:'plus', n:'x', readonly:false},
@@ -79,7 +80,7 @@ export default React.createClass({
                 .then(response => {
                     //alert('Item deleted.')
                     console.log('Item deleted.')
-                    window.evol_deleted=true // hack to skip navigation confirmation
+                    evoGlobals.skip_confirm = true
                     browserHistory.push('/'+entity+'/list')
                 })
                 .catch(() => {

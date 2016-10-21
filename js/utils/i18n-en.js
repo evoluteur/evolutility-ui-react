@@ -80,6 +80,7 @@ module.exports = {
 */    
     // --- status ---
     i18n_msg:{
+        confirmLeave: 'Your work is not saved! Are you sure you want to leave?',
         range: '{0} to {1} of {2} {3}',// 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'
         //sgn_money: '$', // indicator for money
         //sgn_email: '@', // indicator for email
