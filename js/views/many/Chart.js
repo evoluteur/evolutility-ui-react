@@ -57,10 +57,10 @@ many2.getInitialState = function() {
 }
 
 function fnLabel(d){
-    return (d.label==null ? 'N/A' : d.label) + '('+d.count+')'
+    return (d.label==null ? 'N/A' : d.label) + '('+d.value+')'
 }
 function fnValue(d){
-    return d.count
+    return d.value
 }
 
 export default React.createClass({
@@ -108,8 +108,8 @@ export default React.createClass({
             vs=data.map(fnValue);
 
         data.forEach(function(d){
-            if(d.count>maxCount){
-                maxCount=d.count;
+            if(d.value>maxCount){
+                maxCount=d.value;
             }
         })
 
