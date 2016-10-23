@@ -13,14 +13,14 @@ function icon(name) {
 export default React.createClass({
 
 	propTypes: {
+		title: React.PropTypes.string,
 		message: React.PropTypes.string.isRequired,
 		type: React.PropTypes.oneOf([
 			'info', 	// - blue
 			'success', 	// - green
 			'warning', 	// - yellow
 			'danger' 	// - red
-		]),
-		title: React.PropTypes.string
+		])
 	},
 
 	render() {
@@ -28,10 +28,9 @@ export default React.createClass({
 			css = "alert alert-" + aType
 		return (
 			<div className={css} role="alert">
-				{icon(aType)}
-				<strong>{this.props.title || 'Error'}</strong>
-				<br/><br/> 
-				{this.props.message}
+				{this.props.title ? icon(aType) : null}
+				<strong>{this.props.title}</strong>
+				<p>{this.props.message}</p>
 			</div>
 		)
 	}

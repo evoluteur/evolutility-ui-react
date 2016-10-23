@@ -125,13 +125,12 @@
   top: 0;
   flex-direction: row; }
 
-.alert {
-  margin: 10px; }
-  .alert > i {
-    margin-right: 10px;
-    font-size: 20px; }
-  .alert > strong {
-    font-size: 20px; }
+.alert > i {
+  font-size: 18px;
+  margin: 0 10px 10px 0; }
+
+.alert > strong {
+  font-size: 18px; }
 
 /*
   react-evolutility : common
@@ -517,6 +516,11 @@ label {
   display: block;
   text-align: center;
   padding: 10px 20px 30px; }
+
+.chart-holder > i {
+  position: relative;
+  top: 50px;
+  color: grey; }
 
 .chart-actions i {
   color: silver;

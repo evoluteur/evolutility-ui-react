@@ -11,6 +11,7 @@
 
 import React from 'react'
 
+import { i18n_charts } from '../../utils/i18n-en'
 import models from '../../models/all_models'
 import dico from '../../utils/dico'
 import Alert from '../../widgets/Alert'
@@ -28,11 +29,12 @@ export default React.createClass({
     },
 
     render: function () {
-        const e=this.props.params.entity
-        const m=models[e]
-        const title = m.title || m.label
+        const e = this.props.params.entity,
+            m = models[e]
     
         if(m){
+            const title = m.title || m.label,
+                chartFields = dico.getFields(m).filter(dico.fieldInCharts)
             return (
 
                 <div className="evolutility evol-many-charts">
@@ -40,15 +42,17 @@ export default React.createClass({
                     <h2 className="evo-page-title">{title}</h2>
                     
                     <div className="evolutility evol-many-charts">
-                        {dico.getFields(m).filter(dico.fieldInCharts).map(function(f){
+                        {chartFields.length ? chartFields.map(function(f){
                             return <Chart entity={e} key={f.id} field={f} title={f.label} className="panel-default"/> 
-                        })} 
+                        }) : (
+                            <Alert title="No data" message={i18n_charts.nocharts} type="warning"/>
+                        )} 
                     </div>
 
                 </div>
             )
         }else{
-            return <Alert message={'Invalid input parameter \"'+e+'\".'}/>
+            return <Alert title="Error" message={'Invalid input parameter \"'+e+'\".'}/>
         }
     }
 })

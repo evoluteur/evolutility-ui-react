@@ -15,6 +15,7 @@ import _ from 'underscore'
 import axios from 'axios'
 import {apiPath} from '../../../config.js'
 
+import { i18n_msg } from '../../utils/i18n-en'
 import Alert from '../../widgets/Alert'
 import models from '../../models/all_models'
 import dico from '../../utils/dico'
@@ -89,41 +90,47 @@ export default React.createClass({
     },
 
     urlPie: function (data, sizes){
-        var p=this.props
-        var size=p.sizes?p.sizes:'390x200',
-            ls=data.map(fnLabel),
-            vs=data.map(fnValue);
-
-        var urlGoogleChart = urlChart+'?chd=t:'+vs.join(',')+
-            '&chco='+colorsList(data.length)+
-            '&chl='+ls.join('|')+
-            '&cht=p&chs='+size;
-        return urlGoogleChart;
+        if(data && data.length){ 
+            const p=this.props,
+                size=p.sizes?p.sizes:'390x200',
+                ls=data.map(fnLabel),
+                vs=data.map(fnValue),
+                urlGoogleChart = urlChart+'?chd=t:'+vs.join(',')+
+                '&chco='+colorsList(data.length)+
+                '&chl='+ls.join('|')+
+                '&cht=p&chs='+size;
+            return urlGoogleChart
+        }
+        return ''
     },
 
     urlBars: function (data, sizes){
-        const size=sizes?sizes:'360x200';
-        let maxCount = 0,
-            ls=data.map(fnLabel),
-            vs=data.map(fnValue);
+        if(data && data.length){ 
+            const size=sizes?sizes:'360x200';
+            let maxCount = 0,
+                ls=data.map(fnLabel),
+                vs=data.map(fnValue);
 
-        data.forEach(function(d){
-            if(d.value>maxCount){
-                maxCount=d.value;
-            }
-        })
+            data.forEach(function(d){
+                if(d.value>maxCount){
+                    maxCount=d.value;
+                }
+            })
 
-        return urlChart+'?chbh=a&chs='+size+'&cht=bvg&chco='+colorsList(data.length)+'&chds=0,'+maxCount+
-                '&chd=t:'+vs.join('|')+
-                '&chp=0.05&chts=676767,10.5&chdl='+ls.join('|');
+            return urlChart+'?chbh=a&chs='+size+'&cht=bvg&chco='+colorsList(data.length)+'&chds=0,'+maxCount+
+                    '&chd=t:'+vs.join('|')+
+                    '&chp=0.05&chts=676767,10.5&chdl='+ls.join('|');
+        }
+        return ''
+           
     },
 
     render: function (){
 
-        const data=this.state.data || []
-        const url = this['url'+(this.state.chartType||'Pie')](data)
-        let body
-        let icon = this.state.chartType==='Pie'?(
+        const data=this.state.data || [],
+            url = this['url'+(this.state.chartType||'Pie')](data)
+        let body,
+            icon = this.state.chartType==='Pie'?(
                 <i className="glyphicon glyphicon-stats" onClick={this.click_bars}/>
             ) : (
                 <i className="glyphicon glyphicon-cd" onClick={this.click_pie}/>
@@ -133,7 +140,7 @@ export default React.createClass({
         }else if(url){
             body = <img src={url} />
         }else{
-            body = null
+            body = <i>{i18n_msg.loading}</i>
         }
         return (
             <div className="evol-chart-holder panel panel-default">

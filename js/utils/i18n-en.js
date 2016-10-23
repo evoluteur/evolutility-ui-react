@@ -29,8 +29,6 @@ module.exports = {
         cards: 'Cards',
         //bJSON: 'JSON',
         filter: 'Filter',
-        //bBubbles: 'Bubbles',
-        //bSunburst: 'Sunburst',
         //bScatter:'Scatter',
         charts: 'Charts',
         //refresh: 'Refresh',
@@ -40,7 +38,7 @@ module.exports = {
         //ok: 'OK',
         cancel: 'Cancel',
 
-        // --- wizard ---
+        // --- navigation/pagination ---
         prev: 'Previous',
         next: 'Next',
         //finish: 'Finish !'
@@ -57,15 +55,9 @@ module.exports = {
     delete1: 'Do you really want to delete the {0} "{1}"?', // {0}=entity {1}=titlefield value,
     deleteN: 'Delete {0} {1}?', // delete 5 tasks
     deleted1: '{0} deleted.', // {0}=entity ,
-
-    notFound: 'Item not found.',
     //this.setMessage(i18n.notFound, i18n.getLabel('notFoundMsg', this.uiModel.name);
-    notFoundMsg: 'No {0} found.',
-    notFoundMsgId: 'No {0} found for ID="{1}".',
-
     //NoChange: 'No Change',
     //NoX: 'No {0}',
-    //Back2SearchResults: 'Back to search results',
     yes: 'Yes',
     no: 'No',
     none: 'None',
@@ -80,6 +72,7 @@ module.exports = {
     // --- status ---
     i18n_msg:{
         nodata: 'No {0} found.', // 0=entities
+        loading: 'Loading data...',
         confirmLeave: 'Your work is not saved! Are you sure you want to leave?',
         range: '{0} to {1} of {2} {3}',// 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'
         xinz: '{0} of {1} {2}',// 0=mSize, 1=totSize, 2=entities'
@@ -117,64 +110,17 @@ module.exports = {
     },
 
     // --- charts ---
-    charts:{
-        aByB: '{0} by {1}',
-        aB: '{0}: {1}'
-    },
-
+    i18n_charts:{
+        //aByB: '{0} by {1}',
+        //aB: '{0}: {1}',
         // --- data visualization ---
         //vizGroupBy: 'Group by',
         //vizColorBy: 'Color by',
         //vizSizeBy: 'Size by',
-
         //xAxis: 'X Axis',
         //yAxis: 'Y Axis',
         //zAxis: 'Z Axis',
-/*
-    // --- export ---
-    export:{
-        exportOne: 'Export {0}', // {0}=entity
-        exportMany: 'Export {0}', // {0}=entities
-        preview: 'Export preview',
-        header: 'Header',
-        options: 'options',
-        separator: 'Separator',
-        firstLine: 'The first row is a header',
-        format: 'Export format',
-        xpFields: 'Fields to include in the export',
-        IDkey: 'ID',
-        allFields: 'Show all fields',
-        formatCSV: 'Comma separated values (CSV, TXT, XLS...)',
-        formatHTML: 'HTML',
-        formatSQL: 'SQL Insert Statements (SQL)',
-        formatTAB: 'Tab separated values (TXT)',
-        formatXML: 'XML',
-        formatJSON: 'Javascript Object Notation (JSON)',
-        //xpColors: 'Header color-Color odd rows-Color even rows',
-        //xpColMap: 'Columns map to',
-        XMLroot: 'Element name', // 'Root element name'
-        //xpXMLAttr: 'Attributes',
-        //xpXMLElem: 'Elements',
-        headerLabels: 'Field Labels',
-        headerIds: 'Field Attributes or Ids',
-        db: 'Database',
-        SQL: 'SQL Options',
-        SQLTable: 'Table name',
-        SQLTrans: 'In transaction',
-        SQLIdInsert: 'Identity insert',
-        DownloadEntity: 'Download {0}'
-    },
-
-    // --- import ---
-    import:{
-        importOne: 'Import {0}', // {0}=entity
-        importMany: 'Import {0}', // {0}=entities
-        format: 'Source Format',
-        sample: 'Sample',
-        allowDups: 'Allow duplicates',
-        data: 'Data to Import',
-        success: 'Import done.',
-        empty: 'Nothing to Import.'
+        nocharts: 'No default charts.'
     },
 
     // --- filters ---
@@ -211,7 +157,7 @@ module.exports = {
         bSubmit: 'Submit',
         bCancel: 'Cancel'
     },
-
+/*
     // --- documentation ---
     doc:{
         entity: 'Entity',
