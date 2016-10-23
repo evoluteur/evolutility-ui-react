@@ -27,18 +27,23 @@ export default function(){
 			const e = entity || this.props.params.entity,
 				query = this.props.location.query
 
+			this.setState({
+				loading: true
+			})
 			axios.get(apiPath+e+url.querySearch(query))
 				.then(response => {
 					this.setState({
-						data: response.data
+						data: response.data,
+						loading: false
 					})
 				})
-				.catch((err) => {
+				.catch(err => {
 					this.setState({
 						error: {
 							title: 'Error',
 							message: 'Couldn\'t retrieve data.' //err.message
-						}
+						},
+						loading: false
 					})
 				});
 		},
@@ -47,8 +52,7 @@ export default function(){
 			this.setModel()
 			return {
 				data: [],
-				page: 0,
-				filters: []
+				loading: false
 			}
 		},
 

@@ -54,8 +54,6 @@ export default React.createClass({
 
     if(!m){
       return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
-    }else if(this.state.error){
-      return <Alert title="Error" message={this.state.error.message}/>
     }else{
         return ( 
         <div className="evolutility">
@@ -63,38 +61,43 @@ export default React.createClass({
           <h2 className="evo-page-title">{title}</h2>
 
           <div className="evo-one-edit">
-            <div className="evol-pnls">
 
-            {m.groups ? (
-                m.groups.map(function(g, idx){
-                  const groupFields = dico.fieldId2Field(g.fields, m.fieldsH)
-                  return (
-                    <Panel key={g.id||('g'+idx)} title={g.label || gtitle || ''} width={g.width}>
-                      <div className="evol-fset">
-                        {groupFields.map(fnFieldReadOnly)}
-                      </div>
-                    </Panel>
+                {this.state.error ? (
+                    <Alert title="Error" message={this.state.error.message}/>
+                  ):(
+                    <div className="evol-pnls">
+
+                      {m.groups ? (
+                          m.groups.map(function(g, idx){
+                            const groupFields = dico.fieldId2Field(g.fields, m.fieldsH)
+                            return (
+                              <Panel key={g.id||('g'+idx)} title={g.label || gtitle || ''} width={g.width}>
+                                <div className="evol-fset">
+                                  {groupFields.map(fnFieldReadOnly)}
+                                </div>
+                              </Panel>
+                            )
+                          })
+                      ) : (
+                        <Panel key="pOne" title={title}>
+                          <div className="evol-fset"> 
+                            {m.fields.map(fnFieldReadOnly)}
+                          </div>
+                        </Panel>
+                      )}
+
+                      <Panel key="pButtons" width={100}>
+                        <div className="formButtons"> 
+                            <Link to={link+id} className="btn btn-info">
+                              <i className="glyphicon glyphicon-edit"></i> {i18n_actions.edit}
+                            </Link>
+                            <button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_actions.cancel}</button>
+                        </div>
+                      </Panel>
+
+                    </div>
                   )
-                })
-            ) : (
-              <Panel key="pOne" title={title}>
-                <div className="evol-fset"> 
-                  {m.fields.map(fnFieldReadOnly)}
-                </div>
-              </Panel>
-            )}
-
-              <Panel key="pButtons" width={100}>
-                <div className="formButtons"> 
-                    <Link to={link+id} className="btn btn-info">
-                      <i className="glyphicon glyphicon-edit"></i> {i18n_actions.edit}
-                    </Link>
-                    <button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_actions.cancel}</button>
-                </div>
-              </Panel>
-
-            </div>
-
+                }
           </div>
         </div>
         )      

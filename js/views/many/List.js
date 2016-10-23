@@ -9,7 +9,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import {i18n_errors} from '../../utils/i18n-en'
+import {i18n_msg, i18n_errors} from '../../utils/i18n-en'
 import dico from '../../utils/dico'
 import format from '../../utils/format'
 import many from './many'
@@ -95,8 +95,10 @@ export default React.createClass({
 							</table>
 						</div>
 					)
+				}else if(this.state.loading){
+					body = null
 				}else{
-					body = <Alert title="No data" message={'No '+m.namePlural+' found.'} type="info" /> 
+					body = <Alert title="No data" message={i18n_msg.nodata.replace('{0}', m.namePlural)} type="info" />
 				}
 			}
 			return (

@@ -8,7 +8,7 @@
 
 import React from 'react'
 
-import {i18n_errors} from '../../utils/i18n-en'
+import {i18n_msg, i18n_errors} from '../../utils/i18n-en'
 import Alert from '../../widgets/Alert'
 import dico from '../../utils/dico'
 import many from './many'
@@ -46,8 +46,10 @@ export default React.createClass({
 							return <Card key={idx} data={d} fields={fieldCols} entity={entity}/>
 						})}
 					</div>
-			 	}else{
-			 		body = <Alert title="No data" message={'No '+m.namePlural+' found.'} type="info" /> 
+			 	}else if(this.state.loading){
+					body = null
+				}else{
+			 		body = <Alert title="No data" message={i18n_msg.nodata.replace('{0}', m.namePlural)} type="info" /> 
 			 	}
 			}else{
 				body = <Alert title="Error" message={this.state.error.message}/> 

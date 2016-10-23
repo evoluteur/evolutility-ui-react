@@ -73,12 +73,10 @@ export default withRouter(React.createClass({
 	},
 */	
 	render() {
-		const urlParts = window.location.pathname.split('/')
-		//const view = urlParts.length>1 ? urlParts[2] : false
-		const isNew = urlParts.length>2 ? urlParts[3]=='0' : false
-        // const isNew = this.props.isNew || id==0
-    	const {id=0, entity=null} = this.props.params
-		const ep = '/'+entity+'/',
+		const urlParts = window.location.pathname.split('/'),
+			isNew = urlParts.length>2 ? urlParts[3]=='0' : false,
+	    	{id=0, entity=null} = this.props.params,
+			ep = '/'+entity+'/',
 			m = this.model,
 			data = this.state.data || {},
 			cbs = {
@@ -105,8 +103,6 @@ export default withRouter(React.createClass({
   		this.isNew = isNew
 		if(!m){
 			return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
-		}else if(this.state.error){
-			return <Alert title="Error" message={this.state.error.message}/>
 		}else{
 			return (
 				<div className="evolutility">
@@ -114,35 +110,41 @@ export default withRouter(React.createClass({
             		<h2 className="evo-page-title">{title}</h2>
 
 					<div className="evo-one-edit">
-						<div className="evol-pnls">
 
-			    			{(m && m.groups) ? (
-									m.groups.map(function(g, idx){
-										const groupFields = dico.fieldId2Field(g.fields, m.fieldsH)
-										return (
-											<Panel key={g.id||('g'+idx)} title={g.label || gtitle || ''} width={g.width}>
-												<div className="evol-fset">
-													{groupFields.map(fnField)}
-												</div>
-											</Panel>
-										)
-									})
-							) : (
-								<Panel title={title} key="pAllFields">
-									<div className="evol-fset"> 
-										{m.fields.map(fnField)}
+            		{this.state.error ? (
+							<Alert title="Error" message={this.state.error.message}/>
+	            		):(
+							<div className="evol-pnls">
+
+				    			{(m && m.groups) ? (
+										m.groups.map(function(g, idx){
+											const groupFields = dico.fieldId2Field(g.fields, m.fieldsH)
+											return (
+												<Panel key={g.id||('g'+idx)} title={g.label || gtitle || ''} width={g.width}>
+													<div className="evol-fset">
+														{groupFields.map(fnField)}
+													</div>
+												</Panel>
+											)
+										})
+								) : (
+									<Panel title={title} key="pAllFields">
+										<div className="evol-fset"> 
+											{m.fields.map(fnField)}
+										</div>
+									</Panel>
+								)}
+
+								<Panel key="formButtons">
+									<div className="formButtons">
+										<button className="btn btn-info" onClick={this.clickSave}><i className="glyphicon glyphicon-ok"></i> {i18n_actions.save}</button>
+										<button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_actions.cancel}</button>
 									</div>
 								</Panel>
-							)}
 
-							<Panel key="formButtons">
-								<div className="formButtons">
-									<button className="btn btn-info" onClick={this.clickSave}><i className="glyphicon glyphicon-ok"></i> {i18n_actions.save}</button>
-									<button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_actions.cancel}</button>
-								</div>
-							</Panel>
-
-						</div>
+							</div>
+	 					)
+            		}
 					</div>
 				</div>
 			)

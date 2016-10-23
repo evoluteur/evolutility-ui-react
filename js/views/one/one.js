@@ -27,13 +27,22 @@ export default function(){
 
 			if(id && id!=='0'){
 				axios.get(apiPath+e+'/'+id)
-				.then(function (response) {
-					this.emptyDelta(false)
-					this.setState({
-						data: response.data
-					});
-				}.bind(this))
-				.catch(() => {
+				.then((response)=>{
+					if(response.data!==''){
+						this.emptyDelta(false)
+						this.setState({
+							data: response.data
+						});
+					}else{
+						this.setState({
+							error: {
+								message: format(i18n_errors.badId.replace('{0}', id))
+							},
+							data: []
+						})
+					}
+				})
+				.catch(err => {
 					this.setState({
 						error: {
 							message: format(i18n_errors.badId.replace('{0}', id))
@@ -81,7 +90,8 @@ export default function(){
 		getInitialState: function() {
 			this.setModel()
 			return {
-				data: this.props.params.id=='0' ? this.getDefaultData() : {}
+				data: this.props.params.id=='0' ? this.getDefaultData() : {},
+				loading: true
 			}
 		},
 

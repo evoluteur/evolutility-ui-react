@@ -69,8 +69,7 @@ module.exports = {
     yes: 'Yes',
     no: 'No',
     none: 'None',
-    na: 'N/A', // 'not available'
-    nodata: 'No data available.',
+    na: 'N/A', // 'not available',
     notEnoughdata: 'Not enough data available.',
     nopix: 'No picture.',
     nochart: 'No charts available.',
@@ -80,6 +79,7 @@ module.exports = {
 */    
     // --- status ---
     i18n_msg:{
+        nodata: 'No {0} found.', // 0=entities
         confirmLeave: 'Your work is not saved! Are you sure you want to leave?',
         range: '{0} to {1} of {2} {3}',// 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'
         xinz: '{0} of {1} {2}',// 0=mSize, 1=totSize, 2=entities'
