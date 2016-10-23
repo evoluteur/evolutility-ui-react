@@ -12,7 +12,7 @@ import _ from 'underscore'
 import {i18n_msg} from '../../utils/i18n-en'
 import {browserHistory} from 'react-router'
 import Router from 'react-router'
-import {apiPath,pageSize} from '../../../config.js'
+import {apiPath, pageSize} from '../../../config.js'
 import dico from '../../utils/dico'
 import url from '../../utils/url'
 import models from '../../models/all_models'
@@ -68,27 +68,34 @@ export default function(){
 
 		pageSummary(data){
 			const pageIdx = this.props.location.query.page||0,
-				totalSize = data.length ? data[0]._full_count : 0
+				size = data.length;
 
-			if (totalSize === 0) {
-				return '';
-			} else if (totalSize === 1) {
-				return totalSize + ' ' + this.model.name;
-			} else if (pageSize >= totalSize) {
-				return totalSize + ' ' + this.model.namePlural;
-			} else {
-				let rangeBegin = (pageIdx || 0) * pageSize + 1, rangeEnd;
-				if (pageIdx < 1) {
-					rangeEnd = _.min([pageSize, totalSize]);
-				} else {
-					rangeEnd = _.min([rangeBegin + pageSize - 1, totalSize]);
+			if (size) {
+				const totalSize = data[0]._full_count
+				if (size === 1) {
+					return size + ' ' + this.model.name + (totalSize>size ? ' in '+totalSize : '');
+				}else if(size >= totalSize) {
+					return totalSize + ' ' + this.model.namePlural;
+				}else if(!pageIdx && pageSize>size){
+					return i18n_msg.xinz // - '{0} to {1} of {2}' w/ 0=mSize, 1=totSize, 2=entity'
+						.replace('{0}', size)
+						.replace('{1}', totalSize)
+						.replace('{2}', this.model.namePlural);
+				}else{
+					let rangeBegin = pageIdx * pageSize + 1, rangeEnd;
+					if (pageIdx < 1) {
+						rangeEnd = _.min([pageSize, totalSize]);
+					} else {
+						rangeEnd = _.min([rangeBegin + pageSize - 1, totalSize]);
+					}
+					return i18n_msg.range // - '{0} to {1} of {2} {3}' w/ 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'
+						.replace('{0}', rangeBegin)
+						.replace('{1}', rangeEnd)
+						.replace('{2}', totalSize)
+						.replace('{3}', this.model.namePlural);
 				}
-				return i18n_msg.range
-					.replace('{0}', rangeBegin)
-					.replace('{1}', rangeEnd)
-					.replace('{2}', totalSize)
-					.replace('{3}', this.model.namePlural);
 			}
+			return '';
 		},
 
 		setModel(entity){
@@ -125,7 +132,7 @@ export default function(){
 			let pageIdx
 
 			if(id==='»' || id==='«'){
-				pageIdx=url.searchParamInt('page', 0)
+				pageIdx = query.page || 0
 				if(id==='«'){
 					pageIdx--
 				}else{

@@ -18,6 +18,7 @@ export default React.createClass({
 		pageIdx: React.PropTypes.number,
         count: React.PropTypes.number,
         fullCount: React.PropTypes.number,
+        location: React.PropTypes.object,
 		fnClick: React.PropTypes.func.isRequired
 	},
 
@@ -30,15 +31,16 @@ export default React.createClass({
 	},
 
     _paginationBody() {
-        const realSize = this.props.fullCount
-        let pIdx = url.searchParamInt('page')||0,
-            h = []
+        const totalSize = this.props.fullCount,
+            size = this.props.count,
+            pIdx = parseInt(this.props.location.query.page || '0', 10)
+        let h = []
 
-        if (realSize > pageSize) {
+        if (totalSize > size) {
             const fnClick = this.props.fnClick,
-                nbPages = Math.ceil(realSize / pageSize),
-                wPrev = pIdx!==0,
-                wNext = nbPages > (pIdx+1)
+                nbPages = Math.ceil(totalSize / pageSize),
+                wPrev = pIdx>0,
+                wNext = nbPages>(pIdx+1)
             let pId = pIdx + 1,
                 maxRange,
                 bPage = function(id){

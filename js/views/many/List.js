@@ -51,63 +51,73 @@ export default React.createClass({
 				}
 				return <td key={idx}>{format.fieldValue(f, value, true)}</td>
 			}
-			
-			if(this.state.error){
-				return <Alert title="Error" message={this.state.error.message}/> 
-			}else{
-				const fields = m.fields.filter(dico.isFieldMany),
-					data = this.state.data ? this.state.data : [],
-					full_count = this.pageSummary(data),
-					fullCount = data.length ? (data[0]._full_count || 0) : 0,
-					title = m.title || m.label
 
-				return (
-					<div data-entity={e} style={{width: '100%'}}>
-						<h2 className="evo-page-title">
-							{title}
-							<span className="evo-badge">{full_count}</span>
-						</h2>
-						<div className="evolutility evol-many-list">
-							<div>
-								<table className="table table-hover">
-									<thead>
-										<tr>
-											{fields.map((f)=> (
-												<th id={f.id} key={f.id} onClick={this.clickSort}>
-													{f.label}
-													{f.id===this._sortField ? (
-															<i className={"glyphicon glyphicon-arrow-"+(this._sortDirection==='desc' ? 'down' : 'up')}></i>
-														) : null
-													}
-												</th>
-											))}
-										</tr>
-									</thead>
-									<tbody>
-									{
-										data.length ? data.map(function(d){
-											return (
-												<tr key={d.id}>
-													{fields.map(function(f, idx){
-														return cell(d, f, idx)
-													})}
-												</tr>
-											)
-										}) : null
-									}
-									</tbody>
-								</table>
-							</div>
-							<Pagination 
-								fullCount={fullCount} 
-								count={data.length} 
-								fnClick={this.clickPagination} />
+			const data = this.state.data ? this.state.data : []
+			const full_count = this.pageSummary(data),
+				fullCount = data.length ? (data[0]._full_count || 0) : 0,
+				title = m.title || m.label
+			let body
+
+			if(this.state.error){
+				body = <Alert title="Error" message={this.state.error.message}/> 
+			}else{
+				if(data.length){
+					const fields = m.fields.filter(dico.isFieldMany)
+					body = (
+						<div>
+							<table className="table table-hover">
+								<thead>
+									<tr>
+										{fields.map((f)=> (
+											<th id={f.id} key={f.id} onClick={this.clickSort}>
+												{f.label}
+												{f.id===this._sortField ? (
+														<i className={"glyphicon glyphicon-arrow-"+(this._sortDirection==='desc' ? 'down' : 'up')}></i>
+													) : null
+												}
+											</th>
+										))}
+									</tr>
+								</thead>
+								<tbody>
+								{
+									data.length ? data.map(function(d){
+										return (
+											<tr key={d.id}>
+												{fields.map(function(f, idx){
+													return cell(d, f, idx)
+												})}
+											</tr>
+										)
+									}) : null
+								}
+								</tbody>
+							</table>
 						</div>
-					</div>
-				)
+					)
+				}else{
+					body = <Alert title="No data" message={'No '+m.namePlural+' found.'} type="info" /> 
+				}
 			}
+			return (
+				<div data-entity={e} style={{width: '100%'}}>
+					<h2 className="evo-page-title">
+						{title}
+						<span className="evo-badge">{full_count}</span>
+					</h2>
+					<div className="evolutility evol-many-list">
+						{body}
+						<Pagination 
+							count={data.length} 
+							fullCount={fullCount} 
+							fnClick={this.clickPagination} 
+							location={this.props.location}
+						/>
+					</div>
+				</div>
+			)
 		}else{
-			return <Alert message={i18n_errors.badEntity.replace('{0}', e)}/>
+			return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', e)}/>
 		}
 	}
 

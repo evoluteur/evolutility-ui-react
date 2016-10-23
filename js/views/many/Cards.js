@@ -28,42 +28,50 @@ export default React.createClass({
 
 	render() {
 	    const entity = this.props.params.entity,
-			m = this.model,
-			data = this.state.data ? this.state.data : [],
-			full_count = this.pageSummary(data),
-			fullCount = data.length ? (data[0]._full_count || 0) : 0,
-			title = m.title || m.label
+			m = this.model
 	  		
 	  	if(m){
-	  		const title = m.title || m.label
+			const data = this.state.data ? this.state.data : [],
+				full_count = this.pageSummary(data),
+				fullCount = data.length ? (data[0]._full_count || 0) : 0,
+				title = m.title || m.label
+		 		
+			let body
+
 			if(!this.state.error){
-		  		const fieldCols = m.fields.filter(dico.isFieldMany)
-			    return (
-					<div data-entity={entity} className="evol-many-cards">
-						
-						<h2 className="evo-page-title">
-							{title}
-							<span className="evo-badge">{full_count}</span>
-						</h2>
-
-						<div className="evol-cards-body">
-							{this.state.data.map(function(d, idx){
-								return <Card key={idx} data={d} fields={fieldCols} entity={entity}/>
-							})}
-						</div>
-
-						<Pagination 
-							fullCount={fullCount} 
-							count={data.length} 
-							fnClick={this.clickPagination} 
-						/>
+			 	if(data.length){
+			 		const fieldCols = m.fields.filter(dico.isFieldMany)
+			 		body = <div className="evol-cards-body">
+						{this.state.data.map(function(d, idx){
+							return <Card key={idx} data={d} fields={fieldCols} entity={entity}/>
+						})}
 					</div>
-			    )
+			 	}else{
+			 		body = <Alert title="No data" message={'No '+m.namePlural+' found.'} type="info" /> 
+			 	}
 			}else{
-				return <Alert title="Error" message={this.state.error.message}/> 
+				body = <Alert title="Error" message={this.state.error.message}/> 
 			}
+			return (
+				<div data-entity={entity} className="evol-many-cards">
+					
+					<h2 className="evo-page-title">
+						{title}
+						<span className="evo-badge">{full_count}</span>
+					</h2>
+
+					{body}
+
+					<Pagination 
+						count={data.length} 
+						fullCount={fullCount} 
+						fnClick={this.clickPagination} 
+						location={this.props.location}
+					/>
+				</div>
+			)
 	  	}else{
-			return <Alert message={i18n_errors.badEntity.replace('{0}', entity)}/>
+			return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
 		}
   	}
 

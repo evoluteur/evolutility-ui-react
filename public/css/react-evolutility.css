@@ -126,8 +126,7 @@
   flex-direction: row; }
 
 .alert {
-  margin: 50px 10px;
-  text-align: left; }
+  margin: 10px; }
   .alert > i {
     margin-right: 10px;
     font-size: 20px; }
