@@ -6,7 +6,7 @@
 
 import _ from 'underscore'
 import dico from './dico'
-import {i18n_validation} from './i18n-en'
+import { LOCALE, i18n_validation } from './i18n-en'
 
 module.exports = {
 
@@ -55,7 +55,7 @@ module.exports = {
                                 break;
                             case fts.dec:
                             case fts.money:
-                                var regex = this.valRegEx[fts.dec + i18n.LOCALE] || this.valRegEx[fts.dec + 'EN'];
+                                var regex = this.valRegEx[fts.dec + LOCALE] || this.valRegEx[fts.dec + 'EN'];
                                 if (!regex.test(v)){
                                     return formatMsg(fieldLabel(f), i18n_validation[f.type]);
                                 }
