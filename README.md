@@ -136,7 +136,7 @@ Models describe the object and its list of fields.
 
 ### Sample model
 
-The following example is a graphic novels collection app. The classic To-Do app is [also included](https://github.com/evoluteur/react-evolutility/blob/master/js/models/todo.js) in the demo. 
+The following example is a graphic novels collection app. The classic To-Do app is [also included](https://github.com/evoluteur/react-evolutility/blob/master/models/todo.js) in the demo. 
 
 ```javascript
 module.exports = {
@@ -244,4 +244,4 @@ module.exports = {
 
 Copyright (c) 2016 Olivier Giulieri.
 
-React-Evolutility.js is released under the [MIT license](http://github.com/evoluteur/react-evolutility/raw/master/LICENSE.md).
+React-Evolutility.js is released under the [MIT license](http://github.com/evoluteur/react-evolutility/blob/master/LICENSE.md).

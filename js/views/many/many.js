@@ -15,7 +15,7 @@ import Router from 'react-router'
 import {apiPath, pageSize} from '../../../config.js'
 import dico from '../../utils/dico'
 import url from '../../utils/url'
-import models from '../../models/all_models'
+import models from '../../../models/all_models'
 
 export default function(){
 

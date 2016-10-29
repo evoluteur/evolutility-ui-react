@@ -12,7 +12,7 @@
 import React from 'react'
 
 import { i18n_charts } from '../../utils/i18n-en'
-import models from '../../models/all_models'
+import models from '../../../models/all_models'
 import dico from '../../utils/dico'
 import Alert from '../../widgets/Alert'
 import Chart from './Chart'

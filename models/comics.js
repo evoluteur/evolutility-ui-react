@@ -7,7 +7,7 @@ module.exports = {
     titleField: 'title',
     searchFields: ['title', 'authors', 'notes'],
 
-	fields:[
+  fields:[
       {
           id: 'title', type: 'text', label: 'Title', required: true, 
           maxLength: 255,

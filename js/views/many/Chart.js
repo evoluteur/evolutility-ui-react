@@ -7,7 +7,7 @@
 // (c) 2016 Olivier Giulieri
 
 // Quick and easy implementation w/ the old version of google charts
-// must be re-written using D3.js or other cool charting library
+// TODO: re-write using D3.js or other cool charting library
 
 import React from 'react'
 
@@ -17,8 +17,6 @@ import {apiPath} from '../../../config.js'
 
 import { i18n_msg } from '../../utils/i18n-en'
 import Alert from '../../widgets/Alert'
-import models from '../../models/all_models'
-import dico from '../../utils/dico'
 import many from './many'
 
 const urlChart = 'http://chart.apis.google.com/chart'

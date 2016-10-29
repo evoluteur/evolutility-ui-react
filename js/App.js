@@ -11,7 +11,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import Toolbar from './views/action/Toolbar'
 import TopNav from './widgets/TopNav'
-import models from './models/all_models'
+import models from '../models/all_models'
 import Home from './Home'
 
 export default React.createClass({

@@ -13,7 +13,7 @@ import evoGlobals from '../../utils/evoGlobals'
 import {i18n_errors, i18n_msg} from '../../utils/i18n-en'
 import {apiPath} from '../../../config.js'
 import {format} from 'util'
-import models from '../../models/all_models'
+import models from '../../../models/all_models'
 
 export default function(){
 
