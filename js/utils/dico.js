@@ -143,13 +143,17 @@ module.exports = {
 	},
 
 	dataTitle: function(m, data, isNew){
-		if(isNew){
-			return 'New ' + (m.name || 'item')
-		}else if(m.titleField && isFunction(m.titleField)){
-			return m.titleField(data)
-	    }else{
-	     	return data[m.titleField] || m.label || m.title || ''
-	    }
+		if(m){
+			if(isNew){
+				return 'New ' + (m.name || 'item')
+			}else if(m.titleField && isFunction(m.titleField)){
+				return m.titleField(data)
+			}else{
+				return data[m.titleField] || m.label || m.title || ''
+			}
+		}else{
+			return 'New item'
+		}
 	},
 
 	isFieldMany: function(f){
