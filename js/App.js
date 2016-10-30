@@ -12,7 +12,6 @@ import { Link } from 'react-router'
 import Toolbar from './views/action/Toolbar'
 import TopNav from './widgets/TopNav'
 import models from '../models/all_models'
-import Home from './Home'
 
 export default React.createClass({
 
@@ -42,7 +41,6 @@ export default React.createClass({
           </TopNav>
           <div className="TopNavComplement" />
           {this.props.children}
-          {entity ? null : <Home/>}
       </div>
     )
   }

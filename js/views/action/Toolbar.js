@@ -75,7 +75,7 @@ export default React.createClass({
     deleteOne(){
         // TODO: SHOULD BE IN STORE BUT THERE IS NO STORE YET
         const {entity, id} = this.props.params
-        if(entity && id){
+        if(entity && id && models[entity]){
             axios.delete(apiPath+entity+'/'+id)
                 .then(response => {
                     //alert('Item deleted.')
@@ -142,7 +142,7 @@ export default React.createClass({
             actions.push(buttonLink(menuItems.export, this.exportMany));
         }
 
-        if(entity){
+        if(entity && models[entity]){
             const delModal = this.state.deleteConfirmation ? (
                 <Modal className="modal-dialog"
                     isOpen={this.state.deleteConfirmation}
@@ -158,8 +158,8 @@ export default React.createClass({
                                     Do you really want to delete the {models[entity].name}?
                                 </div>
                                 <div className="modal-footer">
-                                    <button key="bDelCancel" onClick={this.closeModal} className="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    <button key="bDelOK" autoFocus onClick={this.deleteOne} className="btn btn-info" data-dismiss="modal">OK</button>
+                                    <button key="bDelCancel" onClick={this.closeModal} className="btn btn-default" data-dismiss="modal">{i18n_actions.cancel}</button>
+                                    <button key="bDelOK" onClick={this.deleteOne} className="btn btn-info" data-dismiss="modal">{i18n_actions.ok}</button>
                                 </div>
                             </div>
                         </div>

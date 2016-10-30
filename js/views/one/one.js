@@ -64,27 +64,32 @@ export default function(){
 				data = this.delta,
 				url = apiPath+e+'/'+(id?id:'')
 
-			axios[id?'put':'post'](url, data)
-			.then(response => {
-				// TODO: notification w/ toastr
-				this.emptyDelta(false)
-				if(id){
-                    //alert('Item updated.')
-                    console.log('Item updated.')
-				}else{
-                    //alert('Item added.')
-                    console.log('Item added.')
-					browserHistory.push('/'+e+'/edit/'+response.data.id)
-				}
-				this.setState({
-					data: response.data
-				})
-			})
-			.catch(function (error) {
-				//TODO:
-				alert('Error')
-				console.log(error);
-			});
+			if(Object.keys(data).length){
+				axios[id?'put':'post'](url, data)
+					.then(response => {
+						// TODO: notification w/ toastr
+						this.emptyDelta(false)
+						if(id){
+		                    //alert('Item updated.')
+		                    console.log('Item updated.')
+						}else{
+		                    //alert('Item added.')
+		                    console.log('Item added.')
+							browserHistory.push('/'+e+'/edit/'+response.data.id)
+						}
+						this.setState({
+							data: response.data
+						})
+					})
+					.catch(function (error) {
+						//TODO:
+						alert('Error')
+						console.log(error);
+					});
+			}//else{
+				//alert('No update necessary. Data dind't change.')
+			//}
+			
 		},
 
 		getInitialState: function() {

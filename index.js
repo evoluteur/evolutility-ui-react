@@ -14,6 +14,8 @@ import Charts from './js/views/many/Charts'
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
+    
+      <IndexRoute component={Home}/>
 
       <Route path="/:entity" component={List}/>
       <Route path="/:entity/list" component={List}/>
@@ -30,4 +32,3 @@ render((
   </Router>
 ), document.getElementById('app'))
 
-//      <IndexRoute component={Home}/>

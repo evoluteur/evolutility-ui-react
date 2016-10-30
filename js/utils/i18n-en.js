@@ -35,13 +35,12 @@ module.exports = {
         //print: 'Print',
         save: 'Save',
         //saveAdd: 'Save and Add Another',
-        //ok: 'OK',
+        ok: 'OK',
         cancel: 'Cancel',
 
         // --- navigation/pagination ---
         prev: 'Previous',
         next: 'Next',
-        //finish: 'Finish !'
     },
 /*
     // --- msg & status ---

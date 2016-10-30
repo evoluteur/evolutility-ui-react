@@ -14,6 +14,7 @@ import dico from '../../utils/dico'
 import format from '../../utils/format'
 import many from './many'
 import Alert from '../../widgets/Alert'
+import PageNotFound from '../../widgets/PageNotFound'
 import Pagination from '../../widgets/Pagination'
 
 
@@ -119,7 +120,8 @@ export default React.createClass({
 				</div>
 			)
 		}else{
-			return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', e)}/>
+			return <PageNotFound location={this.props.location}/>
+			//return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', e)}/>
 		}
 	}
 

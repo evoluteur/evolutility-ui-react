@@ -6,12 +6,11 @@
 // https://github.com/evoluteur/react-evolutility
 // (c) 2016 Olivier Giulieri
 
+import { browserHistory } from 'react-router'
 import axios from 'axios'
 import _ from 'underscore'
 
 import {i18n_msg} from '../../utils/i18n-en'
-import {browserHistory} from 'react-router'
-import Router from 'react-router'
 import {apiPath, pageSize} from '../../../config.js'
 import dico from '../../utils/dico'
 import url from '../../utils/url'
