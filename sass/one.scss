@@ -58,11 +58,11 @@
 .panel-heading { // panel-heading from Bootstrap
   >.panel-title{ // panel-title from Bootstrap
     display: inline-block;
-  }/*
-  >.evol-subtitle{
-    display: inline-block;
-    margin-left:.4em;
-  }*/
+  }
+//  >.evol-subtitle{
+//    display: inline-block;
+//    margin-left:.4em;
+//  }
 }
 
 .evo-panel-help{
@@ -142,10 +142,9 @@
 }
 .evol-buttons{
   clear:both;
-  margin-top:0 !important;
-  //background-color: $toolbar-background-color;
-  > button{
-    margin:1em;
+  padding: 7px 10px;
+  > button, > a {
+    margin: 10px;
   }
 }
 
@@ -184,7 +183,6 @@ label{
   border: 1px solid #FFECB3;
   @include border-radius(2px);
 }
-.evol-mini-holder,
 .evolw-edit {
   .help-block{
     color: #737373 !important;

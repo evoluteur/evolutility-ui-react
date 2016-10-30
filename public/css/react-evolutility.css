@@ -37,24 +37,6 @@
   display: block;
   height: 95px; }
 
-.clearer {
-  clear: both; }
-
-.formButtons {
-  padding: 10px 0; }
-
-.formButtons > * {
-  margin-left: 10px; }
-
-.evo-filters {
-  color: #333; }
-
-.evo-filters.panel {
-  padding: 6px 1px 1px 6px !important; }
-
-.ReactModal__Overlay {
-  z-index: 110; }
-
 /*
   react-evolutility : toolbar
 */
@@ -158,6 +140,12 @@
     width: 50%;
     float: left; }
 
+.clearer {
+  clear: both; }
+
+.ReactModal__Overlay {
+  z-index: 110; }
+
 /*
   react-evolutility : one
 */
@@ -186,14 +174,8 @@
   .evol-pnl .table .evol-money {
     width: 200px; }
 
-.panel-heading {
-  /*
-  >.evol-subtitle{
-    display: inline-block;
-    margin-left:.4em;
-  }*/ }
-  .panel-heading > .panel-title {
-    display: inline-block; }
+.panel-heading > .panel-title {
+  display: inline-block; }
 
 .evo-panel-help {
   margin-top: 5px; }
@@ -259,9 +241,9 @@
 
 .evol-buttons {
   clear: both;
-  margin-top: 0 !important; }
-  .evol-buttons > button {
-    margin: 1em; }
+  padding: 7px 10px; }
+  .evol-buttons > button, .evol-buttons > a {
+    margin: 10px; }
 
 .evol-title-toggle {
   cursor: pointer;
@@ -297,7 +279,6 @@ label {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px; }
 
-.evol-mini-holder .help-block,
 .evolw-edit .help-block {
   color: #737373 !important;
   clear: both; }

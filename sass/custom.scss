@@ -11,8 +11,10 @@ h1, h2 {
 }
 
 
-[data-entity="comics"] .evol-cards-body>div {
-	height: 460px;
+[data-entity="comics"] {
+	.evol-cards-body > div{
+		height: 460px;
+	}
 }
 [data-entity="contact"] .evol-cards-body>div{
 	height: 130px;
