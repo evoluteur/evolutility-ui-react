@@ -86,8 +86,8 @@ export default React.createClass({
                         </Panel>
                       )}
 
-                      <Panel key="pButtons" width={100}>
-                        <div className="formButtons"> 
+                      <Panel key="formButtons">
+                        <div className="evol-buttons"> 
                             <Link to={link+id} className="btn btn-info">
                               <i className="glyphicon glyphicon-edit"></i> {i18n_actions.edit}
                             </Link>

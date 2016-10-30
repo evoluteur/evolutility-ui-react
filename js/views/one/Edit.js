@@ -136,7 +136,7 @@ export default withRouter(React.createClass({
 								)}
 
 								<Panel key="formButtons">
-									<div className="formButtons">
+									<div className="evol-buttons">
 										<button className="btn btn-info" onClick={this.clickSave}><i className="glyphicon glyphicon-ok"></i> {i18n_actions.save}</button>
 										<button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_actions.cancel}</button>
 									</div>
