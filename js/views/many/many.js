@@ -151,6 +151,7 @@ export default function(){
 			}
 			browserHistory.push('/'+e+'/'+this.viewId+url.querySearch(query))
 			//TODO: scroll to top
+			//ReactDOM.findDOMNode(this).scrollTop = 0
 			this.getData()
 		}
 

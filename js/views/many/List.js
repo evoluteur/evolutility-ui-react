@@ -53,8 +53,8 @@ export default React.createClass({
 				return <td key={idx}>{format.fieldValue(f, value, true)}</td>
 			}
 
-			const data = this.state.data ? this.state.data : []
-			const full_count = this.pageSummary(data),
+			const data = this.state.data ? this.state.data : [],
+				full_count = this.pageSummary(data),
 				fullCount = data.length ? (data[0]._full_count || 0) : 0,
 				title = m.title || m.label
 			let body
