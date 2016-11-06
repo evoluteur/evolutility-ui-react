@@ -85,7 +85,8 @@ module.exports = {
 
     // --- validation ---
     i18n_validation:{
-        incomplete: 'Some information is missing or invalid.',
+        //incomplete: 'Some information is missing or invalid.',
+        incomplete: 'Missing information.',
         invalid: 'Invalid format.',
         invalidList: '{0} values in "{1}" are invalid.',
         invalidList1: '1 value in "{1}" is invalid.',

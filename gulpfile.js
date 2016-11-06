@@ -21,7 +21,7 @@ var sig='  ___             _\n'+
 '  | _|\\ V / _ \\ | || |  _| | | |  _| || |\n'+
 '  |___|\\_/\\___/_|\\_,_|\\__|_|_|_|\\__|\\_, |\n'+
 '                                    |__/ \n'+
-' Version '+pkg.version+'\n';
+' Version '+pkg.version+'\n\n'+ Date()+'\n';
 
 console.log(sig);
 

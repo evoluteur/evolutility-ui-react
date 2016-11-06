@@ -8,8 +8,9 @@
 
 import React from 'react'
 import { withRouter } from 'react-router'
+import Modal from 'react-modal'
 
-import {i18n_actions, i18n_errors} from '../../utils/i18n-en'
+import {i18n_actions, i18n_validation, i18n_errors} from '../../utils/i18n-en'
 import dico from '../../utils/dico'
 import validation from '../../utils/validation'
 
@@ -31,6 +32,17 @@ export default withRouter(React.createClass({
 
 	mixins: [one()],
 
+    confirmDelete(){
+        this.setState({
+            modalOn: true
+        })
+    },
+
+    closeModal(){
+        this.setState({
+            modalOn: false
+        })
+    },
 	getDataDelta: function(){
 		return this.delta || null
 	},
@@ -41,7 +53,10 @@ export default withRouter(React.createClass({
 		if(v.valid){
 			this.upsertOne()
 		}else{
-			alert(v.messages.join('\n'))
+			//alert(v.messages.join('\n'))
+			this.setState({
+				invalid: !v.valid
+			})
 		}
 	},
 
@@ -104,6 +119,7 @@ export default withRouter(React.createClass({
 		if(!m){
 			return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
 		}else{
+ 
 			return (
 				<div className="evolutility">
             		
@@ -139,6 +155,8 @@ export default withRouter(React.createClass({
 									<div className="evol-buttons">
 										<button className="btn btn-info" onClick={this.clickSave}><i className="glyphicon glyphicon-ok"></i> {i18n_actions.save}</button>
 										<button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_actions.cancel}</button>
+										<span className="">{this.state.invalid ? i18n_validation.incomplete : null}</span>
+										{this.state.error ? i18n_validation.incomplete : null}
 									</div>
 								</Panel>
 
@@ -146,6 +164,7 @@ export default withRouter(React.createClass({
 	 					)
             		}
 					</div>
+
 				</div>
 			)
 		}
@@ -177,6 +196,15 @@ export default withRouter(React.createClass({
 			messages: messages,
 			invalids: invalids
 		}
+	},
+
+	clearValidation(){
+		this.model.fields.forEach((f) => {
+			this.refs[f.id].setState({
+				invalid: false,
+				message: null
+			})
+		})
 	}
 
 }))

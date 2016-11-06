@@ -145,6 +145,9 @@
   padding: 7px 10px;
   > button, > a {
     margin: 10px;
+    > i{
+      margin-right: 5px;
+    }
   }
 }
 

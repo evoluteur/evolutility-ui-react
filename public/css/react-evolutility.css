@@ -244,6 +244,8 @@
   padding: 7px 10px; }
   .evol-buttons > button, .evol-buttons > a {
     margin: 10px; }
+    .evol-buttons > button > i, .evol-buttons > a > i {
+      margin-right: 5px; }
 
 .evol-title-toggle {
   cursor: pointer;
@@ -416,6 +418,8 @@ label {
       overflow-x: hidden;
       text-overflow: ellipsis;
       width: 100%; }
+  .evol-cards-body > .panel > div > img {
+    margin-top: 5px; }
 
 /*
   react-evolutility : many-charts

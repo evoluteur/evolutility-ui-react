@@ -24,37 +24,42 @@ export default function(){
 		getData: function(entity, nid){
 			const e = entity || this.props.params.entity,
 				id = nid || this.props.params.id
+			let newState = {
+				data: [],
+				loading: false,
+				invalid: false
+			}
 
+			if(this.clearValidation){
+				this.clearValidation()
+			}
 			if(id && id!=='0'){
+				this.setState({
+					loading: true
+				});
 				axios.get(apiPath+e+'/'+id)
 				.then((response)=>{
 					if(response.data!==''){
 						this.emptyDelta(false)
-						this.setState({
-							data: response.data
-						});
+						newState.data = response.data
+						this.setState(newState);
 					}else{
-						this.setState({
-							error: {
-								message: format(i18n_errors.badId.replace('{0}', id))
-							},
-							data: []
-						})
+						newState.error = {
+							message: format(i18n_errors.badId.replace('{0}', id))
+						}
+						this.setState(newState)
 					}
 				})
 				.catch(err => {
-					this.setState({
-						error: {
-							message: format(i18n_errors.badId.replace('{0}', id))
-						},
-						data: []
-					})
+					newState.error = {
+						message: format(i18n_errors.badId.replace('{0}', id))
+					}
+					this.setState(newState)
 				})
 			}else if(id==='0'){
 				this.emptyDelta(true)
-				this.setState({
-					data: this.getDefaultData()
-				})
+				newState.data = this.getDefaultData()
+				this.setState(newState)
 			}
 		},
 
@@ -64,7 +69,7 @@ export default function(){
 				data = this.delta,
 				url = apiPath+e+'/'+(id?id:'')
 
-			if(Object.keys(data).length){
+			if(data && Object.keys(data).length){
 				axios[id?'put':'post'](url, data)
 					.then(response => {
 						// TODO: notification w/ toastr
@@ -78,7 +83,8 @@ export default function(){
 							browserHistory.push('/'+e+'/edit/'+response.data.id)
 						}
 						this.setState({
-							data: response.data
+							data: response.data,
+							invalid: false
 						})
 					})
 					.catch(function (error) {
@@ -96,7 +102,8 @@ export default function(){
 			this.setModel()
 			return {
 				data: this.props.params.id=='0' ? this.getDefaultData() : {},
-				loading: true
+				loading: true,
+				invalid: false
 			}
 		},
 
@@ -111,7 +118,8 @@ export default function(){
 			}else{
 				this.emptyDelta(true)
 				this.setState({
-					data: this.props.params.id == '0' ? this.getDefaultData() : {}
+					data: this.props.params.id == '0' ? this.getDefaultData() : {},
+					invalid: false
 				})
 			}
 		},
@@ -120,13 +128,17 @@ export default function(){
 			if(nextProps.params && (nextProps.params.entity != this.props.params.entity
 					|| nextProps.params.id != this.props.params.id)){
 				this.setModel(nextProps.params.entity)
-				const isNew=nextProps.params.id == '0' 
-				this.emptyDelta(isNew)
-				this.setState({
-					data: isNew ? this.getDefaultData() : {}
-				})
-				if(!isNew && nextProps.params.id!==this.props.params.id){
-					this.getData(nextProps.params.entity, nextProps.params.id)
+				// TODO: alternative to isMounted
+				if(this.isMounted()){
+					const isNew=nextProps.params.id == '0' 
+					this.emptyDelta(isNew)
+					this.setState({
+						data: isNew ? this.getDefaultData() : {},
+						invalid: false
+					})
+					if(!isNew && nextProps.params.id!==this.props.params.id){
+						this.getData(nextProps.params.entity, nextProps.params.id)
+					}
 				} 
 			}
 		},
@@ -149,7 +161,7 @@ export default function(){
 		},
 
 		setModel(entity){
-			this.model=models[entity || this.props.params.entity]
+			this.model = models[entity || this.props.params.entity]
 		},
 
 		getDefaultData(){
