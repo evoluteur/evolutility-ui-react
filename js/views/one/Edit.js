@@ -31,18 +31,7 @@ export default withRouter(React.createClass({
 	},
 
 	mixins: [one()],
-
-    confirmDelete(){
-        this.setState({
-            modalOn: true
-        })
-    },
-
-    closeModal(){
-        this.setState({
-            modalOn: false
-        })
-    },
+ 
 	getDataDelta: function(){
 		return this.delta || null
 	},

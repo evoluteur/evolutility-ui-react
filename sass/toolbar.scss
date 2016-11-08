@@ -2,26 +2,19 @@
   react-evolutility : toolbar
 */
 
-#title{
-  >i{
-    color: #c6d9f0;
-    margin-right: 0.4em;
-  }
-}
-
 .evo-toolbar{
-  margin: 0 5px;
-  > [data-cid="views"]{
-    color:black;
-  }
-
   > ul {
+    margin-bottom: 0;
     > .evo-sel .glyphicon:before{
       color:black;
     }
     > li {
+      list-style: none;
+      float: left;
       >a {
         cursor: pointer;
+        display: inline-block;
+        text-decoration: none;
         color: $color-nav;
         transition: all 0.5s ease;
         padding: 10px 6px 10px 8px;
@@ -30,28 +23,6 @@
         }
       }
     }
-  }
-
-
-// Pills from Bootstrap (modified)
-// -------------------------
-.evo-nav-pills { 
-  margin-bottom: 0;
-  > li {
-    list-style: none;
-    float: left;
-
-    // Links rendered as pills
-    > a {
-      display: inline-block;
-      text-decoration: none;
-      //border-radius: 5px;
-    }
-    + li {
-      margin-left: 2px;
-    }
-
-    // Active state
     &.active > a {
       &,
       &:hover,
@@ -62,28 +33,13 @@
   }
 }
 
+.evo-dropdown-icons{
+  min-width: 50px;
+}
 
-/*
-  [data-id="prev"].nav-disabled,
-  [data-id="next"].nav-disabled{
-    a {
-      color: $color-disabled;
-      &:hover{
-        background-color: transparent;
-        cursor:default;
-      }
-    }
-  }
-*/
-  .evo-dropdown-icons{
-    min-width: 50px;
-  }
-
-  // bootstrap override
-  .dropdown-menu>li>a{
-    padding: 3px 10px;
-  }
-
+// bootstrap override
+.dropdown-menu>li>a{
+  padding: 3px 10px;
 }
 
 .evo-filter-on{
@@ -101,6 +57,7 @@
   //max-width:200px;
   //@include ellipsis();
 //}
+
 .evol-many-list{
   .evol-actions{
     top:0;
