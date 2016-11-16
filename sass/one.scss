@@ -83,63 +83,6 @@
     //    height: 30px;
     //}
 }
-.evol-fld{
-    @include flex-item();
-    padding-left: $field-h-spacing !important;
-    margin-bottom: 12px;
-    //min-width: 120px;
-    .evo-rdonly{
-          // todo: use or remove line below?
-          // border-bottom: 1px solid silver;
-      > img{
-        position: relative;
-        top: -2px;
-        margin-right: 3px;
-      }
-    }
-    >div{
-      width: 100%;
-    }
-    > .text-danger{
-        margin-bottom: 0 !important;
-    }
-    .img-thumbnail{
-      padding: 0 !important;
-    }
-}
-.evol-field-label > label {
-  color:$color-text;
-
-  > .glyphicon-question-sign{
-    cursor: pointer;
-    padding-left: 4px;
-    color: silver;
-
-    &:hover{
-      color:$color-icon-hover;
-    }
-  }
-}
-
-.evol-required,
-.evol-asterix{
-    margin-left:3px;
-    font-weight:bold;
-}
-.evol-required{
-  color: $color-red;
-}
-.evol-asterix{
-  color:#0099cc;
-}
-.evo-rdonly{
-  min-height: 32px;
-  padding-top: 5px;
-  >a{
-    display: block;
-    @include ellipsis();
-  }
-}
 .evol-buttons{
   clear:both;
   padding: 7px 10px;
