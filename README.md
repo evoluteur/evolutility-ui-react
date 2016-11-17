@@ -50,7 +50,7 @@ A large part of the API (methods, options and events) is common to all views. So
 ### Browse
 Shows all fields for viewing (read only). Fields are grouped in panels.
 
-![Browse](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/doc/screenshots/one-browse.gif)
+![Browse](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/public/screenshots/comics/one-browse.gif)
 
 Code: [/js/views/one/Browse.js](https://github.com/evoluteur/react-evolutility/blob/master/js/views/one/Browse.js)
 
@@ -59,7 +59,7 @@ This view shows all fields for edition to create or update records.
 It automatically performs validation based on the model.
 Fields are grouped in panels and tabs.
 
-![Edit](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/doc/screenshots/one-edit.gif)
+![Edit](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/public/screenshots/comics/one-edit.gif)
 
 Code: [/js/views/one/Edit.js](https://github.com/evoluteur/react-evolutility/blob/master/js/views/one/Edit.js)
 
@@ -68,21 +68,21 @@ Code: [/js/views/one/Edit.js](https://github.com/evoluteur/react-evolutility/blo
 ### List
 Gives a tabular view of a collection.
 
-![List](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/doc/screenshots/many-list.gif)
+![List](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/public/screenshots/comics/many-list.gif)
 
 Code: [/js/views/many/List.js](https://github.com/evoluteur/react-evolutility/blob/master/js/views/many/List.js)
 
 ### Cards
 Shows records side by side as cards.
 
-![Cards](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/doc/screenshots/many-cards.gif)
+![Cards](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/public/screenshots/comics/many-cards.gif)
 
 Code: [/js/views/many/Cards.js](https://github.com/evoluteur/react-evolutility/blob/master/js/views/many/Cards.js)
 
 ### Charts
 Draws charts about the collection.
 
-![Charts](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/doc/screenshots/many-charts.gif)
+![Charts](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/public/screenshots/comicsmany-charts.gif)
 
 Code: [/js/views/many/Charts.js](https://github.com/evoluteur/react-evolutility/blob/master/js/views/many/Charts.js)
 
