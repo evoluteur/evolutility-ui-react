@@ -82,7 +82,7 @@ Code: [/js/views/many/Cards.js](https://github.com/evoluteur/react-evolutility/b
 ### Charts
 Draws charts about the collection.
 
-![Charts](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/public/screenshots/comicsmany-charts.gif)
+![Charts](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/public/screenshots/comics/many-charts.gif)
 
 Code: [/js/views/many/Charts.js](https://github.com/evoluteur/react-evolutility/blob/master/js/views/many/Charts.js)
 
