@@ -7,6 +7,7 @@
 // (c) 2016 Olivier Giulieri
 
 import React from 'react'
+import { Link } from 'react-router'
 
 import {i18n_actions, i18n_errors} from '../../utils/i18n-en'
 import dico from '../../utils/dico'
@@ -14,7 +15,6 @@ import one from './one'
 import Alert from '../../widgets/Alert'
 import Field from '../../widgets/Field'
 import Panel from '../../widgets/Panel'
-import { Link } from 'react-router'
 
 export default React.createClass({
 
@@ -43,7 +43,7 @@ export default React.createClass({
           <Field 
             key={f.id} 
             meta={f} 
-            data={data[attr]} 
+            value={data[attr]} 
             readOnly={true}
             entity={entity}
           />

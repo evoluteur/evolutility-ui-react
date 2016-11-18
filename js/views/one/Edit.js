@@ -96,8 +96,9 @@ export default withRouter(React.createClass({
 					id={f.id} 
 					key={f.id} 
 					ref={f.id} 
-					meta={f} 
-					data={data[f.id]} 
+					meta={f}
+					value={data[f.id]} 
+					data={data} 
 					callbacks={cbs}
 					entity={entity}
 				/>

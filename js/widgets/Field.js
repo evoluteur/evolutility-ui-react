@@ -27,14 +27,16 @@ export default React.createClass({
 	propTypes: {
 		meta: React.PropTypes.object.isRequired,
 		callbacks: React.PropTypes.object,
-		data: React.PropTypes.any,
+		//data: React.PropTypes.object, // full object value
+		value: React.PropTypes.any, // field value
 		label: React.PropTypes.string, //override label in meta
 		readOnly: React.PropTypes.bool, //override label in meta
 	},
 
 	getInitialState: function() {
 		return {
-			data: this.props.data,
+			value: this.props.value,
+			//data: this.props.data,
 			help: false
 		}
 	},
@@ -121,14 +123,21 @@ export default React.createClass({
 				)
 			}
 		}
+		let fType
+		if(f.type==='integer' || f.type==='decimal'){
+			fType = 'number'
+		}else{  //if(f.type==='email'){
+			fType = 'text'
+		}
+		
 		return <input 
-			id={f.id} 
-			ref='e'
-			type={f.type==='integer' || f.type==='decimal' ? 'number' : f.type} 
-			value={d?d:''}
-			onChange={cbs.change}
-			className="form-control"
-		/>
+				id={f.id} 
+				ref='e'
+				type={fType} 
+				value={d?d:''}
+				onChange={cbs.change}
+				className="form-control"
+			/>
 
 	},
 
@@ -175,7 +184,8 @@ export default React.createClass({
 		const f = this.props.meta || {type: 'text'},
 			readOnly = this.props.readOnly || f.readOnly,
 			cbs = this.props.callbacks || {},
-			data = this.props.data || null,
+			//data = this.props.data || null,
+			value = this.props.value || null,
 			invalid = this.state.invalid,
 			label = this.props.label || f.label
 
@@ -191,8 +201,8 @@ export default React.createClass({
 
 				{f.help && this.state.help ? <div className="help-block"><i>{f.help}</i></div> : null}
 
-				{readOnly ? this._fieldElemReadOnly(f, data)
-								 : this._fieldElem(f, data, cbs)}
+				{readOnly ? this._fieldElemReadOnly(f, value)
+								 : this._fieldElem(f, value, cbs)}
 
  				{invalid ? <div className="text-danger">{this.state.message}</div> : null}
 
