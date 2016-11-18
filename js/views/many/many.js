@@ -8,7 +8,6 @@
 
 import { browserHistory } from 'react-router'
 import axios from 'axios'
-import _ from 'underscore'
 
 import {i18n_msg} from '../../utils/i18n-en'
 import {apiPath, pageSize} from '../../../config.js'
@@ -87,9 +86,9 @@ export default function(){
 				}else{
 					let rangeBegin = pageIdx * pageSize + 1, rangeEnd;
 					if (pageIdx < 1) {
-						rangeEnd = _.min([pageSize, totalSize]);
+						rangeEnd = Math.min(pageSize, totalSize);
 					} else {
-						rangeEnd = _.min([rangeBegin + pageSize - 1, totalSize]);
+						rangeEnd = Math.min(rangeBegin + pageSize - 1, totalSize);
 					}
 					return i18n_msg.range // - '{0} to {1} of {2} {3}' w/ 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'
 						.replace('{0}', rangeBegin)
@@ -102,7 +101,7 @@ export default function(){
 		},
 
 		setModel(entity){
-			this.model=models[entity || this.props.params.entity]
+			this.model = models[entity || this.props.params.entity]
 		},
 
 		clickSort: function(evt){
@@ -124,7 +123,7 @@ export default function(){
 				query.page=0
 			}
 			const link = '/'+e+'/'+this.viewId
-			browserHistory.push(link + url.querySearch(query))
+			browserHistory.push(link + '?' + url.querySearch(query))
 			this.getData()
 		},
 
@@ -149,7 +148,7 @@ export default function(){
 			}else{
 				query.page=pageIdx
 			}
-			browserHistory.push('/'+e+'/'+this.viewId+url.querySearch(query))
+			browserHistory.push('/'+e+'/'+this.viewId+'?'+url.querySearch(query))
 			//TODO: scroll to top
 			//ReactDOM.findDOMNode(this).scrollTop = 0
 			this.getData()

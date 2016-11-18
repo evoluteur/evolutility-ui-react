@@ -35,7 +35,6 @@ export default React.createClass({
 				full_count = this.pageSummary(data),
 				fullCount = data.length ? (data[0]._full_count || 0) : 0,
 				title = m.title || m.label
-		 		
 			let body
 
 			if(!this.state.error){
