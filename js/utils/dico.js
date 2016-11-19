@@ -92,36 +92,11 @@ function getFields(model) {
 		
 }
 
-function getSubCollecs(model) {
-	var ls = {};
-
-	function collectCollecs(te) {
-		if (te.type === 'panel-list') {
-			ls[te.attribute] = te;
-		} else if (te.type !== 'panel' && te.elements && te.elements.length > 0) {
-			te.elements.forEach(function(te) {
-				if (te.type === 'panel-list') {
-					ls[te.attribute] = te;
-				} else if (te.type !== 'panel') {
-					collectCollecs(te);
-				}
-			});
-		} else {
-			ls[te.attribute] = te;
-		}
-	}
-
-	collectCollecs(model);
-	return ls;
-}
-
 module.exports = {  
 
 	fieldTypes: fts,
 
 	getFields: getFields,
-
-	getSubCollecs: getSubCollecs,
 
 	prepModel: function(m){
 		if(m){
@@ -130,10 +105,7 @@ module.exports = {
 			}
 			if(!m.fieldsH){
 				m.fieldsH = hById(m.fields);
-			}/*
-			if(!m.collecs){
-				m.collecs = getSubCollecs(m);
-			}*/
+			}
 			if(!m.titleField){
 				m.titleField = m.fields[0].id;
 			}
