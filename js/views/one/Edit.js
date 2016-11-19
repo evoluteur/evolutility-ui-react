@@ -15,7 +15,8 @@ import dico from '../../utils/dico'
 import validation from '../../utils/validation'
 
 import Alert from '../../widgets/Alert'
-import one from './one'
+import oneRead from './one-read'
+import oneUpsert from './one-upsert'
 import Field from '../../widgets/Field'
 import Panel from '../../widgets/Panel'
 
@@ -30,7 +31,7 @@ export default withRouter(React.createClass({
 		}).isRequired
 	},
 
-	mixins: [one()],
+	mixins: [oneRead(), oneUpsert()],
  
 	getDataDelta: function(){
 		return this.delta || null

@@ -11,7 +11,7 @@ import { Link } from 'react-router'
 
 import {i18n_actions, i18n_errors} from '../../utils/i18n-en'
 import dico from '../../utils/dico'
-import one from './one'
+import oneRead from './one-read'
 import Alert from '../../widgets/Alert'
 import Field from '../../widgets/Field'
 import Panel from '../../widgets/Panel'
@@ -27,7 +27,7 @@ export default React.createClass({
     }).isRequired
   },
 
-  mixins: [one()],
+  mixins: [oneRead()],
 
   render() {
     const {id=0, entity=null} = this.props.params
