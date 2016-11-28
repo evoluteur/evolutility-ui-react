@@ -15,6 +15,7 @@ import oneRead from './one-read'
 import Alert from '../../widgets/Alert'
 import Field from '../../widgets/Field'
 import Panel from '../../widgets/Panel'
+import List from '../many/List'
 
 export default React.createClass({
 
@@ -85,6 +86,21 @@ export default React.createClass({
                           </div>
                         </Panel>
                       )}
+
+                      {m.collecs ? (
+                        m.collecs.map((c, idx)=>{
+                          return (
+                            <Panel title={c.title} key={'collec_'+c.id}>
+                              <List key={'collec'+idx}
+                                params={this.props.params} 
+                                paramsCollec={c}
+                                style={{width:'100%'}}
+                                location={this.props.location}
+                              />
+                            </Panel>
+                          )
+                        })
+                      ) : null}
 
                       <Panel key="formButtons">
                         <div className="evol-buttons"> 

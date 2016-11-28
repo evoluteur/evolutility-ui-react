@@ -26,17 +26,19 @@ export default React.createClass({
 		params: React.PropTypes.shape({
 			entity: React.PropTypes.string.isRequired
 		}),
+		paramsCollec: React.PropTypes.object
 	}, 
 
 	mixins: [many()],
 
 	render() {
 		const e = this.props.params.entity,
-			m = this.model
+			m = this.model,
+			paramsCollec = this.props.paramsCollec
 
 		if(m){
-			const ico = m.icon ? <img className="evol-many-icon" src={'/pix/'+m.icon}/> : null 
-			const link = '/'+e+'/browse/'
+			const ico = m.icon ? <img className="evol-many-icon" src={'/pix/'+m.icon}/> : null,
+				link = '/'+((paramsCollec && paramsCollec.entity) || e)+'/browse/'
 
 			function cell(d, f, idx){
 				const value = d[(f.type==='lov') ? f.id+'_txt' : f.id]
@@ -48,7 +50,7 @@ export default React.createClass({
 						</Link></td>
 				}else if(f.type==='color'){
 					return <td key={idx}><div className="evo-color-box" id={f.id} 
-                            style={{backgroundColor: value}} title={value}/></td>
+						style={{backgroundColor: value}} title={value}/></td>
 				}
 				return <td key={idx}>{format.fieldValue(f, value, true)}</td>
 			}
@@ -63,7 +65,12 @@ export default React.createClass({
 				body = <Alert title="Error" message={this.state.error.message}/> 
 			}else{
 				if(data.length){
-					const fields = m.fields.filter(dico.isFieldMany)
+					let fields
+					if(paramsCollec){
+						fields = paramsCollec.fields
+					}else{
+						fields = m.fields.filter(dico.isFieldMany)
+					}
 					body = (
 						<div>
 							<table className="table table-hover">
@@ -81,8 +88,7 @@ export default React.createClass({
 									</tr>
 								</thead>
 								<tbody>
-								{
-									data.length ? data.map(function(d){
+								{data.length ? data.map(function(d){
 										return (
 											<tr key={d.id}>
 												{fields.map(function(f, idx){
@@ -104,10 +110,12 @@ export default React.createClass({
 			}
 			return (
 				<div data-entity={e} style={{width: '100%'}}>
-					<h2 className="evo-page-title">
-						{title}
-						<span className="evo-badge">{full_count}</span>
-					</h2>
+					{paramsCollec ? null : (
+						<h2 className="evo-page-title">
+							{title}
+							<span className="evo-badge">{full_count}</span>
+						</h2>
+					)}
 					<div className="evolutility evol-many-list">
 						{body}
 						<Pagination 

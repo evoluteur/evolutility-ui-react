@@ -19,6 +19,7 @@ import oneRead from './one-read'
 import oneUpsert from './one-upsert'
 import Field from '../../widgets/Field'
 import Panel from '../../widgets/Panel'
+import List from '../many/List'
 
 export default withRouter(React.createClass({
 
@@ -124,16 +125,16 @@ export default withRouter(React.createClass({
 							<div className="evol-pnls">
 
 				    			{(m && m.groups) ? (
-										m.groups.map(function(g, idx){
-											const groupFields = dico.fieldId2Field(g.fields, m.fieldsH)
-											return (
-												<Panel key={g.id||('g'+idx)} title={g.label || gtitle || ''} width={g.width}>
-													<div className="evol-fset">
-														{groupFields.map(fnField)}
-													</div>
-												</Panel>
-											)
-										})
+									m.groups.map(function(g, idx){
+										const groupFields = dico.fieldId2Field(g.fields, m.fieldsH)
+										return (
+											<Panel key={g.id||('g'+idx)} title={g.label || gtitle || ''} width={g.width}>
+												<div className="evol-fset">
+													{groupFields.map(fnField)}
+												</div>
+											</Panel>
+										)
+									})
 								) : (
 									<Panel title={title} key="pAllFields">
 										<div className="evol-fset"> 
@@ -141,6 +142,21 @@ export default withRouter(React.createClass({
 										</div>
 									</Panel>
 								)}
+
+								{m.collecs ? (
+									m.collecs.map((c, idx)=>{
+										return (
+											<Panel title={c.title} key={'collec_'+c.id}>
+												<List key={'collec'+idx}
+													params={this.props.params} 
+													paramsCollec={c}
+													style={{width:'100%'}}
+													location={this.props.location}
+												/>
+											</Panel>
+										)
+									})
+								) : null}
 
 								<Panel key="formButtons">
 									<div className="evol-buttons">

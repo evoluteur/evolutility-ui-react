@@ -22,13 +22,22 @@ export default function(){
 		viewSuperType: 'n', // = many
 
 		getData: function(entity){
-			const e = entity || this.props.params.entity,
-				query = this.props.location.query
+			const id = this.props.params.id,
+				e = entity || this.props.params.entity,
+				query = this.props.location.query,
+				paramsCollec = this.props.paramsCollec
+			let qUrl = apiPath + e
 
+			if(paramsCollec){
+				qUrl += '/collec/'+paramsCollec.id+'?id='+id
+			}else if(query){
+				qUrl += '?'+url.querySearch(query)
+			}
+			
 			this.setState({
 				loading: true
 			})
-			axios.get(apiPath+e+url.querySearch(query))
+			axios.get(qUrl)
 				.then(response => {
 					this.setState({
 						data: response.data,
