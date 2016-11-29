@@ -11,13 +11,6 @@
       border-top: 1px solid #ddd;
       border-bottom: 1px solid #ddd;
       margin-bottom: 0;
-      textarea{
-        min-width:200px;
-      }
-      img{
-        max-height: 60px;
-        padding:0;
-      }
       td{
         position: relative;
       }
@@ -36,7 +29,18 @@
           color: $color-border;
         }
       }
+      //input, textarea{
+      //  min-width:200px;
+      //}
+      img{
+        max-height: 60px;
+        padding:0;
+      }
     }
   }
 
+}
+
+fieldset .table{
+  border-bottom: none !important;
 }
