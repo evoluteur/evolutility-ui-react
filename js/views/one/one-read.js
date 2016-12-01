@@ -1,9 +1,9 @@
 
-// React-Evolutility :: One-read
+// Evolutility-UI-React :: One-read
 
 // Mixin used in most Views for One (Browse, Edit but not Card) to get data by ID.
  
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 import axios from 'axios'

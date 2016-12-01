@@ -1,9 +1,9 @@
 
-// React-Evolutility :: /views/many.js
+// Evolutility-UI-React :: /views/many.js
 
 // Mixin used in most Views for Many (List, Cards but not Charts).
 
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 import { browserHistory } from 'react-router'

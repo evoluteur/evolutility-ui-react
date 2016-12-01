@@ -1,9 +1,9 @@
 
-// React-Evolutility :: /views/many/Chart.js
+// Evolutility-UI-React :: /views/many/Chart.js
 
 // Single Bars or Pie charts (usually part of a set of Charts).
 
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 // Quick and easy implementation w/ the old version of google charts

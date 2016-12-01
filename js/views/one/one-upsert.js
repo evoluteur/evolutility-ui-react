@@ -1,9 +1,9 @@
 
-// React-Evolutility :: One-upsert
+// Evolutility-UI-React :: One-upsert
 
 // Mixin used in Views for One for Insert and Update (only view Edit for now maybe more later).
  
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 import axios from 'axios'

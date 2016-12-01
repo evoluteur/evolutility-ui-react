@@ -1,7 +1,7 @@
 
-// evolutility :: utils/validation.js
+// Evolutility-UI-React :: utils/validation.js
 
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 import _ from 'underscore'

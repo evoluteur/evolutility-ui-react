@@ -1,26 +1,25 @@
 /**
-  React-Evolutility v0.0.5
+  Evolutility-React-UI v0.0.5
 
-  https://github.com/evoluteur/react-evolutility
+  https://github.com/evoluteur/evolutility-ui-react
   (c) 2016 Olivier Giulieri
 */
 /*
-  react-evolutility : topnav
+  evolutility-ui-react : topnav
 */
 .TopNav {
   background-color: #00ACC1;
   color: white;
   position: fixed;
-  padding: 0 10px;
   top: 0;
   left: 0;
-  min-height: 65px;
+  min-height: 60px;
   min-width: 500px;
   width: 100%;
   z-index: 100; }
   .TopNav > h2 {
     position: absolute;
-    top: 20px;
+    top: 14px;
     right: 20px;
     margin: 0; }
     .TopNav > h2 a {
@@ -38,53 +37,32 @@
   height: 95px; }
 
 /*
-  react-evolutility : toolbar
+  evolutility-ui-react : toolbar
 */
-#title > i {
-  color: #c6d9f0;
-  margin-right: 0.4em; }
-
-.evo-toolbar {
-  margin: 0 5px;
-  /*
-  [data-id="prev"].nav-disabled,
-  [data-id="next"].nav-disabled{
-    a {
-      color: $color-disabled;
-      &:hover{
-        background-color: transparent;
-        cursor:default;
-      }
-    }
-  }
-*/ }
-  .evo-toolbar > [data-cid="views"] {
-    color: black; }
+.evo-toolbar > ul {
+  margin-bottom: 0; }
   .evo-toolbar > ul > .evo-sel .glyphicon:before {
     color: black; }
-  .evo-toolbar > ul > li > a {
-    cursor: pointer;
-    color: #E0F7FA;
-    transition: all 0.5s ease;
-    padding: 10px 6px 10px 8px; }
-    .evo-toolbar > ul > li > a:hover {
-      color: #FFE0B2; }
-  .evo-toolbar .evo-nav-pills {
-    margin-bottom: 0; }
-    .evo-toolbar .evo-nav-pills > li {
-      list-style: none;
-      float: left; }
-      .evo-toolbar .evo-nav-pills > li > a {
-        display: inline-block;
-        text-decoration: none; }
-      .evo-toolbar .evo-nav-pills > li + li {
-        margin-left: 2px; }
-      .evo-toolbar .evo-nav-pills > li.active > a, .evo-toolbar .evo-nav-pills > li.active > a:hover, .evo-toolbar .evo-nav-pills > li.active > a:focus {
-        color: #FFCC80; }
-  .evo-toolbar .evo-dropdown-icons {
-    min-width: 50px; }
-  .evo-toolbar .dropdown-menu > li > a {
-    padding: 3px 10px; }
+  .evo-toolbar > ul > li {
+    list-style: none;
+    float: left; }
+    .evo-toolbar > ul > li > a {
+      cursor: pointer;
+      display: inline-block;
+      text-decoration: none;
+      color: #E0F7FA;
+      transition: all 0.5s ease;
+      padding: 10px 6px 10px 8px; }
+      .evo-toolbar > ul > li > a:hover {
+        color: #FFE0B2; }
+  .evo-toolbar > ul.active > a, .evo-toolbar > ul.active > a:hover, .evo-toolbar > ul.active > a:focus {
+    color: #FFCC80; }
+
+.evo-dropdown-icons {
+  min-width: 50px; }
+
+.dropdown-menu > li > a {
+  padding: 3px 10px; }
 
 .evo-filter-on {
   background-color: #e0f2f1; }
@@ -104,7 +82,7 @@
   font-size: 18px; }
 
 /*
-  react-evolutility : common
+  evolutility-ui-react : common
 */
 /* --- classes shared by most views --- */
 .evol-body {
@@ -147,7 +125,7 @@
   z-index: 110; }
 
 /*
-  react-evolutility : one
+  evolutility-ui-react : one
 */
 /* --- panels & tabs --- */
 .evol-pnls {
@@ -193,51 +171,6 @@
   display: flex;
   flex-wrap: wrap;
   padding: 16px 16px 10px 0; }
-
-.evol-fld {
-  box-sizing: border-box;
-  flex-grow: 1;
-  padding-left: 16px !important;
-  margin-bottom: 12px; }
-  .evol-fld .evo-rdonly > img {
-    position: relative;
-    top: -2px;
-    margin-right: 3px; }
-  .evol-fld > div {
-    width: 100%; }
-  .evol-fld > .text-danger {
-    margin-bottom: 0 !important; }
-  .evol-fld .img-thumbnail {
-    padding: 0 !important; }
-
-.evol-field-label > label {
-  color: #0d0d0d; }
-  .evol-field-label > label > .glyphicon-question-sign {
-    cursor: pointer;
-    padding-left: 4px;
-    color: silver; }
-    .evol-field-label > label > .glyphicon-question-sign:hover {
-      color: #428bca; }
-
-.evol-required,
-.evol-asterix {
-  margin-left: 3px;
-  font-weight: bold; }
-
-.evol-required {
-  color: #b94a48; }
-
-.evol-asterix {
-  color: #0099cc; }
-
-.evo-rdonly {
-  min-height: 32px;
-  padding-top: 5px; }
-  .evo-rdonly > a {
-    display: block;
-    white-space: nowrap;
-    overflow-x: hidden;
-    text-overflow: ellipsis; }
 
 .evol-buttons {
   clear: both;
@@ -330,8 +263,61 @@ label {
   .evo-color-box span {
     margin-left: 24px; }
 
+.pixdrop {
+  margin-top: 7px;
+  width: 100%;
+  height: 100px;
+  border: 2px dashed silver;
+  padding: 10px; }
+
+.evol-fld {
+  box-sizing: border-box;
+  flex-grow: 1;
+  padding-left: 16px !important;
+  margin-bottom: 12px;
+  min-width: 62px; }
+  .evol-fld .evo-rdonly > img {
+    position: relative;
+    top: -2px;
+    margin-right: 3px; }
+  .evol-fld > div {
+    width: 100%; }
+  .evol-fld > .text-danger {
+    margin-bottom: 0 !important; }
+  .evol-fld .img-thumbnail {
+    padding: 0 !important; }
+
+.evol-field-label > label {
+  color: #0d0d0d; }
+  .evol-field-label > label > .glyphicon-question-sign {
+    cursor: pointer;
+    padding-left: 4px;
+    color: silver; }
+    .evol-field-label > label > .glyphicon-question-sign:hover {
+      color: #428bca; }
+
+.evol-required,
+.evol-asterix {
+  margin-left: 3px;
+  font-weight: bold; }
+
+.evol-required {
+  color: #b94a48; }
+
+.evol-asterix {
+  color: #0099cc; }
+
+.evo-rdonly {
+  min-height: 32px;
+  padding-top: 5px; }
+  .evo-rdonly > a {
+    display: block;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis; }
+
 /*
-  react-evolutility : many
+  evolutility-ui-react : many
 */
 .evol-r-align {
   text-align: right; }
@@ -349,7 +335,7 @@ label {
   margin-left: 20px; }
 
 /*
-  react-evolutility : many-list
+  evolutility-ui-react : many-list
 */
 .evol-many-list > div {
   overflow-x: auto;
@@ -358,13 +344,6 @@ label {
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     margin-bottom: 0; }
-    .evol-many-list > div > .table textarea {
-      min-width: 200px; }
-    .evol-many-list > div > .table img {
-      max-height: 60px;
-      padding: 0; }
-    .evol-many-list > div > .table tr {
-      transition: all 0.3s ease; }
     .evol-many-list > div > .table td {
       position: relative; }
     .evol-many-list > div > .table th {
@@ -379,9 +358,15 @@ label {
         right: 5px;
         top: 12px;
         color: silver; }
+    .evol-many-list > div > .table img {
+      max-height: 60px;
+      padding: 0; }
+
+fieldset .table {
+  border-bottom: none !important; }
 
 /*
-  react-evolutility : many-cards
+  evolutility-ui-react : many-cards
 */
 .evol-cards-body > .panel {
   float: left;
@@ -422,7 +407,7 @@ label {
     margin-top: 5px; }
 
 /*
-  react-evolutility : many-charts
+  evolutility-ui-react : many-charts
 */
 .evol-many-charts {
   display: -webkit-box;
@@ -464,7 +449,7 @@ label {
     color: #428bca; }
 
 /*
-  react-evolutility : print
+  evolutility-ui-react : print
 */
 @media print {
   .evol-buttons,
@@ -497,3 +482,6 @@ h1, h2 {
 
 [data-entity="todo"] .evol-cards-body > div {
   height: 150px; }
+
+.evol-2cols td {
+  padding: 0 20px !important; }

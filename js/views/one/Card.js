@@ -1,9 +1,9 @@
 
-// React-Evolutility :: /views/one/Card.js
+// Evolutility-UI-React :: /views/one/Card.js
 
 // Single card (usually part of a set of Cards)
 
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 import React from 'react'

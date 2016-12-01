@@ -1,9 +1,9 @@
 
-// React-Evolutility :: App.js
+// Evolutility-UI-React :: App.js
 
 // Evolutility App (with model-driven views for CRUD and Charts).
 
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 import React from 'react'
@@ -34,8 +34,9 @@ export default React.createClass({
                       <li><Link to="/contact/list" id="contact" className={entity==='contact'?'active':''}> Address Book</Link></li>
                       <li><Link to="/comics/cards" id="comics" className={entity==='comics'?'active':''}> Comics</Link></li>
                   </ul>
+                  <div className="clearer"/>
               </div>
-              <h2><Link to="/">React-Evolutility</Link></h2>
+              <h2><Link to="/">Evolutility</Link></h2>
               <div className="clearer"/>
               {entity ? <Toolbar key="tb" entity={entity} params={this.props.params} isNew={isNew} view={view}/> : null}
           </TopNav>

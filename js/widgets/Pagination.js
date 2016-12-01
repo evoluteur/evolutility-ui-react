@@ -1,9 +1,9 @@
 
-// React-Evolutility :: /widget/Pagination.js
+// Evolutility-UI-React :: /widget/Pagination.js
  
 // Pagination for List and Cards views (styled w/ Bootstrap).
  
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 import React from 'react'

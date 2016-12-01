@@ -1,9 +1,9 @@
 
-// React-Evolutility :: /widgets/field.js
+// Evolutility-UI-React :: /widgets/field.js
 
 // Model-driven field w/ possible types specifed in dico.fieldTypes.
 
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 import React from 'react'

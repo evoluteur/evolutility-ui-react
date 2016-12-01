@@ -1,5 +1,5 @@
 /*
-  react-evolutility : topnav
+  evolutility-ui-react : topnav
 */
 
 .TopNav{
@@ -8,13 +8,13 @@
 	position: fixed;
 	top:0;
 	left:0;
-	min-height:65px;
+	min-height:60px;
 	min-width: 500px;
 	width:100%;
 	z-index: 100;
 	> h2{
 		position: absolute;
-		top: 20px;
+		top: 14px;
 		right:20px;
 		margin: 0;
 		a{

@@ -6,7 +6,7 @@ var header = require('gulp-header');
 var rename = require('gulp-rename');
 var pkg = require('./package.json');
 
-var beginBanner = '/**\n  React-Evolutility v<%= pkg.version %>\n\n';
+var beginBanner = '/**\n  Evolutility-React-UI v<%= pkg.version %>\n\n';
 var banner = beginBanner + 
     '  <%= pkg.homepage %>\n  <%= pkg.copyright %>\n*/\n';
 var bannerDep = beginBanner + 
@@ -29,7 +29,7 @@ gulp.task('css', function () {
   return gulp.src('./sass/evolutility.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(header(banner, { pkg : pkg }))
-    .pipe(rename('react-evolutility.css'))
+    .pipe(rename('evolutility-ui-react.css'))
     .pipe(gulp.dest('./public/css'));
 });
 
@@ -37,7 +37,7 @@ gulp.task('css-min', function () {
   return gulp.src('./sass/evolutility.scss')
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
     .pipe(header(banner, { pkg : pkg }))
-    .pipe(rename('react-evolutility.min.css'))
+    .pipe(rename('evolutility-ui-react.min.css'))
     .pipe(gulp.dest('./public/css'));
 });
 

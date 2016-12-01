@@ -1,4 +1,4 @@
-﻿//   React-Evolutility Localization Library ENGLISH
+﻿//   Evolutility-UI-React Localization Library ENGLISH
 //   (c) 2016 Olivier Giulieri
 
 module.exports = {

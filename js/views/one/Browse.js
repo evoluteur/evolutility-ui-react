@@ -1,9 +1,9 @@
 
-// React-Evolutility :: /views/one/Browse.js
+// Evolutility-UI-React :: /views/one/Browse.js
 
 // Read-only view to browse one record.
 
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 import React from 'react'

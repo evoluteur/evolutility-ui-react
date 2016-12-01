@@ -1,9 +1,9 @@
 
-// React-Evolutility :: /views/one/Edit.js
+// Evolutility-UI-React :: /views/one/Edit.js
 
 // View to add or update one record at a time.
 
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 import React from 'react'

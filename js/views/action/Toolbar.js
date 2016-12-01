@@ -1,9 +1,9 @@
 
-// React-Evolutility :: toolbar.js
+// Evolutility-UI-React :: toolbar.js
 
 // Toolbar w/ icons for CRUD, export, and charts.
 
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 import React from 'react'

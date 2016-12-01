@@ -1,7 +1,7 @@
 
-// evolutility :: utils/url.js
+// Evolutility-UI-React :: utils/url.js
 
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 module.exports = {

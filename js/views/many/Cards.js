@@ -1,9 +1,9 @@
 
-// React-Evolutility :: /views/many/Cards.js
+// Evolutility-UI-React :: /views/many/Cards.js
 
 // Cards view to display a collection as a set of Cards.
 
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 import React from 'react'

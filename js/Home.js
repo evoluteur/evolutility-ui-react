@@ -5,26 +5,22 @@ export default React.createClass({
     return ( 
         <div className="evo-home">
 
-            <h1>React-Evolutility</h1>
-            <h2>Model-driven Web UI for CRUD and more</h2>
+            <h1>Evolutility-UI-React</h1>
     		
-            <p>React-Evolutility is a set of model-driven views (List, Cards, Edit, Browse, and Charts) 
-            which together provide the full UI for CRUD (Create, Read, Update, Delete)
-             on objects of different structures. 
+            <p>Evolutility-UI-React is a set of views (List, Cards, Edit, Browse, and Charts) 
+             which adapt to different data structures. Used together these views
+              provide a fully customizable Single-Page Application 
+              which can behave like a Do-To app, an Address Book, a Graphic Novels inventory, 
+              or anything you may thing of. No hand-coding is necessary, changing the model changes the 
+              structure of the app.
             </p>
 
-
-            <div className="block2">
-                <h3>UI</h3>
-                    <a href="https://github.com/evoluteur/react-evolutility">React-Evolutility</a> model-driven Web UI, using React and Bootstrap.
-            </div> 
-            <div className="block2">
-                <h3>Server</h3>
-                    <a href="https://github.com/evoluteur/evolutility-server">Evolutility-Server</a> model-driven Restful API using Node.js, Express, and Postgres.
-            </div> 
+            <p>On the server-side, the REST endpoints can be provided by&nbsp;
+                <a href="https://github.com/evoluteur/evolutility-server">Evolutility-Server</a> 
+                &nbsp;using Node.js, Express, and Postgres.
+            </p> 
 
             <div className="clearer"/>
-
 
             <div className="panel panel-default" style={{padding:'20px',margin:'30px 10px'}}>
                 <strong>Evolutility</strong><em> (Biology): </em>
@@ -32,9 +28,9 @@ export default React.createClass({
                     manifesting the nutritive acts by change of form, of volume, or of structure.
             </div>
 
-    <div className="clearfix"></div>
+            <div className="clearfix"></div>
 
-</div>
+        </div>
     )
   }
 })

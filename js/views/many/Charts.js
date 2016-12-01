@@ -1,9 +1,9 @@
 
-// React-Evolutility :: /views/many/Charts.js
+// Evolutility-UI-React :: /views/many/Charts.js
 
 // Dashboard style set of charts (bars or pies).
 
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 // Quick and easy implementation w/ the old version of google charts

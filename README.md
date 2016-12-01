@@ -1,10 +1,10 @@
-# React-Evolutility
+# Evolutility-UI-React
 
-React-Evolutility provides a set of React Views to display and interact with objects of different data structures. These views work together to provide full web apps. 
+Evolutility-UI-React provides a set of React Views to display and interact with objects of different data structures. These views work together to provide full web apps. 
 
-With React-Evolutility you can quickly make a web application UI by configuring views with metadata instead of hand-coding Javascript, CSS, and HTML.
+With Evolutility-UI-React you can quickly make a web application UI by configuring views with metadata instead of hand-coding Javascript, CSS, and HTML.
 
-React-Evolutility works hand-in-hand with [Evolutility-Server](https://github.com/evoluteur/evolutility-server) which provides a matching RESTful API based on the same metadata.
+Evolutility-UI-React works hand-in-hand with [Evolutility-Server](https://github.com/evoluteur/evolutility-server) which provides a matching REST endpoints based on the same metadata.
 
 This project is a **work in progress**. I'm still learning React.
 
@@ -12,14 +12,14 @@ This project is a **work in progress**. I'm still learning React.
 
 ## Installation
 
-[**Download**](https://github.com/evoluteur/react-evolutility/archive/master.zip) or **clone** from GitHub.
+[**Download**](https://github.com/evoluteur/evolutility-ui-react/archive/master.zip) or **clone** from GitHub.
 
 ```bash
 # To get the latest stable version, use git from the command line.
-git clone https://github.com/evoluteur/react-evolutility
+git clone https://github.com/evoluteur/evolutility-ui-react
 ```
 
-In the React-Evolutility directory, use the command line to type the following:
+In the Evolutility-UI-React directory, use the command line to type the following:
 
 ```bash
 # Install dependencies
@@ -37,7 +37,7 @@ In a web browser, go to the url [http://localhost:8080/](http://localhost:8080/)
 
 For any object, a single model defines UI elements across views in a simple declarative way.
 
-React-Evolutility provides 2 types of view:
+Evolutility-UI-React provides 2 types of view:
 
 * Views for a model: [Browse](#browse), [Edit](#edit).
 * Views for a collection: [List](#list), [Cards](#cards), [Charts](#charts).
@@ -50,41 +50,41 @@ A large part of the API (methods, options and events) is common to all views. So
 ### Browse
 Shows all fields for viewing (read only). Fields are grouped in panels.
 
-![Browse](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/public/screenshots/comics/one-browse.gif)
+![Browse](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/one-browse.gif)
 
-Code: [/js/views/one/Browse.js](https://github.com/evoluteur/react-evolutility/blob/master/js/views/one/Browse.js)
+Code: [/js/views/one/Browse.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/js/views/one/Browse.js)
 
 ### Edit
 This view shows all fields for edition to create or update records.
 It automatically performs validation based on the model.
 Fields are grouped in panels and tabs.
 
-![Edit](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/public/screenshots/comics/one-edit.gif)
+![Edit](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/one-edit.gif)
 
-Code: [/js/views/one/Edit.js](https://github.com/evoluteur/react-evolutility/blob/master/js/views/one/Edit.js)
+Code: [/js/views/one/Edit.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/js/views/one/Edit.js)
 
 
 ## Views for Many objects
 ### List
 Gives a tabular view of a collection.
 
-![List](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/public/screenshots/comics/many-list.gif)
+![List](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-list.gif)
 
-Code: [/js/views/many/List.js](https://github.com/evoluteur/react-evolutility/blob/master/js/views/many/List.js)
+Code: [/js/views/many/List.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/js/views/many/List.js)
 
 ### Cards
 Shows records side by side as cards.
 
-![Cards](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/public/screenshots/comics/many-cards.gif)
+![Cards](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-cards.gif)
 
-Code: [/js/views/many/Cards.js](https://github.com/evoluteur/react-evolutility/blob/master/js/views/many/Cards.js)
+Code: [/js/views/many/Cards.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/js/views/many/Cards.js)
 
 ### Charts
 Draws charts about the collection.
 
-![Charts](https://raw.githubusercontent.com/evoluteur/react-evolutility/master/public/screenshots/comics/many-charts.gif)
+![Charts](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-charts.gif)
 
-Code: [/js/views/many/Charts.js](https://github.com/evoluteur/react-evolutility/blob/master/js/views/many/Charts.js)
+Code: [/js/views/many/Charts.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/js/views/many/Charts.js)
 
 
 
@@ -136,7 +136,7 @@ Models describe the object and its list of fields.
 
 ### Sample model
 
-The following example is a graphic novels collection app. The classic To-Do app is [also included](https://github.com/evoluteur/react-evolutility/blob/master/models/todo.js) in the demo. 
+The following example is a graphic novels collection app. The classic To-Do app is [also included](https://github.com/evoluteur/evolutility-ui-react/blob/master/models/todo.js) in the demo. 
 
 ```javascript
 module.exports = {
@@ -244,4 +244,4 @@ module.exports = {
 
 Copyright (c) 2016 Olivier Giulieri.
 
-React-Evolutility.js is released under the [MIT license](http://github.com/evoluteur/react-evolutility/blob/master/LICENSE.md).
+Evolutility-UI-React is released under the [MIT license](http://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE.md).

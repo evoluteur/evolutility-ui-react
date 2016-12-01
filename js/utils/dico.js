@@ -1,7 +1,7 @@
 
 /*! 
-React-Evolutility
-https://github.com/evoluteur/react-evolutility
+Evolutility-UI-React
+https://github.com/evoluteur/evolutility-ui-react
 (c) 2016 Olivier Giulieri
 */
 

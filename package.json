@@ -1,11 +1,11 @@
 {
-  "name": "react-evolutility",
+  "name": "evolutility-ui-react",
   "version": "0.0.5",
   "description": "Model-driven Web UI for CRUD and more",
   "main": "index.js",
   "author": "Olivier Giulieri",
   "copyright": "(c) 2016 Olivier Giulieri",
-  "homepage": "https://github.com/evoluteur/react-evolutility",
+  "homepage": "https://github.com/evoluteur/evolutility-ui-react",
   "license": "MIT",
 
   "scripts": {

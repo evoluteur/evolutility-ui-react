@@ -1,9 +1,9 @@
 
-// evolutility :: format.js
+// Evolutility-UI-React :: format.js
 
 // Helpers for string manipulation and date formats
 
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 import React from 'react'

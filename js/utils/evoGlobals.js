@@ -1,10 +1,10 @@
 
-// evolutility :: global_var.js
+// Evolutility-UI-React :: global_var.js
 
 // Using window as a global variables holder
 // TODO: find better way
 
-// https://github.com/evoluteur/react-evolutility
+// https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
 
 if(!window.evol){
