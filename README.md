@@ -4,7 +4,7 @@ Evolutility-UI-React provides a set of React Views to display and interact with 
 
 With Evolutility-UI-React you can quickly make a web application UI by configuring views with metadata instead of hand-coding Javascript, CSS, and HTML.
 
-Evolutility-UI-React works hand-in-hand with [Evolutility-Server](https://github.com/evoluteur/evolutility-server) which provides a matching REST endpoints based on the same metadata.
+Evolutility-UI-React works hand-in-hand with [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) which provides the matching REST endpoints based on the same metadata.
 
 This project is a **work in progress**. I'm still learning React.
 
@@ -12,7 +12,7 @@ This project is a **work in progress**. I'm still learning React.
 
 ## Installation
 
-[**Download**](https://github.com/evoluteur/evolutility-ui-react/archive/master.zip) or **clone** from GitHub.
+[**Download**](https://github.com/evoluteur/evolutility-ui-react/archive/master.zip) or **clone** from [GitHub](https://github.com/evoluteur/evolutility-ui-react/).
 
 ```bash
 # To get the latest stable version, use git from the command line.
@@ -31,6 +31,8 @@ npm start
 ```
 
 In a web browser, go to the url [http://localhost:8080/](http://localhost:8080/).
+
+For the REST endpoints, you also need to setup [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node).
 
 
 ## Views
@@ -239,6 +241,13 @@ module.exports = {
 
 
 ```
+
+## Other implementations
+
+[Evolutility-UI-jQuery](https://github.com/evoluteur/evolutility-ui-jquery) using jQuery and Backbone.
+
+[Evolutility](http://www.evolutility.org) using ASP.net and Microsoft SQL-Server.
+
 
 ## License
 
