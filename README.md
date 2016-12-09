@@ -242,9 +242,11 @@ module.exports = {
 
 ```
 
-## Other implementations
+## Other implementations of Evolutility
 
 [Evolutility-UI-jQuery](https://github.com/evoluteur/evolutility-ui-jquery) using jQuery and Backbone.
+
+[Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) using Node.js, Express, and PostgreSQL.
 
 [Evolutility](http://www.evolutility.org) using ASP.net and Microsoft SQL-Server.
 
