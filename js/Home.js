@@ -16,7 +16,7 @@ export default React.createClass({
             </p>
 
             <p>On the server-side, the REST endpoints can be provided by&nbsp;
-                <a href="https://github.com/evoluteur/evolutility-server">Evolutility-Server</a> 
+                <a href="https://github.com/evoluteur/evolutility-server-node">Evolutility-Server-Node</a> 
                 &nbsp;using Node.js, Express, and Postgres.
             </p> 
 
@@ -27,6 +27,8 @@ export default React.createClass({
                     The faculty possessed by all substances capable of self-nourishment of 
                     manifesting the nutritive acts by change of form, of volume, or of structure.
             </div>
+
+            <p>Evolutility-UI-React available at <a href="https://github.com/evoluteur/evolutility-ui-jquery">GitHub</a> under the MIT license.</p>
 
             <div className="clearfix"></div>
 
