@@ -9,6 +9,7 @@
 import React from 'react'
 
 import format from '../utils/format'
+import {filesUrl} from '../../config.js'
 
 // - date
 import Datepicker from 'react-datepicker'
@@ -104,9 +105,8 @@ export default React.createClass({
 							id={f.id} 
 						 	key={f.id}
 							ref='e'
-							className="img-thumbnail" 
-							//TODO: don't hardcode url
-							src={'http://localhost:8080/'+d} 
+							className="img-thumbnail"
+							src={filesUrl+d} 
 						/>
 					</div>
 				)	
@@ -154,8 +154,7 @@ export default React.createClass({
 					dangerouslySetInnerHTML={createMarkup()}
 				/> 
 		}else if(f.type==='image' && d){
-			// TODO: get correct url
-			fw = format.image('http://localhost:8080/'+d)
+			fw = format.image(filesUrl+d)
 		}else {
 			fw = format.fieldValue(f, d)
 		}
