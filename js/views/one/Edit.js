@@ -66,10 +66,6 @@ export default withRouter(React.createClass({
 		this._dirty=true
 		this.setState({data: newData})
 	},
-
-	isDirty(){
-		return this._dirty
-	},
 /*
 	fieldClick(i, props) {
 		 //debugger
@@ -77,7 +73,11 @@ export default withRouter(React.createClass({
 	fieldLeave(i, props) {
 		//debugger
 	},
-*/	
+*/
+	isDirty(){
+		return this._dirty
+	},
+
 	render() {
 		const urlParts = window.location.pathname.split('/'),
 			isNew = urlParts.length>2 ? urlParts[3]=='0' : false,

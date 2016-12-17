@@ -15,12 +15,17 @@
   },
 
   "keywords": [
+    "model-driven",
+    "MDA",
+    "metadata",
     "React.js",
     "React",
-    "react-component",
+    "component",
     "CRUD",
     "UI",
-    "framework"
+    "framework",
+    "low-code",
+    "javascript"
   ],
 
   "dependencies": {

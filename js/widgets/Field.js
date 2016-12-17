@@ -28,7 +28,7 @@ export default React.createClass({
 	propTypes: {
 		meta: React.PropTypes.object.isRequired,
 		callbacks: React.PropTypes.object,
-		//data: React.PropTypes.object, // full object value
+		//data: React.PropTypes.object,  // only some field types
 		value: React.PropTypes.any, // field value
 		label: React.PropTypes.string, //override label in meta
 		readOnly: React.PropTypes.bool, //override label in meta
@@ -36,8 +36,6 @@ export default React.createClass({
 
 	getInitialState: function() {
 		return {
-			value: this.props.value,
-			//data: this.props.data,
 			help: false
 		}
 	},
@@ -64,7 +62,8 @@ export default React.createClass({
 						onChange={cbs.change}
 					/>
 		}else if(f.type==='lov'||f.type==='list'){
-			return <select 
+			if(f.list){
+				return <select 
 						id={f.id} 
 						key={f.id}
 						ref='e' 
@@ -77,6 +76,10 @@ export default React.createClass({
 					  return <option key={i.id} value={''+i.id}>{i.text}</option>
 					})}
 				</select>
+			}else{
+				//debugger
+				// TODO: fetch values 
+			}
 		}else if(f.type==='date'){
 			return <Datepicker
 						id={f.id} 
@@ -123,17 +126,17 @@ export default React.createClass({
 				)
 			}
 		}
-		let fType
+		let inputType
 		if(f.type==='integer' || f.type==='decimal'){
-			fType = 'number'
+			inputType = 'number'
 		}else{  //if(f.type==='email'){
-			fType = 'text'
+			inputType = 'text'
 		}
 		
 		return <input 
 				id={f.id} 
 				ref='e'
-				type={fType} 
+				type={inputType} 
 				value={d?d:''}
 				onChange={cbs.change}
 				className="form-control"
@@ -165,14 +168,6 @@ export default React.createClass({
 		)
 	},
 
-	getValue(){
-		const e=this.refs.e
-		if(e.type==='checkbox'){
-			return e.checked ? true : false
-		}
-		return e.value
-	},
-
 	clickHelp(){
 		this.setState({
 			help: !this.state.help
@@ -183,7 +178,6 @@ export default React.createClass({
 		const f = this.props.meta || {type: 'text'},
 			readOnly = this.props.readOnly || f.readOnly,
 			cbs = this.props.callbacks || {},
-			//data = this.props.data || null,
 			value = this.props.value || null,
 			invalid = this.state.invalid,
 			label = this.props.label || f.label
@@ -210,6 +204,7 @@ export default React.createClass({
 	},
 
 	getDateFieldChange(fid) {
+		// - for fields of type date
 		return (v)=>{
 			this.props.callbacks.change({
 				target:{
