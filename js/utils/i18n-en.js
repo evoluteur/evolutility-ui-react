@@ -41,6 +41,8 @@ module.exports = {
         // --- navigation/pagination ---
         prev: 'Previous',
         next: 'Next',
+
+        dropFiles: 'Drop files here, or click to select files to upload.'
     },
 /*
     // --- msg & status ---
@@ -122,7 +124,7 @@ module.exports = {
         //zAxis: 'Z Axis',
         nocharts: 'No default charts.'
     },
-
+/*
     // --- filters ---
     i18n_filters:{
         sEqual: 'equals',
@@ -157,7 +159,7 @@ module.exports = {
         bSubmit: 'Submit',
         bCancel: 'Cancel'
     },
-/*
+
     // --- documentation ---
     doc:{
         entity: 'Entity',

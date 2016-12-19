@@ -24,7 +24,7 @@ export default function(){
 			const e = entity || this.props.params.entity,
 				id = nid || this.props.params.id
 			let newState = {
-				data: [],
+				data: {},
 				loading: false,
 				invalid: false
 			}

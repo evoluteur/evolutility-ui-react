@@ -59,11 +59,7 @@ export default withRouter(React.createClass({
 			v=evt.target.checked
 		}
 		newData[fid]=v
-		if (!this.delta){
-			this.delta={}
-		}
-		this.delta[fid]=v
-		this._dirty=true
+		this.setDeltaField(fid, v)
 		this.setState({data: newData})
 	},
 /*
@@ -74,6 +70,14 @@ export default withRouter(React.createClass({
 		//debugger
 	},
 */
+	setDeltaField(fid, value){
+		if (!this.delta){
+			this.delta={}
+		}
+		this.delta[fid]=value
+		this._dirty=true
+	},
+
 	isDirty(){
 		return this._dirty
 	},
@@ -86,16 +90,16 @@ export default withRouter(React.createClass({
 			m = this.model,
 			data = this.state.data || {},
 			cbs = {
-				click: this.fieldClick,
+				//click: this.fieldClick,
 				change: this.fieldChange,
-				leave: this.fieldLeave
+				//leave: this.fieldLeave,
+				dropFile: this.uploadFileOne
 			},
         	title = dico.dataTitle(m, data, isNew)
 
 		function fnField(f){
 			return (
-				<Field 
-					id={f.id} 
+				<Field
 					key={f.id} 
 					ref={f.id} 
 					meta={f}

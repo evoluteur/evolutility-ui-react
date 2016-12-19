@@ -51,6 +51,32 @@ export default function(){
 			//}
 		},
 
+		uploadFileOne: function(fieldId, formData){
+			// - only for fields of type image or document
+			const mid = this.model.id,
+				f = this.model.fieldsH[fieldId]
+
+			if(formData && (f.type==='image' || f.type==='document')){
+				let url = apiPath+mid+'/upload/'+this.state.data.id+'?field='+f.id
+
+				axios.post(url, formData)
+					.then(response => {
+						var newData = JSON.parse(JSON.stringify(this.state.data||{})),
+							filePath = mid+'/'+response.data.fileName
+						newData[f.id] = filePath
+						this.setDeltaField(f.id, filePath)
+						this.setState({
+							data: newData
+						})
+					})
+					.catch(function (error) {
+						alert('Error')
+						console.log(error);
+					});
+			}
+
+		},
+
 		routerWillLeave(nextLocation) {
 			// - return false to prevent a transition w/o prompting the user,
 			// - or return a string to allow the user to decide.

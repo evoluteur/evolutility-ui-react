@@ -9,11 +9,15 @@
 import React from 'react'
 
 import format from '../utils/format'
+import {i18n_actions} from '../utils/i18n-en'
 import {filesUrl} from '../../config.js'
 
+// - components:
 // - date
 import Datepicker from 'react-datepicker'
 import moment from 'moment'
+// - image & documents
+import Dropzone from 'react-dropzone'
 
 function emHeight(f){
 	let fh = parseInt(f.height || 2, 10);
@@ -62,8 +66,16 @@ export default React.createClass({
 						onChange={cbs.change}
 					/>
 		}else if(f.type==='lov'||f.type==='list'){
+			let opts
 			if(f.list){
-				return <select 
+				opts = f.list.map(function(i, idx){
+						  return <option key={i.id} value={''+i.id}>{i.text}</option>
+					})
+			}//else{
+				//debugger
+				// TODO: fetch values
+			//}
+			return <select 
 						id={f.id} 
 						key={f.id}
 						ref='e' 
@@ -71,15 +83,10 @@ export default React.createClass({
 						value={d || ''}
 						onChange={cbs.change}
 					>
-					<option/>
-					{f.list.map(function(i, idx){
-					  return <option key={i.id} value={''+i.id}>{i.text}</option>
-					})}
-				</select>
-			}else{
-				//debugger
-				// TODO: fetch values 
-			}
+						<option/>
+						{opts}
+					</select>
+
 		}else if(f.type==='date'){
 			return <Datepicker
 						id={f.id} 
@@ -87,44 +94,25 @@ export default React.createClass({
 						ref='e' 
 						className="form-control" 
 						selected={d ? moment(d, "YYYY-MM-DD") : null}
-						onChange={
-							this.getDateFieldChange(f.id)
-						}
+						onChange={this.getDateFieldChange(f.id)}
 					/>
 		}else if(f.type==='image'){
-			const txtField = ''/*<input 
-					id={f.id} 
-					ref='e'
-					type='text' 
-					value={d}
-					onChange={cbs.change}
-					className="form-control"
-				/>*/
-			if(d){
-				return (
-					<div>
-						{txtField}
-						<img 
-							id={f.id} 
-						 	key={f.id}
-							ref='e'
-							className="img-thumbnail"
-							src={filesUrl+d} 
-						/>
-					</div>
-				)	
-			}else{
-				return (
-					<div>
-						{txtField}
-						<div 
-							id={f.id} 
-						 	key={f.id}
-							ref='e'
-						>N/A</div>
-					</div>
-				)
-			}
+			let pix = d ? <img 
+						id={f.id} 
+					 	key={f.id}
+						ref='e'
+						className="img-thumbnail"
+						src={filesUrl+d}
+					/> : null
+
+			return (
+				<div>
+					{pix}
+					<Dropzone ref="dropzone" onDrop={this.onDropFile} className="pixdrop">
+	                  <i>{i18n_actions.dropFiles}</i>
+	                </Dropzone>
+				</div>
+			)
 		}
 		let inputType
 		if(f.type==='integer' || f.type==='decimal'){
@@ -183,7 +171,7 @@ export default React.createClass({
 			label = this.props.label || f.label
 
 		return (
-			<div className={"evol-fld"+(invalid?' has-error':'')} style={{width: (f.width || 100)+'%'}}>
+			<div className={'evol-fld'+(invalid?' has-error':'')} style={{width: (f.width || 100)+'%'}}>
 
 				<div className="evol-field-label">
 					<label className="control-label">{label}
@@ -212,6 +200,18 @@ export default React.createClass({
 					value: v ? v.format() : null
 				}
 			})
+		}
+	},
+
+	onDropFile(files){
+		// - only for fields of type image or document
+		const f = this.props.meta
+		if(files.length && (f.type==='image' || f.type==='document')){
+			const formData = new FormData()
+			files.forEach((f, idx)=>{
+				formData.append('filename', files[idx])
+			})			
+			this.props.callbacks.dropFile(f.id, formData)
 		}
 	}
 
