@@ -81,6 +81,16 @@
 .alert > strong {
   font-size: 18px; }
 
+.evol-remove {
+  margin-top: 5px; }
+  .evol-remove i {
+    position: relative;
+    top: 2px;
+    color: #b94a48;
+    position: relative;
+    top: 2px;
+    margin-right: 5px; }
+
 /*
   evolutility-ui-react : common
 */

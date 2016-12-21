@@ -10,7 +10,6 @@ module.exports = {
     i18n_actions:{
         browse: 'Browse',
         edit: 'Edit',
-        //mini: 'Mini', // 'Quick Edit'
         // login: 'Login',
         new: 'New',
         newEntity: 'New {0}', //'New Item',
@@ -42,7 +41,9 @@ module.exports = {
         prev: 'Previous',
         next: 'Next',
 
-        dropFiles: 'Drop files here, or click to select files to upload.'
+        dropFiles: 'Drop files here, or click to select files to upload.',
+        remove_image: 'Remove image',
+        remove_document: 'Remove document'
     },
 /*
     // --- msg & status ---
@@ -56,7 +57,6 @@ module.exports = {
     delete1: 'Do you really want to delete the {0} "{1}"?', // {0}=entity {1}=titlefield value,
     deleteN: 'Delete {0} {1}?', // delete 5 tasks
     deleted1: '{0} deleted.', // {0}=entity ,
-    //this.setMessage(i18n.notFound, i18n.getLabel('notFoundMsg', this.uiModel.name);
     //NoChange: 'No Change',
     //NoX: 'No {0}',
     yes: 'Yes',

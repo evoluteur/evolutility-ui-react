@@ -54,25 +54,32 @@ export default function(){
 		uploadFileOne: function(fieldId, formData){
 			// - only for fields of type image or document
 			const mid = this.model.id,
-				f = this.model.fieldsH[fieldId]
+				f = this.model.fieldsH[fieldId],
+				stateData = this.state.data||{},
+				that = this
+
+			function setData(filePath){
+				var newData = JSON.parse(JSON.stringify(stateData))
+				newData[f.id] = filePath
+				that.setDeltaField(f.id, filePath)
+				that.setState({
+					data: newData
+				})
+			}
 
 			if(formData && (f.type==='image' || f.type==='document')){
-				let url = apiPath+mid+'/upload/'+this.state.data.id+'?field='+f.id
+				let url = apiPath+mid+'/upload/'+stateData.id+'?field='+f.id
 
 				axios.post(url, formData)
 					.then(response => {
-						var newData = JSON.parse(JSON.stringify(this.state.data||{})),
-							filePath = mid+'/'+response.data.fileName
-						newData[f.id] = filePath
-						this.setDeltaField(f.id, filePath)
-						this.setState({
-							data: newData
-						})
+						setData(mid+'/'+response.data.fileName)
 					})
 					.catch(function (error) {
 						alert('Error')
 						console.log(error);
 					});
+			}else{
+				setData('')
 			}
 
 		},

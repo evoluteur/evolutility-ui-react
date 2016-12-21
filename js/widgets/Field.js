@@ -185,6 +185,10 @@ export default React.createClass({
 				{readOnly ? this._fieldElemReadOnly(f, value)
 								 : this._fieldElem(f, value, cbs)}
 
+				{!readOnly && value && (f.type==='image'||f.type==='document') ? 
+					<div className="evol-remove" onClick={this.removeFile}><a href="javascript:void(0)"><i className="glyphicon glyphicon-remove"/>{i18n_actions['remove_'+f.type]}</a></div> 
+					: null}
+
  				{invalid ? <div className="text-danger">{this.state.message}</div> : null}
 
 			</div>
@@ -212,6 +216,14 @@ export default React.createClass({
 				formData.append('filename', files[idx])
 			})			
 			this.props.callbacks.dropFile(f.id, formData)
+		}
+	},
+
+	removeFile(){
+		// - only for fields of type image or document
+		const f = this.props.meta
+		if(f.type==='image' || f.type==='document'){
+			this.props.callbacks.dropFile(f.id, null)
 		}
 	}
 
