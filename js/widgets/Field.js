@@ -111,6 +111,14 @@ export default React.createClass({
 					<Dropzone ref="dropzone" onDrop={this.onDropFile} className="pixdrop">
 	                  <i>{i18n_actions.dropFiles}</i>
 	                </Dropzone>
+					{d ? (
+						<div className="evol-remove" onClick={this.removeFile}>
+							<a href="javascript:void(0)">
+								<i className="glyphicon glyphicon-remove"/>
+								{i18n_actions['remove_'+f.type]}
+							</a>
+						</div> 
+						) : null}
 				</div>
 			)
 		}
@@ -184,10 +192,6 @@ export default React.createClass({
 
 				{readOnly ? this._fieldElemReadOnly(f, value)
 								 : this._fieldElem(f, value, cbs)}
-
-				{!readOnly && value && (f.type==='image'||f.type==='document') ? 
-					<div className="evol-remove" onClick={this.removeFile}><a href="javascript:void(0)"><i className="glyphicon glyphicon-remove"/>{i18n_actions['remove_'+f.type]}</a></div> 
-					: null}
 
  				{invalid ? <div className="text-danger">{this.state.message}</div> : null}
 
