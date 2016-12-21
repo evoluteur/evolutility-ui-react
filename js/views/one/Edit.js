@@ -39,8 +39,9 @@ export default withRouter(React.createClass({
 	},
 
 	clickSave(evt){ 
-		const fields = this.model.fields
-		const v = this.validate(fields, this.state.data)
+		const fields = this.model.fields,
+			v = this.validate(fields, this.state.data)
+
 		if(v.valid){
 			this.upsertOne()
 		}else{
@@ -52,9 +53,10 @@ export default withRouter(React.createClass({
 	},
 
 	fieldChange(evt) {
-		const fid=evt.target.id
+		const fid=evt.target.id,
+			newData=JSON.parse(JSON.stringify(this.state.data||{}))
 		let v = evt.target.value
-		const newData=JSON.parse(JSON.stringify(this.state.data||{}))
+
 		if(evt.target.type==='checkbox'){
 			v=evt.target.checked
 		}
@@ -97,7 +99,11 @@ export default withRouter(React.createClass({
 			},
         	title = dico.dataTitle(m, data, isNew)
 
-		function fnField(f){
+		const fnField = (f)=>{
+			if((f.type==='lov' || f.type==='list') && !f.list){
+				// - fetch list values
+				this.getLOV(f.id)
+			}
 			return (
 				<Field
 					key={f.id} 

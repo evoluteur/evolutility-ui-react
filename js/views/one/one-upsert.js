@@ -55,14 +55,13 @@ export default function(){
 			// - only for fields of type image or document
 			const mid = this.model.id,
 				f = this.model.fieldsH[fieldId],
-				stateData = this.state.data||{},
-				that = this
+				stateData = this.state.data || {}
 
-			function setData(filePath){
+			const setData = (filePath)=>{
 				var newData = JSON.parse(JSON.stringify(stateData))
 				newData[f.id] = filePath
-				that.setDeltaField(f.id, filePath)
-				that.setState({
+				this.setDeltaField(f.id, filePath)
+				this.setState({
 					data: newData
 				})
 			}
@@ -81,7 +80,29 @@ export default function(){
 			}else{
 				setData('')
 			}
+		},
 
+		getLOV: function(fid){
+			const mid = this.model.id
+
+			if(!this.lovs){
+				axios.get(apiPath+mid+'/lov/'+fid)
+				.then((response)=>{
+					this.model.fieldsH[fid].list = response.data.map(function(d){
+						return {
+							id: d.id, 
+							text: d.text
+						}
+					})
+					this.refs[fid].forceUpdate()
+					this.lovs=true
+				})
+				.catch(err => {
+					this.setState({
+						message: format('Error retrieving list of values for field "'+fid+'"')
+					})
+				})
+			}
 		},
 
 		routerWillLeave(nextLocation) {

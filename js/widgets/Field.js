@@ -9,7 +9,7 @@
 import React from 'react'
 
 import format from '../utils/format'
-import {i18n_actions} from '../utils/i18n-en'
+import {i18n_actions, i18n_msg} from '../utils/i18n-en'
 import {filesUrl} from '../../config.js'
 
 // - components:
@@ -25,6 +25,15 @@ function emHeight(f){
 		fh=2;
 	}
 	return Math.trunc(fh*1.6);
+}
+
+function createMarkup(d) {
+	// TODO: good enough?
+	return {__html: d?d.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br/>'):''}
+}
+
+function createOption(opt){
+	return <option key={opt.id} value={''+opt.id}>{opt.text}</option>
 }
 
 export default React.createClass({
@@ -67,14 +76,17 @@ export default React.createClass({
 					/>
 		}else if(f.type==='lov'||f.type==='list'){
 			let opts
+
 			if(f.list){
-				opts = f.list.map(function(i, idx){
-						  return <option key={i.id} value={''+i.id}>{i.text}</option>
-					})
-			}//else{
-				//debugger
-				// TODO: fetch values
-			//}
+				opts = f.list.map(createOption)
+			}else{
+				const optVal = {
+					id:f.id+'loading', 
+					text: i18n_msg.loading
+				}
+				opts = [createOption(optVal)]
+				f.list = [optVal]
+			}
 			return <select 
 						id={f.id} 
 						key={f.id}
@@ -144,13 +156,9 @@ export default React.createClass({
 		// - return the formated field value
 		let fw
 		if(f.type==='textmultiline'){
-			function createMarkup() {
-				// TODO: what about XSS?
-				return {__html: d?d.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br/>'):''}
-			}
 			const height = emHeight(f)+'em'
 			return <div key={f.id} className="disabled evo-rdonly" style={{height:height}}
-					dangerouslySetInnerHTML={createMarkup()}
+					dangerouslySetInnerHTML={createMarkup(d)}
 				/> 
 		}else if(f.type==='image' && d){
 			fw = format.image(filesUrl+d)
@@ -182,8 +190,9 @@ export default React.createClass({
 			<div className={'evol-fld'+(invalid?' has-error':'')} style={{width: (f.width || 100)+'%'}}>
 
 				<div className="evol-field-label">
-					<label className="control-label">{label}
-						{f.required && !(f.readOnly || readOnly) ? <span className="evol-required">*</span> : null}
+					<label className="control-label">
+						{label}
+						{f.required && !readOnly ? <span className="evol-required">*</span> : null}
 						{f.help ? <i className="glyphicon glyphicon-question-sign" onClick={this.clickHelp} /> : null}
 					</label>
 				</div>
@@ -226,7 +235,7 @@ export default React.createClass({
 	removeFile(){
 		// - only for fields of type image or document
 		const f = this.props.meta
-		if(f.type==='image' || f.type==='document'){
+		if(this.props.callbacks.dropFile){
 			this.props.callbacks.dropFile(f.id, null)
 		}
 	}
