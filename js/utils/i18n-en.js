@@ -42,8 +42,8 @@ module.exports = {
         next: 'Next',
 
         dropFiles: 'Drop files here, or click to select files to upload.',
-        remove_image: 'Remove image',
-        remove_document: 'Remove document'
+        remove_image: 'Remove current image',
+        remove_document: 'Remove current document'
     },
 /*
     // --- msg & status ---
