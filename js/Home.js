@@ -10,8 +10,11 @@ export default React.createClass({
             <p>Evolutility-UI-React is a set of views (List, Cards, Edit, Browse, and Charts) 
              which adapt to different data structures. Used together these views
               provide a fully customizable Single-Page Application 
-              which can behave like a Do-To app, an Address Book, a Graphic Novels inventory, 
-              or anything you may thing of. No hand-coding is necessary, changing the model changes the 
+              which can behave like a {' '}
+              <a href="/todo/list">To-Do app</a>, 
+              an <a href="/contact/list">Address Book</a>, 
+              a <a href="/comics/list">Graphic Novels inventory</a>, 
+              or anything you may think of. No hand-coding is necessary, changing the model changes the 
               structure of the app.
             </p>
 
