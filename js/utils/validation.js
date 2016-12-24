@@ -20,7 +20,7 @@ module.exports = {
 
     validateField: function(f, v){
         var numberField = dico.fieldIsNumber(f);
-        var fts=dico.fieldTypes
+        var ft = dico.fieldTypes
 
         function formatMsg(fLabel, msg, r2, r3){
             return msg.replace('{0}', fLabel)
@@ -36,9 +36,9 @@ module.exports = {
             // Check required and empty
             if (f.required && (v===null || v==='' || _.isUndefined(v) ||
                 (numberField && isNaN(v)) ||
-                (f.type===fts.lov && v==='0') ||
-                (f.type===fts.list && v && !v.length) //||
-                //(f.type===fts.color && v==='#000000')
+                (f.type===ft.lov && v==='0') ||
+                (f.type===ft.list && v && !v.length) //||
+                //(f.type===ft.color && v==='#000000')
             )){
                 return formatMsg(f.label, i18n_validation.empty);
             } else if(!_.isUndefined(v)){
@@ -47,27 +47,27 @@ module.exports = {
                 if( !(isNaN(v) && numberField)) {
                     if (v!==null && v!=='' && !_.isArray(v)){
                         switch (f.type) {
-                            case fts.int:
-                            case fts.email:
+                            case ft.int:
+                            case ft.email:
                                 if (!this.valRegEx[f.type].test(v)) {
                                     return formatMsg(fieldLabel(f), i18n_validation[f.type]);
                                 }
                                 break;
-                            case fts.dec:
-                            case fts.money:
-                                var regex = this.valRegEx[fts.dec + LOCALE] || this.valRegEx[fts.dec + 'EN'];
+                            case ft.dec:
+                            case ft.money:
+                                var regex = this.valRegEx[ft.dec + LOCALE] || this.valRegEx[ft.dec + 'EN'];
                                 if (!regex.test(v)){
                                     return formatMsg(fieldLabel(f), i18n_validation[f.type]);
                                 }
                                 break;
-                            case fts.date:
-                            case fts.datetime:
-                            case fts.time:
+                            case ft.date:
+                            case ft.datetime:
+                            case ft.time:
                                 if ((v !== '') && (!_.isDate(new Date(v)))) {
                                     return formatMsg(fieldLabel(f), i18n_validation[f.type]);
                                 }
                                 break;
-                            case fts.json:
+                            case ft.json:
                                 var obj;
                                 if(_.isObject(v)){
                                     obj=v;

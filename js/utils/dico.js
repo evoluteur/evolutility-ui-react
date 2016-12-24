@@ -9,7 +9,8 @@ https://github.com/evoluteur/evolutility-ui-react
 
 // Helpers for models
 
-var fts = {
+// - Field Types
+var ft = {
 	text: 'text',
 	textml: 'textmultiline',
 	bool: 'boolean',
@@ -40,7 +41,7 @@ function isFunction(fn){
 }
 
 function fieldIsNumber(f){
-	return [fts.int, fts.dec, fts.money].indexOf(f.type)>-1;
+	return [ft.int, ft.dec, ft.money].indexOf(f.type)>-1;
 }
 
 function fieldInCharts(f) {
@@ -48,8 +49,8 @@ function fieldInCharts(f) {
 }
 
 function fieldChartable(f) { 
-	return  (f.type===fts.lov || f.type===fts.list || 
-				f.type===fts.bool || fieldIsNumber(f));
+	return  (f.type===ft.lov || f.type===ft.list || 
+				f.type===ft.bool || fieldIsNumber(f));
 }
 
 function hById(arr){
@@ -94,7 +95,7 @@ function getFields(model) {
 
 module.exports = {  
 
-	fieldTypes: fts,
+	fieldTypes: ft,
 
 	getFields: getFields,
 
@@ -133,7 +134,7 @@ module.exports = {
 	},
 
 	fieldIsText: function(f){
-		return [fts.text, fts.textml, fts.url, fts.html, fts.email].indexOf(f.type)>-1;
+		return [ft.text, ft.textml, ft.url, ft.html, ft.email].indexOf(f.type)>-1;
 	},
 
 	fieldId2Field: function(fieldIds, fieldsH){
