@@ -5,14 +5,17 @@ import App from './js/App'
 import Home from './js/Home'
 import PageNotFound from './js/widgets/PageNotFound'
 
+// - views for one record
 import Browse from './js/views/one/Browse'
 import Edit from './js/views/one/Edit'
+
+// - views for many records
 import List from './js/views/many/List'
 import Cards from './js/views/many/Cards'
 import Charts from './js/views/many/Charts'
 
 render((
-  <Router history={browserHistory}>
+  <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
     <Route path="/" component={App}>
     
       <IndexRoute component={Home}/>
