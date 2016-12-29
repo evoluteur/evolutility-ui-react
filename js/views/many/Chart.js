@@ -15,7 +15,7 @@ import _ from 'underscore'
 import axios from 'axios'
 import {apiPath} from '../../../config.js'
 
-import { i18n_msg } from '../../utils/i18n-en'
+import { i18n_msg } from '../../i18n/i18n'
 import Alert from '../../widgets/Alert'
 import many from './many'
 

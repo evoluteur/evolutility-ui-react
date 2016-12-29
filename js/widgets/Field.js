@@ -1,7 +1,7 @@
 
 // Evolutility-UI-React :: /widgets/field.js
 
-// Model-driven field w/ possible types specifed in dico.fieldTypes.
+// Model-driven field (possible types specifed in dico.fieldTypes).
 
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2016 Olivier Giulieri
@@ -9,7 +9,7 @@
 import React from 'react'
 
 import format from '../utils/format'
-import {i18n_actions, i18n_msg} from '../utils/i18n-en'
+import {i18n_actions, i18n_msg} from '../i18n/i18n'
 import {filesUrl} from '../../config.js'
 
 // - components:
@@ -121,7 +121,7 @@ export default React.createClass({
 				<div>
 					{pix}
 					<Dropzone ref="dropzone" onDrop={this.onDropFile} className="pixdrop">
-	                  <i>{i18n_actions.dropFiles}</i>
+	                  <i>{i18n_actions.dropFile}</i>
 	                </Dropzone>
 					{d ? (
 						<div className="evol-remove" onClick={this.removeFile}>

@@ -9,7 +9,7 @@
 import axios from 'axios'
 import { withRouter, browserHistory } from 'react-router'
 
-import {i18n_errors} from '../../utils/i18n-en'
+import {i18n_errors} from '../../i18n/i18n'
 import {apiPath} from '../../../config.js'
 import {format} from 'util'
 import models from '../../../models/all_models'
