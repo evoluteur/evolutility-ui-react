@@ -20,10 +20,10 @@ export default React.createClass({
   },
 
   render() {
-    const {id=0, entity=null} = this.props.params
-    const urlParts = window.location.pathname.split('/')
-    const view = urlParts.length>1 ? urlParts[2] : false
-    const isNew = urlParts.length>2 ? urlParts[3]=='0' : false
+    const {id=0, entity=null} = this.props.params,
+      urlParts = window.location.pathname.split('/'),
+      view = urlParts.length>1 ? urlParts[2] : false,
+      isNew = urlParts.length>2 ? urlParts[3]=='0' : false
 
     return (
       <div>

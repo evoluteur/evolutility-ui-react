@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "description": "Model-driven Web UI for CRUD and more",
   "main": "index.js",
-  "author": "Olivier Giulieri",
   "copyright": "(c) 2016 Olivier Giulieri",
   "homepage": "https://github.com/evoluteur/evolutility-ui-react",
+  "author": "Olivier Giulieri (https://evoluteur.github.io/)",
   "license": "MIT",
 
   "scripts": {
@@ -25,7 +25,8 @@
     "UI",
     "framework",
     "low-code",
-    "javascript"
+    "javascript",
+    "forms"
   ],
 
   "dependencies": {

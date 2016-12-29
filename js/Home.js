@@ -13,7 +13,7 @@ export default React.createClass({
               which can behave like a {' '}
               <a href="/todo/list">To-Do app</a>, 
               an <a href="/contact/list">Address Book</a>, 
-              a <a href="/comics/list">Graphic Novels inventory</a>, 
+              a <a href="/comics/cards">Graphic Novels inventory</a>, 
               or anything you may think of. No hand-coding is necessary, changing the model changes the 
               structure of the app.
             </p>

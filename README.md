@@ -253,6 +253,6 @@ module.exports = {
 
 ## License
 
-Copyright (c) 2016 Olivier Giulieri.
+Copyright (c) 2016 [Olivier Giulieri](https://evoluteur.github.io/).
 
 Evolutility-UI-React is released under the [MIT license](http://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE.md).
