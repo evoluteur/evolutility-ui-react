@@ -10,7 +10,7 @@ import axios from 'axios'
 import { browserHistory } from 'react-router'
 
 import evoGlobals from '../../utils/evoGlobals'
-import {i18n_msg} from '../../utils/i18n-en'
+import {i18n_msg} from '../../i18n/i18n'
 import {apiPath} from '../../../config.js'
 
 export default function(){
@@ -99,7 +99,7 @@ export default function(){
 				})
 				.catch(err => {
 					this.setState({
-						message: format('Error retrieving list of values for field "'+fid+'"')
+						message: format('Error retrieving list of values for field "'+fid+'".')
 					})
 				})
 			}

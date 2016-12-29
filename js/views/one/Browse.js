@@ -9,7 +9,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import {i18n_actions, i18n_errors} from '../../utils/i18n-en'
+import {i18n_actions, i18n_errors} from '../../i18n/i18n'
 import dico from '../../utils/dico'
 import oneRead from './one-read'
 import Alert from '../../widgets/Alert'

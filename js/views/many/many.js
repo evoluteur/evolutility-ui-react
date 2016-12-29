@@ -9,7 +9,7 @@
 import { browserHistory } from 'react-router'
 import axios from 'axios'
 
-import {i18n_msg} from '../../utils/i18n-en'
+import {i18n_msg} from '../../i18n/i18n'
 import {apiPath, pageSize} from '../../../config.js'
 import dico from '../../utils/dico'
 import url from '../../utils/url'

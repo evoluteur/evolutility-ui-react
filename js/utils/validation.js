@@ -6,7 +6,7 @@
 
 import _ from 'underscore'
 import dico from './dico'
-import { LOCALE, i18n_validation } from './i18n-en'
+import { locale, i18n_validation } from '../i18n/i18n'
 
 module.exports = {
 
@@ -14,7 +14,7 @@ module.exports = {
         email: /^[\w\.\-]+@[\w\.\-]+\.[\w\.\-]+$/,
         integer: /^[-+]?\d+$/, // /^[0-9]*/,
         decimalEN: /(\+|-)?(\d*\.\d*)?$/
-        //decimalFR: /(\+|-)?(\d*\,\d*)?$/,
+        decimalFR: /(\+|-)?(\d*\,\d*)?$/,
         //decimalDA: /(\+|-)?(\d*\,\d*)?$/
     },
 
@@ -55,7 +55,7 @@ module.exports = {
                                 break;
                             case ft.dec:
                             case ft.money:
-                                var regex = this.valRegEx[ft.dec + LOCALE] || this.valRegEx[ft.dec + 'EN'];
+                                var regex = this.valRegEx[ft.dec + locale] || this.valRegEx[ft.dec + 'EN'];
                                 if (!regex.test(v)){
                                     return formatMsg(fieldLabel(f), i18n_validation[f.type]);
                                 }

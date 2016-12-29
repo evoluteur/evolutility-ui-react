@@ -9,7 +9,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import {i18n_msg, i18n_errors} from '../../utils/i18n-en'
+import {i18n_msg, i18n_errors} from '../../i18n/i18n'
 import dico from '../../utils/dico'
 import format from '../../utils/format'
 import many from './many'
