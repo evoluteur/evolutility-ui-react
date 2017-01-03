@@ -4,7 +4,7 @@
 // Model-driven field (possible types specifed in dico.fieldTypes).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2016 Olivier Giulieri
+// (c) 2017 Olivier Giulieri
 
 import React from 'react'
 

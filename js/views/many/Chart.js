@@ -4,7 +4,7 @@
 // Single Bars or Pie charts (usually part of a set of Charts).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2016 Olivier Giulieri
+// (c) 2017 Olivier Giulieri
 
 // Quick and easy implementation w/ the old version of google charts
 // TODO: re-write using D3.js or other cool charting library

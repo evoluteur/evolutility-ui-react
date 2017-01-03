@@ -4,7 +4,7 @@
 // Mixin used in most Views for Many (List, Cards but not Charts).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2016 Olivier Giulieri
+// (c) 2017 Olivier Giulieri
 
 import { browserHistory } from 'react-router'
 import axios from 'axios'

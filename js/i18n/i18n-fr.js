@@ -1,5 +1,5 @@
 ﻿//   Evolutility-UI-React Localized strings in FRENCH
-//   (c) 2016 Olivier Giulieri
+//   (c) 2017 Olivier Giulieri
 //   https://github.com/evoluteur/evolutility-ui-react
 
 module.exports = {

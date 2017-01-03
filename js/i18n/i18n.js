@@ -1,5 +1,5 @@
 ﻿//   Evolutility-UI-React Localization Library
-//   (c) 2016 Olivier Giulieri
+//   (c) 2017 Olivier Giulieri
 //   https://github.com/evoluteur/evolutility-ui-react
 
 import en from './i18n-en'

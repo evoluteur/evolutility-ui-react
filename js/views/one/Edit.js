@@ -4,7 +4,7 @@
 // View to add or update one record at a time.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2016 Olivier Giulieri
+// (c) 2017 Olivier Giulieri
 
 import React from 'react'
 import { withRouter } from 'react-router'

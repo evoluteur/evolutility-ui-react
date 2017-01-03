@@ -4,7 +4,7 @@
 // Mixin used in Views for One for Insert and Update (only view Edit for now maybe more later).
  
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2016 Olivier Giulieri
+// (c) 2017 Olivier Giulieri
 
 import axios from 'axios'
 import { browserHistory } from 'react-router'

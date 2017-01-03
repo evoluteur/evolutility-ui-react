@@ -4,7 +4,7 @@
 // Panel to group fields in views Edit and Browse (styled w/ Bootstrap).
  
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2016 Olivier Giulieri
+// (c) 2017 Olivier Giulieri
 
 import React from 'react'
 

@@ -4,7 +4,7 @@
 // Mixin used in most Views for One (Browse, Edit but not Card) to get data by ID.
  
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2016 Olivier Giulieri
+// (c) 2017 Olivier Giulieri
 
 import axios from 'axios'
 import { withRouter, browserHistory } from 'react-router'

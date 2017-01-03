@@ -4,7 +4,7 @@
 // Toolbar w/ icons for CRUD, export, and charts.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2016 Olivier Giulieri
+// (c) 2017 Olivier Giulieri
 
 import React from 'react'
 import axios from 'axios'
