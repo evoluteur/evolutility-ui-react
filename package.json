@@ -1,6 +1,6 @@
 {
   "name": "evolutility-ui-react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Model-driven Web UI for CRUD and more",
   "main": "index.js",
   "copyright": "(c) 2017 Olivier Giulieri",

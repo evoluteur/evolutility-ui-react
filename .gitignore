@@ -3,8 +3,6 @@ bower_components
 dist
 
 *-nogit/
-less
-public/comics/
 
 # Windows stuff
 Thumbs.db

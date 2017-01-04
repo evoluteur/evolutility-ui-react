@@ -1,8 +1,8 @@
 /**
-  Evolutility-React-UI v0.1.0
+  Evolutility-React-UI v0.1.1
 
   https://github.com/evoluteur/evolutility-ui-react
-  (c) 2016 Olivier Giulieri
+  (c) 2017 Olivier Giulieri
 */
 /*
   evolutility-ui-react : topnav
@@ -281,6 +281,9 @@ label {
   border: 2px dashed silver;
   padding: 10px; }
 
+/*
+  evolutility-ui-react : field
+*/
 .evol-fld {
   box-sizing: border-box;
   flex-grow: 1;
