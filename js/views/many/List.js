@@ -31,6 +31,29 @@ export default React.createClass({
 
 	mixins: [many()],
 
+	tableHeader(fields) {
+		const fnCell = this.props.paramsCollec ? 
+			// - header sub-collection table
+			(f) => <th key={f.id}>
+					{f.label}
+				</th>
+			 : 
+			// - header main table
+			(f) => <th id={f.id} key={f.id} onClick={this.clickSort}>
+					{f.label}
+					{f.id===this._sortField ? (
+							<i className={"glyphicon glyphicon-arrow-"+(this._sortDirection==='desc' ? 'down' : 'up')}></i>
+						) : null
+					}
+				</th>
+
+		return (
+			<tr>
+				{fields.map(fnCell)}
+			</tr>
+		)
+	},
+
 	render() {
 		const e = this.props.params.entity,
 			m = this.model,
@@ -59,7 +82,8 @@ export default React.createClass({
 				full_count = this.pageSummary(data),
 				fullCount = data.length ? (data[0]._full_count || 0) : 0,
 				title = m.title || m.label
-			let body
+			let body,
+				css = paramsCollec ? 'table sub' : 'table table-hover main' 
 
 			if(this.state.error){
 				body = <Alert title="Error" message={this.state.error.message}/> 
@@ -73,19 +97,9 @@ export default React.createClass({
 					}
 					body = (
 						<div>
-							<table className="table table-hover">
+							<table className={css}>
 								<thead>
-									<tr>
-										{fields.map((f)=> (
-											<th id={f.id} key={f.id} onClick={this.clickSort}>
-												{f.label}
-												{f.id===this._sortField ? (
-														<i className={"glyphicon glyphicon-arrow-"+(this._sortDirection==='desc' ? 'down' : 'up')}></i>
-													) : null
-												}
-											</th>
-										))}
-									</tr>
+									{this.tableHeader(fields)}
 								</thead>
 								<tbody>
 								{data.length ? data.map(function(d){

@@ -354,27 +354,30 @@ label {
 .evol-many-list > div {
   overflow-x: auto;
   overflow-y: hidden; }
-  .evol-many-list > div > .table {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 0; }
-    .evol-many-list > div > .table td {
-      position: relative; }
-    .evol-many-list > div > .table th {
-      cursor: pointer;
-      position: relative;
-      font-weight: 500 !important;
-      background-color: #fbfbfb; }
-      .evol-many-list > div > .table th:hover {
-        color: #0099cc; }
-      .evol-many-list > div > .table th i {
-        position: absolute;
-        right: 5px;
-        top: 12px;
-        color: silver; }
-    .evol-many-list > div > .table img {
-      max-height: 60px;
-      padding: 0; }
+
+.evol-many-list .table {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 0; }
+  .evol-many-list .table td {
+    position: relative; }
+  .evol-many-list .table th {
+    position: relative;
+    font-weight: 500 !important;
+    background-color: #fbfbfb; }
+    .evol-many-list .table th i {
+      position: absolute;
+      right: 5px;
+      top: 12px;
+      color: silver; }
+  .evol-many-list .table img {
+    max-height: 60px;
+    padding: 0; }
+
+.evol-many-list .main th {
+  cursor: pointer; }
+  .evol-many-list .main th:hover {
+    color: #0099cc; }
 
 fieldset .table {
   border-bottom: none !important; }
