@@ -31,7 +31,7 @@ export default React.createClass({
                     manifesting the nutritive acts by change of form, of volume, or of structure.
             </div>
 
-            <p>Evolutility-UI-React available at <a href="https://github.com/evoluteur/evolutility-ui-react">GitHub</a> under the MIT license.</p>
+            <p>The code and documentation are available at <a href="https://github.com/evoluteur/evolutility-ui-react">GitHub</a> under the MIT license.</p>
 
             <div className="clearfix"></div>
 
