@@ -69,7 +69,7 @@ export default React.createClass({
 					return <td key={idx}>
 						<Link to={link+d.id}>
 							{ico}
-							{value}
+							{format.fieldValue(f, value, true)}
 						</Link></td>
 				}else if(f.type==='color'){
 					return <td key={idx}><div className="evo-color-box" id={f.id} 
