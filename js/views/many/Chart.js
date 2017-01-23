@@ -10,8 +10,6 @@
 // TODO: re-write using D3.js or other cool charting library
 
 import React from 'react'
-
-import _ from 'underscore'
 import axios from 'axios'
 import {apiPath} from '../../../config.js'
 

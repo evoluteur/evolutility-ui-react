@@ -7,7 +7,6 @@
 // (c) 2017 Olivier Giulieri
 
 import React from 'react'
-import _ from 'underscore'
 
 import url from '../utils/url'
 import {pageSize} from '../../config'
@@ -66,10 +65,10 @@ export default React.createClass({
                 }else{
                     bGap(1);
                 }
-                maxRange=_.min([pId+2, nbPages]);
-                bPageRange(_.max([2, pId-2]), maxRange);
+                maxRange=Math.min(pId+2, nbPages);
+                bPageRange(Math.max([2, pId-2]), maxRange);
             }else{
-                maxRange=_.min([_.max([5, pId+2]), nbPages]);
+                maxRange=Math.min(Math.max(5, pId+2), nbPages);
                 bPageRange(2, maxRange);
             }
             if(maxRange<nbPages && pId+2<nbPages){
