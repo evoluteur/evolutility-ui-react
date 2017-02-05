@@ -20,8 +20,7 @@ render((
     
       <IndexRoute component={Home}/>
 
-      <Route path="/:entity" component={List}/>
-      <Route path="/:entity/list" component={List}/>
+      <Route path="/:entity(/list)" component={List}/>
       <Route path="/:entity/cards" component={Cards}/>
       <Route path="/:entity/charts" component={Charts}/>
 
