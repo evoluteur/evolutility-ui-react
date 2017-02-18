@@ -11,9 +11,7 @@ module.exports = {
 		// - example: {a:'aaa', b: 'bbb'} => "a=aaa&b=bbb"
 		var url = ''
 		for(var prop in query) {
-			if(query.hasOwnProperty(prop)){
-				url += prop+'='+encodeURI(query[prop]||'')+'&'
-			}
+			url += prop+'='+encodeURI(query[prop]||'')+'&'
 		}
 		return url.slice(0, -1);
 	}
