@@ -131,8 +131,11 @@ export default function(){
 			if(query.page){
 				query.page=0
 			}
-			const link = '/'+e+'/'+this.viewId
-			browserHistory.push(link + '?' + url.querySearch(query))
+			let link = '/'+e+'/'+this.viewId
+			if(query){
+				link += '?'+url.querySearch(query)
+			}
+			browserHistory.push(link)
 			this.getData()
 		},
 
