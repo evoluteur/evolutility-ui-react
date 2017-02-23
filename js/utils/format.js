@@ -46,6 +46,13 @@ module.exports = {
         return <img src={d} className="img-thumbnail" />
     },
 
+    doc(d, path){
+        if(d===null){
+            return null
+        }
+        return <a href={encodeURI(path+d)} target='_blank'>{d}</a>
+    },
+
     // --- date formats ---
     dateString: function(d){
         if(d){

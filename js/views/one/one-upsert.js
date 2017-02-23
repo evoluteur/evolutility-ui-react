@@ -74,7 +74,7 @@ export default function(){
 						setData(mid+'/'+response.data.fileName)
 					})
 					.catch(function (error) {
-						alert('Error')
+						alert('Error uploading file.')
 						console.log(error);
 					});
 			}else{

@@ -108,21 +108,26 @@ export default React.createClass({
 						selected={d ? moment(d, "YYYY-MM-DD") : null}
 						onChange={this.getDateFieldChange(f.id)}
 					/>
-		}else if(f.type==='image'){
-			let pix = d ? <img 
-						id={f.id} 
-					 	key={f.id}
-						ref='e'
-						className="img-thumbnail"
-						src={filesUrl+d}
-					/> : null
+		}else if(f.type==='image' || f.type==='document'){
+			let pix = null
+
+			if(d){
+				if(f.type==='image' && d){
+					pix = <img 
+								id={f.id} 
+							 	key={f.id}
+								ref='e'
+								className="img-thumbnail"
+								src={filesUrl+d}
+							/>
+				}else{
+					pix = format.doc(d, filesUrl)
+				}
+			}
 
 			return (
 				<div>
 					{pix}
-					<Dropzone ref="dropzone" onDrop={this.onDropFile} className="pixdrop">
-	                  <i>{i18n_actions.dropFile}</i>
-	                </Dropzone>
 					{d ? (
 						<div className="evol-remove" onClick={this.removeFile}>
 							<a href="javascript:void(0)">
@@ -131,6 +136,9 @@ export default React.createClass({
 							</a>
 						</div> 
 						) : null}
+					<Dropzone ref="dropzone" onDrop={this.onDropFile} className="pixdrop">
+	                  <i>{i18n_actions.dropFile}</i>
+	                </Dropzone>
 				</div>
 			)
 		}
@@ -162,6 +170,8 @@ export default React.createClass({
 				/> 
 		}else if(f.type==='image' && d){
 			fw = format.image(filesUrl+d)
+		}else if(f.type==='document'){
+			fw = format.doc(d, filesUrl)
 		}else {
 			fw = format.fieldValue(f, d)
 		}
@@ -209,7 +219,7 @@ export default React.createClass({
 	},
 
 	getDateFieldChange(fid) {
-		// - for fields of type date
+		// - for fields of type date (using react-datepicker)
 		return (v)=>{
 			this.props.callbacks.change({
 				target:{
