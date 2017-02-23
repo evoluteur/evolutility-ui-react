@@ -226,16 +226,16 @@ module.exports = {
   ],
 
   groups: [
-        { 
-          id:"serie", type: "panel", label: "Serie", width: 70,
-          fields: ["title", "authors", "genre", 
-                "serie_nb", "have_nb", "have", 
-                "language", "complete", "finished", "notes"]
-        },
-        { 
-          id:"pix", type: "panel", label: "Album Cover", width: 30,
-          fields: ["pix"]
-        }
+      { 
+        id:"serie", type: "panel", label: "Serie", width: 70,
+        fields: ["title", "authors", "genre", 
+              "serie_nb", "have_nb", "have", 
+              "language", "complete", "finished", "notes"]
+      },
+      { 
+        id:"pix", type: "panel", label: "Album Cover", width: 30,
+        fields: ["pix"]
+      }
   ]
 }
 
@@ -244,11 +244,11 @@ module.exports = {
 
 ## Other implementations of Evolutility
 
-[Evolutility-UI-jQuery](https://github.com/evoluteur/evolutility-ui-jquery) using jQuery and Backbone.
+[Evolutility-UI-jQuery](https://github.com/evoluteur/evolutility-ui-jquery) - Model-driven Web UI for CRUD using jQuery and Backbone (for REST or localStorage).
 
-[Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) using Node.js, Express, and PostgreSQL.
+[Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) - RESTful Micro-ORM for CRUD and more, written in Javascript, using Node.js, Express, and Postgres.
 
-[Evolutility](http://www.evolutility.org) using ASP.net and Microsoft SQL-Server.
+[Evolutility](http://www.evolutility.org) - Lightweight CRUD framework for heavy lifting with ASP.net and Microsoft SQL-Server.
 
 
 ## License
