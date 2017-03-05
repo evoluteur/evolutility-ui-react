@@ -1,8 +1,8 @@
 module.exports = {
     id: 'comics',
     label: 'Graphic Novels',
-    name: 'graphic novel serie',
-    namePlural: 'graphic novel series',
+    name: 'serie',
+    namePlural: 'series',
     icon: 'comics.png',
     titleField: 'title',
     searchFields: ['title', 'authors', 'notes'],

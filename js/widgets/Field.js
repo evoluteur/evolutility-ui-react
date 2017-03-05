@@ -64,7 +64,7 @@ export default React.createClass({
 						checked={d?true:false}
 						onChange={cbs.change}
 				    />
-		}else if(f.type==='textmultiline' && f.height>1){
+		}else if(f.type==='textmultiline' || f.type==='json'){ // && f.height>1
 			return <textarea 
 						id={f.id} 
 						key={f.id} 

@@ -99,7 +99,7 @@ export default function(){
 				})
 				.catch(err => {
 					this.setState({
-						message: format('Error retrieving list of values for field "'+fid+'".')
+						message: 'Error retrieving list of values for field "'+fid+'".'
 					})
 				})
 			}

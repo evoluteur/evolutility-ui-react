@@ -495,10 +495,11 @@ h1, h2 {
   height: 460px; }
 
 [data-entity="contact"] .evol-cards-body > div {
-  height: 130px; }
+  height: 143px; }
 
 [data-entity="todo"] .evol-cards-body > div {
-  height: 150px; }
+  height: 152px; }
+
 
 .evol-2cols td {
   padding: 0 20px !important; }
