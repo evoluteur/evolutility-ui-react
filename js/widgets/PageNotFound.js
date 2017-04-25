@@ -5,15 +5,19 @@ export default React.createClass({
 		const url = this.props.location && this.props.location.pathname
 
 		return (
-			<div>
+			<div style={{padding: '0 50px 10px'}}>
 
-				<h1>Page Not Found (Error 404)</h1>
+				<h1>404 - Page Not Found</h1>
 
 				<p><br/>
-				The requested URL "{url}" was not found on this server.
+				Oops! The page you are looking for isn't here.
+				</p>
+				<p style={{color: 'silver'}}>
+					404 on file "{url}"
 				</p>
 
-				<p><br/><a href="/">Back to Home Page</a></p>
+				<p><br/><a className="btn btn-info" href="/">Back to Home Page</a></p>
+
 
 			</div>
 		)
