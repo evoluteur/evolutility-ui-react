@@ -33,7 +33,8 @@ module.exports = {
             {id: 10, text: 'Thriller'},
             {id: 11, text: 'Science-fiction'},
             {id: 12, text: 'Super Heros'},
-            {id: 13, text: 'Western'} 
+            {id: 13, text: 'Western'} ,
+            {id: 14, text: 'Crime'} 
           ]
       },
       {

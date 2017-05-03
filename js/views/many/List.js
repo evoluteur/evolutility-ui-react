@@ -60,7 +60,8 @@ export default React.createClass({
 			paramsCollec = this.props.paramsCollec
 
 		if(m){
-			const ico = m.icon ? <img className="evol-many-icon" src={'/pix/'+m.icon}/> : null,
+			const icon= (paramsCollec && paramsCollec.icon) || m.icon;
+			const ico = icon ? <img className="evol-many-icon" src={'/pix/'+icon}/> : null,
 				link = '/'+((paramsCollec && paramsCollec.entity) || e)+'/browse/'
 
 			function cell(d, f, idx){

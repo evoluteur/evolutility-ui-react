@@ -153,8 +153,8 @@ export default withRouter(React.createClass({
 									</Panel>
 								)}
 
-								{m.collecs ? (
-									m.collecs.map((c, idx)=>{
+								{m.collections ? (
+									m.collections.map((c, idx)=>{
 										return (
 											<Panel title={c.title} key={'collec_'+c.id}>
 												<List key={'collec'+idx}
@@ -217,10 +217,14 @@ export default withRouter(React.createClass({
 
 	clearValidation(){
 		this.model.fields.forEach((f) => {
-			this.refs[f.id].setState({
-				invalid: false,
-				message: null
-			})
+			if(this.refs[f.id]){
+				this.refs[f.id].setState({
+					invalid: false,
+					message: null
+				})
+			}else{
+				console.log('Missing field "'+f.id+'".')
+			}
 		})
 	}
 

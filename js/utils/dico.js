@@ -25,7 +25,7 @@ var ft = {
 	html: 'html',
 	formula:'formula', // soon to be a field attribute rather than a field type
 	email: 'email',
-	pix: 'image',
+	image: 'image',
 	doc:'document',
 	//geoloc: 'geolocation',
 	url: 'url',

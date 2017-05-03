@@ -87,8 +87,8 @@ export default React.createClass({
                         </Panel>
                       )}
 
-                      {m.collecs ? (
-                        m.collecs.map((c, idx)=>{
+                      {m.collections ? (
+                        m.collections.map((c, idx)=>{
                           return (
                             <Panel title={c.title} key={'collec_'+c.id}>
                               <List key={'collec'+idx}
