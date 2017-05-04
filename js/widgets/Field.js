@@ -1,7 +1,7 @@
 
-// Evolutility-UI-React :: /widgets/field.js
+// Evolutility-UI-React :: /widgets/Field.js
 
-// Model-driven field (possible types specifed in dico.fieldTypes).
+// Model-driven field (possible types specified in dico.fieldTypes).
 
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2017 Olivier Giulieri
@@ -11,6 +11,8 @@ import React from 'react'
 import format from '../utils/format'
 import {i18n_actions, i18n_msg} from '../i18n/i18n'
 import {filesUrl} from '../../config.js'
+
+import FieldLabel from './FieldLabel'
 
 // - components:
 // - date
@@ -199,13 +201,10 @@ export default React.createClass({
 		return (
 			<div className={'evol-fld'+(invalid?' has-error':'')} style={{width: (f.width || 100)+'%'}}>
 
-				<div className="evol-field-label">
-					<label className="control-label">
-						{label}
-						{f.required && !readOnly ? <span className="evol-required">*</span> : null}
-						{f.help ? <i className="glyphicon glyphicon-question-sign" onClick={this.clickHelp} /> : null}
-					</label>
-				</div>
+				<FieldLabel label={label} 
+					field={f}
+					readOnly={readOnly}
+					clickHelp={this.clickHelp}/>
 
 				{f.help && this.state.help ? <div className="help-block"><i>{f.help}</i></div> : null}
 
