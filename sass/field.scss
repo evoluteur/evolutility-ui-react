@@ -26,16 +26,20 @@
       padding: 0 !important;
     }
 }
-.evol-field-label > label {
-  color:$color-text;
+.evol-field-label {
+  > label {
+    color:$color-label;
+    font-weight: normal;
+    font-size: .8em;
 
-  > .glyphicon-question-sign{
-    cursor: pointer;
-    padding-left: 4px;
-    color: silver;
+    > .glyphicon-question-sign{
+      cursor: pointer;
+      padding-left: 4px;
+      color: silver;
 
-    &:hover{
-      color:$color-icon-hover;
+      &:hover{
+        color:$color-icon-hover;
+      }
     }
   }
 }
