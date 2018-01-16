@@ -4,7 +4,7 @@
 // Mixin used in Views for One for Insert and Update (only view Edit for now maybe more later).
  
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2017 Olivier Giulieri
+// (c) 2018 Olivier Giulieri
 
 import axios from 'axios'
 import { browserHistory } from 'react-router'
@@ -43,7 +43,7 @@ export default function(){
 					})
 					.catch(function (error) {
 						//TODO:
-						alert('Error')
+						alert(error.message || 'Error while inserting or updating the record.')
 						console.log(error);
 					});
 			}//else{

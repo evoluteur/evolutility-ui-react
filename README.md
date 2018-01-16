@@ -250,9 +250,10 @@ module.exports = {
 
 [Evolutility](http://www.evolutility.org) - Lightweight CRUD framework for heavy lifting with ASP.net and Microsoft SQL-Server.
 
-
 ## License
 
-Copyright (c) 2017 [Olivier Giulieri](https://evoluteur.github.io/).
+Copyright (c) 2018 [Olivier Giulieri](https://evoluteur.github.io/).
+
+To suggest a feature or report a bug: [https://github.com/evoluteur/evolutility-ui-react/issues](https://github.com/evoluteur/evolutility-ui-react/issues)
 
 Evolutility-UI-React is released under the [MIT license](http://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE.md).

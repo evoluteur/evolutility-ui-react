@@ -92,6 +92,9 @@
 .form-control {
   padding: 6px; }
 
+.panel {
+  border-radius: 2px !important; }
+
 /*
   evolutility-ui-react : common
 */
@@ -302,7 +305,9 @@ label {
     padding: 0 !important; }
 
 .evol-field-label > label {
-  color: #0d0d0d; }
+  color: grey;
+  font-weight: normal;
+  font-size: .8em; }
   .evol-field-label > label > .glyphicon-question-sign {
     cursor: pointer;
     padding-left: 4px;

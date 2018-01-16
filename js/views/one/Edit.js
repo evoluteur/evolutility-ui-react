@@ -4,7 +4,7 @@
 // View to add or update one record at a time.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2017 Olivier Giulieri
+// (c) 2018 Olivier Giulieri
 
 import React from 'react'
 import { withRouter } from 'react-router'
@@ -100,21 +100,24 @@ export default withRouter(React.createClass({
         	title = dico.dataTitle(m, data, isNew)
 
 		const fnField = (f)=>{
-			if((f.type==='lov' || f.type==='list') && !f.list){
-				// - fetch list values
-				this.getLOV(f.id)
+			if(f){
+				if((f.type==='lov') && !f.list){
+					// - fetch list values
+					this.getLOV(f.id)
+				}
+				return (
+					<Field
+						key={f.id} 
+						ref={f.id} 
+						meta={f}
+						value={data[f.id]} 
+						data={data} 
+						callbacks={cbs}
+						entity={entity}
+					/>
+				)
 			}
-			return (
-				<Field
-					key={f.id} 
-					ref={f.id} 
-					meta={f}
-					value={data[f.id]} 
-					data={data} 
-					callbacks={cbs}
-					entity={entity}
-				/>
-			)
+			return null
 		}
 		
   		this.isNew = isNew

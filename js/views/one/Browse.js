@@ -4,7 +4,7 @@
 // Read-only view to browse one record.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2017 Olivier Giulieri
+// (c) 2018 Olivier Giulieri
 
 import React from 'react'
 import { Link } from 'react-router'
@@ -39,12 +39,14 @@ export default React.createClass({
 
     function fnFieldReadOnly(f){
       if(f){
-        const attr = (f.type==='lov') ? f.id+'_txt' : f.id
+        const isLOV = f.type==='lov';
+        const attr = isLOV ? f.id+'_txt' : f.id
         return (
           <Field 
             key={f.id} 
             meta={f} 
             value={data[attr]} 
+            valueId={isLOV?data[f.id]:null}
             readOnly={true}
             entity={entity}
           />

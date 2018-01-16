@@ -4,7 +4,7 @@
 // Single Bars or Pie charts (usually part of a set of Charts).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2017 Olivier Giulieri
+// (c) 2018 Olivier Giulieri
 
 // Quick and easy implementation w/ the old version of google charts
 // TODO: re-write using D3.js or other cool charting library
@@ -16,12 +16,14 @@ import {apiPath} from '../../../config.js'
 import { i18n_msg } from '../../i18n/i18n'
 import Alert from '../../widgets/Alert'
 import many from './many'
+import chartColors from '../charts/chart-colors'
 
 const urlChart = 'http://chart.apis.google.com/chart'
-const colors=['1f77b4','ff7f0e','2ca02c','d62728','9467bd','8c564b','e377c2','7f7f7f','bcbd22','17becf']
+
 
 const colorsList = function(nbColors){
-    return colors.slice(0, nbColors).join(',');
+    var cs= chartColors.colorsList(nbColors)
+    return cs.slice(0, nbColors).join(',');
 }
 
 var many2 = many()

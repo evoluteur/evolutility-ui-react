@@ -4,7 +4,7 @@
 // Dashboard style set of charts (bars or pies).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2017 Olivier Giulieri
+// (c) 2018 Olivier Giulieri
 
 // Quick and easy implementation w/ the old version of google charts
 // must be re-written using D3.js or other cool charting library
@@ -43,7 +43,7 @@ export default React.createClass({
                     
                     <div className="evolutility evol-many-charts">
                         {chartFields.length ? chartFields.map(function(f){
-                            return <Chart entity={e} key={f.id} field={f} title={f.label} className="panel-default"/> 
+                            return <Chart entity={e} key={'c-'+f.id} field={f} title={f.label} className="panel-default"/> 
                         }) : (
                             <Alert title="No data" message={i18n_charts.nocharts} type="warning"/>
                         )} 
@@ -52,7 +52,7 @@ export default React.createClass({
                 </div>
             )
         }else{
-            return <Alert title="Error" message={'Invalid input parameter \"'+e+'\".'}/>
+            return <Alert title="Error" message={'Invalid input parameter "'+e+'".'}/>
         }
     }
 })

@@ -4,9 +4,10 @@
 // Model-driven field (possible types specified in dico.fieldTypes).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2017 Olivier Giulieri
+// (c) 2018 Olivier Giulieri
 
 import React from 'react'
+import {Link} from 'react-router'
 
 import format from '../utils/format'
 import {i18n_actions, i18n_msg} from '../i18n/i18n'
@@ -162,9 +163,10 @@ export default React.createClass({
 
 	},
 
-	_fieldElemReadOnly(f, d){
+	_fieldElemReadOnly(f, d, d_id){
 		// - return the formated field value
 		let fw
+
 		if(f.type==='textmultiline'){
 			const height = emHeight(f)+'em'
 			return <div key={f.id} className="disabled evo-rdonly" style={{height:height}}
@@ -174,6 +176,8 @@ export default React.createClass({
 			fw = format.image(filesUrl+d)
 		}else if(f.type==='document'){
 			fw = format.doc(d, filesUrl)
+		}else if(f.type==='lov' && f.entity){
+			fw = <Link to={'/'+f.entity+'/browse/'+d_id}>{format.fieldValue(f, d)}</Link>
 		}else {
 			fw = format.fieldValue(f, d)
 		}
@@ -195,6 +199,7 @@ export default React.createClass({
 			readOnly = this.props.readOnly || f.readOnly,
 			cbs = this.props.callbacks || {},
 			value = this.props.value || null,
+			valueId = this.props.valueId || null,
 			invalid = this.state.invalid,
 			label = this.props.label || f.label
 
@@ -208,7 +213,7 @@ export default React.createClass({
 
 				{f.help && this.state.help ? <div className="help-block"><i>{f.help}</i></div> : null}
 
-				{readOnly ? this._fieldElemReadOnly(f, value)
+				{readOnly ? this._fieldElemReadOnly(f, value, valueId)
 								 : this._fieldElem(f, value, cbs)}
 
  				{invalid ? <div className="text-danger">{this.state.message}</div> : null}
