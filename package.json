@@ -3,6 +3,10 @@
   "version": "0.1.3",
   "description": "Model-driven Web UI for CRUD and more",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/evoluteur/evolutility-ui-react.git"
+  },
   "copyright": "(c) 2018 Olivier Giulieri",
   "homepage": "https://github.com/evoluteur/evolutility-ui-react",
   "author": "Olivier Giulieri (https://evoluteur.github.io/)",
