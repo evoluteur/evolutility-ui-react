@@ -54,7 +54,7 @@ Shows all fields for viewing (read only). Fields are grouped in panels.
 
 ![Browse](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/one-browse.gif)
 
-Code: [/js/views/one/Browse.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/js/views/one/Browse.js)
+Code: [/src/components/views/one/Browse.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/one/Browse.js)
 
 ### Edit
 This view shows all fields for edition to create or update records.
@@ -63,7 +63,7 @@ Fields are grouped in panels and tabs.
 
 ![Edit](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/one-edit.gif)
 
-Code: [/js/views/one/Edit.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/js/views/one/Edit.js)
+Code: [/src/components/views/one/Edit.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/one/Edit.js)
 
 
 ## Views for Many objects
@@ -72,21 +72,21 @@ Gives a tabular view of a collection.
 
 ![List](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-list.gif)
 
-Code: [/js/views/many/List.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/js/views/many/List.js)
+Code: [/src/components/views/many/List.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/List.js)
 
 ### Cards
 Shows records side by side as cards.
 
 ![Cards](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-cards.gif)
 
-Code: [/js/views/many/Cards.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/js/views/many/Cards.js)
+Code: [/src/components/views/many/Cards.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Cards.js)
 
 ### Charts
 Draws charts about the collection.
 
 ![Charts](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-charts.gif)
 
-Code: [/js/views/many/Charts.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/js/views/many/Charts.js)
+Code: [/src/components/views/many/Charts.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Charts.js)
 
 
 
@@ -248,7 +248,7 @@ module.exports = {
 
 [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) - RESTful Micro-ORM for CRUD and more, written in Javascript, using Node.js, Express, and Postgres.
 
-[Evolutility](http://www.evolutility.org) - Lightweight CRUD framework for heavy lifting with ASP.net and Microsoft SQL-Server.
+[Evolutility-ASP.net](http://www.evolutility.org) - Lightweight CRUD framework for heavy lifting with ASP.net and Microsoft SQL-Server.
 
 ## License
 

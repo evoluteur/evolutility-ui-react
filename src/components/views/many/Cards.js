@@ -8,9 +8,9 @@
 
 import React from 'react'
 
-import {i18n_msg, i18n_errors} from '../../i18n/i18n'
+import {i18n_msg, i18n_errors} from '../../../i18n/i18n'
 import Alert from '../../widgets/Alert'
-import dico from '../../utils/dico'
+import dico from '../../../utils/dico'
 import many from './many'
 import Card from '../One/Card'
 import Pagination from '../../widgets/Pagination'

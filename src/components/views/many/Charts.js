@@ -11,9 +11,9 @@
 
 import React from 'react'
 
-import { i18n_charts } from '../../i18n/i18n'
+import { i18n_charts } from '../../../i18n/i18n'
 import models from '../../../models/all_models'
-import dico from '../../utils/dico'
+import dico from '../../../utils/dico'
 import Alert from '../../widgets/Alert'
 import Chart from './Chart'
 

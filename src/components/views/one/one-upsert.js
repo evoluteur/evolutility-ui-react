@@ -9,8 +9,8 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router'
 
-import evoGlobals from '../../utils/evoGlobals'
-import {i18n_msg} from '../../i18n/i18n'
+import evoGlobals from '../../../utils/evoGlobals'
+import {i18n_msg} from '../../../i18n/i18n'
 import {apiPath} from '../../../config.js'
 
 export default function(){

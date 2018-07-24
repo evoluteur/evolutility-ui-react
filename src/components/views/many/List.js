@@ -9,9 +9,9 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import {i18n_msg, i18n_errors} from '../../i18n/i18n'
-import dico from '../../utils/dico'
-import format from '../../utils/format'
+import {i18n_msg, i18n_errors} from '../../../i18n/i18n'
+import dico from '../../../utils/dico'
+import format from '../../../utils/format'
 import many from './many'
 import Alert from '../../widgets/Alert'
 import PageNotFound from '../../widgets/PageNotFound'

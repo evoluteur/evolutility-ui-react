@@ -1,4 +1,4 @@
-import {prepModel} from '../js/utils/dico'
+import {prepModel} from '../utils/dico'
 
 import todo from './todo'
 import contact from './contact'

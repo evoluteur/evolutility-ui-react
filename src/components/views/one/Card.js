@@ -9,7 +9,7 @@
 import React from 'react'
 
 import models from '../../../models/all_models'
-import format from '../../utils/format'
+import format from '../../../utils/format'
 import { Link } from 'react-router'
 
 export default React.createClass({

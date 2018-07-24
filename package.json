@@ -11,13 +11,11 @@
   "homepage": "https://github.com/evoluteur/evolutility-ui-react",
   "author": "Olivier Giulieri (https://evoluteur.github.io/)",
   "license": "MIT",
-
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:dev": "webpack-dev-server --inline --content-base public/ --history-api-fallback",
     "start:prod": "webpack && node server.js"
   },
-
   "keywords": [
     "model-driven",
     "MDA",
@@ -32,7 +30,6 @@
     "form",
     "validation"
   ],
-
   "dependencies": {
     "compression": "^1.6.2",
     "express": "^4.14.1",
@@ -49,7 +46,6 @@
     "axios": "^0.15.3",
     "underscore": "^1.8.3"
   },
-  
   "devDependencies": {
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",

@@ -7,7 +7,7 @@
 // (c) 2017 Olivier Giulieri
 
 import React from 'react'
-import {filesUrl} from '../../config.js'
+import {filesUrl} from '../config.js'
 
 function notUndefined(v){
     return (typeof(v) != "undefined")

@@ -5,7 +5,7 @@
 import en from './i18n-en'
 import fr from './i18n-fr'
 
-import {locale} from '../../config'
+import {locale} from '../config'
 
 const i18nObj = {},
 	languages = {

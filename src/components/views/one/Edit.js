@@ -10,9 +10,9 @@ import React from 'react'
 import { withRouter } from 'react-router'
 import Modal from 'react-modal'
 
-import {i18n_actions, i18n_validation, i18n_errors} from '../../i18n/i18n'
-import dico from '../../utils/dico'
-import validation from '../../utils/validation'
+import {i18n_actions, i18n_validation, i18n_errors} from '../../../i18n/i18n'
+import dico from '../../../utils/dico'
+import validation from '../../../utils/validation'
 
 import Alert from '../../widgets/Alert'
 import oneRead from './one-read'

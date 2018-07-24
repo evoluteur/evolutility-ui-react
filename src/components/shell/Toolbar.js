@@ -12,9 +12,9 @@ import { browserHistory, Link } from 'react-router'
 import Modal from 'react-modal'
 
 import evoGlobals from '../../utils/evoGlobals'
-import {apiPath} from '../../../config.js'
+import {apiPath} from '../../config.js'
 import {i18n_actions, i18n_msg} from '../../i18n/i18n'
-import models from '../../../models/all_models'
+import models from '../../models/all_models'
 
 const menuItems = { 
     new: {id: 'edit/0', label: i18n_actions.new, icon:'plus', n:'x', readonly:false},

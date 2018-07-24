@@ -9,8 +9,8 @@
 import React from 'react'
 import {Link} from 'react-router'
 
-import format from '../utils/format'
-import {i18n_actions, i18n_msg} from '../i18n/i18n'
+import format from '../../utils/format'
+import {i18n_actions, i18n_msg} from '../../i18n/i18n'
 import {filesUrl} from '../../config.js'
 
 import FieldLabel from './FieldLabel'

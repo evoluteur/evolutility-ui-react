@@ -8,7 +8,7 @@
 
 import React from 'react'
 
-import url from '../utils/url'
+import url from '../../utils/url'
 import {pageSize} from '../../config'
 
 export default React.createClass({
