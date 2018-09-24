@@ -1,6 +1,6 @@
 module.exports = {
     id: 'comics',
-    label: 'Graphic Novels',
+    label: 'Graphic novels',
     name: 'serie',
     namePlural: 'series',
     icon: 'comics.png',
@@ -39,12 +39,13 @@ module.exports = {
       },
       {
           id: 'serie_nb', type: 'integer', 
-          width: 15, inMany: false,
+          width: 15, 
+          inMany: true,
           label: 'Albums', noCharts: true 
       },
       {
           id: 'have_nb', type: 'integer', 
-          width: 15, inMany: false,
+          width: 15, inMany: true,
           label: 'Owned', noCharts: true 
       },
       {
