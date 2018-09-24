@@ -138,7 +138,7 @@ Models describe the object and its list of fields.
 
 ### Sample model
 
-The following example is a graphic novels collection app. The classic To-Do app is [also included](https://github.com/evoluteur/evolutility-ui-react/blob/master/models/todo.js) in the demo. 
+The following example is the model for a simple graphic novels inventory app. 
 
 ```javascript
 module.exports = {
@@ -241,6 +241,12 @@ module.exports = {
 
 
 ```
+
+More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/todo.js),
+ [Address book](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/contact.js),
+  [Restaurants list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/restaurant.js),
+    [Wine cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/winecellar.js). 
+
 
 ## Other implementations of Evolutility
 
