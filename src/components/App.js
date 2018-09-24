@@ -33,6 +33,9 @@ export default React.createClass({
                       <li><Link to="/todo/list" id="todo" className={entity==='todo'?'active':''}> To-Do</Link></li>
                       <li><Link to="/contact/list" id="contact" className={entity==='contact'?'active':''}> Address Book</Link></li>
                       <li><Link to="/comics/cards" id="comics" className={entity==='comics'?'active':''}> Comics</Link></li>
+                      <li><Link to="/restaurant/list" id="restaurant" className={entity==='restaurant'?'active':''}> Restaurants</Link></li>
+                      <li><Link to="/winecellar/list" id="winecellar" className={entity==='winecellar'?'active':''}> Wines</Link></li>
+                      <li><Link to="/winetasting/list" id="winetasting" className={entity==='winetasting'?'active':''}> Tastings</Link></li>
                   </ul>
                   <div className="clearer"/>
               </div>
