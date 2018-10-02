@@ -78,12 +78,8 @@ module.exports = {
              label: 'Fax', maxLength: 20, width: 100
         },
         {
-            type: 'text', id: 'address1',
-             label: 'Address', maxLength: 150, width: 100
-        },
-        {
-            type: 'text', id: 'address2', 
-             label: '', labelMany: 'Address 2', maxLength: 150, width: 100
+            type: 'textmultiline', id: 'address',
+             label: 'Address', width: 100, height: 3
         },
         {
             type: 'text', id: 'city',
@@ -118,7 +114,7 @@ module.exports = {
         },
         {
             type: 'panel', label: 'Address', width: 62,
-            fields: ['address1', 'address2', 'city', 'state', 'zip', 'country']
+            fields: ['address', 'city', 'state', 'zip', 'country']
         },
         {
             type: 'panel', label: 'Misc.', width: 38,
