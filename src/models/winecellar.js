@@ -142,366 +142,263 @@ module.exports = {
     fnTitle: function(model){
         return model.get('name')+' '+model.get('vintage');
     },
-    fnBadge: function(model){
-        return model.get('remaining') || 0;
-    },
-    fnSearch: ['name', 'winery', 'appellation', 'notes'],
-    elements: [
+    fields:  [
         {
-            type: 'panel',
-            label: 'Wine',
+            id:'name',
+            column:'name',
+            type: 'text',
+            label: 'Name',
+            required: true,
+            maxLength: 150,
+            inMany: true,
+            width: 62,
+            help: 'Name of the wine as indicated on the label.'
+        },
+        {
+            id:'vintage',
+            column:'vintage',
+            type: 'integer',
+            label: 'Vintage',
+            required: true,
+            maxLength: 4,
+            inMany: true,
+            width: 38,
+            min: 1900,
+            max: 2020,
+            help: 'Year the wine was produced.'
+        },
+        {
+            id:'winery',
+            column:'winery',
+            type: 'text',
+            label: 'Winery',
+            maxLength: 100,
+            required: true,
+            inMany: true,
+            width: '62',
+            help: 'The establishment where this wine is made.'
+        },
+        {
+            id:'bsize',
+            column:'bsize',
+            type: 'lov',
+            label: 'Bottle Size',
+            labelList: 'Bottle',
+            width: 38,
+            list: winecellar_lovs.bottleSize,
+            lovtable:'wine_bsize',
+        },
+        {
+            id:'grape',
+            column:'grape',
+            type: 'lov',
+            label: 'Grape',
+            inMany: false,
+            width: 62,
+            list: winecellar_lovs.grape,
+            lovtable:'wine_grape',
+        },
+        {
+            id:'type',
+            column:'type',
+            type: 'lov',
+            label: 'Type',
+            inMany: true,
+            width: 38,
+            list: winecellar_lovs.type,
+            lovtable:'wine_type',
+        },
+        {
+            id:'appellation',
+            column:'appellation',
+            type: 'text',
+            label: 'Appellation',
             width: 100,
-            elements: [
-                {
-                    id:'name',
-                    column:'name',
-                    type: 'text',
-                    label: 'Name',
-                    required: true,
-                    maxLength: 150,
-                    inMany: true,
-                    width: 62,
-                    help: 'Name of the wine as indicated on the label.'
-                },
-                {
-                    id:'vintage',
-                    column:'vintage',
-                    type: 'integer',
-                    label: 'Vintage',
-                    required: true,
-                    maxLength: 4,
-                    inMany: true,
-                    width: 38,
-                    min: 1900,
-                    max: 2020,
-                    help: 'Year the wine was produced.'
-                }
-            ]
+            help: 'An appellation is a legally defined and protected geographical indication used to identify where the grapes for a wine were grown.'
         },
         {
-            type: 'tab',
-            label: 'General',
-            elements: [
-                {
-                    type: 'panel',
-                    label: 'Wine',
-                    width: 80,
-                    elements: [
-                        {
-                            id:'winery',
-                            column:'winery',
-                            type: 'text',
-                            label: 'Winery',
-                            maxLength: 100,
-                            required: true,
-                            inMany: true,
-                            width: '62',
-                            help: 'The establishment where this wine is made.'
-                        },
-                        {
-                            id:'bsize',
-                            column:'bsize',
-                            type: 'lov',
-                            label: 'Bottle Size',
-                            labelList: 'Bottle',
-                            width: 38,
-                            list: winecellar_lovs.bottleSize,
-                            lovtable:'wine_bsize',
-                        },
-                        {
-                            id:'grape',
-                            column:'grape',
-                            type: 'lov',
-                            label: 'Grape',
-                            inMany: false,
-                            width: 62,
-                            list: winecellar_lovs.grape,
-                            lovtable:'wine_grape',
-                        },
-                        {
-                            id:'type',
-                            column:'type',
-                            type: 'lov',
-                            label: 'Type',
-                            inMany: true,
-                            width: 38,
-                            list: winecellar_lovs.type,
-                            lovtable:'wine_type',
-                        },
-                        {
-                            id:'appellation',
-                            column:'appellation',
-                            type: 'text',
-                            label: 'Appellation',
-                            width: 100,
-                            help: 'An appellation is a legally defined and protected geographical indication used to identify where the grapes for a wine were grown.'
-                        },
-                        {
-                            id:'country',
-                            column:'country',
-                            type: 'lov',
-                            label: 'Country',
-                            width: 32,
-                            list: winecellar_lovs.country,
-                            lovtable:'wine_country',
-                        },
-                        {
-                            id:'region',
-                            column:'region',
-                            type: 'text',
-                            label: 'Region',
-                            maxLength: 100,
-                            width: 30
-                        },
-                        {
-                            id:'area',
-                            column:'area',
-                            type: 'text',
-                            label: 'Area',
-                            maxLength: 100,
-                            width: 38
-                        }
-
-                    ]
-                },
-                {
-                    type: 'panel',
-                    label: 'Bottle Label',
-                    width: 20,
-                    elements: [
-                        {
-                            id:'label_img',
-                            column:'label_img',
-                            type: 'image',
-                            label: 'Label',
-                            labelCards: '',
-                            maxLength: 200,
-                            width: 100,
-                            inMany: true
-                        }
-                    ]
-                }
-            ]
+            id:'country',
+            column:'country',
+            type: 'lov',
+            label: 'Country',
+            width: 32,
+            list: winecellar_lovs.country,
+            lovtable:'wine_country',
         },
         {
-            type: 'tab',
-            label: 'Purchase',
-            elements: [
-                {
-                    type: 'panel',
-                    label: 'Purchase',
-                    width: 100,
-                    elements: [
-                        {
-                            id:'buying_date',
-                            column: 'buying_date',
-                            type: 'date',
-                            label: 'Buying Date',
-                            width: 40
-                        },
-                        {
-                            id:'price',
-                            column: 'price',
-                            type: 'money',
-                            label: 'Price',
-                            inMany: true,
-                            width: 30
-                        },
-                        {
-                            id:'value',
-                            column: 'value',
-                            type: 'money',
-                            label: 'Value',
-                            width: 30
-                        },
-                        {
-                            id:'purchased',
-                            column: 'purchased',
-                            type: 'integer',
-                            label: 'Bottles Purchased',
-                            labelList: 'Purchased',
-                            maxLength: 10,
-                            width: 40
-                        },
-                        {
-                            id:'remaining',
-                            column: 'remaining',
-                            type: 'integer',
-                            label: 'Remaining',
-                            labeledit: 'Bottles Remaining',
-                            maxLength: 10,
-                            width: 60,
-                            noCharts: true
-                        },
-                        {
-                            id:'notes',
-                            column: 'notes',
-                            type: 'textmultiline',
-                            label: 'Notes',
-                            maxLength: 150,
-                            width: 100,
-                            height: 2
-                        }
-
-                    ]
-                }
-
-            ]
+            id:'region',
+            column:'region',
+            type: 'text',
+            label: 'Region',
+            maxLength: 100,
+            width: 30
         },
         {
-            type: 'tab',
-            label: 'Drinking and Score',
-            elements: [
-                {
-                    type: 'panel',
-                    label: 'Drinking',
-                    width: 62,
-                    elements: [
-                        {
-                            id:'drink_from',
-                            column: 'drink_from',
-                            type: 'integer',
-                            label: 'Drink from (year)',
-                            labelList: 'Drink',
-                            labelCharts: 'Wines by Start drinking period',
-                            placeholder: '2012',
-                            maxLength: 10,
-                            width: 50,
-                            min: 1900,
-                            max: 2100
-                        },
-                        {
-                            id:'drink_to',
-                            column: 'drink_to',
-                            type: 'integer',
-                            label: 'Drink until',
-                            labelCharts: 'Wines by End drinking period',
-                            maxLength: 4,
-                            width: 50,
-                            min: 1900,
-                            max: 2100,
-                        },
-                        {
-                            id:'peak_from',
-                            column: 'peak_from',
-                            type: 'integer',
-                            label: 'Peak from',
-                            labelCharts: 'Wines by Start peak period',
-                            maxLength: 4,
-                            width: 50,
-                            min: 1900,
-                            max: 2100
-                        },
-                        {
-                            id:'peak_to',
-                            column: 'peak_to',
-                            type: 'integer',
-                            label: 'Peak until',
-                            labelCharts: 'Wines by End peak period',
-                            maxLength: 4,
-                            width: 50,
-                            min: 1900,
-                            max: 2100
-                        },
-                        {
-                            id:'meal',
-                            column: 'meal',
-                            type: 'textmultiline',
-                            label: 'Meal',
-                            maxLength: 200,
-                            width: 100,
-                            height: 2
-                        }
-
-                    ]
-                },
-                {
-                    type: 'panel',
-                    label: 'Score',
-                    width: 38,
-                    elements: [
-                        {
-                            id:'score',
-                            column: 'score',
-                            type: 'lov',
-                            label: 'My Score',
-                            labelList: 'Score',
-                            width: 100,
-                            list: winecellar_lovs.score,
-                            lovtable:'wine_score',
-                        },
-                        {
-                            id:'score_parker',
-                            column: 'score_parker',
-                            type: 'integer',
-                            label: 'Parker',
-                            labelCharts: 'Parker scores',
-                            min: 50,
-                            max: 100,
-                            maxLength: 3,
-                            width: 100
-                        },
-                        {
-                            id:'score_winespectator',
-                            column: 'score_winespectator',
-                            type: 'integer',
-                            label: 'Wine Spectator',
-                            labelCharts: 'Wine Spectator scores',
-                            min: 0,
-                            max: 100,
-                            maxLength: 3,
-                            width: 100
-                        }
-
-                    ]
-                }
-            ]
-        },/*
+            id:'area',
+            column:'area',
+            type: 'text',
+            label: 'Area',
+            maxLength: 100,
+            width: 38
+        },
         {
-            type: 'tab',
-            label: 'Wine Tasting',
-            elements: [
-                {
-                    type: 'panel-list',
-                    id:'degustations',
-                    table:'wine_degustation',
-                    column:'wine_id',
-                    label: 'Degustations',
-                    width: 100,
-                    elements: [
-                        {id: 'ddate', type: 'date', label: 'Date', maxLength: 20, inMany: true,
-                            required:true},
-                        {id: 'robe',  type: 'text', label: 'Robe', maxLength: 100, inMany: true},
-                        {id: 'nose', type: 'text', label: 'Nose', maxLength: 100, inMany: true},
-                        {id: 'taste', type: 'text', label: 'Taste', maxLength: 100, inMany: true},
-                        {id: 'notes', type: 'textmultiline', label: 'Note', maxLength: 300, inMany: true, width: 100, height: 2}
-                    ]
-                }
-            ]
-        },*/
+            id:'label_img',
+            column:'label_img',
+            type: 'image',
+            label: 'Label',
+            labelCards: '',
+            maxLength: 200,
+            width: 100,
+            inMany: true
+        },
         {
-            type: 'tab',
+            id:'buying_date',
+            column: 'buying_date',
+            type: 'date',
+            label: 'Buying Date',
+            width: 40
+        },
+        {
+            id:'price',
+            column: 'price',
+            type: 'money',
+            label: 'Price',
+            inMany: true,
+            width: 30
+        },
+        {
+            id:'value',
+            column: 'value',
+            type: 'money',
+            label: 'Value',
+            width: 30
+        },
+        {
+            id:'purchased',
+            column: 'purchased',
+            type: 'integer',
+            label: 'Bottles Purchased',
+            labelList: 'Purchased',
+            maxLength: 10,
+            width: 40
+        },
+        {
+            id:'remaining',
+            column: 'remaining',
+            type: 'integer',
+            label: 'Remaining',
+            labeledit: 'Bottles Remaining',
+            maxLength: 10,
+            width: 60,
+            noCharts: true
+        },
+        {
+            id:'notes',
+            column: 'notes',
+            type: 'textmultiline',
             label: 'Notes',
-            elements: [
-                {
-                    type: 'panel',
-                    label: 'Comments',
-                    width: 100,
-                    elements: [
-                        {
-                            id: 'comments',
-                            column: 'comments',
-                            type: 'textmultiline',
-                            label: 'Comments',
-                            maxLength: 500,
-                            width: 100,
-                            height: 8
-                        }
-                    ]
-                }
-            ]
+            maxLength: 150,
+            width: 100,
+            height: 2
+        },
+        {
+            id:'drink_from',
+            column: 'drink_from',
+            type: 'integer',
+            label: 'Drink from (year)',
+            labelList: 'Drink',
+            labelCharts: 'Wines by Start drinking period',
+            placeholder: '2012',
+            maxLength: 10,
+            width: 50,
+            min: 1900,
+            max: 2100
+        },
+        {
+            id:'drink_to',
+            column: 'drink_to',
+            type: 'integer',
+            label: 'Drink until',
+            labelCharts: 'Wines by End drinking period',
+            maxLength: 4,
+            width: 50,
+            min: 1900,
+            max: 2100,
+        },
+        {
+            id:'peak_from',
+            column: 'peak_from',
+            type: 'integer',
+            label: 'Peak from',
+            labelCharts: 'Wines by Start peak period',
+            maxLength: 4,
+            width: 50,
+            min: 1900,
+            max: 2100
+        },
+        {
+            id:'peak_to',
+            column: 'peak_to',
+            type: 'integer',
+            label: 'Peak until',
+            labelCharts: 'Wines by End peak period',
+            maxLength: 4,
+            width: 50,
+            min: 1900,
+            max: 2100
+        },
+        {
+            id:'meal',
+            column: 'meal',
+            type: 'textmultiline',
+            label: 'Meal',
+            maxLength: 200,
+            width: 100,
+            height: 2
+        },
+        {
+            id:'score',
+            column: 'score',
+            type: 'lov',
+            label: 'My Score',
+            labelList: 'Score',
+            width: 100,
+            list: winecellar_lovs.score,
+            lovtable:'wine_score',
+        },
+        {
+            id:'score_parker',
+            column: 'score_parker',
+            type: 'integer',
+            label: 'Parker',
+            labelCharts: 'Parker scores',
+            min: 50,
+            max: 100,
+            maxLength: 3,
+            width: 100
+        },
+        {
+            id:'score_winespectator',
+            column: 'score_winespectator',
+            type: 'integer',
+            label: 'Wine Spectator',
+            labelCharts: 'Wine Spectator scores',
+            min: 0,
+            max: 100,
+            maxLength: 3,
+            width: 100
+        },
+        {
+            id: 'comments',
+            column: 'comments',
+            type: 'textmultiline',
+            label: 'Comments',
+            maxLength: 500,
+            width: 100,
+            height: 8
         }
     ],
+    fnSearch: ['name', 'winery', 'appellation', 'notes'],
     groups: [
         {
             type: 'panel',

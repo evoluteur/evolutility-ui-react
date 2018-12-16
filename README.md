@@ -32,7 +32,7 @@ npm start
 
 In a web browser, go to the url [http://localhost:8080/](http://localhost:8080/).
 
-For the REST endpoints, you also need to setup [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node).
+For the REST endpoints, you also need to install and run [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) which provides the matching REST endpoints based on the same metadata.
 
 
 ## Views

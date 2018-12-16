@@ -11,10 +11,10 @@ import { locale, i18n_validation } from '../i18n/i18n'
 module.exports = {
 
     valRegEx: {
-        email: /^[\w\.\-]+@[\w\.\-]+\.[\w\.\-]+$/,
+        email: /^[\w.-]+@[\w.-]+\.[\w.-]+$/,
         integer: /^[-+]?\d+$/, // /^[0-9]*/,
         decimalEN: /(\+|-)?(\d*\.\d*)?$/,
-        decimalFR: /(\+|-)?(\d*\,\d*)?$/,
+        decimalFR: /(\+|-)?(\d*,\d*)?$/,
         //decimalDA: /(\+|-)?(\d*\,\d*)?$/,
     },
 
