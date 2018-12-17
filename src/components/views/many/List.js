@@ -1,45 +1,43 @@
-
 // Evolutility-UI-React :: /views/many/List.js
 
 // List view to display a collection as a list (table w/ sorting and paging).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2017 Olivier Giulieri
+// (c) 2018 Olivier Giulieri
 
 import React from 'react'
-import { Link } from 'react-router'
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 
-import {i18n_msg, i18n_errors} from '../../../i18n/i18n'
-import dico from '../../../utils/dico'
+import {i18n_msg} from '../../../i18n/i18n'
+import {pageSize} from '../../../config'
+
+import Many from './many'
+
+import {isFieldMany} from '../../../utils/dico'
 import format from '../../../utils/format'
-import many from './many'
-import Alert from '../../widgets/Alert'
-import PageNotFound from '../../widgets/PageNotFound'
-import Pagination from '../../widgets/Pagination'
+import Header from '../../shell/Header'
+import Alert from 'widgets/Alert'
+import PageNotFound from 'widgets/PageNotFound'
+import Pagination from 'widgets/Pagination'
 
+import './List.scss' 
 
-export default React.createClass({
+const sliceData = data => data.length > pageSize ? data.slice(0, pageSize) : data
 
-	viewId: 'list',
+export default class List extends Many {
 
-	propTypes: {
-		params: React.PropTypes.shape({
-			entity: React.PropTypes.string.isRequired
-		}),
-		paramsCollec: React.PropTypes.object
-	}, 
-
-	mixins: [many()],
+	viewId = 'list'
 
 	tableHeader(fields) {
 		const fnCell = this.props.paramsCollec ? 
 			// - header sub-collection table
-			(f) => <th key={f.id}>
+			f => <th key={f.id}>
 					{f.label}
 				</th>
-			 : 
+			: 
 			// - header main table
-			(f) => <th id={f.id} key={f.id} onClick={this.clickSort}>
+			f => <th id={f.id} key={f.id} onClick={this.clickSort}>
 					{f.label}
 					{f.id===this._sortField ? (
 							<i className={"glyphicon glyphicon-arrow-"+(this._sortDirection==='desc' ? 'down' : 'up')}></i>
@@ -52,26 +50,32 @@ export default React.createClass({
 				{fields.map(fnCell)}
 			</tr>
 		)
-	},
+	}
 
 	render() {
-		const e = this.props.params.entity,
-			m = this.model,
-			paramsCollec = this.props.paramsCollec
+		const props = this.props,
+			isNested = props.isNested,
+			e = props.match.params.entity,
+			m = this.model, // TODO: model and sub-model distinction
+			paramsCollec = props.paramsCollec
 
-		if(m){
-			const icon= (paramsCollec && paramsCollec.icon) || m.icon;
-			const ico = icon ? <img className="evol-many-icon" src={'/pix/'+icon}/> : null,
-				link = '/'+((paramsCollec && paramsCollec.entity) || e)+'/browse/'
+		if(m || isNested){
+			const icon= (paramsCollec && paramsCollec.icon) || m.icon
+			const ico = icon ? <img className="evol-many-icon" src={'/pix/'+icon} alt=""/> : null
+			const link = '/'+((paramsCollec && paramsCollec.entity) || e)+'/browse/'
 
 			function cell(d, f, idx){
-				const value = d[(f.type==='lov') ? f.id+'_txt' : f.id]
+				const lovField = f.type==='lov'
+				const value = d[lovField ? f.id+'_txt' : f.id]
+				
 				if(idx===0){
 					return <td key={idx}>
-						<Link to={link+d.id}>
-							{ico}
-							{format.fieldValue(f, value, true)}
-						</Link></td>
+							<Link to={link+d.id}>
+								{ico}
+								{format.fieldValue(f, value, true)}
+							</Link>
+							{d.nb_comments?(' '+d.nb_comments+' comments'):null}
+						</td>
 				}else if(f.type==='color'){
 					return <td key={idx}><div className="evo-color-box" id={f.id} 
 						style={{backgroundColor: value}} title={value}/></td>
@@ -87,14 +91,15 @@ export default React.createClass({
 				css = paramsCollec ? 'table sub' : 'table table-hover main' 
 
 			if(this.state.error){
-				body = <Alert title="Error" message={this.state.error.message}/> 
+				body = <Alert type="danger"  title="Error" message={this.state.error.message}/> 
 			}else{
+				document.title = title
 				if(data.length){
 					let fields
 					if(paramsCollec){
 						fields = paramsCollec.fields
 					}else{
-						fields = m.fields.filter(dico.isFieldMany)
+						fields = m.fields.filter(isFieldMany)
 					}
 					body = (
 						<div>
@@ -103,16 +108,11 @@ export default React.createClass({
 									{this.tableHeader(fields)}
 								</thead>
 								<tbody>
-								{data.length ? data.map(function(d){
-										return (
-											<tr key={d.id}>
-												{fields.map(function(f, idx){
-													return cell(d, f, idx)
-												})}
-											</tr>
-										)
-									}) : null
-								}
+									{data.length ? sliceData(data).map(d => (
+										<tr key={d.id}>
+											{fields.map((f, idx) => cell(d, f, idx))}
+										</tr>
+									)) : null}
 								</tbody>
 							</table>
 						</div>
@@ -120,16 +120,20 @@ export default React.createClass({
 				}else if(this.state.loading){
 					body = null
 				}else{
-					body = <Alert title="No data" message={i18n_msg.nodata.replace('{0}', m.namePlural)} type="info" />
-				}
+					// TODO: get model of nested obj
+					if(this.props.isNested){
+						body = <div className="nodata-list2">No data.</div>
+					}else{
+						body = <Alert title="No data" message={i18n_msg.nodata.replace('{0}', m.namePlural)} type="info" />
+					}
+				} 
 			}
+
 			return (
 				<div data-entity={e} style={{width: '100%'}}>
 					{paramsCollec ? null : (
-						<h2 className="evo-page-title">
-							{title}
-							<span className="evo-badge">{full_count}</span>
-						</h2>
+						<Header entity={e} title={title} 
+							count={full_count} cardinality='n' view={this.viewId}/>
 					)}
 					<div className="evolutility evol-many-list">
 						{body}
@@ -144,8 +148,15 @@ export default React.createClass({
 			)
 		}else{
 			return <PageNotFound location={this.props.location}/>
-			//return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', e)}/>
 		}
 	}
 
-})
+}
+
+List.propTypes = {
+	params: PropTypes.shape({
+		entity: PropTypes.string.isRequired
+	}),
+	paramsCollec: PropTypes.object,
+	isNested: PropTypes.bool,
+}

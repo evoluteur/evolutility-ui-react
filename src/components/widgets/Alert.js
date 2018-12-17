@@ -1,4 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
+import './Alert.scss'
 
 const icons = {
 	info: 'info-sign',
@@ -10,18 +13,7 @@ function icon(name) {
 	return <i className={'glyphicon glyphicon-'+icons[name]}/>
 }
 
-export default React.createClass({
-
-	propTypes: {
-		title: React.PropTypes.string,
-		message: React.PropTypes.string.isRequired,
-		type: React.PropTypes.oneOf([
-			'info', 	// - blue
-			'success', 	// - green
-			'warning', 	// - yellow
-			'danger' 	// - red
-		])
-	},
+export default class Alert extends React.PureComponent {
 
 	render() {
 		const aType = this.props.type || 'danger',
@@ -35,4 +27,19 @@ export default React.createClass({
 		)
 	}
 	
-})
+}
+
+Alert.propTypes = {
+	title: PropTypes.string,
+	message: PropTypes.string.isRequired,
+	type: PropTypes.oneOf([
+		'info', 	// - blue
+		'success', 	// - green
+		'warning', 	// - yellow
+		'danger' 	// - red
+	])
+}
+
+Alert.defaultProps = {
+	type: 'info',
+}

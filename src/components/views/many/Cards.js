@@ -1,33 +1,29 @@
-
 // Evolutility-UI-React :: /views/many/Cards.js
 
 // Cards view to display a collection as a set of Cards.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2017 Olivier Giulieri
+// (c) 2018 Olivier Giulieri
 
 import React from 'react'
+import PropTypes from 'prop-types';
 
 import {i18n_msg, i18n_errors} from '../../../i18n/i18n'
-import Alert from '../../widgets/Alert'
-import dico from '../../../utils/dico'
-import many from './many'
-import Card from '../One/Card'
-import Pagination from '../../widgets/Pagination'
+import Header from '../../shell/Header'
+import { isFieldMany } from '../../../utils/dico'
+import Many from './many'
+import Card from '../one/Card'
+import Alert from 'widgets/Alert'
+import Pagination from 'widgets/Pagination'
 
+import './Cards.scss' 
 
-export default React.createClass({
+export default class Cards extends Many {
 
-	viewId: 'cards',
-
-	propTypes: {
-		params: React.PropTypes.object
-	},
-
-	mixins: [many()],
+	viewId = 'cards'
 
 	render() {
-	    const entity = this.props.params.entity,
+	    const entity = this.props.match.params.entity,
 			m = this.model
 	  		
 	  	if(m){
@@ -38,12 +34,14 @@ export default React.createClass({
 			let body
 
 			if(!this.state.error){
+				document.title = title
 			 	if(data.length){
-			 		const fieldCols = m.fields.filter(dico.isFieldMany)
+			 		const fieldCols = m.fields.filter(isFieldMany)
 			 		body = <div className="evol-cards-body">
 						{this.state.data.map(function(d, idx){
 							return <Card key={idx} data={d} fields={fieldCols} entity={entity}/>
 						})}
+						<div className="clearer"></div>
 					</div>
 			 	}else if(this.state.loading){
 					body = null
@@ -56,10 +54,8 @@ export default React.createClass({
 			return (
 				<div data-entity={entity} className="evol-many-cards">
 					
-					<h2 className="evo-page-title">
-						{title}
-						<span className="evo-badge">{full_count}</span>
-					</h2>
+					<Header entity={entity} title={title} count={full_count} 
+						cardinality='n' view={this.viewId} />
 
 					{body}
 
@@ -76,4 +72,8 @@ export default React.createClass({
 		}
   	}
 
-})
+}
+
+Cards.propTypes = {
+	params: PropTypes.object
+}

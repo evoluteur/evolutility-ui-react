@@ -1,4 +1,3 @@
-
 // Evolutility-UI-React :: /views/one/Edit.js
 
 // View to add or update one record at a time.
@@ -7,36 +6,38 @@
 // (c) 2018 Olivier Giulieri
 
 import React from 'react'
-import { withRouter } from 'react-router'
-import Modal from 'react-modal'
+//import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
+//import moment from 'moment'
+//import { withRouter } from 'react-router'
+//import {wTimestamp} from "../../../config"
 import {i18n_actions, i18n_validation, i18n_errors} from '../../../i18n/i18n'
-import dico from '../../../utils/dico'
-import validation from '../../../utils/validation'
+import { dataTitle, fieldId2Field } from 'utils/dico'
+import validation from 'utils/validation'
 
-import Alert from '../../widgets/Alert'
-import oneRead from './one-read'
-import oneUpsert from './one-upsert'
-import Field from '../../widgets/Field'
-import Panel from '../../widgets/Panel'
+import OneReadWrite from './one-readwrite'
+import Alert from 'widgets/Alert'
+import Field from 'widgets/Field'
+import Panel from 'widgets/Panel'
 import List from '../many/List'
+import Header from '../../shell/Header'
 
-export default withRouter(React.createClass({
+export default class Edit extends OneReadWrite{
 
-	viewId: 'edit',
+	viewId = 'edit'
 
-	propTypes: {
-		params: React.PropTypes.shape({
-			entity: React.PropTypes.string.isRequired,
-			id: React.PropTypes.string
-		}).isRequired
-	},
-
-	mixins: [oneRead(), oneUpsert()],
+	constructor(props) {
+		super(props);
+		this.clickSave = this.clickSave.bind(this);
+		this.fieldChange = this.fieldChange.bind(this);
+		this.uploadFileOne = this.uploadFileOne.bind(this);
+	}
  
-	getDataDelta: function(){
+	getDataDelta(){
 		return this.delta || null
-	},
+	}
 
 	clickSave(evt){ 
 		const fields = this.model.fields,
@@ -50,7 +51,7 @@ export default withRouter(React.createClass({
 				invalid: !v.valid
 			})
 		}
-	},
+	}
 
 	fieldChange(evt) {
 		const fid=evt.target.id,
@@ -61,33 +62,18 @@ export default withRouter(React.createClass({
 			v=evt.target.checked
 		}
 		newData[fid]=v
+		
 		this.setDeltaField(fid, v)
 		this.setState({data: newData})
-	},
-/*
-	fieldClick(i, props) {
-		 //debugger
-	},
-	fieldLeave(i, props) {
-		//debugger
-	},
-*/
-	setDeltaField(fid, value){
-		if (!this.delta){
-			this.delta={}
-		}
-		this.delta[fid]=value
-		this._dirty=true
-	},
+	}
 
 	isDirty(){
 		return this._dirty
-	},
+	}
 
 	render() {
-		const urlParts = window.location.pathname.split('/'),
-			isNew = urlParts.length>2 ? urlParts[3]=='0' : false,
-	    	{id=0, entity=null} = this.props.params,
+	    const {id=0, entity=null, view='browse'} = this.props.match.params,
+	    	isNew = id===0 || id==='0',
 			ep = '/'+entity+'/',
 			m = this.model,
 			data = this.state.data || {},
@@ -97,7 +83,8 @@ export default withRouter(React.createClass({
 				//leave: this.fieldLeave,
 				dropFile: this.uploadFileOne
 			},
-        	title = dico.dataTitle(m, data, isNew)
+        	title = dataTitle(m, data, isNew),
+        	linkBrowse = isNew ? (ep+'list') : (ep+view+(id?('/'+id):''));
 
 		const fnField = (f)=>{
 			if(f){
@@ -109,7 +96,7 @@ export default withRouter(React.createClass({
 					<Field
 						key={f.id} 
 						ref={f.id} 
-						meta={f}
+						model={f}
 						value={data[f.id]} 
 						data={data} 
 						callbacks={cbs}
@@ -120,15 +107,19 @@ export default withRouter(React.createClass({
 			return null
 		}
 		
-  		this.isNew = isNew
+		document.title = title + ' ('+view+')'
+  		this.isNew = isNew 
+		//const date = wTimestamp ? moment(data['u_date']) : null
 		if(!m){
 			return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
 		}else{
  
 			return (
-				<div className="evolutility">
-            		
-            		<h2 className="evo-page-title">{title}</h2>
+				<div className="evolutility" role="form">
+
+					<Header {...this.props.match.params} 
+						title={title} 
+							comments={data.nb_comments} count={null} cardinality='1' view={this.viewId} />
 
 					<div className="evo-one-edit">
 
@@ -139,9 +130,9 @@ export default withRouter(React.createClass({
 
 				    			{(m && m.groups) ? (
 									m.groups.map(function(g, idx){
-										const groupFields = dico.fieldId2Field(g.fields, m.fieldsH)
+										const groupFields = fieldId2Field(g.fields, m.fieldsH)
 										return (
-											<Panel key={g.id||('g'+idx)} title={g.label || gtitle || ''} width={g.width}>
+											<Panel key={g.id||('g'+idx)} title={g.label || g.title || ''} width={g.width}>
 												<div className="evol-fset">
 													{groupFields.map(fnField)}
 												</div>
@@ -161,7 +152,8 @@ export default withRouter(React.createClass({
 										return (
 											<Panel title={c.title} key={'collec_'+c.id}>
 												<List key={'collec'+idx}
-													params={this.props.params} 
+													isNested={true}
+													match={this.props.match}
 													paramsCollec={c}
 													style={{width:'100%'}}
 													location={this.props.location}
@@ -174,11 +166,11 @@ export default withRouter(React.createClass({
 								<Panel key="formButtons">
 									<div className="evol-buttons">
 										<button className="btn btn-info" onClick={this.clickSave}><i className="glyphicon glyphicon-ok"></i> {i18n_actions.save}</button>
-										<button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_actions.cancel}</button>
+										<Link className="btn btn-default" to={linkBrowse}><i className="glyphicon glyphicon-remove"></i> {i18n_actions.cancel}</Link>
 										<span className="">{this.state.invalid ? i18n_validation.incomplete : null}</span>
 										{this.state.error ? i18n_validation.incomplete : null}
 									</div>
-								</Panel>
+								</Panel> 
 
 							</div>
 	 					)
@@ -188,9 +180,9 @@ export default withRouter(React.createClass({
 				</div>
 			)
 		}
-	},
+	}
 
-	validate: function (fields, data) {
+	validate(fields, data) {
 		let messages=[],
 			invalids={},
 			cMsg;
@@ -211,12 +203,15 @@ export default withRouter(React.createClass({
 				})
 			}
 		})
+		if(messages.length){
+			toast.error(i18n_validation.incomplete+' '+messages.join(' '))
+		}
 		return {
 			valid: messages.length<1,
 			messages: messages,
 			invalids: invalids
 		}
-	},
+	}
 
 	clearValidation(){
 		this.model.fields.forEach((f) => {
@@ -231,4 +226,21 @@ export default withRouter(React.createClass({
 		})
 	}
 
-}))
+
+	setDeltaField(fid, value){
+		if (!this.delta){
+			this.delta={}
+		}
+		this.delta[fid]=value
+		this._dirty=true
+	}
+}
+/*
+Edit.propTypes = {
+	params: PropTypes.shape({
+		entity: PropTypes.string.isRequired,
+		id: PropTypes.string
+	}).isRequired
+}*/
+
+//export default withRouter(Edit)

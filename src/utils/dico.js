@@ -1,13 +1,15 @@
-
 /*! 
 Evolutility-UI-React
 https://github.com/evoluteur/evolutility-ui-react
-(c) 2017 Olivier Giulieri
+(c) 2018 Olivier Giulieri
 */
 
 // evolutility :: utils/dico.js
 
 // Helpers for models
+
+import format from './format'
+
 
 // - Field Types
 var ft = {
@@ -36,24 +38,21 @@ var ft = {
 	//widget: 'widget'
 };
 
-function isFunction(fn){
-  return typeof fn === "function"
-}
+const isFunction = x => typeof x === "function"
 
-function fieldIsNumber(f){
-	return [ft.int, ft.dec, ft.money].indexOf(f.type)>-1;
-}
+export const fieldTypes = ft
 
-function fieldInCharts(f) {
-	return fieldChartable(f) && !f.noCharts;
-}
+export const fieldIsNumber = f => f.type===ft.int || f.type===ft.dec || f.type===ft.money
 
-function fieldChartable(f) { 
-	return  (f.type===ft.lov || f.type===ft.list || 
-				f.type===ft.bool || fieldIsNumber(f));
-}
+export const fieldIsDateOrTime = f => f.type===ft.date || f.type===ft.datetime || f.type===ft.time
 
-function hById(arr){
+export const fieldIsNumeric = f => fieldIsNumber(f) || fieldIsDateOrTime(f) 
+
+export const fieldInCharts = f => fieldChartable(f) && !f.noCharts;
+
+export const fieldChartable = f => (f.type===ft.lov || f.type===ft.list || f.type===ft.bool || fieldIsNumber(f));
+
+export function hById(arr){
 	var objH={};
 	if(arr){
 		arr.forEach(function(o){
@@ -64,12 +63,12 @@ function hById(arr){
 }
 
 function getFields(model) {
-	var fs = [];
+	const fs = [];
 
 	function collateFields(te) {
 		if (te && te.elements && te.elements.length > 0) {
 			te.elements.forEach(function(te) {
-				if (te.type != 'panel-list') {
+				if (te.type !== 'panel-list') {
 					collateFields(te);
 				}
 			});
@@ -90,65 +89,54 @@ function getFields(model) {
 		}
 	}
 	return []
-		
 }
 
-module.exports = {  
-
-	fieldTypes: ft,
-
-	getFields: getFields,
-
-	prepModel: function(m){
-		if(m){
-			if(!m.fields){
-				m.fields = getFields(m);
-			}
-			if(!m.fieldsH){
-				m.fieldsH = hById(m.fields);
-			}
-			if(!m.titleField){
-				m.titleField = m.fields[0].id;
-			}
-			return m;
+export function prepModel(m){
+	if(m){
+		if(!m.fields){
+			m.fields = getFields(m);
 		}
-		return null;
-	},
+		if(!m.fieldsH){
+			m.fieldsH = hById(m.fields);
+		}
+		if(!m.label){
+			m.label = m.title || m.namePlural || m.name;
+		}
+		if(!m.titleField){
+			m.titleField = m.fields[0];
+		}
 
-	dataTitle: function(m, data, isNew){
-		if(m){
-			if(isNew){
-				return 'New ' + (m.name || 'item')
-			}else if(m.titleField && isFunction(m.titleField)){
-				return m.titleField(data)
+		return m;
+	}
+	return null;
+}
+
+export function dataTitle(m, data, isNew){
+	if(m){
+		let f, title=''
+		if(isNew){
+			return 'New ' + (m.name || 'item')
+		}else if(m.titleField){
+			if(isFunction(m.titleField)){
+				title = m.titleField(data)
 			}else{
-				return data[m.titleField] || m.label || m.title || ''
+				f = m.fieldsH[m.titleField]
+				if(!f){
+					f = m.fields[0]
+				}
+				if(f && data){
+					title = format.fieldValue(f, data[f.id])
+				}
 			}
-		}else{
-			return 'New item'
 		}
-	},
-
-	isFieldMany: function(f){
-		return f.inList || f.inMany
-	},
-
-	fieldIsText: function(f){
-		return [ft.text, ft.textml, ft.url, ft.html, ft.email].indexOf(f.type)>-1;
-	},
-
-	fieldId2Field: function(fieldIds, fieldsH){
-		return fieldIds ? fieldIds.map(function(id){
-			return fieldsH[id] || null
-		}) : null
-	},
-
-	fieldIsNumber: fieldIsNumber,
-
-	fieldInCharts: fieldInCharts,
-
-	fieldChartable: fieldChartable,
-
-	hById: hById
-
+		return title 
+	}else{
+		return 'New item'
+	}
 }
+
+export const isFieldMany = f => f.inList || f.inMany
+
+export const fieldIsText = f => [ft.text, ft.textml, ft.url, ft.html, ft.email].indexOf(f.type)>-1;
+
+export const fieldId2Field = (fieldIds, fieldsH) => fieldIds ? fieldIds.map(id => fieldsH[id] || null) : null

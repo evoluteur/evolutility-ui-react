@@ -1,0 +1,146 @@
+.Nav {
+	z-index: 70;
+	font-family: Droid,Lato,'Helvetica Neue',Arial,Helvetica;
+	position: fixed;
+	left:0;
+	top:42px;
+	width:170px;
+	height: 100%;
+	color: #455A64;
+	padding-top: 20px;
+	border-right: 1px solid #e0e0e0;
+	background-color: #eee;
+	transition: width 0.5s;
+	overflow: hidden;
+	user-select: none;
+	-moz-user-select: none;
+	&:hover { 
+		overflow-y:auto; 
+	}
+	a{
+		text-decoration: none;
+		&.active {
+			color: black;
+			font-family: Droid-Bold,Lato,'Helvetica Neue',Arial,Helvetica;
+			font-weight: 600;
+			text-decoration: none;
+		}
+	}
+
+	div{
+		padding: 7px;
+		font-weight: bold;
+	}
+	ul{
+		list-style-type: none;
+		margin-bottom: 12px;
+		padding: 0;
+	}
+	li{
+		position: relative;
+		font-weight: normal;
+		font-size: 14px;
+		padding: 5px;
+		margin: 0 0 4px 0;
+	}
+
+	.Nav > ul > li{
+		border-left: solid 4px #eee;
+		font-size: 16px; 
+		margin: 0 0 10px 0;
+		padding: 0;
+	/*
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	*/
+	}
+	i{
+		color: #455A64;
+		font-size: 16px;
+		margin-right: 12px;
+
+		&.link{
+			margin-left: 5px;
+		}
+	}
+	a:hover{
+		color: black;
+	}
+
+}
+#afterNav{
+	height: 0;
+	width: 0;
+}
+
+.pageContent{
+    flex: 1 0 auto;
+	margin-left: 180px;
+	padding: 20px;
+	margin-top: 50px;
+	//transition: margin-left 0.5s;
+}
+.navButtonHolder{
+	margin:0;
+	min-width: 170px;
+}
+.navButton{
+	padding: 10px 2px 0 !important;
+	text-align: center;
+    min-height: 52px;
+	/* width: 12em; */
+}
+
+.navInfo{
+	padding: 5px 0;
+}
+
+.txtGrey{
+	color: grey;
+}
+
+/* skip nav #508 */
+a.skipNav {
+    left:-800px;
+    position:absolute;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    z-index:-100;
+}
+
+.mIcons{
+	display: none;
+	position: absolute;
+	top: 0;
+	right: -8px;
+	height: 20px;
+	font-size: 12px;
+	padding: 0;
+	z-index: 100;
+
+	> a {
+		display: inline-block;
+		font-size: 12px;
+
+		> i {
+			display: inline-block;
+			font-size: 12px;
+			margin: 0 3px;
+		}
+	}
+}
+.nav-l2 > li{
+	border-radius: 5px;
+
+	&:hover,
+	&.active{
+		background-color: white;
+			
+		> .mIcons{
+			display: inline-block;
+		}
+	}
+}

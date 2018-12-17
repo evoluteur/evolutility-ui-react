@@ -1,0 +1,28 @@
+@import '../variables';
+
+.TopBar {
+  z-index: 100;
+  position: fixed;
+  top:0;
+  width:100%;
+  background-color: black;
+  height: 50px;
+  padding: 20px;
+  color: white;
+}
+
+.tbLogo{
+  position: absolute;
+  left: 7px;
+  top: 7px;
+}
+
+.github {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  img {
+    height: 35px;
+    width: 35px;
+  }
+}

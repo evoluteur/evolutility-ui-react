@@ -1,19 +1,18 @@
-
 // Evolutility-UI-React :: format.js
 
-// Helpers for string manipulation and date formats
+// Helpers for string, numbers, and date formats
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2017 Olivier Giulieri
+// (c) 2018 Olivier Giulieri
 
 import React from 'react'
 import {filesUrl} from '../config.js'
 
 function notUndefined(v){
-    return (typeof(v) != "undefined")
+    return typeof(v) !== 'undefined'
 }
 
-module.exports = {
+const formatLib = {
 
     fieldValue(f, d, abbr){
         if(f.type==='boolean'){
@@ -35,7 +34,9 @@ module.exports = {
             return <a href={d} target="_blank">{d}</a>
         }else if(f.type==='email' && d){
             return <a href={'mailto:'+d}>{d}</a>
-        }
+        }/*else if(f.type==='lov' && icon){
+            return <React.Fragment><img src={icon} alt=""></img>{d}</React.Fragment>
+        }*/
         return d
     },
 
@@ -43,7 +44,7 @@ module.exports = {
         if(d===null){
             return null
         }
-        return <img src={d} className="img-thumbnail" />
+        return <img src={d} className="img-thumbnail" alt=""/>
     },
 
     doc(d, path){
@@ -54,7 +55,7 @@ module.exports = {
     },
 
     // --- date formats ---
-    dateString: function(d){
+    dateString(d){ 
         if(d){
             d=d.substring(0, 10);
         }
@@ -66,7 +67,8 @@ module.exports = {
         }
         return '';
     },
-    timeString: function(d){
+
+    timeString(d){
         if(notUndefined(d) && d!==null && d!==''){
             var timeParts=d.split(':'),
                 hour=parseInt(timeParts[0],10);
@@ -78,7 +80,8 @@ module.exports = {
         }
         return '';
     },
-    datetimeString: function(d){
+    
+    datetimeString(d){
         if(notUndefined(d) && d!==null && d!==''){
             var dateParts=d.split('T');
             if(dateParts.length>1){
@@ -88,6 +91,22 @@ module.exports = {
             }
         }
         return '';
-    }
+    },
+
+    jsonString(js){
+        if(js){
+            return JSON.stringify(js, null, '\t');
+        }
+        return '';
+    },
+
+    capitalize: function(word){ // TODO: maybe use _.string.capitalize(word);
+        if(word && word.length>0){
+            return word.substring(0,1).toUpperCase() + word.substring(1);//.toLowerCase();
+        }
+        return '';
+    },
 
 };
+
+export default formatLib;

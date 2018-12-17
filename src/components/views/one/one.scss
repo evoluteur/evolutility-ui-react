@@ -1,0 +1,195 @@
+/*
+  evolutility-ui-react : one
+*/
+@import '../../variables';
+
+/* --- panels & tabs --- */
+.evol-pnls{
+  @include flex-holder();
+
+  .evol-pnl {
+    @include flex-item();
+    padding-left:10px !important;
+    min-width: 150px;
+    margin-bottom: -10px;
+
+    .table {
+      //margin-bottom: 0;
+      img {
+        max-height: 60px;
+        padding:0;
+      }
+      .evol-money{
+        //TODO: better fix
+        width: 200px;
+      }
+    }
+
+  // nested panel
+  //  .evol-pnl {
+  //     > .panel{
+  //        margin-bottom: 12px;
+  //    }
+  //    > div > fieldset{
+  //      padding: 10px 10px 5px 2px;
+  //    }
+  //  }
+  }
+
+}
+
+//.evo-plist{
+//  overflow-x: auto;
+//  input{
+//    &[type="date"]{
+//      max-width: 160px;
+//    }
+//    &[type="number"]{
+//      min-width: 100px;
+//    } 
+//    &[type="text"], 
+//    textarea{
+//      min-width: 120px;
+//    }
+//  }
+//  select{
+//    min-width: 120px;
+//  }
+//  .table{
+//    margin-bottom: 0;
+//  }
+//}
+
+//.evol-tabs{
+//    margin: 0 10px 10px !important;
+//    >li>a{
+//      transition: all 0.6s ease;
+//    }
+//}
+
+/* --- fields --- */
+.evol-fset{
+    @include flex-holder();
+    padding: 16px $field-h-spacing 10px 0;
+    //input[type="checkbox"]{
+    //    height: 30px;
+    //}
+}
+.evol-buttons{
+  clear: both;
+  padding: 7px 10px;
+
+  > button, 
+  > a {
+    margin: 10px;
+    > i {
+      margin-right: 5px;
+    }
+  }
+}
+
+.evol-title-toggle{
+  cursor: pointer;
+  float:right;
+}/*
+.evol-json{
+    width:100%;
+    //height:350px;
+    margin: 0 0 10px;
+}
+.evo-p-json{
+  margin-bottom:10px;
+  fieldset{
+    padding:10px !important;
+  }
+}*/
+.glyphicon-wrench{
+    margin-left: 5px;
+    display: inline !important;
+}
+
+/* bootstrap customizations*/
+.table > thead > tr > th{
+  font-weight: $weight-label;
+  background-color: #fbfbfb;
+}
+label{
+  font-weight: $weight-label;
+  margin-bottom: 2px;
+}
+.help-block{
+  padding:2px 5px;
+  background-color: #FFF8E1;
+  border: 1px solid #FFECB3;
+  @include border-radius(2px);
+}
+.evolw-edit {
+  .help-block{
+    color: #737373 !important;
+    clear: both;
+  }
+}
+
+.evo-one-edit,
+.evo-one-browse,
+.evo-one-wiz{
+    margin-left:-10px;
+}
+
+.evol-pl-nodata{
+  text-align: center;
+
+  [data-id="bPlus"]{
+    margin-left:10px;
+    cursor: pointer;
+  }
+}
+/*
+.evo-td-plusminus{
+
+  width:70px;
+  min-width:70px;
+
+  > div{
+    float:left;
+    margin-top: 10px;
+    margin-left:10px;
+    cursor: pointer;
+    color: $color-icon;
+    &:hover{
+      color: $color-icon-hover;
+    }
+  }
+  > div:last-child:after {
+    clear:left;
+  }
+
+}
+
+.evo-msg{
+  &.alert-warning{
+    padding: 10px 10px 3px;
+    >.close{
+      top:0 !important;
+      right:0 !important;
+    }
+  }
+  ul{
+    margin-top:10px;
+  }
+}
+*/
+#isDirty [data-id="nosave"]{
+  float: left;
+}
+
+.evo-color-box{
+  display: inline-block;
+  height:20px;
+  width:20px;
+  border: solid 1px silver;
+  span{
+    margin-left:24px;
+  }
+}
+

@@ -1,13 +1,6 @@
 # Evolutility-UI-React
 
-Evolutility-UI-React provides a set of React Views to display and interact with objects of different data structures. These views work together to provide full web apps. 
-
-With Evolutility-UI-React you can quickly make a web application UI by configuring views with metadata instead of hand-coding Javascript, CSS, and HTML.
-
-Evolutility-UI-React works hand-in-hand with [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) which provides the matching REST endpoints based on the same metadata.
-
-This project is a **work in progress**. I'm still learning React.
-
+Evolutility-UI-React is a set of **model-driven views** to Browse, Edit, List, Cards, and Charts data by writing models rather than code. 
 
 
 ## Installation
@@ -30,7 +23,7 @@ npm start
 
 ```
 
-In a web browser, go to the url [http://localhost:8080/](http://localhost:8080/).
+In a web browser, go to the url [http://localhost:8080/](http://localhost:3000/).
 
 For the REST endpoints, you also need to install and run [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) which provides the matching REST endpoints based on the same metadata.
 
@@ -119,7 +112,8 @@ Models describe the object and its list of fields.
 | readonly     | If set to true, the field value cannot be changed.   |       
 | defaultValue | Default field value for new records.                 |     
 | max, min     | Maximum/Minimum value allowed (only applies to numeric fields).      |    
-| maxLength, minLength | Maximum/Minimum length allowed (only applies to text fields).      |                    
+| maxLength, minLength | Maximum/Minimum length allowed (only applies to text fields).      |     
+| lovicon      | Set to True to include icon with LOV items.    |               
 | inMany       | Determines if the field is present (by default) in lists of records. |                     
 | height       | For fields of type "textmultiline", number of lines used in the field (in Browse and Edit views). |                 
 | width        | Percentage width in Browse and Edit views. |

@@ -1,30 +1,24 @@
-
 // Evolutility-UI-React :: /widget/Panel.js
 
 // Panel to group fields in views Edit and Browse (styled w/ Bootstrap).
  
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2017 Olivier Giulieri
+// (c) 2018 Olivier Giulieri
 
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export default React.createClass({
+import './Panel.scss'
 
-	propTypes: {
-		title: React.PropTypes.string,
-		width: React.PropTypes.number,
-		collapsible: React.PropTypes.bool
-	},
+export default class Panel extends React.Component {
 
-	getInitialState() {
-		return {
-			opened: true
-		}
-	},
+	state = {
+		opened: true
+	}
 
 	clickToggle(){
 		this.setState({opened: !this.state.opened})
-	},
+	}
 
 	render() {
 		const title = this.props.title ? (
@@ -49,4 +43,15 @@ export default React.createClass({
 		)
 	}
 	
-})
+}
+
+Panel.propTypes = {
+	title: PropTypes.string,
+	width: PropTypes.number,
+	collapsible: PropTypes.bool
+}
+
+Panel.defaultProps = {
+	collapsible: false,
+	width: 100,
+}

@@ -1,10 +1,11 @@
-
 // Evolutility-UI-React :: utils/url.js
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2017 Olivier Giulieri
+// (c) 2018 Olivier Giulieri
 
-module.exports = {
+const queryString = require('query-string');
+
+export default {
 
 	querySearch(query){
 		// - make uri params string from query object
@@ -14,6 +15,10 @@ module.exports = {
 			url += prop+'='+encodeURI(query[prop]||'')+'&'
 		}
 		return url.slice(0, -1);
+	},
+
+	parse(qString){
+		return queryString.parse(qString)
 	}
 
 }

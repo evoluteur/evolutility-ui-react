@@ -1,4 +1,3 @@
-
 // Evolutility-UI-React :: /views/many/Chart.js
 
 // Single Bars or Pie charts (usually part of a set of Charts).
@@ -10,84 +9,89 @@
 // TODO: re-write using D3.js or other cool charting library
 
 import React from 'react'
+import PropTypes from 'prop-types';
 import axios from 'axios'
 import {apiPath} from '../../../config.js'
 
 import { i18n_msg } from '../../../i18n/i18n'
-import Alert from '../../widgets/Alert'
-import many from './many'
-import chartColors from '../charts/chart-colors'
+import Alert from 'widgets/Alert'
 
-const urlChart = 'http://chart.apis.google.com/chart'
+import './Charts.scss' 
 
+const urlChart = 'http://chart.apis.google.com/chart',
+    c10 = ['1f77b4','ff7f0e','2ca02c','d62728','9467bd',
+            '8c564b','e377c2','7f7f7f','bcbd22','17becf'],
+    c20 = ['1f77b4','aec7e8','ff7f0e','ffbb78','2ca02c',
+            '98df8a','d62728','ff9896','9467bd','c5b0d5',
+            '8c564b','c49c94','e377c2','f7b6d2','7f7f7f',
+            'c7c7c7','bcbd22','dbdb8d','17becf','9edae5'],
+    cList = maxIdx => maxIdx>10 ? c20 : c10,
+    colorsList = nbColors => cList(nbColors).slice(0, nbColors).join(','),
+    fnLabel = d => (d.label==null ? 'N/A' : d.label) + '('+d.value+')',
+    fnValue = d => d.value
 
-const colorsList = function(nbColors){
-    var cs= chartColors.colorsList(nbColors)
-    return cs.slice(0, nbColors).join(',');
-}
+export default class Chart extends React.Component {
 
-var many2 = many()
-many2.getData = function(){
-    var e = this.props.entity
-    var fid = this.props.field.id
-    var urlparams = ''//?token='+localStorage.token
+    viewId = 'chart'
 
-    if(fid){
-        axios.get(apiPath+''+e+'/chart/'+fid+urlparams)
-            .then(response => {
-                this.setState({
-                    data: response.data
-                });
-            })
-            .catch(() => {
-                this.setState({
-                    error: {
-                        message: 'Couldn\'t retrieve charts data for field "'+fid+'".'
+    constructor(props) {
+        super(props);
+        this.state={
+            data: [],
+            chartType: 'Bars', // "Pie" or "Bars"
+        }
+        this.click_pie = this.click_pie.bind(this);
+        this.click_bars = this.click_bars.bind(this);
+    }
+
+    componentDidMount() {
+        this.getData()
+    }
+
+    componentWillUnmount() {
+        this.done = true
+    }
+
+    getData(){
+        const e = this.props.entity
+        var fid = this.props.field.id
+        var urlparams = ''//?token='+localStorage.token
+
+        if(fid){
+            axios.get(apiPath+''+e+'/chart/'+fid+urlparams)
+                .then(response => {
+                    if(!this.done){
+                        this.setState({
+                            data: response.data
+                        });
                     }
                 })
-            });
+                .catch((err) => {
+                    if(!this.done){
+                        this.setState({
+                            error: {
+                                message: err.response.statusText || 
+                                    'Couldn\'t retrieve charts data for field "'+fid+'".'
+                            }
+                        })
+                    }
+                });
+        }
     }
-}
-many2.getInitialState = function() {
-    return {
-        data: [],
-        chartType: 'Bars' // "Pie" or "Bars"
-    }
-}
-
-function fnLabel(d){
-    return (d.label==null ? 'N/A' : d.label) + '('+d.value+')'
-}
-function fnValue(d){
-    return d.value
-}
-
-export default React.createClass({
-
-    viewId: 'chart',
-
-    propTypes: {
-        entity: React.PropTypes.string.isRequired,
-        field: React.PropTypes.object.isRequired,
-        title: React.PropTypes.string,
-        sizes: React.PropTypes.string,
-        type: React.PropTypes.oneOf(['Bars', 'Pie'])
-    },
-
-    mixins: [many2],
 
     click_pie(evt){
         this.setState({
             chartType: 'Pie'
         })
-    },
+    }
+
     click_bars(evt){
         this.setState({
             chartType: 'Bars'
         })
-    },
+    }
 
-    urlPie: function (data, sizes){
+    urlPie(data, sizes){
         if(data && data.length){ 
             const p=this.props,
                 size=p.sizes?p.sizes:'390x200',
@@ -100,9 +104,9 @@ export default React.createClass({
             return urlGoogleChart
         }
         return ''
-    },
+    }
 
-    urlBars: function (data, sizes){
+    urlBars(data, sizes){
         if(data && data.length){ 
             const size=sizes?sizes:'360x200';
             let maxCount = 0,
@@ -121,29 +125,28 @@ export default React.createClass({
         }
         return ''
            
-    },
+    }
 
-    render: function (){
+    render(){
+        const data = this.state.data || [],
+            sizes = this.props.sizes || null,
+            url = this['url'+(this.state.chartType||'Pie')](data, sizes)
+        let body 
 
-        const data=this.state.data || [],
-            url = this['url'+(this.state.chartType||'Pie')](data)
-        let body,
-            icon = this.state.chartType==='Pie'?(
-                <i className="glyphicon glyphicon-stats" onClick={this.click_bars}/>
-            ) : (
-                <i className="glyphicon glyphicon-cd" onClick={this.click_pie}/>
-            )
         if(this.state.error){
-            body = <Alert title={this.state.error.title} message={this.state.error.message}/> 
+            body = <Alert type="danger" title={this.state.error.title} message={this.state.error.message}/> 
         }else if(url){
-            body = <img src={url} />
+            body = <img src={url} alt=""/>
         }else{
             body = <i>{i18n_msg.loading}</i>
         }
         return (
             <div className="evol-chart-holder panel panel-default">
-                <div className="chart-holder">
-                    <div className="chart-actions pull-right">{icon}</div>
+                <div className={"chart-holder" + (parseInt(sizes, 10)>400 ? ' singleChart' : '')}>
+                    <div className="chart-actions pull-right">
+                        <i className="glyphicon glyphicon-cd" onClick={this.click_pie}/>
+                        <i className="glyphicon glyphicon-stats" onClick={this.click_bars}/>
+                    </div>
                     <h3 className="panel-title">{this.props.title}</h3>
                     {body} 
                 </div>
@@ -151,4 +154,12 @@ export default React.createClass({
         )
     }
 
-})
+}
+
+Chart.propTypes = {
+    entity: PropTypes.string.isRequired,
+    field: PropTypes.object.isRequired,
+    title: PropTypes.string,
+    sizes: PropTypes.string,
+    type: PropTypes.oneOf(['Bars', 'Pie'])
+}

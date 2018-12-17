@@ -1,0 +1,49 @@
+/*
+  evolutility-ui-react : many-charts
+*/
+@import '../../variables';
+
+.evol-many-charts{
+	width: 100%;
+	@include flex-holder();
+}
+.evol-chart-holder{
+	@include flex-item();
+	position: relative;
+	text-align: center;
+	background-color :#FFFFFF;
+	margin:10px 10px 10px 5px;
+	width: 400px;
+	min-height:286px;
+}
+.chart-holder{
+	>h3{
+		display:block;
+		text-align:center;
+		padding:10px 20px 30px;
+	}
+	>i{
+		position: relative;
+		top: 50px;
+		color: grey;
+	}
+}
+.singleChart{
+	padding: 10px 5px 20px;
+}
+.chart-actions{
+	i{
+		color: silver;
+		margin: 10px 10px 2px 0;
+		cursor: pointer;
+		&:hover{
+			color: $color-icon-hover;
+		}
+	}
+}
+.charts-stats{
+	margin-top: 20px;
+	i {
+		margin-right: 5px;
+	}
+}

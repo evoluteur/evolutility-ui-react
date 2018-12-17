@@ -1,50 +1,45 @@
-
 // Evolutility-UI-React :: /widget/Pagination.js
  
 // Pagination for List and Cards views (styled w/ Bootstrap).
  
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2017 Olivier Giulieri
+// (c) 2018 Olivier Giulieri
 
 import React from 'react'
+import PropTypes from 'prop-types';
 
-import url from '../../utils/url'
+import queryString from 'query-string'
+
 import {pageSize} from '../../config'
 
-export default React.createClass({
-
-	propTypes: {
-		pageIdx: React.PropTypes.number,
-        count: React.PropTypes.number,
-        fullCount: React.PropTypes.number,
-        location: React.PropTypes.object,
-		fnClick: React.PropTypes.func.isRequired
-	},
-
-	getInitialState(){
-		return {
-			pageIdx: true,
-            fullCount: this.props.fullCount,
-            count: this.props.count
-		}
-	},
+export default class Pagination extends React.PureComponent {
 
     _paginationBody() {
+        let pIdx
         const totalSize = this.props.fullCount,
             size = this.props.count,
-            pIdx = parseInt(this.props.location.query.page || '0', 10)
-        let h = []
+            query = queryString.parse(this.props.location.search) //this.props.location.query
 
+            if(query){
+                if(query.page==='p--' || query.page==='p++'){
+
+                }
+                pIdx = parseInt(query.page || '0', 10)
+            }else{
+                pIdx = 0
+            }
+        let h = []
+        let gapIdx = 0
+        
         if (totalSize > size) {
             const fnClick = this.props.fnClick,
                 nbPages = Math.ceil(totalSize / pageSize),
                 wPrev = pIdx>0,
-                wNext = nbPages>(pIdx+1)
-            let pId = pIdx + 1,
-                maxRange,
+                wNext = nbPages > (pIdx+1)
+            let pId = pIdx + 1, 
                 bPage = function(id){
                     h.push(<li key={id} className={pId===id?'active':''} onClick={fnClick}>
-                    	<a href="javascript:void(0)">{id}</a>
+                    	<a className="fakeLink">{id}</a>
                     </li>)
                 },
                 bPageRange = function(pStart, pEnd){
@@ -53,43 +48,62 @@ export default React.createClass({
                     }
                 },
                 bGap = function(idx){
-                    h.push(<li key={'gap'+idx} className="disabled"><a href="javascript:void(0)">...</a></li>)
+                    h.push(<li key={'gap'+idx} className="disabled"><a className="fakeLink">...</a></li>)
                 };
+                
             h.push(<li key="prev" className={wPrev ? '':'disabled'} onClick={wPrev ? fnClick : null}> 
-                	<a href="javascript:void(0)">&laquo;</a>
+                	<a className="fakeLink">&laquo;</a>
                 </li>)
             bPage(1);
-            if(pId>4 && nbPages>6){
-                if(pId===5){
-                    bPage(2);
-                }else{
-                    bGap(1);
-                }
-                maxRange=Math.min(pId+2, nbPages);
-                bPageRange(Math.max([2, pId-2]), maxRange);
+
+            if(nbPages<17){
+                bPageRange(2, nbPages);
             }else{
-                maxRange=Math.min(Math.max(5, pId+2), nbPages);
-                bPageRange(2, maxRange);
+                if(pId<5){
+                    bPageRange(2, 5);
+                    if(nbPages>5){
+                        bGap(gapIdx++);
+                        bPage(nbPages);
+                    }
+                }else{
+                    bGap(gapIdx++);
+                    bPageRange(pId-2, Math.min(pId+2, nbPages));
+                    if(nbPages>pId+2){
+                        if(nbPages>pId+3){
+                            bGap(gapIdx++);
+                        }
+                        bPage(nbPages);
+                    }
+                }
             }
-            if(maxRange<nbPages && pId+2<nbPages){
-                bGap(2);
-                bPage(nbPages);
-            }
+
             h.push(<li key="next" className={wNext ? '' : 'disabled'} onClick={wNext ? fnClick : null}>
-            		<a href="javascript:void(0)">&raquo;</a>
+            		<a className="fakeLink">&raquo;</a>
             	</li>)
         }
         return h;
-    },
+    }
 
 	render() {
 		return this.props.fullCount>pageSize ? ( 
-				<nav className="clearer"> 
-					<ul className="pagination">
-						 {this._paginationBody()}
-					</ul> 
-				</nav> 
-			) : null
+			<nav className="clearer"> 
+				<ul className="pagination">
+					 {this._paginationBody()}
+				</ul> 
+			</nav> 
+		) : null
 	}
 	
-})
+}
+
+Pagination.propTypes = {
+    pageIdx: PropTypes.number,
+    count: PropTypes.number.isRequired,
+    fullCount: PropTypes.number.isRequired,
+    location: PropTypes.object,
+    fnClick: PropTypes.func.isRequired
+}
+
+Pagination.defaultProps = {
+    pageIdx: 0
+}

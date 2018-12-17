@@ -1,0 +1,20 @@
+@import '../variables';
+
+.panel-heading { // panel-heading from Bootstrap
+    >.panel-title{ // panel-title from Bootstrap
+      display: inline-block;
+    }
+  //  >.evol-subtitle{
+  //    display: inline-block;
+  //    margin-left:.4em;
+  //  }
+}
+
+.panel{
+	border-radius: 2px !important;
+}
+
+.evo-panel-help{
+    margin-top:5px;
+}
+

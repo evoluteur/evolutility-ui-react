@@ -7,35 +7,38 @@
 // (c) 2018 Olivier Giulieri
 
 import React from 'react'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 import {i18n_actions, i18n_errors} from '../../../i18n/i18n'
-import dico from '../../../utils/dico'
-import oneRead from './one-read'
-import Alert from '../../widgets/Alert'
-import Field from '../../widgets/Field'
-import Panel from '../../widgets/Panel'
+import { dataTitle, fieldId2Field } from '../../../utils/dico'
+
+import OneRead from './one-read'
+import Alert from 'widgets/Alert'
+import Field from 'widgets/Field'
+import Panel from 'widgets/Panel'
 import List from '../many/List'
+import Header from '../../shell/Header'
 
-export default React.createClass({
+export default class Browse extends OneRead {
 
-  viewId: 'browse',
-
+  viewId = 'browse'
+/*
   propTypes: {
     params: React.PropTypes.shape({
       entity: React.PropTypes.string.isRequired,
       id: React.PropTypes.string.isRequired
     }).isRequired
   },
-
-  mixins: [oneRead()],
+*/
+  //mixins: [oneRead()],
 
   render() {
-    const {id=0, entity=null} = this.props.params
-    const link = '/'+entity+'/edit/',
+    const {id=0, entity=null} = this.props.match.params
+    const linkEdit = '/'+entity+'/edit/'+id,
+        linkList = '/'+entity+'/list',
         m = this.model,
         data = this.state.data || {},
-        title = dico.dataTitle(m, data, false)
+        title = dataTitle(m, data, false);
 
     function fnFieldReadOnly(f){
       if(f){
@@ -44,7 +47,7 @@ export default React.createClass({
         return (
           <Field 
             key={f.id} 
-            meta={f} 
+            model={f} 
             value={data[attr]} 
             valueId={isLOV?data[f.id]:null}
             readOnly={true}
@@ -58,10 +61,13 @@ export default React.createClass({
     if(!m){
       return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
     }else{
+        document.title = title
         return ( 
         <div className="evolutility">
 
-          <h2 className="evo-page-title">{title}</h2>
+          <Header {...this.props.match.params} title={title} 
+              comments={data.nb_comments} count={null}
+              cardinality='1' view={this.viewId} />
 
           <div className="evo-one-edit">
 
@@ -72,9 +78,9 @@ export default React.createClass({
 
                       {m.groups ? (
                           m.groups.map(function(g, idx){
-                            const groupFields = dico.fieldId2Field(g.fields, m.fieldsH)
+                            const groupFields = fieldId2Field(g.fields, m.fieldsH)
                             return (
-                              <Panel key={g.id||('g'+idx)} title={g.label || gtitle || ''} width={g.width}>
+                              <Panel key={g.id||('g'+idx)} title={g.label || g.title || ''} width={g.width}>
                                 <div className="evol-fset">
                                   {groupFields.map(fnFieldReadOnly)}
                                 </div>
@@ -94,7 +100,8 @@ export default React.createClass({
                           return (
                             <Panel title={c.title} key={'collec_'+c.id}>
                               <List key={'collec'+idx}
-                                params={this.props.params} 
+                                isNested={true}
+                                match={this.props.match} 
                                 paramsCollec={c}
                                 style={{width:'100%'}}
                                 location={this.props.location}
@@ -106,10 +113,12 @@ export default React.createClass({
 
                       <Panel key="formButtons">
                         <div className="evol-buttons"> 
-                            <Link to={link+id} className="btn btn-info">
-                              <i className="glyphicon glyphicon-edit"></i> {i18n_actions.edit}
+                            <Link to={linkEdit} className="btn btn-info">
+                                <i className="glyphicon glyphicon-edit"></i> {i18n_actions.edit}
                             </Link>
-                            <button className="btn btn-default" onClick={this.navigateBack}><i className="glyphicon glyphicon-remove"></i> {i18n_actions.cancel}</button>
+                            <Link className="btn btn-default" to={linkList}>
+                                <i className="glyphicon glyphicon-remove"></i> {i18n_actions.cancel}
+                            </Link>
                         </div>
                       </Panel>
 
@@ -122,4 +131,4 @@ export default React.createClass({
     }
   }
 
-})
+}

@@ -29,7 +29,7 @@
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_buttons";
 
 // Components
-@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_component-animations";
+//@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_component-animations";
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_dropdowns";
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_button-groups";
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_input-groups";
@@ -54,7 +54,7 @@
 // Components w/ JavaScript
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_modals";
 //@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_tooltip";
-@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_popovers";
+//@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_popovers";
 //@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_carousel";
 
 // Utility classes
@@ -63,4 +63,8 @@
 
 // Other third party
 @import '../node_modules/react-datepicker/dist/react-datepicker';
-@import '../node_modules/react-select/dist/react-select';
+//@import '../node_modules/react-select/dist/react-select';
+
+//@import '../node_modules/react-input-range/src/scss/input-range/input-range';
+
+@import '../node_modules/react-toastify/dist/ReactToastify.min.css';

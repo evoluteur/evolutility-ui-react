@@ -7,18 +7,14 @@ import comics from './comics'
 import winecellar from './winecellar'
 import winetasting from './winetasting'
 
-//import entity from './dico/entity'
-//import field from './dico/field'
 
-module.exports = {
+const allModels = {
 	todo: prepModel(todo),
 	contact: prepModel(contact),
 	restaurant: prepModel(restaurant),
 	comics: prepModel(comics),
 	winecellar: prepModel(winecellar),
 	winetasting: prepModel(winetasting),
-
-	//entity: prepModel(entity),
-	//field: prepModel(field)
 }
 
+export default allModels

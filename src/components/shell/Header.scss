@@ -1,0 +1,24 @@
+@import '../variables';
+
+.evo-page-title {
+	margin: 0 10px 10px 10px;
+	width: 100%;
+	height: 40px;
+	@include ellipsis();
+}
+  
+.hIcons {
+	position: absolute;
+	right:0;
+	top:0;
+
+	i {
+		display: inline-block;
+		margin: 5px;
+		font-size: 20px;
+	}
+	
+	@media (max-width: 600px) {
+		display: none !important;
+	}
+}

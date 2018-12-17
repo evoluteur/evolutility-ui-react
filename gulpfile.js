@@ -29,22 +29,6 @@ var sig='  ______          _       _   _ _ _ _\n'+
 
 console.log(sig);
 
-gulp.task('css', function () {
-  return gulp.src('./sass/evolutility.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(header(banner, { pkg : pkg }))
-    .pipe(rename('evolutility-ui-react.css'))
-    .pipe(gulp.dest('./public/css'));
-});
-
-gulp.task('css-min', function () {
-  return gulp.src('./sass/evolutility.scss')
-    .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
-    .pipe(header(banner, { pkg : pkg }))
-    .pipe(rename('evolutility-ui-react.min.css'))
-    .pipe(gulp.dest('./public/css'));
-});
-
 gulp.task('dep-min', function () {
   return gulp.src('./sass/dependencies.scss')
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
@@ -53,9 +37,8 @@ gulp.task('dep-min', function () {
     .pipe(gulp.dest('./public/css'));
 });
 
-gulp.task('default', ['css', 'css-min', 'dep-min']);
-gulp.task('dev', ['css']);
+gulp.task('default', ['dep-min']);
 
 gulp.task('sass:watch', function () {
-  gulp.watch('./sass/**/*.scss', ['sass']);
+  gulp.watch('./sass/**/*.scss', ['css']);
 });

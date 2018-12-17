@@ -4,57 +4,58 @@
 // Single card (usually part of a set of Cards)
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2017 Olivier Giulieri
+// (c) 2018 Olivier Giulieri
 
 import React from 'react'
+import PropTypes from 'prop-types';
 
 import models from '../../../models/all_models'
 import format from '../../../utils/format'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
-export default React.createClass({
+export default class Card extends React.Component {
 
-  viewId: 'card',
+    viewId = 'card'
 
-  propTypes: {
-    entity: React.PropTypes.string.isRequired,
-    fields: React.PropTypes.array,
-    data: React.PropTypes.object
-  },
+    render() {
+        const d = this.props.data || {},
+            fields = this.props.fields || [],
+            entity = this.props.entity,
+            m = models[entity],
+            link = '/'+entity+'/browse/'
 
-  render() {
-  	const d = this.props.data || {},
-        fields = this.props.fields || [],
-        entity = this.props.entity,
-        m = models[entity],
-        link = '/'+entity+'/browse/'
+        return (
+            <div className="panel panel-default"> 
+                {fields.map(function(f, idx){
+                    const attr = (f.type==='lov') ? f.id+'_txt' : f.id,
+                        fv = format.fieldValue(f, d[attr]),
+                        icon = m.icon ? <img className="evol-many-icon" src={'/pix/'+m.icon} alt=""/> : null
 
-  	return (
-        <div className="panel panel-default"> 
-          {fields.map(function(f, idx){
-            const attr = (f.type==='lov') ? f.id+'_txt' : f.id
-            const fv = format.fieldValue(f, d[attr])
-            const icon = m.icon ? <img className="evol-many-icon" src={'/pix/'+m.icon}/> : null
+                    if(idx===0){
+                        return (
+                            <div key={idx}>
+                                <h4><Link key={f.id} to={link+d.id}>{icon}{fv}</Link></h4>
+                            </div>
+                        )
+                    }else if(f.type==='image'){
+                        return <div key={idx} className="card-fld-center">{fv}</div>
+                    }else{
+                        return (
+                            <div key={idx}>
+                                <label>{f.label}: </label>
+                                <div>{' '}{fv}</div>
+                            </div>
+                        )
+                    }
+                })}
+            </div>
+        )
+    }
 
-            if(idx===0){
-              return (
-                <div key={idx}>
-                  <h4><Link key={f.id} to={link+d.id}>{icon}{fv}</Link></h4>
-                </div>
-              )
-            }else if(f.type=='image'){
-              return <div key={idx}>{fv}</div>
-            }else{
-              return (
-                <div key={idx}>
-                  <label>{f.label}: </label>
-                  <div>{' '}{fv}</div>
-                </div>
-              )
-            }
-          })}
-        </div>
-  	)
-  }
+}
 
-})
+Card.propTypes = {
+    entity: PropTypes.string.isRequired,
+    fields: PropTypes.array,
+    data: PropTypes.object
+}

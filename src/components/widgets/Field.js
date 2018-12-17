@@ -1,4 +1,3 @@
-
 // Evolutility-UI-React :: /widgets/Field.js
 
 // Model-driven field (possible types specified in dico.fieldTypes).
@@ -7,12 +6,12 @@
 // (c) 2018 Olivier Giulieri
 
 import React from 'react'
-import {Link} from 'react-router'
+import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 
-import format from '../../utils/format'
+import format from 'utils/format'
 import {i18n_actions, i18n_msg} from '../../i18n/i18n'
 import {filesUrl} from '../../config.js'
-
 import FieldLabel from './FieldLabel'
 
 // - components:
@@ -21,6 +20,10 @@ import Datepicker from 'react-datepicker'
 import moment from 'moment'
 // - image & documents
 import Dropzone from 'react-dropzone'
+
+
+import './field.scss'
+
 
 function emHeight(f){
 	let fh = parseInt(f.height || 2, 10);
@@ -39,39 +42,35 @@ function createOption(opt){
 	return <option key={opt.id} value={''+opt.id}>{opt.text}</option>
 }
 
-export default React.createClass({
+export default class Field extends React.Component {
 
-	propTypes: {
-		meta: React.PropTypes.object.isRequired,
-		callbacks: React.PropTypes.object,
-		//data: React.PropTypes.object,  // only some field types
-		value: React.PropTypes.any, // field value
-		label: React.PropTypes.string, //override label in meta
-		readOnly: React.PropTypes.bool, //override label in meta
-	},
-
-	getInitialState: function() {
-		return {
+	constructor(props) {
+		super(props);
+		this.state = {
 			help: false
 		}
-	},
+		this.clickHelp = this.clickHelp.bind(this);
+		//TODO: more???
+		this.onDropFile = this.onDropFile.bind(this);
+		this.removeFile = this.removeFile.bind(this);
+	}
 
 	_fieldElem(f, d, cbs){
 		// - return the widget needed for the specific field type
+		const usualProps = {
+			id: f.id,
+			key: f.id,
+			ref: 'e',
+		}
+
 		if(f.type==='boolean'){
-			return <input 
-						id={f.id} 
-						key={f.id} 
-						ref='e'
+			return <input {...usualProps}
 						type="checkbox" 
 						checked={d?true:false}
 						onChange={cbs.change}
 				    />
 		}else if(f.type==='textmultiline' || f.type==='json'){ // && f.height>1
-			return <textarea 
-						id={f.id} 
-						key={f.id} 
-						ref='e'
+			return <textarea {...usualProps}
 						rows={f.height} 
 						className="form-control" 
 						value={d?d:''} 
@@ -90,10 +89,7 @@ export default React.createClass({
 				opts = [createOption(optVal)]
 				f.list = [optVal]
 			}
-			return <select 
-						id={f.id} 
-						key={f.id}
-						ref='e' 
+			return <select {...usualProps}
 						className="form-control" 
 						value={d || ''}
 						onChange={cbs.change}
@@ -103,10 +99,7 @@ export default React.createClass({
 					</select>
 
 		}else if(f.type==='date'){
-			return <Datepicker
-						id={f.id} 
-						key={f.id}
-						ref='e' 
+			return <Datepicker {...usualProps}
 						className="form-control" 
 						selected={d ? moment(d, "YYYY-MM-DD") : null}
 						onChange={this.getDateFieldChange(f.id)}
@@ -116,12 +109,10 @@ export default React.createClass({
 
 			if(d){
 				if(f.type==='image' && d){
-					pix = <img 
-								id={f.id} 
-							 	key={f.id}
-								ref='e'
+					pix = <img {...usualProps}
 								className="img-thumbnail"
 								src={filesUrl+d}
+								alt="" 
 							/>
 				}else{
 					pix = format.doc(d, filesUrl)
@@ -133,13 +124,13 @@ export default React.createClass({
 					{pix}
 					{d ? (
 						<div className="evol-remove" onClick={this.removeFile}>
-							<a href="javascript:void(0)">
+							<a className="fakeLink">
 								<i className="glyphicon glyphicon-remove"/>
 								{i18n_actions['remove_'+f.type]}
 							</a>
 						</div> 
 						) : null}
-					<Dropzone ref="dropzone" onDrop={this.onDropFile} className="pixdrop">
+					<Dropzone ref="dropzone" model={f} onDrop={this.onDropFile} className="pixdrop">
 	                  <i>{i18n_actions.dropFile}</i>
 	                </Dropzone>
 				</div>
@@ -152,16 +143,14 @@ export default React.createClass({
 			inputType = 'text'
 		}
 		
-		return <input 
-				id={f.id} 
-				ref='e'
+		return <input {...usualProps}
 				type={inputType} 
 				value={d?d:''}
 				onChange={cbs.change}
 				className="form-control"
 			/>
 
-	},
+	}
 
 	_fieldElemReadOnly(f, d, d_id){
 		// - return the formated field value
@@ -177,7 +166,10 @@ export default React.createClass({
 		}else if(f.type==='document'){
 			fw = format.doc(d, filesUrl)
 		}else if(f.type==='lov' && f.entity){
-			fw = <Link to={'/'+f.entity+'/browse/'+d_id}>{format.fieldValue(f, d)}</Link>
+			//{f.country_icon && d.country_icon ? <img src={d.country_icon}/> : null}
+			fw = <Link to={'/'+f.entity+'/browse/'+d_id}>
+					{format.fieldValue(f, d)}
+				</Link>
 		}else {
 			fw = format.fieldValue(f, d)
 		}
@@ -186,16 +178,17 @@ export default React.createClass({
 				{fw}
 			</div>
 		)
-	},
+	}
 
 	clickHelp(){
 		this.setState({
 			help: !this.state.help
 		})
-	},
+		this.clickHelp = this.clickHelp.bind(this)
+	}
 
  	render() {
-		const f = this.props.meta || {type: 'text'},
+		const f = this.props.model || {type: 'text'},
 			readOnly = this.props.readOnly || f.readOnly,
 			cbs = this.props.callbacks || {},
 			value = this.props.value || null,
@@ -220,7 +213,7 @@ export default React.createClass({
 
 			</div>
 		)
-	},
+	}
 
 	getDateFieldChange(fid) {
 		// - for fields of type date (using react-datepicker)
@@ -232,11 +225,11 @@ export default React.createClass({
 				}
 			})
 		}
-	},
+	}
 
 	onDropFile(files){
 		// - only for fields of type image or document
-		const f = this.props.meta
+		const f = this.props.model
 		if(files.length && (f.type==='image' || f.type==='document')){
 			const formData = new FormData()
 			files.forEach((f, idx)=>{
@@ -244,14 +237,23 @@ export default React.createClass({
 			})			
 			this.props.callbacks.dropFile(f.id, formData)
 		}
-	},
+	}
 
 	removeFile(){
 		// - only for fields of type image or document
-		const f = this.props.meta
+		const f = this.props.model
 		if(this.props.callbacks.dropFile){
 			this.props.callbacks.dropFile(f.id, null)
 		}
 	}
 
-})
+}
+
+Field.propTypes = {
+	model: PropTypes.object.isRequired,
+	callbacks: PropTypes.object,
+	data: PropTypes.any,  // object or atomic values depending on field type
+	value: PropTypes.any, // field value
+	label: PropTypes.string, //override label in model
+	readOnly: PropTypes.bool, //override label in model
+}

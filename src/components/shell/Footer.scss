@@ -1,0 +1,26 @@
+.Footer{
+	z-index: 100;
+    margin: 50px 0 0 170px;
+    padding: 20px 10px;
+    color: #607D8B;
+	background-color: #f8f8f8;
+	border-top:1px solid silver;
+	text-align: center;
+	> .copyright{
+		display: block;
+		margin-top: 10px;
+		font-size: .8em;
+		color: silver;
+	}
+	div{
+		align-content: center;
+		display: inline-block;
+		margin: 0 10px;
+	}
+}
+
+@media print {
+	.Footer {
+		page-break-inside: avoid;
+	}
+}

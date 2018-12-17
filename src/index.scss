@@ -1,0 +1,112 @@
+@import './components/variables';
+
+html {
+  height: 100%; // IE
+}
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%; // IE
+  height: 100%; // IE
+	font-size: $text-font-size;
+}
+p, legend{
+  font-size: 16px;    
+}
+h1, h2 {
+	font-weight: 300;
+}
+
+.evol-fld{
+	input, textarea, select{
+		font-size: $text-font-size;
+	}
+}
+
+.App {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+	flex-direction: column;
+}
+.siteTitle{
+	color: #2E9EC9;
+	font-size: 3em;
+}
+.w-timestamp{
+	padding: 10px 20px;
+}
+/*
+.form-range {
+	min-height: 70px;
+  max-width: 300px;
+  padding: 30px 10px 10px;
+  margin: 10px 30px;
+
+  @media (min-width: 800px) {
+    max-width: 60%;
+  }
+
+} 
+.input-range__slider {
+	border-radius:0 !important;
+	width:.5rem !important;
+}
+.input-range__label{
+	font-size: 16px !important;
+	margin: 20px 0;
+}
+*/
+
+/* TODO: for now here */
+
+.blue_title{
+	background-color: #b3e5fc;
+	color: white;
+	padding:40px;
+}
+
+.black{
+	color: black !important;
+}
+.numItemList > div {
+	display: inline-block;
+	margin-right: 20px;
+	min-width: 100px;
+}
+
+.fakeLink{
+	cursor: pointer;
+}
+
+
+.evo-views{
+	width: 100%;
+	position: relative;
+}
+.mr10{
+	margin-right: 10px;
+}
+
+.grey{
+	color: silver;
+}
+
+.clearer{
+  clear:both;
+}
+
+.ReactModal__Overlay{
+  z-index: 110;
+}
+
+
+@media print {
+
+  // things to hide
+    .evol-buttons,
+    .evo-toolbar,
+    .evo-noprint{
+      display: none !important;
+    }
+}

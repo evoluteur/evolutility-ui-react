@@ -1,0 +1,77 @@
+/*
+  evolutility-ui-react : toolbar
+*/
+
+@import '../variables';
+
+.evo-toolbar{
+  position: fixed;
+  top: 6px;
+  left: 155px;
+  z-index: 110;
+
+  .navlinks{
+    min-width: 160px;
+  } 
+  > ul {
+    margin-bottom: 0;
+    > .evo-sel .glyphicon:before{
+      color:black;
+    }
+    > li {
+      list-style: none;
+      float: left;
+      >a {
+        cursor: pointer;
+        display: inline-block;
+        text-decoration: none;
+        color: $color-nav;
+        transition: all 0.5s ease;
+        padding: 10px 6px 10px 8px;
+        &:hover{
+          color: $color-nav-hover;
+        }
+      }
+    }
+    &.active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: $color-nav-active;
+      }
+    }
+  }
+}
+
+.evo-dropdown-icons{
+  min-width: 50px;
+}
+
+/* bootstrap override */
+.dropdown-menu>li>a{
+  padding: 3px 10px;
+}
+
+.evo-filter-on{
+  background-color: #e0f2f1;
+}
+.evo-view-on{
+  color: $color-icon-hover;
+}
+/*
+.evo-tb-status{
+  color: #0f0f0f !important;
+  min-height: 35px;
+  line-height: 35px;
+  margin-top: 2px;
+  margin-right: 5px;
+  max-width:200px;
+  @include ellipsis();
+}
+*/
+.evol-many-list{
+  .evol-actions{
+    top:0;
+    flex-direction: row;
+  }
+}

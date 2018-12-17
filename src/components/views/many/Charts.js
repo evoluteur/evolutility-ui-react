@@ -1,4 +1,3 @@
-
 // Evolutility-UI-React :: /views/many/Charts.js
 
 // Dashboard style set of charts (bars or pies).
@@ -13,40 +12,45 @@ import React from 'react'
 
 import { i18n_charts } from '../../../i18n/i18n'
 import models from '../../../models/all_models'
-import dico from '../../../utils/dico'
-import Alert from '../../widgets/Alert'
+import { fieldInCharts } from '../../../utils/dico'
+import Header from '../../shell/Header'
+import Alert from 'widgets/Alert'
 import Chart from './Chart'
+import Many from './many'
 
+import './Charts.scss' 
+export default class Charts extends Many {
 
-export default React.createClass({
-
-    viewId: 'charts',
-
-    propTypes: {
-        params: React.PropTypes.shape({
-            entity: React.PropTypes.string.isRequired
-        }),
-    },
-
-    render: function () {
-        const e = this.props.params.entity,
+    viewId = 'charts'
+ 
+    render() {
+        const e = this.props.match.params.entity,
             m = models[e]
-    
+
         if(m){
             const title = m.title || m.label,
-                chartFields = dico.getFields(m).filter(dico.fieldInCharts)
+                chartFields = m.fields.filter(fieldInCharts)
+            let charts
+
+            if(chartFields.length===0){
+                charts = <Alert title="No data" message={i18n_charts.nocharts} type="warning"/>
+            }else if(chartFields.length===1){
+                const f = chartFields[0]
+                charts = <Chart entity={e} key={'c-'+f.id} field={f} title={f.label}
+                        sizes='600x300' className="panel-default bm10"/> 
+            }else{
+                charts = chartFields.map(f => <Chart entity={e} key={'c-'+f.id} field={f} title={f.label} className="panel-default"/>)
+            }
+        
             return (
 
                 <div className="evolutility evol-many-charts">
                     
-                    <h2 className="evo-page-title">{title}</h2>
+                    <Header entity={e} title={title} count={null} 
+                        cardinality='n' view={this.viewId}/>
                     
                     <div className="evolutility evol-many-charts">
-                        {chartFields.length ? chartFields.map(function(f){
-                            return <Chart entity={e} key={'c-'+f.id} field={f} title={f.label} className="panel-default"/> 
-                        }) : (
-                            <Alert title="No data" message={i18n_charts.nocharts} type="warning"/>
-                        )} 
+                        {charts} 
                     </div>
 
                 </div>
@@ -55,4 +59,5 @@ export default React.createClass({
             return <Alert title="Error" message={'Invalid input parameter "'+e+'".'}/>
         }
     }
-})
+
+}
