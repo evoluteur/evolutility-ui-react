@@ -14,6 +14,7 @@ import { isFieldMany } from '../../../utils/dico'
 import Many from './many'
 import Card from '../one/Card'
 import Alert from 'widgets/Alert'
+import Spinner from '../../shell/Spinner'
 import Pagination from 'widgets/Pagination'
 
 import './Cards.scss' 
@@ -32,8 +33,10 @@ export default class Cards extends Many {
 				fullCount = data.length ? (data[0]._full_count || 0) : 0,
 				title = m.title || m.label
 			let body
-
-			if(!this.state.error){
+			
+			if(this.state.loading){
+				body = <Spinner></Spinner>
+			}else if(!this.state.error){
 				document.title = title
 			 	if(data.length){
 			 		const fieldCols = m.fields.filter(isFieldMany)

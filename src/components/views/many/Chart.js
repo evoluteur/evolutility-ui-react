@@ -15,6 +15,7 @@ import {apiPath} from '../../../config.js'
 
 import { i18n_msg } from '../../../i18n/i18n'
 import Alert from 'widgets/Alert'
+import Spinner from '../../shell/Spinner'
 
 import './Charts.scss' 
 
@@ -38,7 +39,8 @@ export default class Chart extends React.Component {
         super(props);
         this.state={
             data: [],
-            chartType: 'Bars', // "Pie" or "Bars"
+            chartType: 'Bars', // "Pie" or "Bars",
+            loading: true,
         }
         this.click_pie = this.click_pie.bind(this);
         this.click_bars = this.click_bars.bind(this);
@@ -62,7 +64,8 @@ export default class Chart extends React.Component {
                 .then(response => {
                     if(!this.done){
                         this.setState({
-                            data: response.data
+                            data: response.data,
+                            loading: false,
                         });
                     }
                 })
@@ -72,20 +75,21 @@ export default class Chart extends React.Component {
                             error: {
                                 message: err.response.statusText || 
                                     'Couldn\'t retrieve charts data for field "'+fid+'".'
-                            }
+                            },
+                            loading: false,
                         })
                     }
                 });
         }
     }
 
-    click_pie(evt){
+    click_pie(){
         this.setState({
             chartType: 'Pie'
         })
     }
 
-    click_bars(evt){
+    click_bars(){
         this.setState({
             chartType: 'Bars'
         })
@@ -138,7 +142,7 @@ export default class Chart extends React.Component {
         }else if(url){
             body = <img src={url} alt=""/>
         }else{
-            body = <i>{i18n_msg.loading}</i>
+            body = <Spinner></Spinner>
         }
         return (
             <div className="evol-chart-holder panel panel-default">
