@@ -184,7 +184,7 @@ export default class Many extends React.Component {
 		if(query && query.page && !pageIdx){
 			delete(query.page)
 		}else{
-			query.page=pageIdx
+			query.page = pageIdx
 		}
 		//browserHistory.push('/'+e+'/'+this.viewId+'?'+url.querySearch(query))
 		this.props.history.push('/'+e+'/'+this.viewId+'?'+url.querySearch(query))
