@@ -13,7 +13,6 @@ import PropTypes from 'prop-types';
 import axios from 'axios'
 import {apiPath} from '../../../config.js'
 
-import { i18n_msg } from '../../../i18n/i18n'
 import Alert from 'widgets/Alert'
 import Spinner from '../../shell/Spinner'
 
@@ -134,7 +133,8 @@ export default class Chart extends React.Component {
     render(){
         const data = this.state.data || [],
             sizes = this.props.sizes || null,
-            url = this['url'+(this.state.chartType||'Pie')](data, sizes)
+            cType = this.state.chartType || 'Pie',
+            url = this['url'+cType](data, sizes)
         let body 
 
         if(this.state.error){
@@ -148,8 +148,8 @@ export default class Chart extends React.Component {
             <div className="evol-chart-holder panel panel-default">
                 <div className={"chart-holder" + (parseInt(sizes, 10)>400 ? ' singleChart' : '')}>
                     <div className="chart-actions pull-right">
-                        <i className="glyphicon glyphicon-cd" onClick={this.click_pie}/>
-                        <i className="glyphicon glyphicon-stats" onClick={this.click_bars}/>
+                        {cType==='Bars' ? <i className="glyphicon glyphicon-cd" onClick={this.click_pie}/> : null}
+                        {cType==='Pie' ? <i className="glyphicon glyphicon-stats" onClick={this.click_bars}/> : null}
                     </div>
                     <h3 className="panel-title">{this.props.title}</h3>
                     {body} 
