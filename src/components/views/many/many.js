@@ -22,20 +22,25 @@ export default class Many extends React.Component {
 		super(props);
 		this.state = {
 			data: [],
-			loading: false
+			loading: true
 		}
 		this.clickPagination = this.clickPagination.bind(this);
 		this.clickSort = this.clickSort.bind(this);
 	}
 
-	getData(entity, query){
+	getData(entity, query1){ 
 		const params = this.props.match.params,
 			id = params.id,
 			e = entity || params.entity,
-			//query = this.props.location.query,
+			query = query1 ? query1 : url.parse(this.props.location.search), //this.props.location.query,
 			paramsCollec = this.props.paramsCollec
 		let qUrl = apiPath + e
-
+ 
+		if(query.order){
+			const orderParams = query.order.split('.')
+			this._sortField = orderParams[0]
+			this._sortDirection = orderParams[1]
+		} 
 		if(paramsCollec){
 			if(id==='0'){
 				return
@@ -87,6 +92,8 @@ export default class Many extends React.Component {
 				error: false
 			})
 			this.getData(nextProps.match.params.entity)
+		}else if(nextProps.location.search !== this.props.location.search){
+			this.getData(null, url.parse(nextProps.location.search))
 		}
 	}
 
@@ -160,9 +167,7 @@ export default class Many extends React.Component {
 		if(query){
 			link += '?'+url.querySearch(query)
 		}
-		//browserHistory.push(link)
 		this.props.history.push(link)
-		this.getData(null, query)
 	}
 
 	clickPagination(evt){
@@ -186,11 +191,9 @@ export default class Many extends React.Component {
 		}else{
 			query.page = pageIdx
 		}
-		//browserHistory.push('/'+e+'/'+this.viewId+'?'+url.querySearch(query))
 		this.props.history.push('/'+e+'/'+this.viewId+'?'+url.querySearch(query))
 		//TODO: scroll to top
 		//ReactDOM.findDOMNode(this).scrollTop = 0
-		this.getData(null, query)
 	}
 
 }
