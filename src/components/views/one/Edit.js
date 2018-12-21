@@ -107,7 +107,7 @@ export default class Edit extends OneReadWrite{
 			return null
 		}
 		
-		document.title = title + ' ('+view+')'
+		document.title = title
   		this.isNew = isNew 
 		//const date = wTimestamp ? moment(data['u_date']) : null
 		if(!m){
