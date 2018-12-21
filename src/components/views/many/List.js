@@ -88,13 +88,15 @@ export default class List extends Many {
 				full_count = this.pageSummary(data),
 				fullCount = data.length ? (data[0]._full_count || 0) : 0,
 				title = m.title || m.label
-			let body,
+			let body, footer = null,
 				css = paramsCollec ? 'table sub' : 'table table-hover main' 
 
+			document.title = title
 			if(this.state.error){
 				body = <Alert type="danger"  title="Error" message={this.state.error.message}/> 
+			}else if(this.state.loading){
+				body = <Spinner></Spinner> 
 			}else{
-				document.title = title
 				if(data.length){
 					let fields
 					if(paramsCollec){
@@ -118,8 +120,12 @@ export default class List extends Many {
 							</table>
 						</div>
 					)
-				}else if(this.state.loading){
-					body = <Spinner></Spinner> 
+					footer = <Pagination 
+						count={data.length} 
+						fullCount={fullCount} 
+						fnClick={this.clickPagination} 
+						location={this.props.location}
+					/>
 				}else{
 					// TODO: get model of nested obj
 					if(this.props.isNested){
@@ -138,12 +144,7 @@ export default class List extends Many {
 					)}
 					<div className="evolutility evol-many-list">
 						{body}
-						<Pagination 
-							count={data.length} 
-							fullCount={fullCount} 
-							fnClick={this.clickPagination} 
-							location={this.props.location}
-						/>
+						{footer}						
 					</div>
 				</div>
 			)

@@ -32,12 +32,14 @@ export default class Cards extends Many {
 				full_count = this.pageSummary(data),
 				fullCount = data.length ? (data[0]._full_count || 0) : 0,
 				title = m.title || m.label
-			let body
+			let body, footer = null
 			
+			document.title = title
 			if(this.state.loading){
 				body = <Spinner></Spinner>
-			}else if(!this.state.error){
-				document.title = title
+			}else if(this.state.error){
+				body = <Alert title="Error" message={this.state.error.message}/> 
+			}else{
 			 	if(data.length){
 			 		const fieldCols = m.fields.filter(isFieldMany)
 			 		body = <div className="evol-cards-body">
@@ -46,28 +48,22 @@ export default class Cards extends Many {
 						})}
 						<div className="clearer"></div>
 					</div>
-			 	}else if(this.state.loading){
-					body = null
-				}else{
-			 		body = <Alert title="No data" message={i18n_msg.nodata.replace('{0}', m.namePlural)} type="info" /> 
-			 	}
-			}else{
-				body = <Alert title="Error" message={this.state.error.message}/> 
-			}
-			return (
-				<div data-entity={entity} className="evol-many-cards">
-					
-					<Header entity={entity} title={title} count={full_count} 
-						cardinality='n' view={this.viewId} />
-
-					{body}
-
-					<Pagination 
+					footer = <Pagination 
 						count={data.length} 
 						fullCount={fullCount} 
 						fnClick={this.clickPagination} 
 						location={this.props.location}
 					/>
+			 	}else{
+			 		body = <Alert title="No data" message={i18n_msg.nodata.replace('{0}', m.namePlural)} type="info" /> 
+			 	}
+			}
+			return (
+				<div data-entity={entity} className="evol-many-cards">
+					<Header entity={entity} title={title} count={full_count} 
+						cardinality='n' view={this.viewId} />
+					{body}
+					{footer}
 				</div>
 			)
 	  	}else{
