@@ -7,11 +7,11 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import format from 'utils/format'
-import {i18n_actions, i18n_msg} from '../../i18n/i18n'
-import {filesUrl} from '../../config.js'
+import { i18n_actions, i18n_msg } from '../../i18n/i18n'
+import { filesUrl } from '../../config.js'
 import FieldLabel from './FieldLabel'
 
 // - components:

@@ -23,7 +23,7 @@ npm start
 
 ```
 
-In a web browser, go to the url [http://localhost:8080/](http://localhost:3000/).
+In a web browser, go to the url [http://localhost:3000/](http://localhost:3000/).
 
 For the REST endpoints, you also need to install and run [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) which provides the matching REST endpoints based on the same metadata.
 
@@ -86,8 +86,8 @@ Code: [/src/components/views/many/Charts.js](https://github.com/evoluteur/evolut
 
 ## Models
 
-For each application, several views will be generated form a single model. 
-Models describe the object and its list of fields.
+For each application, all views can be generated from the model at run-time. 
+Each model describe an object and its list of fields.
 
 ### Entity
 
