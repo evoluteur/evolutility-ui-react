@@ -30,7 +30,7 @@ var sig='  ______          _       _   _ _ _ _\n'+
 console.log(sig);
 
 gulp.task('dep-min', function () {
-  return gulp.src('./sass/dependencies.scss')
+  return gulp.src('./src/dependencies.scss')
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
     .pipe(header(bannerDep, { pkg : pkg }))
     .pipe(rename('dependencies.min.css'))
