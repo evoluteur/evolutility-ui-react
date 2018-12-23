@@ -2,14 +2,6 @@
 
 Evolutility-UI-React is a set of **model-driven views** to Browse, Edit, List, Cards, and Charts data by writing models rather than code. 
 
-
-<style>
-table {
-    width:100%;
-}
-</style>
-
-
 ## Installation
 
 [**Download**](https://github.com/evoluteur/evolutility-ui-react/archive/master.zip) or **clone** from [GitHub](https://github.com/evoluteur/evolutility-ui-react/).
