@@ -130,6 +130,18 @@ Each model describe an object and its list of fields.
 | fields       | Array of field ids.                        |
 
 
+### Collection
+
+Multiple Master-Details can be specified with collections. 
+
+| Property     | Meaning                               |
+|--------------|---------------------------------------|
+| id           | Unique key for the collection.        |
+| title        | Collection title.      |
+| entity       | Object linked to.                        |
+| fields       | Array of fields.                        |
+
+
 ### Sample model
 
 The following example is the model for a simple graphic novels inventory app. 
