@@ -11,6 +11,7 @@ import Home from './pages/Home.js';
 import List from './components/views/many/List';
 import Cards from './components/views/many/Cards';
 import Charts from './components/views/many/Charts';
+import Stats from './components/views/many/Stats';
 
 import Browse from './components/views/one/Browse';
 import Edit from './components/views/one/Edit';
@@ -22,21 +23,22 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 
 const AppRoutes = () => (
-  <Switch>
-	<Route exact path="/" component={Home} />
-	
-	<Route path="/:entity/browse/:id" component={Browse}/>
-	<Route path="/:entity/browse" component={Browse}/>
-	<Route path="/:entity/edit/:id" component={Edit}/>
-	<Route path="/:entity/edit" component={Edit}/>
-	
-	<Route path="/:entity/cards" component={Cards}/>
-	<Route path="/:entity/charts" component={Charts}/>
-	<Route path="/:entity/list" component={List}/>
-	<Route path="/:entity" component={List}/> 
-	
-	<Route path='*' exact={true} component={PageNotFound} />
-  </Switch>
+	<Switch>
+		<Route exact path="/" component={Home} />
+
+		<Route path="/:entity/browse/:id" component={Browse}/>
+		<Route path="/:entity/browse" component={Browse}/>
+		<Route path="/:entity/edit/:id" component={Edit}/>
+		<Route path="/:entity/edit" component={Edit}/>
+
+		<Route path="/:entity/cards" component={Cards}/>
+		<Route path="/:entity/charts" component={Charts}/>
+		<Route path="/:entity/stats" component={Stats}/>
+		<Route path="/:entity/list" component={List}/>
+		<Route path="/:entity" component={List}/> 
+
+		<Route path='*' exact={true} component={PageNotFound} />
+	</Switch>
 );
 
 
