@@ -91,6 +91,14 @@ module.exports = {
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
       
+      // Evolutility folders
+      models: path.resolve(__dirname, '../src/models/'),
+      i18n: path.resolve(__dirname, '../src/i18n/'),
+      widgets: path.resolve(__dirname, '../src/components/widgets/'),
+      utils: path.resolve(__dirname, '../src/utils/'),
+      shell: path.resolve(__dirname, '../src/shell/'),
+      views: path.resolve(__dirname, '../src/views/'),
+      
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
