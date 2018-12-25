@@ -16,7 +16,7 @@ export default class Home extends React.PureComponent {
         return (
 
         <div className="evo-home">
-             
+                         
             <h1 className="siteTitle"><span style={{fontWeight:'300'}}>Evol</span><span style={{color:'navy'}}>utility</span> <span style={{fontSize: '.5em'}}>v{version}</span> </h1> 
 
             <h2 className="tBlue">Build applications with models rather than code.</h2> 
@@ -29,11 +29,11 @@ export default class Home extends React.PureComponent {
 
                 <p>
                     Sample Web apps: {' '}
-                    <a  target="webapp" href="/todo/list">To-Do list</a>,  {' '}
-                    <a  target="webapp" href="/contact/list">Address Book</a>,  {' '}
-                    <a  target="webapp" href="/comics/cards">Graphic Novels inventory</a>,  {' '}
-                    <a  target="webapp" href="/restaurant/list">Restaurants list</a>, {' '}
-                    <a  target="webapp" href="/winecellar/list">Wine Cellar</a>.
+                    <a href="/todo/list">To-Do list</a>,  {' '}
+                    <a href="/contact/list">Address Book</a>,  {' '}
+                    <a href="/comics/cards">Graphic Novels inventory</a>,  {' '}
+                    <a href="/restaurant/list">Restaurants list</a>, {' '}
+                    <a href="/winecellar/list">Wine Cellar</a>.
                 </p> 
             </div>
 
