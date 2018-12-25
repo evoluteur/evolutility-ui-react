@@ -85,6 +85,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "proxy": "http://localhost:2004/",
   "keywords": [
     "model-driven",
     "metadata",

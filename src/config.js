@@ -3,11 +3,14 @@
 module.exports = {
 
 	// - Path to REST API
-	apiPath: 'http://localhost:2000/api/v1/',
-	apiPathDico: 'http://localhost:2000/api/v1/',
+	apiPath: '/api/v1/',
+	apiPathDico: '/api/v1/',
+	// apiPath: 'http://localhost:2000/api/v1/',
+	// apiPathDico: 'http://localhost:2000/api/v1/',
 
 	// - Path to uploaded files
-	filesUrl: 'http://localhost:3000/pix/',
+	filesUrl: '/pix/',
+	//filesUrl: 'http://localhost:3000/pix/',
 
 	// - Pagination
 	pageSize: 50,
