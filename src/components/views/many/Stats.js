@@ -149,9 +149,6 @@ export default class Stats extends React.Component {
 
                         {itemField(i18n_stats.min, k.min)}
                         {itemField(i18n_stats.max, k.max)}
-                        <div>
-                            <label className="grey stat-fn">{i18n_stats.max}</label> {formatNum(k, k.max)}
-                        </div>
 
                     </div>
                 </div>
