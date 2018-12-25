@@ -9,7 +9,7 @@ import { fieldIsDateOrTime, fieldIsNumeric } from '../../../utils/dico'
 import format from '../../../utils/format'
 import Header from '../../shell/Header'
 import Spinner from '../../shell/Spinner'
-import Alert from 'widgets/Alert'
+import Alert from '../../widgets/Alert'
 
 //import Range from 'widgets/Range'
 

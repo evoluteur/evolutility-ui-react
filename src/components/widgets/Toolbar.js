@@ -14,8 +14,8 @@ import { toast } from 'react-toastify';
 //import { IconName } from "@blueprintjs/icons";
 //import { IconSelect } from "./common/iconSelect";
 
-import Format from 'utils/format'
-import evoGlobals from 'utils/evoGlobals'
+import Format from '../../utils/format'
+import evoGlobals from '../../utils/evoGlobals'
 import {apiPath} from '../../config.js'
 //import {i18n_actions, i18n_msg} from '../../i18n/i18n'
 import { i18n_actions } from '../../i18n/i18n'

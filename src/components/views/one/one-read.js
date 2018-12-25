@@ -12,7 +12,6 @@ import axios from 'axios'
 
 import {i18n_errors} from '../../../i18n/i18n'
 import {apiPath} from '../../../config.js'
-import {format} from 'util'
 import models from '../../../models/all_models' 
 
 import './one.scss'
@@ -55,14 +54,14 @@ export default class OneRead extends React.Component{
 					this.setState(newState);
 				}else{
 					newState.error = {
-						message: format(i18n_errors.badId.replace('{0}', id))
+						message: i18n_errors.badId.replace('{0}', id)
 					}
 					this.setState(newState)
 				}
 			})
 			.catch(err => {
 				newState.error = {
-					message: format(i18n_errors.badId.replace('{0}', id))
+					message: i18n_errors.badId.replace('{0}', id)
 				}
 				this.setState(newState)
 			})

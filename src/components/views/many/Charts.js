@@ -14,7 +14,7 @@ import { i18n_charts } from '../../../i18n/i18n'
 import models from '../../../models/all_models'
 import { fieldInCharts } from '../../../utils/dico'
 import Header from '../../shell/Header'
-import Alert from 'widgets/Alert'
+import Alert from '../../widgets/Alert'
 import Chart from './Chart'
 import Many from './many'
 

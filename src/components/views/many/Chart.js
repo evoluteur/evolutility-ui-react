@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios'
 import {apiPath} from '../../../config.js'
 
-import Alert from 'widgets/Alert'
+import Alert from '../../widgets/Alert'
 import Spinner from '../../shell/Spinner'
 
 import './Charts.scss' 

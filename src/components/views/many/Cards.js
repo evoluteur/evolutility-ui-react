@@ -13,9 +13,9 @@ import Header from '../../shell/Header'
 import { isFieldMany } from '../../../utils/dico'
 import Many from './many'
 import Card from '../one/Card'
-import Alert from 'widgets/Alert'
+import Alert from '../../widgets/Alert'
+import Pagination from '../../widgets/Pagination'
 import Spinner from '../../shell/Spinner'
-import Pagination from 'widgets/Pagination'
 
 import './Cards.scss' 
 

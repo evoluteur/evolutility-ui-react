@@ -16,7 +16,7 @@ import Stats from './components/views/many/Stats';
 import Browse from './components/views/one/Browse';
 import Edit from './components/views/one/Edit';
 
-import PageNotFound from 'widgets/PageNotFound.js';
+import PageNotFound from './components/widgets/PageNotFound.js';
 
 
 import 'react-toastify/dist/ReactToastify.min.css';
