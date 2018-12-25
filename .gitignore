@@ -1,8 +1,12 @@
 node_modules
 bower_components
+
+build/
+
 public/bundle.js
 
 *-nogit/
+*-nogit.*
 
 # Windows stuff
 Thumbs.db

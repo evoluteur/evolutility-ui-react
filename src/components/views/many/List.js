@@ -17,10 +17,10 @@ import Many from './many'
 import {isFieldMany} from '../../../utils/dico'
 import format from '../../../utils/format'
 import Header from '../../shell/Header'
-import Alert from 'widgets/Alert'
 import Spinner from '../../shell/Spinner'
-import PageNotFound from 'widgets/PageNotFound'
-import Pagination from 'widgets/Pagination'
+import Alert from '../../widgets/Alert'
+import PageNotFound from '../../widgets/PageNotFound'
+import Pagination from '../../widgets/Pagination'
 
 import './List.scss' 
 

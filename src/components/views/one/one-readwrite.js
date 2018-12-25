@@ -11,7 +11,7 @@ import axios from 'axios'
 
 import models from '../../../models/all_models'
 //import evoGlobals from 'utils/evoGlobals'
-import Format from 'utils/format'
+import Format from '../../../utils/format'
 import { i18n_msg, i18n_actions, i18n_errors } from '../../../i18n/i18n'
 import { apiPath } from '../../../config.js'
 import OneRead from './one-read'

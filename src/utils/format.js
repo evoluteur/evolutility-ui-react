@@ -31,7 +31,7 @@ const formatLib = {
         }else if(f.type==='image' && d){
             return this.image(filesUrl+d)
         }else if(f.type==='url' && d){
-            return <a href={d} target="_blank">{d}</a>
+            return <a href={d} target="_blank" rel="noopener noreferrer">{d}</a>
         }else if(f.type==='email' && d){
             return <a href={'mailto:'+d}>{d}</a>
         }/*else if(f.type==='lov' && icon){
@@ -51,7 +51,7 @@ const formatLib = {
         if(d===null){
             return null
         }
-        return <a href={encodeURI(path+d)} target='_blank'>{d}</a>
+        return <a href={encodeURI(path+d)} target='_blank' rel="noopener noreferrer">{d}</a>
     },
 
     // --- date formats ---

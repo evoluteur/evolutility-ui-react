@@ -13,9 +13,9 @@ import {i18n_actions, i18n_errors} from '../../../i18n/i18n'
 import { dataTitle, fieldId2Field } from '../../../utils/dico'
 
 import OneRead from './one-read'
-import Alert from 'widgets/Alert'
-import Field from 'widgets/Field'
-import Panel from 'widgets/Panel'
+import Alert from '../../widgets/Alert'
+import Field from '../../widgets/Field'
+import Panel from '../../widgets/Panel'
 import List from '../many/List'
 import Header from '../../shell/Header'
 

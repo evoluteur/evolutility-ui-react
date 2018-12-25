@@ -132,7 +132,13 @@ module.exports = {
     },
 
     i18n_stats:{
-        totalComments: 'Number of comments'
+        lastupdate: 'Last update',
+        totalComments: 'Number of comments',
+        total: 'Total',
+        avg: 'Average',
+        min: 'Min.',
+        max: 'Max.', 
+        nofit: 'Data not fit for generic analysis.',
     },
 
     i18n_errors: {
