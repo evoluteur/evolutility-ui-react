@@ -39,7 +39,7 @@ export default class Pagination extends React.PureComponent {
             let pId = pIdx + 1, 
                 bPage = function(id){
                     h.push(<li key={id} className={pId===id?'active':''} onClick={fnClick}>
-                    	<a className="fakeLink">{id}</a>
+                    	<span className="fakeLink">{id}</span>
                     </li>)
                 },
                 bPageRange = function(pStart, pEnd){
@@ -48,11 +48,11 @@ export default class Pagination extends React.PureComponent {
                     }
                 },
                 bGap = function(idx){
-                    h.push(<li key={'gap'+idx} className="disabled"><a className="fakeLink">...</a></li>)
+                    h.push(<li key={'gap'+idx} className="disabled"><span className="fakeLink">...</span></li>)
                 };
                 
             h.push(<li key="prev" className={wPrev ? '':'disabled'} onClick={wPrev ? fnClick : null}> 
-                	<a className="fakeLink">&laquo;</a>
+                	<span className="fakeLink">&laquo;</span>
                 </li>)
             bPage(1);
 
@@ -78,7 +78,7 @@ export default class Pagination extends React.PureComponent {
             }
 
             h.push(<li key="next" className={wNext ? '' : 'disabled'} onClick={wNext ? fnClick : null}>
-            		<a className="fakeLink">&raquo;</a>
+            		<span className="fakeLink">&raquo;</span>
             	</li>)
         }
         return h;

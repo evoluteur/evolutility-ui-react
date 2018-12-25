@@ -108,7 +108,7 @@ class Toolbar extends React.Component {
             const text = iconOnly ? null : menu.label
             if(isFunction(idOrFun)){
                 return <li key={idx++}>
-                        <a onClick={idOrFun} style={style}>{iicon(menu.icon)} {text}</a>
+                        <span onClick={idOrFun} className="fakeLink" style={style}>{iicon(menu.icon)} {text}</span>
                     </li>
             }else{
                 //activeStyle={cStyle}
@@ -145,7 +145,7 @@ class Toolbar extends React.Component {
             }
         }else{
             navViews = ['list', 'cards', 'charts'].map(menu => buttonLink(menuItems.views[menu], id, true))
-            if(view!=='charts'){
+            if(view!=='charts' && view!=='stats'){
                 //actions.push(buttonLink(menuItems.new, ''));
                 //actions.push(buttonLink(menuItems.filter, this.filterMany));
                 //actions.push(buttonLink(menuItems.views.charts, ''));
@@ -164,7 +164,7 @@ class Toolbar extends React.Component {
                     ariaHideApp={false}
                     isOpen={this.state.deleteConfirmation}
                     onRequestClose={this.closeModal}
-                    style={{content:{position:'absolute',top:'calc(50% - 200px)',left:'calc(50% - 150px)',height:'200px',width:'300px'}}}>
+                    style={{content:{position:'absolute',top:'calc(50% - 200px)',left:'calc(50% - 150px)',width:'360px'}}}>
                         <div>
                             <div className="modal-content">
                                 <div className="modal-header">

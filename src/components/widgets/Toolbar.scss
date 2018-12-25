@@ -21,6 +21,8 @@
     > li {
       list-style: none;
       float: left;
+      
+      >.fakeLink,
       >a {
         cursor: pointer;
         display: inline-block;

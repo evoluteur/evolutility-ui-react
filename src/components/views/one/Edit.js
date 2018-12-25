@@ -119,7 +119,11 @@ export default class Edit extends OneReadWrite{
 
 					<Header {...this.props.match.params} 
 						title={title} 
-							comments={data.nb_comments} count={null} cardinality='1' view={this.viewId} />
+						comments={data.nb_comments} 
+						count={null} 
+						cardinality='1' 
+						view={this.viewId} 
+					/>
 
 					<div className="evo-one-edit">
 
@@ -172,8 +176,8 @@ export default class Edit extends OneReadWrite{
 									</div>
 								</Panel> 
 
-							</div>
-	 					)
+							</div> 
+						)
             		}
 					</div>
 
