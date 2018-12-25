@@ -84,7 +84,7 @@ Code: [/src/components/views/many/Charts.js](https://github.com/evoluteur/evolut
 ### Stats
 Display last update, number of updates in the last week, and for numeric fields the min, max, count, average.
 
-![Charts](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-stats,gif)
+![Stats](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-stats.gif)
 
 Code: [/src/components/views/many/Stats.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Stats.js)
 
