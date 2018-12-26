@@ -9,12 +9,12 @@
 // must be re-written using D3.js or other cool charting library
 
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 import { i18n_charts } from '../../../i18n/i18n'
 import models from '../../../models/all_models'
 import { fieldInCharts } from '../../../utils/dico'
 import Header from '../../shell/Header'
-import Alert from 'widgets/Alert'
+import Alert from '../../widgets/Alert'
 import Chart from './Chart'
 import Many from './many'
 
@@ -51,6 +51,10 @@ export default class Charts extends Many {
                     
                     <div className="evolutility evol-many-charts">
                         {charts} 
+                    </div>
+
+                    <div className="charts-stats">
+                        <Link to={'/'+e+'/stats'}><i className='glyphicon glyphicon-equalizer' />Statistics</Link>
                     </div>
 
                 </div>

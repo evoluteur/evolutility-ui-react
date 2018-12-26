@@ -9,7 +9,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import format from 'utils/format'
+import format from '../../utils/format'
 import { i18n_actions, i18n_msg } from '../../i18n/i18n'
 import { filesUrl } from '../../config.js'
 import FieldLabel from './FieldLabel'
@@ -17,7 +17,6 @@ import FieldLabel from './FieldLabel'
 // - components:
 // - date
 import Datepicker from 'react-datepicker'
-import moment from 'moment'
 // - image & documents
 import Dropzone from 'react-dropzone'
 
@@ -101,7 +100,7 @@ export default class Field extends React.Component {
 		}else if(f.type==='date'){
 			return <Datepicker {...usualProps}
 						className="form-control" 
-						selected={d ? moment(d, "YYYY-MM-DD") : null}
+						selected={ d?new Date(d):null }
 						onChange={this.getDateFieldChange(f.id)}
 					/>
 		}else if(f.type==='image' || f.type==='document'){
@@ -124,15 +123,31 @@ export default class Field extends React.Component {
 					{pix}
 					{d ? (
 						<div className="evol-remove" onClick={this.removeFile}>
-							<a className="fakeLink">
+							<span className="fakeLink">
 								<i className="glyphicon glyphicon-remove"/>
 								{i18n_actions['remove_'+f.type]}
-							</a>
+							</span>
 						</div> 
 						) : null}
-					<Dropzone ref="dropzone" model={f} onDrop={this.onDropFile} className="pixdrop">
-	                  <i>{i18n_actions.dropFile}</i>
-	                </Dropzone>
+						<Dropzone onDrop={this.onDropFile}>
+							{({getRootProps, getInputProps, isDragActive}) => {
+								return (
+									<div
+										{...getRootProps()}
+										className={'pixdrop dropzone '+(isDragActive?'dropzone--isActive':'')}
+										>
+										<input {...getInputProps()} />
+										{
+											isDragActive ?
+											<p>Drop files here...</p> :
+											<p>{i18n_actions.dropFile}</p>
+										}
+									</div>
+								)
+							}}
+						</Dropzone>
+	                <i></i>
+
 				</div>
 			)
 		}
@@ -153,7 +168,7 @@ export default class Field extends React.Component {
 	}
 
 	_fieldElemReadOnly(f, d, d_id){
-		// - return the formated field value
+		// - return the formatted field value
 		let fw
 
 		if(f.type==='textmultiline'){
@@ -221,7 +236,7 @@ export default class Field extends React.Component {
 			this.props.callbacks.change({
 				target:{
 					id: fid, 
-					value: v ? v.format() : null
+					value: v
 				}
 			})
 		}

@@ -2,7 +2,6 @@
 
 Evolutility-UI-React is a set of **model-driven views** to Browse, Edit, List, Cards, and Charts data by writing models rather than code. 
 
-
 ## Installation
 
 [**Download**](https://github.com/evoluteur/evolutility-ui-react/archive/master.zip) or **clone** from [GitHub](https://github.com/evoluteur/evolutility-ui-react/).
@@ -35,7 +34,7 @@ For any object, a single model defines UI elements across views in a simple decl
 Evolutility-UI-React provides 2 types of view:
 
 * Views for a model: [Browse](#browse), [Edit](#edit).
-* Views for a collection: [List](#list), [Cards](#cards), [Charts](#charts).
+* Views for a collection: [List](#list), [Cards](#cards), [Charts](#charts), [Stats](#stats).
 
 Notes: Views for actions will come later.
 
@@ -80,6 +79,14 @@ Draws charts about the collection.
 ![Charts](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-charts.gif)
 
 Code: [/src/components/views/many/Charts.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Charts.js)
+
+
+### Stats
+Display last update, number of updates in the last week, and for numeric fields the min, max, count, average.
+
+![Stats](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-stats.gif)
+
+Code: [/src/components/views/many/Stats.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Stats.js)
 
 
 
@@ -128,6 +135,18 @@ Each model describe an object and its list of fields.
 | type         | Only "panel" is currently supported ("tab" is next). |
 | label        | Group title as displayed to the user.      |
 | fields       | Array of field ids.                        |
+
+
+### Collection
+
+Multiple Master-Details can be specified with collections. 
+
+| Property     | Meaning                               |
+|--------------|---------------------------------------|
+| id           | Unique key for the collection.        |
+| title        | Collection title.                     |
+| entity       | Object linked to.                     |
+| fields       | Array of fields.                      |
 
 
 ### Sample model

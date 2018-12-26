@@ -14,14 +14,14 @@ import { toast } from 'react-toastify';
 //import { withRouter } from 'react-router'
 //import {wTimestamp} from "../../../config"
 import {i18n_actions, i18n_validation, i18n_errors} from '../../../i18n/i18n'
-import { dataTitle, fieldId2Field } from 'utils/dico'
-import validation from 'utils/validation'
+import { dataTitle, fieldId2Field } from '../../../utils/dico'
+import validation from '../../../utils/validation'
 
 import OneReadWrite from './one-readwrite'
-import Alert from 'widgets/Alert'
-import Field from 'widgets/Field'
-import Panel from 'widgets/Panel'
 import List from '../many/List'
+import Alert from '../../widgets/Alert'
+import Field from '../../widgets/Field'
+import Panel from '../../widgets/Panel'
 import Header from '../../shell/Header'
 
 export default class Edit extends OneReadWrite{
@@ -119,7 +119,11 @@ export default class Edit extends OneReadWrite{
 
 					<Header {...this.props.match.params} 
 						title={title} 
-							comments={data.nb_comments} count={null} cardinality='1' view={this.viewId} />
+						comments={data.nb_comments} 
+						count={null} 
+						cardinality='1' 
+						view={this.viewId} 
+					/>
 
 					<div className="evo-one-edit">
 
@@ -172,8 +176,8 @@ export default class Edit extends OneReadWrite{
 									</div>
 								</Panel> 
 
-							</div>
-	 					)
+							</div> 
+						)
             		}
 					</div>
 
