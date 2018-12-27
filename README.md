@@ -96,7 +96,7 @@ Code: [/src/components/views/many/Stats.js](https://github.com/evoluteur/evoluti
 For each application, all views can be generated from the model at run-time. 
 Each model describe an object and its list of fields.
 
-### Entity
+### Object
 
 | Property     | Meaning                                 |
 |--------------|-----------------------------------------|
@@ -132,21 +132,22 @@ Each model describe an object and its list of fields.
 | Property     | Meaning                               |
 |--------------|---------------------------------------|
 | id           | Unique key for the group. It is optional.            |
-| type         | Only "panel" is currently supported ("tab" is next). |
-| label        | Group title as displayed to the user.      |
+| type         | Type of fields group. Only "panel" is currently supported (tab and other types of groups will be added later). |
+| label        | Group title displayed in the group header.      |
 | fields       | Array of field ids.                        |
 
+Note: Groups are optional. By default a single group hold all fields.
 
 ### Collection
 
-Multiple Master-Details can be specified with collections. 
+Multiple details tables can be specified with "collections". 
 
 | Property     | Meaning                               |
 |--------------|---------------------------------------|
 | id           | Unique key for the collection.        |
 | title        | Collection title.                     |
 | entity       | Object linked to.                     |
-| fields       | Array of fields.                      |
+| fields       | Array of fields. Fields in collections do not need all properties of Fields in objects.    |
 
 
 ### Sample model
