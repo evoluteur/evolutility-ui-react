@@ -6,14 +6,13 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2018 Olivier Giulieri
 
-import axios from 'axios'
 //import { createHashHistory } from 'history'
 
 import models from '../../../models/all_models'
 //import evoGlobals from 'utils/evoGlobals'
 import Format from '../../../utils/format'
 import { i18n_msg, i18n_actions, i18n_errors } from '../../../i18n/i18n'
-import { apiPath } from '../../../config.js'
+import dataLayer from '../../../utils/data-layer.js'
 import OneRead from './one-read'
 
 import { toast } from 'react-toastify';
@@ -25,11 +24,12 @@ export default class OneReadWrite extends OneRead{
 		const e = entity || this.props.match.params.entity,
 			m = models[e],
 			id = parseInt(this.props.match.params.id || '', 10),
-			data = this.delta,
-			url = apiPath+e+'/'+(id?id:'')
+			data = this.delta
 
 		if(data && Object.keys(data).length){
-			axios[id?'put':'post'](url, data)
+			let promise = (id) ? dataLayer.updateOne(e, id, data) 
+				: dataLayer.addOne(e, data)
+			promise
 				.then(response => {
 					let toastMsg
 					this.emptyDelta(false)					
@@ -70,9 +70,7 @@ export default class OneReadWrite extends OneRead{
 		}
 
 		if(formData && (f.type==='image' || f.type==='document')){
-			let url = apiPath+mid+'/upload/'+stateData.id+'?field='+f.id
-
-			axios.post(url, formData)
+			dataLayer.uploadOne(mid, stateData.id, f.id, formData)
 				.then(response => {
 					setData(mid+'/'+response.data.fileName)
 				})
@@ -97,7 +95,7 @@ export default class OneReadWrite extends OneRead{
 		const mid = this.model.id
 
 		if(!this.lovs){
-			axios.get(apiPath+mid+'/lov/'+fid)
+			dataLayer.getLov(mid, fid)
 			.then((response)=>{
 				this.model.fieldsH[fid].list = response.data.map(function(d){
 					return {

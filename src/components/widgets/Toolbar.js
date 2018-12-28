@@ -7,7 +7,6 @@
 
 import React from 'react'
 import PropTypes from 'prop-types';
-import axios from 'axios'
 import { withRouter, Link } from 'react-router-dom'
 import Modal from 'react-modal'
 import { toast } from 'react-toastify';
@@ -16,6 +15,7 @@ import { toast } from 'react-toastify';
 
 import Format from '../../utils/format'
 import evoGlobals from '../../utils/evoGlobals'
+import dataLayer from '../../utils/data-layer.js'
 import {apiPath} from '../../config.js'
 //import {i18n_actions, i18n_msg} from '../../i18n/i18n'
 import { i18n_actions } from '../../i18n/i18n'
@@ -220,7 +220,7 @@ class Toolbar extends React.Component {
         const {entity, id} = this.props.match.params,
             m = models[entity]
         if(entity && id && m){
-            axios.delete(apiPath+entity+'/'+id)
+            dataLayer.deleteOne(entity, id)
                 .then(response => {
                     evoGlobals.skip_confirm = true
                     toast.warn(i18n_actions.deleted.replace('{0}', Format.capitalize(m.name)), {

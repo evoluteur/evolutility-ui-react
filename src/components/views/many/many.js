@@ -6,10 +6,10 @@
 // (c) 2018 Olivier Giulieri
 
 import React from 'react'
-import axios from 'axios'
 
 import {i18n_msg} from '../../../i18n/i18n.js'
-import {apiPath, pageSize} from '../../../config.js'
+import dataLayer from '../../../utils/data-layer.js'
+import { pageSize } from '../../../config.js'
 import url from '../../../utils/url'
 import models from '../../../models/all_models'
 
@@ -34,28 +34,22 @@ export default class Many extends React.Component {
 			e = entity || params.entity,
 			query = query1 ? query1 : url.parse(this.props.location.search), //this.props.location.query,
 			paramsCollec = this.props.paramsCollec
-		let qUrl = apiPath + e
+		//let qUrl = apiPath + e
  
-		if(query.order){
+   		if(query.order){
 			const orderParams = query.order.split('.')
 			this._sortField = orderParams[0]
 			this._sortDirection = orderParams[1]
 		} 
-		if(paramsCollec){
-			if(id==='0'){
-				return
-			}
-			qUrl += '/collec/'+paramsCollec.id+'?id='+id
-		}else if(query){
-			qUrl += '?'+url.querySearch(query)
-		}
-		if(pageSize){
-			qUrl += (qUrl.indexOf('?')<0 ? '?' : '&') + 'pageSize='+pageSize 
-		}
 		this.setState({
 			loading: true
 		})
-		axios.get(qUrl)
+		let qs = url.querySearch(query)
+		let promise = (paramsCollec) ? dataLayer.getCollec(e, paramsCollec.id, id) 
+			: (qs) ? dataLayer.getQuery(e, qs) 
+			: dataLayer.getMany(e)
+	   	promise 
+		// axios.get(qUrl)
 			.then(response => {
 				//var a = response.headers
 				this.setState({

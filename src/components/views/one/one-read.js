@@ -7,11 +7,10 @@
 // (c) 2018 Olivier Giulieri
 
 import React from 'react'
-import axios from 'axios'
 //import { withRouter, browserHistory } from 'react-router'
 
 import {i18n_errors} from '../../../i18n/i18n'
-import {apiPath} from '../../../config.js'
+import dataLayer from '../../../utils/data-layer.js'
 import models from '../../../models/all_models' 
 
 import './one.scss'
@@ -46,7 +45,7 @@ export default class OneRead extends React.Component{
 			this.setState({
 				loading: true
 			});
-			axios.get(apiPath+e+'/'+id)
+			dataLayer.getOne(e, id)
 			.then((response)=>{
 				if(response.data!==''){
 					this.emptyDelta(false)

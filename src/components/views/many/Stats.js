@@ -1,8 +1,8 @@
 import React from 'react'
-import axios from 'axios'
 //import moment from 'moment'
 
-import { apiPath, wTimestamp, wComments } from '../../../config.js'
+import dataLayer from '../../../utils/data-layer.js'
+import { wTimestamp, wComments } from '../../../config.js'
 import models from '../../../models/all_models'
 import { i18n_stats } from '../../../i18n/i18n'
 import { fieldIsDateOrTime, fieldIsNumeric } from '../../../utils/dico'
@@ -68,7 +68,7 @@ export default class Stats extends React.Component {
         var e = entity || this.props.match.params.entity,
             fields = models[e].fields
 
-        axios.get(apiPath+e+'/stats')
+        dataLayer.getStats(e)
             .then(response => {
                 this.setState({
                     data: this.prepData(response.data, fields),

@@ -10,9 +10,8 @@
 
 import React from 'react'
 import PropTypes from 'prop-types';
-import axios from 'axios'
-import {apiPath} from '../../../config.js'
 
+import dataLayer from '../../../utils/data-layer.js'
 import Alert from '../../widgets/Alert'
 import Spinner from '../../shell/Spinner'
 
@@ -56,10 +55,9 @@ export default class Chart extends React.Component {
     getData(){
         const e = this.props.entity
         var fid = this.props.field.id
-        var urlparams = ''//?token='+localStorage.token
 
         if(fid){
-            axios.get(apiPath+''+e+'/chart/'+fid+urlparams)
+            dataLayer.getChart(e, fid)
                 .then(response => {
                     if(!this.done){
                         this.setState({
