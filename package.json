@@ -11,20 +11,21 @@
   "author": "Olivier Giulieri (https://evoluteur.github.io/)",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.18.0",
+    "js-file-download": "^0.4.4",
+    "moment": "^2.23.0",
+    "node-sass": "^4.11.0",
+    "query-string": "~6.2.0",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "react-scripts": "2.1.2",
     "react-datepicker": "^2.0.0",
     "react-dev-utils": "^6.1.1",
+    "react-dom": "^16.7.0",
     "react-dropzone": "^8.0.2",
     "react-modal": "^3.8.1",
     "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.2",
     "react-toastify": "^4.5.1",
-    "axios": "^0.18.0",
-    "query-string": "~6.2.0",
-    "moment": "^2.23.0",
-    "underscore": "^1.9.1",
-    "node-sass": "^4.11.0"
+    "underscore": "^1.9.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -40,6 +41,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "proxy": "http://localhost:2004/",
   "browserslist": [
     ">0.2%",
     "not dead",
