@@ -83,4 +83,10 @@ export default {
         return axios.get(apiPath + entity + '/stats/')
     },
 
+    // get entity as CSV file
+    getCsv: function getCsv(entity) {
+        logall('getCsv', entity)
+        return axios.get(apiPath + entity + '?format=csv')
+    },
+
 }

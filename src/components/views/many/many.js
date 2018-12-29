@@ -34,7 +34,6 @@ export default class Many extends React.Component {
 			e = entity || params.entity,
 			query = query1 ? query1 : url.parse(this.props.location.search), //this.props.location.query,
 			paramsCollec = this.props.paramsCollec
-		//let qUrl = apiPath + e
  
    		if(query.order){
 			const orderParams = query.order.split('.')
@@ -49,7 +48,6 @@ export default class Many extends React.Component {
 			: (qs) ? dataLayer.getQuery(e, qs) 
 			: dataLayer.getMany(e)
 	   	promise 
-		// axios.get(qUrl)
 			.then(response => {
 				//var a = response.headers
 				this.setState({

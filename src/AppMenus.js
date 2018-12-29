@@ -5,6 +5,7 @@ module.exports = [
         title: 'Apps',
         icon: 'play',*/
         menus: [
+            {id: 'table', text: 'Table'},
             {id: 'contact', text: 'Contact'},
             {id: 'todo', text: 'To Do'},
             {id: 'comics', text: 'Comics'},

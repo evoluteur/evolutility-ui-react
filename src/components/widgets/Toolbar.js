@@ -16,7 +16,7 @@ import { toast } from 'react-toastify';
 import Format from '../../utils/format'
 import evoGlobals from '../../utils/evoGlobals'
 import dataLayer from '../../utils/data-layer.js'
-import {apiPath} from '../../config.js'
+//import {apiPath} from '../../config.js'
 //import {i18n_actions, i18n_msg} from '../../i18n/i18n'
 import { i18n_actions } from '../../i18n/i18n'
 import models from '../../models/all_models'
@@ -247,7 +247,36 @@ class Toolbar extends React.Component {
         // - export all records as a CSV file.
         const e = this.props.entity || this.props.match.entity || ''
         //window.open(apiPath+e+'?format=csv');
-        window.location.href = apiPath+e+'?format=csv';
+        //window.location.href = apiPath+e+'?format=csv';
+        window.URL = window.URL || window.webkitURL;
+        this.setState({
+            loading: true
+        })
+        dataLayer.getCsv(e)
+            .then(response => {
+                console.log('csv', response.data.length)
+                let blob = new Blob([response.data], { type : 'text/csv' })
+                console.log('csv', blob)
+                let url = window.URL.createObjectURL(blob)
+                console.log('csv', url)
+                window.location.href = url
+                window.location.setAttribute('download', e); 
+                URL.revokeObjectURL(url)
+                //fileDownload(response.data, `${e}.csv`)
+                this.setState({
+                    loading: false
+                })
+            })
+            .catch(err => {
+                this.setState({
+                    error: {
+                        title: 'Error',
+                        message: 'Couldn\'t retrieve data.' //err.message
+                    },
+                })
+
+            });
+
         toast.success('Downloading CSV export.', {
             position: toast.POSITION.TOP_RIGHT
         });

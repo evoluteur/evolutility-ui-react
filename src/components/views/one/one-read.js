@@ -46,7 +46,7 @@ export default class OneRead extends React.Component{
 				loading: true
 			});
 			dataLayer.getOne(e, id)
-			.then((response)=>{
+			.then(response => {
 				if(response.data!==''){
 					this.emptyDelta(false)
 					newState.data = response.data
