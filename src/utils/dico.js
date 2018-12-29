@@ -12,7 +12,7 @@ import format from './format'
 
 
 // - Field Types
-var ft = {
+const ft = {
 	text: 'text',
 	textml: 'textmultiline',
 	bool: 'boolean',
@@ -105,7 +105,6 @@ export function prepModel(m){
 		if(!m.titleField){
 			m.titleField = m.fields[0];
 		}
-
 		return m;
 	}
 	return null;

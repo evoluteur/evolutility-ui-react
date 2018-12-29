@@ -1,9 +1,14 @@
+/*
+  Evolutility UI Models
+  https://github.com/evoluteur/evolutility-ui-react
+*/
+
 import {prepModel} from '../utils/dico'
 
 import todo from './todo'
 import contact from './contact'
-import restaurant from './restaurant'
 import comics from './comics'
+import restaurant from './restaurant'
 import winecellar from './winecellar'
 import winetasting from './winetasting'
 

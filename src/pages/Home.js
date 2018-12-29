@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { version } from '../../package.json';
 import { apiPath } from '../config.js';
 
@@ -29,11 +30,11 @@ export default class Home extends React.PureComponent {
 
                 <p>
                     Sample Web apps: {' '}
-                    <a href="/todo/list">To-Do list</a>,  {' '}
-                    <a href="/contact/list">Address Book</a>,  {' '}
-                    <a href="/comics/cards">Graphic Novels inventory</a>,  {' '}
-                    <a href="/restaurant/list">Restaurants list</a>, {' '}
-                    <a href="/winecellar/list">Wine Cellar</a>.
+                    <Link to="/todo/list">To-Do list</Link>,  {' '}
+                    <Link to="/contact/list">Address Book</Link>,  {' '}
+                    <Link to="/comics/cards">Graphic Novels inventory</Link>,  {' '}
+                    <Link to="/restaurant/list">Restaurants list</Link>, {' '}
+                    <Link to="/winecellar/list">Wine Cellar</Link>.
                 </p> 
             </div>
 

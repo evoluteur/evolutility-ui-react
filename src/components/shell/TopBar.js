@@ -20,8 +20,6 @@ export default class TopBar extends React.PureComponent {
                     <img src={logoGithub} alt="Github" title="Github" />
                 </a>
 
-                
-
             </header>
         )
     }

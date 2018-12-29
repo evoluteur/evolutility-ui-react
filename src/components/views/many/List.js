@@ -14,7 +14,7 @@ import {pageSize} from '../../../config'
 
 import Many from './many'
 
-import {isFieldMany} from '../../../utils/dico'
+import {isFieldMany, fieldTypes as ft} from '../../../utils/dico'
 import format from '../../../utils/format'
 import Header from '../../shell/Header'
 import Spinner from '../../shell/Spinner'
@@ -61,12 +61,12 @@ export default class List extends Many {
 			paramsCollec = props.paramsCollec
 
 		if(m || isNested){
-			const icon= (paramsCollec && paramsCollec.icon) || m.icon
+			const icon = (paramsCollec && paramsCollec.icon) || m.icon
 			const ico = icon ? <img className="evol-many-icon" src={'/pix/'+icon} alt=""/> : null
 			const link = '/'+((paramsCollec && paramsCollec.entity) || e)+'/browse/'
 
 			function cell(d, f, idx){
-				const lovField = f.type==='lov'
+				const lovField = f.type===ft.lov
 				const value = d[lovField ? f.id+'_txt' : f.id]
 				
 				if(idx===0){
@@ -77,7 +77,7 @@ export default class List extends Many {
 							</Link>
 							{d.nb_comments?(' '+d.nb_comments+' comments'):null}
 						</td>
-				}else if(f.type==='color'){
+				}else if(f.type===ft.color){
 					return <td key={idx}><div className="evo-color-box" id={f.id} 
 						style={{backgroundColor: value}} title={value}/></td>
 				}

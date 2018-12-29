@@ -136,7 +136,7 @@ Each model describe an object and its list of fields.
 | label        | Group title displayed in the group header.      |
 | fields       | Array of field ids.                        |
 
-Note: Groups are optional. By default a single group hold all fields.
+Note: Groups are optional. By default a single group holds all fields.
 
 ### Collection
 
