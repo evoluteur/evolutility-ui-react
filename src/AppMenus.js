@@ -1,17 +1,23 @@
+// Create application menu from models
 
-module.exports = [
-    {
-        id: 'demos',/*
-        title: 'Apps',
-        icon: 'play',*/
-        menus: [
-            {id: 'contact', text: 'Contact'},
-            {id: 'todo', text: 'To Do'},
-            {id: 'comics', text: 'Comics'},
-            {id: 'restaurant', text: 'Restaurants'},
-            {id: 'winecellar', text: 'Wine Cellar'},
-            {id: 'winetasting', text: 'Wine Tasting'},
-        ],
-    },
+// by David M Bennett david@andl.org
 
-];
+import models from './models/all_models';
+
+export default {
+    getMenus: function getMenus() {
+        //console.log('models', models)
+        let menus = Object.keys(models).map(k => {
+            return { id: k, text: models[k].label }
+        })
+        //console.log('menus', menus)
+
+        //const appmenus = Object.entries(models).map(m => { return { id: m.id, text: m.label } })
+        return [{
+            id: 'demos',/*
+            title: 'Apps',
+            icon: 'play',*/
+            menus: menus
+        }]
+    }
+}

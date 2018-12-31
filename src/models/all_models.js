@@ -1,20 +1,33 @@
-import {prepModel} from '../utils/dico'
+// Evolutility-UI-React :: /utils/load-models.js
 
-import todo from './todo'
-import contact from './contact'
-import restaurant from './restaurant'
-import comics from './comics'
-import winecellar from './winecellar'
-import winetasting from './winetasting'
+// load models from server at start-up
 
+// https://github.com/evoluteur/evolutility-ui-react
+// (c) 2018 Datid Bennett
 
-const allModels = {
-	todo: prepModel(todo),
-	contact: prepModel(contact),
-	restaurant: prepModel(restaurant),
-	comics: prepModel(comics),
-	winecellar: prepModel(winecellar),
-	winetasting: prepModel(winetasting),
+import { prepModel } from '../utils/dico'
+import dataLayer from '../utils/data-layer'
+
+// simple logging function, easy to disable
+function logall(...args) {
+    console.log(...args)
 }
 
-export default allModels
+let models = {}
+
+// load and prepare all models
+function loadAllModels(cb) {
+    dataLayer.getMany('table')
+    .then(response => {
+        response.data.forEach(m => { models[m.id] = prepModel(m) })
+        logall('models', models)	
+        if (cb) cb()
+    })
+    .catch(err => {
+        logall('error', err)	
+    })
+    
+    
+}
+
+export { models as default, loadAllModels }
