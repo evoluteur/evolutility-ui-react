@@ -7,6 +7,7 @@
 
 import axios from 'axios'
 import { apiPath, pageSize } from '../config.js'
+import { proxy } from '../../package.json'
 
 // simple logging function, easy to disable
 function logall(...args) {
@@ -88,5 +89,11 @@ export default {
         logall('getCsv', entity)
         return axios.get(apiPath + entity + '?format=csv')
     },
+
+    getCsvUrl: function getCsvUrl(entity) {
+        logall('proxy', proxy)
+        return proxy + apiPath + entity + '?format=csv';
+    }
+
 
 }
