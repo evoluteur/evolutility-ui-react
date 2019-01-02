@@ -6,7 +6,7 @@ var header = require('gulp-header');
 var rename = require('gulp-rename');
 var pkg = require('./package.json');
 
-var banner = '/**\n  Evolutility-React-UI v<%= pkg.version %>\n\n' + 
+var banner = '/**\n  Naxl-UI v<%= pkg.version %>\n\n' + 
     '  <%= pkg.homepage %>\n  <%= pkg.copyright %>\n*/\n';
 
 var sig='  ______          _       _   _ _ _ _\n'+
