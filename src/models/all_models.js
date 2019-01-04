@@ -19,7 +19,10 @@ let models = {}
 function loadAllModels(cb) {
     dataLayer.getMany('table')
     .then(response => {
-        response.data.forEach(m => { models[m.id] = prepModel(m) })
+        response.data.forEach(m => { 
+            m.id = m.modelid
+            models[m.id] = prepModel(m) 
+        })
         logall('models', models)	
         if (cb) cb()
     })
