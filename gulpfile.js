@@ -6,8 +6,8 @@ var header = require('gulp-header');
 var rename = require('gulp-rename');
 var pkg = require('./package.json');
 
-var banner = '/**\n  Evolutility-React-UI v<%= pkg.version %>\n\n' + 
-    '  <%= pkg.homepage %>\n  <%= pkg.copyright %>\n*/\n';
+var bannerDep = '/**\n  Evolutility-React-UI v<%= pkg.version %>\n\n' + 
+    '  dependencies: Bootstrap (partial), react-datepicker...\n*/\n';
 
 var sig='  ______          _       _   _ _ _ _\n'+
 ' |  ____|        | |     | | (_) (_) |\n'+
@@ -26,16 +26,10 @@ var sig='  ______          _       _   _ _ _ _\n'+
 
 console.log(sig);
 
-gulp.task('dep-min', function () {
-  return gulp.src('./src/dependencies.scss')
+gulp.task('default', () => gulp.src('./src/dependencies.scss')
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
-    .pipe(header(banner, { pkg : pkg }))
+    .pipe(header(bannerDep, { pkg : pkg }))
     .pipe(rename('dependencies.min.css'))
-    .pipe(gulp.dest('./public/css'));
-});
+    .pipe(gulp.dest('./public/css'))
+)
 
-gulp.task('default', ['dep-min']);
-
-gulp.task('sass:watch', function () {
-  gulp.watch('./sass/**/*.scss', ['css']);
-});
