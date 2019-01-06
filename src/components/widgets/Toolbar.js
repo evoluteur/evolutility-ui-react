@@ -176,7 +176,7 @@ class Toolbar extends React.Component {
                                 </div>
                                 <div className="modal-footer">
                                     <button key="bDelCancel" onClick={this.closeModal} className="btn btn-default" data-dismiss="modal">{i18n_actions.cancel}</button>
-                                    <button key="bDelOK" onClick={this.deleteOne} className="btn btn-info" data-dismiss="modal">{i18n_actions.ok}</button>
+                                    <button key="bDelOK" onClick={this.deleteOne} className="btn btn-primary" data-dismiss="modal">{i18n_actions.ok}</button>
                                 </div>
                             </div>
                         </div>
