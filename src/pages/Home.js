@@ -30,7 +30,7 @@ export default class Home extends React.PureComponent {
 
             <div className="component">
                 <h2>Back-end</h2>
-                <p><a target="db" style={{fontWeight: 600}} href="https://github.com/david-pfx/naxl-server">Naxl-Server</a> is the backend that looks after your valuable personal data.
+                <p><a target="db" style={{fontWeight: 600}} href="https://github.com/david-pfx/naxl-server">Naxl-Server</a> is the backend server that looks after your valuable personal data.
                 </p> 
                 
            </div> 
