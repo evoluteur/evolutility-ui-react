@@ -20,6 +20,7 @@ function loadAllModels(cb) {
     dataLayer.getMany('table')
     .then(response => {
         response.data.forEach(m => { 
+            reJson(m, ['searchFields', 'fields', 'groups'])
             m.id = m.modelid
             models[m.id] = prepModel(m) 
         })
@@ -31,6 +32,15 @@ function loadAllModels(cb) {
     })
     
     
+}
+
+// field type json was stringified for transmission
+function reJson(data, fields) {
+    fields.forEach(f => {
+        if (data[f])
+            data[f] = JSON.parse(data[f])
+    })
+    return data
 }
 
 export { models as default, loadAllModels }

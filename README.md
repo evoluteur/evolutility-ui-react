@@ -27,7 +27,7 @@ Then follow the instructions much as for Evolutility-UI-React.
 
  - API access refactored to use a single data layer.
  - Contains no models. All models are loaded from the server, and the app menu is generated dynamically.
- - Models can be viewed as a 'table of tables'.
+ - Models can be viewed and edited as a 'table of tables'.
  - Uses the NPM proxy feature to send API requests to the server.
 
 ## Todo

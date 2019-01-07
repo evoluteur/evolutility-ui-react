@@ -18,6 +18,7 @@ const formatLib = {
         if(f.type==='boolean'){
             return d ? <i className="glyphicon glyphicon-ok"></i> : ''
         }else if(f.type==='date'){
+            // TODO: fix NLS
             return this.dateString(d)
         }else if(f.type==='color'){
             return (
@@ -34,6 +35,8 @@ const formatLib = {
             return <a href={d} target="_blank" rel="noopener noreferrer">{d}</a>
         }else if(f.type==='email' && d){
             return <a href={'mailto:'+d}>{d}</a>
+        }else if(f.type==='content' && d){  // server will send number of rows
+            return `${d} ${d === 1 ? 'row' : 'rows'}`
         }/*else if(f.type==='lov' && icon){
             return <React.Fragment><img src={icon} alt=""></img>{d}</React.Fragment>
         }*/

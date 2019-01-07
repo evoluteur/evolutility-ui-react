@@ -103,7 +103,8 @@ export default class Field extends React.Component {
 						selected={ d?new Date(d):null }
 						onChange={this.getDateFieldChange(f.id)}
 					/>
-		}else if(f.type==='image' || f.type==='document'){
+		}else if(f.type==='image' || f.type==='document' || f.type==='content'){
+		//}else if(f.type==='image' || f.type==='document'){
 			let pix = null
 
 			if(d){
@@ -113,8 +114,10 @@ export default class Field extends React.Component {
 								src={filesUrl+d}
 								alt="" 
 							/>
-				}else{
+				} else if(f.type==='document' && d){
 					pix = format.doc(d, filesUrl)
+				}else{
+					pix = d
 				}
 			}
 

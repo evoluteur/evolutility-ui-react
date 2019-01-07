@@ -69,10 +69,14 @@ export default class OneReadWrite extends OneRead{
 			})
 		}
 
-		if(formData && (f.type==='image' || f.type==='document')){
+		// allow other kinds of upload
+		if(formData) {
+		//if(formData && (f.type==='image' || f.type==='document')){
 			dataLayer.uploadOne(mid, stateData.id, f.id, formData)
 				.then(response => {
-					setData(mid+'/'+response.data.fileName)
+					if (f.type==='image' || f.type==='document')
+						setData(mid+'/'+response.data.fileName)
+					else setData('')
 				})
 				.catch(function (error) {
 					toast.error(i18n_errors.badUpload)

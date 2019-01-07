@@ -33,9 +33,10 @@ var ft = {
 	url: 'url',
 	color: 'color',
 	hidden: 'hidden',
-	json: 'json'
+	json: 'json',
 	//rating: 'rating',
 	//widget: 'widget'
+	content: 'content',		// special for uploading new table
 };
 
 const isFunction = x => typeof x === "function"

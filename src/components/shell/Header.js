@@ -11,7 +11,7 @@ const icons = {
         {id: '/list', icon:'th-list'},
         {id: '/cards', icon:'th-large'},
         {id: '/charts', icon:'stats'},
-        //{id: '/stats', icon:'equalizer'},
+        {id: '/stats', icon:'equalizer'},
     ],
     '1': [
         {id: '/edit', icon:'edit'},
