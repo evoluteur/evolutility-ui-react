@@ -17,3 +17,4 @@ Desktop.ini
 
 # WebStorm stuff
 .idea
+/package-lock.json
