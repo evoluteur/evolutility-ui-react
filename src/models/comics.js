@@ -80,7 +80,7 @@ module.exports = {
       {
           id: 'notes', type: 'textmultiline', 
           label: 'Notes', maxLength: 1000,
-          width: 70, height: 7, inMany: false
+          width: 100, height: 7, inMany: false
       }
   ],
 

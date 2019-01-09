@@ -6,7 +6,7 @@
 // (c) 2018 Olivier Giulieri
 
 import React from 'react'
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 
@@ -14,9 +14,8 @@ import { toast } from 'react-toastify';
 //import { withRouter } from 'react-router'
 //import {wTimestamp} from "../../../config"
 import {i18n_actions, i18n_validation, i18n_errors} from '../../../i18n/i18n'
-import { dataTitle, fieldId2Field } from '../../../utils/dico'
+import { dataTitle, fieldId2Field, fieldTypes as ft } from '../../../utils/dico'
 import validation from '../../../utils/validation'
-
 import OneReadWrite from './one-readwrite'
 import List from '../many/List'
 import Alert from '../../widgets/Alert'
@@ -46,7 +45,6 @@ export default class Edit extends OneReadWrite{
 		if(v.valid){
 			this.upsertOne()
 		}else{
-			//alert(v.messages.join('\n'))
 			this.setState({
 				invalid: !v.valid
 			})
@@ -79,8 +77,8 @@ export default class Edit extends OneReadWrite{
 			data = this.state.data || {},
 			cbs = {
 				//click: this.fieldClick,
-				change: this.fieldChange,
 				//leave: this.fieldLeave,
+				change: this.fieldChange,
 				dropFile: this.uploadFileOne
 			},
         	title = dataTitle(m, data, isNew),
@@ -88,7 +86,7 @@ export default class Edit extends OneReadWrite{
 
 		const fnField = (f)=>{
 			if(f){
-				if((f.type==='lov') && !f.list){
+				if(f.type===ft.lov && !f.list){
 					// - fetch list values
 					this.getLOV(f.id)
 				}
@@ -151,7 +149,7 @@ export default class Edit extends OneReadWrite{
 									</Panel>
 								)}
 
-								{m.collections ? (
+								{m.collections && !isNew ? (
 									m.collections.map((c, idx)=>{
 										return (
 											<Panel title={c.title} key={'collec_'+c.id}>
@@ -169,7 +167,7 @@ export default class Edit extends OneReadWrite{
 
 								<Panel key="formButtons">
 									<div className="evol-buttons">
-										<button className="btn btn-info" onClick={this.clickSave}><i className="glyphicon glyphicon-ok"></i> {i18n_actions.save}</button>
+										<button className="btn btn-primary" onClick={this.clickSave}><i className="glyphicon glyphicon-ok"></i> {i18n_actions.save}</button>
 										<Link className="btn btn-default" to={linkBrowse}><i className="glyphicon glyphicon-remove"></i> {i18n_actions.cancel}</Link>
 										<span className="">{this.state.invalid ? i18n_validation.incomplete : null}</span>
 										{this.state.error ? i18n_validation.incomplete : null}
@@ -200,7 +198,7 @@ export default class Edit extends OneReadWrite{
 					invalid: true,
 					message: cMsg
 				})
-			}else if(this.refs[f.id].state.invalid===true){
+			}else if(this.refs[f.id] && this.refs[f.id].invalid){
 				this.refs[f.id].setState({
 					invalid: false,
 					message: null
@@ -239,12 +237,12 @@ export default class Edit extends OneReadWrite{
 		this._dirty=true
 	}
 }
-/*
-Edit.propTypes = {
-	params: PropTypes.shape({
-		entity: PropTypes.string.isRequired,
-		id: PropTypes.string
-	}).isRequired
-}*/
 
-//export default withRouter(Edit)
+Edit.propTypes = {
+	match: PropTypes.shape({
+		params: PropTypes.shape({
+			entity: PropTypes.string.isRequired,
+			id: PropTypes.string
+		}).isRequired
+	}).isRequired,
+}

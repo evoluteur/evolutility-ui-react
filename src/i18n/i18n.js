@@ -1,5 +1,5 @@
 ﻿//   Evolutility-UI-React Localized strings in ENGLISH
-//   (c) 2018 Olivier Giulieri
+//   (c) 2019 Olivier Giulieri
 //   https://github.com/evoluteur/evolutility-ui-react
 
 module.exports = {
@@ -71,12 +71,6 @@ module.exports = {
         deleted: '{0} deleted.',
         updated: '{0} updated.',
         added: 'New {0} added.',
-    },
-
-    i18n_footer: {
-        copy: '2018 Olivier Giulieri',
-        documentation: 'Documentation',
-        version: 'Version',
     },
 
     // --- status ---
