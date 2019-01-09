@@ -6,6 +6,7 @@
 // (c) 2018 Olivier Giulieri
 
 import React from 'react'
+import moment from 'moment'
 import {filesUrl} from '../config.js'
 
 function notUndefined(v){
@@ -18,8 +19,11 @@ const formatLib = {
         if(f.type==='boolean'){
             return d ? <i className="glyphicon glyphicon-ok"></i> : ''
         }else if(f.type==='date'){
-            // TODO: fix NLS
             return this.dateString(d)
+        }else if(f.type==='time'){
+            return this.timeString(d)
+        }else if(f.type==='datetime'){
+            return this.datetimeString(d)
         }else if(f.type==='color'){
             return (
                 <div>
@@ -59,41 +63,18 @@ const formatLib = {
 
     // --- date formats ---
     dateString(d){ 
-        if(d){
-            d=d.substring(0, 10);
-        }
-        if(notUndefined(d) && d!==null){
-            var dateParts=d.split('-');
-            if(dateParts.length>1){
-                return dateParts[1]+'/'+dateParts[2]+'/'+dateParts[0];
-            }
-        }
-        return '';
+        //console.log('date', d, moment(d))
+        return d ? moment(d).format('L') : ''
     },
 
     timeString(d){
-        if(notUndefined(d) && d!==null && d!==''){
-            var timeParts=d.split(':'),
-                hour=parseInt(timeParts[0],10);
-            if(hour>12){
-                return (hour-12)+':'+timeParts[1]+' PM';
-            }else{
-                return hour+':'+timeParts[1]+' AM';
-            }
-        }
-        return '';
+        //console.log('time', d, moment(d))
+        return d ? moment(d).format('LTS') : ''
     },
     
     datetimeString(d){
-        if(notUndefined(d) && d!==null && d!==''){
-            var dateParts=d.split('T');
-            if(dateParts.length>1){
-                return this.dateString(dateParts[0])+', '+this.timeString(dateParts[1]);
-            }else{
-                return this.dateString(dateParts[0]);
-            }
-        }
-        return '';
+        //console.log('datetime', d, moment(d))
+        return d ? moment(d).format('L LTS') : ''
     },
 
     jsonString(js){
