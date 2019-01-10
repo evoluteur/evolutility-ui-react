@@ -1,11 +1,12 @@
 // Evolutility-UI-React :: /widgets/FieldLabel.js
 
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const FieldLabel=(props)=>{
 	// - props = label, field, readOnly, clickHelp
 	const f = props.field || {type: 'text'},
-		required = f.required && !props.readOnly;
+		required = (f.required || props.required) && !props.readOnly;
 
 	return (
 		<div className="evol-field-label">
@@ -19,3 +20,10 @@ const FieldLabel=(props)=>{
 }
 
 export default FieldLabel 
+
+FieldLabel.propTypes = {
+	label: PropTypes.string.isRequired,
+	field: PropTypes.object,
+	required: PropTypes.bool, // override for field.required
+	clickHelp: PropTypes.func, 
+}

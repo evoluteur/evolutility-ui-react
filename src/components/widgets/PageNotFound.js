@@ -17,7 +17,7 @@ export default class PageNotFound extends React.PureComponent {
 					404 error on file "{url}".
 				</p>
 
-				<p><br/><a className="btn btn-info" href="/">Back to Home Page</a></p>
+				<p><br/><a className="btn btn-primary" href="/">Back to Home Page</a></p>
 
 
 			</div>

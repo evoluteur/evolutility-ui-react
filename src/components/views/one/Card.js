@@ -11,9 +11,10 @@ import PropTypes from 'prop-types';
 
 import models from '../../../models/all_models'
 import format from '../../../utils/format'
+import { fieldTypes as ft } from '../../../utils/dico'
 import { Link } from 'react-router-dom'
 
-export default class Card extends React.Component {
+export default class Card extends React.PureComponent {
 
     viewId = 'card'
 
@@ -37,7 +38,7 @@ export default class Card extends React.Component {
                                 <h4><Link key={f.id} to={link+d.id}>{icon}{fv}</Link></h4>
                             </div>
                         )
-                    }else if(f.type==='image'){
+                    }else if(f.type===ft.image){
                         return <div key={idx} className="card-fld-center">{fv}</div>
                     }else{
                         return (

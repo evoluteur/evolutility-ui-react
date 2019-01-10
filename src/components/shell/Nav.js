@@ -8,7 +8,7 @@ import './Nav.scss';
 
 // url = http://localhost:2000/api/v1/object?object?active=eq.true
 
-export default class Nav extends React.Component {
+export default class Nav extends React.PureComponent {
 	componentDidMount() {
 		// load modeels from server
 		loadAllModels(() => this.setState({}))

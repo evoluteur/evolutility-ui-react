@@ -32,7 +32,7 @@ export default class Cards extends Many {
 				full_count = this.pageSummary(data),
 				fullCount = data.length ? (data[0]._full_count || 0) : 0,
 				title = m.title || m.label
-			let body, footer = null
+			let body
 			
 			document.title = title
 			if(this.state.loading){
@@ -42,18 +42,20 @@ export default class Cards extends Many {
 			}else{
 			 	if(data.length){
 			 		const fieldCols = m.fields.filter(isFieldMany)
-			 		body = <div className="evol-cards-body">
-						{this.state.data.map(function(d, idx){
-							return <Card key={idx} data={d} fields={fieldCols} entity={entity}/>
-						})}
-						<div className="clearer"></div>
-					</div>
-					footer = <Pagination 
-						count={data.length} 
-						fullCount={fullCount} 
-						fnClick={this.clickPagination} 
-						location={this.props.location}
-					/>
+			 		body = <React.Fragment>
+						<div className="evol-cards-body">
+							{this.state.data.map(function(d, idx){
+								return <Card key={idx} data={d} fields={fieldCols} entity={entity}/>
+							})}
+							<span className="clearer"></span>
+						</div>
+						<Pagination 
+							count={data.length} 
+							fullCount={fullCount} 
+							fnClick={this.clickPagination} 
+							location={this.props.location}
+						/>
+					</React.Fragment>
 			 	}else{
 			 		body = <Alert title="No data" message={i18n_msg.nodata.replace('{0}', m.namePlural)} type="info" /> 
 			 	}
@@ -63,7 +65,6 @@ export default class Cards extends Many {
 					<Header entity={entity} title={title} count={full_count} 
 						cardinality='n' view={this.viewId} />
 					{body}
-					{footer}
 				</div>
 			)
 	  	}else{

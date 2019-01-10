@@ -5,7 +5,7 @@ import dataLayer from '../../../utils/data-layer.js'
 import { wTimestamp, wComments } from '../../../config.js'
 import models from '../../../models/all_models'
 import { i18n_stats } from '../../../i18n/i18n'
-import { fieldIsDateOrTime, fieldIsNumeric } from '../../../utils/dico'
+import { fieldIsDateOrTime, fieldIsNumeric, fieldTypes as ft } from '../../../utils/dico'
 import format from '../../../utils/format'
 import Header from '../../shell/Header'
 import Spinner from '../../shell/Spinner'
@@ -98,7 +98,7 @@ export default class Stats extends React.Component {
                         min: data[f.id+'_min'],
                         max: data[f.id+'_max'],
                     }
-                    if(f.type==='date'){
+                    if(f.type===ft.date){
                         item.min = format.dateString(item.min)
                         item.max = format.dateString(item.max)
                     }

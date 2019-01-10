@@ -9,6 +9,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+import { fieldTypes as ft } from '../../utils/dico'
 import format from '../../utils/format'
 import { i18n_actions, i18n_msg } from '../../i18n/i18n'
 import { filesUrl } from '../../config.js'
@@ -62,20 +63,20 @@ export default class Field extends React.Component {
 			ref: 'e',
 		}
 
-		if(f.type==='boolean'){
+		if(f.type===ft.bool){
 			return <input {...usualProps}
 						type="checkbox" 
 						checked={d?true:false}
 						onChange={cbs.change}
 				    />
-		}else if(f.type==='textmultiline' || f.type==='json'){ // && f.height>1
+		}else if(f.type===ft.textml || f.type===ft.json){ // && f.height>1
 			return <textarea {...usualProps}
 						rows={f.height} 
 						className="form-control" 
 						value={d?d:''} 
 						onChange={cbs.change}
 					/>
-		}else if(f.type==='lov'||f.type==='list'){
+		}else if(f.type===ft.lov || f.type===ft.list){
 			let opts
 
 			if(f.list){
@@ -97,18 +98,17 @@ export default class Field extends React.Component {
 						{opts}
 					</select>
 
-		}else if(f.type==='date'){
+		}else if(f.type===ft.date){
 			return <Datepicker {...usualProps}
 						className="form-control" 
 						selected={ d?new Date(d):null }
 						onChange={this.getDateFieldChange(f.id)}
 					/>
-		}else if(f.type==='image' || f.type==='document' || f.type==='content'){
-		//}else if(f.type==='image' || f.type==='document'){
+		}else if(f.type===ft.image || f.type===ft.doc || f.type === ft.content){
 			let pix = null
 
 			if(d){
-				if(f.type==='image' && d){
+				if(f.type===ft.image && d){
 					pix = <img {...usualProps}
 								className="img-thumbnail"
 								src={filesUrl+d}
@@ -155,7 +155,7 @@ export default class Field extends React.Component {
 			)
 		}
 		let inputType
-		if(f.type==='integer' || f.type==='decimal'){
+		if(f.type===ft.int || f.type===ft.dec){
 			inputType = 'number'
 		}else{  //if(f.type==='email'){
 			inputType = 'text'
@@ -179,9 +179,9 @@ export default class Field extends React.Component {
 			return <div key={f.id} className="disabled evo-rdonly" style={{height:height}}
 					dangerouslySetInnerHTML={createMarkup(d)}
 				/> 
-		}else if(f.type==='image' && d){
+		}else if(f.type===ft.image && d){
 			fw = format.image(filesUrl+d)
-		}else if(f.type==='document'){
+		}else if(f.type===ft.doc){
 			fw = format.doc(d, filesUrl)
 		}else if(f.type==='lov' && f.entity){
 			//{f.country_icon && d.country_icon ? <img src={d.country_icon}/> : null}
@@ -202,15 +202,13 @@ export default class Field extends React.Component {
 		this.setState({
 			help: !this.state.help
 		})
-		this.clickHelp = this.clickHelp.bind(this)
 	}
 
  	render() {
 		const f = this.props.model || {type: 'text'},
 			readOnly = this.props.readOnly || f.readOnly,
 			cbs = this.props.callbacks || {},
-			value = this.props.value || null,
-			valueId = this.props.valueId || null,
+			{ value, valueId } = this.props,
 			invalid = this.state.invalid,
 			label = this.props.label || f.label
 
@@ -248,7 +246,7 @@ export default class Field extends React.Component {
 	onDropFile(files){
 		// - only for fields of type image or document
 		const f = this.props.model
-		if(files.length && (f.type==='image' || f.type==='document')){
+		if(files.length && (f.type===ft.image|| f.type===ft.doc)){
 			const formData = new FormData()
 			files.forEach((f, idx)=>{
 				formData.append('filename', files[idx])
@@ -269,7 +267,10 @@ export default class Field extends React.Component {
 
 Field.propTypes = {
 	model: PropTypes.object.isRequired,
-	callbacks: PropTypes.object,
+	callbacks: PropTypes.shape({
+		change: PropTypes.function,
+		dropFile: PropTypes.function
+	}),
 	data: PropTypes.any,  // object or atomic values depending on field type
 	value: PropTypes.any, // field value
 	label: PropTypes.string, //override label in model
