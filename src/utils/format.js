@@ -19,7 +19,6 @@ const formatLib = {
         if(f.type==='boolean'){
             return d ? <i className="glyphicon glyphicon-ok"></i> : ''
         }else if(f.type==='date'){
-            // TODO: fix NLS
             return this.dateString(d)
         }else if(f.type==='time'){
             return this.timeString(d)
