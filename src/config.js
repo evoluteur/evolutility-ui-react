@@ -16,7 +16,10 @@ module.exports = {
 	pageSize: 50,
 
 	// - Language (en/fr)
-	locale: 'en',
+	// set this to override browser language
+	//locale: 'en',
+	//locale: 'fr',
+	//locale: 'en-au',
 
 	// - Timestamp columns u_date and c_date w/ date of record creation and last update 
 	wTimestamp: true,	

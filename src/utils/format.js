@@ -6,14 +6,19 @@
 // (c) 2018 Olivier Giulieri
 
 import React from 'react'
-import moment from 'moment'
-import {filesUrl} from '../config.js'
+import moment, { lang } from 'moment'
+import 'moment/locale/en-au'
+import 'moment/locale/fr'
+import {filesUrl, locale } from '../config.js'
 
-function notUndefined(v){
-    return typeof(v) !== 'undefined'
-}
+moment.locale(locale || window.navigator.userLanguage || window.navigator.language)
 
 const formatLib = {
+
+    // config to ovoerride browser
+    locale: moment.locale(),
+
+    now: () => moment(),
 
     fieldValue(f, d, abbr){
         if(f.type==='boolean'){

@@ -1,8 +1,8 @@
 import React from 'react';
+
 import { version } from '../../package.json';
-
+import format from '../utils/format';
 import './Home.scss'
-
 
 export default class Home extends React.PureComponent {
 
@@ -15,7 +15,7 @@ export default class Home extends React.PureComponent {
         return (
 
         <div className="evo-home">
-                         
+
             <h1 className="siteTitle"><span style={{color:'navy'}}>Naxl</span> <span style={{fontSize: '.5em'}}>v{version}</span> </h1> 
 
             <h2 className="tBlue">Personal Database Manager for no-coders. Not Another eXceL.</h2> 
@@ -42,6 +42,13 @@ export default class Home extends React.PureComponent {
                 </p>
 
             </div>
+
+            <p>
+            { `Locale: ${format.locale}` } <br />
+            { `Date time: ${format.datetimeString(format.now())}` } <br />
+            </p>
+                         
+
 
         </div>
         
