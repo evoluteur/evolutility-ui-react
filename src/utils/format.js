@@ -6,7 +6,7 @@
 // (c) 2018 Olivier Giulieri
 
 import React from 'react'
-import moment, { lang } from 'moment'
+import moment from 'moment'
 import 'moment/locale/en-au'
 import 'moment/locale/fr'
 import {filesUrl, locale } from '../config.js'
@@ -68,17 +68,14 @@ const formatLib = {
 
     // --- date formats ---
     dateString(d){ 
-        //console.log('date', d, moment(d))
         return d ? moment(d).format('L') : ''
     },
 
     timeString(d){
-        //console.log('time', d, moment(d))
         return d ? moment(d).format('LTS') : ''
     },
     
     datetimeString(d){
-        //console.log('datetime', d, moment(d))
         return d ? moment(d).format('L LTS') : ''
     },
 

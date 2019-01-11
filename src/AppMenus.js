@@ -8,7 +8,7 @@ export default {
     getMenus: function getMenus() {
         //console.log('models', models)
         let menus = Object.keys(models).map(k => {
-            return { id: k, text: models[k].label }
+            return { id: k, text: models[k].label || k }
         })
         //console.log('menus', menus)
 
