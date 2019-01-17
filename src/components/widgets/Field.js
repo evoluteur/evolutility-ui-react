@@ -73,7 +73,8 @@ export default class Field extends React.Component {
 			return <textarea {...usualProps}
 						rows={f.height} 
 						className="form-control" 
-						value={d?d:''} 
+						value={format.fieldValue(f, d)} 
+						//value={d?d:''} 
 						onChange={cbs.change}
 					/>
 		}else if(f.type===ft.lov || f.type===ft.list){
@@ -112,9 +113,9 @@ export default class Field extends React.Component {
 					pix = <img {...usualProps}
 								className="img-thumbnail"
 								src={filesUrl+d}
-								alt="" 
+								alt="Thumbnail" 
 							/>
-				} else if(f.type==='document' && d){
+				} else if(f.type===f.doc && d){
 					pix = format.doc(d, filesUrl)
 				}else{
 					pix = d
@@ -243,17 +244,28 @@ export default class Field extends React.Component {
 		}
 	}
 
+	// upload file to server, let it decide what to do
 	onDropFile(files){
-		// - only for fields of type image or document
-		const f = this.props.model
-		if(files.length && (f.type===ft.image|| f.type===ft.doc)){
-			const formData = new FormData()
-			files.forEach((f, idx)=>{
-				formData.append('filename', files[idx])
-			})			
-			this.props.callbacks.dropFile(f.id, formData)
-		}
+		const f = this.props.model,
+			formData = new FormData()
+
+		files.forEach((f, idx) => {
+			formData.append('filename', files[idx])
+		})			
+		this.props.callbacks.dropFile(f.id, formData)
 	}
+
+	// onDropFile(files){
+	// 	// - only for fields of type image or document
+	// 	const f = this.props.model
+	// 	if(files.length && (f.type===ft.image|| f.type===ft.doc)){
+	// 		const formData = new FormData()
+	// 		files.forEach((f, idx)=>{
+	// 			formData.append('filename', files[idx])
+	// 		})			
+	// 		this.props.callbacks.dropFile(f.id, formData)
+	// 	} else this.props.callbacks.dropFile(f.id, files)
+	// }
 
 	removeFile(){
 		// - only for fields of type image or document

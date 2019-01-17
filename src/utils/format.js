@@ -10,6 +10,7 @@ import moment from 'moment'
 import 'moment/locale/en-au'
 import 'moment/locale/fr'
 import {filesUrl, locale } from '../config.js'
+import { fieldTypes as ft } from '../utils/dico'
 
 moment.locale(locale || window.navigator.userLanguage || window.navigator.language)
 
@@ -44,12 +45,20 @@ const formatLib = {
             return <a href={d} target="_blank" rel="noopener noreferrer">{d}</a>
         }else if(f.type==='email' && d){
             return <a href={'mailto:'+d}>{d}</a>
-        }else if(f.type==='content' && d){  // server will send number of rows
-            return `${d} ${d === 1 ? 'row' : 'rows'}`
+        }else if(f.type==='json' && d){
+            return this.jsonString(d)
+        // }else if(f.type==='content' && d){  // server will send number of rows
+        //     return `${d} ${d === 1 ? 'row' : 'rows'}`
         }/*else if(f.type==='lov' && icon){
             return <React.Fragment><img src={icon} alt=""></img>{d}</React.Fragment>
         }*/
         return d
+    },
+
+    fieldValueMany(f, d, abbr){
+        if (f.type === ft.json && d)
+            return '<json>'
+        else return this.fieldValue(f, d, abbr)
     },
 
     image(d){

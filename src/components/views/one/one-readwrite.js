@@ -8,14 +8,17 @@
 
 //import { createHashHistory } from 'history'
 
+import { toast } from 'react-toastify'
+
 import models from '../../../models/all_models'
 //import evoGlobals from 'utils/evoGlobals'
 import Format from '../../../utils/format'
 import { i18n_msg, i18n_actions, i18n_errors } from '../../../i18n/i18n'
 import dataLayer from '../../../utils/data-layer.js'
+//import parseContent from '../../../utils/parseContent'
 import OneRead from './one-read'
+import { fieldTypes as ft } from '../../../utils/dico'
 
-import { toast } from 'react-toastify';
 //const history = createHashHistory()
 
 export default class OneReadWrite extends OneRead{
@@ -60,29 +63,32 @@ export default class OneReadWrite extends OneRead{
 			f = this.model.fieldsH[fieldId],
 			stateData = this.state.data || {}
 
-		const setData = filePath => {
-			const newData = JSON.parse(JSON.stringify(stateData))
-			newData[f.id] = filePath
+		const setData = (filePath, newdata) => {
+			//console.log('setData', filePath, newdata)
+			const newData = Object.assign({}, stateData, { [f.id]: filePath}, newdata)
 			this.setDeltaField(f.id, filePath)
+			if (newdata) Object.keys(newdata).forEach(k => this.setDeltaField(k, newdata[k]))
 			this.setState({
 				data: newData
 			})
 		}
 
-		// allow other kinds of upload
+		// allow all kinds of upaload for server to handle
+		// but type content returns a new data record
 		if(formData) {
-		//if(formData && (f.type==='image' || f.type==='document')){
 			dataLayer.uploadOne(mid, stateData.id, f.id, formData)
 				.then(response => {
-					if (f.type==='image' || f.type==='document')
-						setData(mid+'/'+response.data.fileName)
-					else setData('')
+					if (f.type === ft.content) {
+						setData(mid+'/'+response.data.fileName, response.data.newdata)
+					} else setData(mid+'/'+response.data.fileName)
 				})
 				.catch(function (error) {
 					toast.error(i18n_errors.badUpload)
 					console.log(error);
 				});
 		}else{
+			if (formData)
+				console.log('bad upload:', f, formData);
 			setData('')
 		}
 	}

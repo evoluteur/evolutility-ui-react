@@ -20,6 +20,8 @@ export default class Home extends React.PureComponent {
 
             <h2 className="tBlue">Personal Database Manager for no-coders. Not Another eXceL.</h2> 
  
+            <p>Please choose a sample data file from the list in the sidebar.</p>
+
             <div className="component">
                 <h2>Front-end</h2>
     
@@ -43,12 +45,13 @@ export default class Home extends React.PureComponent {
 
             </div>
 
-            <p>
-            { `Locale: ${format.locale}` } <br />
-            { `Date time: ${format.datetimeString(format.now())}` } <br />
-            </p>
+           <div className="component">
+                <h2>Local System Settings</h2>
+    
+                <p>{ `Locale: ${format.locale}` }</p>
+                <p>{ `Date time: ${format.datetimeString(format.now())}` }</p>
                          
-
+            </div>
 
         </div>
         
