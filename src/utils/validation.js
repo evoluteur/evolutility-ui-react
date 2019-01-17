@@ -63,7 +63,7 @@ function validateField(f, v){
                                 obj=v;
                             }else{
                                 try{
-                                    obj=JSON.parse();
+                                    obj=JSON.parse(v);
                                     //obj=$.parseJSON(v);
                                 }catch(err){}
                                 if(_.isUndefined(obj)){

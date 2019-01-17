@@ -19,12 +19,13 @@ let models = {}
 function loadAllModels(cb) {
     dataLayer.getMany('table')
     .then(response => {
+        let newmod = {}
         response.data.forEach(m => { 
-            reJson(m, ['searchFields', 'fields', 'groups'])
-            m.id = m.modelid
-            models[m.id] = prepModel(m) 
+            m.id = m.entity
+            newmod[m.id] = prepModel(m) 
         })
-        logall('models', models)	
+        //logall('models', newmod)	
+        models = newmod
         if (cb) cb()
     })
     .catch(err => {
@@ -32,15 +33,6 @@ function loadAllModels(cb) {
     })
     
     
-}
-
-// field type json was stringified for transmission
-function reJson(data, fields) {
-    fields.forEach(f => {
-        if (data[f])
-            data[f] = JSON.parse(data[f])
-    })
-    return data
 }
 
 export { models as default, loadAllModels }
