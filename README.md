@@ -23,16 +23,25 @@ Then follow the instructions much as for Evolutility-UI-React.
  - `npm start` to run the UI project from a local server.
   - Browse to [http://localhost:3002/](http://localhost:3002/) if it doesn't start automatically.
 
+## Demonstration
+
+The initial browser displays a menu of sample data files. It also shows the current locale, obtained from the browser. You may need to configure that.
+
+The 'master table' contains an entry for every table, including itself. Editing this can break the system!
+
+Create a new record in the master table and upload a CSV file by drag and drop into the 'source' field. The table will go live once the record is saved (currently the browser needs to be restarted). A sample file called 'member.csv' can be found in the 'test' directory.
+
 ## Modifications
 
  - API access refactored to use a single data layer.
  - Contains no models. All models are loaded from the server, and the app menu is generated dynamically.
  - Models can be viewed and edited as a 'table of tables'.
+ - A new model can be created by drag and drop into the 'source' field of a new table.
  - Uses the NPM proxy feature to send API requests to the server.
 
 ## Todo
 
-- Upload new database tables from CSV, XLS or JSON.
+- Upload new database tables from XLS or JSON.
 - Edit model (table, field and panel attributes).
 - Edit table in list view.
 
