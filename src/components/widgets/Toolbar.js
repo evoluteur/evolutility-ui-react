@@ -72,10 +72,10 @@ class Toolbar extends React.Component {
             deleteConfirmation: false,
         }
         this.exportMany = this.exportMany.bind(this);
-        //this.filterMany = this.filterMany.bind(this);
         this.deleteOne = this.deleteOne.bind(this);
         this.confirmDelete = this.confirmDelete.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        //this.filterMany = this.filterMany.bind(this);
     }
 
     render() {
@@ -105,12 +105,11 @@ class Toolbar extends React.Component {
             const text = iconOnly ? null : menu.label
             if(isFunction(idOrFun)){
                 return <li key={idx++}>
-                        <span onClick={idOrFun} className="fakeLink" style={style}>{iicon(menu.icon)} {text}</span>
+                        <span onClick={idOrFun} className="fakeLink">{iicon(menu.icon)} <span>{text}</span></span>
                     </li>
             }else{
-                //activeStyle={cStyle}
                 return <li key={idx++}>
-                        <Link to={ep+menu.id+'/'+idOrFun}  style={style}>{iicon(menu.icon)} {text}</Link>
+                        <Link to={ep+menu.id+'/'+idOrFun+q}>{iicon(menu.icon)} <span>{text}</span></Link>
                     </li>
             }
         }
@@ -148,8 +147,6 @@ class Toolbar extends React.Component {
             }
         }
 
-        
-
         if(entity && models[entity]){
             const m = models[entity]
             const delModal = this.state.deleteConfirmation ? (
@@ -174,23 +171,19 @@ class Toolbar extends React.Component {
                             </div>
                         </div>
                 </Modal>
-                ):null
+            ) : null
 
             return (
-              <div className="evo-toolbar" role="navigation">
-                <ul className="navlinks evo-nav-pills pull-left">
-                    {navViews}
-                </ul>
-                <ul className="evo-nav-pills pull-left"
-                    style={{minWidth:'220px'}}>
+                <div className="evo-toolbar" role="navigation">
+                    <ul className="navlinks evo-nav-pills pull-left">
+                        {navViews}
+                    </ul>
+                    <ul className="evo-nav-pills pull-left">
                         {actions}
-                </ul>
-
-                <div className="clearfix"/>
-
-                {delModal}
-            
-              </div>
+                    </ul>
+                    <div className="clearfix"/>
+                    {delModal}
+                </div>
             )
         }
         return null
