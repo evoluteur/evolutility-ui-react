@@ -7,7 +7,7 @@ import './Nav.scss';
 
 // url = http://localhost:2000/api/v1/object?object?active=eq.true
 
-export default class Nav extends React.PureComponent {
+export default class Nav extends React.Component {
 
     render() {
         const cRoute = window.location.pathname.substring(1, 50);
