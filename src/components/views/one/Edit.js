@@ -32,6 +32,7 @@ export default class Edit extends OneReadWrite{
 		this.clickSave = this.clickSave.bind(this);
 		this.fieldChange = this.fieldChange.bind(this);
 		this.uploadFileOne = this.uploadFileOne.bind(this);
+		this.validate = this.validate.bind(this);
 	}
  
 	getDataDelta(){

@@ -35,8 +35,8 @@ export default class Many extends React.Component {
 			query = query1 ? query1 : url.parse(this.props.location.search), //this.props.location.query,
 			paramsCollec = this.props.paramsCollec
 		let qUrl = apiPath + e
- 
-		if(query.order){
+
+		if(query && query.order){
 			const orderParams = query.order.split('.')
 			this._sortField = orderParams[0]
 			this._sortDirection = orderParams[1]

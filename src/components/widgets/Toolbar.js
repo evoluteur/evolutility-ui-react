@@ -3,7 +3,7 @@
 // Toolbar w/ icons for CRUD, export, and charts.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2019 Olivier Giulieri
 
 import React from 'react'
 import PropTypes from 'prop-types';
@@ -65,14 +65,11 @@ function getViewFromURL() {
 
 class Toolbar extends React.Component {
 
-    state = {
-        deleteConfirmation: false
-    }
-
     constructor(props) {
         super(props);
         this.state = {
-            help: false
+            help: false,
+            deleteConfirmation: false,
         }
         this.exportMany = this.exportMany.bind(this);
         //this.filterMany = this.filterMany.bind(this);
@@ -137,8 +134,7 @@ class Toolbar extends React.Component {
                 //actions.push(buttonLink(menuItems.save, id));
             }
             if(view==='browse'){
-                //actions.push(buttonLink(menuItems.views.edit, id, null, {minWidth: '88px'}));
-                navViews.push(buttonLink(menuItems.views.edit, id, null));
+                navViews.push(buttonLink(menuItems.views.edit, id));
             }
             if(!isNew){
                 actions.push(buttonLink(menuItems.del, this.confirmDelete));
@@ -146,7 +142,6 @@ class Toolbar extends React.Component {
         }else{
             navViews = ['list', 'cards', 'charts'].map(menu => buttonLink(menuItems.views[menu], id, true))
             if(view!=='charts' && view!=='stats'){
-                //actions.push(buttonLink(menuItems.new, ''));
                 //actions.push(buttonLink(menuItems.filter, this.filterMany));
                 //actions.push(buttonLink(menuItems.views.charts, ''));
                 actions.push(buttonLink(menuItems.export, this.exportMany));
@@ -157,8 +152,6 @@ class Toolbar extends React.Component {
 
         if(entity && models[entity]){
             const m = models[entity]
-            //const mTitle = m.titleField ? 
-
             const delModal = this.state.deleteConfirmation ? (
                 <Modal className="modal-dialog" 
                     ariaHideApp={false}
@@ -246,7 +239,6 @@ class Toolbar extends React.Component {
     exportMany(){
         // - export all records as a CSV file.
         const e = this.props.entity || this.props.match.entity || ''
-        //window.open(apiPath+e+'?format=csv');
         window.location.href = apiPath+e+'?format=csv';
         toast.success('Downloading CSV export.', {
             position: toast.POSITION.TOP_RIGHT
