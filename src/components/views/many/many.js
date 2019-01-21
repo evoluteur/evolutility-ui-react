@@ -135,6 +135,9 @@ export default class Many extends React.Component {
 			//alert('Invalid entity in many.setModel.')
 		//}
 		this.model = models[e]
+		// model to be used by collection (child) panel
+		if (this.props.paramsCollec)
+			this.modelCollec = models[this.props.paramsCollec.entity]
 	}
 
 	clickSort(evt){

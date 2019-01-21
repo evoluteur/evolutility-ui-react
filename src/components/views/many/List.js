@@ -31,8 +31,8 @@ export default class List extends Many {
 	viewId = 'list'
 
 	tableHeader(fields) {
-		const fnCell = this.props.paramsCollec ? 
-			// - header sub-collection table
+		const fnCell = this.props.isNested ? 
+			// - header sub-collection (child) table
 			f => <th key={f.id}>
 					{f.label}
 				</th>
@@ -56,14 +56,13 @@ export default class List extends Many {
 	render() {
 		const props = this.props,
 			isNested = props.isNested,
-			e = props.match.params.entity,
-			m = this.model, // TODO: model and sub-model distinction
-			paramsCollec = props.paramsCollec
+			e = (isNested) ? props.paramsCollec.entity : props.match.params.entity,
+			m = (isNested) ? this.modelCollec : this.model
 
 		if(m || isNested){
-			const icon = (paramsCollec && paramsCollec.icon) || m.icon
+			const icon = m.icon
 			const ico = icon ? <img className="evol-many-icon" src={'/pix/'+icon} alt=""/> : null
-			const link = '/'+((paramsCollec && paramsCollec.entity) || e)+'/browse/'
+			const link = `/${e}/browse/`
 
 			function cell(d, f, idx){
 				const lovField = f.type===ft.lov
@@ -89,7 +88,7 @@ export default class List extends Many {
 				fullCount = data.length ? (data[0]._full_count || 0) : 0,
 				title = m.title || m.label
 			let body, footer = null,
-				css = paramsCollec ? 'table sub' : 'table table-hover main' 
+				css = isNested ? 'table sub' : 'table table-hover main' 
 
 			document.title = title
 			if(this.state.error){
@@ -98,12 +97,8 @@ export default class List extends Many {
 				body = <Spinner></Spinner> 
 			}else{
 				if(data.length){
-					let fields
-					if(paramsCollec){
-						fields = paramsCollec.fields
-					}else{
-						fields = m.fields.filter(isFieldMany)
-					}
+					let fields = m.fields.filter(isFieldMany)
+					if (isNested) fields = fields.filter(f => f.entity !== props.match.params.entity)
 					body = (
 						<div>
 							<table className={css}>
@@ -138,7 +133,7 @@ export default class List extends Many {
 
 			return (
 				<div data-entity={e} style={{width: '100%'}}>
-					{paramsCollec ? null : (
+					{isNested ? null : (
 						<Header entity={e} title={title} 
 							count={full_count} cardinality='n' view={this.viewId}/>
 					)}
