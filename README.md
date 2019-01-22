@@ -121,9 +121,10 @@ Each model describe an object and its list of fields.
 | max, min     | Maximum/Minimum value allowed (only applies to numeric fields).      |    
 | maxLength, minLength | Maximum/Minimum length allowed (only applies to text fields).      |     
 | lovicon      | Set to True to include icon with LOV items.    |               
+| object       | Model id for the object to link to (only for fields of "lov" type).     |             
 | inMany       | Determines if the field is present (by default) in lists of records. |                     
 | height       | For fields of type "textmultiline", number of lines used in the field (in Browse and Edit views). |                 
-| width        | Percentage width in Browse and Edit views. |
+| width        | Field width in Browse and Edit views (in percent of parent width). |
 | help         | Optional help on the field. |
 | noCharts     | Prevent the field to have a charts (only necessary for fields of type integer, decimal, money, boolean, list of values which are "chartable"). |
 
@@ -146,7 +147,7 @@ Multiple details tables can be specified with "collections".
 |--------------|---------------------------------------|
 | id           | Unique key for the collection.        |
 | title        | Collection title.                     |
-| entity       | Object linked to.                     |
+| object       | Model.id for the Object to link to.   |
 | fields       | Array of fields. Fields in collections do not need all properties of Fields in objects.    |
 
 
@@ -257,9 +258,9 @@ module.exports = {
 ```
 
 More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/todo.js),
- [Address book](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/contact.js),
-  [Restaurants list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/restaurant.js),
-    [Wine cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/winecellar.js). 
+[Address book](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/contact.js),
+[Restaurants list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/restaurant.js),
+[Wine cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/winecellar.js). 
 
 
 ## Other implementations of Evolutility
@@ -272,7 +273,7 @@ More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-rea
 
 ## License
 
-Copyright (c) 2018 [Olivier Giulieri](https://evoluteur.github.io/).
+Copyright (c) 2019 [Olivier Giulieri](https://evoluteur.github.io/).
 
 Evolutility-UI-React is released under the [MIT license](http://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE.md).
 
