@@ -74,7 +74,7 @@ Shows records side by side as cards.
 Code: [/src/components/views/many/Cards.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Cards.js)
 
 ### Charts
-Draws charts about the collection.
+Draws charts about the collection (currently bars and pies).
 
 ![Charts](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-charts.gif)
 
