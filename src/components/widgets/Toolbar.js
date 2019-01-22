@@ -109,7 +109,7 @@ class Toolbar extends React.Component {
                     </li>
             }else{
                 return <li key={idx++}>
-                        <Link to={ep+menu.id+'/'+idOrFun+q}>{iicon(menu.icon)} <span>{text}</span></Link>
+                        <Link to={ep+menu.id+'/'+idOrFun}>{iicon(menu.icon)} <span>{text}</span></Link>
                     </li>
             }
         }
