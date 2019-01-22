@@ -11,6 +11,7 @@ import comics from './comics'
 import restaurant from './restaurant'
 import winecellar from './winecellar'
 import winetasting from './winetasting'
+import test from './test'
 
 
 const allModels = {
@@ -20,6 +21,7 @@ const allModels = {
 	comics: prepModel(comics),
 	winecellar: prepModel(winecellar),
 	winetasting: prepModel(winetasting),
+    test: prepModel(test),
 }
 
 export default allModels
