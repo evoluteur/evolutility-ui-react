@@ -10,6 +10,7 @@
   "homepage": "https://github.com/evoluteur/evolutility-ui-react",
   "author": "Olivier Giulieri (https://evoluteur.github.io/)",
   "license": "MIT",
+  "proxy": "http://localhost:2000/",
   "dependencies": {
     "axios": "^0.18.0",
     "moment": "^2.23.0",
