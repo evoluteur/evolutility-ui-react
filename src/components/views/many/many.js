@@ -1,9 +1,9 @@
 // Evolutility-UI-React :: /views/many.js
 
-// Mixin used in most Views for Many (List, Cards but not Charts).
+// Super-class for most Views for Many (List, Cards but not Charts).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2019 Olivier Giulieri
 
 import React from 'react'
 import axios from 'axios'
