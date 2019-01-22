@@ -1,10 +1,10 @@
 
 // Evolutility-UI-React :: One-upsert
 
-// Mixin used in Views for One for Insert and Update (only view Edit for now maybe more later).
+// Super-class used in Views for One for Insert and Update (only view Edit for now maybe more later).
  
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2019 Olivier Giulieri
 
 import axios from 'axios'
 //import { createHashHistory } from 'history'

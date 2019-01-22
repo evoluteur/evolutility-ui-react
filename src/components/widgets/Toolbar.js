@@ -3,7 +3,7 @@
 // Toolbar w/ icons for CRUD, export, and charts.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2019 Olivier Giulieri
 
 import React from 'react'
 import PropTypes from 'prop-types';
@@ -65,20 +65,17 @@ function getViewFromURL() {
 
 class Toolbar extends React.Component {
 
-    state = {
-        deleteConfirmation: false
-    }
-
     constructor(props) {
         super(props);
         this.state = {
-            help: false
+            help: false,
+            deleteConfirmation: false,
         }
         this.exportMany = this.exportMany.bind(this);
-        //this.filterMany = this.filterMany.bind(this);
         this.deleteOne = this.deleteOne.bind(this);
         this.confirmDelete = this.confirmDelete.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        //this.filterMany = this.filterMany.bind(this);
     }
 
     render() {
@@ -108,12 +105,11 @@ class Toolbar extends React.Component {
             const text = iconOnly ? null : menu.label
             if(isFunction(idOrFun)){
                 return <li key={idx++}>
-                        <span onClick={idOrFun} className="fakeLink" style={style}>{iicon(menu.icon)} {text}</span>
+                        <span onClick={idOrFun} className="fakeLink">{iicon(menu.icon)} <span>{text}</span></span>
                     </li>
             }else{
-                //activeStyle={cStyle}
                 return <li key={idx++}>
-                        <Link to={ep+menu.id+'/'+idOrFun}  style={style}>{iicon(menu.icon)} {text}</Link>
+                        <Link to={ep+menu.id+'/'+idOrFun}>{iicon(menu.icon)} <span>{text}</span></Link>
                     </li>
             }
         }
@@ -137,8 +133,7 @@ class Toolbar extends React.Component {
                 //actions.push(buttonLink(menuItems.save, id));
             }
             if(view==='browse'){
-                //actions.push(buttonLink(menuItems.views.edit, id, null, {minWidth: '88px'}));
-                navViews.push(buttonLink(menuItems.views.edit, id, null));
+                navViews.push(buttonLink(menuItems.views.edit, id));
             }
             if(!isNew){
                 actions.push(buttonLink(menuItems.del, this.confirmDelete));
@@ -146,19 +141,14 @@ class Toolbar extends React.Component {
         }else{
             navViews = ['list', 'cards', 'charts'].map(menu => buttonLink(menuItems.views[menu], id, true))
             if(view!=='charts' && view!=='stats'){
-                //actions.push(buttonLink(menuItems.new, ''));
                 //actions.push(buttonLink(menuItems.filter, this.filterMany));
                 //actions.push(buttonLink(menuItems.views.charts, ''));
                 actions.push(buttonLink(menuItems.export, this.exportMany));
             }
         }
 
-        
-
         if(entity && models[entity]){
             const m = models[entity]
-            //const mTitle = m.titleField ? 
-
             const delModal = this.state.deleteConfirmation ? (
                 <Modal className="modal-dialog" 
                     ariaHideApp={false}
@@ -181,23 +171,19 @@ class Toolbar extends React.Component {
                             </div>
                         </div>
                 </Modal>
-                ):null
+            ) : null
 
             return (
-              <div className="evo-toolbar" role="navigation">
-                <ul className="navlinks evo-nav-pills pull-left">
-                    {navViews}
-                </ul>
-                <ul className="evo-nav-pills pull-left"
-                    style={{minWidth:'220px'}}>
+                <div className="evo-toolbar" role="navigation">
+                    <ul className="navlinks evo-nav-pills pull-left">
+                        {navViews}
+                    </ul>
+                    <ul className="evo-nav-pills pull-left">
                         {actions}
-                </ul>
-
-                <div className="clearfix"/>
-
-                {delModal}
-            
-              </div>
+                    </ul>
+                    <div className="clearfix"/>
+                    {delModal}
+                </div>
             )
         }
         return null
@@ -246,7 +232,6 @@ class Toolbar extends React.Component {
     exportMany(){
         // - export all records as a CSV file.
         const e = this.props.entity || this.props.match.entity || ''
-        //window.open(apiPath+e+'?format=csv');
         window.location.href = apiPath+e+'?format=csv';
         toast.success('Downloading CSV export.', {
             position: toast.POSITION.TOP_RIGHT

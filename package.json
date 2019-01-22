@@ -1,6 +1,6 @@
 {
   "name": "evolutility-ui-react",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "description": "Model-driven Web UI for CRUD and more",
   "repository": {
     "type": "git",
@@ -10,6 +10,7 @@
   "homepage": "https://github.com/evoluteur/evolutility-ui-react",
   "author": "Olivier Giulieri (https://evoluteur.github.io/)",
   "license": "MIT",
+  "proxy": "http://localhost:2000/",
   "dependencies": {
     "axios": "^0.18.0",
     "moment": "^2.23.0",

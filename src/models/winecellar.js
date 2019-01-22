@@ -207,6 +207,7 @@ module.exports = {
             width: 38,
             list: winecellar_lovs.type,
             lovtable:'wine_type',
+            lovicon: true,
         },
         {
             id:'appellation',

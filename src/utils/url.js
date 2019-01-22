@@ -9,12 +9,14 @@ export default {
 
 	querySearch(query){
 		// - make uri params string from query object
-		// - example: {a:'aaa', b: 'bbb'} => "a=aaa&b=bbb"
-		var url = ''
+		// - example: {a:1, b: 'bbb'} => "a=1&b=bbb"
+		var urlParams = []
 		for(var prop in query) {
-			url += prop+'='+encodeURI(query[prop]||'')+'&'
+			if(query[prop]!==''){
+				urlParams.push(prop+'='+encodeURI(query[prop]))
+			}
 		}
-		return url.slice(0, -1);
+		return urlParams.join('&');
 	},
 
 	parse(qString){

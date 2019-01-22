@@ -1,10 +1,10 @@
 
 // Evolutility-UI-React :: One-read
 
-// Mixin used in most Views for One (Browse, Edit but not Card) to get data by ID.
+// Super-class used in Views for One (Browse, Edit but not Card) to get data by ID.
  
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2019 Olivier Giulieri
 
 import React from 'react'
 import axios from 'axios'

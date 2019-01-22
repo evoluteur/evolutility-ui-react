@@ -23,14 +23,14 @@ export default class Card extends React.PureComponent {
             fields = this.props.fields || [],
             entity = this.props.entity,
             m = models[entity],
-            link = '/'+entity+'/browse/'
+            link = '/'+entity+'/browse/',
+            icon = m.icon ? <img className="evol-many-icon" src={'/pix/'+m.icon} alt=""/> : null
 
         return (
             <div className="panel panel-default"> 
                 {fields.map(function(f, idx){
-                    const attr = (f.type==='lov') ? f.id+'_txt' : f.id,
-                        fv = format.fieldValue(f, d[attr]),
-                        icon = m.icon ? <img className="evol-many-icon" src={'/pix/'+m.icon} alt=""/> : null
+                    const attr = (f.type===ft.lov) ? f.id+'_txt' : f.id,
+                        fv = format.fieldValue(f, d[attr])
 
                     if(idx===0){
                         return (
@@ -44,7 +44,13 @@ export default class Card extends React.PureComponent {
                         return (
                             <div key={idx}>
                                 <label>{f.label}: </label>
-                                <div>{' '}{fv}</div>
+                                <div>
+                                    {(f.type===ft.lov && f.lovicon) 
+                                        ?  <img src={'/pix/'+d[f.id+'_icon']} className="lovIcon" alt=""/>
+                                         : ' '
+                                    }
+                                    {fv}
+                                </div>
                             </div>
                         )
                     }

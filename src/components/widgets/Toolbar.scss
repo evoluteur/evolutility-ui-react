@@ -10,9 +10,6 @@
   left: 155px;
   z-index: 110;
 
-  .navlinks{
-    min-width: 160px;
-  } 
   > ul {
     margin-bottom: 0;
     > .evo-sel .glyphicon:before{
@@ -73,7 +70,19 @@
 */
 .evol-many-list{
   .evol-actions{
-    top:0;
+    top: 0;
     flex-direction: row;
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  .evo-nav-pills > li > .fakeLink > span,
+  .evo-nav-pills > li > a > span {
+    display: none;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .github{
+    display: none;
   }
 }

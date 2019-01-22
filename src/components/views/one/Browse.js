@@ -44,12 +44,14 @@ export default class Browse extends OneRead {
       if(f){
         const isLOV = f.type==='lov';
         const attr = isLOV ? f.id+'_txt' : f.id
+
         return (
           <Field 
             key={f.id} 
             model={f} 
             value={data[attr]} 
             valueId={isLOV?data[f.id]:null}
+            icon={isLOV?data[f.id+'_icon']:null}
             readOnly={true}
             entity={entity}
           />

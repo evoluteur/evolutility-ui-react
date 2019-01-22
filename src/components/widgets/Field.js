@@ -181,11 +181,22 @@ export default class Field extends React.Component {
 			fw = format.image(filesUrl+d)
 		}else if(f.type===ft.doc){
 			fw = format.doc(d, filesUrl)
-		}else if(f.type==='lov' && f.entity){
 			//{f.country_icon && d.country_icon ? <img src={d.country_icon}/> : null}
-			fw = <Link to={'/'+f.entity+'/browse/'+d_id}>
-					{format.fieldValue(f, d)}
-				</Link>
+		}else if(f.type===ft.lov){
+			if(f.object){
+				fw = <Link to={'/'+f.object+'/browse/'+d_id}>
+						{format.fieldValue(f, d)}
+					</Link>
+			}else{
+				if(f.lovicon && this.props.icon){
+					fw = <span>
+							<img src={'/pix/'+this.props.icon} className="lovicon" alt=""/> 
+							{format.fieldValue(f, d)}
+						</span>
+				}else{
+					fw = format.fieldValue(f, d)
+				}
+			}
 		}else {
 			fw = format.fieldValue(f, d)
 		}
@@ -231,7 +242,7 @@ export default class Field extends React.Component {
 
 	getDateFieldChange(fid) {
 		// - for fields of type date (using react-datepicker)
-		return (v)=>{
+		return v => {
 			this.props.callbacks.change({
 				target:{
 					id: fid, 
