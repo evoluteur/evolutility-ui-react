@@ -31,7 +31,7 @@ export default {
             required: true
         },
         { 
-            id: 'wine_id', entity: 'winecellar', column: 'wine_id', type: 'lov', 
+            id: 'wine_id', object: 'winecellar', column: 'wine_id', type: 'lov', 
             label: 'Wine', inMany: true,
             width: 62,
             required: true
