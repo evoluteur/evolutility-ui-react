@@ -32,7 +32,7 @@ export default class ChartTable extends React.PureComponent {
                     </thead>
                     <tbody>
                         {this.props.data ? this.props.data.map(d => (
-                            <tr>
+                            <tr key={d.value+d.label}>
                                 <td>{d.label ? <Link to={makeLink(d)}>{d.label}</Link> : ' N/A' }</td>
                                 <td>{d.value}</td>
                             </tr>

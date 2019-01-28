@@ -132,12 +132,6 @@ export default class Chart extends React.Component {
         if(this.state.error){
             body = <Alert type="danger" title={this.state.error.title} message={this.state.error.message}/> 
         }else if(cType==='Table'){
-            const sLink = this.props.entity+'?'+this.props.field.id+'=',
-                makeLink = d => {
-                    let param = '' + (d.id || d.label)
-                    param = param==='null' ? 'null' : 'eq.'+param
-                    return sLink + param
-                }
             body = <ChartTable field={this.props.field} data={data} entity={this.props.entity} />
         }else{
             const url = this['url'+cType](data, sizes)
