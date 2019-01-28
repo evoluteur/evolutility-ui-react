@@ -6,15 +6,15 @@
 .evol-many-charts{
 	width: 100%;
 	@include flex-holder();
-}
-.evol-chart-holder{
-	@include flex-item();
-	position: relative;
-	text-align: center;
-	background-color :#FFFFFF;
-	margin:10px 10px 10px 5px;
-	width: 400px;
-	min-height:286px;
+	> .evol-chart-holder{
+		@include flex-item();
+		position: relative;
+		text-align: center;
+		background-color :#FFFFFF;
+		margin:10px 10px 10px 5px;
+		width: 400px;
+		min-height:286px;
+	}
 }
 .chart-holder{
 	>h3{
@@ -25,7 +25,6 @@
 	>i{
 		position: relative;
 		top: 50px;
-		color: grey;
 	}
 }
 .singleChart{
@@ -33,11 +32,15 @@
 }
 .chart-actions{
 	i{
-		color: silver;
+		color: $color-icon;
 		margin: 10px 10px 2px 0;
 		cursor: pointer;
 		&:hover{
 			color: $color-icon-hover;
+		}
+		&.active{
+			color: black;
+			cursor: default;
 		}
 	}
 }
