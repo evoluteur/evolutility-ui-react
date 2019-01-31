@@ -1,0 +1,9 @@
+.chartTable{
+	padding: 0 10px;
+	.table{
+		text-align: left;
+		th:nth-child(2){
+			width: 100px;
+		}
+	}
+}

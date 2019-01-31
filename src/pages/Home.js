@@ -32,11 +32,11 @@ export default class Home extends React.PureComponent {
                 </p>
                 <p>
                     Sample models:{' '}
-                    <a target="model" href="https://github.com/evoluteur/evolutility-models/blob/master/models/todo.js">To-Do list</a>,  {' '}
-                    <a target="model" href="https://github.com/evoluteur/evolutility-models/blob/master/models/contact.js">Address Book</a>,  {' '}
-                    <a target="model" href="https://github.com/evoluteur/evolutility-models/blob/master/models/comics.js">Graphic Novels inventory</a>,  {' '}
-                    <a target="model" href="/https://github.com/evoluteur/evolutility-models/blob/master/models/restaurant.js">Restaurants list</a>, {' '}
-                    <a target="model" href="https://github.com/evoluteur/evolutility-models/blob/master/models/winecellar.js">Wine Cellar</a>.
+                    <a target="model" href="https://github.com/evoluteur/evolutility-models/blob/master/models/pim/todo.js">To-Do list</a>,  {' '}
+                    <a target="model" href="https://github.com/evoluteur/evolutility-models/blob/master/models/pim/contact.js">Address Book</a>,  {' '}
+                    <a target="model" href="https://github.com/evoluteur/evolutility-models/blob/master/models/pim/comics.js">Graphic Novels inventory</a>,  {' '}
+                    <a target="model" href="/https://github.com/evoluteur/evolutility-models/blob/master/models/pim/restaurant.js">Restaurants list</a>, {' '}
+                    <a target="model" href="https://github.com/evoluteur/evolutility-models/blob/master/models/pim/winecellar.js">Wine Cellar</a>.
                 </p>
            </div>
 

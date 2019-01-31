@@ -15,6 +15,7 @@ import {apiPath} from '../../../config.js'
 
 import Alert from '../../widgets/Alert'
 import Spinner from '../../shell/Spinner'
+import ChartTable from './Chart_Table'
 
 import './Charts.scss' 
 
@@ -41,8 +42,7 @@ export default class Chart extends React.Component {
             chartType: 'Bars', // "Pie" or "Bars",
             loading: true,
         }
-        this.click_pie = this.click_pie.bind(this);
-        this.click_bars = this.click_bars.bind(this);
+        this.click_view = this.click_view.bind(this)
     }
 
     componentDidMount() {
@@ -82,15 +82,9 @@ export default class Chart extends React.Component {
         }
     }
 
-    click_pie(){
+    click_view(evt){
         this.setState({
-            chartType: 'Pie'
-        })
-    }
-
-    click_bars(){
-        this.setState({
-            chartType: 'Bars'
+            chartType: evt.currentTarget.id
         })
     }
 
@@ -127,29 +121,33 @@ export default class Chart extends React.Component {
                     '&chp=0.05&chts=676767,10.5&chdl='+ls.join('|');
         }
         return ''
-           
     }
 
     render(){
         const data = this.state.data || [],
             sizes = this.props.sizes || null,
-            cType = this.state.chartType || 'Pie',
-            url = this['url'+cType](data, sizes)
+            cType = this.state.chartType || 'Pie'
         let body 
 
         if(this.state.error){
             body = <Alert type="danger" title={this.state.error.title} message={this.state.error.message}/> 
-        }else if(url){
-            body = <img src={url} alt=""/>
+        }else if(cType==='Table'){
+            body = <ChartTable field={this.props.field} data={data} entity={this.props.entity} />
         }else{
-            body = <Spinner></Spinner>
+            const url = this['url'+cType](data, sizes)
+            if(url){
+                body = <img src={url} alt=""/>
+            }else{
+                body = <Spinner></Spinner>
+            }
         }
         return (
             <div className="evol-chart-holder panel panel-default">
                 <div className={"chart-holder" + (parseInt(sizes, 10)>400 ? ' singleChart' : '')}>
                     <div className="chart-actions pull-right">
-                        {cType==='Bars' ? <i className="glyphicon glyphicon-cd" onClick={this.click_pie}/> : null}
-                        {cType==='Pie' ? <i className="glyphicon glyphicon-stats" onClick={this.click_bars}/> : null}
+                        <i id="Pie" className={"glyphicon glyphicon-cd"+(cType==='Pie'?' active':'')} onClick={this.click_view}/>
+                        <i id="Bars" className={"glyphicon glyphicon-stats"+(cType==='Bars'?' active':'')} onClick={this.click_view}/>
+                        <i id="Table" className={"glyphicon glyphicon-th-list"+(cType==='Table'?' active':'')} onClick={this.click_view}/>
                     </div>
                     <h3 className="panel-title">{this.props.title}</h3>
                     {body} 
@@ -165,5 +163,5 @@ Chart.propTypes = {
     field: PropTypes.object.isRequired,
     title: PropTypes.string,
     sizes: PropTypes.string,
-    type: PropTypes.oneOf(['Bars', 'Pie'])
+    type: PropTypes.oneOf(['Bars', 'Pie', 'Table'])
 }

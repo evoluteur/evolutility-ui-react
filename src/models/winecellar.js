@@ -399,7 +399,6 @@ module.exports = {
             height: 8
         }
     ],
-    fnSearch: ['name', 'winery', 'appellation', 'notes'],
     groups: [
         {
             type: 'panel',
@@ -450,7 +449,7 @@ module.exports = {
             table: 'wine_tasting',
             column: 'wine_id',
             title: 'Degustations',
-            entity: 'winetasting', 
+            object: 'winetasting', 
             icon: 'wine.gif', 
             fields: [
                 {id: 'drink_date', type: 'date', label: 'Date', maxLength: 20, inMany: true,

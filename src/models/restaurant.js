@@ -31,7 +31,6 @@ module.exports = {
     icon: 'resto.gif',
     name: 'restaurant', 
     namePlural: 'restaurants',
-    searchFields: ['name'],
 
     fields:[
         {
