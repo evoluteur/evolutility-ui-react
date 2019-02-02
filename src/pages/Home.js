@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { version } from '../../package.json';
+import { version, proxy } from '../../package.json';
 import { apiPath } from '../config.js';
 
 import './Home.scss'
 
+const apiPathFull = proxy + apiPath
 
 export default class Home extends React.PureComponent {
 
@@ -18,11 +19,11 @@ export default class Home extends React.PureComponent {
 
         <div className="evo-home">
                          
-            <h1 className="siteTitle"><span style={{fontWeight:'300'}}>Evol</span><span style={{color:'navy'}}>utility</span> <span style={{fontSize: '.5em'}}>v{version}</span> </h1> 
+            <h1 className="siteTitle"><span style={{fontWeight:'300'}}>Evol</span><span className="navy">utility</span> <span style={{fontSize: '.5em'}}>v{version}</span> </h1> 
 
             <h2 className="tBlue">Build applications with models rather than code.</h2> 
             
-            <p><br/>&nbsp;</p>
+            <p>&nbsp;</p>
  
             <div className="component">
                 <h2>Models</h2> 
@@ -63,13 +64,13 @@ export default class Home extends React.PureComponent {
                 
                 <p>Sample RESTful API: {' '}
 
-                    <a target="api" href={apiPath}>API discovery</a>, {' '}
+                    <a target="api" href={apiPathFull}>API discovery</a>, {' '}
 
-                    <a target="api" href={apiPath+'todo'}>To-Do list</a>,  {' '}
-                    <a target="api" href={apiPath+'contact'}>Address Book</a>,  {' '}
-                    <a target="api" href={apiPath+'comics'}>Graphic Novels inventory</a>,  {' '}
-                    <a target="api" href={apiPath+'restaurant'}>Restaurants list</a>, {' '}
-                    <a target="api" href={apiPath+'winecellar'}>Wine Cellar</a>. 
+                    <a target="api" href={apiPathFull+'todo'}>To-Do list</a>,  {' '}
+                    <a target="api" href={apiPathFull+'contact'}>Address Book</a>,  {' '}
+                    <a target="api" href={apiPathFull+'comics'}>Graphic Novels inventory</a>,  {' '}
+                    <a target="api" href={apiPathFull+'restaurant'}>Restaurants list</a>, {' '}
+                    <a target="api" href={apiPathFull+'winecellar'}>Wine Cellar</a>. 
                 </p> 
            </div> 
            

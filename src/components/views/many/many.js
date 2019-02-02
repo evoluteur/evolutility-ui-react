@@ -28,11 +28,11 @@ export default class Many extends React.Component {
 		this.clickSort = this.clickSort.bind(this);
 	}
 
-	getData(entity, query1){ 
+	getData(entity, query1){
 		const params = this.props.match.params,
 			id = params.id,
 			e = entity || params.entity,
-			query = query1 ? query1 : url.parse(this.props.location.search), //this.props.location.query,
+			query = query1 ? query1 : url.parseQuery(this.props.location.search),
 			paramsCollec = this.props.paramsCollec
 		let qUrl = apiPath + e
 
@@ -93,7 +93,7 @@ export default class Many extends React.Component {
 			})
 			this.getData(nextProps.match.params.entity)
 		}else if(nextProps.location.search !== this.props.location.search){
-			this.getData(null, url.parse(nextProps.location.search))
+			this.getData(null, url.parseQuery(nextProps.location.search) || {})
 		}
 	}
 
@@ -106,7 +106,7 @@ export default class Many extends React.Component {
 			}else if(size >= totalSize) {
 				return totalSize + ' ' + this.model.namePlural;
 			}else{
-				const query = url.parse(this.props.location.search)
+				const query = url.parseQuery(this.props.location.search)
 				if(query){
 					const pageIdx = query.page||0;				
 					if(!pageIdx && pageSize>size){
@@ -148,7 +148,7 @@ export default class Many extends React.Component {
 	clickSort(evt){
 		const e = this.props.match.params.entity,
 			fid = evt.currentTarget.id,
-			query = url.parse(this.props.location.search)
+			query = url.parseQuery(this.props.location.search) || {}
 		let direc = 'asc'
 
 		if(this._sortField===fid){
@@ -173,7 +173,7 @@ export default class Many extends React.Component {
 	clickPagination(evt){
 		const e = this.props.match.params.entity,
 			id = evt.currentTarget.textContent,
-			query = url.parse(this.props.location.search)
+			query = url.parseQuery(this.props.location.search) || {}
 		let pageIdx
 
 		if(id==='»' || id==='«'){

@@ -94,48 +94,54 @@ Code: [/src/components/views/many/Stats.js](https://github.com/evoluteur/evoluti
 ## Models
 
 For each application, all views can be generated from the model at run-time. 
-Each model describe an object and its list of fields.
+Each model describe an object and its list of fields. A single model is used for all views (Browse, Edit, List, Cards...) of the object it describes.
 
 ### Object
 
 | Property     | Meaning                                 |
 |--------------|-----------------------------------------|
-| id           | Unique key to identify the entity (used as API parameter). |    
-| icon         | Icon file name for the entity (example: "cube.gif". |  
+| id           | Unique key to identify the entity (used as API parameter). |
+| icon         | Icon file name for the entity (example: "cube.gif". |
 | name         | Object name (singular).    |
 | namePlural   | Object name (plural).      |
 | title        | Application name.          |
 | fields       | Array of fields.           |
 | groups       | Array of groups. If not provided a single group will be used.   |
-| titleField   | Field id for the column value used as record title. titleField can also be a function. | 
+| titleField   | Field id for the column value used as record title. titleField can also be a function. |
 
 ### Field
+
+Objects have fields.
 
 | Property     | Meaning                               |
 |--------------|---------------------------------------|
 | id           | Unique key for the field (can be the same as column but doesn't have to be). |
 | type         | Field type to show in the UI. Possible field types: <ul><li>boolean (yes/no)</li><li>date</li><li>datetime</li><li>decimal</li><li>document</li><li>email</li><li>image</li><li>integer</li><li>lov (list of values)</li><li>money</li><li>text</li><li>textmultiline</li><li>time</li><li>url</li></ul> |
 | required     | Determines if the field is required for saving.      |
-| readonly     | If set to true, the field value cannot be changed.   |       
-| defaultValue | Default field value for new records.                 |     
-| max, min     | Maximum/Minimum value allowed (only applies to numeric fields).      |    
-| maxLength, minLength | Maximum/Minimum length allowed (only applies to text fields).      |     
-| lovicon      | Set to True to include icon with LOV items.    |               
-| object       | Model id for the object to link to (only for fields of "lov" type).     |             
-| inMany       | Determines if the field is present (by default) in lists of records. |                     
-| height       | For fields of type "textmultiline", number of lines used in the field (in Browse and Edit views). |                 
+| readonly     | If set to true, the field value cannot be changed.   |
+| defaultValue | Default field value for new records.                 |
+| max, min     | Maximum/Minimum value allowed (only applies to numeric fields).      |
+| maxLength, minLength | Maximum/Minimum length allowed (only applies to text fields).      |
+| lovicon      | Set to True to include icon with LOV items.    |
+| object       | Model id for the object to link to (only for fields of "lov" type).     |
+| inMany       | Determines if the field is present (by default) in lists of records. |
+| height       | For fields of type "textmultiline", number of lines used in the field (in Browse and Edit views). |
 | width        | Field width in Browse and Edit views (in percent of parent width). |
 | help         | Optional help on the field. |
 | noCharts     | Prevent the field to have a charts (only necessary for fields of type integer, decimal, money, boolean, list of values which are "chartable"). |
+| unique       | Values must be unique (not implemented yet).   |
 
 ### Group
+
+Groups are used to visually divide Fields (in Edit and Browse views).
 
 | Property     | Meaning                               |
 |--------------|---------------------------------------|
 | id           | Unique key for the group. It is optional.            |
 | type         | Type of fields group. Only "panel" is currently supported (tab and other types of groups will be added later). |
 | label        | Group title displayed in the group header.      |
-| fields       | Array of field ids.                        |
+| fields       | Array of field ids.       |
+| width        | Width (in % of the container total width).        |
 
 Note: Groups are optional. By default a single group holds all fields.
 
@@ -150,6 +156,7 @@ Multiple details tables can be specified with "collections".
 | object       | Model.id for the Object to link to.   |
 | fields       | Array of fields. Fields in collections do not need all properties of Fields in objects.    |
 
+Sample model using collections: [Wine Cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/winecellar.js).
 
 ### Sample model
 

@@ -76,7 +76,7 @@ export default class OneReadWrite extends OneRead{
 				.then(response => {
 					setData(mid+'/'+response.data.fileName)
 				})
-				.catch(function (error) {
+				.catch(error => {
 					toast.error(i18n_errors.badUpload)
 					console.log(error);
 				});
@@ -98,7 +98,7 @@ export default class OneReadWrite extends OneRead{
 
 		if(!this.lovs){
 			axios.get(apiPath+mid+'/lov/'+fid)
-			.then((response)=>{
+			.then(response => {
 				this.model.fieldsH[fid].list = response.data.map(function(d){
 					return {
 						id: d.id, 

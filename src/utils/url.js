@@ -19,8 +19,12 @@ export default {
 		return urlParams.join('&');
 	},
 
-	parse(qString){
-		return queryString.parse(qString)
-	}
+	parseQuery(qString){
+		if(qString){
+			const idx = qString.indexOf('?')
+			return qString ? queryString.parse(idx ? qString.slice(idx) : qString) : null
+		}
+		return null
+	},
 
 }
