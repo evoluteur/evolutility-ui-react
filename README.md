@@ -128,6 +128,7 @@ Objects have fields.
 | height       | For fields of type "textmultiline", number of lines used in the field (in Browse and Edit views). |
 | width        | Field width in Browse and Edit views (in percent of parent width). |
 | help         | Optional help on the field. |
+| chartType    | Default charts type used for the field ("Bars", "Pie", or "Table"). "Bars" is used if not specified. |
 | noCharts     | Prevent the field to have a charts (only necessary for fields of type integer, decimal, money, boolean, list of values which are "chartable"). |
 | unique       | Values must be unique (not implemented yet).   |
 

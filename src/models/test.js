@@ -65,7 +65,8 @@ var fields = [
 		"required": true,
 		"inMany": true,
 		"width": 100,
-		"help": "LOV "
+		"help": "LOV ",
+		chartType: "Pie"
 	},
 	{
 		"id": "lovlc",
@@ -74,7 +75,8 @@ var fields = [
 		"list": lov,
 		"defaultValue": 5,
 		"width": 100,
-		"help": "List of Values with \"Lemon Cookie\" as default value."
+		"help": "List of Values with \"Lemon Cookie\" as default value.",
+		chartType: "Table"
 	},
 	{
 		"id": "date",
