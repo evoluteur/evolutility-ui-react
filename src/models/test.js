@@ -209,7 +209,8 @@ module.exports = {
 				"date",
 				"datetime",
 				"time"
-			]
+			],
+			"footer": "Not fully implemented yet"
 		},
 		{
 			"id": "ppix",

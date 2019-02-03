@@ -142,6 +142,7 @@ Groups are used to visually divide Fields (in Edit and Browse views).
 | label        | Group title displayed in the group header.      |
 | fields       | Array of field ids.       |
 | width        | Width (in % of the container total width).        |
+| footer       | Text to be displayed at the bottom of the group.    |
 
 Note: Groups are optional. By default a single group holds all fields.
 

@@ -11,7 +11,10 @@
 }
 
 .panel{
-	border-radius: 2px !important;
+  border-radius: 2px !important;
+  div.panel-footer {
+    background-color: $color-panel-footer;
+  }
 }
 
 .evo-panel-help{
