@@ -87,6 +87,8 @@ module.exports = {
         deleted: '{0} "{1}" deleted.',
         //error: 'Error',
         noUpdate: 'No update necessary.',
+        deleteConfirmation: 'Do you really want to delete the selected {0}?',
+        delete: 'Delete {0}?'
     },
 
     // --- validation ---
