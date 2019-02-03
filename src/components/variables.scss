@@ -37,8 +37,9 @@ $field-h-spacing: 16px;
 // labels
 $weight-label: 500;
 
-// footer
+// page footer
 $color-text-footer: silver;
+$color-panel-footer: #fafafa;
 
 // mixins
 @mixin border-radius($r){
