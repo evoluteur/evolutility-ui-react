@@ -135,7 +135,10 @@ export default class Edit extends OneReadWrite{
 									m.groups.map(function(g, idx){
 										const groupFields = fieldId2Field(g.fields, m.fieldsH)
 										return (
-											<Panel key={g.id||('g'+idx)} title={g.label || g.title || ''} width={g.width}>
+											<Panel key={g.id||('g'+idx)} 
+													title={g.label || g.title || ''} 
+													footer={g.footer}
+													width={g.width}>
 												<div className="evol-fset">
 													{groupFields.map(fnField)}
 												</div>

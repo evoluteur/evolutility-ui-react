@@ -4,7 +4,7 @@
 // Read-only view to browse one record.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2019 Olivier Giulieri
 
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -82,7 +82,10 @@ export default class Browse extends OneRead {
                           m.groups.map(function(g, idx){
                             const groupFields = fieldId2Field(g.fields, m.fieldsH)
                             return (
-                              <Panel key={g.id||('g'+idx)} title={g.label || g.title || ''} width={g.width}>
+                              <Panel key={g.id||('g'+idx)} 
+                                  title={g.label || g.title || ''} 
+                                  footer={g.footer}
+                                  width={g.width}>
                                 <div className="evol-fset">
                                   {groupFields.map(fnFieldReadOnly)}
                                 </div>
