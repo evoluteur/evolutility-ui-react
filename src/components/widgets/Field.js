@@ -3,7 +3,7 @@
 // Model-driven field (possible types specified in dico.fieldTypes).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2019 Olivier Giulieri
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -60,7 +60,6 @@ export default class Field extends React.Component {
 		const usualProps = {
 			id: f.id,
 			key: f.id,
-			ref: 'e',
 		}
 
 		if(f.type===ft.bool){
