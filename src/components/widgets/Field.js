@@ -151,14 +151,26 @@ export default class Field extends React.Component {
 
 				</div>
 			)
+		}else if(f.type===ft.email){
+			return <div className="input-group">
+					<span className="input-group-addon" id={"symbol"+f.id}>@</span>
+					<input {...usualProps}
+						type="text"  
+						aria-describedby={"symbol"+f.id}
+						value={d?d:''}
+						onChange={cbs.change}
+						className="form-control"
+					/>
+				</div>
 		}
 		let inputType
 		if(f.type===ft.int || f.type===ft.dec){
 			inputType = 'number'
+			usualProps.step= f.type===ft.int ? "1" : "0.1"
 		}else{  //if(f.type==='email'){
 			inputType = 'text'
 		}
-		
+
 		return <input {...usualProps}
 				type={inputType} 
 				value={d?d:''}
