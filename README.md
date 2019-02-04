@@ -11,6 +11,14 @@ Evolutility-UI-React is a set of **model-driven views** to Browse, Edit, List, C
 git clone https://github.com/evoluteur/evolutility-ui-react
 ```
 
+or use the [npm package](https://www.npmjs.com/package/evolutility-ui-react):
+
+```bash
+# To get the latest stable version, use npm from the command line.
+npm install evolutility-ui-react
+```
+
+
 In the Evolutility-UI-React directory, use the command line to type the following:
 
 ```bash
