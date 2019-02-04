@@ -36,17 +36,26 @@ export default class Charts extends Many {
                 charts = <Alert title="No data" message={i18n_charts.nocharts} type="warning"/>
             }else if(chartFields.length===1){
                 const f = chartFields[0]
-                charts = <Chart entity={e} key={'c-'+f.id} field={f} title={f.label}
+
+                charts = <Chart entity={e} key={'c-'+f.id} 
+                        field={f} title={f.label}
+                        chartType={f.chartType}
                         sizes='600x300' className="panel-default bm10"/> 
             }else{
-                charts = chartFields.map(f => <Chart entity={e} key={'c-'+f.id} field={f} title={f.label} className="panel-default"/>)
+                charts = chartFields.map(f => <Chart 
+                    entity={e} 
+                    key={'c-'+f.id} 
+                    field={f} 
+                    title={f.label} 
+                    chartType={f.chartType}
+                    className="panel-default" />)
             }
-        
-            return (
 
+            return (
                 <div className="evolutility evol-many-charts">
                     
-                    <Header entity={e} title={title} count={null} 
+                    <Header entity={e} 
+                        title={title} count={null} 
                         cardinality='n' view={this.viewId}/>
                     
                     <div className="evolutility evol-many-charts">

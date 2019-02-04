@@ -39,7 +39,7 @@ export default class Chart extends React.Component {
         super(props);
         this.state={
             data: [],
-            chartType: 'Bars', // "Pie" or "Bars",
+            chartType: props.chartType, // "Pie" or "Bars" or "Table",
             loading: true,
         }
         this.click_view = this.click_view.bind(this)
@@ -126,7 +126,7 @@ export default class Chart extends React.Component {
     render(){
         const data = this.state.data || [],
             sizes = this.props.sizes || null,
-            cType = this.state.chartType || 'Pie'
+            cType = this.state.chartType
         let body 
 
         if(this.state.error){
@@ -164,4 +164,7 @@ Chart.propTypes = {
     title: PropTypes.string,
     sizes: PropTypes.string,
     type: PropTypes.oneOf(['Bars', 'Pie', 'Table'])
+}
+Chart.defaultProps = {
+	chartType: 'Bars',
 }

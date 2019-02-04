@@ -1,3 +1,5 @@
+@import '../variables';
+
 .Nav {
 	z-index: 70;
 	font-family: Droid,Lato,'Helvetica Neue',Arial,Helvetica;
@@ -65,7 +67,7 @@
 		}
 	}
 	a:hover{
-		color: black;
+		color: $color-icon-hover;
 	}
 
 }
@@ -125,6 +127,11 @@ a.skipNav {
 		display: inline-block;
 		font-size: 12px;
 
+		&:hover{
+			>i{
+				color: $color-icon-hover
+			}
+		}
 		> i {
 			display: inline-block;
 			font-size: 12px;
@@ -134,6 +141,7 @@ a.skipNav {
 }
 .nav-l2 > li{
 	border-radius: 5px;
+	padding: 5px 10px;
 
 	&:hover,
 	&.active{
@@ -141,6 +149,10 @@ a.skipNav {
 			
 		> .mIcons{
 			display: inline-block;
+			padding-right: 14px;
+			> a:hover {
+				color: $color-icon-hover;
+			}
 		}
 	}
 }

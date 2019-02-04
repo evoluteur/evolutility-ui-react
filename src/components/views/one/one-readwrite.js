@@ -6,6 +6,7 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2019 Olivier Giulieri
 
+import React from 'react'
 import axios from 'axios'
 //import { createHashHistory } from 'history'
 
@@ -45,8 +46,14 @@ export default class OneReadWrite extends OneRead{
 						invalid: false
 					})
 				})
-				.catch(function (error) {
-					toast.error('Server error while inserting or updating the record.')
+				.catch(error => {
+					if(error.response &&error.response.data &&  error.response.data.invalids){
+						const msg = error.response.data.invalids.map(e => <div key={e.id}>{e.id + ': ' + e.condition}</div>)
+						toast.error(<div>Record failed server validation.<br/>{msg}</div>)
+						// TODO: flag fields
+					}else{
+						toast.error('Server error while inserting or updating the record.')
+					}
 					console.log(error);
 				});
 		}else{
@@ -76,7 +83,7 @@ export default class OneReadWrite extends OneRead{
 				.then(response => {
 					setData(mid+'/'+response.data.fileName)
 				})
-				.catch(function (error) {
+				.catch(error => {
 					toast.error(i18n_errors.badUpload)
 					console.log(error);
 				});
@@ -98,7 +105,7 @@ export default class OneReadWrite extends OneRead{
 
 		if(!this.lovs){
 			axios.get(apiPath+mid+'/lov/'+fid)
-			.then((response)=>{
+			.then(response => {
 				this.model.fieldsH[fid].list = response.data.map(function(d){
 					return {
 						id: d.id, 

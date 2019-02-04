@@ -18,7 +18,7 @@ import Format from '../../utils/format'
 import evoGlobals from '../../utils/evoGlobals'
 import {apiPath} from '../../config.js'
 //import {i18n_actions, i18n_msg} from '../../i18n/i18n'
-import { i18n_actions } from '../../i18n/i18n'
+import { i18n_msg, i18n_actions } from '../../i18n/i18n'
 import models from '../../models/all_models'
 
 import './Toolbar.scss'
@@ -159,10 +159,10 @@ class Toolbar extends React.Component {
                             <div className="modal-content">
                                 <div className="modal-header">
                                     <button  onClick={this.closeModal} className="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h4 className="modal-title">Delete item</h4>
+                                    <h4 className="modal-title">{i18n_msg.delete.replace('{0}', m.name)}</h4>
                                 </div>
                                 <div className="modal-body">
-                                    Do you really want to delete the {m.name} ?
+                                    {i18n_msg.deleteConfirmation.replace('{0}', m.name)}
                                 </div>
                                 <div className="modal-footer">
                                     <button key="bDelCancel" onClick={this.closeModal} className="btn btn-default" data-dismiss="modal">{i18n_actions.cancel}</button>

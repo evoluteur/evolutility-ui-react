@@ -25,7 +25,7 @@ $color-background-nav: #0077b5;
 $color-nav: white; //#83d0f2; //white; //#337ab7; //#E0F7FA;
 $color-nav-hover: #FFCC80; //#23527c;//#FFE0B2;
 $color-nav-active: #FFCC80;//#E0F7FA;
-$color-icon-hover: #31708f;
+$color-icon-hover: #0066ff;
 $color-icon: #428bca;
 $color-icon-background-hover: #ECEFF1;
 
@@ -37,8 +37,9 @@ $field-h-spacing: 16px;
 // labels
 $weight-label: 500;
 
-// footer
+// page footer
 $color-text-footer: silver;
+$color-panel-footer: #fafafa;
 
 // mixins
 @mixin border-radius($r){

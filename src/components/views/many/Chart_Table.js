@@ -14,7 +14,7 @@ export default class ChartTable extends React.PureComponent {
     viewId = 'chart_table'
 
     render(){
-        const sLink = this.props.entity+'?'+this.props.field.id+'=',
+        const sLink = '../../'+this.props.entity+'?'+this.props.field.id+'=',
             makeLink = d => {
                 let param = '' + (d.id || d.label)
                 param = param==='null' ? 'null' : 'eq.'+param

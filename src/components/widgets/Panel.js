@@ -38,6 +38,9 @@ export default class Panel extends React.Component {
 					<fieldset style={{display: (this.state.opened ? 'block':'none')}}>
 						{this.props.children}
 					</fieldset>
+					{this.props.footer ? (
+						<div className="panel-footer">{this.props.footer}</div>
+					) : null}
 				</div>
 			</div>
 		)
