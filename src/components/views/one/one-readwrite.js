@@ -48,7 +48,7 @@ export default class OneReadWrite extends OneRead{
 				})
 				.catch(error => {
 					if(error.response &&error.response.data &&  error.response.data.invalids){
-						const msg = error.response.data.invalids.map(e => <div>{e.id + ': ' + e.condition}</div>)
+						const msg = error.response.data.invalids.map(e => <div key={e.id}>{e.id + ': ' + e.condition}</div>)
 						toast.error(<div>Record failed server validation.<br/>{msg}</div>)
 						// TODO: flag fields
 					}else{
