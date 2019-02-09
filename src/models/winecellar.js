@@ -110,24 +110,96 @@ var winecellar_lovs = {
     ],
 
     country: [
-        { id: 1, text: "Argentina"},
-        { id: 2, text: "Austria"},
-        { id: 3, text: "Bulgaria"},
-        { id: 4, text: "Canada"},
-        { id: 5, text: "Chile"},
-        { id: 6, text: "Cyprus"},
-        { id: 7, text: "France"},
-        { id: 8, text: "Germany"},
-        { id: 9, text: "Greece"},
-        { id: 10, text: "Hungary"},
-        { id: 11, text: "Italy"},
-        { id: 12, text: "Luxembourg"},
-        { id: 13, text: "New Zealand"},
-        { id: 14, text: "Portugal"},
-        { id: 15, text: "South Africa"},
-        { id: 16, text: "Spain"},
-        { id: 17, text: "Switzerland"},
-        { id: 18, text: "United States"}
+        {
+            "id": 1,
+            "icon": "wine/flag/ar.png",
+            "text": "Argentina"
+        },
+        {
+            "id": 2,
+            "icon": "wine/flag/at.png",
+            "text": "Austria"
+        },
+        {
+            "id": 3,
+            "icon": "wine/flag/bg.png",
+            "text": "Bulgaria"
+        },
+        {
+            "id": 4,
+            "icon": "wine/flag/ca.png",
+            "text": "Canada"
+        },
+        {
+            "id": 5,
+            "icon": "wine/flag/cl.png",
+            "text": "Chile"
+        },
+        {
+            "id": 6,
+            "icon": "wine/flag/cy.png",
+            "text": "Cyprus"
+        },
+        {
+            "id": 7,
+            "icon": "wine/flag/fr.png",
+            "text": "France"
+        },
+        {
+            "id": 8,
+            "icon": "wine/flag/de.png",
+            "text": "Germany"
+        },
+        {
+            "id": 9,
+            "icon": "wine/flag/gr.png",
+            "text": "Greece"
+        },
+        {
+            "id": 10,
+            "icon": "wine/flag/hu.png",
+            "text": "Hungary"
+        },
+        {
+            "id": 11,
+            "icon": "wine/flag/it.png",
+            "text": "Italy"
+        },
+        {
+            "id": 12,
+            "icon": "wine/flag/lu.png",
+            "text": "Luxembourg"
+        },
+        {
+            "id": 13,
+            "icon": "wine/flag/nz.png",
+            "text": "New Zealand"
+        },
+        {
+            "id": 14,
+            "icon": "wine/flag/pt.png",
+            "text": "Portugal"
+        },
+        {
+            "id": 15,
+            "icon": "wine/flag/za.png",
+            "text": "South Africa"
+        },
+        {
+            "id": 16,
+            "icon": "wine/flag/es.png",
+            "text": "Spain"
+        },
+        {
+            "id": 17,
+            "icon": "wine/flag/ch.png",
+            "text": "Switzerland"
+        },
+        {
+            "id": 18,
+            "icon": "wine/flag/us.png",
+            "text": "United States"
+        }
     ]
 
 };
@@ -225,6 +297,7 @@ module.exports = {
             width: 32,
             list: winecellar_lovs.country,
             lovtable:'wine_country',
+            lovicon: true,
         },
         {
             id:'region',
