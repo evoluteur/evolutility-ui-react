@@ -209,7 +209,7 @@ class Toolbar extends React.Component {
             axios.delete(apiPath+entity+'/'+id)
                 .then(response => {
                     evoGlobals.skip_confirm = true
-                    toast.warn(i18n_actions.deleted.replace('{0}', Format.capitalize(m.name)), {
+                    toast.success(i18n_actions.deleted.replace('{0}', Format.capitalize(m.name)), {
                         position: toast.POSITION.TOP_RIGHT
                     });
                     this.props.history.push('/'+entity+'/list')
