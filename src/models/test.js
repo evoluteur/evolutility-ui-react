@@ -162,7 +162,7 @@ module.exports = {
 	"title": "Test List",
 	"name": "test",
 	"namePlural": "tests",
-	"icon": "test.gif",
+	"icon": "eye.png",
 	"titleField": "name",
 	"fields": fields,
 	"groups": [
