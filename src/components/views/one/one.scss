@@ -90,7 +90,13 @@
 
 .evol-title-toggle{
   cursor: pointer;
-  float:right;
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  color: grey;
+  &:hover{
+    color: #259DCB;
+  }
 }/*
 .evol-json{
     width:100%;

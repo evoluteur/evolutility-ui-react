@@ -1,6 +1,7 @@
 @import '../variables';
 
 .panel-heading { // panel-heading from Bootstrap
+    position: relative;
     >.panel-title{ // panel-title from Bootstrap
       display: inline-block;
     }

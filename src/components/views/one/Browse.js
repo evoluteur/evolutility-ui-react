@@ -103,7 +103,7 @@ export default class Browse extends OneRead {
                       {m.collections ? (
                         m.collections.map((c, idx)=>{
                           return (
-                            <Panel title={c.title} key={'collec_'+c.id}>
+                            <Panel title={c.title} key={'collec_'+c.id} collapsible={true}>
                               <List key={'collec'+idx}
                                 isNested={true}
                                 match={this.props.match} 

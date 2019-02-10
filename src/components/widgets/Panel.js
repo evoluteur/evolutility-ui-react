@@ -12,9 +12,13 @@ import './Panel.scss'
 
 export default class Panel extends React.Component {
 
-	state = {
-		opened: true
-	}
+    constructor(props) {
+        super(props);
+        this.state = {
+			opened: true
+        }
+        this.clickToggle = this.clickToggle.bind(this);
+    }
 
 	clickToggle(){
 		this.setState({opened: !this.state.opened})
@@ -51,7 +55,7 @@ export default class Panel extends React.Component {
 Panel.propTypes = {
 	title: PropTypes.string,
 	width: PropTypes.number,
-	collapsible: PropTypes.bool
+	collapsible: PropTypes.any
 }
 
 Panel.defaultProps = {
