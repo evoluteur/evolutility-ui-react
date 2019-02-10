@@ -134,11 +134,11 @@ module.exports = {
         avg: 'Average',
         min: 'Min.',
         max: 'Max.', 
-        nofit: 'Data not fit for generic analysis.',
+        noFit: 'Data not fit for generic analysis.',
     },
 
     i18n_errors: {
-        badId: 'Couldn\'t retrieve data for id="{0}".',
+        badId: 'No data found for id="{0}".',
         badEntity: 'Invalid parameter: entity="{0}".',
         badChart: 'Couldn\'t retrieve charts data.',
         badUpload: 'Error uploading file.',

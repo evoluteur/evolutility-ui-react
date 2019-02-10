@@ -5,11 +5,12 @@
 	font-family: Droid,Lato,'Helvetica Neue',Arial,Helvetica;
 	position: fixed;
 	left:0;
-	top:42px;
+	top:50px;
 	width:170px;
 	height: 100%;
+	height: calc(100% - 50px);
 	color: #455A64;
-	padding-top: 20px;
+	padding-top: 12px;
 	border-right: 1px solid #e0e0e0;
 	background-color: #eee;
 	transition: width 0.5s;

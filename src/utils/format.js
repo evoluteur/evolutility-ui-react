@@ -7,6 +7,7 @@
 
 import React from 'react'
 import {filesUrl} from '../config.js'
+import {fieldTypes as ft} from './dico.js'
 
 function notUndefined(v){
     return typeof(v) !== 'undefined'
@@ -15,10 +16,14 @@ function notUndefined(v){
 const formatLib = {
 
     fieldValue(f, d, abbr){
-        if(f.type==='boolean'){
+        if(f.type===ft.bool){
             return d ? <i className="glyphicon glyphicon-ok"></i> : ''
-        }else if(f.type==='date'){
+        }else if(f.type===ft.date){
             return this.dateString(d)
+        }else if(f.type===ft.time){
+            return this.timeString(d)
+        }else if(f.type===ft.datetime){
+            return this.datetimeString(d)
         }else if(f.type==='color'){
             return (
                 <div>
@@ -28,11 +33,11 @@ const formatLib = {
                     </div>
                 </div>
             )
-        }else if(f.type==='image' && d){
+        }else if(f.type===ft.image && d){
             return this.image(filesUrl+d)
-        }else if(f.type==='url' && d){
+        }else if(f.type===ft.url && d){
             return <a href={d} target="_blank" rel="noopener noreferrer">{d}</a>
-        }else if(f.type==='email' && d){
+        }else if(f.type===ft.email && d){
             return <a href={'mailto:'+d}>{d}</a>
         }/*else if(f.type==='lov' && icon){
             return <React.Fragment><img src={icon} alt=""></img>{d}</React.Fragment>
@@ -55,6 +60,14 @@ const formatLib = {
     },
 
     // --- date formats ---
+    dateOpt(d, type){ 
+        if(type==='time'){
+            return this.timeString(d)
+        }else if(type==='datetime'){
+            return this.dateString(d)
+        }
+        return this.dateString(d);
+    },
     dateString(d){ 
         if(d){
             d=d.substring(0, 10);

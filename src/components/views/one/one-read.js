@@ -48,7 +48,7 @@ export default class OneRead extends React.Component{
 			});
 			axios.get(apiPath+e+'/'+id)
 			.then((response)=>{
-				if(response.data!==''){
+				if(response.data!==null && response.data!==''){
 					this.emptyDelta(false)
 					newState.data = response.data
 					this.setState(newState);
@@ -77,7 +77,6 @@ export default class OneRead extends React.Component{
 		if(this.props.router){
 			this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave)
 		}
-        //document.title = this.model.label
 		window.scrollTo(0, 0)
 		// - get data or if new then clear data
 		if(this.props.match.params.id && this.props.match.params.id!=='0'){

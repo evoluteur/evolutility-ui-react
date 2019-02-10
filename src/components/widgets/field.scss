@@ -4,6 +4,9 @@
 
 @import '../variables';
 
+.inline{
+  display: inline;
+}
 .form-control {
 	padding: 6px;
 }
@@ -31,6 +34,13 @@
     }
     .img-thumbnail {
       padding: 0 !important;
+    }
+    input[type="time"]{
+      display: inline-block;
+      width: 130px;
+    }
+    .react-datepicker-wrapper{
+      display: inline;
     }
 
 }

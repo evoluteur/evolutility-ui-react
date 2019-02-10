@@ -60,20 +60,19 @@ export default class Field extends React.Component {
 		const usualProps = {
 			id: f.id,
 			key: f.id,
+			onChange: cbs.change,
 		}
 
 		if(f.type===ft.bool){
 			return <input {...usualProps}
 						type="checkbox" 
 						checked={d?true:false}
-						onChange={cbs.change}
 				    />
 		}else if(f.type===ft.textml || f.type===ft.json){ // && f.height>1
 			return <textarea {...usualProps}
 						rows={f.height} 
 						className="form-control" 
-						value={d?d:''} 
-						onChange={cbs.change}
+						value={d?d:''}
 					/>
 		}else if(f.type===ft.lov || f.type===ft.list){
 			let opts
@@ -91,7 +90,6 @@ export default class Field extends React.Component {
 			return <select {...usualProps}
 						className="form-control" 
 						value={d || ''}
-						onChange={cbs.change}
 					>
 						<option/>
 						{opts}
@@ -100,9 +98,23 @@ export default class Field extends React.Component {
 		}else if(f.type===ft.date){
 			return <Datepicker {...usualProps}
 						className="form-control" 
-						selected={ d?new Date(d):null }
+						selected={ d ? new Date(d) : null }
+						onChange={this.getDateFieldChange(f.id)}
+					/>				
+		}else if(f.type===ft.datetime){
+			return <React.Fragment>
+					<Datepicker {...usualProps}
+						className="form-control inline" 
+						selected={ d ? new Date(d) : null }
 						onChange={this.getDateFieldChange(f.id)}
 					/>
+				</React.Fragment>
+		}else if(f.type===ft.time){
+			return <input {...usualProps}
+					type="time"
+					value={ d ? d : '' }
+					className="form-control"
+				/>
 		}else if(f.type===ft.image || f.type===ft.doc){
 			let pix = null
 
@@ -156,7 +168,7 @@ export default class Field extends React.Component {
 					<input {...usualProps}
 						type="text"  
 						aria-describedby={"symbol"+f.id}
-						value={d?d:''}
+						value={ d ? d : '' }
 						onChange={cbs.change}
 						className="form-control"
 					/>
@@ -172,7 +184,7 @@ export default class Field extends React.Component {
 
 		return <input {...usualProps}
 				type={inputType} 
-				value={d?d:''}
+				value={ d ? d : '' }
 				onChange={cbs.change}
 				className="form-control"
 			/>

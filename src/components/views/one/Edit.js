@@ -82,7 +82,7 @@ export default class Edit extends OneReadWrite{
 				change: this.fieldChange,
 				dropFile: this.uploadFileOne
 			},
-        	title = dataTitle(m, data, isNew),
+        	title = this.state.error ? 'No data' : dataTitle(m, data, isNew),
         	linkBrowse = isNew ? (ep+'list') : (ep+view+(id?('/'+id):''));
 
 		const fnField = (f)=>{
@@ -112,8 +112,7 @@ export default class Edit extends OneReadWrite{
 		if(!m){
 			return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
 		}else{
- 
-			return (
+ 			return (
 				<div className="evolutility" role="form">
 
 					<Header {...this.props.match.params} 
@@ -233,13 +232,12 @@ export default class Edit extends OneReadWrite{
 		})
 	}
 
-
 	setDeltaField(fid, value){
 		if (!this.delta){
 			this.delta={}
 		}
-		this.delta[fid]=value
-		this._dirty=true
+		this.delta[fid] = value
+		this._dirty = true
 	}
 }
 

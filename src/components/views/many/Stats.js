@@ -5,7 +5,7 @@ import axios from 'axios'
 import { apiPath, wTimestamp, wComments } from '../../../config.js'
 import models from '../../../models/all_models'
 import { i18n_stats } from '../../../i18n/i18n'
-import { fieldIsDateOrTime, fieldIsNumeric, fieldTypes as ft } from '../../../utils/dico'
+import { fieldIsDateOrTime, fieldIsNumeric } from '../../../utils/dico'
 import format from '../../../utils/format'
 import Header from '../../shell/Header'
 import Spinner from '../../shell/Spinner'
@@ -98,9 +98,9 @@ export default class Stats extends React.Component {
                         min: data[f.id+'_min'],
                         max: data[f.id+'_max'],
                     }
-                    if(f.type===ft.date){
-                        item.min = format.dateString(item.min)
-                        item.max = format.dateString(item.max)
+                    if(fieldIsDateOrTime(f)){
+                        item.min = format.dateOpt(item.min, f.type)
+                        item.max = format.dateOpt(item.max, f.type)
                     }
                     if(data[f.id+'_avg']){
                         item.avg = formatNum(f, data[f.id+'_avg'])
@@ -135,7 +135,7 @@ export default class Stats extends React.Component {
             data = this.state.data || {},
             title = (data ? data.titleCount : 'No ')+' '+model.namePlural;
 
-        const itemField = (label, value)=>  <div><label className="grey stat-fn">{label}</label> {value}</div>
+        const itemField = (id, label, value) =>  <div key={id}><label className="grey stat-fn">{label}</label> {value}</div>
 
         function item(k){
             return (
@@ -143,12 +143,12 @@ export default class Stats extends React.Component {
                     <label className="stat-label">{k.field.label}</label>
                     
                     <div className="numItemList disabled evo-rdonly">
-                        {k.sum ? itemField(i18n_stats.total, k.sum) : null}
+                        {k.sum ? itemField(k.id+'sum', i18n_stats.total, k.sum) : null}
 
-                        {k.avg ? itemField(i18n_stats.avg, k.avg) : null}
+                        {k.avg ? itemField(k.id+'avg', i18n_stats.avg, k.avg) : null}
 
-                        {itemField(i18n_stats.min, k.min)}
-                        {itemField(i18n_stats.max, k.max)}
+                        {itemField(k.id+'min', i18n_stats.min, k.min)}
+                        {itemField(k.id+'max', i18n_stats.max, k.max)}
 
                     </div>
                 </div>
@@ -183,7 +183,7 @@ export default class Stats extends React.Component {
                                 (data && data.length) ?
                                     data.map(item)
                                 :
-                                    <div className="evol-fld">{i18n_stats.nofit}</div>
+                                    <div className="evol-fld">{i18n_stats.noFit}</div>
                             }
                         </div>
                     </div>
