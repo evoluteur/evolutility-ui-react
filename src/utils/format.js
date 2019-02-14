@@ -17,13 +17,14 @@ import 'moment/locale/de'
 import 'moment/locale/es'
 
 import {filesUrl, locale } from '../config.js'
-import { fieldTypes as ft } from '../utils/dico'
+import {fieldTypes as ft} from './dico.js'
 
+// Set the locale from the browser -- which may needed to be configured
 moment.locale(locale || window.navigator.userLanguage || window.navigator.language)
 
 const formatLib = {
 
-    // config to ovoerride browser
+    // config to override browser
     locale: moment.locale(),
 
     now: () => moment(),
@@ -85,6 +86,14 @@ const formatLib = {
     },
 
     // --- date formats ---
+    dateOpt(d, type){ 
+        if(type==='time'){
+            return this.timeString(d)
+        }else if(type==='datetime'){
+            return this.dateString(d)
+        }
+        return this.dateString(d);
+    },
     dateString(d){ 
         return d ? moment(d).format('L') : ''
     },
@@ -98,7 +107,7 @@ const formatLib = {
     },
 
     decimalString(d){
-        return d ? numeral(d).format() : ''
+        return d ? numeral(d).format() : '' // TODO: choose format
     },
 
     moneyString(d){
