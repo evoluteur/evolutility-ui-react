@@ -300,8 +300,8 @@ export default class Field extends React.Component {
 Field.propTypes = {
 	model: PropTypes.object.isRequired,
 	callbacks: PropTypes.shape({
-		change: PropTypes.function,
-		dropFile: PropTypes.function
+		change: PropTypes.func,
+		dropFile: PropTypes.func
 	}),
 	data: PropTypes.any,  // object or atomic values depending on field type
 	value: PropTypes.any, // field value
