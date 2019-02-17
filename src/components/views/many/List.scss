@@ -43,7 +43,12 @@
       }
     }
   }
-
+  .nobr{
+    white-space: nowrap;
+    max-width: 500px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 .list-new{
   border-top: 1px solid #ddd;

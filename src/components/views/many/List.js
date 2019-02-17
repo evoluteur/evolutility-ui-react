@@ -84,8 +84,10 @@ export default class List extends Many {
 				}else if(lovField && f.lovicon){
 					return (
 						<td key={idx}>
-							<img src={'/pix/'+d[f.id+'_icon']} className="lovIcon" alt=""/>
-							{format.fieldValue(f, value, true)}
+							<div className="nobr">
+								<img src={'/pix/'+d[f.id+'_icon']} className="lovIcon" alt=""/>
+								{format.fieldValue(f, value, true)}
+							</div>
 						</td>
 					)
 				}
