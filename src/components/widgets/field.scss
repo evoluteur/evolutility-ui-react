@@ -10,7 +10,9 @@
 .form-control {
 	padding: 6px;
 }
-
+.scroll-y{
+  overflow-y: scroll;
+}
 .evol-fld {
     @include flex-item();
     padding-left: $field-h-spacing !important;
