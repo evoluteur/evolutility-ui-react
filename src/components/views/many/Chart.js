@@ -28,7 +28,7 @@ const urlChart = 'http://chart.apis.google.com/chart',
             'c7c7c7','bcbd22','dbdb8d','17becf','9edae5'],
     cList = maxIdx => maxIdx>10 ? c20 : c10,
     colorsList = nbColors => cList(nbColors).slice(0, nbColors).join(','),
-    fnLabel = d => (d.label==null ? 'N/A' : d.label) + '('+d.value+')',
+    fnLabel = d => (d.label==null ? 'N/A' : d.label.substring(0, 20)) + ' ('+d.value+')',
     fnValue = d => d.value
 
 export default class Chart extends React.Component {
