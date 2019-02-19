@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import { version, proxy } from '../../package.json';
 import { apiPath } from '../config.js';
+import Format from '../utils/format'
 
 import './Home.scss'
 
-const apiPathFull = proxy + apiPath
+const apiPathFull = Format.urlJoin((typeof proxy !== "undefined")?proxy:'', apiPath)
 
 export default class Home extends React.PureComponent {
 

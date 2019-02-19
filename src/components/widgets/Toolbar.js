@@ -17,6 +17,7 @@ import { toast } from 'react-toastify';
 import Format from '../../utils/format'
 import evoGlobals from '../../utils/evoGlobals'
 import {apiPath} from '../../config.js'
+import {proxy} from '../../../package.json'
 //import {i18n_actions, i18n_msg} from '../../i18n/i18n'
 import { i18n_msg, i18n_actions } from '../../i18n/i18n'
 import models from '../../models/all_models'
@@ -232,10 +233,20 @@ class Toolbar extends React.Component {
     exportMany(){
         // - export all records as a CSV file.
         const e = this.props.entity || this.props.match.entity || ''
-        window.location.href = apiPath+e+'?format=csv';
-        toast.success('Downloading CSV export.', {
-            position: toast.POSITION.TOP_RIGHT
-        });
+        if(e){
+            let link = apiPath + e +'?format=csv'
+            if(link.indexOf('://')<0 && proxy){
+                link = Format.urlJoin(proxy, link)
+            }
+            window.location.href = link;
+            toast.success('Downloading CSV export.', {
+                position: toast.POSITION.TOP_RIGHT
+            })
+        }else{
+            toast.error('Error while doing export.', {
+                position: toast.POSITION.TOP_RIGHT
+            })
+        }
     }
 /*
     filterMany(){

@@ -121,6 +121,18 @@ const formatLib = {
         return '';
     },
 
+    urlJoin(u1, u2){
+        const slashu2 = u2[0]==='/'
+        const slashu1 = u1[u1.length-1]==='/'
+        if(slashu2 && slashu1){
+            return u1 + u2.substring(1)
+        }else if(!slashu2 && !slashu1){
+            return u1 + '/' + u2
+        }else{
+            return u1 + u2
+        }
+    },
+
     capitalize: function(word){ // TODO: maybe use _.string.capitalize(word);
         if(word && word.length>0){
             return word.substring(0,1).toUpperCase() + word.substring(1);//.toLowerCase();
