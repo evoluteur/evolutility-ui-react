@@ -19,16 +19,19 @@ export default class NavSection extends React.PureComponent {
 
         const iconViews = (mid, f) => (
             <div className="mIcons" >
-                {vIcons.map(i=>f.url?null:<Link to={'/'+mid+i.id} key={i.id}><i className={'glyphicon glyphicon-'+i.icon}/></Link>)}
+                {vIcons.map(menu => f.url ? null : <Link to={'/'+mid+menu.id} key={menu.id}><i className={'glyphicon glyphicon-'+menu.icon}/></Link>)}
             </div>
         )
 
-        const link = m => (
-            <li key={m.id} className={cRoute.startsWith(m.id)?'active ':''}>
-                <Link to={'/'+m.id}>{m.text}</Link>
-                {iconViews(m.id, m)}
-            </li>
-        )
+        const link = m => {
+            const mLink = '/'+m.id + (m.defaultViewMany ? '/'+m.defaultViewMany : '')
+            return (
+                <li key={m.id} className={cRoute.startsWith(m.id)?'active ':''}>
+                    <Link to={mLink}>{m.text}</Link>
+                    {iconViews(m.id, m)}
+                </li>
+            )
+        }
 
         return (
             <li className={props.active?'active-li':''} key={g.id}>

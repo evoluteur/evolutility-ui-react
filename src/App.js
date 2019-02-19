@@ -1,3 +1,6 @@
+// Evolutility-UI-React
+// https://github.com/evoluteur/evolutility-ui-react
+
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";

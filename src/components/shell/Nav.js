@@ -19,10 +19,10 @@ export default class Nav extends React.Component {
                 <ul>
                     {AppMenus.map((g)=>(
                         <NavSection
-                            route={cRoute}
-                            active={activeGroup===g.id}
-                            model={g}
-                            key={g.id}
+                            route = {cRoute}
+                            active = {activeGroup===g.id}
+                            model = {g}
+                            key = {g.id}
                         />
                     ))}
                 </ul>
