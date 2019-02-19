@@ -13,5 +13,14 @@ module.exports = [
             {id: 'winetasting', text: 'Wine Tasting'},
         ],
     },
-
+    {
+        id: 'music',
+        title: 'Music',
+        icon: 'music',
+        menus: [
+            {id: 'artist', text: 'Artists', defaultViewMany: 'cards'},
+            {id: 'album', text: 'Albums', defaultViewMany: 'cards'},
+            {id: 'track', text: 'Tracks'},
+        ],
+    },
 ];

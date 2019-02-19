@@ -1,5 +1,5 @@
 
-import format from '../utils/format'
+import format from '../../utils/format'
 
 export default {
     id: 'winetasting',

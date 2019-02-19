@@ -115,6 +115,7 @@ Each model describe an object and its list of fields. A single model is used for
 | title        | Application name.          |
 | fields       | Array of fields.           |
 | groups       | Array of groups. If not provided a single group will be used.   |
+| collections  | Array of collections.      | X | X |
 | titleField   | Field id for the column value used as record title. titleField can also be a function. |
 
 ### Field
@@ -166,7 +167,7 @@ Multiple details tables can be specified with "collections".
 | object       | Model.id for the Object to link to.   |
 | fields       | Array of fields. Fields in collections do not need all properties of Fields in objects.    |
 
-Sample model using collections: [Wine Cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/winecellar.js).
+Sample model using collections: [Wine Cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/pim/winecellar.js).
 
 ### Sample model
 
@@ -271,13 +272,12 @@ module.exports = {
   ]
 }
 
-
 ```
 
-More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/todo.js),
-[Address book](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/contact.js),
-[Restaurants list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/restaurant.js),
-[Wine cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/winecellar.js). 
+More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/pim/todo.js),
+[Address book](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/pim/contact.js),
+[Restaurants list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/pim/restaurant.js),
+[Wine cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/pim/winecellar.js). 
 
 
 ## Other implementations of Evolutility
