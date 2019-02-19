@@ -39,7 +39,7 @@ export default class Card extends React.PureComponent {
                             </div>
                         )
                     }else if(f.type===ft.image){
-                        return <div key={idx} className="card-fld-center">{fv}</div>
+                        return <div key={idx} className="card-fld-center"><Link key={f.id} to={link+d.id}>{fv}</Link></div>
                     }else{
                         return (
                             <div key={idx}>
