@@ -64,7 +64,7 @@ export default class List extends Many {
 			const icon = (paramsCollec && paramsCollec.icon) || m.icon
 			const ico = icon ? <img className="evol-many-icon" src={'/pix/'+icon} alt=""/> : null
 			const realEntity = isNested ? paramsCollec.object || paramsCollec.entity : e
-			const link = '/'+realEntity+'/browse/'
+			const link = '/'+realEntity+'/'+m.defaultViewOne+'/'
 
 			function cell(d, f, idx){
 				const lovField = f.type===ft.lov

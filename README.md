@@ -115,8 +115,9 @@ Each model describe an object and its list of fields. A single model is used for
 | title        | Application name.          |
 | fields       | Array of fields.           |
 | groups       | Array of groups. If not provided a single group will be used.   |
-| collections  | Array of collections.      | X | X |
+| collections  | Array of collections.      |
 | titleField   | Field id for the column value used as record title. titleField can also be a function. |
+| defaultViewOne | To have List and Cards link to Edit instead of Browse, set defaultViewOne="edit". |
 
 ### Field
 

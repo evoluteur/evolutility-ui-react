@@ -95,6 +95,7 @@ export function prepModel(m){
 	if(m){
 		if(!m.prepared){
 			// - Model
+			m.defaultViewOne = m.defaultViewOne || 'browse'
 			if(!m.label){
 				m.label = m.title || m.namePlural || m.name;
 			}

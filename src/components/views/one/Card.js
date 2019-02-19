@@ -23,7 +23,7 @@ export default class Card extends React.PureComponent {
             fields = this.props.fields || [],
             entity = this.props.entity,
             m = models[entity],
-            link = '/'+entity+'/browse/',
+            link = '/'+entity+'/'+m.defaultViewOne+'/',
             icon = m.icon ? <img className="evol-many-icon" src={'/pix/'+m.icon} alt=""/> : null
 
         return (
