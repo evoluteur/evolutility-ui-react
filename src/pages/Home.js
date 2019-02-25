@@ -48,13 +48,17 @@ export default class Home extends React.PureComponent {
                 <p><a target="ui" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-ui-react">Evolutility-UI-React</a> provides a set of model-driven views to List, Cards, Edit, Browse, and Charts your data. 
                 </p>
 
-                <p>
-                    Sample Web apps: {' '}
-                    <Link to="/todo/list">To-Do list</Link>,  {' '}
-                    <Link to="/contact/list">Address Book</Link>,  {' '}
-                    <Link to="/comics/cards">Graphic Novels inventory</Link>,  {' '}
-                    <Link to="/restaurant/list">Restaurants list</Link>, {' '}
-                    <Link to="/winecellar/list">Wine Cellar</Link>.
+                <p className="apps-icons">
+                    Sample apps: {' '}
+                    <Link to="/todo/list"><img src="/pix/todo.gif" alt="" title="To-Do list"/></Link>
+                    <Link to="/contact/list"><img src="/pix/contact.gif" alt="" title="Address Book"/></Link>
+                    <Link to="/comics/cards"><img src="/pix/comics.png" alt="" title="Graphic Novels inventory"/></Link>
+                    <Link to="/restaurant/list"><img src="/pix/resto.gif" alt="" title="Restaurants list"/></Link> 
+                    <Link to="/winecellar/list"><img src="/pix/wine-bottle.png" alt="" title="Wine Cellar"/></Link>
+                    <Link to="/winetasting/list"><img src="/pix/wine.gif" alt="" title="Wine Tasting"/></Link>
+                    <Link to="/artist/cards"><img src="/pix/star.png" alt="" title="Artists"/></Link>
+                    <Link to="/album/cards"><img src="/pix/cd.png" alt="" title="Albums"/></Link>
+                    <Link to="/track/list"><img src="/pix/music.png" alt="" title="Music tracks"/></Link>
                 </p> 
             </div>
 

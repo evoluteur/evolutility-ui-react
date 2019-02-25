@@ -66,18 +66,17 @@ module.exports = {
             type: 'textmultiline', id: 'notes',
              label: 'Notes', maxLength: 2000, width: 100, height: 6
         },
- 
         {
             type: 'text', id: 'phone',
              label: 'Phone', maxLength: 20, width: 50, mini:'1'
         },
         {
             type: 'url', id: 'web',
-             label: 'web', width: 100
+             label: 'Web site', width: 100
         },
         {
             type: 'url', id: 'yelp',
-             label: 'yelp', width: 100, 
+             label: 'Yelp', width: 100, 
         },
         {
             type: 'textmultiline', id: 'address',
@@ -108,7 +107,7 @@ module.exports = {
         {
           id:"pContact", type:"panel", 
           label: "Contact", width: 38,
-          fields: ['phone','web','yelp','address','city','state','zip',]
+          fields: ['web','yelp','phone','address','city','state','zip',]
         },
     ]
 

@@ -10,8 +10,8 @@ import './Nav.scss';
 export default class Nav extends React.Component {
 
     render() {
-        const cRoute = window.location.pathname.substring(1, 50);
-        const activeGroup = AppMenus[cRoute]||'';
+        const cRoute = window.location.pathname.substring(1, 100)
+        const activeGroup = AppMenus[cRoute] || ''
 
         return (
             <nav className="Nav">

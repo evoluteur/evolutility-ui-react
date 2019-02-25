@@ -212,13 +212,14 @@ module.exports = {
 				"datetime",
 				"time"
 			],
-			"footer": "Not fully implemented yet"
+			"footer": "Not fully implemented yet."
 		},
 		{
 			"id": "ppix",
 			"type": "panel",
 			"label": "Image & Document",
 			"width": 38,
+			"header": "Uploaded images and documents are saved as files (use 'filesUrl' to specify the path).",
 			"fields": [
 				"image",
 				"document"

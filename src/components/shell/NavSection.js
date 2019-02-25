@@ -8,7 +8,6 @@ export default class NavSection extends React.PureComponent {
         const props = this.props,
             cRoute = props.route,
             g = props.model;
-
         const vIcons = [
             {id: '/list', icon:'th-list'},
             //{id: '/cards', icon:'th-large'},
@@ -16,17 +15,16 @@ export default class NavSection extends React.PureComponent {
             //{id: '/stats', icon:'equalizer'},
             {id: '/edit/0', icon:'plus'},
         ]
-
         const iconViews = (mid, f) => (
             <div className="mIcons" >
                 {vIcons.map(menu => f.url ? null : <Link to={'/'+mid+menu.id} key={menu.id}><i className={'glyphicon glyphicon-'+menu.icon}/></Link>)}
             </div>
         )
-
+        const cssActive = (mid, url) => (mid===url || url.startsWith(mid+'/')) ? 'active' : ''
         const link = m => {
             const mLink = '/'+m.id + (m.defaultViewMany ? '/'+m.defaultViewMany : '')
             return (
-                <li key={m.id} className={cRoute.startsWith(m.id)?'active ':''}>
+                <li key={m.id} className={cssActive(m.id, cRoute)}>
                     <Link to={mLink}>{m.text}</Link>
                     {iconViews(m.id, m)}
                 </li>
