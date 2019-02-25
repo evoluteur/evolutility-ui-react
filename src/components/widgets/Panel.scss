@@ -13,6 +13,7 @@
 
 .panel{
   border-radius: 2px !important;
+  div.panel-header,
   div.panel-footer {
     background-color: $color-panel-footer;
   }

@@ -136,6 +136,7 @@ export default class Edit extends OneReadWrite{
 										return (
 											<Panel key={g.id||('g'+idx)} 
 													title={g.label || g.title || ''} 
+													header={g.header}
 													footer={g.footer}
 													width={g.width}>
 												<div className="evol-fset">
@@ -155,8 +156,12 @@ export default class Edit extends OneReadWrite{
 								{m.collections && !isNew ? (
 									m.collections.map((c, idx)=>{
 										return (
-											<Panel title={c.title} key={'collec_'+c.id} collapsible={true}>
-												<List key={'collec'+idx}
+											<Panel key={'collec_'+c.id} 
+													title={c.title} 
+													collapsible={true}
+													header={c.header}
+													footer={c.footer}>
+												<List
 													isNested={true}
 													match={this.props.match}
 													paramsCollec={c}

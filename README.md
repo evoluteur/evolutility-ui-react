@@ -153,6 +153,7 @@ Groups are used to visually divide Fields (in Edit and Browse views).
 | label        | Group title displayed in the group header.      |
 | fields       | Array of field ids.       |
 | width        | Width (in % of the container total width).        |
+| header       | Text to be displayed at the top of the group (just below the group title).|
 | footer       | Text to be displayed at the bottom of the group.    |
 
 Note: Groups are optional. By default a single group holds all fields.
@@ -167,6 +168,8 @@ Multiple details tables can be specified with "collections".
 | title        | Collection title.                     |
 | object       | Model.id for the Object to link to.   |
 | fields       | Array of fields. Fields in collections do not need all properties of Fields in objects.    |
+| header       | Text to be displayed before the collection.   |
+| footer       | Text to be displayed after the collection.    |
 
 Sample model using collections: [Wine Cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/pim/winecellar.js).
 

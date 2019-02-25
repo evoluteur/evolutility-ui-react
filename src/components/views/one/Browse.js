@@ -84,6 +84,7 @@ export default class Browse extends OneRead {
                             return (
                               <Panel key={g.id||('g'+idx)} 
                                   title={g.label || g.title || ''} 
+                                  header={g.header}
                                   footer={g.footer}
                                   width={g.width}>
                                 <div className="evol-fset">
@@ -103,7 +104,9 @@ export default class Browse extends OneRead {
                       {m.collections ? (
                         m.collections.map((c, idx)=>{
                           return (
-                            <Panel title={c.title} key={'collec_'+c.id} collapsible={true}>
+                            <Panel title={c.title} key={'collec_'+c.id} collapsible={true}
+                                header={c.header}
+                                footer={c.footer}>
                               <List key={'collec'+idx}
                                 isNested={true}
                                 match={this.props.match} 

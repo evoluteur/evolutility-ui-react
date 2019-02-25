@@ -39,6 +39,9 @@ export default class Panel extends React.Component {
 			<div className="evol-pnl" style={{width: this.props.width+'%'}}>
 				<div className="panel panel-default">
 					{title}
+					{this.props.header ? (
+						<div className="panel-heading panel-header">{this.props.header}</div>
+					) : null}
 					<fieldset style={{display: (this.state.opened ? 'block':'none')}}>
 						{this.props.children}
 					</fieldset>
