@@ -525,12 +525,11 @@ module.exports = {
             object: 'winetasting', 
             icon: 'wine.gif', 
             fields: [
-                {id: 'drink_date', type: 'date', label: 'Date', maxLength: 20, inMany: true,
-                    required:true},
-                {id: 'robe',  type: 'text', label: 'Robe', maxLength: 100, inMany: true},
-                {id: 'nose', type: 'text', label: 'Nose', maxLength: 100, inMany: true},
-                {id: 'taste', type: 'text', label: 'Taste', maxLength: 100, inMany: true},
-                {id: 'notes', type: 'textmultiline', label: 'Note', maxLength: 300, inMany: true, width: 100, height: 2}
+                'drink_date', 
+                'robe',
+                'nose',
+                'taste',
+                'notes',
             ]
         }
     ]

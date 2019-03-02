@@ -3,8 +3,9 @@
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-import {prepModel} from '../utils/dico'
+import { prepModel, prepModelCollecs } from '../utils/dico'
 
+// - Personal Information Manager (PIM)
 import todo from './pim/todo'
 import contact from './pim/contact'
 import comics from './pim/comics'
@@ -12,23 +13,32 @@ import restaurant from './pim/restaurant'
 import winecellar from './pim/winecellar'
 import winetasting from './pim/winetasting'
 
+// - Music
 import album from './music/album'
 import artist from './music/artist'
 import track from './music/track'
 
 import test from './tests/test'
 
-export default {
-    todo: prepModel(todo),
-    contact: prepModel(contact),
-    comics: prepModel(comics),
-    restaurant: prepModel(restaurant),
-    winecellar: prepModel(winecellar),
-    winetasting: prepModel(winetasting),
 
-    album: prepModel(album),
-    artist: prepModel(artist),
-    track: prepModel(track),
+let models = {
+    todo: todo,
+    contact: contact,
+    comics: comics,
+    restaurant: restaurant,
+    winecellar: winecellar,
+    winetasting: winetasting,
 
-    test: prepModel(test),
+    album: album,
+    artist: artist,
+    track: track,
+
+    test: test,
 }
+
+const ms = Object.keys(models)
+// need 2 passes for field map to be populated first, then collecs
+ms.forEach(m => { models[m] = prepModel(models[m]) })
+ms.forEach(m => { models[m] = prepModelCollecs(models, models[m]) })
+
+export default models

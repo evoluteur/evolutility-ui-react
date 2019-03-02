@@ -167,7 +167,7 @@ Multiple details tables can be specified with "collections".
 | id           | Unique key for the collection.        |
 | title        | Collection title.                     |
 | object       | Model.id for the Object to link to.   |
-| fields       | Array of fields. Fields in collections do not need all properties of Fields in objects.    |
+| fields       | Array of fields (objects or ids). Fields in collections do not need all properties of Fields in objects.    |
 | header       | Text to be displayed before the collection.   |
 | footer       | Text to be displayed after the collection.    |
 

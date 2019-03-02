@@ -116,6 +116,28 @@ export function prepModel(m){
 	return null;
 }
 
+export function prepModelCollecs(models, m){
+	if(m){
+		if(!m.prepared2){
+			if(m.collections){
+				m.collections.forEach((c) => {
+					if(c.object){
+						const fsh = models[c.object].fieldsH
+						c.fields.forEach((f, idx) => {
+							if(typeof(f) === 'string'){
+								c.fields[idx] = JSON.parse(JSON.stringify(fsh[f]))
+							}
+						})
+					}
+				})
+			}
+			m.prepared2 = true
+		}
+		return m;
+	}
+	return null;
+}
+
 export function dataTitle(m, data, isNew){
 	if(m){
 		let f, title=''
