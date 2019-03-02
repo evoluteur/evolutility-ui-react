@@ -14,7 +14,7 @@ import {pageSize} from '../../../config'
 
 import Many from './many'
 
-import {isFieldMany, fieldTypes as ft} from '../../../utils/dico'
+import { isFieldMany, fieldIsNumber, fieldTypes as ft } from '../../../utils/dico'
 import format from '../../../utils/format'
 import Header from '../../shell/Header'
 import Spinner from '../../shell/Spinner'
@@ -33,7 +33,7 @@ export default class List extends Many {
 	tableHeader(fields) {
 		const fnCell = this.props.paramsCollec ? 
 			// - header sub-collection table
-			f => <th key={f.id}>
+			f => <th key={'c'+f.id}>
 					{f.label}
 				</th>
 			: 
@@ -71,13 +71,15 @@ export default class List extends Many {
 				const value = d[lovField ? f.id+'_txt' : f.id]
 				
 				if(idx===0){
-					return <td key={idx}>
+					return (
+						<td key={idx}>
 							<Link to={link+d.id}>
 								{ico}
 								{format.fieldValue(f, value, true)}
 							</Link>
 							{d.nb_comments?(' '+d.nb_comments+' comments'):null}
 						</td>
+					)
 				}else if(f.type===ft.image){
 					return <td key={idx}><Link to={link+d.id}>{format.fieldValue(f, value, true)}</Link></td>
 				}else if(f.type===ft.color){
@@ -92,6 +94,9 @@ export default class List extends Many {
 							</div>
 						</td>
 					)
+				}else if(fieldIsNumber(f)){
+					return <td key={idx} className="alignR">{format.fieldValue(f, value, true)}</td>
+
 				}
 				return <td key={idx}>{format.fieldValue(f, value, true)}</td>
 			}
@@ -110,8 +115,8 @@ export default class List extends Many {
 				body = <Spinner></Spinner> 
 			}else{
 				if(data.length){
-					let fields = paramsCollec ? paramsCollec.fields : m.fields.filter(isFieldMany), 
-						newItem = (isNested && paramsCollec.object) ? <div className="list-new"><Link to={'/'+realEntity+'/edit/0'}><i className="glyphicon glyphicon-plus"/> New</Link></div> : null
+					const fields = paramsCollec ? paramsCollec.fields : m.fields.filter(isFieldMany)
+
 					body = (
 						<div>
 							<table className={css}>
@@ -135,7 +140,6 @@ export default class List extends Many {
 									fnClick={this.clickPagination} 
 									location={this.props.location}
 								/>
-								{newItem}
 							</React.Fragment> 
 				}else{
 					// TODO: get model of nested obj

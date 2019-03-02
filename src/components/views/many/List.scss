@@ -4,7 +4,9 @@
 @import '../../variables';
 
 .evol-many-list{
-
+  .alignR {
+    text-align: right;
+  }
   > div {
     overflow-x: auto;
     overflow-y: hidden;
