@@ -101,15 +101,14 @@ Code: [/src/components/views/many/Stats.js](https://github.com/evoluteur/evoluti
 
 ## Models
 
-For each application, all views can be generated from the model at run-time. 
-Each model describe an object and its list of fields. A single model is used for all views (Browse, Edit, List, Cards...) of the object it describes.
+Each model describe an object and its list of fields. A single model is used for all views (Browse, Edit, List, Cards...).
 
 ### Object
 
 | Property     | Meaning                                 |
 |--------------|-----------------------------------------|
 | id           | Unique key to identify the entity (used as API parameter). |
-| icon         | Icon file name for the entity (example: "cube.gif". |
+| icon         | Icon file name for the entity (example: "cube.gif"). |
 | name         | Object name (singular).    |
 | namePlural   | Object name (plural).      |
 | title        | Application name.          |
