@@ -34,7 +34,7 @@ export default class ChartTable extends React.PureComponent {
                         {this.props.data ? this.props.data.map(d => (
                             <tr key={d.value+d.label}>
                                 <td>{d.label ? <Link to={makeLink(d)}>{d.label}</Link> : ' N/A' }</td>
-                                <td>{d.value}</td>
+                                <td className="alignR">{d.value}</td>
                             </tr>
                         )):null}
                     </tbody>
