@@ -203,10 +203,14 @@ export default class Edit extends OneReadWrite{
 			if(cMsg){
 				messages.push(cMsg)
 				invalids[f.id]=true
-				this.refs[f.id].setState({
-					invalid: true,
-					message: cMsg
-				})
+				if(this.refs[f.id]){
+					this.refs[f.id].setState({
+						invalid: true,
+						message: cMsg
+					})
+				}else{
+					console.error('Field ref for "'+f.id+'" not found. The field doesn\'t not belong to any group in the model.')
+				}
 			}else if(this.refs[f.id] && this.refs[f.id].invalid){
 				this.refs[f.id].setState({
 					invalid: false,

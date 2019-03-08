@@ -163,7 +163,7 @@ export default class Stats extends React.Component {
                     count={title} cardinality='n' view={this.viewId}/>
 
                 {this.state.error ? (
-                    <Alert type="danger"  title="Error" message={this.state.error.message}/> 
+                    <Alert title="Error" message={this.state.error.message}/> 
                 ) : (
                     <div>
                         {wTimestamp ? (

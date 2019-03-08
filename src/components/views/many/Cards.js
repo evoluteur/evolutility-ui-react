@@ -57,7 +57,7 @@ export default class Cards extends Many {
 						/>
 					</React.Fragment>
 			 	}else{
-			 		body = <Alert title="No data" message={i18n_msg.nodata.replace('{0}', m.namePlural)} type="info" /> 
+			 		body = <Alert title="No data" type="info" message={i18n_msg.nodata.replace('{0}', m.namePlural)} /> 
 			 	}
 			}
 			return (

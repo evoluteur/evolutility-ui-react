@@ -110,7 +110,7 @@ export default class List extends Many {
 
 			document.title = title
 			if(this.state.error){
-				body = <Alert type="danger"  title="Error" message={this.state.error.message}/> 
+				body = <Alert title="Error" message={this.state.error.message}/> 
 			}else if(this.state.loading){
 				body = <Spinner></Spinner> 
 			}else{

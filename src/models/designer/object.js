@@ -55,7 +55,7 @@ module.exports = {
 			"maxLength": 100,
 			"inMany": true,
 			"width": 75,
-			"help": "Internal identifier for the entity"
+			"help": "Identifier for the entity (used in URLs of pages)"
 		},
 		{
 			"id": "name",
@@ -116,7 +116,7 @@ module.exports = {
 			"label": "Info",
 			"width": 38,
 			"fields": [
-				"entity_name",
+				"entity",
 				"icon",
 				"description"
 			]
@@ -137,6 +137,12 @@ module.exports = {
 					"label": "column"
 				},
 				{
+					"id": "type",
+					"type": "lov",
+					"label": "Type",
+					"lovicon": true,
+				},
+				{
 					"id": "inMany",
 					"type": "boolean",
 					"label": "List"
@@ -146,11 +152,6 @@ module.exports = {
 					"type": "integer",
 					"label": "Width",
 					"defaultValue": 100
-				},
-				{
-					"id": "height",
-					"type": "integer",
-					"label": "Height"
 				},
 				{
 					"id": "required",

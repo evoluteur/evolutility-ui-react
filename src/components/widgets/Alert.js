@@ -16,7 +16,7 @@ function icon(name) {
 export default class Alert extends React.PureComponent {
 
 	render() {
-		const aType = this.props.type || 'danger',
+		const aType = this.props.type,
 			css = "alert alert-" + aType
 		return (
 			<div className={css} role="alert">
@@ -41,5 +41,5 @@ Alert.propTypes = {
 }
 
 Alert.defaultProps = {
-	type: 'info',
+	type: 'danger',
 }

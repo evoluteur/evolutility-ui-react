@@ -33,7 +33,7 @@ export default class Browse extends OneRead {
   //mixins: [oneRead()],
 
   render() {
-    const {id=0, entity=null} = this.props.match.params
+    const { id=0, entity=null } = this.props.match.params
     const linkEdit = '/'+entity+'/edit/'+id,
         linkList = '/'+entity+'/list',
         m = this.model,
