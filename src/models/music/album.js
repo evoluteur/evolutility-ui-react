@@ -8,7 +8,7 @@ module.exports = {
 	"title": "Albums",
 	"name": "album",
 	"namePlural": "albums",
-    "icon": "cd.png",
+  "icon": "cd.png",
 	"titleField": "name",
 	"fields": [
 		{
@@ -80,24 +80,11 @@ module.exports = {
 			"id": "music_track",
 			"title": "Tracks",
 			"object": "track",
+			"icon": 'music.png',
 			"fields": [
-				{
-					"id": "name",
-					"type": "text",
-					"label": "Track",
-					"inMany": true
-				},
-				{
-					"id": "genre",
-					"type": "lov",
-					"label": "Genre"
-				},
-				{
-					"id": "length",
-					"type": "text",
-					"label": "Length",
-					"inMany": true
-				}
+				"name",
+				"genre",
+				"length",
 			]
 		}
 	]

@@ -70,17 +70,10 @@ module.exports = {
 			"id": "music_album",
 			"title": "Albums",
 			"object": "album",
+			"icon": "cd.png",
 			"fields": [
-				{
-					"id": "title",
-					"type": "text",
-					"label": "Title"
-				},
-				{
-					"id": "cover",
-					"type": "image",
-					"label": "Cover"
-				}
+				"title",
+				"cover",
 			]
 		}
 	]
