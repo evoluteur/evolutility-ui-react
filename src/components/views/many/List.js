@@ -61,7 +61,7 @@ export default class List extends Many {
 			paramsCollec = props.paramsCollec
 
 		if(m || isNested){
-			const ico = (paramsCollec && paramsCollec.icon) || ''
+			const ico = (isNested ? (paramsCollec && paramsCollec.icon) : m.icon) || null
 			const icon = ico ? <img className="evol-many-icon" src={'/pix/'+ico} alt=""/> : null
 			const realEntity = isNested ? paramsCollec.object || paramsCollec.entity : e
 			const link = '/'+realEntity+'/'+m.defaultViewOne+'/'
