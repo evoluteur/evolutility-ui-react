@@ -133,14 +133,12 @@ export default class List extends Many {
 							</table>
 						</div>
 					)
-					footer = <React.Fragment>
-								<Pagination 
-									count={data.length} 
-									fullCount={fullCount} 
-									fnClick={this.clickPagination} 
-									location={this.props.location}
-								/>
-							</React.Fragment> 
+					footer = <Pagination 
+								count={data.length} 
+								fullCount={fullCount} 
+								fnClick={this.clickPagination} 
+								location={this.props.location}
+							/>
 				}else{
 					// TODO: get model of nested obj
 					if(this.props.isNested){
