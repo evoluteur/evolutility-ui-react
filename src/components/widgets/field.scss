@@ -41,6 +41,9 @@
       display: inline-block;
       width: 130px;
     }
+    textarea {
+      max-width: 100%;
+    }
     .react-datepicker-wrapper{
       display: inline;
     }
