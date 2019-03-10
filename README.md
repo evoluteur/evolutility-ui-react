@@ -35,6 +35,19 @@ In a web browser, go to the url [http://localhost:3000/](http://localhost:3000/)
 For the REST endpoints, you also need to install and run [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) which provides the matching REST endpoints based on the same metadata.
 
 
+## Configuration
+
+Configurations options are specified in the file [/src/config.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/config.js). They apply to all apps (app specific options are specified in models).
+
+
+| Option     | Meaning            | Example            |
+|--------------|------------------|---------------------|
+| apiPath | Path to REST API (can use "proxy" from package.json). | '/api/v1/' |
+| filesUrl | Path to upload files to. | 'http://localhost:3000/pix/' |
+| pageSize | Pagination | 50 |
+| wTimestamp | Add timestamp columns u_date and c_date to track record creation and update times. | true |
+
+
 ## Views
 
 For any object, a single model defines UI elements across views in a simple declarative way.
@@ -56,6 +69,8 @@ Shows all fields for viewing (read only). Fields are grouped in panels.
 
 Code: [/src/components/views/one/Browse.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/one/Browse.js)
 
+View: [http://localhost:3000/comics/browse/{id}](http://localhost:3000/comics/browse/14)
+
 ### Edit
 This view shows all fields for edition to create or update records.
 It automatically performs validation based on the model.
@@ -65,6 +80,7 @@ Fields are grouped in panels and tabs.
 
 Code: [/src/components/views/one/Edit.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/one/Edit.js)
 
+View: [http://localhost:3000/comics/edit/{id}](http://localhost:3000/comics/edit/14)
 
 ## Views for Many objects
 ### List
@@ -74,12 +90,16 @@ Gives a tabular view of a collection.
 
 Code: [/src/components/views/many/List.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/List.js)
 
+View: [http://localhost:3000/comics/list](http://localhost:3000/comics/list)
+
 ### Cards
 Shows records side by side as cards.
 
 ![Cards](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-cards.gif)
 
 Code: [/src/components/views/many/Cards.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Cards.js)
+
+View: [http://localhost:3000/comics/cards](http://localhost:3000/comics/cards)
 
 ### Charts
 Draws charts about the collection (currently bars and pies).
@@ -88,6 +108,7 @@ Draws charts about the collection (currently bars and pies).
 
 Code: [/src/components/views/many/Charts.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Charts.js)
 
+View: [http://localhost:3000/comics/charts](http://localhost:3000/comics/charts)
 
 ### Stats
 Display last update, number of updates in the last week, and for numeric fields the min, max, count, average.
@@ -96,7 +117,7 @@ Display last update, number of updates in the last week, and for numeric fields 
 
 Code: [/src/components/views/many/Stats.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Stats.js)
 
-
+View: [http://localhost:3000/comics/stats](http://localhost:3000/comics/stats)
 
 
 ## Models
@@ -112,12 +133,14 @@ Each model describe an object and its list of fields. A single model is used for
 | name         | Object name (singular).    |
 | namePlural   | Object name (plural).      |
 | title        | Application name.          |
-| fields       | Array of fields.           |
-| groups       | Array of groups. If not provided a single group will be used.   |
-| collections  | Array of collections.      |
+| fields       | Array of [Fields](#Field). |
+| groups       | Array of [Groups](#Group). If not provided a single group will be used.   |
+| collections  | Array of [Collections](#Collection).      |
 | titleField   | Field id for the column value used as record title. titleField can also be a function. |
 | defaultViewOne | To have List and Cards link to Edit instead of Browse, set defaultViewOne="edit". |
 
+
+<a name="Field"></a>
 ### Field
 
 Objects have fields.
@@ -141,6 +164,7 @@ Objects have fields.
 | noCharts     | Prevent the field to have a charts (only necessary for fields of type integer, decimal, money, boolean, list of values which are "chartable"). |
 | unique       | Values must be unique (not implemented yet).   |
 
+<a name="Group"></a>
 ### Group
 
 Groups are used to visually divide Fields (in Edit and Browse views).
@@ -157,6 +181,8 @@ Groups are used to visually divide Fields (in Edit and Browse views).
 
 Note: Groups are optional. By default a single group holds all fields.
 
+
+<a name="Collection"></a>
 ### Collection
 
 Multiple details tables can be specified with "collections". 
