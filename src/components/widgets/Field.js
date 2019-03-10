@@ -22,7 +22,7 @@ import Datepicker from 'react-datepicker'
 import Dropzone from 'react-dropzone'
 
 
-import './Field1.scss'
+import './Field.scss'
 
 
 function emHeight(f){
