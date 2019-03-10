@@ -42,9 +42,10 @@ Configurations options are specified in the file [/src/config.js](https://github
 
 | Option     | Meaning            | Example            |
 |--------------|------------------|---------------------|
-| apiPath | Path to REST API (can use "proxy" from package.json). | '/api/v1/' |
-| filesUrl | Path to upload files to. | 'http://localhost:3000/pix/' |
+| apiPath | Path to REST API (can use "proxy" from package.json). | "/api/v1/" |
+| filesUrl | Path to upload files to. | "http://localhost:3000/pix/" |
 | pageSize | Pagination | 50 |
+| locale | Date format (no translation yet) | en/fr |
 | wTimestamp | Add timestamp columns u_date and c_date to track record creation and update times. | true |
 
 

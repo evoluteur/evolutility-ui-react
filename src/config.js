@@ -15,7 +15,7 @@ module.exports = {
 
 	// - Language (en/fr)
 	// defaults to getting locale from browser
-	//locale: 'en',
+	locale: 'en',
 	//locale: 'fr',
 
 	// - Timestamp columns u_date and c_date w/ date of record creation and last update 
