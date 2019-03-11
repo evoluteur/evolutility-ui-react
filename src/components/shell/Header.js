@@ -24,17 +24,20 @@ function iconViews(mid, cardinality, id, view){
     if(cardinality==='1' && id==='0'){
         return null
     }
+    const urlQuery = window.location.search || ''
+
     return (
         <div className="hIcons" style={{display:'inline-block'}}>
-            {icons[cardinality].map(i => <Link to={'/'+mid+i.id+(id?('/'+id):'')} key={i.id}>
+            {icons[cardinality].map( i => <Link to={'/'+mid+i.id+(id?('/'+id):'')+urlQuery} key={i.id}>
 	            	<i className={'glyphicon glyphicon-'+i.icon+(view===i.id.slice(1)?' black':'')}/>
-	            </Link>)}
+                </Link>
+            )}
         </div>
     )
 }
 
 
-export default class Header extends React.PureComponent {
+export default class Header extends React.Component {
 
     render() {
         let comments = this.props.comments

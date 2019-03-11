@@ -75,5 +75,7 @@ export default class Cards extends Many {
 }
 
 Cards.propTypes = {
-	params: PropTypes.object
+	params: PropTypes.shape({
+		entity: PropTypes.string.isRequired
+	}),
 }

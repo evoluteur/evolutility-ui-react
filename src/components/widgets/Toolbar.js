@@ -10,11 +10,13 @@ import PropTypes from 'prop-types';
 import axios from 'axios'
 import { withRouter, Link } from 'react-router-dom'
 import Modal from 'react-modal'
+import SearchBox from '../views/actions/SearchBox'
 import { toast } from 'react-toastify';
 //import { IconName } from "@blueprintjs/icons";
 //import { IconSelect } from "./common/iconSelect";
 
 import Format from '../../utils/format'
+import url from '../../utils/url'
 import evoGlobals from '../../utils/evoGlobals'
 import {apiPath} from '../../config.js'
 import {proxy} from '../../../package.json'
@@ -43,7 +45,8 @@ const menuItems = {
         list: {id:'list', label: i18n_actions.list, icon:'th-list', n:'n'},
         cards: {id:'cards', label: i18n_actions.cards, icon:'th-large', n:'n'},
         //scatter: {id:'scatter', label: i18n_actions.bScatter, icon:'certificate',n:'n'},
-        charts: {id:'charts', label: i18n_actions.charts, icon:'stats', n:'n'}
+        charts: {id:'charts', label: i18n_actions.charts, icon:'stats', n:'n'},
+        //stats: {id:'stats', label: i18n_actions.stats, icon:'equalizer', n:'n'},
     },
     //search: true
 }
@@ -72,37 +75,28 @@ class Toolbar extends React.Component {
             help: false,
             deleteConfirmation: false,
         }
+        this.searchValue = url.parseQuery(window.location.href).search || ''
         this.exportMany = this.exportMany.bind(this);
         this.deleteOne = this.deleteOne.bind(this);
         this.confirmDelete = this.confirmDelete.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.fnSearch = this.fnSearch.bind(this);
         //this.filterMany = this.filterMany.bind(this);
     }
 
     render() {
-        let {entity, id} = this.props
- /*
-        if(this.props.match && this.props.match.params){
-            id = this.props.match.params.id
-            entity = this.props.match.params.entity 
-        }else{
-            id = this.props.id,
-            entity = this.props.entity
-        }*/
-
-        let ep='/'+entity+'/'/*
-            cStyle={ 
-                color: '#FFCC80',
-            },*/
-            //urlSearch = window.location.search ? window.location.search.substring(1) : ''
-
-        let idx = 0,
-            view = this.props.view || getViewFromURL()
-
-        function iicon(icon){
-            return <i className={'glyphicon glyphicon-'+icon}></i>
-        }
-        function buttonLink(menu, idOrFun, iconOnly, style){
+        const useParams = this.props.match && this.props.match.params
+        const {entity, id = ''} = useParams ? this.props.match.params : this.props
+        const ep = '/'+entity+'/'        
+        let view = this.props.view || getViewFromURL(),
+            idx = 0
+        const isNew = this.props.isNew || id==='0' || id===0
+        let navViews = []
+        let actions = []
+        const q = (window.location && window.location.search) ? window.location.search : ''
+        const iicon = (icon) => <i className={'glyphicon glyphicon-'+icon}></i>
+        
+        function buttonLink(menu, idOrFun, iconOnly, urlQuery = ''){
             const text = iconOnly ? null : menu.label
             if(isFunction(idOrFun)){
                 return <li key={idx++}>
@@ -110,20 +104,11 @@ class Toolbar extends React.Component {
                     </li>
             }else{
                 return <li key={idx++}>
-                        <Link to={ep+menu.id+'/'+idOrFun}>{iicon(menu.icon)} <span>{text}</span></Link>
+                        <Link to={ep+menu.id+'/'+idOrFun+urlQuery}>{iicon(menu.icon)} <span>{text}</span></Link>
                     </li>
             }
         }
         
-        const isNew = this.props.isNew || id==='0' || id===0
-        const linksOne = [] //isNew ? [] : ['edit', 'browse'] 
-
-        id ? linksOne.map(menu => buttonLink(menuItems.views[menu], id))
-                : ['list', 'cards', 'charts'].map(menu => buttonLink(menuItems.views[menu], '', true))
-
-        let navViews = []
-        let actions = []
-
         if(!isNew){
             actions.push(buttonLink(menuItems.new, ''));
         }
@@ -144,7 +129,7 @@ class Toolbar extends React.Component {
             if(view!=='charts' && view!=='stats'){
                 //actions.push(buttonLink(menuItems.filter, this.filterMany));
                 //actions.push(buttonLink(menuItems.views.charts, ''));
-                actions.push(buttonLink(menuItems.export, this.exportMany));
+                actions.push(buttonLink(menuItems.export, this.exportMany, null, q));
             }
         }
 
@@ -181,6 +166,9 @@ class Toolbar extends React.Component {
                     </ul>
                     <ul className="evo-nav-pills pull-left">
                         {actions}
+                        {isNew ? null : (
+                            <li><SearchBox fnSearch={this.fnSearch} searchValue={this.searchValue}></SearchBox></li>
+                        )}
                     </ul>
                     <div className="clearfix"/>
                     {delModal}
@@ -247,6 +235,29 @@ class Toolbar extends React.Component {
                 position: toast.POSITION.TOP_RIGHT
             })
         }
+    }
+
+    fnSearch(evt){
+        const loc = window.location
+        let bUrl = loc.pathname
+        bUrl = bUrl.startsWith('/') ? bUrl.slice(1) : bUrl
+        const urlWords = bUrl.split('/')
+        if(urlWords[1]!=='list' && urlWords[1]!=='cards'){
+            bUrl = urlWords[0]+'/list'
+        }
+        const bQuery = url.parseQuery(loc.search)
+
+        if(bQuery){
+            bQuery.search = evt.value
+            const query = url.querySearch(bQuery)
+            if(query){
+                bUrl += '?'+query
+            }
+        }else if(evt.value){
+            bUrl += '?search='+evt.value
+        }
+        this.searchValue = evt.value
+        this.props.history.push('/'+bUrl)
     }
 /*
     filterMany(){

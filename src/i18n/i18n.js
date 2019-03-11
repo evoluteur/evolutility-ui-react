@@ -76,6 +76,7 @@ module.exports = {
     // --- status ---
     i18n_msg:{
         nodata: 'No {0} found.', // 0=entities
+        nodataSearch: 'No {0} found in search for "{1}".',
         loading: 'Loading data...',
         confirmLeave: 'Your work is not saved! Are you sure you want to leave?',
         range: '{0} to {1} of {2} {3}',// 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'

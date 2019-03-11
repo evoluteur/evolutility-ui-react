@@ -16,6 +16,7 @@ import Many from './many'
 
 import { isFieldMany, fieldIsNumber, fieldTypes as ft } from '../../../utils/dico'
 import format from '../../../utils/format'
+import { parseQuery } from '../../../utils/url'
 import Header from '../../shell/Header'
 import Spinner from '../../shell/Spinner'
 import Alert from '../../widgets/Alert'
@@ -59,6 +60,8 @@ export default class List extends Many {
 			e = props.match.params.entity,
 			m = this.model, // TODO: model and sub-model distinction
 			paramsCollec = props.paramsCollec
+		let search = parseQuery(window.location.search)
+		search = (search && search.search) ? search.search : null
 
 		if(m || isNested){
 			const ico = (isNested ? (paramsCollec && paramsCollec.icon) : m.icon) || null
@@ -103,10 +106,11 @@ export default class List extends Many {
 
 			const data = this.state.data ? this.state.data : [],
 				full_count = this.pageSummary(data),
-				fullCount = data.length ? (data[0]._full_count || 0) : 0,
-				title = m.title || m.label
-			let body, footer = null,
+				fullCount = data.length ? (data[0]._full_count || data.length) : data.length,
+				title = m.title || m.label,
 				css = paramsCollec ? 'table sub' : 'table table-hover main' 
+			let body, 
+				pagination = null
 
 			document.title = title
 			if(this.state.error){
@@ -133,7 +137,7 @@ export default class List extends Many {
 							</table>
 						</div>
 					)
-					footer = <Pagination 
+					pagination = <Pagination 
 								count={data.length} 
 								fullCount={fullCount} 
 								fnClick={this.clickPagination} 
@@ -144,7 +148,12 @@ export default class List extends Many {
 					if(this.props.isNested){
 						body = <div className="nodata-list2">No data.</div>
 					}else{
-						body = <Alert title="No data" message={i18n_msg.nodata.replace('{0}', m.namePlural)} type="info" />
+						let msg = search ? i18n_msg.nodataSearch
+							.replace('{0}', m.namePlural)
+							.replace('{1}', search)
+						: i18n_msg.nodata
+							.replace('{0}', m.namePlural)
+						body = <Alert title="No data" message={msg} type="info" />
 					}
 				} 
 			}
@@ -157,7 +166,7 @@ export default class List extends Many {
 					)}
 					<div className="evolutility evol-many-list">
 						{body}
-						{footer}						
+						{search ? null : pagination}					
 					</div>
 				</div>
 			)
