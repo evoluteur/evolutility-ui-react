@@ -8,7 +8,7 @@ module.exports = {
 	"title": "Worlds",
 	"name": "world",
 	"namePlural": "worlds",
-	"icon": "",
+	"icon": "bricks.png",
 	"defaultViewMany": "list",
 	"defaultViewOne": "browse",
 	"titleField": "name",

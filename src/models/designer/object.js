@@ -8,7 +8,7 @@ module.exports = {
 	"title": "Object",
 	"name": "object",
 	"namePlural": "objects",
-	"icon": "cube.gif",
+	"icon": "brick.png",
 	"defaultViewMany": "list",
 	"defaultViewOne": "browse",
 	"titleField": "title",
