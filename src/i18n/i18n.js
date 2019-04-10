@@ -120,7 +120,8 @@ module.exports = {
 
     // --- charts ---
     i18n_charts:{
-        nocharts: 'No default charts.'
+        nocharts: 'No default charts.',
+        total: 'Total',
     },
 
     // --- comments ---

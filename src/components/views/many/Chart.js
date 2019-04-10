@@ -19,6 +19,17 @@ import ChartTable from './Chart_Table'
 
 import './Charts.scss' 
 
+const sortLabel = (a, b) => (a.label||'').localeCompare(b.label||'')
+const sortCount = (a, b) => {
+    if(a.value<b.value){
+        return 1;
+    }
+    if(b.value<a.value){
+        return -1;
+    }
+    return 0;
+}
+
 const urlChart = 'http://chart.apis.google.com/chart',
     c10 = ['1f77b4','ff7f0e','2ca02c','d62728','9467bd',
             '8c564b','e377c2','7f7f7f','bcbd22','17becf'],
@@ -40,9 +51,12 @@ export default class Chart extends React.Component {
         this.state={
             data: [],
             chartType: props.chartType, // "Pie" or "Bars" or "Table",
+            sortColumn: '',
+            sortOrder: '',
             loading: true,
         }
         this.click_view = this.click_view.bind(this)
+        this.sortTable = this.sortTable.bind(this)
     }
 
     componentDidMount() {
@@ -132,7 +146,7 @@ export default class Chart extends React.Component {
         if(this.state.error){
             body = <Alert type="danger" title={this.state.error.title} message={this.state.error.message}/> 
         }else if(cType==='Table'){
-            body = <ChartTable field={this.props.field} data={data} entity={this.props.entity} />
+            body = <ChartTable field={this.props.field} data={data} entity={this.props.entity} sortTable={this.sortTable} />
         }else{
             const url = this['url'+cType](data, sizes)
             if(url){
@@ -154,6 +168,25 @@ export default class Chart extends React.Component {
                 </div>
             </div>
         )
+    }
+
+    sortTable(evt){
+        // - client-side sort (we have all the data no need to re-query)
+        const sortId = evt.currentTarget.id || 'count'
+        let data = JSON.parse(JSON.stringify(this.state.data))
+        if(data && data.length>1){
+            const sortFn = sortId==='label' ? sortLabel : sortCount
+            if(this.state.sortId===sortId){
+                data = data.reverse()
+            }else{
+                data = data.sort(sortFn)
+            }
+            this.setState({
+                data: data,
+                sortId: sortId,
+            })
+        }
+
     }
 
 }
