@@ -2,6 +2,9 @@
     SpinKit
     http://tobiasahlin.com/spinkit/
 */
+
+@import '../variables';
+
 .spinner {
     margin: 100px auto 0;
     width: 70px;
@@ -11,7 +14,7 @@
   .spinner > div {
     width: 18px;
     height: 18px;
-    background-color: #333;
+    background-color: $color-blue1;
   
     border-radius: 100%;
     display: inline-block;
