@@ -34,24 +34,18 @@ export default class List extends Many {
 	tableHeader(fields) {
 		const fnCell = this.props.paramsCollec ? 
 			// - header sub-collection table
-			f => <th key={'c'+f.id}>
-					{f.label}
-				</th>
+			f => <th key={'c'+f.id}>{f.labelShort || f.label}</th>
 			: 
 			// - header main table
-			f => <th id={f.id} key={f.id} onClick={this.clickSort}>
-					{f.label}
+			f => <th id={f.id} key={f.id} onClick={this.clickSort} 
+						className={fieldIsNumber(f) ? 'alignR' : ''}>
+					{f.labelShort || f.label}
 					{f.id===this._sortField ? (
-							<i className={"glyphicon glyphicon-arrow-"+(this._sortDirection==='desc' ? 'down' : 'up')}></i>
-						) : null
-					}
+						<i className={"glyphicon glyphicon-arrow-"+(this._sortDirection==='desc' ? 'down' : 'up')}></i>
+					) : null}
 				</th>
 
-		return (
-			<tr>
-				{fields.map(fnCell)}
-			</tr>
-		)
+		return <tr>{fields.map(fnCell)}</tr>
 	}
 
 	render() {
@@ -72,25 +66,25 @@ export default class List extends Many {
 			function cell(d, f, idx){
 				const lovField = f.type===ft.lov
 				const value = d[lovField ? f.id+'_txt' : f.id]
-				
+
 				if(idx===0){
 					return (
-						<td key={idx}>
+						<td key={f.id}>
 							<Link to={link+d.id}>
 								{icon}
 								{format.fieldValue(f, value, true)}
 							</Link>
-							{d.nb_comments?(' '+d.nb_comments+' comments'):null}
+							{d.nb_comments ? (' '+d.nb_comments+' comments') : null}
 						</td>
 					)
 				}else if(f.type===ft.image){
-					return <td key={idx}><Link to={link+d.id}>{format.fieldValue(f, value, true)}</Link></td>
+					return <td key={f.id}><Link to={link+d.id}>{format.fieldValue(f, value, true)}</Link></td>
 				}else if(f.type===ft.color){
-					return <td key={idx}><div className="evo-color-box" id={f.id} 
+					return <td key={f.id}><div className="evo-color-box" id={f.id} 
 						style={{backgroundColor: value}} title={value}/></td>
 				}else if(lovField && f.lovicon){
 					return (
-						<td key={idx}>
+						<td key={f.id}>
 							<div className="nobr">
 								<img src={'/pix/'+d[f.id+'_icon']} className="lovIcon" alt=""/>
 								{format.fieldValue(f, value, true)}
@@ -98,10 +92,9 @@ export default class List extends Many {
 						</td>
 					)
 				}else if(fieldIsNumber(f)){
-					return <td key={idx} className="alignR">{format.fieldValue(f, value, true)}</td>
-
+					return <td key={f.id} className="alignR">{format.fieldValue(f, value, true)}</td>
 				}
-				return <td key={idx}>{format.fieldValue(f, value, true)}</td>
+				return <td key={f.id}>{format.fieldValue(f, value, true)}</td>
 			}
 
 			const data = this.state.data ? this.state.data : [],
@@ -155,7 +148,7 @@ export default class List extends Many {
 							.replace('{0}', m.namePlural)
 						body = <Alert title="No data" message={msg} type="info" />
 					}
-				} 
+				}
 			}
 
 			return (

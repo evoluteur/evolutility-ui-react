@@ -43,7 +43,7 @@ export default class Card extends React.PureComponent {
                     }else{
                         return (
                             <div key={idx}>
-                                <label>{f.label}: </label>
+                                <label>{f.labelShort || f.label}: </label>
                                 <div>
                                     {(f.type===ft.lov && f.lovicon) 
                                         ?  <img src={'/pix/'+d[f.id+'_icon']} className="lovIcon" alt=""/>

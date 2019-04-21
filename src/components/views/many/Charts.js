@@ -37,16 +37,18 @@ export default class Charts extends Many {
             }else if(chartFields.length===1){
                 const f = chartFields[0]
 
-                charts = <Chart entity={e} key={'c-'+f.id} 
-                        field={f} title={f.label}
-                        chartType={f.chartType}
-                        sizes='600x300' className="panel-default bm10"/> 
+                charts = <Chart key={'c-'+f.id}  
+                    entity={e}
+                    field={f} 
+                    title={f.labelCharts || f.label}
+                    chartType={f.chartType}
+                    sizes='600x300' className="panel-default bm10"/> 
             }else{
                 charts = chartFields.map(f => <Chart 
                     entity={e} 
                     key={'c-'+f.id} 
                     field={f} 
-                    title={f.label} 
+                    title={f.labelCharts || f.label} 
                     chartType={f.chartType}
                     className="panel-default" />)
             }
@@ -72,5 +74,4 @@ export default class Charts extends Many {
             return <Alert title="Error" message={'Invalid input parameter "'+e+'".'}/>
         }
     }
-
 }

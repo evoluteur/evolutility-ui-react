@@ -3,7 +3,7 @@
 // Single Bars or Pie charts (usually part of a set of Charts).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2019 Olivier Giulieri
 
 // Quick and easy implementation w/ the old version of google charts
 // TODO: re-write using D3.js or other cool charting library
@@ -69,8 +69,8 @@ export default class Chart extends React.Component {
 
     getData(){
         const e = this.props.entity
-        var fid = this.props.field.id
-        var urlparams = ''//?token='+localStorage.token
+        const fid = this.props.field.id
+        let urlparams = ''//?token='+localStorage.token
 
         if(fid){
             axios.get(apiPath+''+e+'/chart/'+fid+urlparams)
@@ -129,7 +129,6 @@ export default class Chart extends React.Component {
                     maxCount=d.value;
                 }
             })
-
             return urlChart+'?chbh=a&chs='+size+'&cht=bvg&chco='+colorsList(data.length)+'&chds=0,'+maxCount+
                     '&chd=t:'+vs.join('|')+
                     '&chp=0.05&chts=676767,10.5&chdl='+ls.join('|');
@@ -186,9 +185,7 @@ export default class Chart extends React.Component {
                 sortId: sortId,
             })
         }
-
     }
-
 }
 
 Chart.propTypes = {
