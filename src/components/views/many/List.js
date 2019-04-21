@@ -15,18 +15,19 @@ import {pageSize} from '../../../config'
 import Many from './many'
 
 import { isFieldMany, fieldIsNumber, fieldTypes as ft } from '../../../utils/dico'
+import { getSearchText } from '../../../utils/url'
 import format from '../../../utils/format'
-import { parseQuery } from '../../../utils/url'
 import Header from '../../shell/Header'
 import Spinner from '../../shell/Spinner'
 import Alert from '../../widgets/Alert'
 import PageNotFound from '../../widgets/PageNotFound'
 import Pagination from '../../widgets/Pagination'
 
-import './List.scss' 
+import './List.scss'
 
 const sliceData = data => data.length > pageSize ? data.slice(0, pageSize) : (data || [])
 
+// TODO: search w/ pagination
 export default class List extends Many {
 
 	viewId = 'list'
@@ -53,9 +54,8 @@ export default class List extends Many {
 			isNested = props.isNested,
 			e = props.match.params.entity,
 			m = this.model, // TODO: model and sub-model distinction
-			paramsCollec = props.paramsCollec
-		let search = parseQuery(window.location.search)
-		search = (search && search.search) ? search.search : null
+			paramsCollec = props.paramsCollec,
+			search = getSearchText()
 
 		if(m || isNested){
 			const ico = (isNested ? (paramsCollec && paramsCollec.icon) : m.icon) || null

@@ -1,6 +1,5 @@
 import React from 'react';
 //import { Link } from "react-router-dom";
-
 import { version, copyright } from '../../../package.json';
 
 import './Footer.scss';
@@ -18,9 +17,8 @@ export default class Footer extends React.PureComponent {
             	<a target="db" href="https://github.com/evoluteur/evolutility-server-node">Server</a>
             </div>
             <span className="copyright">
-                Evolutility-UI-React v{version}<br/>&copy; {copyright.replace('(c)', '')}
+                <span>Evolutility-UI-React v{version}</span> <span>&copy; {copyright.replace('(c)', '')}</span>
             </span>
         </div>
     }
-
 }

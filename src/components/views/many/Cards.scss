@@ -34,6 +34,7 @@
         width: $golden-ratio-small;
         @include ellipsis();
         vertical-align: top;
+        font-weight: 300;
       }
       > div{
         display: inline-block;

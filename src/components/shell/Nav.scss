@@ -141,7 +141,7 @@ a.skipNav {
 	}
 }
 .nav-l2 > li{
-	border-radius: 5px;
+	@include border-radius(5px);
 	padding: 5px 10px;
 
 	&:hover,

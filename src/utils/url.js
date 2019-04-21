@@ -1,9 +1,13 @@
 // Evolutility-UI-React :: utils/url.js
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2019 Olivier Giulieri
 
 const queryString = require('query-string');
+
+export function queryUrl(){
+	return window.location.search || ''
+}
 
 export function querySearch(query){
 	// - make uri params string from query object
@@ -25,7 +29,14 @@ export function parseQuery(qString){
 	return null
 }
 
+export function getSearchText(){
+	let search = parseQuery(window.location.search)
+	return (search && search.search) ? search.search : null
+}
+
 export default {
+	queryUrl: queryUrl,
 	querySearch: querySearch,
 	parseQuery: parseQuery,
+	getSearchText: getSearchText,
 }

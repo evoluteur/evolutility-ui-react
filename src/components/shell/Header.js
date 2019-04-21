@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 //import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 
 import Toolbar from '../widgets/Toolbar.js';
+import { queryUrl, getSearchText } from '../../utils/url.js'
 
 import './Header.scss' 
 
@@ -24,8 +26,7 @@ function iconViews(mid, cardinality, id, view){
     if(cardinality==='1' && id==='0'){
         return null
     }
-    const urlQuery = window.location.search || ''
-
+    const urlQuery = queryUrl()
     return (
         <div className="hIcons" style={{display:'inline-block'}}>
             {icons[cardinality].map( i => <Link to={'/'+mid+i.id+(id?('/'+id):'')+urlQuery} key={i.id}>
@@ -40,16 +41,23 @@ function iconViews(mid, cardinality, id, view){
 export default class Header extends React.Component {
 
     render() {
-        let comments = this.props.comments
-        comments = comments ? (comments+' comments') : null
+        // TODO: make charts work w/ search & filters (and switch comment below)
+        //let search = getSearchText()
+        let search = this.props.view==='charts' ? null : getSearchText()
         const count = this.props.count
+        let comments = this.props.comments
+        if(comments){
+            comments += comments===1 ? ' comment' : ' comments'
+        }
+
         return (
 			<div  className="evo-views">
                 <Toolbar entity={this.props.entity} id={this.props.id} />
 				<h2 className="evo-page-title">
-					{this.props.title}
-					{count?<span className="evo-badge">{count}</span>:null}
-                    {comments?<span className="evo-badge">{comments}</span>:null}
+                    {this.props.title}
+                    {search ? <span className="evo-badge">Search "{search}"</span> : null}
+					{count ? <span className="evo-badge">{count}</span> : null}
+                    {comments ? <span className="evo-badge">{comments}</span> : null}
 				</h2>
 				<div>
 					{iconViews(this.props.entity, this.props.cardinality, this.props.id, this.props.view)}
@@ -57,5 +65,10 @@ export default class Header extends React.Component {
 			</div>
         )
     }
+}
 
+Header.propTypes = {
+    view: PropTypes.string,
+    count: PropTypes.string,
+    comments: PropTypes.number,
 }

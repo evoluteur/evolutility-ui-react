@@ -16,8 +16,11 @@
 .evol-fld {
     @include flex-item();
     padding-left: $field-h-spacing !important;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     min-width: 62px;
+    input, textarea, select{
+      font-size: $text-font-size;
+    }
     
     .evo-rdonly {
           // todo: use or remove line below?

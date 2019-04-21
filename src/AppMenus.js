@@ -2,7 +2,7 @@
 module.exports = [
     {
         id: 'demos',
-        title: 'Apps',
+        title: 'Demo Apps',
         icon: 'fire',
         menus: [
             {id: 'contact', text: 'Contact'},
@@ -15,7 +15,7 @@ module.exports = [
     },
     {
         id: 'music',
-        title: 'Music',
+        title: 'Another demo',
         icon: 'music',
         menus: [
             {id: 'artist', text: 'Artists', defaultViewMany: 'cards'},
