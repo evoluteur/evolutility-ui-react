@@ -258,7 +258,7 @@ module.exports = {
             labelShort: 'Bottle',
             width: 38,
             list: winecellar_lovs.bottleSize,
-            lovtable:'wine_bsize',
+            lovTable:'wine_bsize',
         },
         {
             id:'grape',
@@ -268,7 +268,7 @@ module.exports = {
             inMany: false,
             width: 62,
             list: winecellar_lovs.grape,
-            lovtable:'wine_grape',
+            lovTable:'wine_grape',
         },
         {
             id:'type',
@@ -278,8 +278,8 @@ module.exports = {
             inMany: true,
             width: 38,
             list: winecellar_lovs.type,
-            lovtable:'wine_type',
-            lovicon: true,
+            lovTable:'wine_type',
+            lovIcon: true,
         },
         {
             id:'appellation',
@@ -296,8 +296,8 @@ module.exports = {
             label: 'Country',
             width: 32,
             list: winecellar_lovs.country,
-            lovtable:'wine_country',
-            lovicon: true,
+            lovTable:'wine_country',
+            lovIcon: true,
         },
         {
             id:'region',
@@ -438,7 +438,7 @@ module.exports = {
             labelShort: 'Score',
             width: 100,
             list: winecellar_lovs.score,
-            lovtable:'wine_score',
+            lovTable:'wine_score',
         },
         {
             id:'score_parker',

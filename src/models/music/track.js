@@ -8,7 +8,7 @@ module.exports = {
 	"title": "Tracks",
 	"name": "track",
 	"namePlural": "tracks",
-    "icon": "music.png",
+	"icon": "music.png",
 	"titleField": "name",
 	"fields": [
 		{

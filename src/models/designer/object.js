@@ -140,7 +140,7 @@ module.exports = {
 					"id": "type",
 					"type": "lov",
 					"label": "Type",
-					"lovicon": true,
+					"lovIcon": true,
 				},
 				{
 					"id": "inMany",

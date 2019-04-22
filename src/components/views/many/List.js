@@ -82,11 +82,11 @@ export default class List extends Many {
 				}else if(f.type===ft.color){
 					return <td key={f.id}><div className="evo-color-box" id={f.id} 
 						style={{backgroundColor: value}} title={value}/></td>
-				}else if(lovField && f.lovicon){
+				}else if(lovField && f.lovIcon){
 					return (
 						<td key={f.id}>
 							<div className="nobr">
-								<img src={'/pix/'+d[f.id+'_icon']} className="lovIcon" alt=""/>
+								<img src={'/pix/'+d[f.id+'_icon']} className="lov-icon" alt=""/>
 								{format.fieldValue(f, value, true)}
 							</div>
 						</td>

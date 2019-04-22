@@ -8,7 +8,7 @@ module.exports = {
 	"title": "Artists",
 	"name": "artist",
 	"namePlural": "artists",
-    "icon": "star.png",
+	"icon": "star.png",
 	"titleField": "name",
 	"fields": [
 		{

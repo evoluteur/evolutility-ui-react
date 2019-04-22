@@ -95,7 +95,7 @@ module.exports = {
 					"icon": "designer/ft-url.gif"
 				}
 			],
-			"lovicon": true,
+			"lovIcon": true,
 			"defaultValue": 1,
 			"inMany": true,
 			"width": 38,
@@ -130,7 +130,7 @@ module.exports = {
 			"width": 32
 		},
 		{
-			"id": "lovtable",
+			"id": "lovTable",
 			"type": "text",
 			"label": "LOV Table",
 			"maxLength": 100,
@@ -138,7 +138,7 @@ module.exports = {
 			"help": "Lookup table"
 		},
 		{
-			"id": "lovcolumn",
+			"id": "lovColumn",
 			"type": "text",
 			"label": "LOV column",
 			"maxLength": 100,
@@ -146,7 +146,7 @@ module.exports = {
 			"help": "Column fom Lookup table to display"
 		},
 		{
-			"id": "lovicon",
+			"id": "lovIcon",
 			"type": "text",
 			"label": "LOV Icon",
 			"maxLength": 100,
@@ -167,7 +167,8 @@ module.exports = {
 			"label": "Position",
 			"maxLength": 3,
 			"width": 50,
-			"help": "Order of the field"
+			"help": "Order of the field",
+			"noCharts": true
 		},
 		{
 			"id": "width",
@@ -301,11 +302,11 @@ module.exports = {
 			"width": 50
 		},
 		{
-			"id": "deletetrigger",
+			"id": "deleteTrigger",
 			"type": "boolean",
 			"label": "Delete trigger",
 			"width": 50,
-			"help": "If checked, deleting records in the lovtable will trigger a cascade delete (only for list (dropdown) fields)."
+			"help": "If checked, deleting records in the lovTable will trigger a cascade delete (only for list (dropdown) fields)."
 		}
 	],
 	"groups": [
@@ -319,8 +320,8 @@ module.exports = {
 				"column",
 				"fid",
 				"object",
-				"lovtable",
-				"lovcolumn"
+				"lovTable",
+				"lovColumn"
 			]
 		},
 		{
@@ -344,7 +345,7 @@ module.exports = {
 			"width": 62,
 			"fields": [
 				"defaultValue",
-				"deletetrigger",
+				"deleteTrigger",
 				"required",
 				"readonly",
 				"minvalue",

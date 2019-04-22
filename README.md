@@ -157,7 +157,7 @@ Objects have fields.
 | defaultValue | Default field value for new records.                 |
 | max, min     | Maximum/Minimum value allowed (only applies to numeric fields).      |
 | maxLength, minLength | Maximum/Minimum length allowed (only applies to text fields).      |
-| lovicon      | Set to True to include icon with LOV items.    |
+| lovIcon      | Set to True to include icon with LOV items.    |
 | object       | Model id for the object to link to (only for fields of "lov" type).     |
 | inMany       | Determines if the field is present (by default) in lists of records. |
 | height       | For fields of type "textmultiline", number of lines used in the field (in Browse and Edit views). |
@@ -262,7 +262,7 @@ module.exports = {
       {
           id: "language", type: "lov", label: "Language", 
           width: 17, inMany: true,
-          lovicon: true,
+          lovIcon: true,
           list: [
             {id: 2, text: 'French', icon:'comics/flags/fr.png'},
             {id: 1, text: 'American', icon:'comics/flags/us.png'}
