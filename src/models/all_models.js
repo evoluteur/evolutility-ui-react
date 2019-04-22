@@ -22,9 +22,9 @@ import track from './music/track'
 import test from './tests/test'
 
 // - Designer
-//import field from './designer/field'
-//import object from './designer/object'
-//import world from './designer/world'
+import field from './designer/field'
+import object from './designer/object'
+import world from './designer/world'
 
 let models = {
     todo: todo,
@@ -40,9 +40,9 @@ let models = {
 
     test: test,
 
-    //field: field,
-    //object: object,
-    //world: world,
+    field: field,
+    object: object,
+    world: world,
 }
 
 const ms = Object.keys(models)
