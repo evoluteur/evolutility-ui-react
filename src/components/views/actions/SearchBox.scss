@@ -1,5 +1,7 @@
 // - Search box for Evolutility toolbar
 
+@import '../../variables';
+
 // -- search
 .evo-search{
   position: relative;
@@ -15,6 +17,9 @@
   >.btn{
     color: white;
     background-color: #0f0f0f;
+    &:hover{
+      color: $color-nav-hover;
+    }
   }
   input:hover{
     background-color: #414141;
