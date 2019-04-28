@@ -1,18 +1,16 @@
 $text-font-size: 16px;
 $background-color: white;
-
+$almostwhite-color: #f0f0f0;
 $almostblack-color: #0d0d0d;
 // base
 $color-text: $almostblack-color;
 $color-label: grey;
 $color-title: #428bca;
 $color-cool:#92cddc;
+$color-border: silver;
 $color-disabled:silver;
 
 $color-blue1: #259DCB;
-
-$color-border: silver;
-
 $color-red: #b94a48;
 
 // responsive design
@@ -24,13 +22,11 @@ $golden-ratio-big: 62%;
 $golden-ratio-small: 38%;
 
 // top nav bar including toolbar
-$color-background-nav: #0077b5;
-$color-nav: white; //#83d0f2; //white; //#337ab7; //#E0F7FA;
-$color-nav-hover: #FFCC80; //#23527c;//#FFE0B2;
-$color-nav-active: #FFCC80;//#E0F7FA;
+$color-nav: white; //white; //#337ab7; //#E0F7FA;
+$color-nav-hover: #BBDEFB; //#23527c;//#FFE0B2;
+$color-nav-active: #E0F7FA;
 $color-icon-hover: #0066ff;
 $color-icon: #428bca;
-$color-icon-background-hover: #ECEFF1;
 
 $table--header-background-color: #fbfbfb;
 
