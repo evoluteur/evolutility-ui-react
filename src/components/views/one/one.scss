@@ -124,9 +124,9 @@ label{
   margin-bottom: 2px;
 }
 .help-block{
-  padding:2px 5px;
-  background-color: #FFF8E1;
-  border: 1px solid #FFECB3;
+  background: #FEFEF3;
+  border-left: solid 4px #F4E925;
+  padding: 2px 5px;
   @include border-radius(2px);
 }
 .evolw-edit {
