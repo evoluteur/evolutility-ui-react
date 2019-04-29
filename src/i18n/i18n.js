@@ -130,7 +130,8 @@ module.exports = {
     },
 
     i18n_stats:{
-        lastupdate: 'Last update',
+        lastUpdate: 'Last update',
+        firstInsert: 'First insert',
         totalComments: 'Number of comments',
         total: 'Total',
         avg: 'Average',

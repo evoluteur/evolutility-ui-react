@@ -21,12 +21,13 @@ export default class NavSection extends React.PureComponent {
             </div>
         )
         const cssActive = (mid, url) => (mid===url || url.startsWith(mid+'/')) ? 'active' : ''
-        const link = m => {
-            const mLink = '/'+m.id + (m.defaultViewMany ? '/'+m.defaultViewMany : '')
+        const link = menu => {
+            const mLink = '/'+menu.id + 
+                (menu.url ? '' : (menu.defaultViewMany ? '/'+menu.defaultViewMany : '/list'))
             return (
-                <li key={m.id} className={cssActive(m.id, cRoute)}>
-                    <Link to={mLink}>{m.text}</Link>
-                    {iconViews(m.id, m)}
+                <li key={menu.id} className={cssActive(menu.id, cRoute)}>
+                    <Link to={mLink}>{menu.text}</Link>
+                    {iconViews(menu.id, menu)}
                 </li>
             )
         }

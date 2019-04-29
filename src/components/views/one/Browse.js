@@ -66,7 +66,6 @@ export default class Browse extends OneRead {
         document.title = title
         return ( 
         <div className="evolutility">
-
           <Header {...this.props.match.params} title={title} 
               comments={data.nb_comments} count={null}
               cardinality='1' view={this.viewId} />
@@ -135,7 +134,7 @@ export default class Browse extends OneRead {
                 }
           </div>
         </div>
-        )      
+      )
     }
   }
 

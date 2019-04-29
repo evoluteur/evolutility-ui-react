@@ -121,6 +121,7 @@ export default class Stats extends React.Component {
         }
         if(wTimestamp){
             formatTime('u_date_max')
+            formatTime('c_date_min')
             ks['u_date_week_count'] = data['u_date_week_count']
         }
         if(wComments){
@@ -144,7 +145,6 @@ export default class Stats extends React.Component {
                     
                     <div className="numItemList disabled evo-rdonly">
                         {k.sum ? itemField(k.id+'sum', i18n_stats.total, k.sum) : null}
-
                         {k.avg ? itemField(k.id+'avg', i18n_stats.avg, k.avg) : null}
 
                         {itemField(k.id+'min', i18n_stats.min, k.min)}
@@ -168,8 +168,12 @@ export default class Stats extends React.Component {
                     <div>
                         {wTimestamp ? (
                             <div className="evol-fld">
-                                <label className="evo-label">{i18n_stats.lastupdate}</label>
-                                <div>{data.u_date_max}<span className="grey weekupdates">{data.u_date_week_count} Updates this week</span></div> 
+                                <label className="evo-label">{data.u_date_week_count} Updates this week</label>
+                                <p>
+                                    <span className="grey">{i18n_stats.lastUpdate}:</span> {data.u_date_max}
+                                    <br/>
+                                    <span className="grey">{i18n_stats.firstInsert}</span>: {data.c_date_min}
+                                </p> 
                             </div>
                         ):null}
                         {wComments ? ( 

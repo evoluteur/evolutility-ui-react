@@ -82,9 +82,14 @@ h1, h2 {
   font-weight: 300;
 }
 .clearer{
-  clear:both;
+  clear: both;
 }
-
+.pc50 {
+  width: 50%;
+}
+.pc100 {
+  width: 100%;
+}
 .ReactModal__Overlay{
   z-index: 110;
 }

@@ -103,7 +103,7 @@ Code: [/src/components/views/many/Cards.js](https://github.com/evoluteur/evoluti
 View: [http://localhost:3000/comics/cards](http://localhost:3000/comics/cards)
 
 ### Charts
-Draws charts about the collection (currently bars and pies).
+Draws charts about the collection. Currently bars and pie charts are implemented, a list with count and percentages is also available. Only provided for fields of types like boolean, lov, integer, decimal, date... (not text or textmultilines).
 
 ![Charts](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-charts.gif)
 

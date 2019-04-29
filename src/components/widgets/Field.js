@@ -305,6 +305,6 @@ Field.propTypes = {
 	}),
 	data: PropTypes.any,  // object or atomic values depending on field type
 	value: PropTypes.any, // field value
-	label: PropTypes.string, //override label in model
-	readOnly: PropTypes.bool, //override label in model
+	label: PropTypes.string, // override label in model
+	readOnly: PropTypes.bool, // override readonly in model
 }
