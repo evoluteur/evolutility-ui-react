@@ -107,7 +107,7 @@ Draws charts about the collection. Currently bars and pie charts are implemented
 
 ![Charts](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-charts.gif)
 
-Code: [/src/components/views/many/Charts.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Charts.js)
+Code: [/src/components/views/charts/Charts.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/charts/Charts.js)
 
 View: [http://localhost:3000/comics/charts](http://localhost:3000/comics/charts)
 

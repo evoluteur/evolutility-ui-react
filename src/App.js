@@ -13,9 +13,9 @@ import Home from './pages/Home.js';
 
 import List from './components/views/many/List';
 import Cards from './components/views/many/Cards';
-import Charts from './components/views/many/Charts';
 import Stats from './components/views/many/Stats';
 
+import Charts from './components/views/charts/Charts';
 import Browse from './components/views/one/Browse';
 import Edit from './components/views/one/Edit';
 

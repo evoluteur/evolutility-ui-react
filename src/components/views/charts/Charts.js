@@ -16,7 +16,7 @@ import { fieldInCharts } from '../../../utils/dico'
 import Header from '../../shell/Header'
 import Alert from '../../widgets/Alert'
 import Chart from './Chart'
-import Many from './many'
+import Many from '../many/many'
 
 import './Charts.scss' 
 export default class Charts extends Many {
