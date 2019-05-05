@@ -206,6 +206,13 @@ module.exports = {
 			"help": "example \"$ 0.00\""
 		},
 		{
+			"id": "labelShort",
+			"label": "Short label",
+			"type": "text",
+			"help": "Optional shorter Field title to display in list header",
+			"width": 100,
+		},
+		{
 			"id": "required",
 			"type": "boolean",
 			"label": "Required",
@@ -335,6 +342,7 @@ module.exports = {
 				"height",
 				"css",
 				"format",
+				"labelShort",
 				"chartType",
 				"noCharts"
 			]

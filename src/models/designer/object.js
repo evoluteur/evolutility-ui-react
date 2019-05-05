@@ -45,6 +45,12 @@ module.exports = {
 			"required": true,
 			"maxLength": 100,
 			"inMany": true,
+			"width": 62
+		},
+		{
+			"id": "pKey",
+			"label": "Primary key column",
+			"type": "text",
 			"width": 38
 		},
 		{

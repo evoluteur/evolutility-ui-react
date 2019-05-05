@@ -136,15 +136,7 @@ export default class Many extends React.Component {
 	}
 
 	setModel(entity){
-		let e = entity
-		if(!e){
-			if(this.props.match && this.props.match.params){
-				e=this.props.match.params.entity
-			}
-		}//else{
-			//alert('Invalid entity in many.setModel.')
-		//}
-		this.model = models[e]
+		this.model = models[entity || this.props.match.params.entity]
 	}
 
 	clickSort(evt){

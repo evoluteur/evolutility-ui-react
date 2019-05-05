@@ -137,7 +137,7 @@ module.exports = {
         avg: 'Average',
         min: 'Min.',
         max: 'Max.', 
-        noFit: 'Data not fit for generic analysis.',
+        noFit: 'The data doesn\'t have numeric or date/time fields.',
     },
 
     i18n_errors: {

@@ -3,12 +3,13 @@
 // Dashboard style set of charts (bars or pies).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2019 Olivier Giulieri
 
 // Quick and easy implementation w/ the old version of google charts
 // must be re-written using D3.js or other cool charting library
 
 import React from 'react'
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 import { i18n_charts } from '../../../i18n/i18n'
 import models from '../../../models/all_models'
@@ -16,13 +17,21 @@ import { fieldInCharts } from '../../../utils/dico'
 import Header from '../../shell/Header'
 import Alert from '../../widgets/Alert'
 import Chart from './Chart'
-import Many from '../many/many'
 
 import './Charts.scss' 
-export default class Charts extends Many {
+export default class Charts extends React.Component {
 
     viewId = 'charts'
  
+	componentWillMount() {
+		this.model = models[this.props.match.params.entity]
+    }
+
+	componentDidMount() {
+        document.title = this.model ? this.model.label : 'No title' 
+        window.scrollTo(0, 0)
+    }
+    
     render() {
         const e = this.props.match.params.entity,
             m = models[e]
@@ -74,4 +83,13 @@ export default class Charts extends Many {
             return <Alert title="Error" message={'Invalid input parameter "'+e+'".'}/>
         }
     }
+}
+
+Charts.propTypes = {
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            entity: PropTypes.string.isRequired,
+            
+        })
+	}).isRequired,
 }

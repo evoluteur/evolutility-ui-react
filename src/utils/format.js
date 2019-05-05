@@ -3,18 +3,18 @@
 // Helpers for string, numbers, and date formats
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2019 Olivier Giulieri
 
 import React from 'react'
 import numeral from 'numeral'
 import moment from 'moment'
 
 // include locale support for a few chosen countries -- add more as needed
-import 'moment/locale/en-gb'
-import 'moment/locale/en-au'
-import 'moment/locale/fr'
-import 'moment/locale/de'
-import 'moment/locale/es'
+//import 'moment/locale/en-gb'
+//import 'moment/locale/en-au'
+//import 'moment/locale/fr'
+//import 'moment/locale/de'
+//import 'moment/locale/es'
 
 import {filesUrl, locale } from '../config.js'
 import {fieldTypes as ft} from './dico.js'
@@ -22,6 +22,7 @@ import {fieldTypes as ft} from './dico.js'
 // Set the locale from the browser -- which may need to be configured
 moment.locale(locale || window.navigator.userLanguage || window.navigator.language)
 
+const nullOrUndefined = v => v===null || v===undefined
 const formatLib = {
 
     // config to override browser
@@ -79,7 +80,7 @@ const formatLib = {
     },
 
     doc(d, path){
-        if(d===null){
+        if(nullOrUndefined(d)){
             return null
         }
         return <a href={encodeURI(path+d)} target='_blank' rel="noopener noreferrer">{d}</a>
@@ -95,19 +96,20 @@ const formatLib = {
         return this.dateString(d);
     },
     dateString(d){ 
-        return d ? moment(d).format('L') : ''
+        return nullOrUndefined(d) ? '' : moment(d).format('L')
     },
 
     timeString(d){
-        return d ? moment(d).format('LTS') : ''
+        return nullOrUndefined(d) ? '' :  moment(d).format('LTS')
     },
     
     datetimeString(d){
-        return d ? moment(d).format('L LTS') : ''
+        return nullOrUndefined(d) ? '' :  moment(d).format('L LTS')
     },
 
     decimalString(d){
-        return d ? numeral(d).format() : '' // TODO: choose format
+        // TODO: choose format
+        return nullOrUndefined(d) ? '' : numeral(d).format()
     },
 
     moneyString(d){
