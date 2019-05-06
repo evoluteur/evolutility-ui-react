@@ -221,7 +221,7 @@ module.exports = {
 			"help": "Mandatory field"
 		},
 		{
-			"id": "readonly",
+			"id": "readOnly",
 			"type": "boolean",
 			"label": "Read only",
 			"defaultValue": false,
@@ -355,7 +355,7 @@ module.exports = {
 				"defaultValue",
 				"deleteTrigger",
 				"required",
-				"readonly",
+				"readOnly",
 				"minvalue",
 				"maxvalue",
 				"minLength",

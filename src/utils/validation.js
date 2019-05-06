@@ -21,7 +21,7 @@ function validateField(f, v){
         return f.label || f.labelMany;
     }
 
-    if(!f.readonly){
+    if(!f.readOnly){
 
         // Check required and empty
         if (f.required && (v===null || v==='' || _.isUndefined(v) ||

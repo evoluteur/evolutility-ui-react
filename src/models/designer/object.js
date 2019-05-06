@@ -86,7 +86,7 @@ module.exports = {
 			"id": "icon",
 			"type": "image",
 			"label": "Icon",
-			"readonly": true,
+			"readOnly": true,
 			"maxLength": "50",
 			"inMany": true,
 			"width": 62,

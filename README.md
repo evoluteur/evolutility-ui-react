@@ -153,7 +153,7 @@ Objects have fields.
 | label        | Field description (displayed with an asterisk for required fields).      |
 | labelShort   | Optional shorter version of the labels (used in List and Cards views). |
 | required     | Determines if the field is required for saving.      |
-| readonly     | If set to true, the field value cannot be changed.   |
+| readOnly     | If set to true, the field value cannot be changed.   |
 | defaultValue | Default field value for new records.                 |
 | max, min     | Maximum/Minimum value allowed (only applies to numeric fields).      |
 | maxLength, minLength | Maximum/Minimum length allowed (only applies to text fields).      |
