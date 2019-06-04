@@ -15,13 +15,16 @@ import Alert from '../../widgets/Alert'
 
 import './Stats.scss'
 
-function formatNum(k, value){
+function formatNum(k, value, zero){
     if(typeof value!=='undefined' && value!==null){
         if(typeof(value) === 'string'){
             if(fieldIsDateOrTime(k)){
                 return format.dateString(value)
             }
             return value
+        }
+        if(zero && !value){
+            return zero
         }
         return (Math.round(value*100)/100)
     }
@@ -168,12 +171,15 @@ export default class Stats extends React.Component {
                     <div>
                         {wTimestamp ? (
                             <div className="evol-fld">
-                                <label className="evo-label">{data.u_date_week_count} Updates this week</label>
-                                <p>
-                                    <span className="grey">{i18n_stats.lastUpdate}:</span> {data.u_date_max}
-                                    <br/>
-                                    <span className="grey">{i18n_stats.firstInsert}</span>: {data.c_date_min}
-                                </p> 
+                                <label className="evo-label">{data.u_date_week_count || 'No'} Updates this week</label>
+                                <div class="stat-field">
+                                    <span>{i18n_stats.lastUpdate}:</span> 
+                                    {data.u_date_max}
+                                </div> 
+                                <div class="stat-field">
+                                    <span>{i18n_stats.firstInsert}:</span> 
+                                    {data.c_date_min}
+                                </div> 
                             </div>
                         ):null}
                         {wComments ? ( 
@@ -183,12 +189,9 @@ export default class Stats extends React.Component {
                             </div>
                         ):null}
                         <div className="kpi_list">
-                            {
-                                (data && data.length) ?
-                                    data.map(item)
-                                :
-                                    <div className="evol-fld">{i18n_stats.noFit}</div>
-                            }
+                            {(data && data.length) ? data.map(item) : (
+                                <div className="evol-fld">{i18n_stats.noFit}</div>
+                            )}
                         </div>
                     </div>
                 )}

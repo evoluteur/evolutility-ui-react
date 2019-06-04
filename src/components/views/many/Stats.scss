@@ -1,3 +1,4 @@
+@import '../../variables';
 
 // view Stats
 .weekupdates{
@@ -15,5 +16,13 @@
 	width: 80px;
 }
 .stat-label{
-
+	margin-bottom: 10px;
+}
+.stat-field{
+	line-height: 30px;
+	> span {
+		display: inline-block;
+		color: $grey-color;
+		min-width: 70px;
+	}
 }
