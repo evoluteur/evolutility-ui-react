@@ -69,9 +69,7 @@ export default class Charts extends React.Component {
                         title={title} count={null} 
                         cardinality='n' view={this.viewId}/>
                     
-                    <div className="evolutility evol-many-charts">
                         {charts} 
-                    </div>
 
                     <div className="charts-stats">
                         <Link to={'/'+e+'/stats'}><i className='glyphicon glyphicon-equalizer' />Statistics</Link>

@@ -21,6 +21,7 @@
     th{
       position: relative;
       font-weight: $weight-label !important;
+      white-space: nowrap;
       background-color: $toolbar-background-color;
       i{
         position: absolute;
@@ -41,7 +42,7 @@
     th{
       cursor: pointer;
       &:hover{
-        color: #0099cc;
+        color: $color-icon-hover;
       }
     }
   }

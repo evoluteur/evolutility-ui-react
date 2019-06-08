@@ -47,7 +47,7 @@ module.exports = {
 		{
 			"id": "g1",
 			"type": "panel",
-			"label": "Artist",
+			"label": '', //"Artist",
 			"width": 70,
 			"fields": [
 				"name",
@@ -58,7 +58,7 @@ module.exports = {
 		{
 			"id": "g2",
 			"type": "panel",
-			"label": "Photo",
+			"label": '', //"Photo",
 			"width": 30,
 			"fields": [
 				"photo"

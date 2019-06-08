@@ -71,8 +71,8 @@ export default class Cards extends Many {
 				</div>
 			)
 	  	}else{
-			return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
-		}
+				return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
+			}
   	}
 
 }

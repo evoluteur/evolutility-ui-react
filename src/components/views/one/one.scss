@@ -95,7 +95,7 @@
   top: 12px;
   color: grey;
   &:hover{
-    color: $color-blue1;
+    color: $color-icon-hover
   }
 }/*
 .evol-json{
@@ -129,11 +129,6 @@ label{
   padding: 2px 5px;
   @include border-radius(2px);
 }
-.evolw-edit {
-  .help-block{
-    color: #737373 !important;
-    clear: both;
-  }
 }
 
 .evo-one-edit,

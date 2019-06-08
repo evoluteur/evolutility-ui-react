@@ -101,13 +101,13 @@ module.exports = {
     groups: [
         {
           id:"pResto", type:"panel", 
-          label: "Restaurant", width: 62,
-          fields: ['name','cuisine','schedule','price','favorite','notes']
+          label: "", width: 62,
+          fields: ['name','cuisine','schedule','price','yelp','favorite','notes']
         },
         {
           id:"pContact", type:"panel", 
           label: "Contact", width: 38,
-          fields: ['web','yelp','phone','address','city','state','zip',]
+          fields: ['web','phone','address','city','state','zip',]
         },
     ]
 

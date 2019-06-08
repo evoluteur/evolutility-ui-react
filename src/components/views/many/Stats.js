@@ -172,11 +172,11 @@ export default class Stats extends React.Component {
                         {wTimestamp ? (
                             <div className="evol-fld">
                                 <label className="evo-label">{data.u_date_week_count || 'No'} Updates this week</label>
-                                <div class="stat-field">
+                                <div className="stat-field">
                                     <span>{i18n_stats.lastUpdate}:</span> 
                                     {data.u_date_max}
                                 </div> 
-                                <div class="stat-field">
+                                <div className="stat-field">
                                     <span>{i18n_stats.firstInsert}:</span> 
                                     {data.c_date_min}
                                 </div> 

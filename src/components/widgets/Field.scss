@@ -54,17 +54,17 @@
 }
 .evol-field-label {
   > label {
-    color:$color-label !important;
+    color: $color-label !important;
     font-weight: normal;
     font-size: .8em;
 
     > .glyphicon-question-sign{
       cursor: pointer;
       padding-left: 4px;
-      color: silver;
+      color: $grey-color;
 
       &:hover{
-        color:$color-icon-hover;
+        color: $color-icon-hover;
       }
     }
   }
@@ -72,14 +72,14 @@
 
 .evol-required,
 .evol-asterix {
-    margin-left:3px;
-    font-weight:bold;
+    margin-left: 3px;
+    font-weight: bold;
 }
 .evol-required{
   color: $color-red;
 }
 .evol-asterix {
-  color:#0099cc;
+  color: $color-icon-hover;
 }
 .evo-rdonly {
   min-height: 32px;
@@ -106,7 +106,7 @@
   margin-top:7px;
   width:100%;
   min-height:100px;
-  border:2px dashed silver;
+  border:2px dashed $grey-color;
   padding:10px;
   > p {
     font-style: italic;

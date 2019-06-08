@@ -91,7 +91,7 @@ export default class OneRead extends React.Component{
 	}
 
 	componentWillUnmount() {
-		this.done=true
+		this.done = true
 	}
 
 	componentWillReceiveProps(nextProps){

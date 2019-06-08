@@ -213,7 +213,7 @@ export default class Field extends React.Component {
 			}else{
 				if(f.lovicon && this.props.icon){
 					fw = <span>
-							<img src={'/pix/'+this.props.icon} className="lovicon" alt=""/> 
+							<img src={'/pix/'+this.props.icon} className="lov-icon" alt=""/> 
 							{format.fieldValue(f, d)}
 						</span>
 				}else{
@@ -255,7 +255,7 @@ export default class Field extends React.Component {
 				{f.help && this.state.help ? <div className="help-block"><i>{f.help}</i></div> : null}
 
 				{readOnly ? this._fieldElemReadOnly(f, value, valueId)
-								 : this._fieldElem(f, value, cbs)}
+					: this._fieldElem(f, value, cbs)}
 
  				{invalid ? <div className="text-danger">{this.state.message}</div> : null}
 

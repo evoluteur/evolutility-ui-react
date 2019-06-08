@@ -18,7 +18,7 @@
 	user-select: none;
 	-moz-user-select: none;
 	&:hover { 
-		overflow-y:auto; 
+		overflow-y: auto; 
 	}
 	a{
 		text-decoration: none;
@@ -142,8 +142,8 @@ a.skipNav {
 }
 .nav-l2 > li{
 	@include border-radius(5px);
-	padding: 5px 10px;
 
+	padding: 5px 0 5px 10px;
 	&:hover,
 	&.active{
 		background-color: white;

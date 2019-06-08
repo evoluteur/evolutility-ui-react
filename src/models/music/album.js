@@ -40,6 +40,8 @@ module.exports = {
 			"type": "textmultiline",
 			"label": "Description",
 			"maxLength": 1000,
+			width: 100,
+			height: 5,
 			"inMany": false
 		},
 		{
@@ -54,7 +56,7 @@ module.exports = {
 		{
 			"id": "p-album",
 			"type": "panel",
-			"label": "Album",
+			"label": '', //"Album",
 			"table": "music_album",
 			"column": "album_id",
 			"width": 70,
@@ -68,7 +70,7 @@ module.exports = {
 		{
 			"id": "p-cover",
 			"type": "panel",
-			"label": "Cover",
+			"label": '', //"Cover",
 			"width": 30,
 			"fields": [
 				"cover"

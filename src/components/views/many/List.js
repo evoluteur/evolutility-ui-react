@@ -78,19 +78,24 @@ export default class List extends Many {
 						</td>
 					)
 				}else if(f.type===ft.image){
-					return <td key={f.id}><Link to={link+d.id}>{format.fieldValue(f, value, true)}</Link></td>
+					return <td key={f.id}>
+						{value ? <Link to={link+d.id}>{format.fieldValue(f, value, true)}</Link> : ''}
+					</td>
 				}else if(f.type===ft.color){
 					return <td key={f.id}><div className="evo-color-box" id={f.id} 
 						style={{backgroundColor: value}} title={value}/></td>
 				}else if(lovField && f.lovIcon){
-					return (
-						<td key={f.id}>
-							<div className="nobr">
-								<img src={'/pix/'+d[f.id+'_icon']} className="lov-icon" alt=""/>
-								{format.fieldValue(f, value, true)}
-							</div>
-						</td>
-					)
+					let icon = d[f.id+'_icon']
+					if(icon){
+						return (
+							<td key={f.id}>
+								<div className="nobr">
+									<img src={'/pix/'+icon} className="lov-icon" alt=""/>
+									{format.fieldValue(f, value, true)}
+								</div>
+							</td>
+						)
+					}
 				}else if(fieldIsNumber(f)){
 					return <td key={f.id} className="alignR">{format.fieldValue(f, value, true)}</td>
 				}
