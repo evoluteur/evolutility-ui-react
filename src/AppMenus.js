@@ -5,12 +5,12 @@ module.exports = [
         title: 'Demo Apps',
         icon: 'fire',
         menus: [
-            {id: 'contact', text: 'Contact'},
-            {id: 'todo', text: 'To Do'},
-            {id: 'comics', text: 'Comics', defaultViewMany: 'cards'},
+            {id: 'contact', text: 'Addressbook'},
+            {id: 'todo', text: 'Tasks'},
             {id: 'restaurant', text: 'Restaurants'},
             {id: 'winecellar', text: 'Wine Cellar'},
             {id: 'winetasting', text: 'Wine Tasting'},
+            {id: 'comics', text: 'Graphic Novels', defaultViewMany: 'cards'},
         ],
     },
     {
