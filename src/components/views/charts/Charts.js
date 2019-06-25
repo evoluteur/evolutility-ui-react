@@ -38,14 +38,15 @@ export default class Charts extends React.Component {
 
         if(m){
             const title = m.title || m.label,
-                chartFields = m.fields.filter(fieldInCharts)
+                chartFields = m.fields.filter(fieldInCharts),
+                nbCharts = chartFields.length,
+                css = 'evolutility evol-many-charts nbc' + nbCharts
             let charts
 
-            if(chartFields.length===0){
-                charts = <Alert title="No data" message={i18n_charts.nocharts} type="warning"/>
-            }else if(chartFields.length===1){
+            if(nbCharts===0){
+                charts = <Alert title="No data" message={i18n_charts.nocharts} type="info"/>
+            }else if(nbCharts===1){
                 const f = chartFields[0]
-
                 charts = <Chart key={'c-'+f.id}  
                     entity={e}
                     field={f} 
@@ -63,19 +64,16 @@ export default class Charts extends React.Component {
             }
 
             return (
-                <div className="evolutility evol-many-charts">
-                    
-                    <Header entity={e} 
-                        title={title} count={null} 
-                        cardinality='n' view={this.viewId}/>
-                    
-                        {charts} 
-
+                <React.Fragment>
+                    <div className={css}>
+                        <Header entity={e} title={title} count={null} 
+                            cardinality='n' view={this.viewId} />
+                        {charts}
+                    </div>
                     <div className="charts-stats">
                         <Link to={'/'+e+'/stats'}><i className='glyphicon glyphicon-equalizer' />Statistics</Link>
                     </div>
-
-                </div>
+                </React.Fragment>
             )
         }else{
             return <Alert title="Error" message={'Invalid input parameter "'+e+'".'}/>

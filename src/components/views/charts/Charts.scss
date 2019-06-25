@@ -17,12 +17,12 @@
 	}
 }
 .chart-holder{
-	>h3{
+	> h3{
 		display:block;
 		text-align:center;
 		padding:10px 20px 30px;
 	}
-	>i{
+	> i{
 		position: relative;
 		top: 50px;
 	}
@@ -50,3 +50,8 @@
 		margin-right: 5px;
 	}
 }
+	.nbc1{
+		.evol-chart-holder{
+			min-width: 610px;
+		}
+	}
