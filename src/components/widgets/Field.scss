@@ -34,8 +34,9 @@
     >div{
       width: 100%;
     }
-    > .text-danger {
+    > .evo-fld-invalid {
         margin-bottom: 0 !important;
+        
     }
     .img-thumbnail {
       padding: 0 !important;
@@ -56,7 +57,7 @@
   > label {
     color: $color-label !important;
     font-weight: normal;
-    font-size: .8em;
+    font-size: .9em;
 
     > .glyphicon-question-sign{
       cursor: pointer;

@@ -252,12 +252,12 @@ export default class Field extends React.Component {
 					readOnly={readOnly}
 					clickHelp={this.clickHelp}/>
 
-				{f.help && this.state.help ? <div className="help-block"><i>{f.help}</i></div> : null}
+				{f.help && this.state.help ? <div className="evo-fld-help">{f.help}</div> : null}
 
 				{readOnly ? this._fieldElemReadOnly(f, value, valueId)
 					: this._fieldElem(f, value, cbs)}
 
- 				{invalid ? <div className="text-danger">{this.state.message}</div> : null}
+ 				{invalid ? <div className="evo-fld-invalid">{this.state.message}</div> : null}
 
 			</div>
 		)

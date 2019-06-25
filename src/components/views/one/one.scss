@@ -9,7 +9,7 @@
 
   .evol-pnl {
     @include flex-item();
-    padding-left:10px !important;
+    padding-left: 10px !important;
     min-width: 150px;
     margin-bottom: -10px;
 
@@ -17,14 +17,13 @@
       //margin-bottom: 0;
       img {
         max-height: 60px;
-        padding:0;
+        padding: 0;
       }
       .evol-money{
         //TODO: better fix
         width: 200px;
       }
     }
-
   // nested panel
   //  .evol-pnl {
   //     > .panel{
@@ -34,7 +33,7 @@
   //      padding: 10px 10px 5px 2px;
   //    }
   //  }
-  //}
+  }
 
 }
 
@@ -123,12 +122,27 @@ label{
   font-weight: $weight-label;
   margin-bottom: 2px;
 }
-.help-block{
-  background: #FEFEF3;
-  border-left: solid 4px #F4E925;
-  padding: 2px 5px;
-  @include border-radius(2px);
+
+.evo-fld-help{
+  background: #FFF8E1; // amber-50
+  border: solid 1px #FFE082; // amber-200
+  border-left: solid 4px #FFE082; // amber-200
 }
+.evo-fld-invalid{
+  background: #FBE9E7;//Deep Orange 50
+  border: solid 1px #FF8A65; //Deep Orange 300
+  border-left: solid 4px #FF8A65; //Deep Orange 300
+}
+
+.evo-fld-help,
+.evo-fld-invalid{
+  color: #737373;
+  display: inline-block;
+  padding: 4px 5px 4px 10px;
+  @include border-radius(2px);
+  font-style: italic;
+  margin: 5px 5px 5px 0;
+  clear: both;
 }
 
 .evo-one-edit,
