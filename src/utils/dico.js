@@ -10,7 +10,6 @@ https://github.com/evoluteur/evolutility-ui-react
 
 import format from './format'
 
-
 // - Field Types
 const ft = {
 	text: 'text',
@@ -96,6 +95,7 @@ export function prepModel(m){
 		if(!m.prepared){
 			// - Model
 			m.defaultViewOne = m.defaultViewOne || 'browse'
+			//m.defaultViewMany = m.defaultViewMany || 'list'
 			if(!m.label){
 				m.label = m.title || m.namePlural || m.name;
 			}
@@ -118,20 +118,25 @@ export function prepModel(m){
 
 export function prepModelCollecs(models, m){
 	if(m){
-		if(!m.prepared2){
+		if(!m.preparedCollecs){
 			if(m.collections){
 				m.collections.forEach((c) => {
 					if(c.object){
-						const fsh = models[c.object].fieldsH
-						c.fields.forEach((f, idx) => {
-							if(typeof(f) === 'string'){
-								c.fields[idx] = JSON.parse(JSON.stringify(fsh[f]))
-							}
-						})
+						const collecModel = models[c.object]
+						if(collecModel){
+							const fsh = collecModel.fieldsH
+							c.fields.forEach((f, idx) => {
+								if(typeof(f) === 'string'){
+									c.fields[idx] = JSON.parse(JSON.stringify(fsh[f]))
+								}
+							})
+						}else{
+							console.log('Model "'+c.object+'" not found in model "'+m.id+'".')
+						}
 					}
 				})
 			}
-			m.prepared2 = true
+			m.preparedCollecs = true
 		}
 		return m;
 	}
