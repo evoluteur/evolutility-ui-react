@@ -125,7 +125,6 @@ a.skipNav {
 	z-index: 100;
 
 	> a {
-		display: inline-block;
 		font-size: 12px;
 
 		&:hover{
@@ -142,12 +141,14 @@ a.skipNav {
 }
 .nav-l2 > li{
 	@include border-radius(5px);
-
 	padding: 5px 0 5px 10px;
+	> a.ev-actions {
+		display: inline-block;
+		max-width: 90px;
+	}
 	&:hover,
 	&.active{
 		background-color: white;
-			
 		> .mIcons{
 			display: inline-block;
 			padding-right: 14px;
