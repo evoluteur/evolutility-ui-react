@@ -1,12 +1,9 @@
-// Evolutility-UI-React :: /views/many/Chart.js
+// Evolutility-UI-React :: /views/charts/Chart.js
 
-// Single Bars or Pie charts (usually part of a set of Charts).
+// Parent Component for Bars charts, Pie charts, or list
 
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2019 Olivier Giulieri
-
-// Quick and easy implementation w/ the old version of google charts
-// TODO: re-write using D3.js or other cool charting library
 
 import React from 'react'
 import PropTypes from 'prop-types';
@@ -14,8 +11,14 @@ import axios from 'axios'
 import {apiPath} from '../../../config.js'
 
 import Alert from '../../widgets/Alert'
+import { lcWrite } from '../../../utils/localStorage'
 import Spinner from '../../shell/Spinner'
-import ChartTable from './Chart_Table'
+import ChartTable from './ChartTable'
+import ChartProps from './ChartProps'
+
+import Bars from './Bars'
+import Pie from './Pie'
+//import TreeMap from './TreeMap'
 
 import './Charts.scss' 
 
@@ -29,18 +32,6 @@ const sortCount = (a, b) => {
     }
     return 0;
 }
-
-const urlChart = 'http://chart.apis.google.com/chart',
-    c10 = ['1f77b4','ff7f0e','2ca02c','d62728','9467bd',
-            '8c564b','e377c2','7f7f7f','bcbd22','17becf'],
-    c20 = ['1f77b4','aec7e8','ff7f0e','ffbb78','2ca02c',
-            '98df8a','d62728','ff9896','9467bd','c5b0d5',
-            '8c564b','c49c94','e377c2','f7b6d2','7f7f7f',
-            'c7c7c7','bcbd22','dbdb8d','17becf','9edae5'],
-    cList = maxIdx => maxIdx>10 ? c20 : c10,
-    colorsList = nbColors => cList(nbColors).slice(0, nbColors).join(','),
-    fnLabel = d => (d.label==null ? 'N/A' : d.label.substring(0, 20)) + ' ('+d.value+')',
-    fnValue = d => d.value
 
 export default class Chart extends React.Component {
 
@@ -61,6 +52,7 @@ export default class Chart extends React.Component {
 
     componentDidMount() {
         this.getData()
+
     }
 
     componentWillUnmount() {
@@ -97,73 +89,52 @@ export default class Chart extends React.Component {
     }
 
     click_view(evt){
+        const e=this.props.entity
+        const fid=this.props.field.id
+        const chartsType = evt.currentTarget.id
+
+        lcWrite(e+'-charts-'+fid, chartsType)
         this.setState({
-            chartType: evt.currentTarget.id
+            chartType: chartsType
         })
-    }
-
-    urlPie(data, sizes){
-        if(data && data.length){ 
-            const p=this.props,
-                size=p.sizes?p.sizes:'390x200',
-                ls=data.map(fnLabel),
-                vs=data.map(fnValue),
-                urlGoogleChart = urlChart+'?chd=t:'+vs.join(',')+
-                '&chco='+colorsList(data.length)+
-                '&chl='+ls.join('|')+
-                '&cht=p&chs='+size;
-            return urlGoogleChart
-        }
-        return ''
-    }
-
-    urlBars(data, sizes){
-        if(data && data.length){ 
-            const size=sizes?sizes:'360x200';
-            let maxCount = 0,
-                ls=data.map(fnLabel),
-                vs=data.map(fnValue);
-
-            data.forEach(function(d){
-                if(d.value>maxCount){
-                    maxCount=d.value;
-                }
-            })
-            return urlChart+'?chbh=a&chs='+size+'&cht=bvg&chco='+colorsList(data.length)+'&chds=0,'+maxCount+
-                    '&chd=t:'+vs.join('|')+
-                    '&chp=0.05&chts=676767,10.5&chdl='+ls.join('|');
-        }
-        return ''
     }
 
     render(){
         const data = this.state.data || [],
-            sizes = this.props.sizes || null,
+            size = this.props.size || 'small',
             cType = this.state.chartType
         let body 
-
+                
+        data.forEach(row => {
+            row.id =  '' + row.id
+        })
+        const params = {
+            data: data,
+            entity: this.props.entity,
+            sortTable: this.sortTable,
+        }
         if(this.state.error){
             body = <Alert type="danger" title={this.state.error.title} message={this.state.error.message}/> 
+        }else if(this.state.loading){
+            body = <Spinner></Spinner>
         }else if(cType==='Table'){
-            body = <ChartTable field={this.props.field} data={data} entity={this.props.entity} sortTable={this.sortTable} />
+            body = <ChartTable {...params} field={this.props.field}/>
+        }else if(cType==='Pie'){
+            body = <Pie {...params} />
         }else{
-            const url = this['url'+cType](data, sizes)
-            if(url){
-                body = <img src={url} alt=""/>
-            }else{
-                body = <Spinner></Spinner>
-            }
+            body = <Bars {...params} />
         }
+
         return (
             <div className="evol-chart-holder panel panel-default">
-                <div className={"chart-holder" + (parseInt(sizes, 10)>400 ? ' singleChart' : '')}>
+                <div className={"chart-holder"+(size?' size-'+size:'')}>
                     <div className="chart-actions pull-right">
-                        <i id="Pie" className={"glyphicon glyphicon-cd"+(cType==='Pie'?' active':'')} onClick={this.click_view}/>
-                        <i id="Bars" className={"glyphicon glyphicon-stats"+(cType==='Bars'?' active':'')} onClick={this.click_view}/>
-                        <i id="Table" className={"glyphicon glyphicon-th-list"+(cType==='Table'?' active':'')} onClick={this.click_view}/>
+                        <i id="Pie" onClick={this.click_view} className={"glyphicon glyphicon-cd"+(cType==='Pie'?' active':'')}/>
+                        <i id="Bars" onClick={this.click_view} className={"glyphicon glyphicon-stats"+(cType==='Bars'?' active':'')}/>
+                        <i id="Table" onClick={this.click_view} className={"glyphicon glyphicon-th-list"+(cType==='Table'?' active':'')}/>
                     </div>
                     <h3 className="panel-title">{this.props.title}</h3>
-                    {body} 
+                    {body}
                 </div>
             </div>
         )
@@ -192,8 +163,9 @@ Chart.propTypes = {
     entity: PropTypes.string.isRequired,
     field: PropTypes.object.isRequired,
     title: PropTypes.string,
-    sizes: PropTypes.string,
-    type: PropTypes.oneOf(['Bars', 'Pie', 'Table'])
+    size: PropTypes.oneOf(ChartProps.size),
+    type: PropTypes.oneOf(ChartProps.chart),
+    sort: PropTypes.string,
 }
 Chart.defaultProps = {
 	chartType: 'Bars',

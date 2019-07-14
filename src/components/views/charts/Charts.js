@@ -1,4 +1,4 @@
-// Evolutility-UI-React :: /views/many/Charts.js
+// Evolutility-UI-React :: /views/charts/Charts.js
 
 // Dashboard style set of charts (bars or pies).
 
@@ -14,6 +14,8 @@ import { Link } from 'react-router-dom'
 import { i18n_charts } from '../../../i18n/i18n'
 import models from '../../../models/all_models'
 import { fieldInCharts } from '../../../utils/dico'
+import { lcRead } from '../../../utils/localStorage'
+import format from '../../../utils/format'
 import Header from '../../shell/Header'
 import Alert from '../../widgets/Alert'
 import Chart from './Chart'
@@ -24,11 +26,11 @@ export default class Charts extends React.Component {
     viewId = 'charts'
  
 	componentWillMount() {
-		this.model = models[this.props.match.params.entity]
+        this.model = models[this.props.match.params.entity]
     }
 
 	componentDidMount() {
-        document.title = this.model ? this.model.label : 'No title' 
+        document.title = this.model ? this.model.label + ' Charts' : 'Evolutility' 
         window.scrollTo(0, 0)
     }
     
@@ -40,28 +42,39 @@ export default class Charts extends React.Component {
             const title = m.title || m.label,
                 chartFields = m.fields.filter(fieldInCharts),
                 nbCharts = chartFields.length,
-                css = 'evolutility evol-many-charts nbc' + nbCharts
+                css = 'evolutility evol-many-charts ' + (nbCharts===1?'single':'many')
             let charts
+
+            const chartTitle = f => format.capitalize(m.namePlural) + ' / ' + (f.labelCharts || f.label)
 
             if(nbCharts===0){
                 charts = <Alert title="No data" message={i18n_charts.nocharts} type="info"/>
-            }else if(nbCharts===1){
-                const f = chartFields[0]
-                charts = <Chart key={'c-'+f.id}  
-                    entity={e}
-                    field={f} 
-                    title={f.labelCharts || f.label}
-                    chartType={f.chartType}
-                    sizes='600x300' className="panel-default bm10"/> 
             }else{
-                charts = chartFields.map(f => <Chart 
-                    entity={e} 
-                    key={'c-'+f.id} 
-                    field={f} 
-                    title={f.labelCharts || f.label} 
-                    chartType={f.chartType}
-                    className="panel-default" />)
-            }
+                if(nbCharts===1){
+                    const f = chartFields[0]
+                    charts = <Chart 
+                        entity={e}
+                        field={f} 
+                        title={chartTitle(f)}
+                        chartType={lcRead(m.id+'-charts-'+f.id) || f.chartType}
+                        key={'c0-'+f.id}
+                        size={'large'}
+                        className="panel-default singleChart"/> 
+                }else{
+                    const params = {
+                        entity: e,
+                        size: 'small',
+                        className: "panel-default",
+                    }
+                    charts = chartFields.map(f => <Chart 
+                            {...params}
+                            key={'c-'+f.id} 
+                            field={f} 
+                            title={chartTitle(f)}
+                            chartType={lcRead(m.id+'-charts-'+f.id) || f.chartType} />
+                        )
+                }
+            } 
 
             return (
                 <React.Fragment>
@@ -85,7 +98,6 @@ Charts.propTypes = {
     match: PropTypes.shape({
         params: PropTypes.shape({
             entity: PropTypes.string.isRequired,
-            
         })
 	}).isRequired,
 }

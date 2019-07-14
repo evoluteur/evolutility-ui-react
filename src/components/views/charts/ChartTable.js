@@ -1,4 +1,4 @@
-// Evolutility-UI-React :: /views/many/Chart_Table.js
+// Evolutility-UI-React :: /views/charts/Chart_Table.js
 
 // Shows a table with the chart data
 
@@ -8,13 +8,13 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 import {i18n_charts} from '../../../i18n/i18n'
 
-import './Chart_Table.scss'
+import './ChartTable.scss'
 
 const percent = (value, total) => (parseInt(10000 * value / total)/100)+'%'
 
 export default class ChartTable extends React.PureComponent {
 
-    viewId = 'chart_table'
+    viewId = 'charttable'
 
     render(){
         const sLink = '../../'+this.props.entity+'?'+this.props.field.id+'=',

@@ -16,6 +16,7 @@
 		min-height:286px;
 	}
 }
+
 .chart-holder{
 	> h3{
 		display:block;
@@ -26,7 +27,19 @@
 		position: relative;
 		top: 50px;
 	}
+	> .i-chart{
+		padding: 0 10px;
+		height: 300px;
+		min-width: 300px;
+		min-height: 100px;
+	}
+	&.size-large{
+		> .i-chart{
+			height: 500px;
+		}
+	}
 }
+
 .singleChart{
 	padding: 10px 5px 20px;
 }
@@ -43,6 +56,11 @@
 			cursor: default;
 		}
 	}
+	&.sort{
+		position: absolute;
+		top: 30px;
+		right: 5px;
+	}
 }
 .charts-stats{
 	margin-top: 20px;
@@ -50,8 +68,9 @@
 		margin-right: 5px;
 	}
 }
-	.nbc1{
-		.evol-chart-holder{
-			min-width: 610px;
-		}
+
+.nbc1{
+	.evol-chart-holder{
+		min-width: 610px;
 	}
+}
