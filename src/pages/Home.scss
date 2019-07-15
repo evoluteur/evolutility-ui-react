@@ -21,4 +21,16 @@
   .apps-icons > a {
     margin-right: 10px;
   }
+  .cSet{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    > div {
+      box-sizing: border-box;
+      flex-grow: 1;
+      margin: 10px 10px 10px 5px;
+      width: 30%;
+      min-width: 200px;
+    }
+  }
 }
