@@ -80,6 +80,10 @@ export default class Home extends React.PureComponent {
                 </div> 
                 
             </div>
+
+            <p>The sample applications you will see here are not anything you haven't seen before. 
+                The interesting thing is that these demos are not done with templates, CSS and custom Javascript but are only configured with models.
+              </p>
         </div>
         
         );

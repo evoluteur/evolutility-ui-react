@@ -13,9 +13,9 @@ import Home from './pages/Home.js';
 
 import List from './components/views/many/List';
 import Cards from './components/views/many/Cards';
+import Charts from './components/views/charts/Charts';
 import Stats from './components/views/many/Stats';
 
-import Charts from './components/views/charts/Charts';
 import Browse from './components/views/one/Browse';
 import Edit from './components/views/one/Edit';
 
@@ -28,6 +28,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 const AppRoutes = () => (
 	<Switch>
 		<Route exact path="/" component={Home} />
+		<Route path="/:entity" exact={true} component={List}/> 
 
 		<Route path="/:entity/browse/:id" component={Browse}/>
 		<Route path="/:entity/browse" component={Browse}/>
@@ -35,15 +36,14 @@ const AppRoutes = () => (
 		<Route path="/:entity/edit" component={Edit}/>
 
 		<Route path="/:entity/cards" component={Cards}/>
+		<Route path="/:entity/list" component={List}/>
+
 		<Route path="/:entity/charts" component={Charts}/>
 		<Route path="/:entity/stats" component={Stats}/>
-		<Route path="/:entity/list" component={List}/>
-		<Route path="/:entity" component={List}/> 
 
 		<Route path='*' exact={true} component={PageNotFound} />
 	</Switch>
 );
-
 
 export default class App extends React.Component {
 //<React.StrictMode></React.StrictMode>
