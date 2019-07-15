@@ -209,7 +209,7 @@ module.exports = {
     table: 'wine',
     name: 'wine',
     namePlural: 'wines',
-    label: 'Wine Cellar',
+    label: 'Wine cellar',
     icon: 'wine-bottle.png',
     fnTitle: function(model){
         return model.get('name')+' '+model.get('vintage');

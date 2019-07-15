@@ -4,7 +4,7 @@ import format from '../../utils/format'
 export default {
     id: 'winetasting',
     table: 'wine_tasting',
-    title: 'Wine Tasting',
+    title: 'Wine tasting',
     titleField: function(data){
         var title = ''
         if(data.wine_id){

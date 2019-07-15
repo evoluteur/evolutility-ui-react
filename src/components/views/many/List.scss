@@ -15,9 +15,6 @@
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     margin-bottom: 0;
-    td{
-      position: relative;
-    }
     th{
       position: relative;
       font-weight: $weight-label !important;
@@ -29,6 +26,9 @@
         top: 12px;
         color: $color-border;
       }
+    }
+    td{
+      position: relative;
     }
     //input, textarea{
     //  min-width:200px;

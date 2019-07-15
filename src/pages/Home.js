@@ -24,8 +24,6 @@ export default class Home extends React.PureComponent {
 
             <h2 className="tBlue">Build applications with models rather than code.</h2> 
             
-            <p>&nbsp;</p>
-
             <div className="cSet">
                 
                 <div className="component">

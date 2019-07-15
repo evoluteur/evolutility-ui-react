@@ -162,7 +162,7 @@ export default class Stats extends React.Component {
         }
         return (
             <div className="">
-                <Header entity={e} title={model.label || model.title} 
+                <Header entity={e} title={(model.label || model.title) + ' Stats'} 
                     count={title} cardinality='n' view={this.viewId}/>
 
                 {this.state.error ? (

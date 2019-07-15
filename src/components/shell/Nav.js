@@ -24,8 +24,8 @@ const MenuLink = ({ menu }) => <Route
         exact={false}
         children={({ match }) => (
             <li className={match ? "active" : ""}>
-            <Link to={'/'+menu.id}>{menu.text}</Link>
-            {iconViews(menu.id, menu)}
+                <Link to={'/'+menu.id+'/'+(menu.defaultViewMany ? menu.defaultViewMany : 'list')}>{menu.text}</Link>
+                {iconViews(menu.id, menu)}
             </li>
         )}
     />
@@ -35,7 +35,6 @@ const MenuLinks = ({ menus }) => menus.map(menu => <MenuLink menu={menu} key={me
 export default class Nav extends React.Component {
 
     render() {
-
         return (
             <nav className="Nav">
                 <a className="skipNav" href="#afterNav">{i18n_nav.skip}</a>

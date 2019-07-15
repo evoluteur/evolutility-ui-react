@@ -12,7 +12,7 @@ var lov_categories = [
 
 module.exports = {
     id: 'contact',
-    label: 'Address Book',
+    label: 'Address book',
     icon: 'contact.gif',
     name: 'contact', namePlural: 'contacts',
     titleField: function(data){
@@ -61,7 +61,8 @@ module.exports = {
             type: 'lov', id: 'category',
              label: 'Category', width: 100,
              list: lov_categories,
-            inMany: true
+            inMany: true,
+            chartType: 'Pie',
         },
         {
             type: 'text', id: 'phone',

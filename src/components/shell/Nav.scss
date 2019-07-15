@@ -31,6 +31,7 @@
 	}
 
 	div{
+		margin-bottom: 10px;
 		padding: 7px;
 		font-weight: bold;
 	}
@@ -43,7 +44,7 @@
 		position: relative;
 		font-weight: normal;
 		font-size: 14px;
-		padding: 5px;
+		padding: 5px 3px;
 		margin: 0 0 4px 0;
 	}
 
@@ -151,7 +152,7 @@ a.skipNav {
 		background-color: white;
 		> .mIcons{
 			display: inline-block;
-			padding-right: 14px;
+			//padding-right: 14px;
 			> a:hover {
 				color: $color-icon-hover;
 			}
