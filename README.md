@@ -35,7 +35,7 @@ In a web browser, go to the url [http://localhost:3000/](http://localhost:3000/)
 For the REST endpoints, you also need to install and run [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) which provides the matching REST endpoints based on the same metadata.
 
 
-## Configuration
+## Setup
 
 Configurations options are specified in the file [/src/config.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/config.js). They apply to all apps (app specific options are specified in models).
 
@@ -55,10 +55,10 @@ For any object, a single model defines UI elements across views in a simple decl
 
 Evolutility-UI-React provides 2 types of view:
 
-* Views for a model: [Browse](#browse), [Edit](#edit).
-* Views for a collection: [List](#list), [Cards](#cards), [Charts](#charts), [Stats](#stats).
+* Views for One - a single record: [Browse](#browse), [Edit](#edit).
+* Views for Many - a collection of records: [List](#list), [Cards](#cards), [Charts](#charts), [Stats](#stats).
 
-Notes: Views for actions will come later.
+Notes: Views for actions (search, filter, export) will come later.
 
 A large part of the API (methods, options and events) is common to all views. Some views have additional API.
 
@@ -125,6 +125,10 @@ View: [http://localhost:3000/comics/stats](http://localhost:3000/comics/stats)
 
 Each model describe an object and its list of fields. A single model is used for all views (Browse, Edit, List, Cards...).
 
+For any object, all UI views (List, Cards, Edit, Charts...) share the same model. 
+All Fields are present in the Edit and Browse views. Fields can be flagged as "inMany" to be included in List, Cards, and Charts views.
+
+
 ### Object
 
 | Property     | Meaning                                 |
@@ -170,7 +174,7 @@ Objects have fields.
 <a name="Group"></a>
 ### Group
 
-Groups are used to visually divide Fields (in Edit and Browse views).
+Groups are used to separate Fields into panels in the Edit and Browse views.
 
 | Property     | Meaning                               |
 |--------------|---------------------------------------|
@@ -182,8 +186,9 @@ Groups are used to visually divide Fields (in Edit and Browse views).
 | header       | Text to be displayed at the top of the group (just below the group title).|
 | footer       | Text to be displayed at the bottom of the group.    |
 
-Note: Groups are optional. By default a single group holds all fields.
-
+Notes: 
+- Groups are optional. By default a single group holds all fields.
+- Groups are positioned based on their "width" property the same way than fields are positioned inside groups.
 
 <a name="Collection"></a>
 ### Collection
@@ -312,11 +317,13 @@ More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-rea
 [Wine cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/pim/winecellar.js). 
 
 
-## Other implementations of Evolutility
+## Evolutility backend
+
+[Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) provides REST or GraphQL end-points for Evolutility-UI-React using the same models.
+
+### Earlier implementations for other stacks
 
 [Evolutility-UI-jQuery](https://github.com/evoluteur/evolutility-ui-jquery) - Model-driven Web UI for CRUD using jQuery and Backbone (for REST or localStorage).
-
-[Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) - RESTful Micro-ORM for CRUD and more, written in Javascript, using Node.js, Express, and Postgres.
 
 [Evolutility-ASP.net](https://github.com/evoluteur/evolutility-asp.net) - Lightweight CRUD framework for heavy lifting with ASP.net and Microsoft SQL-Server.
 

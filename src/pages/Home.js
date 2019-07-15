@@ -68,15 +68,15 @@ export default class Home extends React.PureComponent {
                     </p> 
                     
                     <p>Sample RESTful API: {' '}
-
                         <a target="api" href={apiPathFull}>API discovery</a>, {' '}
-
                         <a target="api" href={apiPathFull+'todo'}>To-Do list</a>,  {' '}
                         <a target="api" href={apiPathFull+'contact'}>Address Book</a>,  {' '}
                         <a target="api" href={apiPathFull+'comics'}>Graphic Novels inventory</a>,  {' '}
                         <a target="api" href={apiPathFull+'restaurant'}>Restaurants list</a>, {' '}
-                        <a target="api" href={apiPathFull+'winecellar'}>Wine Cellar</a>. 
+                        <a target="api" href={apiPathFull+'winecellar'}>Wine Cellar</a>{' '}
+                         or <a target="api" href="http://localhost:2000/graphql">GraphQL UI</a>.
                     </p> 
+
                 </div> 
                 
             </div>
