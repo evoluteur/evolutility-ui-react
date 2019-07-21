@@ -9,11 +9,23 @@ export default class Pie extends React.Component {
     render() {
         let data = this.props.data
         if(data){
-            data = data.map(d => ({
-                id: ''+d.label,
-                label: ''+d.label,
-                value: d.value,
-            }))
+            let dh ={}
+            let label
+            data = data.map(d => {
+                label = d.label
+                if(dh[label]){
+                    dh[label] += 1
+                    label += ' ('+dh[label]+')'
+                }else{
+                    dh[label] = 1
+                }
+                return {
+                    id: ''+label,
+                    label: ''+label,
+                    value: d.value,
+                }
+            })
+
         }
 
         return <div className="i-chart" role="contentinfo">
