@@ -2,8 +2,10 @@
 
 .panel-heading { // panel-heading from Bootstrap
     position: relative;
-    >.panel-title{ // panel-title from Bootstrap
+    > .panel-title { // panel-title from Bootstrap
       display: inline-block;
+      font-weight: 400;
+      font-size: 1.2em;
     }
   //  >.evol-subtitle{
   //    display: inline-block;
@@ -15,7 +17,7 @@
   border-radius: 2px !important;
   div.panel-header,
   div.panel-footer {
-    background-color: $color-panel-footer;
+    background-color: $bgcolor-panel-footer;
   }
 }
 
@@ -23,3 +25,6 @@
     margin-top:5px;
 }
 
+.panel-default > .panel-heading {
+  background-color: $bgcolor-panel-header !important;
+}

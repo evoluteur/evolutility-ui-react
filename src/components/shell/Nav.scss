@@ -24,15 +24,19 @@
 		text-decoration: none;
 		&.active {
 			color: black;
-			font-family: Droid-Bold,Lato,'Helvetica Neue',Arial,Helvetica;
-			font-weight: 600;
 			text-decoration: none;
 		}
 	}
-	div{
+	div {
+		line-height: 25px;
 		margin-bottom: 10px;
 		padding: 7px;
 		font-weight: bold;
+		font-size: 15px;
+		> i {
+			position: relative;
+			top: 2px;
+		}
 	}
 	ul{
 		list-style-type: none;
@@ -47,24 +51,35 @@
 		margin: 0 0 4px 0;
 	}
 
-	.Nav > ul > li{
-		border-left: solid 4px #eee;
-		font-size: 16px; 
-		margin: 0 0 10px 0;
-		padding: 0;
-	/*
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	*/
+	> ul {
+		> li > ul {
+			border-left: 3px solid #eee;
+		}
+		> li{
+			border-left: solid 4px #eee;
+			font-size: 16px; 
+			margin: 0 0 10px 0;
+			padding: 0;
+		/*
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		*/
+		}
+	}
+	.active-li {
 		> div {
-			line-height: 25px;
+			background-color: $almostwhite-color;
+		}
+		> ul {
+			border-left: 3px solid grey;
 		}
 	}
 	i{
 		color: #455A64;
 		font-size: 16px;
 		margin-right: 12px;
+		top: -2px;
 
 		&.link{
 			margin-left: 5px;
@@ -72,6 +87,10 @@
 	}
 	a:hover{
 		color: $color-icon-hover;
+	}
+	.footLinks{
+		margin-top: 20px;
+		padding: 10px;
 	}
 
 }
@@ -131,12 +150,13 @@ a.skipNav {
 		font-size: 12px;
 
 		&:hover{
-			>i{
+			>i {
 				color: $color-icon-hover
 			}
 		}
 		> i {
 			display: inline-block;
+			top: -4px;
 			font-size: 12px;
 			margin: 0 3px;
 		}

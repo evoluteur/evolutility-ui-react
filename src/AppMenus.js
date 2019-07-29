@@ -1,8 +1,8 @@
 
 module.exports = [
     {
-        id: 'demos',
-        title: 'Organizer',
+        id: 'pim',
+        title: 'Personal Information Manager',
         icon: 'leaf',
         menus: [
             {id: 'contact', text: 'Address book'},

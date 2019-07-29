@@ -10,6 +10,7 @@ import TopBar from './components/shell/TopBar.js';
 import Footer from './components/shell/Footer.js';
 
 import Home from './pages/Home.js';
+import Demo from './pages/Demo.js';
 
 import List from './components/views/many/List';
 import Cards from './components/views/many/Cards';
@@ -28,6 +29,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 const AppRoutes = () => (
 	<Switch>
 		<Route exact path="/" component={Home} />
+		<Route exact path="/demo" component={Demo} />
 		<Route path="/:entity" exact={true} component={List}/> 
 
 		<Route path="/:entity/browse/:id" component={Browse}/>
@@ -52,7 +54,7 @@ export default class App extends React.Component {
 			<BrowserRouter>
 				<div className="App">
 					<TopBar />
-					<Nav />
+					<Route path='*' exact={true} component={Nav} /> 
 					<div className="pageContent" role="main">
 						<AppRoutes/>
 					</div>

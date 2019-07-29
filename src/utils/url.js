@@ -32,9 +32,19 @@ export function getSearchText(){
 	return (search && search.search) ? search.search : null
 }
 
+export function getUrlMap(url){
+	const ws = (url ? url+'' : window.location.pathname ).split('/')
+	return {
+		entity: ws.length>0 ? ws[1] : null,
+		view: ws.length>1 ? ws[2] : null,
+		id: ws.length>2 ? ws[3] : null,
+	}
+}
+
 export default {
 	queryUrl: queryUrl,
 	querySearch: querySearch,
 	parseQuery: parseQuery,
 	getSearchText: getSearchText,
+	getUrlMap: getUrlMap,
 }

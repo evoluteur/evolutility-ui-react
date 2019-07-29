@@ -1,0 +1,24 @@
+.evo-demo {
+  .demoLinks{
+    > a {
+          display: block;
+          margin-bottom: 4px;
+          > img {
+              margin-right: 5px;
+          }
+      }
+    }
+    .cSet{
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      > div {
+        box-sizing: border-box;
+        padding: 0 10px;
+        flex-grow: 1;
+        margin: 10px 10px 10px 5px;
+        width: 30%;
+        min-width: 200px;
+      }
+    }
+}
