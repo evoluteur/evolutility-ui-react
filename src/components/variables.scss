@@ -3,6 +3,7 @@ $background-color: white;
 $almostwhite-color: #f0f0f0;
 $almostblack-color: #0d0d0d;
 $grey-color: silver;
+$bgcolor-header: #fbfbfb;
 // base
 $color-text: $almostblack-color;
 $color-label: grey;
@@ -40,8 +41,8 @@ $field-h-spacing: 16px;
 $weight-label: 500;
 
 // page footer
-$color-text-footer: silver;
-$color-panel-footer: #fafafa;
+$color-text-footer: #607D8B;
+$bgcolor-text-footer: #f8f8f8;
 
 // mixins
 @mixin border-radius($r){

@@ -63,8 +63,8 @@ export default class Browse extends OneRead {
     if(!m){
       return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
     }else{
-        document.title = title
-        return ( 
+      document.title = title
+      return ( 
         <div className="evolutility">
           <Header {...this.props.match.params} title={title} 
               comments={data.nb_comments} count={null}

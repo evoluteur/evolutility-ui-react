@@ -109,6 +109,9 @@ export function prepModel(m){
 			if(!m.titleField){
 				m.titleField = m.fields[0];
 			}
+			if(m.fields.filter(fieldInCharts).length<1){
+				m.noCharts = true
+			}
 			m.prepared = true
 		}
 		return m;

@@ -15,19 +15,13 @@ module.exports = {
 			"id": "name",
 			"type": "text",
 			"label": "Name",
-			"inMany": true,
-			"width": 80,
-			"height": 1
+			"required": true,
+			"inMany": true
 		},
 		{
 			"id": "url",
 			"type": "url",
 			"label": "Web site"
-		},
-		{
-			"id": "url_wiki",
-			"type": "url_wiki",
-			"label": "Wikipedia"
 		},
 		{
 			"id": "photo",

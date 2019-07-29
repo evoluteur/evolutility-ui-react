@@ -5,9 +5,7 @@
 
 const queryString = require('query-string');
 
-export function queryUrl(){
-	return window.location.search || ''
-}
+export const queryUrl = () => window.location.search || ''
 
 export function querySearch(query){
 	// - make uri params string from query object

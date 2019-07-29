@@ -18,8 +18,8 @@ import { toast } from 'react-toastify';
 import Format from '../../utils/format'
 import url from '../../utils/url'
 import evoGlobals from '../../utils/evoGlobals'
-import {apiPath} from '../../config.js'
-import {proxy} from '../../../package.json'
+import { apiPath } from '../../config.js'
+import { proxy } from '../../../package.json'
 //import {i18n_actions, i18n_msg} from '../../i18n/i18n'
 import { i18n_msg, i18n_actions } from '../../i18n/i18n'
 import models from '../../models/all_models'
@@ -227,7 +227,7 @@ class Toolbar extends React.Component {
                 link = Format.urlJoin(proxy, link)
             }
             window.location.href = link;
-            toast.success('Downloading CSV export.', {
+            toast.success(i18n_msg.downloadingCSV, {
                 position: toast.POSITION.TOP_RIGHT
             })
         }else{

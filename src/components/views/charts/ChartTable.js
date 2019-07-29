@@ -40,7 +40,7 @@ export default class ChartTable extends React.PureComponent {
                     </thead>
                     <tbody>
                         { data ? data.map(d => (
-                            <tr key={d.value+d.label}>
+                            <tr key={d.value+d.id}>
                                 <td>{d.label ? <Link to={makeLink(d)}>{d.label}</Link> : ' N/A' }</td>
                                 <td className="alignR">{d.value}</td>
                                 <td className="alignR">{percent(d.value, totalCount)}</td>

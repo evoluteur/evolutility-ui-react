@@ -3,7 +3,6 @@ import format from '../../utils/format'
 
 export default {
     id: 'winetasting',
-    table: 'wine_tasting',
     title: 'Wine tasting',
     titleField: function(data){
         var title = ''
@@ -25,34 +24,34 @@ export default {
     //fnSearch: ['name', 'winery', 'appellation', 'notes'],
     fields: [
         { 
-            id: 'drink_date', column: 'drink_date', type: 'date', 
+            id: 'drink_date', type: 'date', 
             label: 'Date', inMany: true,
             width: 38,
             required: true
         },
         { 
-            id: 'wine_id', object: 'winecellar', column: 'wine_id', type: 'lov', 
+            id: 'wine_id', object: 'winecellar', type: 'lov', 
             label: 'Wine', inMany: true,
             width: 62,
             required: true
         },
         { 
-            id: 'taste', column: 'taste', type: 'text', 
+            id: 'taste', type: 'text', 
             label: 'Taste', maxLength: 100, inMany: true,
             width: 100,
         },
         { 
-            id: 'robe', column: 'robe', type: 'text', 
+            id: 'robe', type: 'text', 
             label: 'Robe', maxLength: 100, inMany: true,
             width: 100,
         },
         { 
-            id: 'nose', column: 'nose', type: 'text', 
+            id: 'nose', type: 'text', 
             label: 'Nose', maxLength: 100, inMany: true,
             width: 100,
         },
         { 
-            id: 'notes', column: 'notes', type: 'textmultiline', 
+            id: 'notes', type: 'textmultiline', 
             label: 'Notes', inMany: true, height: 5,
             width: 100,
         }

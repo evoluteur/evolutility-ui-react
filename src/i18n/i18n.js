@@ -71,6 +71,7 @@ module.exports = {
         deleted: '{0} deleted.',
         updated: '{0} updated.',
         added: 'New {0} added.',
+        downloadingCSV: 'Downloading CSV export.',
     },
 
     // --- status ---

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default class PageNotFound extends React.PureComponent {
 
@@ -17,8 +18,7 @@ export default class PageNotFound extends React.PureComponent {
 					404 error on file "{url}".
 				</p>
 
-				<p><br/><a className="btn btn-primary" href="/">Back to Home Page</a></p>
-
+				<p><br/><Link className="btn btn-primary" to="/">Back to Home Page</Link></p>
 
 			</div>
 		)

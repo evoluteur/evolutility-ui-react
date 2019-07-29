@@ -206,7 +206,6 @@ var winecellar_lovs = {
 
 module.exports = {
     id: 'winecellar',
-    table: 'wine',
     name: 'wine',
     namePlural: 'wines',
     label: 'Wine cellar',
@@ -217,7 +216,6 @@ module.exports = {
     fields:  [
         {
             id:'name',
-            column:'name',
             type: 'text',
             label: 'Name',
             required: true,
@@ -228,7 +226,6 @@ module.exports = {
         },
         {
             id:'vintage',
-            column:'vintage',
             type: 'integer',
             label: 'Vintage',
             required: true,
@@ -241,7 +238,6 @@ module.exports = {
         },
         {
             id:'winery',
-            column:'winery',
             type: 'text',
             label: 'Winery',
             maxLength: 100,
@@ -252,7 +248,6 @@ module.exports = {
         },
         {
             id:'bsize',
-            column:'bsize',
             type: 'lov',
             label: 'Bottle Size',
             labelShort: 'Bottle',
@@ -262,7 +257,6 @@ module.exports = {
         },
         {
             id:'grape',
-            column:'grape',
             type: 'lov',
             label: 'Grape',
             inMany: false,
@@ -272,7 +266,6 @@ module.exports = {
         },
         {
             id:'type',
-            column:'type',
             type: 'lov',
             label: 'Type',
             inMany: true,
@@ -283,7 +276,6 @@ module.exports = {
         },
         {
             id:'appellation',
-            column:'appellation',
             type: 'text',
             label: 'Appellation',
             width: 100,
@@ -291,7 +283,6 @@ module.exports = {
         },
         {
             id:'country',
-            column:'country',
             type: 'lov',
             label: 'Country',
             width: 32,
@@ -301,7 +292,6 @@ module.exports = {
         },
         {
             id:'region',
-            column:'region',
             type: 'text',
             label: 'Region',
             maxLength: 100,
@@ -309,7 +299,6 @@ module.exports = {
         },
         {
             id:'area',
-            column:'area',
             type: 'text',
             label: 'Area',
             maxLength: 100,
@@ -317,7 +306,6 @@ module.exports = {
         },
         {
             id:'label_img',
-            column:'label_img',
             type: 'image',
             label: 'Label',
             labelCards: '',
@@ -327,14 +315,12 @@ module.exports = {
         },
         {
             id:'buying_date',
-            column: 'buying_date',
             type: 'date',
             label: 'Buying Date',
             width: 40
         },
         {
             id:'price',
-            column: 'price',
             type: 'money',
             label: 'Price',
             inMany: true,
@@ -342,14 +328,12 @@ module.exports = {
         },
         {
             id:'value',
-            column: 'value',
             type: 'money',
             label: 'Value',
             width: 30
         },
         {
             id:'purchased',
-            column: 'purchased',
             type: 'integer',
             label: 'Bottles Purchased',
             labelShort: 'Purchased',
@@ -358,7 +342,6 @@ module.exports = {
         },
         {
             id:'remaining',
-            column: 'remaining',
             type: 'integer',
             label: 'Bottles Remaining',
             labelShort: 'Remaining',
@@ -368,7 +351,6 @@ module.exports = {
         },
         {
             id:'notes',
-            column: 'notes',
             type: 'textmultiline',
             label: 'Notes',
             maxLength: 150,
@@ -377,7 +359,6 @@ module.exports = {
         },
         {
             id:'drink_from',
-            column: 'drink_from',
             type: 'integer',
             label: 'Drink from (year)',
             labelShort: 'Drink',
@@ -390,7 +371,6 @@ module.exports = {
         },
         {
             id:'drink_to',
-            column: 'drink_to',
             type: 'integer',
             label: 'Drink until',
             labelCharts: 'End of drinking period',
@@ -401,7 +381,6 @@ module.exports = {
         },
         {
             id:'peak_from',
-            column: 'peak_from',
             type: 'integer',
             label: 'Peak from',
             labelCharts: 'Peak period start',
@@ -412,7 +391,6 @@ module.exports = {
         },
         {
             id:'peak_to',
-            column: 'peak_to',
             type: 'integer',
             label: 'Peak until',
             labelCharts: 'Peak period end',
@@ -423,7 +401,6 @@ module.exports = {
         },
         {
             id:'meal',
-            column: 'meal',
             type: 'textmultiline',
             label: 'Meal',
             maxLength: 200,
@@ -432,7 +409,6 @@ module.exports = {
         },
         {
             id:'score',
-            column: 'score',
             type: 'lov',
             label: 'My Score',
             labelShort: 'Score',
@@ -442,7 +418,6 @@ module.exports = {
         },
         {
             id:'score_parker',
-            column: 'score_parker',
             type: 'integer',
             label: 'Parker',
             labelCharts: 'Parker scores',
@@ -453,7 +428,6 @@ module.exports = {
         },
         {
             id:'score_winespectator',
-            column: 'score_winespectator',
             type: 'integer',
             label: 'Wine Spectator',
             labelCharts: 'Wine Spectator scores',
@@ -464,7 +438,6 @@ module.exports = {
         },
         {
             id: 'comments',
-            column: 'comments',
             type: 'textmultiline',
             label: 'Comments',
             maxLength: 500,
@@ -520,7 +493,6 @@ module.exports = {
         {
             id:'wine_tasting',
             table: 'wine_tasting',
-            column: 'wine_id',
             title: 'Degustations',
             object: 'winetasting', 
             icon: 'wine.gif', 
