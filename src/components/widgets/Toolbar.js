@@ -28,6 +28,7 @@ import './Toolbar.scss'
 
 const menuItems = {
     new: {id: 'edit/0', label: i18n_actions.new, icon:'plus', n:'x', readonly:false},
+    new_nolabel: {id: 'edit/0', icon:'plus', n:'x', readonly:false},
     del: {id: 'del', label: i18n_actions.delete1, icon:'trash', n:'1', readonly:false},
     //filter: {id:'filter', label: i18n_actions.filter, icon:'filter', n:'n'},
     export: {id: 'export', label: i18n_actions.export1, icon:'cloud-download', n:'x'},
@@ -110,22 +111,21 @@ class Toolbar extends React.Component {
         }
         
         if(!isNew){
-            actions.push(buttonLink(menuItems.new, ''));
+            actions.push(buttonLink(menuItems[id ? 'new_nolabel' : 'new'], ''));
         }
+        navViews = ['list', 'cards', 'charts'].map(menu => buttonLink(menuItems.views[menu], id, true))
         if(id){
-            navViews.push(buttonLink(menuItems.views.list, '', true))
             if(view==='edit' && !isNew){
-                navViews.push(buttonLink(menuItems.views.browse, id))
+                actions.push(buttonLink(menuItems.views.browse, id))
                 //actions.push(buttonLink(menuItems.save, id));
             }
             if(view==='browse'){
-                navViews.push(buttonLink(menuItems.views.edit, id));
+                actions.push(buttonLink(menuItems.views.edit, id));
             }
             if(!isNew){
                 actions.push(buttonLink(menuItems.del, this.confirmDelete));
             }
         }else{
-            navViews = ['list', 'cards', 'charts'].map(menu => buttonLink(menuItems.views[menu], id, true))
             if(view!=='charts' && view!=='stats'){
                 //actions.push(buttonLink(menuItems.filter, this.filterMany));
                 //actions.push(buttonLink(menuItems.views.charts, ''));

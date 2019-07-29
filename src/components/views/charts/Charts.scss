@@ -19,9 +19,11 @@
 
 .chart-holder{
 	> h3{
-		display:block;
-		text-align:center;
-		padding:10px 20px 30px;
+		display: block;
+		font-weight: 400;
+		font-size: 1.2em;
+		text-align: center;
+		padding: 10px 20px 30px;
 	}
 	> i{
 		position: relative;
@@ -32,6 +34,10 @@
 		height: 300px;
 		min-width: 300px;
 		min-height: 100px;
+	}
+	.alert {
+		text-align: left;
+		margin: 0 10px;
 	}
 	&.size-large{
 		> .i-chart{
@@ -73,4 +79,9 @@
 	.evol-chart-holder{
 		min-width: 610px;
 	}
+}
+
+// no data in charts
+.chart-holder > .alert {
+	margin-top: 50px;
 }

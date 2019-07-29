@@ -8,8 +8,9 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import axios from 'axios'
-import {apiPath} from '../../../config.js'
+import { apiPath } from '../../../config.js'
 
+import { i18n_charts } from '../../../i18n/i18n'
 import Alert from '../../widgets/Alert'
 import { lcWrite } from '../../../utils/localStorage'
 import Spinner from '../../shell/Spinner'
@@ -52,7 +53,6 @@ export default class Chart extends React.Component {
 
     componentDidMount() {
         this.getData()
-
     }
 
     componentWillUnmount() {
@@ -78,6 +78,7 @@ export default class Chart extends React.Component {
                     if(!this.done){
                         this.setState({
                             error: {
+                                title: 'Server error',
                                 message: err.response.statusText || 
                                     'Couldn\'t retrieve charts data for field "'+fid+'".'
                             },
@@ -89,8 +90,8 @@ export default class Chart extends React.Component {
     }
 
     click_view(evt){
-        const e=this.props.entity
-        const fid=this.props.field.id
+        const e = this.props.entity
+        const fid = this.props.field.id
         const chartsType = evt.currentTarget.id
 
         lcWrite(e+'-charts-'+fid, chartsType)
@@ -114,24 +115,34 @@ export default class Chart extends React.Component {
             sortTable: this.sortTable,
         }
         if(this.state.error){
+            // - error
             body = <Alert type="danger" title={this.state.error.title} message={this.state.error.message}/> 
         }else if(this.state.loading){
+            // - loading
             body = <Spinner></Spinner>
-        }else if(cType==='Table'){
-            body = <ChartTable {...params} field={this.props.field}/>
-        }else if(cType==='Pie'){
-            body = <Pie {...params} />
+        }else if(!data || data.length===0){
+            // - no data
+            body = <Alert type="info" title={i18n_charts.noData} message={i18n_charts.emptyData}/> 
         }else{
-            body = <Bars {...params} />
+            if(cType==='Table'){
+                // - table view
+                body = <ChartTable {...params} field={this.props.field}/>
+            }else if(cType==='Pie'){
+                // - Pie charts
+                body = <Pie {...params} />
+            }else{
+                // - Bars charts
+                body = <Bars {...params} />
+            }
         }
 
         return (
             <div className="evol-chart-holder panel panel-default">
                 <div className={"chart-holder"+(size?' size-'+size:'')}>
                     <div className="chart-actions pull-right">
-                        <i id="Pie" onClick={this.click_view} className={"glyphicon glyphicon-cd"+(cType==='Pie'?' active':'')}/>
-                        <i id="Bars" onClick={this.click_view} className={"glyphicon glyphicon-stats"+(cType==='Bars'?' active':'')}/>
-                        <i id="Table" onClick={this.click_view} className={"glyphicon glyphicon-th-list"+(cType==='Table'?' active':'')}/>
+                        <i id="Pie" title={i18n_charts.pie} onClick={this.click_view} className={"glyphicon glyphicon-cd"+(cType==='Pie'?' active':'')}/>
+                        <i id="Bars" title={i18n_charts.bars} onClick={this.click_view} className={"glyphicon glyphicon-stats"+(cType==='Bars'?' active':'')}/>
+                        <i id="Table" title={i18n_charts.table} onClick={this.click_view} className={"glyphicon glyphicon-th-list"+(cType==='Table'?' active':'')}/>
                     </div>
                     <h3 className="panel-title">{this.props.title}</h3>
                     {body}

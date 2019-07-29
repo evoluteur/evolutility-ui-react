@@ -123,6 +123,12 @@ module.exports = {
     i18n_charts:{
         nocharts: 'No default charts.',
         total: 'Total',
+        noData: 'No data',
+        emptyData: 'The query returned no results.',
+
+        pie: 'Pie',
+        bars: 'Bars',
+        table: 'Table',
     },
 
     // --- comments ---
