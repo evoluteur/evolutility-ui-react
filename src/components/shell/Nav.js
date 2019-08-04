@@ -48,7 +48,8 @@ const MenuLinks = ({ menus }) => menus.map(menu => <MenuLink menu={menu} key={me
 export default class Nav extends React.Component {
 
     render() {
-        const w = url.getUrlMap(this.props.match.url)
+        const urlw = this.props.match ? this.props.match.url : ''
+        const w = url.getUrlMap(urlw)
         const g = item2Group_Map[w.entity]
         let footer
 

@@ -227,9 +227,6 @@ class Toolbar extends React.Component {
                 link = Format.urlJoin(proxy, link)
             }
             window.location.href = link;
-            toast.success(i18n_msg.downloadingCSV, {
-                position: toast.POSITION.TOP_RIGHT
-            })
         }else{
             toast.error('Error while doing export.', {
                 position: toast.POSITION.TOP_RIGHT

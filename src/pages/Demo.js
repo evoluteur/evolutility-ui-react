@@ -47,7 +47,7 @@ export default class Demo extends React.PureComponent {
                 <div className="component"> 
                 <br/>
                     <p>
-                        <Link to="/test/list"><img src="/pix/cog.png" alt="" title="Test"/>Test App</Link> with fields of all possible types.
+                        <Link to="/test/list">Test App</Link> with fields of all possible types.
                     </p>
                 </div>
                 

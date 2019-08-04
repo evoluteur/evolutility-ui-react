@@ -121,7 +121,7 @@ module.exports = {
 
     // --- charts ---
     i18n_charts:{
-        nocharts: 'No default charts.',
+        nocharts: 'No default charts, the object doesn\'t have numeric fields.',
         total: 'Total',
         noData: 'No data',
         emptyData: 'The query returned no results.',
@@ -144,7 +144,7 @@ module.exports = {
         avg: 'Average',
         min: 'Min.',
         max: 'Max.', 
-        noFit: 'The data doesn\'t have numeric or date/time fields.',
+        noFit: 'The data doesn\'t have any numeric fields necessary for stats.',
     },
 
     i18n_errors: {
