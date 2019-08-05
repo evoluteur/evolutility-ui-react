@@ -133,10 +133,12 @@ module.exports = {
 
     // --- comments ---
     i18n_comments:{
-        
+        comment: 'comment',
+        comments: 'comments'
     },
 
     i18n_stats:{
+        weekUpdates: ' records added or updated this week',
         lastUpdate: 'Last update',
         firstInsert: 'First insert',
         totalComments: 'Number of comments',
@@ -145,6 +147,8 @@ module.exports = {
         min: 'Min.',
         max: 'Max.', 
         noFit: 'The data doesn\'t have any numeric fields necessary for stats.',
+        noData: 'No data',
+        emptyData: 'The query returned no results.',
     },
 
     i18n_errors: {

@@ -36,10 +36,12 @@ const ft = {
 	//rating: 'rating',
 	//widget: 'widget'
 };
+const fta = Object.keys(ft).map(k => ft[k])
 
 const isFunction = x => typeof x === "function"
 
 export const fieldTypes = ft
+export const fieldTypeStrings = fta
 
 export const fieldIsNumber = f => f.type===ft.int || f.type===ft.dec || f.type===ft.money
 

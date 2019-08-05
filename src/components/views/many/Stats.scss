@@ -1,15 +1,58 @@
 @import '../../variables';
 
+
+$chart-width: 490px;
+$label-width: 200px;
+
 // view Stats
+.evol-stats {
+	margin: 0 10px;
+	label {
+		display: block;
+	}
+	> div {
+		margin-bottom: 5px;
+	}
+	.evol-chart-holder {
+		display: block;
+		margin-left: 10px;
+		width: $chart-width;
+		max-width: $chart-width;
+	}
+	.cols-2{
+		@include flex-holder();
+		.col-1,
+		.col-2 {
+			margin-right: 10px;
+			@include flex-item();
+		}
+	}
+}
+.f-stats {
+	> label {
+		display: block;
+		width: $label-width;
+		@include icons-actions();
+		> i {
+			margin-left: 5px;
+		}
+	}
+	> div {
+		display: inline-block !important;
+	}
+}
+.fl-stats { 
+	min-width: 300px;
+	> div {
+		display: inline-block;
+		margin: 0 10px 10px 10px;
+		min-width: 100px;
+		max-width: 300px;
+	}
+}
 .weekupdates{
 	margin-left: 10px;
 
-}
-.numItemList > div {
-	margin-left:10px;
-	display: inline-block;
-	margin-right: 20px;
-	min-width: 100px;
 }
 .stat-fn{
 	display: block;

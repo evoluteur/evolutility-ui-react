@@ -45,8 +45,10 @@ export default class Chart extends React.Component {
             chartType: props.chartType, // "Pie" or "Bars" or "Table",
             sortColumn: '',
             sortOrder: '',
+            size: props.size || 'small',
             loading: true,
         }
+        this.click_resize = this.click_resize.bind(this)
         this.click_view = this.click_view.bind(this)
         this.sortTable = this.sortTable.bind(this)
     }
@@ -100,9 +102,15 @@ export default class Chart extends React.Component {
         })
     }
 
+    click_resize(){
+        this.setState({
+            size: this.state.size==='small' ? 'full' : 'small'
+        })
+    }
+
     render(){
         const data = this.state.data || [],
-            size = this.props.size || 'small',
+            size = this.state.size,
             cType = this.state.chartType
         let body 
                 
@@ -137,8 +145,13 @@ export default class Chart extends React.Component {
         }
 
         return (
-            <div className="evol-chart-holder panel panel-default">
-                <div className={"chart-holder"+(size?' size-'+size:'')}>
+            <div className={"evol-chart-holder panel panel-default"+(size?' size-'+size:'')}>
+                <div className="chart-holder">
+                    {this.props.canExpend ? (
+                        <div className="chart-actions pull-left">
+                            <i id="Resize" onClick={this.click_resize} className={"glyphicon glyphicon-resize-"+(size==='small'?'full':'small')}/>
+                        </div>
+                    ) : null}
                     <div className="chart-actions pull-right">
                         <i id="Pie" title={i18n_charts.pie} onClick={this.click_view} className={"glyphicon glyphicon-cd"+(cType==='Pie'?' active':'')}/>
                         <i id="Bars" title={i18n_charts.bars} onClick={this.click_view} className={"glyphicon glyphicon-stats"+(cType==='Bars'?' active':'')}/>
@@ -177,7 +190,9 @@ Chart.propTypes = {
     size: PropTypes.oneOf(ChartProps.size),
     type: PropTypes.oneOf(ChartProps.chart),
     sort: PropTypes.string,
+    canExpend: PropTypes.bool,
 }
 Chart.defaultProps = {
 	chartType: 'Bars',
+    canExpend: true,
 }

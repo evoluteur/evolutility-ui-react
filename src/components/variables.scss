@@ -91,3 +91,24 @@ $bgcolor-text-footer: #f8f8f8;
   overflow-x: hidden;
   text-overflow: ellipsis;
 }
+
+
+@mixin icons-actions{
+	i{
+		color: $color-icon;
+		margin: 10px 10px 2px 0;
+		cursor: pointer;
+		&:hover{
+			color: $color-icon-hover;
+		}
+		&.active{
+			color: black;
+			cursor: default;
+		}
+	}
+	&.sort{
+		position: absolute;
+		top: 30px;
+		right: 5px;
+	}
+}

@@ -16,7 +16,21 @@
 		min-height:286px;
 	}
 }
+.evol-chart-holder{
 
+	&.size-full{
+		width: 100%;
+		.i-chart{
+			height: 600px;
+		}
+		/*
+		@media only screen and (max-width: 700px) {
+			.i-chart{
+				height: 400px;
+			}
+		}*/
+	}
+}
 .chart-holder{
 	> h3{
 		display: block;
@@ -39,10 +53,8 @@
 		text-align: left;
 		margin: 0 10px;
 	}
-	&.size-large{
-		> .i-chart{
-			height: 500px;
-		}
+	#Resize {
+		margin-left: 8px;
 	}
 }
 
@@ -50,23 +62,7 @@
 	padding: 10px 5px 20px;
 }
 .chart-actions{
-	i{
-		color: $color-icon;
-		margin: 10px 10px 2px 0;
-		cursor: pointer;
-		&:hover{
-			color: $color-icon-hover;
-		}
-		&.active{
-			color: black;
-			cursor: default;
-		}
-	}
-	&.sort{
-		position: absolute;
-		top: 30px;
-		right: 5px;
-	}
+	@include icons-actions();
 }
 .charts-stats{
 	margin-top: 20px;
