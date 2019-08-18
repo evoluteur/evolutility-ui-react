@@ -113,7 +113,6 @@ export default class Stats extends React.Component {
             fields.forEach((f)=>{
                 if(fieldIsNumeric(f)){ 
                     let item = data[f.id]
-                    item.id = item.id
                     item.type = f.type
                     item.field = f
                     if(fieldIsDateOrTime(f)){
@@ -155,15 +154,12 @@ export default class Stats extends React.Component {
         const e = this.props.match.params.entity,
             model = models[e] || null,
             data = this.state.data || {}
-        let title
 
         if(model){
             if(data){
                 no01n(data.count, model.name, model.namePlural)
             }
-        }else{
-            title = 'Error - invalid model "'+e+'"'
-        } 
+        }
 
         const itemAggr = (id, label, value) =>  <div key={id}><label className="grey stat-fn">{label}</label> {value}</div>
 

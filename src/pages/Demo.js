@@ -1,8 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { version, proxy } from '../../package.json';
-import { apiPath } from '../config.js';
-import Format from '../utils/format'
 
 import './Demo.scss'
 
