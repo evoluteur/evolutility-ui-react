@@ -19,7 +19,7 @@ import validation from '../../../utils/validation'
 import OneReadWrite from './one-readwrite'
 import List from '../many/List'
 import Alert from '../../widgets/Alert'
-import Field from '../../widgets/Field'
+import Field from '../../field/Field'
 import Panel from '../../widgets/Panel'
 import Header from '../../shell/Header'
 

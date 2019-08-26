@@ -1,4 +1,4 @@
-// Evolutility-UI-React :: /widgets/FieldLabel.js
+// Evolutility-UI-React :: /field/FieldLabel.js
 
 import React from 'react'
 import PropTypes from 'prop-types'

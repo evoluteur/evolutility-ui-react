@@ -1,4 +1,4 @@
-// Evolutility-UI-React :: /widgets/Field.js
+// Evolutility-UI-React :: /field/Field.js
 
 // Model-driven field (possible types specified in dico.fieldTypes).
 
@@ -70,7 +70,7 @@ export default class Field extends React.Component {
 				    />
 		}else if(f.type===ft.textml || f.type===ft.json){ // && f.height>1
 			return <textarea {...usualProps}
-						rows={f.height} 
+						rows={f.height}
 						className="form-control" 
 						value={d?d:''}
 					/>
@@ -107,6 +107,12 @@ export default class Field extends React.Component {
 						className="form-control inline" 
 						selected={ d ? new Date(d) : null }
 						onChange={this.getDateFieldChange(f.id)}
+					/>
+					<input {...usualProps}
+						key={usualProps.key+'_time'}
+						type="time"
+						value={ d ? d : '' }
+						className="form-control"
 					/>
 				</React.Fragment>
 		}else if(f.type===ft.time){
@@ -211,7 +217,7 @@ export default class Field extends React.Component {
 						{format.fieldValue(f, d)}
 					</Link>
 			}else{
-				if(f.lovicon && this.props.icon){
+				if(f.lovIcon && this.props.icon){
 					fw = <span>
 							<img src={'/pix/'+this.props.icon} className="lov-icon" alt=""/> 
 							{format.fieldValue(f, d)}
@@ -298,7 +304,7 @@ export default class Field extends React.Component {
 }
 
 Field.propTypes = {
-	model: PropTypes.object.isRequired,
+	model: PropTypes.object.isRequired, // model is a field definition (field model)
 	callbacks: PropTypes.shape({
 		change: PropTypes.func,
 		dropFile: PropTypes.func
@@ -306,5 +312,5 @@ Field.propTypes = {
 	data: PropTypes.any,  // object or atomic values depending on field type
 	value: PropTypes.any, // field value
 	label: PropTypes.string, // override label in model
-	readOnly: PropTypes.bool, // override readonly in model
+	readOnly: PropTypes.bool, // override readOnly in model
 }
