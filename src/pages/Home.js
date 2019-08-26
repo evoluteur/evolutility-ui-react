@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { version, proxy } from '../../package.json';
 import { apiPath } from '../config.js';
-import Format from '../utils/format'
+import Format from '../utils/format';
 
 import './Home.scss'
 
-const apiPathFull = Format.urlJoin((typeof proxy !== "undefined")?proxy:'', apiPath)
+const apiPathFull = Format.urlJoin(typeof proxy !== "undefined" ? proxy : '', apiPath)
 
 export default class Home extends React.PureComponent {
 
@@ -82,7 +82,7 @@ export default class Home extends React.PureComponent {
             </div>
 
             <p>The sample applications you will see here are not anything you haven't seen before. 
-                The interesting thing is that these demos are not done with templates, CSS and custom Javascript but are only configured with models.
+                The interesting thing is that the demo apps are not built with templates, CSS and custom Javascript but are only configured with models.
               </p>
         </div>
         

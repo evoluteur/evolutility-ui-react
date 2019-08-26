@@ -47,9 +47,7 @@ export default class Demo extends React.PureComponent {
                         <Link to="/test/list">Test App</Link> with fields of all possible types.
                     </p>
                 </div>
-                
             </div>
-        
-        );
+        )
     }
 }

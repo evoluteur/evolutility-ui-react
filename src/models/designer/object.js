@@ -5,7 +5,7 @@
 
 module.exports = {
 	"id": "object",
-	"title": "Object",
+	"title": "Objects",
 	"name": "object",
 	"namePlural": "objects",
 	"icon": "brick.png",

@@ -1,6 +1,6 @@
 /*
-  Evolutility UI Model for Artists
-  https://github.com/evoluteur/evolutility-ui-react
+  Evolutility UI model for Artists
+ https://github.com/evoluteur/evolutility-ui-react
 */
 
 module.exports = {
@@ -21,20 +21,26 @@ module.exports = {
 		{
 			"id": "url",
 			"type": "url",
-			"label": "Web site"
+			"label": "Web site",
+			"width": 80
+		},
+		{
+			"id": "bdate",
+			"type": "date",
+			"label": "Birth date",
+			"width": 20
 		},
 		{
 			"id": "photo",
 			"type": "image",
 			"label": "Photo",
 			"inMany": true,
-			"width": 100
 		},
 		{
 			"id": "description",
 			"type": "textmultiline",
 			"label": "Description",
-			height: 4,
+			"height": 4
 		}
 	],
 	"groups": [
@@ -46,6 +52,7 @@ module.exports = {
 			"fields": [
 				"name",
 				"url",
+				"bdate",
 				"description"
 			]
 		},

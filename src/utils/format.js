@@ -113,7 +113,7 @@ const formatLib = {
     },
 
     moneyString(d){
-        return d ? numeral(d).format('$0,0.00') : ''
+        return (d || d===0) ? numeral(d).format('$0,0.00') : ''
     },
 
     jsonString(js){
