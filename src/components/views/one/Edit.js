@@ -3,7 +3,7 @@
 // View to add or update one record at a time.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2019 Olivier Giulieri
 
 import React from 'react'
 import PropTypes from 'prop-types';
@@ -175,8 +175,8 @@ export default class Edit extends OneReadWrite{
 
 								<Panel key="formButtons">
 									<div className="evol-buttons">
-										<button className="btn btn-primary" onClick={this.clickSave}><i className="glyphicon glyphicon-ok"></i> {i18n_actions.save}</button>
 										<Link className="btn btn-default" to={linkBrowse}><i className="glyphicon glyphicon-remove"></i> {i18n_actions.cancel}</Link>
+										<button className="btn btn-primary" onClick={this.clickSave}><i className="glyphicon glyphicon-ok"></i> {i18n_actions.save}</button>
 										<span className="">{this.state.invalid ? i18n_validation.incomplete : null}</span>
 										{this.state.error ? i18n_validation.incomplete : null}
 									</div>

@@ -120,11 +120,11 @@ export default class Browse extends OneRead {
 
                       <Panel key="formButtons">
                         <div className="evol-buttons"> 
-                            <Link to={linkEdit} className="btn btn-primary">
-                                <i className="glyphicon glyphicon-edit"></i> {i18n_actions.edit}
-                            </Link>
                             <Link className="btn btn-default" to={linkList}>
                                 <i className="glyphicon glyphicon-remove"></i> {i18n_actions.cancel}
+                            </Link>
+                            <Link to={linkEdit} className="btn btn-primary">
+                                <i className="glyphicon glyphicon-edit"></i> {i18n_actions.edit}
                             </Link>
                         </div>
                       </Panel>
