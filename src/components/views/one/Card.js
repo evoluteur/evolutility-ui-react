@@ -24,6 +24,7 @@ export default class Card extends React.PureComponent {
             entity = this.props.entity,
             m = models[entity],
             link = '/'+entity+'/'+m.defaultViewOne+'/',
+            linkEdit = '/'+entity+'/edit/',
             icon = m.icon ? <img className="evol-many-icon" src={'/pix/'+m.icon} alt=""/> : null
 
         return (
@@ -34,10 +35,15 @@ export default class Card extends React.PureComponent {
 
                     if(idx===0){
                         return (
-                            <div key={idx}>
-                                <h4><Link key={f.id} to={link+d.id}>{icon}{fv}</Link></h4>
+                            <div key={f.id}>
+                                <h4><Link  to={link+d.id}>{icon}{fv}</Link></h4>
+                                <div className="card-actions">
+                                    <Link to={link+d.id}><i title="Browse" className="glyphicon glyphicon-eye-open"></i></Link>
+                                    <Link to={linkEdit+d.id}><i title="Edit" className="glyphicon glyphicon-edit"></i></Link>
+                                </div>
                             </div>
                         )
+                       // <i data-id="Delete" title="Delete" className="glyphicon glyphicon-trash"></i>
                     }else if(f.type===ft.image){
                         return <div key={idx} className="card-fld-center"><Link key={f.id} to={link+d.id}>{fv}</Link></div>
                     }else{

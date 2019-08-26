@@ -22,6 +22,24 @@
     @include border-radius(10px);
     overflow: auto;
     
+    &:hover{
+      .card-actions{
+        display: block;
+      }
+    }
+    .card-actions{
+      z-index: 100;
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 20px;
+      @include icons-actions();
+      i{
+        margin: 5px 0 0 0;
+      }
+      background-color: white;
+    }
     .img-thumbnail{
       padding: 0 !important;
     }
@@ -36,12 +54,12 @@
         vertical-align: top;
         font-weight: 300;
       }
-      > div{
+      > div:not(.card-actions){
         display: inline-block;
         padding-right:5px;
         width: $golden-ratio-big;
         vertical-align: top;
-        > a{
+        > a {
           display: inline-block;
           @include ellipsis();
           width: 100%;

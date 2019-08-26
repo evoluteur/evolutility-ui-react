@@ -15,7 +15,7 @@ import Alert from '../../widgets/Alert'
 import { lcWrite } from '../../../utils/localStorage'
 import Spinner from '../../shell/Spinner'
 import ChartTable from './ChartTable'
-import ChartProps from './ChartProps'
+import chartProps from './ChartProps'
 
 import Bars from './Bars'
 import Pie from './Pie'
@@ -23,6 +23,11 @@ import Pie from './Pie'
 
 import './Charts.scss' 
 
+const cTypes = {
+    bars: 'Bars', 
+    pie: 'Pie', 
+    table: 'Table',
+}
 const sortLabel = (a, b) => (a.label||'').localeCompare(b.label||'')
 const sortCount = (a, b) => {
     if(a.value<b.value){
@@ -33,6 +38,7 @@ const sortCount = (a, b) => {
     }
     return 0;
 }
+const expandToggle = size => size === 'large' ? 'small' : 'large'
 
 export default class Chart extends React.Component {
 
@@ -40,7 +46,7 @@ export default class Chart extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             data: [],
             chartType: props.chartType, // "Pie" or "Bars" or "Table",
             sortColumn: '',
@@ -94,7 +100,7 @@ export default class Chart extends React.Component {
     click_view(evt){
         const e = this.props.entity
         const fid = this.props.field.id
-        const chartsType = evt.currentTarget.id
+        const chartsType = evt.currentTarget.dataset.id
 
         lcWrite(e+'-charts-'+fid, chartsType)
         this.setState({
@@ -104,12 +110,13 @@ export default class Chart extends React.Component {
 
     click_resize(){
         this.setState({
-            size: this.state.size==='small' ? 'full' : 'small'
+            size: expandToggle(this.state.size)
         })
     }
 
     render(){
-        const data = this.state.data || [],
+        const props = this.props,
+            data = this.state.data || [],
             size = this.state.size,
             cType = this.state.chartType
         let body 
@@ -119,7 +126,7 @@ export default class Chart extends React.Component {
         })
         const params = {
             data: data,
-            entity: this.props.entity,
+            entity: props.entity,
             sortTable: this.sortTable,
         }
         if(this.state.error){
@@ -132,10 +139,10 @@ export default class Chart extends React.Component {
             // - no data
             body = <Alert type="info" title={i18n_charts.noData} message={i18n_charts.emptyData}/> 
         }else{
-            if(cType==='Table'){
+            if(cType===cTypes.table){
                 // - table view
-                body = <ChartTable {...params} field={this.props.field}/>
-            }else if(cType==='Pie'){
+                body = <ChartTable {...params} field={props.field}/>
+            }else if(cType===cTypes.pie){
                 // - Pie charts
                 body = <Pie {...params} />
             }else{
@@ -147,17 +154,17 @@ export default class Chart extends React.Component {
         return (
             <div className={"evol-chart-holder panel panel-default"+(size?' size-'+size:'')}>
                 <div className="chart-holder">
-                    {this.props.canExpend ? (
-                        <div className="chart-actions pull-left">
-                            <i id="Resize" onClick={this.click_resize} className={"glyphicon glyphicon-resize-"+(size==='small'?'full':'small')}/>
+                    {(props.canExpend && this.state.chartType!==cTypes.table) ? (
+                        <div className="chart-actions-left">
+                            <i data-id="Resize" onClick={this.click_resize} className={"glyphicon glyphicon-resize-"+(size==='large' ? 'small' : 'full')}/>
                         </div>
                     ) : null}
-                    <div className="chart-actions pull-right">
-                        <i id="Pie" title={i18n_charts.pie} onClick={this.click_view} className={"glyphicon glyphicon-cd"+(cType==='Pie'?' active':'')}/>
-                        <i id="Bars" title={i18n_charts.bars} onClick={this.click_view} className={"glyphicon glyphicon-stats"+(cType==='Bars'?' active':'')}/>
-                        <i id="Table" title={i18n_charts.table} onClick={this.click_view} className={"glyphicon glyphicon-th-list"+(cType==='Table'?' active':'')}/>
+                    <div className="chart-actions-right">
+                        <i data-id="Pie" title={i18n_charts.pie} onClick={this.click_view} className={"glyphicon glyphicon-cd"+(cType==='Pie'?' active':'')}/>
+                        <i data-id="Bars" title={i18n_charts.bars} onClick={this.click_view} className={"glyphicon glyphicon-stats"+(cType==='Bars'?' active':'')}/>
+                        <i data-id="Table" title={i18n_charts.table} onClick={this.click_view} className={"glyphicon glyphicon-th-list"+(cType==='Table'?' active':'')}/>
                     </div>
-                    <h3 className="panel-title">{this.props.title}</h3>
+                    <h3 className="panel-title">{props.title}</h3>
                     {body}
                 </div>
             </div>
@@ -187,12 +194,13 @@ Chart.propTypes = {
     entity: PropTypes.string.isRequired,
     field: PropTypes.object.isRequired,
     title: PropTypes.string,
-    size: PropTypes.oneOf(ChartProps.size),
-    type: PropTypes.oneOf(ChartProps.chart),
+    size: PropTypes.oneOf(chartProps.sizes),
+    type: PropTypes.oneOf(chartProps.chartTypes),
     sort: PropTypes.string,
     canExpend: PropTypes.bool,
 }
 Chart.defaultProps = {
-	chartType: 'Bars',
+    chartType: cTypes.bars,
+    size: 'small',
     canExpend: true,
 }

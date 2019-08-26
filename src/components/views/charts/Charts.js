@@ -61,13 +61,10 @@ export default class Charts extends React.Component {
                         size={'large'}
                         className="panel-default singleChart"/> 
                 }else{
-                    const params = {
-                        entity: e,
-                        size: 'small',
-                        className: "panel-default",
-                    }
                     charts = chartFields.map(f => <Chart 
-                            {...params}
+                            entity={e}
+                            size="small"
+                            className="panel-default"
                             key={'c-'+f.id} 
                             field={f} 
                             title={chartTitle(f)}

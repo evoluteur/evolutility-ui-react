@@ -27,19 +27,31 @@ $label-width: 200px;
 			@include flex-item();
 		}
 	}
+	.evo-label{
+		margin-bottom: 7px;
+	}
 }
 .f-stats {
+	&:hover{
+		i {
+			display: inline;
+		}
+	}
 	> label {
 		display: block;
 		width: $label-width;
 		@include icons-actions();
 		> i {
-			margin-left: 5px;
+			display: none;
+			margin-left: 10px;
 		}
 	}
 	> div {
 		display: inline-block !important;
 	}
+	.chart-actions-right{
+		top: 7px;
+	}    
 }
 .fl-stats { 
 	min-width: 300px;
@@ -66,6 +78,7 @@ $label-width: 200px;
 	> span {
 		display: inline-block;
 		color: $grey-color;
+		width: 100px;
 		min-width: 80px;
 		margin-right: 7px;
 	}

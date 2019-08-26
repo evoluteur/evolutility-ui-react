@@ -95,4 +95,4 @@ export default class Pie extends React.Component {
     }
 }
 
-Pie.propTypes = ChartProps.props
+Pie.propTypes = ChartProps.chartProps

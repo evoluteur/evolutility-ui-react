@@ -92,4 +92,4 @@ export default class Bars extends React.Component {
     }
 }
 
-Bars.propTypes = ChartProps.props
+Bars.propTypes = ChartProps.chartProps
