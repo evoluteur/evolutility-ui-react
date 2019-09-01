@@ -8,7 +8,7 @@ module.exports = {
 	"title": "Objects",
 	"name": "object",
 	"namePlural": "objects",
-	"icon": "brick.png",
+	"icon": "cube.gif",
 	"defaultViewMany": "list",
 	"defaultViewOne": "browse",
 	"titleField": "title",
@@ -49,19 +49,20 @@ module.exports = {
 		},
 		{
 			"id": "pKey",
-			"label": "Primary key column",
 			"type": "text",
-			"width": 38
+			"label": "Primary key column",
+			"width": 38,
+			"help": "By default the primary key is called \"id\". This property let's you use another column name."
 		},
 		{
 			"id": "entity",
 			"type": "text",
-			"label": "Entity Id",
+			"label": "Object Id",
 			"required": true,
 			"maxLength": 100,
 			"inMany": true,
 			"width": 75,
-			"help": "Identifier for the entity (used in URLs of pages)"
+			"help": "Internal identifier for the object"
 		},
 		{
 			"id": "name",
@@ -93,6 +94,20 @@ module.exports = {
 			"help": "example='contact.gif'"
 		},
 		{
+			"id": "titleField",
+			"type": "text",
+			"label": "Title field",
+			"width": 38,
+			"help": "Id of the field used as record title"
+		},
+		{
+			"id": "searchFields",
+			"type": "textmultiline",
+			"label": "Search fields",
+			"width": 62,
+			"help": "Ids of the fields used in searches."
+		},
+		{
 			"id": "description",
 			"type": "textmultiline",
 			"label": "Description",
@@ -113,7 +128,9 @@ module.exports = {
 				"name",
 				"namePlural",
 				"world",
-				"table"
+				"table",
+				"titleField",
+				"searchFields"
 			]
 		},
 		{
@@ -140,13 +157,7 @@ module.exports = {
 				},
 				{
 					"id": "column",
-					"label": "column"
-				},
-				{
-					"id": "type",
-					"type": "lov",
-					"label": "Type",
-					"lovIcon": true,
+					"label": "Column"
 				},
 				{
 					"id": "inMany",
@@ -158,6 +169,11 @@ module.exports = {
 					"type": "integer",
 					"label": "Width",
 					"defaultValue": 100
+				},
+				{
+					"id": "height",
+					"type": "integer",
+					"label": "Height"
 				},
 				{
 					"id": "required",

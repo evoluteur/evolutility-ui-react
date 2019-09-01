@@ -3,7 +3,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import logoEvol from './evologo.gif'
-import logoGithub from './github.png'
 
 import './TopBar.scss'
 
@@ -15,10 +14,6 @@ export default class TopBar extends React.PureComponent {
         return (   
             <header className="TopBar" role="banner">
                 <Link to='/'><img src={logoEvol} className="tbLogo" alt="" /></Link>
-
-                <a className="github" target="github" href="https://github.com/evoluteur/evolutility-ui-react" data-hotkey="g d">
-                    <img src={logoGithub} alt="Github" title="Github" />
-                </a>
 
             </header>
         )

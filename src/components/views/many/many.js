@@ -1,9 +1,11 @@
-// Evolutility-UI-React :: /views/many.js
+/*
+	Evolutility-UI-React :: /views/many.js
 
-// Super-class for most Views for Many (List, Cards but not Charts).
+	Super-class for most Views for Many (List, Cards but not Charts).
 
-// https://github.com/evoluteur/evolutility-ui-react
-// (c) 2019 Olivier Giulieri
+	https://github.com/evoluteur/evolutility-ui-react
+	(c) 2019 Olivier Giulieri
+*/
 
 import React from 'react'
 import axios from 'axios'

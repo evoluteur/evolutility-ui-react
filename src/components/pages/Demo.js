@@ -16,7 +16,8 @@ export default class Demo extends React.PureComponent {
                 <h1>Evolutility Demo Apps</h1>
 
                 <p>These sample applications are not anything you haven't seen before. </p>
-                <p>The interesting thing is that these demo apps are built with models rather than code... and you build more apps simply by making new models.
+                <p>The interesting thing is that these demo apps are built with models rather than code... 
+                    and you can easily make more apps simply by making new models.
                 </p>
 
                 <div className="cSet">
@@ -44,7 +45,7 @@ export default class Demo extends React.PureComponent {
                 <div className="component"> 
                 <br/>
                     <p>
-                        <Link to="/test/list">Test App</Link> with fields of all possible types.
+                        <Link to="/test/cards">Test App</Link> with fields of all possible types.
                     </p>
                 </div>
             </div>

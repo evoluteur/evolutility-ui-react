@@ -51,7 +51,7 @@ module.exports = {
         //bJSON: 'JSON',
         filter: 'Filter',
         //bScatter:'Scatter',
-        charts: 'Charts',
+        charts: 'Dashboard', //'Charts',
         //refresh: 'Refresh',
         //print: 'Print',
         save: 'Save',

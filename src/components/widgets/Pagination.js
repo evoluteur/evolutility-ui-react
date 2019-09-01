@@ -21,9 +21,8 @@ export default class Pagination extends React.PureComponent {
             query = queryString.parse(this.props.location.search) //this.props.location.query
 
             if(query){
-                if(query.page==='p--' || query.page==='p++'){
-
-                }
+                //if(query.page==='p--' || query.page==='p++'){
+                //}
                 pIdx = parseInt(query.page || '0', 10)
             }else{
                 pIdx = 0
@@ -31,7 +30,7 @@ export default class Pagination extends React.PureComponent {
         let h = []
         let gapIdx = 0
         
-        if (totalSize > size) {
+        if (totalSize > size  && !(pIdx===0 && size<pageSize)) {
             const fnClick = this.props.fnClick,
                 nbPages = Math.ceil(totalSize / pageSize),
                 wPrev = pIdx>0,

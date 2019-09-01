@@ -8,7 +8,7 @@
 	top:50px;
 	width:170px;
 	height: 100%;
-	height: calc(100% - 50px);
+	height: calc(100% - 40px);
 	color: #455A64;
 	padding-top: 12px;
 	border-right: 1px solid #e0e0e0;
@@ -29,7 +29,6 @@
 	}
 	div {
 		line-height: 25px;
-		margin-bottom: 10px;
 		padding: 7px;
 		font-weight: bold;
 		font-size: 15px;
@@ -71,9 +70,9 @@
 		> div {
 			background-color: $almostwhite-color;
 		}
-		> ul {
-			border-left: 3px solid grey;
-		}
+		//> ul {
+		//	border-left: 3px solid grey;
+		//}
 	}
 	i{
 		color: #455A64;
@@ -164,7 +163,10 @@ a.skipNav {
 }
 .nav-l2 > li{
 	@include border-radius(5px);
-	padding: 5px 0 5px 10px;
+	padding: 5px 0 5px 5px;
+	> a {
+		padding: 5px;
+	}
 	> a.ev-actions {
 		display: inline-block;
 		max-width: 90px;

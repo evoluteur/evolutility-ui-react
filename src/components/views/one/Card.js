@@ -4,7 +4,7 @@
 // Single card (usually part of a set of Cards)
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2019 Olivier Giulieri
 
 import React from 'react'
 import PropTypes from 'prop-types';

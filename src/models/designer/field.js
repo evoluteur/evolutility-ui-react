@@ -165,10 +165,10 @@ module.exports = {
 			"id": "position",
 			"type": "integer",
 			"label": "Position",
+			"noCharts": true,
 			"maxLength": 3,
 			"width": 50,
-			"help": "Order of the field",
-			"noCharts": true
+			"help": "Order of the field"
 		},
 		{
 			"id": "width",
@@ -207,10 +207,10 @@ module.exports = {
 		},
 		{
 			"id": "labelShort",
-			"label": "Short label",
 			"type": "text",
-			"help": "Optional shorter Field title to display in list header",
+			"label": "Label",
 			"width": 100,
+			"help": "Optional shorter Field title to display in list header"
 		},
 		{
 			"id": "required",
@@ -251,6 +251,7 @@ module.exports = {
 			"label": "Min. value",
 			"noCharts": true,
 			"maxLength": 4,
+			"labelShort": "Min.",
 			"width": 50,
 			"help": "Minimum value allowed for the field"
 		},
@@ -260,6 +261,7 @@ module.exports = {
 			"label": "Max. value",
 			"noCharts": true,
 			"maxLength": 4,
+			"labelShort": "Max.",
 			"width": 50,
 			"help": "Maximum value allowed for the field"
 		},
@@ -268,6 +270,7 @@ module.exports = {
 			"type": "text",
 			"label": "Regular Expression",
 			"maxLength": 100,
+			"labelShort": "RegExp",
 			"width": 50,
 			"help": "Regular expression used to validate the field value."
 		},
@@ -328,7 +331,8 @@ module.exports = {
 				"fid",
 				"object",
 				"lovTable",
-				"lovColumn"
+				"lovColumn",
+				"lovIcon"
 			]
 		},
 		{
@@ -356,8 +360,8 @@ module.exports = {
 				"deleteTrigger",
 				"required",
 				"readOnly",
-				"minvalue",
-				"maxvalue",
+				"minValue",
+				"maxValue",
 				"minLength",
 				"maxLength",
 				"regExp",

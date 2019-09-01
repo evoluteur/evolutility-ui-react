@@ -20,7 +20,7 @@ import format from '../../../utils/format'
 import Header from '../../shell/Header'
 import Spinner from '../../shell/Spinner'
 import Alert from '../../widgets/Alert'
-import PageNotFound from '../../widgets/PageNotFound'
+import PageNotFound from '../../pages/PageNotFound'
 import Pagination from '../../widgets/Pagination'
 
 import './List.scss'

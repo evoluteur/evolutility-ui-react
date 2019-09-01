@@ -9,8 +9,8 @@ import Nav from './components/shell/Nav.js';
 import TopBar from './components/shell/TopBar.js';
 import Footer from './components/shell/Footer.js';
 
-import Home from './pages/Home.js';
-import Demo from './pages/Demo.js';
+import Home from './components/pages/Home.js';
+import Demo from './components/pages/Demo.js';
 
 import List from './components/views/many/List';
 import Cards from './components/views/many/Cards';
@@ -20,8 +20,8 @@ import Stats from './components/views/many/Stats';
 import Browse from './components/views/one/Browse';
 import Edit from './components/views/one/Edit';
 
-import PageNotFound from './components/widgets/PageNotFound.js';
 
+import PageNotFound from './components/pages/PageNotFound.js';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 

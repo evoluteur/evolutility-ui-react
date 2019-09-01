@@ -1,4 +1,5 @@
-# Evolutility-UI-React
+# Evolutility-UI-React &middot; [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE.md) [![npm version](https://img.shields.io/npm/v/evolutility-ui-react)](https://www.npmjs.com/package/evolutility-ui-react) 
+
 
 Evolutility-UI-React is a set of **model-driven views** to Browse, Edit, List, Cards, and Charts data by writing models rather than code. 
 

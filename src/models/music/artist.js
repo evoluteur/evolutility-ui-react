@@ -22,19 +22,20 @@ module.exports = {
 			"id": "url",
 			"type": "url",
 			"label": "Web site",
-			"width": 80
+			"width": 70
 		},
 		{
 			"id": "bdate",
 			"type": "date",
 			"label": "Birth date",
-			"width": 20
+			"width": 30
 		},
 		{
 			"id": "photo",
 			"type": "image",
 			"label": "Photo",
 			"inMany": true,
+			"width": 100
 		},
 		{
 			"id": "description",
