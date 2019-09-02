@@ -28,7 +28,10 @@ export default class Home extends React.PureComponent {
             <div className="cSet">
                 
                 <div className="component">
-                    <h2>Model-driven UI</h2>
+                    <h2>
+                        <img src="/svg/eye.svg" className="cpnSvg" />
+                        Model-driven UI
+                    </h2>
         
                     <p><a target="ui" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-ui-react">Evolutility-UI-React</a> provides a set of model-driven views to List, Cards, Edit, Browse, and Charts your data. 
                     </p>
@@ -48,7 +51,10 @@ export default class Home extends React.PureComponent {
                 </div>
 
                 <div className="component">
-                    <h2>Model-driven backend</h2>
+                    <h2>
+                        <img src="/svg/database.svg" className="cpnSvg" />
+                        Model-driven backend
+                    </h2>
                     <p><a target="db" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-server-node">Evolutility-Server-Node</a> provides a set of model-driven REST endpoints for CRUD (Create, Read, Update, Delete) and more.
                     </p> 
                     
@@ -58,14 +64,20 @@ export default class Home extends React.PureComponent {
                         <a target="api" href={apiPathFull+'contact'}>Address Book</a>,  {' '}
                         <a target="api" href={apiPathFull+'comics'}>Graphic Novels inventory</a>,  {' '}
                         <a target="api" href={apiPathFull+'restaurant'}>Restaurants list</a>, {' '}
-                        <a target="api" href={apiPathFull+'winecellar'}>Wine Cellar</a>{' '}
-                         or <a target="api" href="http://localhost:2000/graphql">GraphQL UI</a>.
-                    </p> 
+                        <a target="api" href={apiPathFull+'winecellar'}>Wine Cellar</a>.
+                    </p>
+
+                    <p>
+                        <a target="api" href="http://localhost:2000/graphql">GraphQL UI</a>
+                    </p>
 
                 </div> 
                 
                 <div className="component">
-                    <h2>Models</h2> 
+                    <h2>
+                        <img src="/svg/cogs.svg" className="cpnSvg" />
+                        Models
+                    </h2> 
                     <p><a target="db" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-models">Evolutility-Models</a> {' '}
                     are applications definitions covering both back-end (database table and columns...) and front-end (label, width, height...). 
                     </p>
@@ -78,12 +90,7 @@ export default class Home extends React.PureComponent {
                         <a target="model" href="https://github.com/evoluteur/evolutility-models/blob/master/models/pim/winecellar.js">Wine Cellar</a>.
                     </p>
                 </div>
- 
-            </div>
-
-            <p>The sample applications you will see here are not anything you haven't seen before. 
-                The interesting thing is that the demo apps are not built with templates, CSS and custom Javascript but are only configured with models.
-              </p>
+            </div> 
         </div>
         
         );

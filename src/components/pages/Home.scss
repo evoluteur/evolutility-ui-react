@@ -1,6 +1,17 @@
 .evo-home {
-  
+  .cpnSvg{
+    position: relative;
+    top: -3px;
+    margin-right: 10px;
+    height: 30px;
+    width: 30px;
+
+  }
   .component {
+    h2{
+      font-weight: 400;
+      margin-bottom: 30px;
+    }
     border: solid 1px silver;
     border-radius: 3px;
     margin: 30px 0;
