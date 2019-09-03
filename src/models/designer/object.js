@@ -1,5 +1,5 @@
 /*
-  Evolutility UI Model for Object
+  Evolutility UI model for Objects
   https://github.com/evoluteur/evolutility-ui-react
 */
 
@@ -33,7 +33,7 @@ module.exports = {
 		{
 			"id": "world",
 			"type": "lov",
-			"label": "World",
+			"label": "App",
 			"object": "world",
 			"inMany": true,
 			"width": 100
@@ -158,6 +158,12 @@ module.exports = {
 				{
 					"id": "column",
 					"label": "Column"
+				},
+				{
+					"id": "type",
+					"type": "lov",
+					"label": "Type",
+					"lovIcon": true
 				},
 				{
 					"id": "inMany",

@@ -1,6 +1,6 @@
 /*
   Evolutility UI model for Artists
- https://github.com/evoluteur/evolutility-ui-react
+  https://github.com/evoluteur/evolutility-ui-react
 */
 
 module.exports = {

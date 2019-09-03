@@ -1,6 +1,7 @@
 module.exports = {
   id: "todo",
-  label: "To-Do list",
+  title: "To-Do List",
+  active: true,
   name: "task",
   namePlural: "tasks",
   icon: "todo.gif",

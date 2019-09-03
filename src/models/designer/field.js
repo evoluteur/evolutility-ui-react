@@ -1,5 +1,5 @@
 /*
-  Evolutility UI Model for Fields
+  Evolutility UI model for Fields
   https://github.com/evoluteur/evolutility-ui-react
 */
 
@@ -246,7 +246,7 @@ module.exports = {
 			"help": "Maximum number of characters allowed"
 		},
 		{
-			"id": "minvalue",
+			"id": "minValue",
 			"type": "integer",
 			"label": "Min. value",
 			"noCharts": true,
@@ -256,7 +256,7 @@ module.exports = {
 			"help": "Minimum value allowed for the field"
 		},
 		{
-			"id": "maxvalue",
+			"id": "maxValue",
 			"type": "integer",
 			"label": "Max. value",
 			"noCharts": true,
