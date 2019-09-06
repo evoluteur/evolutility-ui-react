@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { version, proxy } from '../../../package.json';
+import pkg from '../../../package.json';
 import { apiPath } from '../../config.js';
-import Format from '../../utils/format';
-
 
 import './Home.scss'
 
-const apiPathFull = Format.urlJoin(typeof proxy !== "undefined" ? proxy : '', apiPath)
+const proxy = pkg.proxy || ''
+const apiPathFull = proxy ? proxy : apiPath
 
 export default class Home extends React.PureComponent {
 
@@ -21,7 +20,7 @@ export default class Home extends React.PureComponent {
 
         <div className="evo-home">
             
-            <h1 className="siteTitle"><span style={{fontWeight:'300'}}>Evol</span><span className="navy">utility</span> <span style={{fontSize: '.5em'}}>v{version}</span> </h1> 
+            <h1 className="siteTitle"><span>Evol</span><span className="navy">utility</span> <span style={{fontSize: '.5em'}}>v{pkg.version}</span> </h1> 
 
             <h2 className="tBlue">Build applications with models rather than code.</h2> 
 
@@ -29,7 +28,7 @@ export default class Home extends React.PureComponent {
                 
                 <div className="component">
                     <h2>
-                        <img src="/svg/eye.svg" className="cpnSvg" />
+                        <img alt="UI" src="/svg/eye.svg" className="cpnSvg" />
                         Model-driven UI
                     </h2>
         
@@ -52,7 +51,7 @@ export default class Home extends React.PureComponent {
 
                 <div className="component">
                     <h2>
-                        <img src="/svg/database.svg" className="cpnSvg" />
+                        <img alt="Backend" src="/svg/database.svg" className="cpnSvg" />
                         Model-driven backend
                     </h2>
                     <p><a target="db" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-server-node">Evolutility-Server-Node</a> provides a set of model-driven REST endpoints for CRUD (Create, Read, Update, Delete) and more.
@@ -75,7 +74,7 @@ export default class Home extends React.PureComponent {
                 
                 <div className="component">
                     <h2>
-                        <img src="/svg/cogs.svg" className="cpnSvg" />
+                        <img alt="Models" src="/svg/cogs.svg" className="cpnSvg" />
                         Models
                     </h2> 
                     <p><a target="db" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-models">Evolutility-Models</a> {' '}

@@ -7,10 +7,12 @@
     "url": "git://github.com/evoluteur/evolutility-ui-react.git"
   },
   "copyright": "(c) 2019 Olivier Giulieri",
-  "homepage": "https://github.com/evoluteur/evolutility-ui-react",
   "author": "Olivier Giulieri (https://evoluteur.github.io/)",
   "license": "MIT",
-  "proxy": "http://localhost:2000/",
+  "engines": {
+    "node": "10.16.3",
+    "npm": "6.9.0"
+  },
   "dependencies": {
     "@nivo/bar": "^0.59.0",
     "@nivo/pie": "^0.59.0",

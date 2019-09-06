@@ -12,20 +12,19 @@ import { withRouter, Link } from 'react-router-dom'
 import Modal from 'react-modal'
 import SearchBox from '../views/actions/SearchBox'
 import { toast } from 'react-toastify';
-//import { IconName } from "@blueprintjs/icons";
-//import { IconSelect } from "./common/iconSelect";
 
 import Format from '../../utils/format'
 import url from '../../utils/url'
 import evoGlobals from '../../utils/evoGlobals'
 import { apiPath } from '../../config.js'
-import { proxy } from '../../../package.json'
+import pkg from '../../../package.json'
 //import {i18n_actions, i18n_msg} from '../../i18n/i18n'
 import { i18n_msg, i18n_actions } from '../../i18n/i18n'
 import models from '../../models/all_models'
 
 import './Toolbar.scss'
 
+const proxy = pkg.proxy || ''
 const menuItems = {
     new: {id: 'edit/0', label: i18n_actions.new, icon:'plus', n:'x', readonly:false},
     new_nolabel: {id: 'edit/0', icon:'plus', n:'x', readonly:false},
