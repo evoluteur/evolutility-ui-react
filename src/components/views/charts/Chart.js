@@ -73,7 +73,8 @@ export default class Chart extends React.Component {
         let urlparams = ''//?token='+localStorage.token
 
         if(fid){
-            axios.get(apiPath+''+e+'/chart/'+fid+urlparams)
+            const url = apiPath+''+e+'/chart/'+fid+urlparams
+            axios.get(url)
                 .then(response => {
                     if(!this.done){
                         this.setState({
@@ -84,11 +85,11 @@ export default class Chart extends React.Component {
                 })
                 .catch((err) => {
                     if(!this.done){
+                        console.error(err)
                         this.setState({
                             error: {
                                 title: 'Server error',
-                                message: err.response.statusText || 
-                                    'Couldn\'t retrieve charts data for field "'+fid+'".'
+                                message: 'Couldn\'t retrieve charts data for field "'+fid+'" at '+url+'.'
                             },
                             loading: false,
                         })
