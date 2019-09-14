@@ -106,14 +106,12 @@ export default class OneReadWrite extends OneRead{
 		if(!this.lovs){
 			axios.get(apiPath+mid+'/lov/'+fid)
 			.then(response => {
-				this.model.fieldsH[fid].list = response.data.map(function(d){
-					return {
-						id: d.id, 
-						text: d.text
-					}
-				})
+				this.model.fieldsH[fid].list = response.data.map(d => ({
+					id: d.id, 
+					text: d.text
+				}))
 				this.refs[fid].forceUpdate()
-				this.lovs=true
+				this.lovs = true
 			})
 			.catch(err => {
 				const errorMsg = 'Error retrieving list of values for field "'+fid+'".'

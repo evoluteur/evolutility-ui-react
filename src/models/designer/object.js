@@ -150,42 +150,13 @@ module.exports = {
 			"id": "collec-fields",
 			"object": "field",
 			"fields": [
-				{
-					"id": "label",
-					"type": "text",
-					"label": "Label"
-				},
-				{
-					"id": "column",
-					"label": "Column"
-				},
-				{
-					"id": "type",
-					"type": "lov",
-					"label": "Type",
-					"lovIcon": true
-				},
-				{
-					"id": "inMany",
-					"type": "boolean",
-					"label": "List"
-				},
-				{
-					"id": "width",
-					"type": "integer",
-					"label": "Width",
-					"defaultValue": 100
-				},
-				{
-					"id": "height",
-					"type": "integer",
-					"label": "Height"
-				},
-				{
-					"id": "required",
-					"type": "boolean",
-					"label": "Required"
-				}
+				"label",
+				"column",
+				"type",
+				"inMany",
+				"width",
+				"height",
+				"required"
 			]
 		}
 	]

@@ -53,11 +53,11 @@ export const fieldInCharts = f => fieldChartable(f) && !f.noCharts;
 
 export const fieldChartable = f => (f.type===ft.lov || f.type===ft.list || f.type===ft.bool || fieldIsNumber(f));
 
-export function hById(arr){
+export function hById(arr, prop='id'){
 	var objH={};
 	if(arr){
 		arr.forEach(function(o){
-			objH[o.id] = o; 
+			objH[o[prop]] = o; 
 		});
 	}
 	return objH;

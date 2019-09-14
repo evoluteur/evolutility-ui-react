@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { i18n_msg } from '../../i18n/i18n';
 
 import './Spinner.scss';
@@ -11,7 +12,7 @@ export default class Spinner extends React.PureComponent {
 
         return (
             <div className="evol-loading"> 
-                <div className="loading_txt">{i18n_msg.loading}</div> 
+                <div className="loading_txt">{this.props.message || i18n_msg.loading}</div> 
                 <div className="spinner">
                     <div className="bounce1"></div>
                     <div className="bounce2"></div>
@@ -21,4 +22,8 @@ export default class Spinner extends React.PureComponent {
         );
     }
 
+}
+
+Spinner.propTypes = {
+	message: PropTypes.string,
 }

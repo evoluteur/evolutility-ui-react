@@ -168,12 +168,12 @@ export default class Field extends React.Component {
 
 				</div>
 			)
-		}else if(f.type===ft.email){
+		}else if(f.type===ft.email || f.type===ft.money){
+			const symbol = f.type===ft.email ? '@' : '$'
 			return <div className="input-group">
-					<span className="input-group-addon" id={"symbol"+f.id}>@</span>
+					<span className="input-group-addon">{symbol}</span>
 					<input {...usualProps}
-						type="text"  
-						aria-describedby={"symbol"+f.id}
+						type="text"
 						value={ d ? d : '' }
 						onChange={cbs.change}
 						className="form-control"
