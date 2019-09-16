@@ -6,6 +6,7 @@
 module.exports = {
 	"id": "winecellar",
 	"title": "Wine cellar",
+	"world": "organizer",
 	"name": "wine",
 	"namePlural": "wines",
 	"icon": "wine.gif",

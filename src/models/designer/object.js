@@ -6,6 +6,7 @@
 module.exports = {
 	"id": "object",
 	"title": "Objects",
+	"world": "designer",
 	"name": "object",
 	"namePlural": "objects",
 	"icon": "cube.gif",
@@ -43,7 +44,7 @@ module.exports = {
 			"type": "text",
 			"label": "DB Table name",
 			"required": true,
-			"maxLength": 100,
+			"maxLength": 63,
 			"inMany": true,
 			"width": 62
 		},

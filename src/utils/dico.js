@@ -177,3 +177,21 @@ export const isFieldMany = f => f.inList || f.inMany
 export const fieldIsText = f => [ft.text, ft.textml, ft.url, ft.html, ft.email].indexOf(f.type)>-1;
 
 export const fieldId2Field = (fieldIds, fieldsH) => fieldIds ? fieldIds.map(id => fieldsH[id] || null) : null
+
+export default {
+	fieldTypes: ft,
+	fieldTypeStrings: fta,
+	fieldIsNumber: fieldIsNumber,
+	fieldIsDateOrTime: fieldIsDateOrTime,
+	fieldIsNumeric: fieldIsNumeric,
+	fieldInCharts: fieldInCharts,
+	fieldChartable: fieldChartable,
+	hById: hById,
+	hByX: hById,
+	prepModel: prepModel,
+	prepModelCollecs: prepModelCollecs,
+	dataTitle: dataTitle,
+	isFieldMany: isFieldMany,
+	fieldIsText: fieldIsText,
+	fieldId2Field: fieldId2Field,
+}

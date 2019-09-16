@@ -6,6 +6,7 @@
 module.exports = {
 	"id": "restaurant",
 	"title": "Restaurants",
+	"world": "organizer",
 	"name": "restaurant",
 	"namePlural": "restaurants",
 	"icon": "resto.gif",

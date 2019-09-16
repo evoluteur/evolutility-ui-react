@@ -6,6 +6,7 @@
 module.exports = {
 	"id": "world",
 	"title": "Applications",
+	"world": "designer",
 	"name": "application",
 	"namePlural": "applications",
 	"icon": "",
@@ -54,7 +55,7 @@ module.exports = {
 			"fields": [
 				"title",
 				"icon",
-				"active",
+				"active"
 			]
 		}
 	]

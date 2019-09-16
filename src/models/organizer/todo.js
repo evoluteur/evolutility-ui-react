@@ -6,6 +6,7 @@
 module.exports = {
 	"id": "todo",
 	"title": "To-Do List",
+	"world": "organizer",
 	"name": "task",
 	"namePlural": "tasks",
 	"icon": "todo.gif",

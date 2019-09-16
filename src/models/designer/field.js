@@ -6,6 +6,7 @@
 module.exports = {
 	"id": "field",
 	"title": "Fields",
+	"world": "designer",
 	"name": "field",
 	"namePlural": "fields",
 	"icon": "",
@@ -106,7 +107,7 @@ module.exports = {
 			"type": "text",
 			"label": "Column",
 			"required": true,
-			"maxLength": 100,
+			"maxLength": 63,
 			"width": 62,
 			"help": "Database column name"
 		},
@@ -133,7 +134,7 @@ module.exports = {
 			"id": "lovTable",
 			"type": "text",
 			"label": "LOV Table",
-			"maxLength": 100,
+			"maxLength": 63,
 			"width": 32,
 			"help": "Lookup table"
 		},
@@ -141,7 +142,7 @@ module.exports = {
 			"id": "lovColumn",
 			"type": "text",
 			"label": "LOV column",
-			"maxLength": 100,
+			"maxLength": 63,
 			"width": 38,
 			"help": "Column fom Lookup table to display"
 		},
@@ -149,7 +150,7 @@ module.exports = {
 			"id": "lovIcon",
 			"type": "text",
 			"label": "LOV Icon",
-			"maxLength": 100,
+			"maxLength": 63,
 			"width": 38,
 			"help": "Column fom Lookup table to display"
 		},

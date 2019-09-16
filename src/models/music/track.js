@@ -1,11 +1,12 @@
 /*
-  Evolutility UI Model for Tracks
+  Evolutility UI model for Tracks
   https://github.com/evoluteur/evolutility-ui-react
 */
 
 module.exports = {
 	"id": "track",
 	"title": "Tracks",
+	"world": "music",
 	"name": "track",
 	"namePlural": "tracks",
 	"icon": "music.png",

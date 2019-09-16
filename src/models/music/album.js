@@ -1,11 +1,12 @@
 /*
-  Evolutility UI Model for Albums
+  Evolutility UI model for Albums
   https://github.com/evoluteur/evolutility-ui-react
 */
 
 module.exports = {
 	"id": "album",
 	"title": "Albums",
+	"world": "music",
 	"name": "album",
 	"namePlural": "albums",
 	"icon": "cd.png",
@@ -40,9 +41,9 @@ module.exports = {
 			"type": "textmultiline",
 			"label": "Description",
 			"maxLength": 1000,
-			width: 100,
-			height: 5,
-			"inMany": false
+			"inMany": false,
+			"width": 100,
+			"height": 5
 		},
 		{
 			"id": "cover",
@@ -82,11 +83,11 @@ module.exports = {
 			"id": "music_track",
 			"title": "Tracks",
 			"object": "track",
-			"icon": 'music.png',
+			"icon": "music.png",
 			"fields": [
 				"name",
 				"genre",
-				"length",
+				"length"
 			]
 		}
 	]
