@@ -5,13 +5,13 @@
 
 import { prepModel, prepModelCollecs } from '../utils/dico'
 
-// - Personal Information Manager (PIM)
-import todo from './pim/todo'
-import contact from './pim/contact'
-import comics from './pim/comics'
-import restaurant from './pim/restaurant'
-import winecellar from './pim/winecellar'
-import winetasting from './pim/winetasting'
+// - Organizer
+import todo from './organizer/todo'
+import contact from './organizer/contact'
+import comics from './organizer/comics'
+import restaurant from './organizer/restaurant'
+import winecellar from './organizer/winecellar'
+import winetasting from './organizer/winetasting'
 
 // - Music
 import album from './music/album'

@@ -207,7 +207,7 @@ Multiple details tables can be specified with "collections".
 | header       | Text to be displayed before the collection.   |
 | footer       | Text to be displayed after the collection.    |
 
-Sample model using collections: [Wine Cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/pim/winecellar.js).
+Sample model using collections: [Wine Cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/winecellar.js).
 
 ### Sample model
 
@@ -314,10 +314,10 @@ module.exports = {
 
 ```
 
-More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/pim/todo.js),
-[Address book](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/pim/contact.js),
-[Restaurants list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/pim/restaurant.js),
-[Wine cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/pim/winecellar.js). 
+More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/todo.js),
+[Address book](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/contact.js),
+[Restaurants list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/restaurant.js),
+[Wine cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/winecellar.js). 
 
 
 ## Evolutility backend

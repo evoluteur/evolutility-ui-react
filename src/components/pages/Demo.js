@@ -22,7 +22,7 @@ export default class Demo extends React.PureComponent {
 
                 <div className="cSet">
                     <div className="component c1"> 
-                        <h3>Personal Information Manager</h3>
+                        <h3>Personal Organizer</h3>
                         <div className="demoLinks">
                             <Link to="/todo/list"><img src="/pix/todo.gif" alt="" title="To-Do list"/>To-Do list</Link>
                             <Link to="/contact/list"><img src="/pix/contact.gif" alt="" title="Address book"/>Address book</Link>

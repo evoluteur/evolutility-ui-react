@@ -23,7 +23,6 @@ import Range from '../../widgets/Range'
 import Chart from '../../views/charts/Chart'
 
 import './Stats.scss'
-import { ftruncate } from 'fs';
 
 function formatNum(k, value, zero){
     if(typeof value!=='undefined' && value!==null){

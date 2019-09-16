@@ -1,11 +1,10 @@
 .evo-home {
-  .cpnSvg{
+  h2 > .cpnSvg{
     position: relative;
     top: -3px;
     margin-right: 10px;
     height: 30px;
     width: 30px;
-
   }
   .component {
     h2{
@@ -26,8 +25,23 @@
   .tBlue {
     color: #2E9EC9;
   }
-  .apps-icons > a {
-    margin-right: 10px;
+  .apps-icons {
+    .appLinks{
+      position: relative;
+    }
+    > a {
+      margin-right: 5px;
+      > span > div {
+        display: inline-block;
+        white-space: nowrap;
+        margin: 5px 0;
+      }
+    }
+    img {
+      position: relative;
+      top: -2px;
+      margin: 0 6px 0 5px;
+    }
   }
   .cSet{
     width: 100%;
