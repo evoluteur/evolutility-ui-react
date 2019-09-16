@@ -2,11 +2,78 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import pkg from '../../../package.json';
 import { apiPath } from '../../config.js';
+import models from '../../models/all_models'
 
 import './Home.scss'
 
 const proxy = pkg.proxy || ''
 const apiPathFull = proxy ? proxy : apiPath
+
+const appIcons = [
+    {
+        id: "todo",
+        oid: 1,
+    },
+    {
+        id: "contact",
+        oid: 2,
+    },
+    {
+        id: "comics",
+        oid: 3,
+        view: "cards", 
+    },
+    {
+        id: "restaurant",
+        oid: 4,
+    }, 
+    {
+        id: "winecellar",
+        oid: 5,
+    },
+    {
+        id: "winetasting",
+        oid: 6,
+    },
+    {
+        id: "artist",
+        oid: 8,
+        view: "cards",
+    },
+    {
+        id: "album",
+        oid: 7,
+        view: "cards",
+    },
+    { 
+        id: "track",
+        oid: 9,
+    }
+].map(menu => {
+    const m = models[menu.id]
+    menu.world = m.world
+    menu.icon = 'pix/'+m.icon
+    menu.label = m.title || m.label
+    return menu
+})
+
+const iconContent = iconDef => (
+    <span>
+        <div>
+            <img src={iconDef.icon} alt=""/>
+            {iconDef.label}
+        </div>
+    </span>
+)
+const urlGitHubModels = 'https://github.com/evoluteur/evolutility-models/blob/master/models/'
+const iconURL = iconDef => "/"+iconDef.id+"/"+(iconDef.view ? iconDef.view : 'list')
+const xLink = (url, iconDef) => <Link to={url}>{iconContent(iconDef)}</Link>
+const xA = (url, target, iconDef) => <a href={url} target={target}>{iconContent(iconDef)}</a>
+const appIcon = iconDef => xLink(iconURL(iconDef), iconDef)
+const appModel = iconDef => xLink('/object/browse/'+iconDef.oid, iconDef)
+const appAPI = iconDef => xA(apiPathFull+iconDef.id, 'api', iconDef)
+const appJson = iconDef => xA(urlGitHubModels+iconDef.world+'/'+iconDef.id+'.js', 'model', iconDef)
+
 
 export default class Home extends React.PureComponent {
 
@@ -17,13 +84,9 @@ export default class Home extends React.PureComponent {
 
     render() {
         return (
-
         <div className="evo-home">
-            
             <h1 className="siteTitle"><span>Evol</span><span className="navy">utility</span> <span style={{fontSize: '.5em'}}>v{pkg.version}</span> </h1> 
-
-            <h2 className="tBlue">Build applications with models rather than code.</h2> 
-
+            <h2 className="tBlue">Minimalist model-driven architecture to build and evolve applications with models rather than code.</h2> 
             <div className="cSet">
                 
                 <div className="component">
@@ -31,21 +94,12 @@ export default class Home extends React.PureComponent {
                         <img alt="UI" src="/svg/eye.svg" className="cpnSvg" />
                         Model-driven UI
                     </h2>
-        
-                    <p><a target="ui" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-ui-react">Evolutility-UI-React</a> provides a set of model-driven views to List, Cards, Edit, Browse, and Charts your data. 
+                    <p><a target="ui" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-ui-react">Evolutility-UI-React</a> {' '}
+                    provides a set of model-driven views to List, Cards, Edit, Browse, and Charts your data. 
                     </p>
-
                     <p className="apps-icons">
-                        Sample apps: {' '}
-                        <Link to="/todo/list"><img src="/pix/todo.gif" alt="" title="To-Do list"/></Link>
-                        <Link to="/contact/list"><img src="/pix/contact.gif" alt="" title="Address Book"/></Link>
-                        <Link to="/comics/cards"><img src="/pix/comics.png" alt="" title="Graphic Novels inventory"/></Link>
-                        <Link to="/restaurant/list"><img src="/pix/resto.gif" alt="" title="Restaurants list"/></Link> 
-                        <Link to="/winecellar/list"><img src="/pix/wine-bottle.png" alt="" title="Wine Cellar"/></Link>
-                        <Link to="/winetasting/list"><img src="/pix/wine.gif" alt="" title="Wine Tasting"/></Link>
-                        <Link to="/artist/cards"><img src="/pix/star.png" alt="" title="Artists"/></Link>
-                        <Link to="/album/cards"><img src="/pix/cd.png" alt="" title="Albums"/></Link>
-                        <Link to="/track/list"><img src="/pix/music.png" alt="" title="Music tracks"/></Link>
+                        Demo apps: {' '}
+                        {appIcons.map(ico => appIcon(ico))}
                     </p> 
                 </div>
 
@@ -54,22 +108,16 @@ export default class Home extends React.PureComponent {
                         <img alt="Backend" src="/svg/database.svg" className="cpnSvg" />
                         Model-driven backend
                     </h2>
-                    <p><a target="db" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-server-node">Evolutility-Server-Node</a> provides a set of model-driven REST endpoints for CRUD (Create, Read, Update, Delete) and more.
-                    </p> 
-                    
-                    <p>Sample RESTful API: {' '}
-                        <a target="api" href={apiPathFull}>API discovery</a>, {' '}
-                        <a target="api" href={apiPathFull+'todo'}>To-Do list</a>,  {' '}
-                        <a target="api" href={apiPathFull+'contact'}>Address Book</a>,  {' '}
-                        <a target="api" href={apiPathFull+'comics'}>Graphic Novels inventory</a>,  {' '}
-                        <a target="api" href={apiPathFull+'restaurant'}>Restaurants list</a>, {' '}
-                        <a target="api" href={apiPathFull+'winecellar'}>Wine Cellar</a>.
+                    <p><a target="db" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-server-node">Evolutility-Server-Node</a> {' '}
+                    provides a model-driven REST or GraphQL API for CRUD (Create, Read, Update, Delete) and more.
                     </p>
-
-                    <p>
-                        <a target="api" href="http://localhost:2000/graphql">GraphQL UI</a>
+                    <p className="apps-icons">REST end-points: {' '}
+                        <a target="api" href={apiPathFull}>API discovery</a> {' '}
+                        {appIcons.map(ico => appAPI(ico))}
                     </p>
-
+                    <p>GraphQL: {' '}
+                        <a target="api" href="http://localhost:2000/graphql">GraphiQL</a>
+                    </p>
                 </div> 
                 
                 <div className="component">
@@ -80,18 +128,17 @@ export default class Home extends React.PureComponent {
                     <p><a target="db" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-models">Evolutility-Models</a> {' '}
                     are applications definitions covering both back-end (database table and columns...) and front-end (label, width, height...). 
                     </p>
-                    <p>
-                        Sample models:{' '}
-                        <a target="model" href="https://github.com/evoluteur/evolutility-models/blob/master/models/pim/todo.js">To-Do list</a>,  {' '}
-                        <a target="model" href="https://github.com/evoluteur/evolutility-models/blob/master/models/pim/contact.js">Address Book</a>,  {' '}
-                        <a target="model" href="https://github.com/evoluteur/evolutility-models/blob/master/models/pim/comics.js">Graphic Novels inventory</a>,  {' '}
-                        <a target="model" href="/https://github.com/evoluteur/evolutility-models/blob/master/models/pim/restaurant.js">Restaurants list</a>, {' '}
-                        <a target="model" href="https://github.com/evoluteur/evolutility-models/blob/master/models/pim/winecellar.js">Wine Cellar</a>.
+                    <p className="apps-icons">
+                        Sample models (stored in the database):{' '}
+                        { appIcons.map(appModel) }
+                    </p>
+                    <p className="apps-icons">
+                        Sample models (stored as JSON files):{' '}
+                        { appIcons.map(appJson) }
                     </p>
                 </div>
             </div> 
         </div>
-        
         );
     }
 }
