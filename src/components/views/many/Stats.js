@@ -10,7 +10,6 @@
 
 import React from 'react'
 import axios from 'axios'
-//import moment from 'moment'
 
 import { apiPath, wTimestamp, wComments } from '../../../config.js'
 import models from '../../../models/all_models'
@@ -20,14 +19,17 @@ import format from '../../../utils/format'
 import Header from '../../shell/Header'
 import Spinner from '../../shell/Spinner'
 import Alert from '../../widgets/Alert'
+import Range from '../../widgets/Range'
 import Chart from '../../views/charts/Chart'
 
-//import Range from 'widgets/Range'
-
 import './Stats.scss'
+import { ftruncate } from 'fs';
 
 function formatNum(k, value, zero){
     if(typeof value!=='undefined' && value!==null){
+        if(k.type==='money'){
+            return format.moneyString(value)
+        }
         if(typeof(value) === 'string'){
             if(fieldIsDateOrTime(k)){
                 return format.dateString(value)
@@ -119,9 +121,6 @@ export default class Stats extends React.Component {
                         item.min = format.dateOpt(item.min, f.type)
                         item.max = format.dateOpt(item.max, f.type)
                     }
-                    if(item.avg){
-                        item.avg = formatNum(f, item.avg)
-                    }
                     if(item.sum){
                         item.sum = formatNum(f, item.sum)
                     }
@@ -137,7 +136,7 @@ export default class Stats extends React.Component {
         function formatTime(propName){
             ks[propName] = data[propName] ? 
                 format.datetimeString(data[propName])
-                : null
+                : 'N/A'
         }
         if(wTimestamp){
             formatTime('u_date_max')
@@ -161,22 +160,38 @@ export default class Stats extends React.Component {
             }
         }
 
+        const formattedValue = (value, isMoney=false) => isMoney ? format.moneyString(value) : value
         const itemAggr = (id, label, value) =>  <div key={id}><label className="grey stat-fn">{label}</label> {value}</div>
 
         const item = (k) => <div key={k.field.id} className="f-stats">
                 <label className="stat-label">
                     {k.field.label}
                     {k.chartable ? (
-                        <i id={k.field.id} title={'i18n_charts.pie'    } onClick={this.toggleChart} className="glyphicon glyphicon-stats"/>
+                        <i id={k.field.id} onClick={this.toggleChart} className="glyphicon glyphicon-stats"/>
                     ) : null }
                 </label>
                 <div className="stat-values">
                     <div className="fl-stats">
                         {k.sum ? itemAggr(k.id+'sum', i18n_stats.total, k.sum) : null}
-                        {k.avg ? itemAggr(k.id+'avg', i18n_stats.avg, k.avg) : null}
-
-                        {itemAggr(k.id+'min', i18n_stats.min, k.min)}
-                        {itemAggr(k.id+'max', i18n_stats.max, k.max)}
+                        {k.avg ? itemAggr(k.id+'avg', i18n_stats.avg, formattedValue(k.avg, k.field.type==='money')) : null}
+                        {k.min===k.max ? (
+                            itemAggr(k.id+'min-max', i18n_stats.min+' = '+i18n_stats.max, formattedValue(k.min, k.field.type==='money'))
+                        ) : (
+                            k.avg ? (
+                                <div className="field-range">
+                                    {itemAggr(k.id+'min', i18n_stats.min, formattedValue(k.min, k.field.type==='money'))}
+                                    <div>
+                                        <Range min={k.min} max={k.max} avg={k.avg} ></Range>
+                                    </div>
+                                    {itemAggr(k.id+'max', i18n_stats.max, formattedValue(k.max, k.field.type==='money'))}
+                                </div>
+                            ) : (
+                                <React.Fragment>
+                                    {itemAggr(k.id+'min', i18n_stats.min, k.min)}
+                                    {itemAggr(k.id+'max', i18n_stats.max, k.max)}
+                                </React.Fragment>
+                            )
+                        )}
                     </div>
                     <div>
                         { this.state[k.field.id + '_Chart'] ? (

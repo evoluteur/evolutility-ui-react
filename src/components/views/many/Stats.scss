@@ -2,7 +2,8 @@
 
 
 $chart-width: 490px;
-$label-width: 200px;
+$label-width: 270px;
+$label2-width: 100px;
 
 // view Stats
 .evol-stats {
@@ -30,8 +31,25 @@ $label-width: 200px;
 	.evo-label{
 		margin-bottom: 7px;
 	}
+	
+	.field-range {
+		position: relative;
+		width: 360px;
+		margin-bottom: 20px;
+		> div {
+			display: inline-block;
+			&:first-child {
+				text-align: right;
+			}
+			&:nth-child(2) {
+				text-align: right;
+				margin: 0 10px;
+			}
+		}
+	}
 }
 .f-stats {
+	margin: 10px 0;
 	&:hover{
 		i {
 			display: inline;
@@ -44,14 +62,12 @@ $label-width: 200px;
 		> i {
 			display: none;
 			margin-left: 10px;
+			cursor: pointer;
 		}
-	}
-	> div {
-		display: inline-block !important;
 	}
 	.chart-actions-right{
 		top: 7px;
-	}    
+	}
 }
 .fl-stats { 
 	min-width: 300px;
@@ -59,7 +75,6 @@ $label-width: 200px;
 		display: inline-block;
 		margin: 0 10px 10px 10px;
 		min-width: 100px;
-		max-width: 300px;
 	}
 }
 .weekupdates{
@@ -68,7 +83,6 @@ $label-width: 200px;
 }
 .stat-fn{
 	display: block;
-	width: 80px;
 }
 .stat-label{
 	margin-bottom: 10px;
@@ -79,7 +93,7 @@ $label-width: 200px;
 		display: inline-block;
 		color: $grey-color;
 		width: 100px;
-		min-width: 80px;
+		min-width: $label2-width;
 		margin-right: 7px;
 	}
 }
