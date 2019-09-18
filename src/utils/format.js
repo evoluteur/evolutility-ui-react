@@ -22,6 +22,8 @@ import {fieldTypes as ft} from './dico.js'
 // Set the locale from the browser -- which may need to be configured
 moment.locale(locale || window.navigator.userLanguage || window.navigator.language)
 
+const mFormat = (d, format) => nullOrUndefined(d) ? '' :  moment(d).format(format)
+const numFormat = (d, format) => nullOrUndefined(d) ? '' : numeral(d).format(format)
 const nullOrUndefined = v => v===null || v===undefined
 const formatLib = {
 
@@ -95,33 +97,13 @@ const formatLib = {
         }
         return this.dateString(d);
     },
-    dateString(d){ 
-        return nullOrUndefined(d) ? '' : moment(d).format('L')
-    },
-
-    timeString(d){
-        return nullOrUndefined(d) ? '' :  moment(d).format('LTS')
-    },
     
-    datetimeString(d){
-        return nullOrUndefined(d) ? '' :  moment(d).format('L LTS')
-    },
-
-    decimalString(d){
-        // TODO: choose format
-        return nullOrUndefined(d) ? '' : numeral(d).format()
-    },
-
-    moneyString(d){
-        return (d || d===0) ? numeral(d).format('$0,0.00') : ''
-    },
-
-    jsonString(js){
-        if(js){
-            return JSON.stringify(js, null, '\t');
-        }
-        return '';
-    },
+    dateString: d => mFormat(d, 'L'),
+    timeString: d => mFormat(d, 'LTS'),
+    datetimeString: d => mFormat(d, 'L LTS'),
+    decimalString: d => numFormat(d, d>1 ? '0.00' : '0.000'),
+    moneyString: d => numFormat(d, '$0,0.00'),
+    jsonString: js => js ? JSON.stringify(js, null, '\t') : '',
 
     urlJoin(u1, u2){
         const slashu2 = u2[0]==='/'

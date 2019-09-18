@@ -54,7 +54,7 @@ export default class Stats extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-            data: {},
+            data: null,
             loading: true,
         }
 		this.toggleChart = this.toggleChart.bind(this);
@@ -114,19 +114,23 @@ export default class Stats extends React.Component {
             fields.forEach((f)=>{
                 if(fieldIsNumeric(f)){ 
                     let item = data[f.id]
-                    item.type = f.type
-                    item.field = f
-                    if(fieldIsDateOrTime(f)){
-                        item.min = format.dateOpt(item.min, f.type)
-                        item.max = format.dateOpt(item.max, f.type)
+                    if(item){
+                        item.type = f.type
+                        item.field = f
+                        if(fieldIsDateOrTime(f)){
+                            item.min = format.dateOpt(item.min, f.type)
+                            item.max = format.dateOpt(item.max, f.type)
+                        }
+                        if(item.sum){
+                            item.sum = formatNum(f, item.sum)
+                        }
+                        if(fieldChartable(f)){
+                            item.chartable = true
+                        }
+                        ks.push(item)
+                    }else{
+                        console.error('No value for field "'+f.id+'".')
                     }
-                    if(item.sum){
-                        item.sum = formatNum(f, item.sum)
-                    }
-                    if(fieldChartable(f)){
-                        item.chartable = true
-                    }
-                    ks.push(item)
                 }
             })
         }
@@ -151,7 +155,7 @@ export default class Stats extends React.Component {
     render(){
         const e = this.props.match.params.entity,
             model = models[e] || null,
-            data = this.state.data || {}
+            data = this.state.data || null
 
         if(model){
             if(data){
@@ -161,7 +165,6 @@ export default class Stats extends React.Component {
 
         const formattedValue = (value, isMoney=false) => isMoney ? format.moneyString(value) : value
         const itemAggr = (id, label, value) =>  <div key={id}><label className="grey stat-fn">{label}</label> {value}</div>
-
         const item = (k) => <div key={k.field.id} className="f-stats">
                 <label className="stat-label">
                     {k.field.label}
@@ -218,7 +221,7 @@ export default class Stats extends React.Component {
                 <div className="evol-stats">
                     <div className="cols-2">
                         <div className="col-1">
-                            <label className="evo-label">{ recCount }</label>
+                            <label className="evo-label label-count">{ recCount }</label>
                             { wComments ? ( 
                                 <label className="evo-label">{ commentsCount }</label>
                             ) : null }

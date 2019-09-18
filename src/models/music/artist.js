@@ -6,6 +6,7 @@
 module.exports = {
 	"id": "artist",
 	"title": "Artists",
+	"world": "music",
 	"name": "artist",
 	"namePlural": "artists",
 	"icon": "star.png",

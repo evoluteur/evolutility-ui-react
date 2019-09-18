@@ -67,8 +67,8 @@ const iconContent = iconDef => (
 )
 const urlGitHubModels = 'https://github.com/evoluteur/evolutility-models/blob/master/models/'
 const iconURL = iconDef => "/"+iconDef.id+"/"+(iconDef.view ? iconDef.view : 'list')
-const xLink = (url, iconDef) => <Link to={url}>{iconContent(iconDef)}</Link>
-const xA = (url, target, iconDef) => <a href={url} target={target}>{iconContent(iconDef)}</a>
+const xLink = (url, iconDef) => <Link key={iconDef.id} to={url}>{iconContent(iconDef)}</Link>
+const xA = (url, target, iconDef) => <a key={iconDef.id} href={url} target={target}>{iconContent(iconDef)}</a>
 const appIcon = iconDef => xLink(iconURL(iconDef), iconDef)
 const appModel = iconDef => xLink('/object/browse/'+iconDef.oid, iconDef)
 const appAPI = iconDef => xA(apiPathFull+iconDef.id, 'api', iconDef)
@@ -97,10 +97,10 @@ export default class Home extends React.PureComponent {
                     <p><a target="ui" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-ui-react">Evolutility-UI-React</a> {' '}
                     provides a set of model-driven views to List, Cards, Edit, Browse, and Charts your data. 
                     </p>
-                    <p className="apps-icons">
+                    <div className="apps-icons">
                         Demo apps: {' '}
                         {appIcons.map(ico => appIcon(ico))}
-                    </p> 
+                    </div> 
                 </div>
 
                 <div className="component">
@@ -111,10 +111,10 @@ export default class Home extends React.PureComponent {
                     <p><a target="db" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-server-node">Evolutility-Server-Node</a> {' '}
                     provides a model-driven REST or GraphQL API for CRUD (Create, Read, Update, Delete) and more.
                     </p>
-                    <p className="apps-icons">REST end-points: {' '}
+                    <div className="apps-icons">REST end-points: {' '}
                         <a target="api" href={apiPathFull}>API discovery</a> {' '}
                         {appIcons.map(ico => appAPI(ico))}
-                    </p>
+                    </div>
                     <p>GraphQL: {' '}
                         <a target="api" href="http://localhost:2000/graphql">GraphiQL</a>
                     </p>
@@ -128,14 +128,14 @@ export default class Home extends React.PureComponent {
                     <p><a target="db" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-models">Evolutility-Models</a> {' '}
                     are applications definitions covering both back-end (database table and columns...) and front-end (label, width, height...). 
                     </p>
-                    <p className="apps-icons">
+                    <div className="apps-icons">
                         Sample models (stored in the database):{' '}
                         { appIcons.map(appModel) }
-                    </p>
-                    <p className="apps-icons">
+                    </div>
+                    <div className="apps-icons">
                         Sample models (stored as JSON files):{' '}
                         { appIcons.map(appJson) }
-                    </p>
+                    </div>
                 </div>
             </div> 
         </div>
