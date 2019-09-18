@@ -10,6 +10,9 @@ module.exports = {
 	// - Path to uploaded files
 	filesUrl: 'http://localhost:3000/pix/',
 
+	// - get models from server
+	queryModels: false,
+
 	// - Pagination
 	pageSize: 50,
 

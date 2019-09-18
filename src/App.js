@@ -3,8 +3,11 @@
 
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
+import config from './config'
+import moMa from './utils/moMa'
+import Spinner from './components/shell/Spinner'
 import Nav from './components/shell/Nav.js';
 import TopBar from './components/shell/TopBar.js';
 import Footer from './components/shell/Footer.js';
@@ -25,6 +28,7 @@ import PageNotFound from './components/pages/PageNotFound.js';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
+let queryModels = config.queryModels || false
 
 const AppRoutes = () => (
 	<Switch>
@@ -48,21 +52,51 @@ const AppRoutes = () => (
 );
 
 export default class App extends React.Component {
-//<React.StrictMode></React.StrictMode>
-	render() {
-		return (
-			<BrowserRouter>
-				<div className="App">
-					<TopBar />
-					<Route path='*' exact={true} component={Nav} /> 
-					<div className="pageContent" role="main">
-						<AppRoutes/>
-					</div>
-					<ToastContainer autoClose={5000} />
-					<Footer />
-				</div>
-			</BrowserRouter>
-		);
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			loading: queryModels,
+		}
 	}
 
+	componentDidMount() {
+		if(queryModels){
+			moMa.fetchModels(
+				() => this.setState({
+					loading: false,
+				}),
+				err => {
+					this.setState({
+						loading: false,
+					})
+					toast.error('Error fetching models: '+err.message)
+				}
+			)
+			queryModels = false
+		}
+	}
+
+	render() {
+		return (
+			<div className="App">
+				{ this.state.loading ? (
+					<div className="loading-evol">
+						<Spinner message="Fetching Evolutility UI models..."></Spinner>
+					</div>
+				) : (
+					<BrowserRouter>
+						<TopBar />
+						<Route path='*' exact={true} component={Nav} /> 
+						<div className="pageContent" role="main">
+							<AppRoutes/>
+						</div>
+						<ToastContainer autoClose={5000} />
+						<Footer />
+					</BrowserRouter>
+				)}
+				<ToastContainer autoClose={5000} />
+			</div>
+		)
+	}
 }
