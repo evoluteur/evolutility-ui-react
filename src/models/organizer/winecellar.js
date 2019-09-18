@@ -713,17 +713,10 @@ module.exports = {
 		{
 			"type": "panel",
 			"label": "Wine",
-			"width": 100,
-			"fields": [
-				"name",
-				"vintage"
-			]
-		},
-		{
-			"type": "panel",
-			"label": "Wine",
 			"width": 80,
 			"fields": [
+				"name",
+				"vintage",
 				"winery",
 				"bsize",
 				"grape",
