@@ -163,7 +163,7 @@ export default class Stats extends React.Component {
             }
         }
 
-        const formattedValue = (value, isMoney=false) => isMoney ? format.moneyString(value) : value
+        const formattedValue = (value, field) => field.type==='money' ? format.moneyString(value) : value
         const itemAggr = (id, label, value) =>  <div key={id}><label className="grey stat-fn">{label}</label> {value}</div>
         const item = (k) => <div key={k.field.id} className="f-stats">
                 <label className="stat-label">
@@ -175,17 +175,17 @@ export default class Stats extends React.Component {
                 <div className="stat-values">
                     <div className="fl-stats">
                         {k.sum ? itemAggr(k.id+'sum', i18n_stats.total, k.sum) : null}
-                        {k.avg ? itemAggr(k.id+'avg', i18n_stats.avg, formattedValue(k.avg, k.field.type==='money')) : null}
+                        {k.avg ? itemAggr(k.id+'avg', i18n_stats.avg, formattedValue(format.decimalString(k.avg), k.field)) : null}
                         {k.min===k.max ? (
-                            itemAggr(k.id+'min-max', i18n_stats.min+' = '+i18n_stats.max, formattedValue(k.min, k.field.type==='money'))
+                            itemAggr(k.id+'min-max', i18n_stats.min+' = '+i18n_stats.max, formattedValue(k.min, k.field))
                         ) : (
                             k.avg ? (
                                 <div className="field-range">
-                                    {itemAggr(k.id+'min', i18n_stats.min, formattedValue(k.min, k.field.type==='money'))}
+                                    {itemAggr(k.id+'min', i18n_stats.min, formattedValue(k.min, k.field))}
                                     <div>
                                         <Range min={k.min} max={k.max} avg={k.avg} ></Range>
                                     </div>
-                                    {itemAggr(k.id+'max', i18n_stats.max, formattedValue(k.max, k.field.type==='money'))}
+                                    {itemAggr(k.id+'max', i18n_stats.max, formattedValue(k.max, k.field))}
                                 </div>
                             ) : (
                                 <React.Fragment>
