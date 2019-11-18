@@ -5,7 +5,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-
 // $icon-font-path: "./fonts/bootstrap/";
 
 // Core variables and mixins
@@ -28,7 +27,7 @@
 
 // Components
 //@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_component-animations";
-@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_dropdowns";
+//@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_dropdowns";
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_button-groups";
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_input-groups";
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_navs";
@@ -61,12 +60,11 @@
 
 
 // Other third party
-//@import '../node_modules/react-toastify/dist/ReactToastify.css';
 @import '../node_modules/react-datepicker/dist/react-datepicker';
 //@import '../node_modules/react-select/dist/react-select';
 //@import '../node_modules/react-input-range/src/scss/input-range/input-range';
 
-//@import '../node_modules/react-toastify/dist/ReactToastify.css';
+@import '../node_modules/react-toastify/scss/main';
 
-//@import '../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css';
-//@import '../node_modules/@blueprintjs/core/lib/css/blueprint.css'; 
+//@import "../node_modules/react-crud-icons/dist/css/react-crud-icons.css";
+@import "../node_modules/react-crud-icons/src/Icon.scss";
