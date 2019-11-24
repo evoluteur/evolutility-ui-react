@@ -7,6 +7,9 @@
 .evol-pnls{
   @include flex-holder();
 
+  .panel{
+    height: calc( 100% - 20px );
+  }
   .evol-pnl {
     @include flex-item();
     padding-left: 10px !important;
