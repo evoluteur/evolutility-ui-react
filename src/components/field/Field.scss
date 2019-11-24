@@ -16,7 +16,7 @@
 .evol-fld {
     @include flex-item();
     padding-left: $field-h-spacing !important;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     min-width: 62px;
     input, textarea, select{
       font-size: $text-font-size;
