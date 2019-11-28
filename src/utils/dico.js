@@ -51,7 +51,7 @@ export const fieldIsNumeric = f => fieldIsNumber(f) || fieldIsDateOrTime(f)
 
 export const fieldInCharts = f => fieldChartable(f) && !f.noCharts;
 
-export const fieldChartable = f => (f.type===ft.lov || f.type===ft.list || f.type===ft.bool || fieldIsNumber(f));
+export const fieldChartable = f => f.type===ft.lov || f.type===ft.bool || fieldIsNumber(f);
 
 export function hById(arr, prop='id'){
 	var objH={};

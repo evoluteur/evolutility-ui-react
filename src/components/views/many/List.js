@@ -72,7 +72,7 @@ export default class List extends Many {
 						<td key={f.id}>
 							<Link to={link+d.id}>
 								{icon}
-								{format.fieldValue(f, value, true)}
+								{value ? format.fieldValue(f, value, true) : ('( '+d.id+' )')}
 							</Link>
 							{d.nb_comments ? (' '+d.nb_comments+' comments') : null}
 						</td>
@@ -112,7 +112,11 @@ export default class List extends Many {
 
 			document.title = title
 			if(this.state.error){
-				body = <Alert title="Error" message={this.state.error.message}/> 
+				if(isNested){
+					body = 'No data.'
+				}else{
+					body = <Alert title="Error" message={this.state.error.message}/> 
+				}
 			}else if(this.state.loading){
 				body = <Spinner></Spinner> 
 			}else{

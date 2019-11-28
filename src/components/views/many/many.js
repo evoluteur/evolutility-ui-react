@@ -66,10 +66,14 @@ export default class Many extends React.Component {
 				})
 			})
 			.catch(err => {
+				let msg = ''
+				if(err.response && err.response.statusText){
+					msg = err.response.statusText+'.'
+				}
 				this.setState({
 					error: {
 						title: 'Error',
-						message: 'Couldn\'t retrieve data.' //err.message
+						message: 'Couldn\'t retrieve data at '+qUrl +'. '+msg
 					},
 					loading: false
 				})

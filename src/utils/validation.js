@@ -9,7 +9,7 @@ import { fieldTypes, fieldIsNumber } from './dico'
 import { locale, i18n_validation } from '../i18n/i18n'
 
 function validateField(f, v){
-    var numberField = fieldIsNumber(f);
+    var isNumberField = fieldIsNumber(f);
     var ft = fieldTypes
 
     function formatMsg(fLabel, msg, r2, r3){
@@ -25,7 +25,7 @@ function validateField(f, v){
 
         // Check required and empty
         if (f.required && (v===null || v==='' || _.isUndefined(v) ||
-            (numberField && isNaN(v)) ||
+            (isNumberField && isNaN(v)) ||
             (f.type===ft.lov && v==='0') ||
             (f.type===ft.list && v && !v.length) //||
             //(f.type===ft.color && v==='#000000')
@@ -34,7 +34,7 @@ function validateField(f, v){
         } else if(!_.isUndefined(v)){
 
             // Check field type
-            if( !(isNaN(v) && numberField)) {
+            if( !(isNaN(v) && isNumberField)) {
                 if (v!==null && v!=='' && !_.isArray(v)){
                     switch (f.type) {
                         case ft.int:
@@ -87,7 +87,7 @@ function validateField(f, v){
             }
 
             // Check min & max
-            if (numberField) {
+            if (isNumberField) {
                 if (v !== '') {
                     if (f.max && parseFloat(v) > f.max) {
                         return formatMsg(fieldLabel(f), i18n_validation.max, f.max);
@@ -108,7 +108,7 @@ function validateField(f, v){
         }
 
         // Check minLength and maxLength
-        if (_.isString(v) && !numberField) {
+        if (_.isString(v) && !isNumberField) {
             var len = v.length,
                 badMax = f.maxLength?len > f.maxLength:false,
                 badMin = f.minLength?len < f.minLength:false;

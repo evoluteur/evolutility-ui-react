@@ -36,7 +36,7 @@ export default class Card extends React.PureComponent {
                     if(idx===0){
                         return (
                             <div key={f.id}>
-                                <h4><Link  to={link+d.id}>{icon}{fv}</Link></h4>
+                                <h4><Link  to={link+d.id}>{icon}{fv ? fv : '( '+d.id+' )'}</Link></h4>
                                 <div className="card-actions">
                                     <Link to={link+d.id}><i title="Browse" className="glyphicon glyphicon-eye-open"></i></Link>
                                     <Link to={linkEdit+d.id}><i title="Edit" className="glyphicon glyphicon-edit"></i></Link>

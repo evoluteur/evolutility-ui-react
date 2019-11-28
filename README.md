@@ -42,13 +42,12 @@ For the REST endpoints, you also need to install and run [Evolutility-Server-Nod
 
 Configurations options are specified in the file [/src/config.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/config.js). They apply to all apps (app specific options are specified in models).
 
-
-| Option     | Meaning            | Example            |
-|--------------|------------------|---------------------|
-| apiPath | Path to REST API (can use "proxy" from package.json). | "/api/v1/" |
-| filesUrl | Path to upload files to. | "http://localhost:3000/pix/" |
-| pageSize | Pagination | 50 |
-| locale | Date format (no translation yet) | en/fr |
+| Option     | Description      | Example             |
+|------------|------------------|---------------------|
+| apiPath    | Path to REST API (can use "proxy" from package.json). | "http://localhost:2000/api/v1/" |
+| filesUrl   | Path to upload files to. | "http://localhost:3000/pix/" |
+| pageSize   | Page size in pagination.  | 50 |
+| locale     | Date format (no translation yet). | en/fr |
 | wTimestamp | Add timestamp columns u_date and c_date to track record creation and update times. | true |
 
 

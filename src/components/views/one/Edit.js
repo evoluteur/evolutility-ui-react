@@ -236,7 +236,7 @@ export default class Edit extends OneReadWrite{
 					message: null
 				})
 			}else{
-				console.log('Missing field "'+f.id+'".')
+				console.log('Missing field "'+f.id+'" in clearValidation.')
 			}
 		})
 	}
