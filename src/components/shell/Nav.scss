@@ -20,6 +20,9 @@
 	&:hover { 
 		overflow-y: auto; 
 	}
+	.demos{
+		margin-left: 20px;
+	}
 	a{
 		text-decoration: none;
 		&.active {
@@ -88,8 +91,12 @@
 		color: $color-icon-hover;
 	}
 	.footLinks{
-		margin-top: 20px;
-		padding: 10px;
+		margin: 30px 10px 10px 20px;
+		padding: 10px 10px 10px 0;
+		a {
+			font-weight: 400;
+		}
+		
 	}
 
 }

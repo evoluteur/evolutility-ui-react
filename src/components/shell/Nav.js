@@ -57,8 +57,8 @@ export default class Nav extends React.Component {
         if(g==='designer'){
             menus = [sections.designer]
             footer = <Link to="/">Home</Link>
-        } else if(g==='pim' || g==='music' || w.entity==='demo'){
-            menus = [sections.pim, sections.music]
+        } else if(g==='organizer' || g==='music' || w.entity==='demo'){
+            menus = [sections.organizer, sections.music]
             //footer = <Link to="/world/list">Designer</Link>
         } else {
             menus = []
