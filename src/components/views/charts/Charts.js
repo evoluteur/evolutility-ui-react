@@ -10,7 +10,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom'
+
 import { i18n_charts } from '../../../i18n/i18n'
 import models from '../../../models/all_models'
 import { fieldInCharts } from '../../../utils/dico'
@@ -24,10 +24,6 @@ import './Charts.scss'
 export default class Charts extends React.Component {
 
     viewId = 'charts'
- 
-	componentWillMount() {
-        this.model = models[this.props.match.params.entity]
-    }
 
 	componentDidMount() {
         document.title = this.model ? this.model.label + ' Charts' : 'Evolutility' 
@@ -37,15 +33,15 @@ export default class Charts extends React.Component {
     render() {
         const e = this.props.match.params.entity,
             m = models[e]
+            this.model = m
 
         if(m){
             const title = m.title || m.label,
                 chartFields = m.fields.filter(fieldInCharts),
                 nbCharts = chartFields.length,
                 css = 'evolutility evol-many-charts ' + (nbCharts===1?'single':'many')
-            let charts
-
             const chartTitle = f => format.capitalize(m.namePlural) + ' / ' + (f.labelCharts || f.label)
+            let charts
 
             if(nbCharts===0){
                 charts = <Alert title="No data" message={i18n_charts.nocharts} type="info"/>
@@ -62,28 +58,25 @@ export default class Charts extends React.Component {
                         className="panel-default singleChart"/> 
                 }else{
                     charts = chartFields.map(f => <Chart 
-                            entity={e}
-                            size="small"
-                            className="panel-default"
-                            key={'c-'+f.id} 
-                            field={f} 
-                            title={chartTitle(f)}
-                            chartType={lcRead(m.id+'-charts-'+f.id) || f.chartType} />
-                        )
+                        entity={e}
+                        size="small"
+                        className="panel-default"
+                        key={'c-'+f.id} 
+                        field={f} 
+                        title={chartTitle(f)}
+                        chartType={lcRead(m.id+'-charts-'+f.id) || f.chartType} />
+                    )
                 }
             } 
 
             return (
-                <React.Fragment>
+                <div className="">
+                    <Header entity={e} model={m} title={title} count={null} 
+                        cardinality='n' view={this.viewId} />
                     <div className={css}>
-                        <Header entity={e} title={title} count={null} 
-                            cardinality='n' view={this.viewId} />
                         {charts}
                     </div>
-                    <div className="charts-stats">
-                        <Link to={'/'+e+'/stats'}><i className='glyphicon glyphicon-equalizer' />Statistics</Link>
-                    </div>
-                </React.Fragment>
+                </div>
             )
         }else{
             return <Alert title="Error" message={'Invalid input parameter "'+e+'".'}/>

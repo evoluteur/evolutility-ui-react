@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 
 const sizes = ['small', 'large']
-const chartTypes = ['Bars', 'Pie', 'Table']
+const chartTypes = ['bars', 'pie', 'table']
 
 export default {
     sizes: sizes,

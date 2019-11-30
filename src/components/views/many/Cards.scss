@@ -23,17 +23,29 @@
     overflow: auto;
     
     &:hover{
+      border-color: $color-border-hover;
       .card-actions{
-        display: block;
+        //display: block;
+        width: 58px;
       }
     }
     .card-actions{
-      z-index: 100;
-      display: none;
+      z-index: 50;
+      //display: none;
       position: absolute;
       top: 0;
-      right: 0;
-      width: 20px;
+      right: -10px;
+      width: 2px;
+      padding: 0 4px 4px 4px;
+      background-color: white;
+      border: 1px solid white;
+      border-left-color: $color-border;
+      border-bottom-color: $color-border;
+      border-bottom-left-radius: 5px;
+      -webkit-transition: width $ease-time ease $delay-time;
+      -moz-transition: width $ease-time ease $delay-time;
+      -o-transition: width $ease-time ease $delay-time;
+      transition: width $ease-time ease $delay-time;
       @include icons-actions();
       i{
         margin: 5px 0 0 0;
@@ -56,7 +68,7 @@
       }
       > div:not(.card-actions){
         display: inline-block;
-        padding-right:5px;
+        padding-right: 5px;
         width: $golden-ratio-big;
         vertical-align: top;
         > a {

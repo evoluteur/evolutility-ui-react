@@ -8,16 +8,16 @@
 	@include flex-holder();
 	> .evol-chart-holder{
 		@include flex-item();
-		position: relative;
-		text-align: center;
-		background-color :#FFFFFF;
-		margin:10px 10px 10px 5px;
-		width: 400px;
-		min-height:286px;
 	}
 }
 
 .evol-chart-holder{
+	position: relative;
+	text-align: center;
+	background-color :#FFFFFF;
+	margin: 0 10px 20px 5px;
+	width: 400px;
+	min-height:286px;
 	&.size-large{
 		width: 100%;
 		.i-chart{
@@ -33,11 +33,21 @@
 }
 .chart-holder{
 	position: relative;
+	border: 1px solid white;
+	overflow: hidden;
+	.chart-actions-left,
+	.chart-actions-right {
+		display: block;
+		top: -32px;
+		opacity: 100%;
+	}
 	&:hover {
 		.chart-actions-left,
 		.chart-actions-right {
-			display: block;
+			top: 5px;
+			opacity: 100%;
 		}
+		border-color: $color-border-hover;
 	}
 	> h3{
 		display: block;
@@ -66,21 +76,28 @@
 }
 
 .singleChart{
-	padding: 10px 5px 20px;
+	display: block;
+	padding: 0 5px 20px;
 }
 .chart-actions-left,
 .chart-actions-right {
-	display: none;
 	position: absolute;
 	top: 0;
+	//display: none;
+	-webkit-transition: top $ease-time ease $delay-time;
+	-moz-transition: top $ease-time ease $delay-time;
+	-o-transition: top $ease-time ease $delay-time;
+	transition: top $ease-time ease $delay-time;
 	@include icons-actions();
-	background-color: white;
+	> i.crud-icon.light > svg {
+		fill: $color-icon;
+	}
 }
 .chart-actions-left{
-	left: 0;
+	left: 5px;
 }
 .chart-actions-right {
-	right: 0;
+	right: 5px;
 }
 .charts-stats{
 	margin-top: 20px;
@@ -88,13 +105,6 @@
 		margin-right: 5px;
 	}
 }
-
-.nbc1{
-	.evol-chart-holder{
-		min-width: 610px;
-	}
-}
-
 // no data in charts
 .chart-holder > .alert {
 	margin-top: 50px;

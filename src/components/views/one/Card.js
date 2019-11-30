@@ -9,6 +9,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
+import Icon from 'react-crud-icons'
 import models from '../../../models/all_models'
 import format from '../../../utils/format'
 import { fieldTypes as ft } from '../../../utils/dico'
@@ -38,14 +39,13 @@ export default class Card extends React.PureComponent {
                             <div key={f.id}>
                                 <h4><Link  to={link+d.id}>{icon}{fv ? fv : '( '+d.id+' )'}</Link></h4>
                                 <div className="card-actions">
-                                    <Link to={link+d.id}><i title="Browse" className="glyphicon glyphicon-eye-open"></i></Link>
-                                    <Link to={linkEdit+d.id}><i title="Edit" className="glyphicon glyphicon-edit"></i></Link>
+                                    <Link to={linkEdit+d.id}><Icon name="edit" size="small"></Icon></Link>
                                 </div>
                             </div>
                         )
                        // <i data-id="Delete" title="Delete" className="glyphicon glyphicon-trash"></i>
                     }else if(f.type===ft.image){
-                        return <div key={idx} className="card-fld-center"><Link key={f.id} to={link+d.id}>{fv}</Link></div>
+                        return <div key={f.id} className="card-fld-center"><Link to={link+d.id}>{fv}</Link></div>
                     }else{
                         const icon = f.type===ft.lov && f.lovIcon ? d[f.id+'_icon'] : ''
                         return (

@@ -65,7 +65,7 @@ export default class Cards extends Many {
 			}
 			return (
 				<div data-entity={entity} className="evol-many-cards">
-					<Header entity={entity} title={title} count={full_count} 
+					<Header model={m} entity={entity} title={title} count={full_count} 
 						cardinality='n' view={this.viewId} />
 					{body}
 				</div>

@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios'
 import { apiPath } from '../../../config.js'
 
+import Icon from 'react-crud-icons'
 import { i18n_charts } from '../../../i18n/i18n'
 import Alert from '../../widgets/Alert'
 import { lcWrite } from '../../../utils/localStorage'
@@ -24,9 +25,9 @@ import Pie from './Pie'
 import './Charts.scss' 
 
 const cTypes = {
-    bars: 'Bars', 
-    pie: 'Pie', 
-    table: 'Table',
+    bars: 'bars', 
+    pie: 'pie', 
+    table: 'table',
 }
 const sortLabel = (a, b) => (a.label||'').localeCompare(b.label||'')
 const sortCount = (a, b) => {
@@ -39,6 +40,8 @@ const sortCount = (a, b) => {
     return 0;
 }
 const expandToggle = size => size === 'large' ? 'small' : 'large'
+const cssActive = active => active ? 'active' : ''
+const chartIcon = (chartType, props) => <Icon id={chartType} key={chartType} name={chartType==='table' ? 'list' : chartType} tooltip={i18n_charts[chartType]} {...props} className={cssActive(chartType===chartType)}></Icon>
 
 export default class Chart extends React.Component {
 
@@ -117,9 +120,7 @@ export default class Chart extends React.Component {
 
     render(){
         const props = this.props,
-            data = this.state.data || [],
-            size = this.state.size,
-            cType = this.state.chartType
+            { data = [], size,  chartType} = this.state
         let body 
                 
         data.forEach(row => {
@@ -132,7 +133,7 @@ export default class Chart extends React.Component {
         }
         if(this.state.error){
             // - error
-            body = <Alert type="danger" title={this.state.error.title} message={this.state.error.message}/> 
+            body = <Alert type="danger" title={this.state.error.title} message={this.state.error.message} more={this.state.error.messageMore}/> 
         }else if(this.state.loading){
             // - loading
             body = <Spinner></Spinner>
@@ -140,10 +141,10 @@ export default class Chart extends React.Component {
             // - no data
             body = <Alert type="info" title={i18n_charts.noData} message={i18n_charts.emptyData}/> 
         }else{
-            if(cType===cTypes.table){
+            if(chartType===cTypes.table){
                 // - table view
                 body = <ChartTable {...params} field={props.field}/>
-            }else if(cType===cTypes.pie){
+            }else if(chartType===cTypes.pie){
                 // - Pie charts
                 body = <Pie {...params} />
             }else{
@@ -151,19 +152,25 @@ export default class Chart extends React.Component {
                 body = <Bars {...params} />
             }
         }
-
+        const iconProps = {
+            size: 'small',
+            theme: 'light',
+            onClick: this.click_view,
+        }
         return (
             <div className={"evol-chart-holder panel panel-default"+(size?' size-'+size:'')}>
                 <div className="chart-holder">
-                    {(props.canExpend && this.state.chartType!==cTypes.table) ? (
+                    {props.canExpend ? (
                         <div className="chart-actions-left">
-                            <i data-id="Resize" onClick={this.click_resize} className={"glyphicon glyphicon-resize-"+(size==='large' ? 'small' : 'full')}/>
+                            <Icon onClick={this.click_resize} name={size==='large' ? 'collapse' : 'expand'} size="small" tooltip={size==='large' ? 'Collapse' : 'Expand'} ></Icon>
                         </div>
                     ) : null}
                     <div className="chart-actions-right">
-                        <i data-id="Pie" title={i18n_charts.pie} onClick={this.click_view} className={"glyphicon glyphicon-cd"+(cType==='Pie'?' active':'')}/>
-                        <i data-id="Bars" title={i18n_charts.bars} onClick={this.click_view} className={"glyphicon glyphicon-stats"+(cType==='Bars'?' active':'')}/>
-                        <i data-id="Table" title={i18n_charts.table} onClick={this.click_view} className={"glyphicon glyphicon-th-list"+(cType==='Table'?' active':'')}/>
+                        {[
+                            chartIcon('pie', iconProps),
+                            chartIcon('bars', iconProps),
+                            chartIcon('table', iconProps)
+                        ]}
                     </div>
                     <h3 className="panel-title">{props.title}</h3>
                     {body}

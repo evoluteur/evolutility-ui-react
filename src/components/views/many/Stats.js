@@ -258,7 +258,8 @@ export default class Stats extends React.Component {
         return (
             <div className="">
                 <Header entity={e} title={(model.label || model.title) + ' Stats'} 
-                     cardinality='n' view={this.viewId}/>
+                    model={model}
+                    cardinality='n' view={this.viewId}/>
                 { body }
             </div>
         )

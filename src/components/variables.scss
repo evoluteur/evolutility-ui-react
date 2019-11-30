@@ -34,6 +34,8 @@ $color-nav-hover: #BBDEFB; //#23527c;//#FFE0B2;
 $color-nav-active: #E0F7FA;
 $color-icon-hover: #0D47A1;
 $color-icon: #428bca;
+$ease-time: 0.2s;
+$delay-time: 0.3s;
 
 $toolbar-background-color: #fbfbfb;
 $toolbar-border-color: #bce8f1;
@@ -73,15 +75,14 @@ $bgcolor-text-footer: #f8f8f8;
 
 
 @mixin icons-actions{
-	i{
-		color: $color-icon;
-		margin: 10px 10px 2px 0;
+	svg{
+		fill: $color-icon;
 		cursor: pointer;
 		&:hover{
-			color: $color-icon-hover;
+			fill: $color-icon-hover;
 		}
 		&.active{
-			color: black;
+			fill: black;
 			cursor: default;
 		}
 	}

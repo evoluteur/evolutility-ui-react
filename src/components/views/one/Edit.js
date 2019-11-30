@@ -117,6 +117,7 @@ export default class Edit extends OneReadWrite{
 
 					<Header {...this.props.match.params} 
 						title={title} 
+						model={m}
 						comments={data.nb_comments} 
 						count={null} 
 						cardinality='1' 

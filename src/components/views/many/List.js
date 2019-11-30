@@ -61,7 +61,7 @@ export default class List extends Many {
 			const ico = (isNested ? (paramsCollec && paramsCollec.icon) : m.icon) || null
 			const icon = ico ? <img className="evol-many-icon" src={'/pix/'+ico} alt=""/> : null
 			const realEntity = isNested ? paramsCollec.object || paramsCollec.entity : e
-			const link = '/'+realEntity+'/'+m.defaultViewOne+'/'
+			const link = '/'+realEntity+'/'+((m && m.defaultViewOne) || 'browse') +'/'
 
 			function cell(d, f, idx){
 				const lovField = f.type===ft.lov
@@ -164,6 +164,7 @@ export default class List extends Many {
 				<div data-entity={e} style={{width: '100%'}}>
 					{paramsCollec ? null : (
 						<Header entity={e} title={title} 
+							model={m}
 							count={full_count} cardinality='n' view={this.viewId}/>
 					)}
 					<div className="evolutility evol-many-list">
