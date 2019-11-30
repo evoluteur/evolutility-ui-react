@@ -9,7 +9,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import {i18n_msg} from '../../../i18n/i18n'
 import {pageSize} from '../../../config'
 
 import Many from './many'
@@ -19,6 +18,7 @@ import { getSearchText } from '../../../utils/url'
 import format from '../../../utils/format'
 import Header from '../../shell/Header'
 import Spinner from '../../shell/Spinner'
+import NoData from './NoData'
 import Alert from '../../widgets/Alert'
 import PageNotFound from '../../pages/PageNotFound'
 import Pagination from '../../widgets/Pagination'
@@ -150,12 +150,7 @@ export default class List extends Many {
 					if(this.props.isNested){
 						body = <div className="nodata-list2">No data.</div>
 					}else{
-						let msg = search ? i18n_msg.nodataSearch
-							.replace('{0}', m.namePlural)
-							.replace('{1}', search)
-						: i18n_msg.nodata
-							.replace('{0}', m.namePlural)
-						body = <Alert title="No data" message={msg} type="info" />
+						body = <NoData name={m.name} namePlural={m.namePlural}></NoData>
 					}
 				}
 			}

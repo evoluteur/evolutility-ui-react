@@ -8,7 +8,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
-import {i18n_msg, i18n_errors} from '../../../i18n/i18n'
+import {i18n_errors} from '../../../i18n/i18n'
 import Header from '../../shell/Header'
 import { isFieldMany } from '../../../utils/dico'
 import Many from './many'
@@ -16,6 +16,7 @@ import Card from '../one/Card'
 import Alert from '../../widgets/Alert'
 import Pagination from '../../widgets/Pagination'
 import Spinner from '../../shell/Spinner'
+import NoData from './NoData'
 
 import './Cards.scss' 
 
@@ -60,7 +61,7 @@ export default class Cards extends Many {
 						/>
 					</React.Fragment>
 			 	}else{
-			 		body = <Alert title="No data" type="info" message={i18n_msg.nodata.replace('{0}', m.namePlural)} /> 
+					body = <NoData name={m.name} namePlural={m.namePlural}></NoData>
 			 	}
 			}
 			return (
