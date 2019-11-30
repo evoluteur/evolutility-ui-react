@@ -12,6 +12,7 @@ import { withRouter, Link } from 'react-router-dom'
 import Modal from 'react-modal'
 import SearchBox from '../views/actions/SearchBox'
 import { toast } from 'react-toastify';
+import Icon from "react-crud-icons";
 
 import Format from '../../utils/format'
 import url from '../../utils/url'
@@ -22,30 +23,30 @@ import pkg from '../../../package.json'
 import { i18n_msg, i18n_actions } from '../../i18n/i18n'
 import models from '../../models/all_models'
 
+
 import './Toolbar.scss'
 
 const proxy = pkg.proxy || ''
 const menuItems = {
-    new: {id: 'edit/0', label: i18n_actions.new, icon:'plus', n:'x', readonly:false},
-    new_nolabel: {id: 'edit/0', icon:'plus', n:'x', readonly:false},
-    del: {id: 'del', label: i18n_actions.delete1, icon:'trash', n:'1', readonly:false},
+    //new: {id: 'edit/0', label: i18n_actions.new, icon:'add', n:'x', readonly:false},
+    del: {id: 'del', label: i18n_actions.delete1, icon:'delete', n:'1', readonly:false},
     //filter: {id:'filter', label: i18n_actions.filter, icon:'filter', n:'n'},
-    export: {id: 'export', label: i18n_actions.export1, icon:'cloud-download', n:'x'},
-    save: {id:'save', label: i18n_actions.save, icon:'floppy-disk', n:'1', readonly:false},
-    //import: {id:'import', label: i18n_actions.bImport, icon:'cloud-upload',n:'x'},
+    export: {id: 'export', label: i18n_actions.export1, icon:'export', n:'x'},
+    save: {id:'save', label: i18n_actions.save, icon:'save', n:'1', readonly:false},
+    //import: {id:'import', label: i18n_actions.bImport, icon:'import',n:'x'},
     //cog: {id:'cog',label: 'Customize', icon:'cog', n:'x'},
     //print: {id: 'print', label: '', icon:'print', n:'x'},
     //prev: {id:'prev', label: '', icon:'chevron-left', n:'x'},
     //next: {id:'next', label: '', icon:'chevron-right', n:'x'}
     //sel: {id: 'selections', label: i18n_actions.Selections, icon:'star', n:'x'},
     views: {
-        browse: {id:'browse', label: i18n_actions.browse, icon:'eye-open', n:'1'},// // ReadOnly
+        browse: {id:'browse', label: i18n_actions.browse, icon:'browse', n:'1'},// // ReadOnly
         edit: {id:'edit', label: i18n_actions.edit, icon:'edit', n:'1', readonly:false},// // All Fields for editing
 
-        list: {id:'list', label: i18n_actions.list, icon:'th-list', n:'n'},
-        cards: {id:'cards', label: i18n_actions.cards, icon:'th-large', n:'n'},
+        list: {id:'list', label: i18n_actions.list, icon:'list', n:'n'},
+        cards: {id:'cards', label: i18n_actions.cards, icon:'cards', n:'n'},
         //scatter: {id:'scatter', label: i18n_actions.bScatter, icon:'certificate',n:'n'},
-        charts: {id:'charts', label: i18n_actions.charts, icon:'stats', n:'n'},
+        charts: {id:'charts', label: i18n_actions.charts, icon:'dashboard', n:'n'},
         //stats: {id:'stats', label: i18n_actions.stats, icon:'equalizer', n:'n'},
     },
     //search: true
@@ -81,7 +82,8 @@ class Toolbar extends React.Component {
         this.confirmDelete = this.confirmDelete.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.fnSearch = this.fnSearch.bind(this);
-        //this.filterMany = this.filterMany.bind(this);
+        //this.toggleFilter = this.toggleFilter.bind(this);
+        //this.onFilterChange = this.onFilterChange.bind(this);
     }
 
     render() {
@@ -94,25 +96,16 @@ class Toolbar extends React.Component {
         let navViews = []
         let actions = []
         const q = (window.location && window.location.search) ? window.location.search : ''
-        const iicon = (icon) => <i className={'glyphicon glyphicon-'+icon}></i>
         
-        function buttonLink(menu, idOrFun, iconOnly, urlQuery = ''){
-            const text = iconOnly ? null : menu.label
-            if(isFunction(idOrFun)){
-                return <li key={idx++}>
-                        <span onClick={idOrFun} className="fakeLink">{iicon(menu.icon)} <span>{text}</span></span>
-                    </li>
-            }else{
-                return <li key={idx++}>
-                        <Link to={ep+menu.id+'/'+idOrFun+urlQuery}>{iicon(menu.icon)} <span>{text}</span></Link>
-                    </li>
-            }
+        function buttonLink(menu, idOrFun, urlQuery = '') {
+            return isFunction(idOrFun) ? (
+                    <span key={idx++} onClick={idOrFun} className="fakeLink"><Icon name={menu.icon} tooltip={menu.label} theme="dark"></Icon> </span>
+                ) : (
+                    <Link key={idx++} to={ep+menu.id+'/'+idOrFun+urlQuery}><Icon name={menu.icon} tooltip={menu.label} theme="dark"></Icon> </Link>
+                )
         }
-        
-        if(!isNew){
-            actions.push(buttonLink(menuItems[id ? 'new_nolabel' : 'new'], ''));
-        }
-        navViews = ['list', 'cards', 'charts'].map(menu => buttonLink(menuItems.views[menu], id, true))
+
+        navViews = null //['list', 'cards', 'charts'].map(menu => buttonLink(menuItems.views[menu], id))
         if(id){
             if(view==='edit' && !isNew){
                 actions.push(buttonLink(menuItems.views.browse, id))
@@ -126,9 +119,9 @@ class Toolbar extends React.Component {
             }
         }else{
             if(view!=='charts' && view!=='stats'){
-                //actions.push(buttonLink(menuItems.filter, this.filterMany));
+                //actions.push(buttonLink(menuItems.filter, this.toggleFilter));
                 //actions.push(buttonLink(menuItems.views.charts, ''));
-                actions.push(buttonLink(menuItems.export, this.exportMany, null, q));
+                actions.push(buttonLink(menuItems.export, this.exportMany, q));
             }
         }
 
@@ -160,17 +153,19 @@ class Toolbar extends React.Component {
 
             return (
                 <div className="evo-toolbar" role="navigation">
-                    <ul className="navlinks evo-nav-pills pull-left">
-                        {navViews}
-                    </ul>
-                    <ul className="evo-nav-pills pull-left">
-                        {actions}
+                    <div className="navlinks evo-nav-pills">
+                        { navViews }
+                    </div>
+                    <div className="evo-nav-pills">
+                        { actions }
                         {isNew ? null : (
-                            <li><SearchBox fnSearch={this.fnSearch} searchValue={this.searchValue}></SearchBox></li>
+                            <div className="searchbox">
+                                <SearchBox fnSearch={this.fnSearch} searchValue={this.searchValue}></SearchBox>
+                            </div>
                         )}
-                    </ul>
+                    </div>
                     <div className="clearfix"/>
-                    {delModal}
+                    { delModal }
                 </div>
             )
         }
@@ -193,6 +188,7 @@ class Toolbar extends React.Component {
         // TODO: SHOULD BE IN STORE BUT THERE IS NO STORE YET
         const {entity, id} = this.props.match.params,
             m = models[entity]
+
         if(entity && id && m){
             axios.delete(apiPath+entity+'/'+id)
                 .then(response => {

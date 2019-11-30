@@ -5,8 +5,9 @@
 // -- search
 .evo-search{
   position: relative;
+  top: 14px;
   width: 200px;
-  margin-left: 50px;
+  margin-left: 20px;
   padding: 3px 4px 2px 2px;
   .evo-field{
     &:not(:valid) ~ .clear-icon {

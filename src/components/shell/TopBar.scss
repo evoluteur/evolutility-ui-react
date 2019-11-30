@@ -9,6 +9,19 @@
   height: 50px;
   padding: 20px;
   color: $almostwhite-color;
+
+  > .views{
+    top: 2px;
+    left: 150px !important;
+  }
+  .pos-right {
+    position: absolute;
+    top: 4px;
+    right: 5px;
+    @media only screen and (max-width: 650px) {
+        display: none; 
+    }
+  }
   .navlinks {
     min-width: 280px;
   }

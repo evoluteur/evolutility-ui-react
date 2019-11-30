@@ -6,45 +6,17 @@
 
 .evo-toolbar{
   position: fixed;
-  top: 6px;
-  left: 155px;
+  top: -1px;
+  left: 420px;
   z-index: 110;
-
-  > ul {
-    margin-bottom: 0;
-    > .evo-sel .glyphicon:before{
-      color: $almostblack-color;
-    }
-    > li {
-      list-style: none;
-      float: left;
-      
-      > .fakeLink,
-      > a {
-        cursor: pointer;
-        display: inline-block;
-        text-decoration: none;
-        font-weight: 400;
-        color: $color-nav;
-        //transition: all 0.5s ease;
-        padding: 10px 6px 10px 8px;
-        &:hover{
-          color: $color-nav-hover;
-        }
-      }
-    }
-    &.active > a {
-      &,
-      &:hover,
-      &:focus {
-        color: $color-nav-active;
-      }
-    }
+  .crud-icon > div {
+    white-space: nowrap;
   }
-}
-
-.evo-dropdown-icons{
-  min-width: 50px;
+  .searchbox {
+    position: relative;
+    top: -6px;
+    display: inline-block;
+  }
 }
 
 /* bootstrap override */
@@ -55,35 +27,9 @@
 .evo-filter-on{
   background-color: #e0f2f1;
 }
-.evo-view-on{
-  color: $color-icon-hover;
-}
-/*
-.evo-tb-status{
-  color: #0f0f0f !important;
-  min-height: 35px;
-  line-height: 35px;
-  margin-top: 2px;
-  margin-right: 5px;
-  max-width:200px;
-  @include ellipsis();
-}
-*/
-.evol-many-list{
-  .evol-actions{
-    top: 0;
-    flex-direction: row;
-  }
-}
-
 @media only screen and (max-width: 780px) {
   .evo-nav-pills > li > .fakeLink > span,
   .evo-nav-pills > li > a > span {
-    display: none;
-  }
-}
-@media only screen and (max-width: 650px) {
-  .github{
     display: none;
   }
 }
