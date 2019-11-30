@@ -94,7 +94,7 @@ function getFields(model) {
 
 export function prepModel(m){
 	if(m){
-		if(!m.prepared){
+		if(!m._prepared){
 			// - Model
 			m.defaultViewOne = m.defaultViewOne || 'browse'
 			//m.defaultViewMany = m.defaultViewMany || 'list'
@@ -114,7 +114,7 @@ export function prepModel(m){
 			if(m.fields.filter(fieldInCharts).length<1){
 				m.noCharts = true
 			}
-			m.prepared = true
+			m._prepared = true
 		}
 		return m;
 	}
@@ -123,7 +123,7 @@ export function prepModel(m){
 
 export function prepModelCollecs(models, m){
 	if(m){
-		if(!m.preparedCollecs){
+		if(!m._preparedCollecs){
 			if(m.collections){
 				m.collections.forEach((c) => {
 					if(c.object){
@@ -141,7 +141,7 @@ export function prepModelCollecs(models, m){
 					}
 				})
 			}
-			m.preparedCollecs = true
+			m._preparedCollecs = true
 		}
 		return m;
 	}
