@@ -229,16 +229,18 @@ export default class Edit extends OneReadWrite{
 	}
 
 	clearValidation(){
-		this.model.fields.forEach((f) => {
-			if(this.refs[f.id]){
-				this.refs[f.id].setState({
-					invalid: false,
-					message: null
-				})
-			}else{
-				console.log('Missing field "'+f.id+'" in clearValidation.')
-			}
-		})
+		if(this.model){
+			this.model.fields.forEach((f) => {
+				if(this.refs[f.id]){
+					this.refs[f.id].setState({
+						invalid: false,
+						message: null
+					})
+				}else{
+					console.log('Missing field "'+f.id+'" in clearValidation.')
+				}
+			})
+		}
 	}
 
 	setDeltaField(fid, value){

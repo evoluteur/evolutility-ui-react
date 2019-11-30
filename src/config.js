@@ -10,7 +10,7 @@ module.exports = {
 	// - Path to uploaded files
 	filesUrl: 'http://localhost:3000/pix/',
 
-	// - get models from server
+	// - get models from server at startup (and add/replace json models)
 	queryModels: false,
 
 	// - Pagination

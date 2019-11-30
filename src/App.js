@@ -86,7 +86,7 @@ export default class App extends React.Component {
 					</div>
 				) : (
 					<BrowserRouter>
-						<TopBar />
+						<Route path='*' exact={true} component={TopBar} />
 						<Route path='*' exact={true} component={Nav} /> 
 						<div className="pageContent" role="main">
 							<AppRoutes/>

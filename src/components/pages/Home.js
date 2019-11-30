@@ -115,7 +115,7 @@ export default class Home extends React.PureComponent {
                         <a target="api" href={apiPathFull}>API discovery</a> {' '}
                         {appIcons.map(ico => appAPI(ico))}
                     </div>
-                    <p>GraphQL: {' '}
+                    <p><br/>GraphQL: {' '}
                         <a target="api" href="http://localhost:2000/graphql">GraphiQL</a>
                     </p>
                 </div> 

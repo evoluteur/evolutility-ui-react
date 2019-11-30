@@ -3,12 +3,15 @@
 .TopBar {
   z-index: 100;
   position: fixed;
-  top:0;
-  width:100%;
+  top: 0;
+  width: 100%;
   background-color: $almostblack-color;
   height: 50px;
   padding: 20px;
   color: $almostwhite-color;
+  .navlinks {
+    min-width: 280px;
+  }
 }
 
 .tbLogo{

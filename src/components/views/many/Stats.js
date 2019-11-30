@@ -165,7 +165,8 @@ export default class Stats extends React.Component {
 
         const formattedValue = (value, field) => field.type==='money' ? format.moneyString(value) : value
         const itemAggr = (id, label, value) =>  <div key={id}><label className="grey stat-fn">{label}</label> {value}</div>
-        const item = (k) => <div key={k.field.id} className="f-stats">
+        const item = k => (k.min===null) ? null : 
+            <div key={k.field.id} className="f-stats">
                 <label className="stat-label">
                     {k.field.label}
                     {k.chartable ? (

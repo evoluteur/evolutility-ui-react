@@ -85,7 +85,7 @@ export default class Many extends React.Component {
 	}
 
 	componentDidMount() {
-        document.title = this.model ? this.model.label : 'No title' 
+        document.title = this.model ? this.model.label : 'Evolutility' 
         window.scrollTo(0, 0)
 		this.getData()
 	}

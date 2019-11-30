@@ -1,8 +1,12 @@
-[data-entity="comics"] .evol-cards-body > div{
-	height: 520px;
+// For each object card height can be set here
+
+[data-entity="comics"] {
+	.evol-cards-body > div {
+		height: 560px;
+	}
 }
 [data-entity="contact"] .evol-cards-body > div{
-	height: 140px;
+	height: 180px;
 }
 [data-entity="todo"] .evol-cards-body > div {
 	height: 152px;

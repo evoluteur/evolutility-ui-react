@@ -4,6 +4,7 @@
 @import '../../variables';
 
 .evol-many-list{
+  padding: 10px;
   .alignR {
     text-align: right;
   }
@@ -54,9 +55,6 @@
 .list-new{
   border-top: $border;
   padding: 20px 10px;
-}
-fieldset .table{
-  border-bottom: none !important;
 }
 
 .nodata-list2{
