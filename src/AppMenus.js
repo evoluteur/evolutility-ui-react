@@ -8,7 +8,7 @@ module.exports = [
             {id: 'contact', text: 'Address book'},
             {id: 'todo', text: 'Tasks'},
             {id: 'restaurant', text: 'Restaurants'},
-            {id: 'winecellar', url1:'winecellar/cards', text: 'Wine cellar'},
+            {id: 'winecellar', text: 'Wine cellar', defaultViewMany: 'cards'},
             {id: 'winetasting', text: 'Wine tastings'},
             {id: 'comics', text: 'Graphic novels', defaultViewMany: 'cards'},
         ],
@@ -21,6 +21,14 @@ module.exports = [
             {id: 'artist', text: 'Artists', defaultViewMany: 'cards'},
             {id: 'album', text: 'Albums', defaultViewMany: 'cards'},
             {id: 'track', text: 'Tracks'},
+        ],
+    },
+    {
+        id: 'test',
+        title: 'Test',
+        icon: 'tint',
+        menus: [
+            {id: 'test', text: 'Tests', defaultViewMany: 'cards'},
         ],
     },/*
     {

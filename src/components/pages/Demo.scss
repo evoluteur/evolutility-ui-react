@@ -1,6 +1,12 @@
 .evo-demo {
+  .component > h3 > i {
+    position: relative;
+    top: 4px;
+    margin-right: 15px;
+  }
   .demoLinks{
     line-height: 26px;
+    margin-left: 40px;
     > a {
           margin-bottom: 4px;
           > img {
@@ -9,6 +15,7 @@
       }
     }
     .cSet{
+      padding-left: 10px;
       width: 100%;
       display: flex;
       flex-wrap: wrap;

@@ -58,10 +58,15 @@ export default class Nav extends React.Component {
             menus = [sections.designer]
             footer = <Link to="/">Home</Link>
         } else if(g==='organizer' || g==='music' || w.entity==='demo'){
-            menus = [sections.organizer, sections.music]
+            menus = [sections.organizer, sections.music] 
+            //menus = [sections.organizer, sections.music, sections.test]
             //footer = <Link to="/world/list">Designer</Link>
-        } else {
-            menus = []
+        } else { 
+            if (w.entity==='test'){
+                menus = [sections.test]
+            } else {
+                menus = []
+            }
             footer = <Link to="/demo">Demo Apps</Link>
         }
 
