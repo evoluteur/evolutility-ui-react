@@ -79,6 +79,15 @@ var fields = [
 		chartType: "Table"
 	},
 	{
+		"id": "list",
+		"type": "list",
+		"label": "Multiselect",
+		//"required": true,
+		"list": lov,
+		"inMany": true,
+		"width": 100
+	},
+	{
 		"id": "date",
 		"type": "date",
 		"label": "Date",
@@ -187,7 +196,8 @@ module.exports = {
 			"fields": [
 				"parent",
 				"lov",
-				"lovlc"
+				"lovlc",
+				"list",
 			]
 		},
 		{

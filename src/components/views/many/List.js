@@ -27,11 +27,14 @@ import './List.scss'
 
 const sliceData = data => data.length > pageSize ? data.slice(0, pageSize) : (data || [])
 
+
 // TODO: search w/ pagination
 export default class List extends Many {
 
 	viewId = 'list'
-
+	
+	lovMaps = {}
+	
 	tableHeader(fields) {
 		const fnCell = this.props.paramsCollec ? 
 			// - header sub-collection table
@@ -62,6 +65,7 @@ export default class List extends Many {
 			const icon = ico ? <img className="evol-many-icon" src={'/pix/'+ico} alt=""/> : null
 			const realEntity = isNested ? paramsCollec.object || paramsCollec.entity : e
 			const link = '/'+realEntity+'/'+((m && m.defaultViewOne) || 'browse') +'/'
+			const getLovMap = this.getLovMap
 
 			function cell(d, f, idx){
 				const lovField = f.type===ft.lov
@@ -96,12 +100,20 @@ export default class List extends Many {
 							</td>
 						)
 					}
+				}else if(f.type===ft.list){
+					const lovMap = getLovMap(f)
+					return (
+						<td key={f.id}>
+							<div className="list-tags">
+								{(value || []).map(v => <div key={v}>{lovMap[v] || 'N/A'}</div>)}
+							</div>
+						</td>
+					)
 				}else if(fieldIsNumber(f)){
 					return <td key={f.id} className="alignR">{format.fieldValue(f, value, true)}</td>
 				}
 				return <td key={f.id}>{format.fieldValue(f, value, true)}</td>
 			}
-
 			const data = this.state.data ? this.state.data : [],
 				full_count = this.pageSummary(data),
 				fullCount = data.length ? (data[0]._full_count || data.length) : data.length,
@@ -123,8 +135,10 @@ export default class List extends Many {
 				if(data.length){
 					const fields = paramsCollec ? paramsCollec.fields : m.fields.filter(isFieldMany)
 
-					body = (
-						<div>
+					if(!fields.length){
+						body = <Alert title="Error" message="No fields are flagged as inMany to show in list." /> 
+					}else{
+						body = (
 							<table className={css}>
 								<thead>
 									{this.tableHeader(fields)}
@@ -137,14 +151,16 @@ export default class List extends Many {
 									)) : null}
 								</tbody>
 							</table>
-						</div>
-					)
-					pagination = <Pagination 
+						)
+						pagination = (
+							<Pagination 
 								count={data.length} 
 								fullCount={fullCount} 
 								fnClick={this.clickPagination} 
 								location={this.props.location}
 							/>
+						)
+					}
 				}else{
 					// TODO: get model of nested obj
 					if(this.props.isNested){
@@ -171,6 +187,16 @@ export default class List extends Many {
 		}else{
 			return <PageNotFound location={this.props.location}/>
 		}
+	}
+
+	getLovMap = f => {
+		let map = this.lovMaps[f.id]
+		if(!map && f.list){
+			map = {}
+			f.list.forEach(item => map[item.id] = item.text)
+			this.lovMaps[f.id] = map
+		}
+		return map
 	}
 
 }

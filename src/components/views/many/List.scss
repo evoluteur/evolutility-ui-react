@@ -18,11 +18,9 @@
       font-weight: $weight-label !important;
       white-space: nowrap;
       background-color: $bgcolor-header;
-      i{
-        position: absolute;
-        right: 5px;
-        top: 12px;
-        color: $color-border;
+      .glyphicon-arrow-down,
+      .glyphicon-arrow-up {
+        color: silver;
       }
     }
     td{

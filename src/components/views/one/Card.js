@@ -19,6 +19,8 @@ export default class Card extends React.PureComponent {
 
     viewId = 'card'
 
+    lovMaps = {}
+
     render() {
         const d = this.props.data || {},
             fields = this.props.fields || [],
@@ -26,13 +28,15 @@ export default class Card extends React.PureComponent {
             m = models[entity],
             link = '/'+entity+'/'+m.defaultViewOne+'/',
             linkEdit = '/'+entity+'/edit/',
-            icon = m.icon ? <img className="evol-many-icon" src={'/pix/'+m.icon} alt=""/> : null
+            icon = m.icon ? <img className="evol-many-icon" src={'/pix/'+m.icon} alt=""/> : null,
+            getLovMap = this.getLovMap;
 
         return (
             <div className="panel panel-default"> 
                 {fields.map(function(f, idx){
                     const attr = (f.type===ft.lov) ? f.id+'_txt' : f.id,
                         fv = format.fieldValue(f, d[attr])
+                      //  <Link to={link+d.id}><Icon name="browse" size="small"></Icon></Link>
 
                     if(idx===0){
                         return (
@@ -46,6 +50,16 @@ export default class Card extends React.PureComponent {
                        // <i data-id="Delete" title="Delete" className="glyphicon glyphicon-trash"></i>
                     }else if(f.type===ft.image){
                         return <div key={f.id} className="card-fld-center"><Link to={link+d.id}>{fv}</Link></div>
+                    }else if(f.type===ft.list){
+					    const lovMap = getLovMap(f)
+                        return (
+                            <div key={f.id}>
+                                <label>{f.labelShort || f.label}: </label>
+                                <div className="list-tags">
+                                    {(fv || []).map(v => <div key={v}>{lovMap[v] || 'N/A'}</div>)}
+                                </div>
+                            </div>
+                        )
                     }else{
                         const icon = f.type===ft.lov && f.lovIcon ? d[f.id+'_icon'] : ''
                         return (
@@ -62,6 +76,17 @@ export default class Card extends React.PureComponent {
             </div>
         )
     }
+
+	getLovMap = f => {
+		let map = this.lovMaps[f.id]
+		if(!map && f.list){
+			map = {}
+            f.list.forEach(item => map[item.id] = item.text)
+            // - it would be better to not duplicate lovMap for fields sharing the same list
+			this.lovMaps[f.id] = map
+		}
+		return map
+	}
 
 }
 

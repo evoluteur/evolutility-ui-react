@@ -15,11 +15,13 @@ import { i18n_actions, i18n_msg } from '../../i18n/i18n'
 import { filesUrl } from '../../config.js'
 import FieldLabel from './FieldLabel'
 
-// - components:
+// - components for some field types:
 // - date
 import Datepicker from 'react-datepicker'
 // - image & documents
 import Dropzone from 'react-dropzone'
+// - list
+import MultiSelect from "@khanacademy/react-multi-select";
 
 
 import './Field.scss'
@@ -38,8 +40,16 @@ function createMarkup(d) {
 	return {__html: d?d.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br/>'):''}
 }
 
-function createOption(opt){
-	return <option key={opt.id} value={''+opt.id}>{opt.text}</option>
+function createOption(id, text){
+	return <option key={id} value={''+id}>{text}</option>
+}
+
+function itemInList(id, list){
+	const tag = list.find(item => item.id===id)
+	if(tag){
+		return tag.text
+	}
+	return 'N/A'
 }
 
 export default class Field extends React.Component {
@@ -53,6 +63,7 @@ export default class Field extends React.Component {
 		//TODO: more???
 		this.onDropFile = this.onDropFile.bind(this);
 		this.removeFile = this.removeFile.bind(this);
+		this.getMultiselectFieldChange = this.getMultiselectFieldChange.bind(this);
 	}
 
 	_fieldElem(f, d, cbs){
@@ -74,19 +85,9 @@ export default class Field extends React.Component {
 						className="form-control" 
 						value={d?d:''}
 					/>
-		}else if(f.type===ft.lov || f.type===ft.list){
-			let opts
-
-			if(f.list){
-				opts = f.list.map(createOption)
-			}else{
-				const optVal = {
-					id:f.id+'loading', 
-					text: i18n_msg.loading
-				}
-				opts = [createOption(optVal)]
-				f.list = [optVal]
-			}
+		}else if(f.type===ft.lov){
+			let opts = f.list ? (f.list||[]).map(item => createOption(item.id, item.text))
+				: [createOption(f.id+"loading", i18n_msg.loading)]
 			return <select {...usualProps}
 						className="form-control" 
 						value={d || ''}
@@ -94,7 +95,16 @@ export default class Field extends React.Component {
 						<option/>
 						{opts}
 					</select>
-
+		}else if(f.type===ft.list){
+			let opts = f.list.map(item => ({
+				value: item.id,
+				label: item.text
+			}))
+			return <MultiSelect
+					options={opts}
+					selected={d|| []}
+					onSelectedChanged={this.getMultiselectFieldChange(f)}
+				/>
 		}else if(f.type===ft.date){
 			return <Datepicker {...usualProps}
 						className="form-control" 
@@ -226,6 +236,14 @@ export default class Field extends React.Component {
 					fw = format.fieldValue(f, d)
 				}
 			}
+		}else if(f.type===ft.list){
+			if(f.list){
+				fw = <div key={f.id+'_list'} className="list-tags">
+						{(d || []).map(itemid => <div key={itemid}>{itemInList(itemid, f.list)}</div>)}
+					</div>
+			}else{
+				fw = format.fieldValue(f, d)
+			}
 		}else {
 			fw = format.fieldValue(f, d)
 		}
@@ -273,8 +291,21 @@ export default class Field extends React.Component {
 		// - for fields of type date (using react-datepicker)
 		return v => {
 			this.props.callbacks.change({
-				target:{
+				target: {
 					id: fid, 
+					value: v
+				}
+			})
+		}
+	}
+
+	getMultiselectFieldChange() {
+		// - for fields of type list (using react-multi-select)
+		return v => {
+			const f = this.props.model
+			this.props.callbacks.change({
+				target:{
+					id: f.id, 
 					value: v
 				}
 			})
