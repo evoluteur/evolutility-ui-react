@@ -112,7 +112,7 @@ export default class Stats extends React.Component {
 
         if(data){
             fields.forEach((f)=>{
-                if(fieldIsNumeric(f)){ 
+                if(fieldIsNumeric(f) && !f.noStats){ 
                     let item = data[f.id]
                     if(item){
                         item.type = f.type

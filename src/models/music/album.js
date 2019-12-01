@@ -10,7 +10,8 @@ module.exports = {
 	"name": "album",
 	"namePlural": "albums",
 	"icon": "cd.png",
-	"titleField": "name",
+	"titleField": "title",
+	noStats: true,
 	"fields": [
 		{
 			"id": "title",

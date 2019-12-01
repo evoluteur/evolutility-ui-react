@@ -13,6 +13,7 @@ module.exports = {
 	"defaultViewMany": "list",
 	"defaultViewOne": "browse",
 	"titleField": "fistname",
+	noStats: true,
 	"fields": [
 		{
 			"id": "lastname",

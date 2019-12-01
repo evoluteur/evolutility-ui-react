@@ -11,6 +11,7 @@ module.exports = {
 	"namePlural": "artists",
 	"icon": "star.png",
 	"titleField": "name",
+	noStats: true,
 	"fields": [
 		{
 			"id": "name",

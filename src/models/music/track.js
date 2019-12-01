@@ -11,6 +11,7 @@ module.exports = {
 	"namePlural": "tracks",
 	"icon": "music.png",
 	"titleField": "name",
+	noStats: true,
 	"fields": [
 		{
 			"id": "name",
