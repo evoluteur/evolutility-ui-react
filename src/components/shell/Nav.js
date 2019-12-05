@@ -1,8 +1,11 @@
 import React from 'react';
 import { Route, Link } from "react-router-dom";
+import Icon from "react-crud-icons";
 import { i18n_nav } from '../../i18n/i18n';
 import AppMenus from '../../AppMenus.js';
 import url from '../../utils/url.js'
+
+import models from '../../models/all_models'
 
 import './Nav.scss';
 
@@ -18,17 +21,24 @@ AppMenus.forEach( menuGroup => {
     })
 })
 
-const vIcons = [
-    {id: '/list', icon:'th-list'},
-    //{id: '/cards', icon:'th-large'},
-    {id: '/charts', icon:'stats'},
-    //{id: '/stats', icon:'equalizer'},
-    {id: '/edit/0', icon:'plus'},
-]
+const vwIcons = m => {
+    const mm = [
+        {id: '/edit/0', icon:'add2'},
+        {id: '/list', icon:'list'},
+        //{id: '/cards', icon:'th-large'},
+    ]
+    if(!m.noCharts){
+        mm.push({id: '/charts', icon:'dashboard'})
+    }
+    return mm
+}
 
 const iconViews = (mid, f) => (
     <div className="mIcons" >
-        {vIcons.map(menu => f.url ? null : <Link to={'/'+mid+menu.id} key={menu.id}><i className={'glyphicon glyphicon-'+menu.icon}/></Link>)}
+        {vwIcons(models[mid]||[]).map(menu => f.url ? null : 
+            <Link to={'/'+mid+menu.id} key={menu.id}>
+                <Icon name={menu.icon} size="small" theme="none"/>
+            </Link>)}
     </div>
 )
 
@@ -74,7 +84,7 @@ export default class Nav extends React.Component {
             <li className={ section.id===g ? 'active-li':''} key={section.id}>
                 {section.title ? (
                     <div>
-                        <i className={'glyphicon glyphicon-'+section.icon} name={section.icon}/>
+                        <img alt="Backend" src={'/svg/'+section.icon+'.svg'} className="cpnSvg" />
                         {section.title}
                     </div>
                 ) : null}

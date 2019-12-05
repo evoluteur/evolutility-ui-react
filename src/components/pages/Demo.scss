@@ -1,12 +1,17 @@
 .evo-demo {
-  .component > h3 > i {
-    position: relative;
-    top: 4px;
-    margin-right: 15px;
+  .component > h3  {
+    > img {
+      margin-right: 8px;
+    }
+    > i {
+      position: relative;
+      top: 4px;
+      margin-right: 15px;
+    }
   }
   .demoLinks{
     line-height: 26px;
-    margin-left: 40px;
+    margin-left: 10px;
     > a {
           margin-bottom: 4px;
           > img {

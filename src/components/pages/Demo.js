@@ -22,7 +22,7 @@ export default class Demo extends React.PureComponent {
 
                 <div className="cSet">
                     <div className="component c1"> 
-                        <h3><i class="glyphicon glyphicon-leaf" name="leaf"></i>Organizer</h3>
+                        <h3><img alt="Organizer" src="/svg/briefcase.svg" />Organizer</h3>
                         <div className="demoLinks">
                             <Link to="/todo/list"><img src="/pix/todo.gif" alt="" title="To-Do list"/>To-Do list</Link><br/>
                             <Link to="/contact/list"><img src="/pix/contact.gif" alt="" title="Address book"/>Address book</Link><br/>
@@ -33,7 +33,7 @@ export default class Demo extends React.PureComponent {
                         </div>
                     </div>
                     <div className="component"> 
-                        <h3><i class="glyphicon glyphicon-music" name="music"></i>Music</h3>
+                        <h3><img alt="Music" src="/svg/music.svg" />Music</h3>
                         <div className="demoLinks">
                             <Link to="/artist/cards"><img src="/pix/star.png" alt="" title="Artists"/>Artists</Link><br/>
                             <Link to="/album/cards"><img src="/pix/cd.png" alt="" title="Albums"/>Albums</Link><br/>

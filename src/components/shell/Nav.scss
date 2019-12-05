@@ -4,9 +4,9 @@
 	z-index: 70;
 	font-family: Droid,Lato,'Helvetica Neue',Arial,Helvetica;
 	position: fixed;
-	left:0;
-	top:50px;
-	width:170px;
+	left: 0;
+	top: 50px;
+	width: 170px;
 	height: 100%;
 	height: calc(100% - 40px);
 	color: #455A64;
@@ -34,11 +34,18 @@
 		line-height: 25px;
 		padding: 7px;
 		font-weight: bold;
-		font-size: 15px;
+		font-size: 16px;
 		> i {
 			position: relative;
 			top: 2px;
 		}
+	}
+	>ul > li > div > img{
+		position: relative;
+		top: -2px;
+		margin-right: 8px;
+		width: 20px;
+		height: 20px;
 	}
 	ul{
 		list-style-type: none;
@@ -67,6 +74,35 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 		*/
+		}
+	}
+	.mIcons{
+		//display: none;
+		text-align: right;
+		width: 0;
+		overflow: hidden;
+		transition: width $ease-time ease 0s;
+		position: absolute;
+		top: 5px;
+		right: -1px;
+		height: 20px;
+		font-size: 12px;
+		padding: 0;
+		z-index: 100;
+
+		> a {
+			display: inline-block;
+			&:hover{
+				> svg {
+					fill: $color-icon-hover
+				}
+			}
+			> svg {
+				fill: $color-icon;
+				height: 16px;
+				width: 16px;
+				margin: 0 2px;
+			}
 		}
 	}
 	.active-li {
@@ -142,32 +178,6 @@ a.skipNav {
     z-index:-100;
 }
 
-.mIcons{
-	display: none;
-	position: absolute;
-	top: 0;
-	right: -8px;
-	height: 20px;
-	font-size: 12px;
-	padding: 0;
-	z-index: 100;
-
-	> a {
-		font-size: 12px;
-
-		&:hover{
-			>i {
-				color: $color-icon-hover
-			}
-		}
-		> i {
-			display: inline-block;
-			top: -4px;
-			font-size: 12px;
-			margin: 0 3px;
-		}
-	}
-}
 .nav-l2 > li{
 	@include border-radius(5px);
 	padding: 5px 0 5px 5px;
@@ -183,6 +193,8 @@ a.skipNav {
 		background-color: white;
 		> .mIcons{
 			display: inline-block;
+			width: 65px; 
+			transition: width $ease-time ease $delay-time2;
 			//padding-right: 14px;
 			> a:hover {
 				color: $color-icon-hover;

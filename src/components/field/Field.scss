@@ -58,16 +58,9 @@
     color: $color-label !important;
     font-weight: normal;
     font-size: .9em;
-
-    > .glyphicon-question-sign{
-      cursor: pointer;
-      padding-left: 4px;
-      color: $grey-color;
-
-      &:hover{
-        color: $color-icon-hover;
-      }
-    }
+  }
+  .crud-icon > svg {
+    fill: $color-label;
   }
 }
 

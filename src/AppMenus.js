@@ -3,7 +3,7 @@ module.exports = [
     {
         id: 'organizer',
         title: 'Organizer',
-        icon: 'leaf',
+        icon: 'briefcase',
         menus: [
             {id: 'contact', text: 'Address book'},
             {id: 'todo', text: 'Tasks'},
@@ -26,7 +26,7 @@ module.exports = [
     {
         id: 'test',
         title: 'Test',
-        icon: 'tint',
+        icon: 'water',
         menus: [
             {id: 'test', text: 'Tests', defaultViewMany: 'cards'},
         ],

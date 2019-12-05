@@ -3,6 +3,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import  Icon from 'react-crud-icons'
+
 const FieldLabel=(props)=>{
 	// - props = label, field, readOnly, clickHelp
 	const f = props.field || {type: 'text'},
@@ -13,7 +15,7 @@ const FieldLabel=(props)=>{
 			<label className="control-label">
 				{props.label || f.label}
 				{required ? <span className="evol-required">*</span> : null}
-				{f.help ? <i className="glyphicon glyphicon-question-sign" onClick={props.clickHelp} /> : null}
+				{f.help ? <Icon name="help" onClick={props.clickHelp} size="tiny"></Icon> : null}
 			</label>
 		</div>
 	)
