@@ -41,7 +41,7 @@ const sortCount = (a, b) => {
 }
 const expandToggle = size => size === 'large' ? 'small' : 'large'
 const cssActive = active => active ? 'active' : ''
-const chartIcon = (chartType, props) => <Icon id={chartType} key={chartType} name={chartType==='table' ? 'list' : chartType} tooltip={i18n_charts[chartType]} {...props} className={cssActive(chartType===chartType)}></Icon>
+const chartIcon = (chartType, props) => <Icon id={chartType} key={chartType} name={chartType==='table' ? 'list' : chartType} tooltip={i18n_charts[chartType]} size="small" className={cssActive(chartType===chartType)}></Icon>
 
 export default class Chart extends React.Component {
 
