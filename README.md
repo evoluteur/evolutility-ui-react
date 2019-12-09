@@ -155,7 +155,7 @@ Objects have fields.
 | Property     | Meaning                               |
 |--------------|---------------------------------------|
 | id           | Unique key for the field (can be the same as column but doesn't have to be). |
-| type         | Field type to show in the UI. Possible field types: <ul><li>boolean (yes/no)</li><li>date</li><li>datetime</li><li>decimal</li><li>document</li><li>email</li><li>image</li><li>integer</li><li>lov (list of values)</li><li>list (multiselect)</li><li>money</li><li>text</li><li>textmultiline</li><li>time</li><li>url</li></ul> |
+| type         | Field type to show in the UI. Possible field types: <ul><li>boolean (yes/no)</li><li>date</li><li>datetime</li><li>decimal</li><li>document</li><li>email</li><li>image</li><li>integer</li><li>json</li><li>lov (list of values)</li><li>list (multiselect)</li><li>money</li><li>text</li><li>textmultiline</li><li>time</li><li>url</li></ul> |
 | label        | Field description (displayed with an asterisk for required fields).      |
 | labelShort   | Optional shorter version of the labels (used in List and Cards views). |
 | required     | Determines if the field is required for saving.      |
@@ -170,8 +170,9 @@ Objects have fields.
 | width        | Field width in Browse and Edit views (in percent of parent width). |
 | help         | Optional help on the field. |
 | chartType    | Default charts type used for the field ("Bars", "Pie", or "Table"). "Bars" is used if not specified. |
-| noCharts     | Prevent the field to have a charts (only necessary for fields of type integer, decimal, money, boolean, list of values which are "chartable"). |
-| unique       | Values must be unique (not implemented yet).   |
+| noCharts     | Exclude field from charts (only applies to fields of type integer, decimal, money, boolean, list of values which are "chartable"). |
+| noStats      | Exclude field from Stats.   |
+| unique       | Requires value to be unique (not implemented yet).   |
 
 <a name="Group"></a>
 ### Group

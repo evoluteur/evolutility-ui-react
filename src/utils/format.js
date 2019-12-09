@@ -99,8 +99,8 @@ const formatLib = {
     },
     
     dateString: d => mFormat(d, 'L'),
-    timeString: d => mFormat(moment(d, 'HH:mm:ss'), 'LTS'),
-    datetimeString: d => mFormat(d, 'L LTS'),
+    timeString: d => mFormat(moment(d, 'HH:mm:ss'), 'hh:mm A'),
+    datetimeString: d => mFormat(d, 'L hh:mm A'),
     decimalString: d => numFormat(d, d>1 ? '0.00' : '0.000'),
     moneyString: d => numFormat(d, '$0,0.00'),
     jsonString: js => js ? JSON.stringify(js, null, '\t') : '',
