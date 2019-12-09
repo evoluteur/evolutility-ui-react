@@ -10,8 +10,11 @@ module.exports = {
 	"name": "track",
 	"namePlural": "tracks",
 	"icon": "music.png",
+	"active": true,
+	"position": 30,
+	"defaultViewMany": "list",
+	"defaultViewOne": "browse",
 	"titleField": "name",
-	noStats: true,
 	"fields": [
 		{
 			"id": "name",
@@ -80,5 +83,6 @@ module.exports = {
 			"width": 62
 		}
 	],
-	"collections": []
+	"collections": [],
+	"noStats": true
 }

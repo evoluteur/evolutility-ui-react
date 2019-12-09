@@ -10,7 +10,9 @@ module.exports = {
 	"name": "wine",
 	"namePlural": "wines",
 	"icon": "wine.gif",
-	"defaultViewMany": "list",
+	"active": true,
+	"position": 50,
+	"defaultViewMany": "cards",
 	"defaultViewOne": "browse",
 	"titleField": "name",
 	"fields": [

@@ -84,7 +84,7 @@ export default class Nav extends React.Component {
             <li className={ section.id===g ? 'active-li':''} key={section.id}>
                 {section.title ? (
                     <div>
-                        <img alt="Backend" src={'/svg/'+section.icon+'.svg'} className="cpnSvg" />
+                        <img alt={section.title} src={'/svg/'+section.icon+'.svg'} className="cpnSvg" />
                         {section.title}
                     </div>
                 ) : null}
@@ -103,7 +103,6 @@ export default class Nav extends React.Component {
                 <div className="footLinks">
                     {footer}
                 </div>
-                
                 <div id="afterNav"></div>
             </nav>
         );

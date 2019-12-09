@@ -10,10 +10,11 @@ module.exports = {
 	"name": "wine tasting",
 	"namePlural": "wine tastings",
 	"icon": "wine.gif",
+	"active": true,
+	"position": 55,
 	"defaultViewMany": "list",
 	"defaultViewOne": "browse",
 	"titleField": "drink_date",
-	noStats: true,
 	"fields": [
 		{
 			"id": "drink_date",
@@ -89,5 +90,6 @@ module.exports = {
 			]
 		}
 	],
-	"collections": []
+	"collections": [],
+	"noStats": true
 }

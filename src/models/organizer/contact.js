@@ -10,10 +10,11 @@ module.exports = {
 	"name": "contact",
 	"namePlural": "contacts",
 	"icon": "contact.gif",
+	"active": true,
+	"position": 10,
 	"defaultViewMany": "list",
 	"defaultViewOne": "browse",
 	"titleField": "fistname",
-	noStats: true,
 	"fields": [
 		{
 			"id": "lastname",
@@ -226,5 +227,6 @@ module.exports = {
 			]
 		}
 	],
-	"collections": []
+	"collections": [],
+	"noStats": true
 }

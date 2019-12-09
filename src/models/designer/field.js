@@ -9,7 +9,7 @@ module.exports = {
 	"world": "designer",
 	"name": "field",
 	"namePlural": "fields",
-	"icon": "",
+	"icon": "edi_fld.png",
 	"defaultViewMany": "list",
 	"defaultViewOne": "browse",
 	"titleField": "label",
@@ -82,7 +82,7 @@ module.exports = {
 				},
 				{
 					"id": 11,
-					"text": "List (dropdown)",
+					"text": "Lov (dropdown)",
 					"icon": "designer/ft-lov.gif"
 				},
 				{
@@ -94,6 +94,16 @@ module.exports = {
 					"id": 13,
 					"text": "Link",
 					"icon": "designer/ft-url.gif"
+				},
+				{
+					"id": 14,
+					"text": "List (multiselect)",
+					"icon": "designer/ft-list.gif"
+				},
+				{
+					"id": 15,
+					"text": "JSON",
+					"icon": "designer/ft-json.png"
 				}
 			],
 			"lovIcon": true,

@@ -10,8 +10,11 @@ module.exports = {
 	"name": "artist",
 	"namePlural": "artists",
 	"icon": "star.png",
+	"active": true,
+	"position": 10,
+	"defaultViewMany": "cards",
+	"defaultViewOne": "browse",
 	"titleField": "name",
-	noStats: true,
 	"fields": [
 		{
 			"id": "name",
@@ -77,8 +80,10 @@ module.exports = {
 			"icon": "cd.png",
 			"fields": [
 				"title",
-				"cover",
+				"cover"
 			]
 		}
-	]
+	],
+	"noCharts": true,
+	"noStats": true
 }

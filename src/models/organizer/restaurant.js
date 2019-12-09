@@ -10,10 +10,11 @@ module.exports = {
 	"name": "restaurant",
 	"namePlural": "restaurants",
 	"icon": "resto.gif",
+	"active": true,
+	"position": 30,
 	"defaultViewMany": "list",
 	"defaultViewOne": "browse",
 	"titleField": "name",
-	noStats: true,
 	"fields": [
 		{
 			"id": "name",
@@ -221,5 +222,6 @@ module.exports = {
 			]
 		}
 	],
-	"collections": []
+	"collections": [],
+	"noStats": true
 }

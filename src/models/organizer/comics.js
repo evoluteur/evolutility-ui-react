@@ -10,7 +10,9 @@ module.exports = {
 	"name": "serie",
 	"namePlural": "series",
 	"icon": "comics.png",
-	"defaultViewMany": "list",
+	"active": true,
+	"position": 40,
+	"defaultViewMany": "cards",
 	"defaultViewOne": "browse",
 	"titleField": "title",
 	"fields": [

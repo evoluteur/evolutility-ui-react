@@ -10,10 +10,11 @@ module.exports = {
 	"name": "task",
 	"namePlural": "tasks",
 	"icon": "todo.gif",
+	"active": true,
+	"position": 20,
 	"defaultViewMany": "list",
 	"defaultViewOne": "browse",
 	"titleField": "title",
-	noStats: true,
 	"fields": [
 		{
 			"id": "title",
@@ -139,5 +140,6 @@ module.exports = {
 			]
 		}
 	],
-	"collections": []
+	"collections": [],
+	"noStats": true
 }
