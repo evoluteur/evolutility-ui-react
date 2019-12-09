@@ -99,7 +99,7 @@ const formatLib = {
     },
     
     dateString: d => mFormat(d, 'L'),
-    timeString: d => mFormat(d, 'LTS'),
+    timeString: d => mFormat(moment(d, 'HH:mm:ss'), 'LTS'),
     datetimeString: d => mFormat(d, 'L LTS'),
     decimalString: d => numFormat(d, d>1 ? '0.00' : '0.000'),
     moneyString: d => numFormat(d, '$0,0.00'),
