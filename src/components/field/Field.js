@@ -27,6 +27,10 @@ import MultiSelect from "@khanacademy/react-multi-select";
 import './Field.scss'
 
 
+function isObject(obj) {
+	return (typeof obj === "object" && obj !== null)// || typeof obj === "function";
+}
+
 function emHeight(f){
 	let fh = parseInt(f.height || 2, 10);
 	if(fh<2){
@@ -77,13 +81,19 @@ export default class Field extends React.Component {
 		if(f.type===ft.bool){
 			return <input {...usualProps}
 						type="checkbox" 
-						checked={d?true:false}
+						checked={d ? true : false}
 				    />
-		}else if(f.type===ft.textml || f.type===ft.json){ // && f.height>1
+		}else if(f.type===ft.textml){
 			return <textarea {...usualProps}
-						rows={f.height}
+						rows={f.height || 4}
 						className="form-control" 
-						value={d?d:''}
+						value={d ? d : ''}
+					/>
+		}else if(f.type===ft.json){
+			return <textarea {...usualProps}
+						rows={f.height || 4}
+						className="form-control" 
+						value={isObject(d) ? JSON.stringify(d, null, 2) : (d || '')}
 					/>
 		}else if(f.type===ft.lov){
 			let opts = f.list ? (f.list||[]).map(item => createOption(item.id, item.text))
@@ -102,7 +112,7 @@ export default class Field extends React.Component {
 			}))
 			return <MultiSelect
 					options={opts}
-					selected={d|| []}
+					selected={d || []}
 					onSelectedChanged={this.getMultiselectFieldChange(f)}
 				/>
 		}else if(f.type===ft.date){
@@ -244,6 +254,8 @@ export default class Field extends React.Component {
 			}else{
 				fw = format.fieldValue(f, d)
 			}
+		}else if(f.type===ft.json){
+			fw = <pre>{isObject(d) ? JSON.stringify(d, null, 2) : (d || '')}</pre>
 		}else {
 			fw = format.fieldValue(f, d)
 		}

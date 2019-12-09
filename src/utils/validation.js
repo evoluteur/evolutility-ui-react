@@ -2,7 +2,7 @@
 // Evolutility-UI-React :: utils/validation.js
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2019 Olivier Giulieri
 
 import _ from 'underscore'
 import { fieldTypes, fieldIsNumber } from './dico'
@@ -63,8 +63,7 @@ function validateField(f, v){
                                 obj=v;
                             }else{
                                 try{
-                                    obj=JSON.parse();
-                                    //obj=$.parseJSON(v);
+                                    obj=JSON.parse(v);
                                 }catch(err){}
                                 if(_.isUndefined(obj)){
                                     return formatMsg(fieldLabel(f), i18n_validation[f.type]);

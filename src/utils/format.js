@@ -22,7 +22,7 @@ import {fieldTypes as ft} from './dico.js'
 // Set the locale from the browser -- which may need to be configured
 moment.locale(locale || window.navigator.userLanguage || window.navigator.language)
 
-const mFormat = (d, format) => nullOrUndefined(d) ? '' :  moment(d).format(format)
+const mFormat = (d, format) => nullOrUndefined(d) ? '' : moment(d).format(format)
 const numFormat = (d, format) => nullOrUndefined(d) ? '' : numeral(d).format(format)
 const nullOrUndefined = v => v===null || v===undefined
 const formatLib = {

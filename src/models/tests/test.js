@@ -1,5 +1,5 @@
 /*
-  Evolutility UI Model for Test List
+  Evolutility UI model for Test List
   https://github.com/evoluteur/evolutility-ui-react
 */
 var lov = [
@@ -47,6 +47,13 @@ var fields = [
 		"label": "Text multiline",
 		"width": 50,
 		"height": 3
+	},
+	{
+		"id": "json",
+		"type": "json",
+		"label": "JSON",
+		"width": 100,
+		"height": 4
 	},
 	{
 		"id": "lov",
@@ -185,7 +192,8 @@ module.exports = {
 				"text",
 				"textmultiline",
 				"email",
-				"url"
+				"url",
+				"json"
 			]
 		},
 		{
