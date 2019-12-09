@@ -117,7 +117,7 @@ export default class List extends Many {
 			const data = this.state.data ? this.state.data : [],
 				full_count = this.pageSummary(data),
 				fullCount = data.length ? (data[0]._full_count || data.length) : data.length,
-				title = m.title || m.label,
+				title = m ? (m.title || m.label) : 'N/A',
 				css = paramsCollec ? 'table sub' : 'table table-hover main' 
 			let body, 
 				pagination = null
@@ -125,7 +125,7 @@ export default class List extends Many {
 			document.title = title
 			if(this.state.error){
 				if(isNested){
-					body = 'No data.'
+					body = <div className="nodata">No data.</div>
 				}else{
 					body = <Alert title="Error" message={this.state.error.message}/> 
 				}
@@ -164,7 +164,7 @@ export default class List extends Many {
 				}else{
 					// TODO: get model of nested obj
 					if(this.props.isNested){
-						body = <div className="nodata-list2">No data.</div>
+						body = <div className="nodata">No data.</div>
 					}else{
 						body = <NoData name={m.name} namePlural={m.namePlural}></NoData>
 					}
