@@ -45,7 +45,7 @@ const chartIcon = (chartType, props) => <Icon id={chartType} key={chartType}
     {...props}
     name={chartType==='table' ? 'list' : chartType} 
     tooltip={i18n_charts[chartType]} 
-    className={cssActive(chartType===chartType)}></Icon>
+    className={cssActive(chartType===props.chartType)}></Icon>
 
 export default class Chart extends React.Component {
 
