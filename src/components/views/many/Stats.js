@@ -199,7 +199,7 @@ export default class Stats extends React.Component {
                         { this.state[k.field.id + '_Chart'] ? (
                             <Chart entity={ e } field={ k.field }
                                 title={ format.capitalize(model.namePlural) + ' / ' + k.field.label } 
-                                type="Bars"
+                                type="bars"
                                 canExpend={false}
                                 size="small"></Chart>
                         ) : null }

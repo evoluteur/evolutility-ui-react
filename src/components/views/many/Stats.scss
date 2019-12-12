@@ -55,8 +55,8 @@ $label2-width: 100px;
 .f-stats {
 	margin: 10px 0;
 	&:hover{
-		i {
-			display: inline;
+		> label > i {
+			display: inline-block;
 		}
 	}
 	> label {
@@ -68,9 +68,6 @@ $label2-width: 100px;
 			margin-left: 10px;
 			cursor: pointer;
 		}
-	}
-	.chart-actions-right{
-		top: 7px;
 	}
 }
 .fl-stats { 
