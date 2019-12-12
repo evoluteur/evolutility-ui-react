@@ -76,12 +76,7 @@ class Toolbar extends React.Component {
             help: false,
             deleteConfirmation: false,
         }
-        this.searchValue = url.parseQuery(window.location.href).search || ''
-        this.exportMany = this.exportMany.bind(this);
-        this.deleteOne = this.deleteOne.bind(this);
-        this.confirmDelete = this.confirmDelete.bind(this);
-        this.closeModal = this.closeModal.bind(this);
-        this.fnSearch = this.fnSearch.bind(this);
+        this.searchValue = url.parseQuery(window.location.href).search || '' 
         //this.toggleFilter = this.toggleFilter.bind(this);
         //this.onFilterChange = this.onFilterChange.bind(this);
     }
@@ -172,19 +167,19 @@ class Toolbar extends React.Component {
         return null
     }
 
-    confirmDelete(){
+    confirmDelete = () => {
         this.setState({
             deleteConfirmation: true
         })
     }
 
-    closeModal(){
+    closeModal = () => {
         this.setState({
             deleteConfirmation: false
         })
     }
 
-    deleteOne(){
+    deleteOne = () => {
         // TODO: SHOULD BE IN STORE BUT THERE IS NO STORE YET
         const {entity, id} = this.props.match.params,
             m = models[entity]
@@ -213,7 +208,7 @@ class Toolbar extends React.Component {
         this.closeModal()
     }
 
-    exportMany(){
+    exportMany = () => {
         // - export all records as a CSV file.
         const e = this.props.entity || this.props.match.entity || ''
         if(e){
@@ -229,7 +224,7 @@ class Toolbar extends React.Component {
         }
     }
 
-    fnSearch(evt){
+    fnSearch = evt => {
         const loc = window.location
         let bUrl = loc.pathname
         bUrl = bUrl.startsWith('/') ? bUrl.slice(1) : bUrl
@@ -252,7 +247,7 @@ class Toolbar extends React.Component {
         this.props.history.push('/'+bUrl)
     }
 /*
-    filterMany(){
+    filterMany = () => {
         const e = this.props.entity || this.props.match.entity || ''
         alert(e);
 

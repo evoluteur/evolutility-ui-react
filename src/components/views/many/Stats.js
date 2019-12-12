@@ -57,7 +57,6 @@ export default class Stats extends React.Component {
             data: null,
             loading: true,
         }
-		this.toggleChart = this.toggleChart.bind(this);
     }
     
     setModel(entity){
@@ -265,7 +264,7 @@ export default class Stats extends React.Component {
         )
     }
 
-    toggleChart(evt) {
+    toggleChart = evt => {
         const fid = evt.currentTarget.id
         let chartOn = this.state[fid+'_Chart'] || false
         this.setState({

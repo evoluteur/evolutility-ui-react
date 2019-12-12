@@ -63,11 +63,6 @@ export default class Field extends React.Component {
 		this.state = {
 			help: false
 		}
-		this.clickHelp = this.clickHelp.bind(this);
-		//TODO: more???
-		this.onDropFile = this.onDropFile.bind(this);
-		this.removeFile = this.removeFile.bind(this);
-		this.getMultiselectFieldChange = this.getMultiselectFieldChange.bind(this);
 	}
 
 	_fieldElem(f, d, cbs){
@@ -266,7 +261,7 @@ export default class Field extends React.Component {
 		)
 	}
 
-	clickHelp(){
+	clickHelp = () => {
 		this.setState({
 			help: !this.state.help
 		})
@@ -311,7 +306,7 @@ export default class Field extends React.Component {
 		}
 	}
 
-	getMultiselectFieldChange() {
+	getMultiselectFieldChange = () => {
 		// - for fields of type list (using react-multi-select)
 		return v => {
 			const f = this.props.model
@@ -324,7 +319,7 @@ export default class Field extends React.Component {
 		}
 	}
 
-	onDropFile(files){
+	onDropFile = (files) => {
 		// - only for fields of type image or document
 		const f = this.props.model
 		if(files.length && (f.type===ft.image|| f.type===ft.doc)){
@@ -336,7 +331,7 @@ export default class Field extends React.Component {
 		}
 	}
 
-	removeFile(){
+	removeFile = () => {
 		// - only for fields of type image or document
 		const f = this.props.model
 		if(this.props.callbacks.dropFile){

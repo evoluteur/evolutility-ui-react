@@ -8,12 +8,9 @@ export default class SearchBox extends React.Component {
   constructor(props) {
 		super(props);
 		this.searchValue = this.props.searchValue;
-		this.clear = this.clear.bind(this);
-		this.keyUp = this.keyUp.bind(this);
-		this.clickSearch = this.clickSearch.bind(this);
 	}
 	
-	clear(){
+	clear = () => {
 		this.searchValue = this.refs.text.value = ''
 		this.props.fnSearch({
 			entity: this.props.entity,
@@ -21,7 +18,7 @@ export default class SearchBox extends React.Component {
 		})
 	}
 
-	keyUp(evt){
+	keyUp = evt => {
 		if(evt.keyCode === 13){
 			this.clickSearch()
 		}else{
@@ -29,7 +26,7 @@ export default class SearchBox extends React.Component {
 		}
 	}
 
-	clickSearch(){
+	clickSearch = () => {
 		this.searchValue = this.refs.text.value
 		this.props.fnSearch({
 			entity: this.props.entity,

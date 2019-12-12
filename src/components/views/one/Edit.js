@@ -29,17 +29,14 @@ export default class Edit extends OneReadWrite{
 
 	constructor(props) {
 		super(props);
-		this.clickSave = this.clickSave.bind(this);
-		this.fieldChange = this.fieldChange.bind(this);
 		this.uploadFileOne = this.uploadFileOne.bind(this);
-		this.validate = this.validate.bind(this);
 	}
  
 	getDataDelta(){
 		return this.delta || null
 	}
 
-	clickSave(evt){ 
+	clickSave = evt => { 
 		const fields = this.model.fields,
 			v = this.validate(fields, this.state.data)
 
@@ -52,7 +49,7 @@ export default class Edit extends OneReadWrite{
 		}
 	}
 
-	fieldChange(evt) {
+	fieldChange = evt => {
 		const fid=evt.target.id,
 			newData=JSON.parse(JSON.stringify(this.state.data||{}))
 		let v = evt.target.value
@@ -193,7 +190,7 @@ export default class Edit extends OneReadWrite{
 		}
 	}
 
-	validate(fields, data) {
+	validate = (fields, data) => {
 		let messages=[],
 			invalids={},
 			cMsg;

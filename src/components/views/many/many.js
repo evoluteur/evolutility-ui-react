@@ -26,8 +26,6 @@ export default class Many extends React.Component {
 			data: [],
 			loading: true
 		}
-		this.clickPagination = this.clickPagination.bind(this);
-		this.clickSort = this.clickSort.bind(this);
 	}
 
 	getData(entity, query1){
@@ -145,7 +143,7 @@ export default class Many extends React.Component {
 		this.model = models[entity || this.props.match.params.entity]
 	}
 
-	clickSort(evt){
+	clickSort = evt => {
 		const e = this.props.match.params.entity,
 			fid = evt.currentTarget.id,
 			query = url.parseQuery(this.props.location.search) || {}
@@ -170,7 +168,7 @@ export default class Many extends React.Component {
 		this.props.history.push(link)
 	}
 
-	clickPagination(evt){
+	clickPagination = evt => {
 		const e = this.props.match.params.entity,
 			id = evt.currentTarget.textContent,
 			query = url.parseQuery(this.props.location.search) || {}

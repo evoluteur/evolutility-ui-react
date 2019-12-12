@@ -17,10 +17,9 @@ export default class Panel extends React.Component {
         this.state = {
 			opened: true
         }
-        this.clickToggle = this.clickToggle.bind(this);
     }
 
-	clickToggle(){
+	clickToggle = () => {
 		this.setState({opened: !this.state.opened})
 	}
 

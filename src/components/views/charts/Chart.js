@@ -61,9 +61,6 @@ export default class Chart extends React.Component {
             size: props.size || 'small',
             loading: true,
         }
-        this.click_resize = this.click_resize.bind(this)
-        this.click_view = this.click_view.bind(this)
-        this.sortTable = this.sortTable.bind(this)
     }
 
     componentDidMount() {
@@ -105,7 +102,7 @@ export default class Chart extends React.Component {
         }
     }
 
-    click_view(evt){
+    click_view = evt => {
         const e = this.props.entity
         const fid = this.props.field.id
         const chartsType = evt.currentTarget.dataset.id
@@ -116,7 +113,7 @@ export default class Chart extends React.Component {
         })
     }
 
-    click_resize(){
+    click_resize = () => {
         this.setState({
             size: expandToggle(this.state.size)
         })
@@ -183,7 +180,7 @@ export default class Chart extends React.Component {
         )
     }
 
-    sortTable(evt){
+    sortTable = evt => {
         // - client-side sort (we have all the data no need to re-query)
         const sortId = evt.currentTarget.id || 'count'
         let data = JSON.parse(JSON.stringify(this.state.data))

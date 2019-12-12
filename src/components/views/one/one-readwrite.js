@@ -22,7 +22,7 @@ import { toast } from 'react-toastify';
 
 export default class OneReadWrite extends OneRead{
 
-	upsertOne(entity){
+	upsertOne = entity => {
 		const e = entity || this.props.match.params.entity,
 			m = models[e],
 			id = parseInt(this.props.match.params.id || '', 10),
