@@ -9,6 +9,7 @@
   "copyright": "(c) 2019 Olivier Giulieri",
   "author": "Olivier Giulieri (https://evoluteur.github.io/)",
   "license": "MIT",
+  "proxy": "http://localhost:2000",
   "engines": {
     "node": "10.16.3",
     "npm": "6.9.0"
@@ -28,9 +29,9 @@
     "react-dropzone": "^10.2.0",
     "react-modal": "^3.11.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.2.0",
+    "react-scripts": "^3.3.0",
     "react-toastify": "^5.4.1",
-    "react-crud-icons": "^0.0.3",
+    "react-crud-icons": "^0.1.0",
     "@khanacademy/react-multi-select": "^0.3.3",
     "underscore": "^1.9.1"
   },
@@ -62,6 +63,7 @@
     "not op_mini all"
   ],
   "keywords": [
+    "low-code",
     "model-driven",
     "metadata",
     "UI",
@@ -69,7 +71,6 @@
     "CRUD",
     "MDA",
     "javascript",
-    "low-code",
     "generic forms",
     "views",
     "MVC",
