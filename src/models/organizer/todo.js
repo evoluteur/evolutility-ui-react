@@ -5,6 +5,7 @@
 
 module.exports = {
 	"id": "todo",
+	"oid": 1,
 	"title": "To-Do List",
 	"world": "organizer",
 	"name": "task",

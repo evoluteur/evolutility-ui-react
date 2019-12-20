@@ -5,6 +5,7 @@
 
 module.exports = {
 	"id": "restaurant",
+	"oid": 4,
 	"title": "Restaurants",
 	"world": "organizer",
 	"name": "restaurant",
@@ -202,9 +203,9 @@ module.exports = {
 				"schedule",
 				"yelp",
 				"price",
+				"favorite",
 				"notes",
-				"hours",
-				"favorite"
+				"hours"
 			]
 		},
 		{

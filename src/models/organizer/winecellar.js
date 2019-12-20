@@ -5,11 +5,12 @@
 
 module.exports = {
 	"id": "winecellar",
+	"oid": 5,
 	"title": "Wine cellar",
 	"world": "organizer",
 	"name": "wine",
 	"namePlural": "wines",
-	"icon": "wine.gif",
+	"icon": "wine-bottle.png",
 	"active": true,
 	"position": 50,
 	"defaultViewMany": "cards",

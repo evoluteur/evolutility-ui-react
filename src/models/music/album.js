@@ -5,6 +5,7 @@
 
 module.exports = {
 	"id": "album",
+	"oid": 7,
 	"title": "Albums",
 	"world": "music",
 	"name": "album",

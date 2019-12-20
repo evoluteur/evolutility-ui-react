@@ -5,6 +5,7 @@
 
 module.exports = {
 	"id": "contact",
+	"oid": 2,
 	"title": "Address book",
 	"world": "organizer",
 	"name": "contact",

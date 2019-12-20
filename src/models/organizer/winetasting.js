@@ -5,6 +5,7 @@
 
 module.exports = {
 	"id": "winetasting",
+	"oid": 6,
 	"title": "Wine tastings",
 	"world": "organizer",
 	"name": "wine tasting",
@@ -25,7 +26,7 @@ module.exports = {
 			"width": 38
 		},
 		{
-			"id": "wine_id",
+			"id": "wine",
 			"type": "lov",
 			"label": "Wine",
 			"object": "winecellar",
@@ -74,7 +75,7 @@ module.exports = {
 			"width": 62,
 			"fields": [
 				"drink_date",
-				"wine_id",
+				"wine",
 				"notes"
 			]
 		},

@@ -5,6 +5,7 @@
 
 module.exports = {
 	"id": "comics",
+	"oid": 3,
 	"title": "Graphic Novels",
 	"world": "organizer",
 	"name": "serie",
