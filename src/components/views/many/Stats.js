@@ -14,7 +14,7 @@ import axios from 'axios'
 import { apiPath, wTimestamp, wComments } from '../../../config.js'
 import models from '../../../models/all_models'
 import { i18n_stats, i18n_comments } from '../../../i18n/i18n'
-import { fieldIsDateOrTime, fieldIsNumeric, fieldChartable } from '../../../utils/dico'
+import { fieldIsDateOrTime, fieldIsNumeric, fieldInCharts } from '../../../utils/dico'
 import format from '../../../utils/format'
 import Header from '../../shell/Header'
 import Spinner from '../../shell/Spinner'
@@ -123,7 +123,7 @@ export default class Stats extends React.Component {
                         if(item.sum){
                             item.sum = formatNum(f, item.sum)
                         }
-                        if(fieldChartable(f)){
+                        if(fieldInCharts(f)){
                             item.chartable = true
                         }
                         ks.push(item)
@@ -196,7 +196,7 @@ export default class Stats extends React.Component {
                         )}
                     </div>
                     <div>
-                        { this.state[k.field.id + '_Chart'] ? (
+                        { k.chartable && this.state[k.field.id + '_Chart'] ? (
                             <Chart entity={ e } field={ k.field }
                                 title={ format.capitalize(model.namePlural) + ' / ' + k.field.label } 
                                 type="bars"
