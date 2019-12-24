@@ -51,6 +51,15 @@
     .react-datepicker-wrapper{
       display: inline;
     }
+    .evo-rdonly{
+      > pre{
+        padding: 5px;
+        font-size: 12px;
+        background-color: #eceff1;
+        border: solid 1px #b0bec5;
+        min-height: 30px;
+      }
+    }
 
 }
 .evol-field-label {
@@ -58,6 +67,18 @@
     color: $color-label !important;
     font-weight: normal;
     font-size: .9em;
+    svg {
+      cursor: pointer;
+      margin: 0 5px;
+      height: 14px;
+      width: 14px;
+      fill: $color-icon;
+    }
+    &:hover {
+      svg {
+        fill: $color-icon-hover;
+      }
+    }
   }
   .crud-icon > svg {
     fill: $color-label;

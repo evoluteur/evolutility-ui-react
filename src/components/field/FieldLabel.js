@@ -15,7 +15,7 @@ const FieldLabel=(props)=>{
 			<label className="control-label">
 				{props.label || f.label}
 				{required ? <span className="evol-required">*</span> : null}
-				{f.help ? <Icon name="help" onClick={props.clickHelp} size="tiny"></Icon> : null}
+				{f.help ? <Icon name="help" onClick={props.clickHelp} size="tiny" theme="none"></Icon> : null}
 			</label>
 		</div>
 	)

@@ -31,7 +31,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.0",
     "react-toastify": "^5.4.1",
-    "react-crud-icons": "^0.1.0",
+    "react-crud-icons": "^0.1.1",
     "@khanacademy/react-multi-select": "^0.3.3",
     "underscore": "^1.9.1"
   },

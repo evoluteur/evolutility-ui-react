@@ -91,7 +91,7 @@ export default class Field extends React.Component {
 						value={isObject(d) ? JSON.stringify(d, null, 2) : (d || '')}
 					/>
 		}else if(f.type===ft.lov){
-			let opts = f.list ? (f.list||[]).map(item => createOption(item.id, item.text))
+			let opts = f.list ? f.list.map(item => createOption(item.id, item.text))
 				: [createOption(f.id+"loading", i18n_msg.loading)]
 			return <select {...usualProps}
 						className="form-control" 
@@ -101,10 +101,10 @@ export default class Field extends React.Component {
 						{opts}
 					</select>
 		}else if(f.type===ft.list){
-			let opts = f.list.map(item => ({
+			let opts = f.list ? f.list.map(item => ({
 				value: item.id,
 				label: item.text
-			}))
+			})) : null
 			return <MultiSelect
 					options={opts}
 					selected={d || []}
@@ -126,7 +126,7 @@ export default class Field extends React.Component {
 					<input {...usualProps}
 						key={usualProps.key+'_time'}
 						type="time"
-						value={ d ? d : '' }
+						value={ d ? (d+'').substr(11, 8) : '' }
 						className="form-control"
 					/>
 				</React.Fragment>
@@ -285,8 +285,11 @@ export default class Field extends React.Component {
 
 				{f.help && this.state.help ? <div className="evo-fld-help">{f.help}</div> : null}
 
-				{readOnly ? this._fieldElemReadOnly(f, value, valueId)
-					: this._fieldElem(f, value, cbs)}
+				{readOnly ? 
+					this._fieldElemReadOnly(f, value, valueId)
+					: 
+					this._fieldElem(f, value, cbs)
+				}
 
  				{invalid ? <div className="evo-fld-invalid">{this.state.message}</div> : null}
 
