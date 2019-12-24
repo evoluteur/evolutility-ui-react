@@ -221,20 +221,23 @@ module.exports = {
     namePlural: "graphic novel series",
     icon: "comics.png",
     titleField: "title",
-    searchFields: ["title", "authors", "notes"]
 
 	fields:[
       {
-          id: "title", type: "text", label: "Title", required: true, 
-          maxLength: 255,
-          width: 100, inMany: true
+          id: "title", type: "text", 
+          label: "Title", 
+          required: true, maxLength: 255,
+          width: 100, inMany: true, 
       },
       {
-          id: "authors", type: "text", width: 62, inMany: true,
-          label: "Authors"
+          id: "authors", type: "text", 
+          label: "Authors",
+          inMany: true, width: 62, 
+          
       },
       {
-          id: "genre", type: "lov", label: "Genre", 
+          id: "genre", type: "lov", 
+          label: "Genre", 
           width: 38, inMany: true,
           list: [
             {id: 1, text: "Adventure"},
@@ -293,8 +296,9 @@ module.exports = {
       },
       {
           id: "notes", type: "textmultiline", 
-          label: "Notes", maxLength: 1000,
-          width: 70, height: 7, inMany: false
+          label: "Notes", 
+          width: 70, height: 7, maxLength: 5000,
+          inMany: false
       }
   ],
 

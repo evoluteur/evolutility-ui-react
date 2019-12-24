@@ -183,7 +183,7 @@ export default class Chart extends React.Component {
     sortTable = evt => {
         // - client-side sort (we have all the data no need to re-query)
         const sortId = evt.currentTarget.id || 'count'
-        let data = JSON.parse(JSON.stringify(this.state.data))
+        let data = this.state.data ? JSON.parse(JSON.stringify(this.state.data)) : null
         if(data && data.length>1){
             const sortFn = sortId==='label' ? sortLabel : sortCount
             if(this.state.sortId===sortId){
