@@ -12,7 +12,7 @@ import axios from 'axios'
 
 import models from '../../../models/all_models'
 //import evoGlobals from 'utils/evoGlobals'
-import Format from '../../../utils/format'
+import { capitalize } from '../../../utils/format'
 import { i18n_msg, i18n_actions, i18n_errors } from '../../../i18n/i18n'
 import { apiPath } from '../../../config.js'
 import OneRead from './one-read'
@@ -35,7 +35,7 @@ export default class OneReadWrite extends OneRead{
 					let toastMsg
 					this.emptyDelta(false)					
 					if(id){
-	                    toastMsg = i18n_actions.updated.replace('{0}', Format.capitalize(m.name))
+	                    toastMsg = i18n_actions.updated.replace('{0}', capitalize(m.name))
 					}else{
 	                    toastMsg = i18n_actions.added.replace('{0}', m.name)
 						this.props.history.push('/'+e+'/edit/'+response.data.id)

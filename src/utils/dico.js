@@ -1,14 +1,13 @@
 /*! 
 Evolutility-UI-React
 https://github.com/evoluteur/evolutility-ui-react
-(c) 2018 Olivier Giulieri
+(c) 2019 Olivier Giulieri
 */
 
-// evolutility :: utils/dico.js
 
 // Helpers for models
 
-import format from './format'
+import { fieldValue } from './format'
 
 // - Field Types
 const ft = {
@@ -27,7 +26,7 @@ const ft = {
 	formula:'formula', // soon to be a field attribute rather than a field type
 	email: 'email',
 	image: 'image',
-	doc:'document',
+	doc: 'document',
 	//geoloc: 'geolocation',
 	url: 'url',
 	color: 'color',
@@ -63,35 +62,6 @@ export function hById(arr, prop='id'){
 	return objH;
 }
 
-function getFields(model) {
-	const fs = [];
-
-	function collateFields(te) {
-		if (te && te.elements && te.elements.length > 0) {
-			te.elements.forEach(function(te) {
-				if (te.type !== 'panel-list') {
-					collateFields(te);
-				}
-			});
-		} else { 
-			if(te.type && te.type!== 'formula'){
-				fs.push(te);
-			}
-		}
-	}
-
-	if(model){
-		if(model.fields){
-			return model.fields;
-		}else{
-			collateFields(model);
-			model.fields=fs;
-			return fs;
-		}
-	}
-	return []
-}
-
 export function prepModel(m){
 	if(m){
 		if(!m._prepared){
@@ -102,9 +72,6 @@ export function prepModel(m){
 				m.label = m.title || m.namePlural || m.name;
 			}
 			// - Fields
-			if(!m.fields){
-				m.fields = getFields(m);
-			}
 			if(!m.fieldsH){
 				m.fieldsH = hById(m.fields);
 			}
@@ -178,7 +145,7 @@ export const dataTitle = (m, data, isNew) => {
 					f = m.fields[0]
 				}
 				if(f && data){
-					title = format.fieldValue(f, data[f.id])
+					title = fieldValue(f, data[f.id])
 				}
 			}
 		}

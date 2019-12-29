@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 
 import Icon from 'react-crud-icons'
 import models from '../../../models/all_models'
-import format from '../../../utils/format'
+import { fieldValue } from '../../../utils/format'
 import { fieldTypes as ft } from '../../../utils/dico'
 import { Link } from 'react-router-dom'
 
@@ -35,7 +35,7 @@ export default class Card extends React.PureComponent {
             <div className="panel panel-default"> 
                 {fields.map(function(f, idx){
                     const attr = (f.type===ft.lov) ? f.id+'_txt' : f.id,
-                        fv = format.fieldValue(f, d[attr])
+                        fv = fieldValue(f, d[attr])
                       //  <Link to={link+d.id}><Icon name="browse" size="small"></Icon></Link>
 
                     if(idx===0){

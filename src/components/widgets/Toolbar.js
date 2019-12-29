@@ -14,7 +14,7 @@ import SearchBox from '../views/actions/SearchBox'
 import { toast } from 'react-toastify';
 import Icon from "react-crud-icons";
 
-import Format from '../../utils/format'
+import { capitalize, urlJoin } from '../../utils/format'
 import url from '../../utils/url'
 import evoGlobals from '../../utils/evoGlobals'
 import { apiPath } from '../../config.js'
@@ -52,10 +52,7 @@ const menuItems = {
     //search: true
 }
 
-function isFunction(fn) {
-    var getType = {};
-    return fn && getType.toString.call(fn) === '[object Function]';
-}
+const isFunction = x => typeof x === "function"
 
 function getViewFromURL() {
     const path = window.location.pathname
@@ -188,7 +185,7 @@ class Toolbar extends React.Component {
             axios.delete(apiPath+entity+'/'+id)
                 .then(response => {
                     evoGlobals.skip_confirm = true
-                    toast.success(i18n_actions.deleted.replace('{0}', Format.capitalize(m.name)), {
+                    toast.success(i18n_actions.deleted.replace('{0}', capitalize(m.name)), {
                         position: toast.POSITION.TOP_RIGHT
                     });
                     this.props.history.push('/'+entity+'/list')
@@ -214,7 +211,7 @@ class Toolbar extends React.Component {
         if(e){
             let link = apiPath + e +'?format=csv'
             if(link.indexOf('://')<0 && proxy){
-                link = Format.urlJoin(proxy, link)
+                link = urlJoin(proxy, link)
             }
             window.location.href = link;
         }else{

@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import { fieldTypes as ft } from '../../utils/dico'
-import format from '../../utils/format'
+import { fieldValue, image, doc } from '../../utils/format'
 import { i18n_actions, i18n_msg } from '../../i18n/i18n'
 import { filesUrl } from '../../config.js'
 import FieldLabel from './FieldLabel'
@@ -137,8 +137,7 @@ export default class Field extends React.Component {
 					className="form-control"
 				/>
 		}else if(f.type===ft.image || f.type===ft.doc){
-			let pix = null
-
+			let pix = null 
 			if(d){
 				if(f.type===ft.image && d){
 					pix = <img {...usualProps}
@@ -147,7 +146,7 @@ export default class Field extends React.Component {
 								alt="" 
 							/>
 				}else{
-					pix = format.doc(d, filesUrl)
+					pix = doc(d, filesUrl)
 				}
 			}
 
@@ -222,23 +221,23 @@ export default class Field extends React.Component {
 					dangerouslySetInnerHTML={createMarkup(d)}
 				/> 
 		}else if(f.type===ft.image && d){
-			fw = format.image(filesUrl+d)
+			fw = image(filesUrl+d)
 		}else if(f.type===ft.doc){
-			fw = format.doc(d, filesUrl)
+			fw = doc(d, filesUrl)
 			//{f.country_icon && d.country_icon ? <img src={d.country_icon}/> : null}
 		}else if(f.type===ft.lov){
 			if(f.object){
 				fw = <Link to={'/'+f.object+'/browse/'+d_id}>
-						{format.fieldValue(f, d)}
+						{fieldValue(f, d)}
 					</Link>
 			}else{
 				if(f.lovIcon && this.props.icon){
 					fw = <span>
 							<img src={'/pix/'+this.props.icon} className="lov-icon" alt=""/> 
-							{format.fieldValue(f, d)}
+							{fieldValue(f, d)}
 						</span>
 				}else{
-					fw = format.fieldValue(f, d)
+					fw = fieldValue(f, d)
 				}
 			}
 		}else if(f.type===ft.list){
@@ -247,12 +246,12 @@ export default class Field extends React.Component {
 						{(d || []).map(itemid => <div key={itemid}>{itemInList(itemid, f.list)}</div>)}
 					</div>
 			}else{
-				fw = format.fieldValue(f, d)
+				fw = fieldValue(f, d)
 			}
 		}else if(f.type===ft.json){
 			fw = <pre>{isObject(d) ? JSON.stringify(d, null, 2) : (d || '')}</pre>
 		}else {
-			fw = format.fieldValue(f, d)
+			fw = fieldValue(f, d)
 		}
 		return (
 			<div key={f.id} className="disabled evo-rdonly">

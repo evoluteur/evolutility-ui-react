@@ -15,7 +15,7 @@ import { i18n_charts } from '../../../i18n/i18n'
 import models from '../../../models/all_models'
 import { fieldInCharts } from '../../../utils/dico'
 import { lcRead } from '../../../utils/localStorage'
-import format from '../../../utils/format'
+import { capitalize } from '../../../utils/format'
 import Header from '../../shell/Header'
 import Alert from '../../widgets/Alert'
 import Chart from './Chart'
@@ -40,7 +40,7 @@ export default class Charts extends React.Component {
                 chartFields = m.fields.filter(fieldInCharts),
                 nbCharts = chartFields.length,
                 css = 'evolutility evol-many-charts ' + (nbCharts===1?'single':'many')
-            const chartTitle = f => format.capitalize(m.namePlural) + ' / ' + (f.labelCharts || f.label)
+            const chartTitle = f => capitalize(m.namePlural) + ' / ' + (f.labelCharts || f.label)
             let charts
 
             if(nbCharts===0){
