@@ -9,7 +9,7 @@ module.exports = {
 	"world": "designer",
 	"name": "object",
 	"namePlural": "objects",
-	"icon": "cube.gif",
+	"icon": "/designer/object.png",
 	"defaultViewMany": "list",
 	"defaultViewOne": "browse",
 	"titleField": "title",
@@ -21,7 +21,7 @@ module.exports = {
 			"required": true,
 			"maxLength": 200,
 			"inMany": true,
-			"width": 80,
+			"width": 82,
 			"help": "example: 'Address book'"
 		},
 		{
@@ -29,15 +29,27 @@ module.exports = {
 			"type": "boolean",
 			"label": "Active",
 			"inMany": true,
-			"width": 20
+			"width": 18
 		},
 		{
 			"id": "world",
 			"type": "lov",
-			"label": "App",
+			"label": "World",
 			"object": "world",
 			"inMany": true,
-			"width": 100
+			"width": 62
+		},
+		{
+			"id": "noCharts",
+			"type": "boolean",
+			"label": "No Charts",
+			"width": 35
+		},
+		{
+			"id": "noStats",
+			"type": "boolean",
+			"label": "No Stats",
+			"width": 30
 		},
 		{
 			"id": "table",
@@ -63,7 +75,7 @@ module.exports = {
 			"maxLength": 100,
 			"inMany": true,
 			"width": 75,
-			"help": "Internal identifier for the object"
+			"help": "Unique identifier for the object"
 		},
 		{
 			"id": "name",
@@ -91,7 +103,7 @@ module.exports = {
 			"readOnly": true,
 			"maxLength": "50",
 			"inMany": true,
-			"width": 62,
+			"width": 35,
 			"help": "example='contact.gif'"
 		},
 		{
@@ -100,13 +112,6 @@ module.exports = {
 			"label": "Title field",
 			"width": 38,
 			"help": "Id of the field used as record title"
-		},
-		{
-			"id": "searchFields",
-			"type": "textmultiline",
-			"label": "Search fields",
-			"width": 62,
-			"help": "Ids of the fields used in searches."
 		},
 		{
 			"id": "description",
@@ -130,8 +135,7 @@ module.exports = {
 				"namePlural",
 				"world",
 				"table",
-				"titleField",
-				"searchFields"
+				"titleField"
 			]
 		},
 		{
@@ -142,6 +146,8 @@ module.exports = {
 			"fields": [
 				"entity",
 				"icon",
+				"noCharts",
+				"noStats",
 				"description"
 			]
 		}
@@ -149,15 +155,39 @@ module.exports = {
 	"collections": [
 		{
 			"id": "collec-fields",
+			"title": "Fields",
 			"object": "field",
 			"fields": [
+				"fid",
 				"label",
 				"column",
 				"type",
 				"inMany",
-				"width",
-				"height",
+				"inSearch",
 				"required"
+			]
+		},
+		{
+			"id": "collec-groups",
+			"title": "Field groups",
+			"object": "group",
+			"fields": [
+				"gid",
+				"label",
+				"type",
+				"fields"
+			]
+		},
+		{
+			"id": "collec-collecs",
+			"title": "Collections",
+			"object": "collection",
+			"fields": [
+				"cid",
+				"label",
+				"column",
+				"object",
+				"fields"
 			]
 		}
 	]

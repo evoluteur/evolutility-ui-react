@@ -1,15 +1,15 @@
 /*
-  Evolutility UI model for Applications
+  Evolutility UI model for Worlds
   https://github.com/evoluteur/evolutility-ui-react
 */
 
 module.exports = {
 	"id": "world",
-	"title": "Applications",
+	"title": "Worlds",
 	"world": "designer",
-	"name": "application",
-	"namePlural": "applications",
-	"icon": "",
+	"name": "world",
+	"namePlural": "worlds",
+	"icon": "/designer/world.png",
 	"defaultViewMany": "list",
 	"defaultViewOne": "browse",
 	"titleField": "name",

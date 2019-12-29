@@ -78,10 +78,20 @@ module.exports = {
 				{
 					"id": 8,
 					"text": "Reggae"
+				},
+				{
+					"id": 9,
+					"text": "Soul"
 				}
 			],
 			"inMany": true,
 			"width": 62
+		},
+		{
+			"id": "description",
+			"type": "textmultiline",
+			"label": "Description",
+			"height": 3
 		}
 	],
 	"collections": [],

@@ -23,13 +23,7 @@ module.exports = {
 			"label": "Title",
 			"required": true,
 			"inMany": true,
-			"width": 62,
-			"height": 1
-		},
-		{
-			"id": "url",
-			"type": "url",
-			"label": "Amazon"
+			"width": 62
 		},
 		{
 			"id": "artist",
@@ -38,8 +32,20 @@ module.exports = {
 			"object": "artist",
 			"required": true,
 			"inMany": true,
-			"width": 38,
-			"height": 1
+			"width": 38
+		},
+		{
+			"id": "url",
+			"type": "url",
+			"label": "Amazon",
+			"width": 62
+		},
+		{
+			"id": "length",
+			"type": "text",
+			"label": "Length",
+			"inMany": true,
+			"width": 38
 		},
 		{
 			"id": "description",
@@ -48,12 +54,12 @@ module.exports = {
 			"maxLength": 1000,
 			"inMany": false,
 			"width": 100,
-			"height": 5
+			"height": 6
 		},
 		{
 			"id": "cover",
 			"type": "image",
-			"label": "Album Cover",
+			"label": "Cover",
 			"inMany": true,
 			"width": 100
 		}
@@ -62,21 +68,20 @@ module.exports = {
 		{
 			"id": "p-album",
 			"type": "panel",
-			"label": '', //"Album",
-			"table": "music_album",
-			"column": "album_id",
+			"label": "Album",
 			"width": 70,
 			"fields": [
 				"title",
 				"artist",
 				"url",
+				"length",
 				"description"
 			]
 		},
 		{
 			"id": "p-cover",
 			"type": "panel",
-			"label": '', //"Cover",
+			"label": "Cover",
 			"width": 30,
 			"fields": [
 				"cover"

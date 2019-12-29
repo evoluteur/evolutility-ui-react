@@ -47,14 +47,14 @@ module.exports = {
 			"id": "description",
 			"type": "textmultiline",
 			"label": "Description",
-			"height": 4
+			"height": 6
 		}
 	],
 	"groups": [
 		{
 			"id": "g1",
 			"type": "panel",
-			"label": '', //"Artist",
+			"label": "Artist",
 			"width": 70,
 			"fields": [
 				"name",
@@ -66,7 +66,7 @@ module.exports = {
 		{
 			"id": "g2",
 			"type": "panel",
-			"label": '', //"Photo",
+			"label": "Photo",
 			"width": 30,
 			"fields": [
 				"photo"
@@ -81,7 +81,8 @@ module.exports = {
 			"icon": "cd.png",
 			"fields": [
 				"title",
-				"cover"
+				"cover",
+				"length"
 			]
 		}
 	],

@@ -203,9 +203,9 @@ module.exports = {
 				"schedule",
 				"yelp",
 				"price",
-				"favorite",
 				"notes",
-				"hours"
+				"hours",
+				"favorite"
 			]
 		},
 		{

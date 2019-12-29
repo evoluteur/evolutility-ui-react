@@ -121,18 +121,26 @@ export function prepModel(m){
 	return null;
 }
 
-export function prepModelCollecs(models, m){
+const prepModelCollecs = (m, models) => {
 	if(m){
 		if(!m._preparedCollecs){
 			if(m.collections){
-				m.collections.forEach((c) => {
+				m.collections.forEach(c => {
 					if(c.object){
 						const collecModel = models[c.object]
 						if(collecModel){
+							// - if no icon, get it from collec object
+							if(!c.icon && collecModel.icon){
+								c.icon = collecModel.icon
+							}
+							// - if no fields, get it from collec object (fields in list but not the object)
+							if(!c.fields){
+								c.fields = collecModel.fields.filter(f => f.inMany && !f.object===c.object)
+							}
 							const fsh = collecModel.fieldsH
 							c.fields.forEach((f, idx) => {
 								if(typeof(f) === 'string'){
-									c.fields[idx] = JSON.parse(JSON.stringify(fsh[f]))
+									c.fields[idx] = JSON.parse(JSON.stringify(fsh[f]||{}))
 								}
 							})
 						}else{
@@ -148,11 +156,19 @@ export function prepModelCollecs(models, m){
 	return null;
 }
 
-export function dataTitle(m, data, isNew){
+export const prepModels = (models) => {
+	const ms = Object.keys(models)
+	// need 2 passes for field map to be populated first, then collecs
+	ms.forEach(m => { models[m] = prepModel(models[m]) })
+	ms.forEach(m => { models[m] = prepModelCollecs(models[m], models) })
+	return models
+}
+
+export const dataTitle = (m, data, isNew) => {
 	if(m){
 		let f, title=''
 		if(isNew){
-			return 'New ' + (m.name || 'item')
+			title = 'New ' + (m.name || 'item')
 		}else if(m.titleField){
 			if(isFunction(m.titleField)){
 				title = m.titleField(data)

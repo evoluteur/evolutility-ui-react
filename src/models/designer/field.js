@@ -9,7 +9,7 @@ module.exports = {
 	"world": "designer",
 	"name": "field",
 	"namePlural": "fields",
-	"icon": "edi_fld.png",
+	"icon": "/designer/field.png",
 	"defaultViewMany": "list",
 	"defaultViewOne": "browse",
 	"titleField": "label",
@@ -82,7 +82,7 @@ module.exports = {
 				},
 				{
 					"id": 11,
-					"text": "Lov (dropdown)",
+					"text": "Dropdown (lov)",
 					"icon": "designer/ft-lov.gif"
 				},
 				{
@@ -97,7 +97,7 @@ module.exports = {
 				},
 				{
 					"id": 14,
-					"text": "List (multiselect)",
+					"text": "Multiselect (list)",
 					"icon": "designer/ft-list.gif"
 				},
 				{
@@ -167,10 +167,26 @@ module.exports = {
 		{
 			"id": "inMany",
 			"type": "boolean",
-			"label": "List",
+			"label": "In List",
 			"inMany": true,
 			"width": 50,
-			"help": "Field is used in summary lists"
+			"help": "Field is displayed in summary lists (List and Cards views in the UI)"
+		},
+		{
+			"id": "inSearch",
+			"type": "boolean",
+			"label": "In Search",
+			"inMany": true,
+			"width": 50,
+			"help": "Field is used for text searches."
+		},
+		{
+			"id": "noFilter",
+			"type": "boolean",
+			"label": "In Filter",
+			"inMany": true,
+			"width": 50,
+			"help": "Excludes the field from filters' conditions."
 		},
 		{
 			"id": "position",
@@ -219,7 +235,7 @@ module.exports = {
 		{
 			"id": "labelShort",
 			"type": "text",
-			"label": "Label",
+			"label": "Short label",
 			"width": 100,
 			"help": "Optional shorter Field title to display in list header"
 		},
@@ -293,13 +309,6 @@ module.exports = {
 			"help": "If chacked, the field's charts will not appear in the dashboard."
 		},
 		{
-			"id": "chartType",
-			"type": "text",
-			"label": "Default Chart Type",
-			"width": 50,
-			"help": "Possible values: Bars, Pie, or List."
-		},
-		{
 			"id": "help",
 			"type": "textmultiline",
 			"label": "Help",
@@ -357,9 +366,7 @@ module.exports = {
 				"height",
 				"css",
 				"format",
-				"labelShort",
-				"chartType",
-				"noCharts"
+				"labelShort"
 			]
 		},
 		{
@@ -368,14 +375,16 @@ module.exports = {
 			"width": 62,
 			"fields": [
 				"defaultValue",
-				"deleteTrigger",
 				"required",
 				"readOnly",
+				"inSearch",
+				"inFilter",
 				"minValue",
 				"maxValue",
 				"minLength",
 				"maxLength",
 				"regExp",
+				"deleteTrigger",
 				"noCharts"
 			]
 		},

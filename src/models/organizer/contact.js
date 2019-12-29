@@ -111,16 +111,9 @@ module.exports = {
 			"width": 100
 		},
 		{
-			"id": "phone",
+			"id": "phonework",
 			"type": "text",
 			"label": "Work Phone",
-			"maxLength": 20,
-			"width": 100
-		},
-		{
-			"id": "phonehome",
-			"type": "text",
-			"label": "Home Phone",
 			"maxLength": 20,
 			"width": 100
 		},
@@ -128,6 +121,13 @@ module.exports = {
 			"id": "phonecell",
 			"type": "text",
 			"label": "Cell.",
+			"maxLength": 20,
+			"width": 100
+		},
+		{
+			"id": "phonehome",
+			"type": "text",
+			"label": "Home Phone",
 			"maxLength": 20,
 			"width": 100
 		},
@@ -201,8 +201,8 @@ module.exports = {
 			"width": 38,
 			"fields": [
 				"phone",
-				"phonehome",
 				"phonecell",
+				"phonehome",
 				"fax"
 			]
 		},
