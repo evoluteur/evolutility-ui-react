@@ -54,7 +54,7 @@ module.exports = {
 			"maxLength": 1000,
 			"inMany": false,
 			"width": 100,
-			"height": 6
+			"height": 9
 		},
 		{
 			"id": "cover",

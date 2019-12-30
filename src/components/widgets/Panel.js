@@ -24,28 +24,31 @@ export default class Panel extends React.Component {
 	}
 
 	render() {
-		const title = this.props.title ? (
+		const props = this.props
+		const title = props.title ? (
 				<div className="panel-heading">
-					{this.props.collapsible ? (
+					{props.collapsible ? (
 						<i className={'evol-title-toggle glyphicon glyphicon-chevron-'+(this.state.opened ? 'up':'down')} 
 							onClick={this.clickToggle}></i> 
 						) : null}
-					<h3 className="panel-title">{this.props.title}</h3>
+					<h3 className="panel-title">
+						{props.title}
+					</h3>
 				</div>
 			) : null
 		
 		return (
-			<div className="evol-pnl" style={{width: this.props.width+'%'}}>
+			<div className="evol-pnl" style={{width: props.width+'%'}}>
 				<div className="panel panel-default">
 					{title}
-					{this.props.header ? (
-						<div className="panel-heading panel-header">{this.props.header}</div>
+					{props.header ? (
+						<div className="panel-heading panel-header">{props.header}</div>
 					) : null}
 					<fieldset style={{display: (this.state.opened ? 'block':'none')}}>
-						{this.props.children}
+						{props.children}
 					</fieldset>
-					{this.props.footer ? (
-						<div className="panel-footer">{this.props.footer}</div>
+					{props.footer ? (
+						<div className="panel-footer">{props.footer}</div>
 					) : null}
 				</div>
 			</div>

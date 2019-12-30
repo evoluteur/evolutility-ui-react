@@ -35,16 +35,17 @@ function getIcons(cardinality, model) {
             ih.list,
             ih.cards
         ]
-        if(model && !model.noCharts){
-            cardiIcons.push(ih.charts)
-        }
-        if(model && !model.noStats){
-            cardiIcons.push(ih.stats)
+        if(model){
+            if(!model.noCharts){
+                cardiIcons.push(ih.charts)
+            }
+            if(!model.noStats){
+                cardiIcons.push(ih.stats)
+            }
         }
         return cardiIcons
     }
 }
-
 
 function iconViews(mid, cardinality, id, view, model){
     if(cardinality==='1' && id==='0'){

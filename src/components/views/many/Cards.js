@@ -47,17 +47,17 @@ export default class Cards extends Many {
 						<div className="evol-cards-body">
 							{this.state.data.map(function(d, idx){
 								return <Card key={idx} 
-										data={d} 
-										fields={fieldCols} 
-										entity={entity}/>
+									data={d} 
+									fields={fieldCols} 
+									entity={entity}/>
 							})}
 							<span className="clearer"></span>
 						</div>
 						<Pagination 
-								count={data.length} 
-								fullCount={fullCount} 
-								fnClick={this.clickPagination} 
-								location={this.props.location}
+							count={data.length} 
+							fullCount={fullCount} 
+							fnClick={this.clickPagination} 
+							location={this.props.location}
 						/>
 					</React.Fragment>
 			 	}else{

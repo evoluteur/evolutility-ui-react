@@ -15,7 +15,7 @@ import Many from './many'
 
 import { isFieldMany, fieldIsNumber, fieldTypes as ft } from '../../../utils/dico'
 import { getSearchText } from '../../../utils/url'
-import format from '../../../utils/format'
+import { fieldValue } from '../../../utils/format'
 import Header from '../../shell/Header'
 import Spinner from '../../shell/Spinner'
 import NoData from './NoData'
@@ -67,23 +67,24 @@ export default class List extends Many {
 			const link = '/'+realEntity+'/'+((m && m.defaultViewOne) || 'browse') +'/'
 			const getLovMap = this.getLovMap
 
-			function cell(d, f, idx){
+			const cell = (d, f, idx) => {
 				const lovField = f.type===ft.lov
 				const value = d[lovField ? f.id+'_txt' : f.id]
 
 				if(idx===0){
+					// - First column is a link
 					return (
 						<td key={f.id}>
 							<Link to={link+d.id}>
 								{icon}
-								{value ? format.fieldValue(f, value, true) : ('( '+d.id+' )')}
+								{value ? fieldValue(f, value, true) : ('( '+d.id+' )')}
 							</Link>
 							{d.nb_comments ? (' '+d.nb_comments+' comments') : null}
 						</td>
 					)
 				}else if(f.type===ft.image){
 					return <td key={f.id}>
-						{value ? <Link to={link+d.id}>{format.fieldValue(f, value, true)}</Link> : ''}
+						{value ? <Link to={link+d.id}>{fieldValue(f, value, true)}</Link> : ''}
 					</td>
 				}else if(f.type===ft.color){
 					return <td key={f.id}><div className="evo-color-box" id={f.id} 
@@ -95,7 +96,7 @@ export default class List extends Many {
 							<td key={f.id}>
 								<div className="nobr">
 									<img src={'/pix/'+icon} className="lov-icon" alt=""/>
-									{format.fieldValue(f, value, true)}
+									{fieldValue(f, value, true)}
 								</div>
 							</td>
 						)
@@ -110,9 +111,9 @@ export default class List extends Many {
 						</td>
 					)
 				}else if(fieldIsNumber(f)){
-					return <td key={f.id} className="alignR">{format.fieldValue(f, value, true)}</td>
+					return <td key={f.id} className="alignR">{fieldValue(f, value, true)}</td>
 				}
-				return <td key={f.id}>{format.fieldValue(f, value, true)}</td>
+				return <td key={f.id}>{fieldValue(f, value, true)}</td>
 			}
 			const data = this.state.data ? this.state.data : [],
 				full_count = this.pageSummary(data),
@@ -170,7 +171,6 @@ export default class List extends Many {
 					}
 				}
 			}
-
 			return (
 				<div data-entity={e} style={{width: '100%'}}>
 					{paramsCollec ? null : (

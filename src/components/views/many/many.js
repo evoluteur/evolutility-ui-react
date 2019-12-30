@@ -57,7 +57,6 @@ export default class Many extends React.Component {
 		})
 		axios.get(qUrl)
 			.then(response => {
-				//var a = response.headers
 				this.setState({
 					data: response.data,
 					loading: false

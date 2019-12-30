@@ -38,7 +38,6 @@ export default class OneRead extends React.Component{
 			loading: false,
 			invalid: false
 		}
-
 		if(this.clearValidation){
 			this.clearValidation()
 		}
@@ -73,9 +72,10 @@ export default class OneRead extends React.Component{
 	}
 
 	componentDidMount() {
+		const props = this.props
 		// - set hook to confirm navigation (on leave if dirty data)
-		if(this.props.router){
-			this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave)
+		if(props.router){
+			props.router.setRouteLeaveHook(props.route, this.routerWillLeave)
 		}
 		window.scrollTo(0, 0)
 		// - get data or if new then clear data

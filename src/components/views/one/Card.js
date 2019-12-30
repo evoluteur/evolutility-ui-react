@@ -56,7 +56,7 @@ export default class Card extends React.PureComponent {
                             <div key={f.id}>
                                 <label>{f.labelShort || f.label}: </label>
                                 <div className="list-tags">
-                                    {(fv || []).map(v => <div key={v}>{lovMap[v] || 'N/A'}</div>)}
+                                    {fv ? fv.map(v => <div key={v}>{lovMap[v] || 'N/A'}</div>) : null}
                                 </div>
                             </div>
                         )
@@ -66,7 +66,7 @@ export default class Card extends React.PureComponent {
                             <div key={f.id}>
                                 <label>{f.labelShort || f.label}: </label>
                                 <div>
-                                    {icon ?  <img src={'/pix/'+icon} className="lov-icon" alt=""/> : ''}
+                                    {icon ? <img src={'/pix/'+icon} className="lov-icon" alt=""/> : ''}
                                     {fv}
                                 </div>
                             </div>

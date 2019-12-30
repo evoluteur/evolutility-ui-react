@@ -55,10 +55,9 @@ export default class Edit extends OneReadWrite{
 		let v = evt.target.value
 
 		if(evt.target.type==='checkbox'){
-			v=evt.target.checked
+			v = evt.target.checked
 		}
 		newData[fid]=v
-		
 		this.setDeltaField(fid, v)
 		this.setState({data: newData})
 	}

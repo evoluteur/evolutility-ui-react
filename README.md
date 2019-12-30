@@ -1,4 +1,4 @@
-# Evolutility-UI-React &middot; [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE.md) [![npm version](https://img.shields.io/npm/v/evolutility-ui-react)](https://www.npmjs.com/package/evolutility-ui-react) 
+# Evolutility-UI-React &middot; [![GitHub license](https://img.shields.io/github/license/evoluteur/evolutility-ui-react)](https://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE.md) [![npm version](https://img.shields.io/npm/v/evolutility-ui-react)](https://www.npmjs.com/package/evolutility-ui-react) 
 
 
 Evolutility-UI-React is a set of **model-driven views** to Browse, Edit, List, Cards, and Charts data by writing models rather than code. 
@@ -203,7 +203,7 @@ Multiple details tables can be specified with "collections".
 | id           | Unique key for the collection.        |
 | title        | Collection title.                     |
 | object       | Model.id for the Object to link to.   |
-| fields       | Array of fields (objects or ids). Fields in collections do not need all properties of Fields in objects.    |
+| fields       | Array of fields (objects or ids). Fields in collections can be field objects or just ids of fields in the collection's object.    |
 | header       | Text to be displayed before the collection.   |
 | footer       | Text to be displayed after the collection.    |
 
@@ -310,7 +310,7 @@ module.exports = {
               "language", "complete", "finished", "notes"]
       },
       { 
-        id:"pix", type: "panel", label: "Album Cover", width: 30,
+        id:"pix", type: "panel", label: "Cover", width: 30,
         fields: ["pix"]
       }
   ]

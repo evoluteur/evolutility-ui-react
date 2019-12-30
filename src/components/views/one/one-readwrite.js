@@ -8,7 +8,6 @@
 
 import React from 'react'
 import axios from 'axios'
-//import { createHashHistory } from 'history'
 
 import models from '../../../models/all_models'
 //import evoGlobals from 'utils/evoGlobals'
@@ -18,7 +17,6 @@ import { apiPath } from '../../../config.js'
 import OneRead from './one-read'
 
 import { toast } from 'react-toastify';
-//const history = createHashHistory()
 
 export default class OneReadWrite extends OneRead{
 
@@ -47,7 +45,7 @@ export default class OneReadWrite extends OneRead{
 					})
 				})
 				.catch(error => {
-					if(error.response &&error.response.data &&  error.response.data.invalids){
+					if(error.response && error.response.data &&  error.response.data.invalids){
 						const msg = error.response.data.invalids.map(e => <div key={e.id}>{e.id + ': ' + e.condition}</div>)
 						toast.error(<div>Record failed server validation.<br/>{msg}</div>)
 						// TODO: flag fields
@@ -61,7 +59,7 @@ export default class OneReadWrite extends OneRead{
 		}
 	}
 
-	uploadFileOne(fieldId, formData){
+	uploadFileOne = (fieldId, formData) => {
 		// - only for fields of type image or document
 		const mid = this.model.id,
 			f = this.model.fieldsH[fieldId],
@@ -110,7 +108,9 @@ export default class OneReadWrite extends OneRead{
 					id: d.id, 
 					text: d.text
 				}))
-				this.refs[fid].forceUpdate()
+				if(this.refs[fid]){
+					this.refs[fid].forceUpdate()
+				}
 				this.lovs = true
 			})
 			.catch(err => {
