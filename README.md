@@ -123,6 +123,16 @@ Code: [/src/components/views/many/Stats.js](https://github.com/evoluteur/evoluti
 View: [http://localhost:3000/comics/stats](http://localhost:3000/comics/stats)
 
 
+### APIs
+Documentation and test for the model's REST endpoints.
+
+![API](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/doc-api.gif)
+
+Code: [/src/components/views/doc/Api.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/doc/Api.js)
+
+View: [http://localhost:3000/comics/api](http://localhost:3000/comics/api)
+
+
 ## Models
 
 Each model describe an object and its list of fields. A single model is used for all views (Browse, Edit, List, Cards...).

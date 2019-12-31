@@ -23,6 +23,8 @@ import Stats from './components/views/many/Stats';
 import Browse from './components/views/one/Browse';
 import Edit from './components/views/one/Edit';
 
+import Api from './components/views/doc/Api';
+
 
 import PageNotFound from './components/pages/PageNotFound.js';
 
@@ -46,6 +48,7 @@ const AppRoutes = () => (
 
 		<Route path="/:entity/charts" component={Charts}/>
 		<Route path="/:entity/stats" component={Stats}/>
+		<Route path="/:entity/api" component={Api}/>
 
 		<Route path='*' exact={true} component={PageNotFound} />
 	</Switch>

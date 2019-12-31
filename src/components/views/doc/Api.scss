@@ -1,0 +1,66 @@
+
+@import '../../variables';
+
+.evol-api-doc {
+    .docParams{
+        margin-top: 50px;
+    }
+    .table {
+        margin-top: 20px;
+    }
+    .api-holder {
+        @include flex-holder();
+    }
+    .api-toc {
+        @include flex-item();
+        min-width: 250px;
+        > div {
+            display: block;
+            margin: 0 0 10px;
+            > label {
+                display: block;
+            }
+        }
+    }
+    .api-json {
+        @include flex-item();
+        min-width: 100px;
+        flex-grow: 10;
+        > textarea {
+            margin-top: 10px;
+            width: 100%;
+            height: 100%;
+            min-width: 200px;
+            min-height: 300px;
+        }
+        margin-left: 20px;
+    }
+    .crud{
+        > div {
+            display: flex;
+            vertical-align: top;
+            margin-bottom: 5px;
+            span {
+                display: inline-block;
+                width: 45px;
+                text-align: right;
+                margin: 0 5px 0 20px;
+            }
+        }
+
+        input{
+            width: 55px;
+        }
+    }
+    .tag {
+        display: inline-block;
+        width: 80px;
+    }
+    .fakeLink{
+        cursor: pointer;
+        color: $color-title;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}
