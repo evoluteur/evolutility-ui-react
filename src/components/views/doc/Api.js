@@ -1,10 +1,10 @@
  /*
-    Evolutility-UI-React :: /views/doc/ApiDoc.js
+    Evolutility-UI-React :: /views/doc/Api.js
 
     Views to document and test object's REST API 
 
     https://github.com/evoluteur/evolutility-ui-react
-    (c) 2019 Olivier Giulieri
+    (c) 2020 Olivier Giulieri
 */
 
 import React from 'react'

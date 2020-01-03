@@ -306,7 +306,14 @@ module.exports = {
 			"type": "boolean",
 			"label": "Exclude from Charts",
 			"width": 50,
-			"help": "If chacked, the field's charts will not appear in the dashboard."
+			"help": "Determines if the field's charts appears in the dashboard."
+		},
+		{
+			"id": "noStats",
+			"type": "boolean",
+			"label": "Exclude from Stats",
+			"width": 50,
+			"help": "Determines if the field's stats appears in the Stats view."
 		},
 		{
 			"id": "help",
@@ -385,7 +392,8 @@ module.exports = {
 				"maxLength",
 				"regExp",
 				"deleteTrigger",
-				"noCharts"
+				"noCharts",
+				"noStats"
 			]
 		},
 		{

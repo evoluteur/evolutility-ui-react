@@ -2,7 +2,7 @@
 // Evolutility-UI-React :: utils/validation.js
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2019 Olivier Giulieri
+// (c) 2020 Olivier Giulieri
 
 import _ from 'underscore'
 import { fieldTypes, fieldIsNumber } from './dico'
@@ -18,7 +18,7 @@ function validateField(f, v){
             .replace('{2}', r3);
     }
     function fieldLabel(f){
-        return f.label || f.labelMany;
+        return f.label || f.labelShort;
     }
 
     if(!f.readOnly){

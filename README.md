@@ -5,6 +5,16 @@ Evolutility-UI-React is a set of **model-driven views** to Browse, Edit, List, C
 
 ![Edit](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/one-edit.gif)
 
+
+### Table of Contents
+1. [Installation](#Installation)
+2. [Configuration](#Configuration)
+3. [Views](#Views): [One](#ViewsOne) - [Many](#ViewsMany) - [Doc](#ViewsDoc)
+4. [Models](#Models)
+5. [Backend](#Backend)
+6. [License](#License)
+
+<a name="Installation"></a>
 ## Installation
 
 [**Download**](https://github.com/evoluteur/evolutility-ui-react/archive/master.zip) or **clone** from [GitHub](https://github.com/evoluteur/evolutility-ui-react/).
@@ -38,7 +48,8 @@ In a web browser, go to the url [http://localhost:3000/](http://localhost:3000/)
 For the REST endpoints, you also need to install and run [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) which provides the matching REST endpoints based on the same metadata.
 
 
-## Setup
+<a name="Configuration"></a>
+## Configuration
 
 Configurations options are specified in the file [/src/config.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/config.js). They apply to all apps (app specific options are specified in models).
 
@@ -51,20 +62,26 @@ Configurations options are specified in the file [/src/config.js](https://github
 | wTimestamp | Add timestamp columns u_date and c_date to track record creation and update times. | true |
 
 
+<a name="Views"></a>
 ## Views
 
 For any object, a single model defines UI elements across views in a simple declarative way.
 
 Evolutility-UI-React provides 2 types of view:
 
-* Views for One - a single record: [Browse](#browse), [Edit](#edit).
-* Views for Many - a collection of records: [List](#list), [Cards](#cards), [Charts](#charts), [Stats](#stats).
+* Views for One - a single record: [Browse](#Browse), [Edit](#Edit).
+* Views for Many - a collection of records: [List](#List), [Cards](#Cards), [Charts](#Charts), [Stats](#Stats).
 
 Notes: Views for actions (search, filter, export) will come later.
 
-A large part of the API (methods, options and events) is common to all views. Some views have additional API.
+A large part of the API (methods, options and events) is similar in all views. Some views have additional endpoints. For convenience, there is an [API documentation view](#api) to document and test the API.
 
+<a name="ViewsOne"></a>
 ## Views for One object
+
+[Browse](#Browse) - [Edit](#Edit)
+
+<a name="Browse"></a>
 ### Browse
 Shows all fields for viewing (read only). Fields are grouped in panels.
 
@@ -74,6 +91,7 @@ Code: [/src/components/views/one/Browse.js](https://github.com/evoluteur/evoluti
 
 View: [http://localhost:3000/comics/browse/{id}](http://localhost:3000/comics/browse/14)
 
+<a name="Edit"></a>
 ### Edit
 This view shows all fields for edition to create or update records.
 It automatically performs validation based on the model.
@@ -85,7 +103,13 @@ Code: [/src/components/views/one/Edit.js](https://github.com/evoluteur/evolutili
 
 View: [http://localhost:3000/comics/edit/{id}](http://localhost:3000/comics/edit/14)
 
+
+<a name="ViewsMany"></a>
 ## Views for Many objects
+
+[List](#List) - [Cards](#Cards) - [Charts](#Charts) - [Stats](#Stats)
+ 
+<a name="List"></a>
 ### List
 Gives a tabular view of a collection.
 
@@ -95,6 +119,7 @@ Code: [/src/components/views/many/List.js](https://github.com/evoluteur/evolutil
 
 View: [http://localhost:3000/comics/list](http://localhost:3000/comics/list)
 
+<a name="Cards"></a>
 ### Cards
 Shows records side by side as cards.
 
@@ -104,6 +129,7 @@ Code: [/src/components/views/many/Cards.js](https://github.com/evoluteur/evoluti
 
 View: [http://localhost:3000/comics/cards](http://localhost:3000/comics/cards)
 
+<a name="Charts"></a>
 ### Charts
 Draws charts about the collection. Currently bars and pie charts are implemented, a list with count and percentages is also available. Only provided for fields of types like boolean, lov, integer, decimal, date... (not text or textmultilines).
 
@@ -113,6 +139,7 @@ Code: [/src/components/views/charts/Charts.js](https://github.com/evoluteur/evol
 
 View: [http://localhost:3000/comics/charts](http://localhost:3000/comics/charts)
 
+<a name="Stats"></a>
 ### Stats
 Display last update, number of updates in the last week, and for numeric fields the min, max, count, average.
 
@@ -122,7 +149,10 @@ Code: [/src/components/views/many/Stats.js](https://github.com/evoluteur/evoluti
 
 View: [http://localhost:3000/comics/stats](http://localhost:3000/comics/stats)
 
+<a name="ViewsDoc"></a>
+## Views for Documentation
 
+<a name="Api"></a>
 ### APIs
 Documentation and test for the model's REST endpoints.
 
@@ -133,12 +163,13 @@ Code: [/src/components/views/doc/Api.js](https://github.com/evoluteur/evolutilit
 View: [http://localhost:3000/comics/api](http://localhost:3000/comics/api)
 
 
+<a name="Models"></a>
 ## Models
 
 Each model describe an object and its list of fields. A single model is used for all views (Browse, Edit, List, Cards...).
 
 For any object, all UI views (List, Cards, Edit, Charts...) share the same model. 
-All Fields are present in the Edit and Browse views. Fields can be flagged as "inMany" to be included in List, Cards, and Charts views.
+All Fields are present in the Edit and Browse views. Fields can be flagged with "inMany" to be included in the List and Cards views, or "noCharts" and "noStats" to be excluded from the Charts or Stats views.
 
 
 ### Object
@@ -334,6 +365,7 @@ More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-rea
 [Wine cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/winecellar.js). 
 
 
+<a name="Backend"></a>
 ## Evolutility backend
 
 [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) provides REST or GraphQL end-points for Evolutility-UI-React using the same models.
@@ -344,9 +376,11 @@ More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-rea
 
 [Evolutility-ASP.net](https://github.com/evoluteur/evolutility-asp.net) - Lightweight CRUD framework for heavy lifting with ASP.net and Microsoft SQL-Server.
 
+
+<a name="License"></a>
 ## License
 
-Copyright (c) 2019 [Olivier Giulieri](https://evoluteur.github.io/).
+Copyright (c) 2020 [Olivier Giulieri](https://evoluteur.github.io/).
 
 Evolutility-UI-React is released under the [MIT license](http://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE.md).
 
