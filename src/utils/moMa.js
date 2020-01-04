@@ -3,7 +3,7 @@
 // Models manager: fetch and cache models
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2019 Olivier Giulieri
+// (c) 2020 Olivier Giulieri
 
 
 import axios from 'axios'
@@ -12,7 +12,7 @@ import models from '../models/all_models'
 import { prepModel } from './dico'
 
 export function fetchModels(cb, cbErr) {
-    const url = config.apiPath+'md/models'
+    const url = config.apiPath+'meta/models'
     axios.get(url)
         .then(response => {
             addModels(response.data)
