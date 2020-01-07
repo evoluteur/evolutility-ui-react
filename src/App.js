@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
 import config from './config'
-import moMa from './utils/moMa'
+import { fetchModels } from './utils/moMa'
 import Spinner from './components/shell/Spinner'
 import Nav from './components/shell/Nav.js';
 import TopBar from './components/shell/TopBar.js';
@@ -65,7 +65,7 @@ export default class App extends React.Component {
 
 	componentDidMount() {
 		if(queryModels){
-			moMa.fetchModels(
+			fetchModels(
 				() => this.setState({
 					loading: false,
 				}),

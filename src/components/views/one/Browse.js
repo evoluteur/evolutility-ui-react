@@ -4,7 +4,7 @@
 // Read-only view to browse one record.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2019 Olivier Giulieri
+// (c) 2020 Olivier Giulieri
 
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -17,6 +17,7 @@ import Alert from '../../widgets/Alert'
 import Field from '../../field/Field'
 import Panel from '../../widgets/Panel'
 import List from '../many/List'
+import Spinner from '../../shell/Spinner'
 import Header from '../../shell/Header'
 
 export default class Browse extends OneRead {
@@ -44,7 +45,6 @@ export default class Browse extends OneRead {
       if(f){
         const isLOV = f.type==='lov';
         const attr = isLOV ? f.id+'_txt' : f.id
-
         return (
           <Field 
             key={f.id} 
@@ -62,6 +62,8 @@ export default class Browse extends OneRead {
 
     if(!m){
       return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
+    }else if(this.state.loading){
+      return <Spinner></Spinner>
     }else{
       document.title = title
       return ( 

@@ -4,7 +4,7 @@
 	Super-class for most Views for Many (List, Cards but not Charts).
 
 	https://github.com/evoluteur/evolutility-ui-react
-	(c) 2019 Olivier Giulieri
+	(c) 2020 Olivier Giulieri
 */
 
 import React from 'react'
@@ -55,12 +55,18 @@ export default class Many extends React.Component {
 		this.setState({
 			loading: true
 		})
+		this.lastQuery = qUrl
 		axios.get(qUrl)
 			.then(response => {
-				this.setState({
-					data: response.data,
-					loading: false
-				})
+				if(this.lastQuery === qUrl){
+					this.lastQuery = null
+					this.setState({
+						data: response.data,
+						loading: false
+					})
+				}else{
+					console.log('Navigated before response: '+qUrl)
+				}
 			})
 			.catch(err => {
 				let msg = ''

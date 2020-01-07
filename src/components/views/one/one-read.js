@@ -4,7 +4,7 @@
 // Super-class used in Views for One (Browse, Edit but not Card) to get data by ID.
  
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2019 Olivier Giulieri
+// (c) 2020 Olivier Giulieri
 
 import React from 'react'
 import axios from 'axios'
@@ -45,22 +45,26 @@ export default class OneRead extends React.Component{
 			this.setState({
 				loading: true
 			});
-			axios.get(apiPath+e+'/'+id)
+			const qUrl = apiPath+e+'/'+id
+			this.lastQuery = qUrl
+			axios.get(qUrl)
 			.then((response)=>{
-				if(response.data!==null && response.data!==''){
-					this.emptyDelta(false)
-					newState.data = response.data
-					this.setState(newState);
-				}else{
-					newState.error = {
-						message: i18n_errors.badId.replace('{0}', id)
+				if(this.lastQuery === qUrl){
+					if(response.data!==null && response.data!==''){
+						this.emptyDelta(false)
+						newState.data = response.data
+					}else{
+						newState.info = i18n_errors.badId.replace('{0}', id)
 					}
+					this.lastQuery = null
 					this.setState(newState)
+				}else{
+					console.log('Navigated before response: '+qUrl)
 				}
 			})
 			.catch(err => {
 				newState.error = {
-					message: i18n_errors.badId.replace('{0}', id)
+					message: err.message || i18n_errors.badId.replace('{0}', id)
 				}
 				this.setState(newState)
 			})

@@ -3,7 +3,7 @@
 // View to add or update one record at a time.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2019 Olivier Giulieri
+// (c) 2020 Olivier Giulieri
 
 import React from 'react'
 import PropTypes from 'prop-types';
@@ -21,16 +21,13 @@ import List from '../many/List'
 import Alert from '../../widgets/Alert'
 import Field from '../../field/Field'
 import Panel from '../../widgets/Panel'
+import Spinner from '../../shell/Spinner'
 import Header from '../../shell/Header'
 
 export default class Edit extends OneReadWrite{
 
 	viewId = 'edit'
 
-	constructor(props) {
-		super(props);
-		this.uploadFileOne = this.uploadFileOne.bind(this);
-	}
  
 	getDataDelta(){
 		return this.delta || null
@@ -81,7 +78,10 @@ export default class Edit extends OneReadWrite{
         	title = this.state.error ? 'No data' : dataTitle(m, data, isNew),
         	linkBrowse = isNew ? (ep+'list') : (ep+view+(id?('/'+id):''));
 
-		const fnField = (f)=>{
+		if(this.state.loading && !isNew){
+			return <Spinner></Spinner>
+		}
+		const fnField = f => {
 			if(f){
 				if(f.type===ft.lov && !f.list){
 					// - fetch list values

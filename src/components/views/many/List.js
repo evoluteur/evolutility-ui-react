@@ -3,7 +3,7 @@
 // List view to display a collection as a list (table w/ sorting and paging).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2019 Olivier Giulieri
+// (c) 2020 Olivier Giulieri
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -124,14 +124,14 @@ export default class List extends Many {
 				pagination = null
 
 			document.title = title
-			if(this.state.error){
+			if(this.state.loading){
+				body = <Spinner />
+			}else if(this.state.error){
 				if(isNested){
 					body = <div className="nodata">No data.</div>
 				}else{
 					body = <Alert title="Error" message={this.state.error.message}/> 
 				}
-			}else if(this.state.loading){
-				body = <Spinner></Spinner> 
 			}else{
 				if(data.length){
 					const fields = paramsCollec ? paramsCollec.fields : m.fields.filter(isFieldMany)
@@ -180,7 +180,7 @@ export default class List extends Many {
 					)}
 					<div className="evolutility evol-many-list">
 						{body}
-						{search ? null : pagination}					
+						{ (search && !this.state.loading) ? null : pagination }
 					</div>
 				</div>
 			)

@@ -36,9 +36,12 @@ export function addModels(ms) {
     })
 }
 
+export let modelIds = Object.keys(models)
+
 export default {
 	fetchModels: fetchModels,
     addModels: addModels,
     getModel: getModel,
-    models: models
+    models: models,
+    modelIds: modelIds,
 }
