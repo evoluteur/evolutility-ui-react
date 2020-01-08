@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import DemosList from './DemosList.js'
 
-import './Demo.scss'
 
 export default class Demo extends React.PureComponent {
 
@@ -15,33 +15,12 @@ export default class Demo extends React.PureComponent {
             <div className="evo-demo">
                 <h1>Evolutility Demo Apps</h1>
 
-                <p>These sample applications are not anything you haven't seen before. </p>
+                <DemosList title={true} />
+
+                <p><br/>These sample applications are not anything you haven't seen before. </p>
                 <p>The interesting thing is that these demo apps are built with models rather than code... 
                     and you can easily make more apps simply by making new <a className="extlink" href="https://github.com/evoluteur/evolutility-models#evolutility-models--" target ="models">models</a>.
                 </p>
-
-                <div className="cSet">
-                    <div className="component c1"> 
-                        <h3><img alt="Organizer" src="/svg/briefcase.svg" />Organizer</h3>
-                        <div className="demoLinks">
-                            <Link to="/todo/list"><img src="/pix/todo.gif" alt="" title="To-Do list"/>To-Do list</Link><br/>
-                            <Link to="/contact/list"><img src="/pix/contact.gif" alt="" title="Address book"/>Address book</Link><br/>
-                            <Link to="/comics/cards"><img src="/pix/comics.png" alt="" title="Graphic Novels inventory"/>Graphic novels</Link><br/>
-                            <Link to="/restaurant/list"><img src="/pix/resto.gif" alt="" title="Restaurants list"/>Restaurants</Link><br/>
-                            <Link to="/winecellar/list"><img src="/pix/wine-bottle.png" alt="" title="Wine Cellar"/>Wine Cellar</Link><br/>
-                            <Link to="/winetasting/list"><img src="/pix/wine.gif" alt="" title="Wine Tasting"/>Wine Tasting</Link><br/>
-                        </div>
-                    </div>
-                    <div className="component"> 
-                        <h3><img alt="Music" src="/svg/music.svg" />Music</h3>
-                        <div className="demoLinks">
-                            <Link to="/artist/cards"><img src="/pix/star.png" alt="" title="Artists"/>Artists</Link><br/>
-                            <Link to="/album/cards"><img src="/pix/cd.png" alt="" title="Albums"/>Albums</Link><br/>
-                            <Link to="/track/list"><img src="/pix/music.png" alt="" title="Music tracks"/>Tracks</Link><br/>
-                        </div>
-                    </div>
-                </div>
-
                 <div className="component"> 
                 <br/>
                     <p>

@@ -1,79 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import pkg from '../../../package.json';
-import { apiPath } from '../../config.js';
-import models from '../../models/all_models'
+import { modelIds, getModel } from '../../utils/moMa'
+import DemosList from './DemosList.js'
 
 import './Home.scss'
 
-const proxy = pkg.proxy || ''
-const apiPathFull = proxy ? proxy : apiPath
+const orgIcons = []
+const musicIcons = []
 
-const appIcons = [
-    {
-        id: "todo",
-        oid: 1,
-    },
-    {
-        id: "contact",
-        oid: 2,
-    },
-    {
-        id: "comics",
-        oid: 3,
-        view: "cards", 
-    },
-    {
-        id: "restaurant",
-        oid: 4,
-    }, 
-    {
-        id: "winecellar",
-        oid: 5,
-    },
-    {
-        id: "winetasting",
-        oid: 6,
-    },
-    {
-        id: "artist",
-        oid: 8,
-        view: "cards",
-    },
-    {
-        id: "album",
-        oid: 7,
-        view: "cards",
-    },
-    { 
-        id: "track",
-        oid: 9,
+modelIds.forEach(mid => {
+    const m = getModel(mid)
+    if(m.active){
+        if(m.world==='organizer' || m.world==='music'){ 
+            const menuItem = {
+                id: m.id,
+                oid: m.oid,
+                world: m.world,
+                icon: 'pix/'+m.icon,
+                label: m.title || m.label,
+            }
+            if(m.world==='organizer'){
+                orgIcons.push(menuItem)
+            }else if(m.world==='music'){
+                musicIcons.push(menuItem)
+            }
+        }
     }
-].map(menu => {
-    const m = models[menu.id]
-    menu.world = m.world
-    menu.icon = 'pix/'+m.icon
-    menu.label = m.title || m.label
-    return menu
 })
-
-const iconContent = iconDef => (
-    <span>
-        <div>
-            <img src={iconDef.icon} alt=""/>
-            {iconDef.label}
-        </div>
-    </span>
-)
-const urlGitHubModels = 'https://github.com/evoluteur/evolutility-models/blob/master/models/'
-const iconURL = iconDef => "/"+iconDef.id+"/"+(iconDef.view ? iconDef.view : 'list')
-const xLink = (url, iconDef) => <Link key={iconDef.id} to={url}>{iconContent(iconDef)}</Link>
-const xA = (url, target, iconDef) => <a key={iconDef.id} href={url} target={target}>{iconContent(iconDef)}</a>
-const appIcon = iconDef => xLink(iconURL(iconDef), iconDef)
-const appModel = iconDef => xLink('/object/browse/'+iconDef.oid, iconDef)
-const appAPI = iconDef => xA(apiPathFull+iconDef.id, 'api', iconDef)
-const appJson = iconDef => xA(urlGitHubModels+iconDef.world+'/'+iconDef.id+'.js', 'model', iconDef)
-
 
 export default class Home extends React.PureComponent {
 
@@ -84,61 +37,58 @@ export default class Home extends React.PureComponent {
 
     render() {
         return (
-        <div className="evo-home">
-            <h1 className="siteTitle"><span>Evol</span><span className="navy">utility</span> <span style={{fontSize: '.5em'}}>v{pkg.version}</span> </h1> 
-            <h2 className="tBlue">Minimalist model-driven architecture to build and evolve applications with models rather than code.</h2> 
-            <div className="cSet">
-                
-                <div className="component">
-                    <h2>
-                        <img alt="UI" src="/svg/eye.svg" className="cpnSvg" />
-                        Model-driven UI
-                    </h2>
-                    <p><a target="ui" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-ui-react">Evolutility-UI-React</a> {' '}
-                    provides a set of model-driven views to List, Cards, Edit, Browse, and Charts your data. 
-                    </p>
-                    <div className="apps-icons">
-                        Demo apps: {' '}
-                        {appIcons.map(ico => appIcon(ico))}
-                    </div> 
-                </div>
+            <div className="evo-home">
+                <h1 className="siteTitle"><span>Evol</span><span className="navy">utility</span> <span style={{fontSize: '.5em'}}>v{pkg.version}</span> </h1> 
+                <h2 className="tBlue">Toolkit for building applications with models rather than code</h2> 
 
-                <div className="component">
-                    <h2>
-                        <img alt="Backend" src="/svg/database.svg" className="cpnSvg" />
-                        Model-driven backend
-                    </h2>
-                    <p><a target="db" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-server-node">Evolutility-Server-Node</a> {' '}
-                    provides a model-driven REST or GraphQL API for CRUD (Create, Read, Update, Delete) and more.
-                    </p>
-                    <div className="apps-icons">REST end-points: {' '}
-                        <a target="api" href={apiPathFull}>API discovery</a> {' '}
-                        {appIcons.map(ico => appAPI(ico))}
-                    </div>
-                    <p><br/>GraphQL: {' '}
-                        <a target="api" href="http://localhost:2000/graphql">GraphiQL</a>
-                    </p>
-                </div> 
+                <section>
+                    <div>Evolutility provides:</div>
+                    <ul>
+                        <li>A model-driven UI with a set of generic views for Browse, Edit, List, Cards, Dashboard, Stats, and API documentation and test.</li>
+                        <li>A model-driven Backend with generic REST or GraphQL endpoints for CRUD and more.</li>
+                        <li>A set of sample models with sample data.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <div>With it, you can build UIs like these:</div>
+                    <DemosList />
+                </section>
                 
-                <div className="component">
-                    <h2>
-                        <img alt="Models" src="/svg/cogs.svg" className="cpnSvg" />
-                        Models
-                    </h2> 
-                    <p><a target="db" style={{fontWeight: 600}} href="https://github.com/evoluteur/evolutility-models">Evolutility-Models</a> {' '}
-                    are applications definitions covering both back-end (database table and columns...) and front-end (label, width, height...). 
-                    </p>
-                    <div className="apps-icons">
-                        Sample models (stored in the database):{' '}
-                        { appIcons.map(appModel) }
+                <section>
+                    <div>... and generate REST or <a href="http://localhost:2000/graphql" target="gql">GraphQL</a> endpoints like these:</div>
+                    <DemosList view="api" />
+                </section>
+                
+                <section>
+                    <div>... simply by making models like these:</div> 
+                    <DemosList view="model" />
+                </section>
+
+                <section>
+                    <p>No hand-coding necessary. The database tables, the REST or GraphQL endpoints, and all UI views are generated based on the models.</p>
+                </section>
+
+                <section>
+                    <div>Open source at GitHub:</div>
+
+                    <div>Model-driven UI:&nbsp;
+                        <a target="ui" href="https://github.com/evoluteur/evolutility-ui-react">Evolutility-UI-React</a> 
+                            <iframe src="https://ghbtns.com/github-btn.html?user=evoluteur&amp;repo=evolutility-ui-react&amp;type=star&amp;count=true&amp;size=small" frameBorder="0" scrolling="0" width="170px" height="30px"title="ui-react"></iframe>
+                        
+                        <a target="ui" href="https://github.com/evoluteur/evolutility-ui-jquery">Evolutility-UI-jQuery</a> 
+                            <iframe src="https://ghbtns.com/github-btn.html?user=evoluteur&amp;repo=evolutility-ui-jquery&amp;type=star&amp;count=true&amp;size=small" frameBorder="0" scrolling="0" width="170px" height="30px" title="ui-jquery"></iframe>
                     </div>
-                    <div className="apps-icons">
-                        Sample models (stored as JSON files):{' '}
-                        { appIcons.map(appJson) }
+                    <div>Model-driven Backend:&nbsp;
+                        <a target="db" href="https://github.com/evoluteur/evolutility-server-node">Evolutility-Server-Node</a>
+                            <iframe src="https://ghbtns.com/github-btn.html?user=evoluteur&amp;repo=evolutility-server-node&amp;type=star&amp;count=true&amp;size=small" frameBorder="0" scrolling="0" width="170px" height="30px" title="server"></iframe>
                     </div>
-                </div>
-            </div> 
-        </div>
+                    <div>Models:&nbsp;
+                        <a target="models" href="https://github.com/evoluteur/evolutility-models">Evolutility-Models</a>
+                            <iframe src="https://ghbtns.com/github-btn.html?user=evoluteur&repo=evolutility-models&type=star&amp;count=true&amp;size=small" frameBorder="0" scrolling="0" width="170px" height="30px" title="models"></iframe>
+                    </div>
+                </section>
+            </div>
         );
     }
 }
