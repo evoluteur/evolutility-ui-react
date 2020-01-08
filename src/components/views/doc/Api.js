@@ -11,7 +11,7 @@ import React from 'react'
 import axios from 'axios'
 
 import { apiPath } from '../../../config.js'
-import models from '../../../models/all_models'
+import { getModel } from '../../../utils/moMa'
 import { i18n_stats } from '../../../i18n/i18n'
 import Header from '../../shell/Header'
 import Spinner from '../../shell/Spinner'
@@ -138,7 +138,7 @@ export default class ApiDoc extends React.Component {
                 e = this.props.params.entity || this.props.entity || null
             }
         }
-        this.model = models[e]
+        this.model = getModel(e)
     }
 
     componentWillReceiveProps(nextProps) {
@@ -153,11 +153,12 @@ export default class ApiDoc extends React.Component {
 
     componentDidMount() {
         this.getData()
+		window.scrollTo(0, 0)
     }
 
     render() {
         const e = this.props.match.params.entity,
-            model = models[e] || null,
+            model = getModel(e),
             data = this.state.data || null,
             getJSON = this.getJSON
         let idx, rootep = 'N/A'
@@ -190,7 +191,7 @@ export default class ApiDoc extends React.Component {
 
         const formattedData = () => this.state.isCSV ? 
             this.state.dataJson 
-        :
+            :
             JSON.stringify(this.state.dataJson || {}, null, 2)
 
         let body
@@ -226,7 +227,7 @@ export default class ApiDoc extends React.Component {
                     <p><br/>
                         <a target="api" href="http://localhost:2000/graphql">GraphiQL</a>
                     </p>
-                    <div class="docParams">
+                    <div className="docParams">
                         {this.renderParams(model, rootep, data)}
                         { data ? this.renderCRUD(data.crud) : null }
                         <p><br/><br/>Full API doc at <a target="doc" 
@@ -251,7 +252,7 @@ export default class ApiDoc extends React.Component {
     renderParams(model, rootep, apiDef){
 
         const fieldFilterParamRow = f => (
-            <tr>
+            <tr key={f.id}>
                 <td>{f.id}</td>
                 <td>Filter by {f.label} {fieldConditions(f)}</td>
                 <td>{filterExample(f)}</td>
@@ -259,8 +260,9 @@ export default class ApiDoc extends React.Component {
         )
 
         return (
-            <div>
+            <div className="endpoints">
                 <h3>REST APIs Parameters</h3>
+
                 <h3>List of {model.namePlural}</h3>
                 <p>{rootep+model.id}</p>
                 <table className="table">
@@ -297,7 +299,7 @@ export default class ApiDoc extends React.Component {
                 </table>
 
                 <h3>List of Values</h3>
-                { (apiDef && apiDef.lovs) ? apiDef.lovs.map(url => <p>{ url }</p>) : null }
+                { (apiDef && apiDef.lovs) ? apiDef.lovs.map(url => <p key={url}>{ url }</p>) : null }
                 <table className="table">
                     <thead>
                         <tr>

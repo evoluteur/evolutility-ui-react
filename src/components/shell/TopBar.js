@@ -6,7 +6,7 @@ import Icon from "react-crud-icons";
 import logoEvol from './evologo.gif'
 import { i18n_actions } from '../../i18n/i18n'
 
-import models from '../../models/all_models'
+import { getModel } from '../../utils/moMa'
 
 import './TopBar.scss'
 
@@ -34,7 +34,7 @@ export default class TopBar extends React.Component {
                 path.splice(0, 1)
             }
         }
-        const model = models[path[0]]
+        const model = getModel(path[0])
         const e = '/'+path[0]+'/'
         return (   
             <header className="TopBar" role="banner">

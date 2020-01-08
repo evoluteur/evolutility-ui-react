@@ -6,7 +6,10 @@
         margin-top: 50px;
     }
     .table {
-        margin-top: 20px;
+        margin: 20px 0 40px;
+    }
+    .endpoints > h3 {
+        margin-top: 40px;
     }
     .api-holder {
         @include flex-holder();
@@ -51,10 +54,6 @@
         input{
             width: 55px;
         }
-    }
-    .tag {
-        display: inline-block;
-        width: 80px;
     }
     .fakeLink{
         cursor: pointer;

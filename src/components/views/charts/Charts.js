@@ -3,7 +3,7 @@
 // Dashboard style set of charts (bars or pies).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2019 Olivier Giulieri
+// (c) 2020 Olivier Giulieri
 
 // Quick and easy implementation w/ the old version of google charts
 // must be re-written using D3.js or other cool charting library
@@ -12,7 +12,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 
 import { i18n_charts } from '../../../i18n/i18n'
-import models from '../../../models/all_models'
+import { getModel } from '../../../utils/moMa'
 import { fieldInCharts } from '../../../utils/dico'
 import { lcRead } from '../../../utils/localStorage'
 import { capitalize } from '../../../utils/format'
@@ -21,6 +21,7 @@ import Alert from '../../widgets/Alert'
 import Chart from './Chart'
 
 import './Charts.scss' 
+
 export default class Charts extends React.Component {
 
     viewId = 'charts'
@@ -32,7 +33,7 @@ export default class Charts extends React.Component {
     
     render() {
         const e = this.props.match.params.entity,
-            m = models[e]
+            m = getModel(e)
             this.model = m
 
         if(m){

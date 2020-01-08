@@ -3,7 +3,7 @@
 // Cards view to display a collection as a set of Cards.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2020 Olivier Giulieri
 
 import React from 'react'
 import PropTypes from 'prop-types';
@@ -71,10 +71,10 @@ export default class Cards extends Many {
 					{body}
 				</div>
 			)
-	  	}else{
-				return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
-			}
-  	}
+		}else{
+			return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
+		}
+	}
 
 }
 
