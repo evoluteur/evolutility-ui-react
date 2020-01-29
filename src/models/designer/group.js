@@ -11,6 +11,7 @@ module.exports = {
 	"namePlural": "groups",
 	"icon": "designer/group.png",
 	"active": true,
+	"position": 30,
 	"defaultViewMany": "list",
 	"defaultViewOne": "browse",
 	"titleField": "label",

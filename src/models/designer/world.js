@@ -10,6 +10,7 @@ module.exports = {
 	"name": "world",
 	"namePlural": "worlds",
 	"icon": "/designer/world.png",
+	"position": 50,
 	"defaultViewMany": "list",
 	"defaultViewOne": "browse",
 	"titleField": "name",

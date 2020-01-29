@@ -10,6 +10,7 @@ module.exports = {
 	"name": "collection",
 	"namePlural": "collections",
 	"icon": "/designer/collection.png",
+	"position": 40,
 	"defaultViewMany": "list",
 	"defaultViewOne": "browse",
 	"titleField": "label",

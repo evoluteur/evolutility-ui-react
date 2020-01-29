@@ -132,27 +132,27 @@ module.exports = {
 			"width": 62
 		},
 		{
-			"id": "notes",
+			"id": "favorite",
 			"type": "textmultiline",
-			"label": "Notes",
+			"label": "Favorite dish",
 			"maxLength": 2000,
-			"width": 32,
-			"height": 6
+			"width": 62,
+			"height": 2
 		},
 		{
 			"id": "hours",
 			"type": "textmultiline",
 			"label": "Hours",
-			"width": 30,
-			"height": 6
+			"width": 38,
+			"height": 2
 		},
 		{
-			"id": "favorite",
+			"id": "notes",
 			"type": "textmultiline",
-			"label": "Favorite dish",
+			"label": "Notes",
 			"maxLength": 2000,
-			"width": 38,
-			"height": 6
+			"width": 100,
+			"height": 3
 		},
 		{
 			"id": "phone",
@@ -203,9 +203,9 @@ module.exports = {
 				"schedule",
 				"yelp",
 				"price",
-				"notes",
+				"favorite",
 				"hours",
-				"favorite"
+				"notes"
 			]
 		},
 		{

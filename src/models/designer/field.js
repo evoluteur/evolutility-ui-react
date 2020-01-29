@@ -10,6 +10,7 @@ module.exports = {
 	"name": "field",
 	"namePlural": "fields",
 	"icon": "/designer/field.png",
+	"position": 20,
 	"defaultViewMany": "list",
 	"defaultViewOne": "browse",
 	"titleField": "label",
