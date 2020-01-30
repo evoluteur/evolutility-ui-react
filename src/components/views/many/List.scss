@@ -14,7 +14,11 @@
   .table{
     margin-bottom: 0;
     th{
-      position: relative;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 49px;
+      z-index: 2;
+      //position: relative;
       font-weight: $weight-label !important;
       white-space: nowrap;
       background-color: $bgcolor-header;
