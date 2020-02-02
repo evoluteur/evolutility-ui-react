@@ -63,6 +63,9 @@ export default class Home extends React.PureComponent {
                 <section>
                     <div>... simply by making models like these:</div> 
                     <DemosList view="model" />
+                    <p><br/>Models can also be stored in {' '}
+                        <a href="https://github.com/evoluteur/evolutility-models/tree/master/models/organizer" target="jsm" className="extlink">JSON files</a>.
+                    </p>
                 </section>
 
                 <section>
