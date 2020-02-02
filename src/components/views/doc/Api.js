@@ -169,8 +169,8 @@ export default class ApiDoc extends React.Component {
         idx = rootep.length
 
         const lilink = url => (
-            <li key={url} className="fakeLink"> 
-                <span onClick={getJSON}>
+            <li key={url}> 
+                <span onClick={getJSON} className="fakeLink">
                     {url.substr(idx)}
                 </span>
             </li>
@@ -179,7 +179,7 @@ export default class ApiDoc extends React.Component {
         const link = (label, url) => (
             <div className="evol-field-label">
                 <label>{label}</label>
-                <ul>
+                <ul className="small-pad">
                     { url!=null && Array.isArray(url) ? 
                             url.map(url => lilink(url))
                         : 
