@@ -40,6 +40,7 @@ export default class Browse extends OneRead {
         m = this.model,
         data = this.state.data || {},
         title = dataTitle(m, data, false);
+		const listData = cid => data.collections ? data.collections[cid] : null;
 
     function fnFieldReadOnly(f){
       if(f){
@@ -111,6 +112,7 @@ export default class Browse extends OneRead {
                                 footer={c.footer}>
                               <List key={'collec'+idx}
                                 isNested={true}
+                                data={listData(c.id)}
                                 match={this.props.match} 
                                 paramsCollec={c}
                                 style={{width:'100%'}}

@@ -29,11 +29,17 @@ export default class Many extends React.Component {
 	}
 
 	getData(entity, query1){
+		if(this.props.isNested){
+			this.lastQuery = null
+			this.setState({
+				data: this.props.data,
+				loading: false
+			})
+			return
+		}
 		const params = this.props.match.params,
-			id = params.id,
 			e = entity || params.entity,
-			query = query1 ? query1 : (this.props.location ? url.parseQuery(this.props.location.search) : null),
-			paramsCollec = this.props.paramsCollec
+			query = query1 ? query1 : (this.props.location ? url.parseQuery(this.props.location.search) : null)
 		let qUrl = apiPath + e
 
 		if(query && query.order){
@@ -41,12 +47,7 @@ export default class Many extends React.Component {
 			this._sortField = orderParams[0]
 			this._sortDirection = orderParams[1]
 		}
-		if(paramsCollec){
-			if(id==='0'){
-				return
-			}
-			qUrl += '/collec/'+paramsCollec.id+'?id='+id
-		}else if(query){
+		if(query){
 			qUrl += '?'+url.querySearch(query)
 		}
 		if(pageSize){
@@ -107,8 +108,8 @@ export default class Many extends React.Component {
 	}
 
 	pageSummary(data){
-		const size = data.length;
-		if (size) {
+		const size = data && data.length || 0;
+		if (size && !this.props.isNested) {
 			const totalSize = data[0]._full_count
 			if (size === 1) {
 				return size + ' ' + this.model.name + (totalSize>size ? ' in '+totalSize : '');

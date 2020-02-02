@@ -56,7 +56,7 @@ export default class List extends Many {
 		const props = this.props,
 			isNested = props.isNested,
 			e = props.match.params.entity,
-			m = this.model, // TODO: model and sub-model distinction
+			m = this.model,
 			paramsCollec = props.paramsCollec,
 			search = getSearchText()
 
@@ -115,7 +115,7 @@ export default class List extends Many {
 				}
 				return <td key={f.id}>{fieldValue(f, value, true)}</td>
 			}
-			const data = this.state.data ? this.state.data : [],
+			const data = isNested ? (this.props.data || []) : (this.state.data ? this.state.data : []),
 				full_count = this.pageSummary(data),
 				fullCount = data.length ? (data[0]._full_count || data.length) : data.length,
 				title = m ? (m.title || m.label) : 'N/A',
@@ -153,7 +153,7 @@ export default class List extends Many {
 								</tbody>
 							</table>
 						)
-						pagination = (
+						pagination = isNested ? null : (
 							<Pagination 
 								count={data.length} 
 								fullCount={fullCount} 
@@ -207,4 +207,5 @@ List.propTypes = {
 	}),
 	paramsCollec: PropTypes.object,
 	isNested: PropTypes.bool,
+	data: PropTypes.any,
 }

@@ -76,11 +76,8 @@ export default class Edit extends OneReadWrite{
 				dropFile: this.uploadFileOne
 			},
         	title = this.state.error ? 'No data' : dataTitle(m, data, isNew),
-        	linkBrowse = isNew ? (ep+'list') : (ep+view+(id?('/'+id):''));
-
-		if(this.state.loading && !isNew){
-			return <Spinner></Spinner>
-		}
+			linkBrowse = isNew ? (ep+'list') : (ep+view+(id?('/'+id):''));
+		const listData = cid => data.collections ? data.collections[cid] : null;
 		const fnField = f => {
 			if(f){
 				if(f.type===ft.lov && !f.list){
@@ -100,6 +97,10 @@ export default class Edit extends OneReadWrite{
 				)
 			}
 			return null
+		}
+
+		if(this.state.loading && !isNew){
+			return <Spinner></Spinner>
 		}
 		
 		document.title = title
@@ -126,7 +127,6 @@ export default class Edit extends OneReadWrite{
 							<Alert title="Error" message={this.state.error.message}/>
 	            		):(
 							<div className="evol-pnls">
-
 				    			{(m && m.groups) ? (
 									m.groups.map(function(g, idx){
 										const groupFields = fieldId2Field(g.fields, m.fieldsH)
@@ -163,6 +163,7 @@ export default class Edit extends OneReadWrite{
 													match={this.props.match}
 													paramsCollec={c}
 													style={{width:'100%'}}
+													data={listData(c.id)}
 													location={this.props.location}
 												/>
 											</Panel>
