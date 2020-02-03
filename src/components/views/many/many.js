@@ -84,7 +84,7 @@ export default class Many extends React.Component {
 			});
 	}
 
-	componentWillMount() {
+	UNSAFE_componentWillMount() {
 		this.setModel()
 	}
 
@@ -94,7 +94,7 @@ export default class Many extends React.Component {
 		this.getData()
 	}
 
-	componentWillReceiveProps(nextProps){
+	UNSAFE_componentWillReceiveProps(nextProps){
 		if(nextProps.match.params && nextProps.match.params.entity !== this.props.match.params.entity){
 			this.setModel(nextProps.match.params.entity)
 			this.setState({

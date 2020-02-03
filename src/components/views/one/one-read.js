@@ -26,7 +26,7 @@ export default class OneRead extends React.Component{
 		invalid: false
 	}
 
-	componentWillMount() {
+	UNSAFE_componentWillMount() {
 		this.setModel()
 	}
 
@@ -98,7 +98,7 @@ export default class OneRead extends React.Component{
 		this.done = true
 	}
 
-	componentWillReceiveProps(nextProps){
+	UNSAFE_componentWillReceiveProps(nextProps){
 		if(nextProps.match.params && (nextProps.match.params.entity !== this.props.match.params.entity
 				|| nextProps.match.params.id !== this.props.match.params.id)){
 			this.setModel(nextProps.match.params.entity)

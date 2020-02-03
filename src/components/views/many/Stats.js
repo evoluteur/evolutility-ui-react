@@ -71,7 +71,7 @@ export default class Stats extends React.Component {
         this.model = models[e]
     }
 
-    componentWillReceiveProps(nextProps){
+    UNSAFE_componentWillReceiveProps(nextProps){
         if(nextProps.match.params && nextProps.match.params.entity !== this.props.match.params.entity){
             this.setModel(nextProps.match.params.entity)
             this.setState({
