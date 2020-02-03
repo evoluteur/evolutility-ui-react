@@ -94,7 +94,6 @@ export default class App extends React.Component {
 						<div className="pageContent" role="main">
 							<AppRoutes/>
 						</div>
-						<ToastContainer autoClose={5000} />
 						<Footer />
 					</BrowserRouter>
 				)}
