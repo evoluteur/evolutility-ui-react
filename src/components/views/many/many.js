@@ -108,7 +108,7 @@ export default class Many extends React.Component {
 	}
 
 	pageSummary(data){
-		const size = data && data.length || 0;
+		const size = data ? data.length : 0;
 		if (size && !this.props.isNested) {
 			const totalSize = data[0]._full_count
 			if (size === 1) {

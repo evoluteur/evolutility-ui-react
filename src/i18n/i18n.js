@@ -65,8 +65,8 @@ module.exports = {
 
         dropFile: 'Drop the file here, or click to select the file to upload.',
         //dropFiles: 'Drop files here, or click to select files to upload.',
-        remove_image: 'Remove current image',
-        remove_document: 'Remove current document',
+        remove_image: 'Remove image',
+        remove_document: 'Remove document',
 
         deleted: '{0} deleted.',
         updated: '{0} updated.',
