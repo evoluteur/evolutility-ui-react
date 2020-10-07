@@ -3,7 +3,7 @@
 // Helpers for string, numbers, and date formats
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2019 Olivier Giulieri
+// (c) 2020 Olivier Giulieri
 
 import React from 'react'
 import numeral from 'numeral'

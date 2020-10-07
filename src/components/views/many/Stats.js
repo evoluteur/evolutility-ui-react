@@ -5,7 +5,7 @@
     like min, max, average... for numeric fields
 
     https://github.com/evoluteur/evolutility-ui-react
-    (c) 2019 Olivier Giulieri
+    (c) 2020 Olivier Giulieri
 */
 
 import React from 'react'

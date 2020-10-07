@@ -1,20 +1,24 @@
 @import '../variables';
 
+$nav-width: 180px;
+//$nav-width-c: 50px;
+
+$nav-trans-time: .1s;
+
 .Nav {
-	z-index: 70;
+	z-index: 5;
 	font-family: Droid,Lato,'Helvetica Neue',Arial,Helvetica;
 	position: fixed;
+	overflow: hidden;
 	left: 0;
-	top: 50px;
-	width: 170px;
+	top: 0;
+	width: $nav-width;
+	transition: width $nav-trans-time ease;
 	height: 100%;
-	height: calc(100% - 40px);
 	color: #455A64;
-	padding-top: 12px;
+	padding-top: 10px;
 	border-right: 1px solid #e0e0e0;
 	background-color: #eee;
-	//transition: width 0.5s;
-	overflow: hidden;
 	user-select: none;
 	-moz-user-select: none;
 	&:hover { 
@@ -61,14 +65,12 @@
 	}
 
 	> ul {
-		> li > ul {
-			border-left: 3px solid #eee;
-		}
 		> li{
 			border-left: solid 4px #eee;
 			font-size: 16px; 
 			margin: 0 0 10px 0;
 			padding: 0;
+			white-space: nowrap;
 		/*
 			white-space: nowrap;
 			overflow: hidden;
@@ -136,17 +138,26 @@
 	}
 
 }
+.navTop{
+	min-height: 50px;
+}
 #afterNav{
 	height: 0;
 	width: 0;
 }
 
+#navToggle{
+	position: absolute;
+	top: 0;
+	left: 1px;
+  }
 .pageContent{
     flex: 1 0 auto;
-	margin-left: 180px;
-	padding: 20px;
-	margin-top: 40px;
+	margin-left: $nav-width;
+	transition: margin-left $nav-trans-time ease;
+	padding: 10px 20px;
 	//transition: margin-left 0.5s;
+	margin-top: 50px;
 }
 .navButtonHolder{
 	margin:0;
@@ -201,4 +212,14 @@ a.skipNav {
 			}
 		}
 	}
+}
+
+.embossed {
+	position: absolute;
+	top: 9px;
+	left: 50px;
+	text-shadow: -1px -1px 1px #fff, 1px 1px 1px #aaa;
+	color: rgb(151, 150, 150);
+	opacity: 0.8;
+	font-size: 24px;
 }

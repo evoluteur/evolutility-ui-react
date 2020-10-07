@@ -15,31 +15,31 @@
     "npm": "6.9.0"
   },
   "dependencies": {
-    "@nivo/bar": "^0.61.1",
-    "@nivo/pie": "^0.61.1",
-    "axios": "^0.19.2",
-    "moment": "^2.24.0",
-    "node-sass": "^4.13.1",
+    "@nivo/bar": "^0.62.0",
+    "@nivo/pie": "^0.62.0",
+    "axios": "^0.20.0",
+    "moment": "^2.29.1",
+    "node-sass": "^4.14.1",
     "numeral": "^2.0.6",
-    "query-string": "~6.10.1",
-    "react": "^16.12.0",
-    "react-scripts": "^3.3.0",
-    "react-dom": "^16.12.0",
-    "react-datepicker": "^2.11.0",
-    "react-dev-utils": "^10.0.0",
-    "react-dropzone": "^10.2.1",
-    "react-modal": "^3.11.1",
-    "react-router-dom": "^5.1.2",
-    "react-toastify": "^5.5.0",
-    "react-crud-icons": "^0.1.1",
+    "query-string": "~6.13.5",
+    "react": "^16.13.1",
+    "react-scripts": "^3.4.3",
+    "react-dom": "^16.13.1",
+    "react-datepicker": "^3.2.2",
+    "react-dev-utils": "^10.2.1",
+    "react-dropzone": "^11.2.0",
+    "react-modal": "^3.11.2",
+    "react-router-dom": "^5.2.0",
+    "react-toastify": "^6.0.9",
+    "react-crud-icons": "^0.1.2",
     "@khanacademy/react-multi-select": "^0.3.3",
-    "underscore": "^1.9.1"
+    "underscore": "^1.11.0"
   },
   "devDependencies": {
-    "gulp": "^4.0.0",
-    "gulp-header": "^2.0.7",
-    "gulp-rename": "^1.4.0",
-    "gulp-sass": "^4.0.2",
+    "gulp": "^4.0.2",
+    "gulp-header": "^2.0.9",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.1.0",
     "bootstrap-sass": "^3.4.1"
   },
   "scripts": {
@@ -71,10 +71,11 @@
     "CRUD",
     "MDA",
     "javascript",
-    "generic forms",
+    "generic-forms",
     "views",
     "MVC",
     "platform",
-    "framework"
+    "framework",
+    "evolutility"
   ]
 }

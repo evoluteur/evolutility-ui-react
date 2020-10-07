@@ -1,3 +1,9 @@
+/*
+  Evolutility-UI-React
+  https://github.com/evoluteur/evolutility-ui-react
+  (c) 2020 Olivier Giulieri
+*/
+
 import React from 'react';
 import pkg from '../../../package.json';
 import { modelIds, getModel } from '../../utils/moMa'
@@ -56,7 +62,7 @@ export default class Home extends React.PureComponent {
                 </section>
                 
                 <section>
-                    <div>... and generate REST or <a href="http://localhost:2000/graphql" target="gql">GraphQL</a> endpoints like these:</div>
+                    <div>... and generate REST or <a href="http://localhost:2000/graphql" target="gql"  rel="noopener noreferrer">GraphQL</a> endpoints like these:</div>
                     <DemosList view="api" />
                 </section>
                 
@@ -64,30 +70,31 @@ export default class Home extends React.PureComponent {
                     <div>... simply by making models like these:</div> 
                     <DemosList view="model" />
                     <p><br/>Models can also be stored in {' '}
-                        <a href="https://github.com/evoluteur/evolutility-models/tree/master/models/organizer" target="jsm" className="extlink">JSON files</a>.
+                        <a href="https://github.com/evoluteur/evolutility-models/tree/master/models/organizer" target="jsm" rel="noopener noreferrer" className="extlink">JSON files</a>.
                     </p>
                 </section>
 
                 <section>
                     <p>No hand-coding necessary. The database tables, the REST or GraphQL endpoints, and all UI views are generated based on the models.</p>
+                    <p>Code and documentation at <a href="https://github.com/evoluteur/evolutility-ui-react" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
                 </section>
 
                 <section>
-                    <div>Open source at GitHub:</div>
+                    <div>Open Source at GitHub with MIT license:</div>
 
                     <div>Model-driven UI:&nbsp;
-                        <a target="ui" href="https://github.com/evoluteur/evolutility-ui-react">Evolutility-UI-React</a> 
+                        <a target="ui" rel="noopener" href="https://github.com/evoluteur/evolutility-ui-react">Evolutility-UI-React</a> 
                             <iframe src="https://ghbtns.com/github-btn.html?user=evoluteur&amp;repo=evolutility-ui-react&amp;type=star&amp;count=true&amp;size=small" frameBorder="0" scrolling="0" width="170px" height="30px"title="ui-react"></iframe>
-                        
-                        <a target="ui" href="https://github.com/evoluteur/evolutility-ui-jquery">Evolutility-UI-jQuery</a> 
+                        or{' '}
+                        <a target="ui" rel="noopener" href="https://github.com/evoluteur/evolutility-ui-jquery">Evolutility-UI-jQuery</a> 
                             <iframe src="https://ghbtns.com/github-btn.html?user=evoluteur&amp;repo=evolutility-ui-jquery&amp;type=star&amp;count=true&amp;size=small" frameBorder="0" scrolling="0" width="170px" height="30px" title="ui-jquery"></iframe>
                     </div>
                     <div>Model-driven Backend:&nbsp;
-                        <a target="db" href="https://github.com/evoluteur/evolutility-server-node">Evolutility-Server-Node</a>
+                        <a target="db" rel="noopener" href="https://github.com/evoluteur/evolutility-server-node">Evolutility-Server-Node</a>
                             <iframe src="https://ghbtns.com/github-btn.html?user=evoluteur&amp;repo=evolutility-server-node&amp;type=star&amp;count=true&amp;size=small" frameBorder="0" scrolling="0" width="170px" height="30px" title="server"></iframe>
                     </div>
                     <div>Models:&nbsp;
-                        <a target="models" href="https://github.com/evoluteur/evolutility-models">Evolutility-Models</a>
+                        <a target="models" rel="noopener" href="https://github.com/evoluteur/evolutility-models">Evolutility-Models</a>
                             <iframe src="https://ghbtns.com/github-btn.html?user=evoluteur&repo=evolutility-models&type=star&amp;count=true&amp;size=small" frameBorder="0" scrolling="0" width="170px" height="30px" title="models"></iframe>
                     </div>
                 </section>

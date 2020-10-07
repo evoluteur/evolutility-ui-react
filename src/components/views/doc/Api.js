@@ -225,12 +225,12 @@ export default class ApiDoc extends React.Component {
                         </div>
                     </div>
                     <p><br/>
-                        <a target="api" href="http://localhost:2000/graphql">GraphiQL</a>
+                        <a target="api" rel="noopener noreferrer" href="http://localhost:2000/graphql">GraphiQL</a>
                     </p>
                     <div className="docParams">
                         {this.renderParams(model, rootep, data)}
                         { data ? this.renderCRUD(data.crud) : null }
-                        <p><br/><br/>Full API doc at <a target="doc" 
+                        <p><br/><br/>Full API doc at <a target="doc" rel="noopener noreferrer" 
                             href="https://github.com/evoluteur/evolutility-server-node#rest-api"
                             className="">GitHub</a>.</p>
                     </div>
