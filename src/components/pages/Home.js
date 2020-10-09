@@ -84,18 +84,14 @@ export default class Home extends React.PureComponent {
 
                     <div>Model-driven UI:&nbsp;
                         <a target="ui" rel="noopener" href="https://github.com/evoluteur/evolutility-ui-react">Evolutility-UI-React</a> 
-                            <iframe src="https://ghbtns.com/github-btn.html?user=evoluteur&amp;repo=evolutility-ui-react&amp;type=star&amp;count=true&amp;size=small" frameBorder="0" scrolling="0" width="170px" height="30px"title="ui-react"></iframe>
-                        or{' '}
+                        {' or '}
                         <a target="ui" rel="noopener" href="https://github.com/evoluteur/evolutility-ui-jquery">Evolutility-UI-jQuery</a> 
-                            <iframe src="https://ghbtns.com/github-btn.html?user=evoluteur&amp;repo=evolutility-ui-jquery&amp;type=star&amp;count=true&amp;size=small" frameBorder="0" scrolling="0" width="170px" height="30px" title="ui-jquery"></iframe>
                     </div>
                     <div>Model-driven Backend:&nbsp;
                         <a target="db" rel="noopener" href="https://github.com/evoluteur/evolutility-server-node">Evolutility-Server-Node</a>
-                            <iframe src="https://ghbtns.com/github-btn.html?user=evoluteur&amp;repo=evolutility-server-node&amp;type=star&amp;count=true&amp;size=small" frameBorder="0" scrolling="0" width="170px" height="30px" title="server"></iframe>
                     </div>
                     <div>Models:&nbsp;
                         <a target="models" rel="noopener" href="https://github.com/evoluteur/evolutility-models">Evolutility-Models</a>
-                            <iframe src="https://ghbtns.com/github-btn.html?user=evoluteur&repo=evolutility-models&type=star&amp;count=true&amp;size=small" frameBorder="0" scrolling="0" width="170px" height="30px" title="models"></iframe>
                     </div>
                 </section>
             </div>

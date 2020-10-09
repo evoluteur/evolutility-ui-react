@@ -25,6 +25,14 @@
   .navlinks {
     min-width: 280px;
   }
+  >iframe{
+    right: 5px;
+    top: 15px;
+    position: absolute;
+    @media only screen and (max-width: 800px) {
+        display: none; 
+    }
+  }
 }
 
 .tbLogo{
