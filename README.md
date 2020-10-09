@@ -1,7 +1,7 @@
 # Evolutility-UI-React &middot; [![GitHub license](https://img.shields.io/github/license/evoluteur/evolutility-ui-react)](https://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/evolutility-ui-react)](https://www.npmjs.com/package/evolutility-ui-react) 
 
 
-Evolutility-UI-React is a set of **model-driven views** to Browse, Edit, List, Cards, and Charts data by writing models rather than code. 
+Evolutility-UI-React is a set of **model-driven views** to Browse, Edit, List, Cards, and Charts data. With it you can build applications by writing models rather than code. 
 
 ![Edit](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/one-edit.gif)
 
@@ -262,8 +262,7 @@ module.exports = {
     namePlural: "graphic novel series",
     icon: "comics.png",
     titleField: "title",
-
-	fields:[
+    fields:[
       {
           id: "title", type: "text", 
           label: "Title", 
@@ -297,22 +296,23 @@ module.exports = {
           ]
       },
       {
-          id: "serie_nb", type: "integer", 
-          width: 15, inMany: false,
-          label: "Albums", noCharts: true 
+          id: "serie_nb", type: "integer",
+          label: "Albums", noCharts: true, 
+          width: 15, inMany: false 
       },
       {
-          id: "have_nb", type: "integer", 
-          width: 15, inMany: false,
-          label: "Owned", noCharts: true 
+          id: "have_nb", type: "integer",
+          label: "Owned", 
+          width: 15, inMany: false, noCharts: true
       },
       {
-          id: "have", type: "text", 
-          width: 15, inMany: false,
-          label: "Have" 
+          id: "have", type: "text",
+          label: "Have", 
+          width: 15, inMany: false
       },
       {
-          id: "language", type: "lov", label: "Language", 
+          id: "language", type: "lov", 
+          label: "Language", 
           width: 17, inMany: true,
           lovIcon: true,
           list: [
@@ -321,19 +321,19 @@ module.exports = {
           ]
       },
       {
-          id: "complete", type: "boolean", 
-          width: 19, inMany: false,
-          label: "Complete"
+          id: "complete", type: "boolean",
+          label: "Complete", 
+          width: 19, inMany: false
       },
       {
-          id: "finished", type: "boolean", 
-          width: 19, inMany: false,
-          label: "Finished"
+          id: "finished", type: "boolean",
+          label: "Finished", 
+          width: 19, inMany: false
       },
       {
-          id: "pix", type: "image", 
-          width: 30, inMany: true,
-          label: "Cover"
+          id: "pix", type: "image",
+          label: "Cover", 
+          width: 30, inMany: true
       },
       {
           id: "notes", type: "textmultiline", 
@@ -348,7 +348,8 @@ module.exports = {
         id:"serie", type: "panel", label: "Serie", width: 70,
         fields: ["title", "authors", "genre", 
               "serie_nb", "have_nb", "have", 
-              "language", "complete", "finished", "notes"]
+              "language", "complete", "finished", "notes"
+        ]
       },
       { 
         id:"pix", type: "panel", label: "Cover", width: 30,
