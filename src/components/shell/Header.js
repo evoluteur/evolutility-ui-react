@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import  Icon from 'react-crud-icons'
-import Toolbar from '../widgets/Toolbar.js';
 import { queryUrl, getSearchText } from '../../utils/url.js'
 
 import './Header.scss' 
@@ -79,9 +78,8 @@ export default class Header extends React.Component {
 
         return (
 			<div  className="evo-page-header">
-                <Toolbar entity={this.props.entity} id={this.props.id} />
 				<h2 className="page-title">
-                    {this.props.title}
+                    <span id="itemTitle">{this.props.title}</span>
                     {search ? <span className="evo-badge">Search "{search}"</span> : null}
 					{count ? <span className="evo-badge">{count}</span> : null}
                     {comments ? <span className="evo-badge">{comments}</span> : null}

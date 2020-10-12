@@ -76,11 +76,13 @@ class Toolbar extends React.Component {
         this.searchValue = url.parseQuery(window.location.href).search || '' 
         //this.toggleFilter = this.toggleFilter.bind(this);
         //this.onFilterChange = this.onFilterChange.bind(this);
+        this.deleteOne = this.deleteOne.bind(this)
     }
 
     render() {
-        const useParams = this.props.match && this.props.match.params
-        const {entity, id = ''} = useParams ? this.props.match.params : this.props
+        const {entity, id = ''} = this.props
+        //const useParams = this.props.match && this.props.match.params
+        //let {entity, id = ''} = useParams ? this.props.match.params : this.props
         const ep = '/'+entity+'/'        
         let view = this.props.view || getViewFromURL(),
             idx = 0
@@ -119,6 +121,8 @@ class Toolbar extends React.Component {
 
         if(entity && models[entity]){
             const m = models[entity]
+            const item = document.getElementById('itemTitle')
+            const itemName = item ? item.innerHTML : ''
             const delModal = this.state.deleteConfirmation ? (
                 <Modal className="modal-dialog" 
                     ariaHideApp={false}
@@ -132,7 +136,7 @@ class Toolbar extends React.Component {
                                     <h4 className="modal-title">{i18n_msg.delete.replace('{0}', m.name)}</h4>
                                 </div>
                                 <div className="modal-body">
-                                    {i18n_msg.deleteConfirmation.replace('{0}', m.name)}
+                                    {i18n_msg.deleteConfirmation.replace('{0}', m.name).replace('{1}', itemName)}
                                 </div>
                                 <div className="modal-footer">
                                     <button key="bDelCancel" onClick={this.closeModal} className="btn btn-default" data-dismiss="modal">{i18n_actions.cancel}</button>
@@ -177,9 +181,9 @@ class Toolbar extends React.Component {
     }
 
     deleteOne = () => {
-        // TODO: SHOULD BE IN STORE BUT THERE IS NO STORE YET
-        const {entity, id} = this.props.match.params,
-            m = models[entity]
+        // TODO: 
+        const {entity, id} = this.props//.match.params
+        const m = models[entity]
 
         if(entity && id && m){
             axios.delete(apiPath+entity+'/'+id)
@@ -253,7 +257,7 @@ class Toolbar extends React.Component {
 }
 
 Toolbar.propTypes = {
-    entity: PropTypes.string,//.isRequired,
+    entity: PropTypes.string.isRequired,
     id: PropTypes.string,
 }
 

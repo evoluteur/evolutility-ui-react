@@ -7,6 +7,7 @@ import logoEvol from './evologo.gif'
 import { i18n_actions } from '../../i18n/i18n'
 
 import { getModel } from '../../utils/moMa'
+import Toolbar from '../widgets/Toolbar'
 
 import './TopBar.scss'
 
@@ -34,30 +35,33 @@ export default class TopBar extends React.Component {
                 path.splice(0, 1)
             }
         }
-        const model = getModel(path[0])
-        const e = '/'+path[0]+'/'
-        return (   
+        const e = path[0]
+        const vw = path[1]
+        const id = path[2]
+        const model = getModel(e)
+        const eSlash = '/'+e+'/'
+        return (
             <header className="TopBar" role="banner">
                 <Link to='/'><img src={logoEvol} className="tbLogo" alt="" /></Link>
-
                 { model ? (
-                    <div className="evo-toolbar views">
-                        <ul className="navlinks evo-nav-pills pull-left">
-                            {model.readOnly ? null : (
-                                <Link to={e+'edit/0'}> 
-                                    <Icon name="add" tooltip={newEntity(model)} theme="dark"></Icon>
+                <div className="evo-toolbar views">
+                    <ul className="navlinks evo-nav-pills pull-left">
+                        {model.readOnly ? null : (
+                            <Link to={eSlash+'edit/0'}> 
+                                <Icon name="add" tooltip={newEntity(model)} theme="dark"></Icon>
+                            </Link>
+                        )}
+                        {Object.keys(getViewsList(model)).map(vid => {
+                            const v=views[vid]
+                            return <Link to={eSlash+v.id} key={v.id}> 
+                                <Icon name={v.icon} tooltip={v.label} theme="dark"></Icon>
                                 </Link>
-                            )}
-                            {Object.keys(getViewsList(model)).map(vid => {
-                                const v=views[vid]
-                                return <Link to={e+v.id} key={v.id}> 
-                                    <Icon name={v.icon} tooltip={v.label} theme="dark"></Icon>
-                                    </Link>
-                            })}
-                        </ul>
-                    </div>
+                        })}
+                    </ul>
+                    <Toolbar id={id} entity={e} view={vw} />
+                </div>
                 ) : null}
-                <iframe src="https://ghbtns.com/github-btn.html?user=evoluteur&amp;repo=evolutility-ui-react&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="100px" height="30px"></iframe>
+                <iframe title="GitHub" src="https://ghbtns.com/github-btn.html?user=evoluteur&amp;repo=evolutility-ui-react&amp;type=star&amp;count=true&amp;size=small" frameBorder="0" scrolling="0" width="100px" height="30px"></iframe>
             </header>
         )
     }
