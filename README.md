@@ -67,10 +67,12 @@ Configurations options are specified in the file [/src/config.js](https://github
 
 For any object, a single model defines UI elements across views in a simple declarative way.
 
-Evolutility-UI-React provides 2 types of view:
+Evolutility-UI-React provides different types of view:
 
 * Views for One - a single record: [Browse](#Browse), [Edit](#Edit).
 * Views for Many - a collection of records: [List](#List), [Cards](#Cards), [Charts](#Charts), [Stats](#Stats).
+* Views for documentation: [REST API Doc](#Api).
+
 
 Notes: Views for actions (search, filter, export) will come later.
 
@@ -153,7 +155,7 @@ View: [http://localhost:3000/comics/stats](http://localhost:3000/comics/stats)
 ## Views for Documentation
 
 <a name="Api"></a>
-### APIs
+### REST API
 Documentation and test for the model's REST endpoints.
 
 ![API](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/doc-api.gif)
