@@ -3,7 +3,7 @@
 
 Evolutility-UI-React is a set of **model-driven views** to Browse, Edit, List, Cards, and Charts data. With it you can build applications by writing models rather than code. 
 
-![Edit](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/one-edit.gif)
+![Edit](public/screenshots/comics/one-edit.gif)
 
 
 ### Table of Contents
@@ -87,7 +87,7 @@ A large part of the API (methods, options and events) is similar in all views. S
 ### Browse
 Shows all fields for viewing (read only). Fields are grouped in panels.
 
-![Browse](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/one-browse.gif)
+![Browse](public/screenshots/comics/one-browse.gif)
 
 Code: [/src/components/views/one/Browse.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/one/Browse.js)
 
@@ -99,7 +99,7 @@ This view shows all fields for edition to create or update records.
 It automatically performs validation based on the model.
 Fields are grouped in panels and tabs.
 
-![Edit](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/one-edit.gif)
+![Edit](public/screenshots/comics/one-edit.gif)
 
 Code: [/src/components/views/one/Edit.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/one/Edit.js)
 
@@ -115,7 +115,7 @@ View: [http://localhost:3000/comics/edit/{id}](http://localhost:3000/comics/edit
 ### List
 Gives a tabular view of a collection.
 
-![List](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-list.gif)
+![List](public/screenshots/comics/many-list.gif)
 
 Code: [/src/components/views/many/List.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/List.js)
 
@@ -125,7 +125,7 @@ View: [http://localhost:3000/comics/list](http://localhost:3000/comics/list)
 ### Cards
 Shows records side by side as cards.
 
-![Cards](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-cards.gif)
+![Cards](public/screenshots/comics/many-cards.gif)
 
 Code: [/src/components/views/many/Cards.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Cards.js)
 
@@ -135,7 +135,7 @@ View: [http://localhost:3000/comics/cards](http://localhost:3000/comics/cards)
 ### Charts
 Draws charts about the collection. Currently bars and pie charts are implemented, a list with count and percentages is also available. Only provided for fields of types like boolean, lov, integer, decimal, date... (not text or textmultilines).
 
-![Charts](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-charts.gif)
+![Charts](public/screenshots/comics/many-charts.gif)
 
 Code: [/src/components/views/charts/Charts.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/charts/Charts.js)
 
@@ -145,7 +145,7 @@ View: [http://localhost:3000/comics/charts](http://localhost:3000/comics/charts)
 ### Stats
 Display last update, number of updates in the last week, and for numeric fields the min, max, count, average.
 
-![Stats](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/many-stats.gif)
+![Stats](public/screenshots/comics/many-stats.gif)
 
 Code: [/src/components/views/many/Stats.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Stats.js)
 
@@ -158,7 +158,7 @@ View: [http://localhost:3000/comics/stats](http://localhost:3000/comics/stats)
 ### REST API
 Documentation and test for the model's REST endpoints.
 
-![API](https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/master/public/screenshots/comics/doc-api.gif)
+![API](public/screenshots/comics/doc-api.gif)
 
 Code: [/src/components/views/doc/Api.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/doc/Api.js)
 
