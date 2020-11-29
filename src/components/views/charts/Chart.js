@@ -93,7 +93,7 @@ export default class Chart extends React.Component {
                         this.setState({
                             error: {
                                 title: 'Server error',
-                                message: 'Couldn\'t retrieve charts data for field "'+fid+'" at '+url+'.'
+                                message: 'Couldn\'t retrieve charts data for field "'+fid+'".'
                             },
                             loading: false,
                         })

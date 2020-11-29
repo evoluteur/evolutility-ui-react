@@ -4,7 +4,7 @@ import Icon from "react-crud-icons";
 import { i18n_nav } from '../../i18n/i18n';
 import AppMenus from '../../AppMenus.js';
 import url from '../../utils/url.js'
-
+import GitHub from './GitHub'
 import models from '../../models/all_models'
 
 import './Nav.scss';
@@ -129,6 +129,7 @@ export default class Nav extends React.Component {
                     {footer}
                 </div>
                 <div id="afterNav"></div>
+                <GitHub />
             </nav>
         );
     }

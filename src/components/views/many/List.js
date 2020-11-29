@@ -10,9 +10,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import {pageSize} from '../../../config'
-
 import Many from './many'
-
 import { isFieldMany, fieldIsNumber, fieldTypes as ft } from '../../../utils/dico'
 import { getSearchText } from '../../../utils/url'
 import { fieldValue } from '../../../utils/format'
@@ -198,7 +196,6 @@ export default class List extends Many {
 		}
 		return map
 	}
-
 }
 
 List.propTypes = {
@@ -208,4 +205,8 @@ List.propTypes = {
 	paramsCollec: PropTypes.object,
 	isNested: PropTypes.bool,
 	data: PropTypes.any,
+}
+
+List.defaultProps = {
+	isNested: false,
 }

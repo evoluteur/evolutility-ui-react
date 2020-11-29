@@ -162,7 +162,7 @@ export default class ApiDoc extends React.Component {
             data = this.state.data || null,
             getJSON = this.getJSON
         let idx, rootep = 'N/A'
-        if(data){
+        if(data && data.list){
             idx = data.list.lastIndexOf('/')
             rootep = data.list.substr(0, idx+1)
         }
@@ -319,7 +319,6 @@ export default class ApiDoc extends React.Component {
 
             </div>
         )
-
     }
 
     renderCRUD = actions => (

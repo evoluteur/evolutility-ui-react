@@ -15,7 +15,8 @@ module.exports = {
 	"position": 40,
 	"defaultViewMany": "cards",
 	"defaultViewOne": "browse",
-	"titleField": "title",
+    "titleField": "title",
+    noStats: true,
 	"fields": [
 		{
 			"id": "title",
@@ -100,7 +101,8 @@ module.exports = {
 		},
 		{
 			"id": "serie_nb",
-			"type": "integer",
+            "type": "integer",
+            min: 0,
 			"label": "Albums",
 			"noCharts": true,
 			"inMany": true,
@@ -109,6 +111,7 @@ module.exports = {
 		{
 			"id": "have_nb",
 			"type": "integer",
+            min: 0,
 			"label": "Owned",
 			"noCharts": true,
 			"inMany": true,

@@ -38,10 +38,11 @@ export function addModels(ms) {
 
 export let modelIds = Object.keys(models)
 
-export default {
+const moma = {
 	fetchModels: fetchModels,
     addModels: addModels,
     getModel: getModel,
     models: models,
     modelIds: modelIds,
 }
+export default moma

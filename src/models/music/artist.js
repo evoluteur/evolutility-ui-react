@@ -75,9 +75,11 @@ module.exports = {
 	],
 	"collections": [
 		{
-			"id": "music_album",
+			"id": "albums",
 			"title": "Albums",
 			"object": "album",
+			"column": "artist_id",
+			order: "title",
 			"icon": "cd.png",
 			"fields": [
 				"title",

@@ -26,9 +26,9 @@ import Header from '../../shell/Header'
 
 export default class Edit extends OneReadWrite{
 
-	viewId = 'edit'
+    viewId = 'edit'
+    _validationOn = false
 
- 
 	getDataDelta(){
 		return this.delta || null
 	}
@@ -205,6 +205,7 @@ export default class Edit extends OneReadWrite{
 						invalid: true,
 						message: cMsg
 					})
+                    this._validationOn = true
 				}else{
 					console.error('Field ref for "'+f.id+'" not found. The field doesn\'t not belong to any group in the model.')
 				}
@@ -214,7 +215,7 @@ export default class Edit extends OneReadWrite{
 					message: null
 				})
 			}
-		})
+        })
 		if(messages.length){
 			toast.error(i18n_validation.incomplete+' '+messages.join(' '))
 		}
@@ -237,7 +238,8 @@ export default class Edit extends OneReadWrite{
 					console.log('Missing field "'+f.id+'" in clearValidation.')
 				}
 			})
-		}
+        }
+        this._validationOn = false
 	}
 
 	setDeltaField(fid, value){

@@ -12,6 +12,7 @@ import React from 'react'
 import axios from 'axios'
 
 import { apiPath, wTimestamp, wComments } from '../../../config.js'
+import Icon from "react-crud-icons";
 import models from '../../../models/all_models'
 import { i18n_stats, i18n_comments } from '../../../i18n/i18n'
 import { fieldIsDateOrTime, fieldIsNumeric, fieldInCharts } from '../../../utils/dico'
@@ -169,7 +170,7 @@ export default class Stats extends React.Component {
                 <label className="stat-label">
                     {k.field.label}
                     {k.chartable ? (
-                        <i id={k.field.id} onClick={this.toggleChart} className="glyphicon glyphicon-stats"/>
+                        <Icon id={k.field.id} onClick={this.toggleChart} name="bars" theme="light" size="small" />
                     ) : null }
                 </label>
                 <div className="stat-values">
@@ -230,7 +231,7 @@ export default class Stats extends React.Component {
                             ) : null }
                         </div>
                         <div className="col-2">
-                            { wTimestamp ? (
+                            { wTimestamp && (data.u_date_max!=='N/A' || data.c_date_min!=='N/A')? (
                                 <div>
                                     <div className="stat-field">
                                         <span>{i18n_stats.lastUpdate}:</span> 

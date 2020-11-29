@@ -26,7 +26,11 @@ $nav-trans-time: .1s;
 	}
 	.demos{
 		margin-left: 20px;
-	}
+    }
+    iframe{
+        margin: 0 10px;
+    }
+    
 	a{
 		text-decoration: none;
 		&.active {
@@ -157,7 +161,8 @@ $nav-trans-time: .1s;
 	transition: margin-left $nav-trans-time ease;
 	padding: 10px 20px;
 	//transition: margin-left 0.5s;
-	margin-top: 50px;
+    margin-top: 50px;
+    min-height: 90%;
 }
 .navButtonHolder{
 	margin:0;

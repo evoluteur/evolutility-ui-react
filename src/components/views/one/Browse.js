@@ -7,9 +7,10 @@
 // (c) 2020 Olivier Giulieri
 
 import React from 'react'
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 
-import {i18n_actions, i18n_errors} from '../../../i18n/i18n'
+import { i18n_actions, i18n_errors } from '../../../i18n/i18n'
 import { dataTitle, fieldId2Field } from '../../../utils/dico'
 
 import OneRead from './one-read'
@@ -143,4 +144,9 @@ export default class Browse extends OneRead {
     }
   }
 
+}
+
+Browse.propTypes = {
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object,
 }

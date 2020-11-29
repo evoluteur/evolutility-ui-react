@@ -54,21 +54,19 @@ $label2-width: 100px;
 }
 .f-stats {
 	margin: 10px 0;
-	&:hover{
-		> label > i {
-			display: inline-block;
-		}
-	}
 	> label {
 		display: block;
 		width: $label-width;
 		@include icons-actions();
 		> i {
-			display: none;
 			margin-left: 10px;
 			cursor: pointer;
 		}
-	}
+    }
+    .crud-icon{
+        position: relative;
+        top: 3px;
+    }
 }
 .fl-stats { 
 	min-width: 300px;

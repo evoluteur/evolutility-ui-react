@@ -90,9 +90,11 @@ module.exports = {
 	],
 	"collections": [
 		{
-			"id": "music_track",
+			"id": "tracks",
 			"title": "Tracks",
 			"object": "track",
+			"column": "album_id",
+			order: "name",
 			"icon": "music.png",
 			"fields": [
 				"name",

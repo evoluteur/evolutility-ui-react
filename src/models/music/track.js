@@ -30,7 +30,8 @@ module.exports = {
 			"id": "album",
 			"type": "lov",
 			"label": "Album",
-			"object": "album",
+            "object": "album",
+            lovColumn: "title",
 			"inMany": true,
 			"width": 100,
 			"height": 1

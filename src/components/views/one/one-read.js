@@ -38,7 +38,7 @@ export default class OneRead extends React.Component{
 			loading: false,
 			invalid: false
 		}
-		if(this.clearValidation && this.viewId!=='browse'){
+		if(this._validated && this.clearValidation && this.viewId!=='browse'){
 			this.clearValidation()
 		}
 		if(id && id!=='0'){
