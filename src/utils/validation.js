@@ -127,7 +127,7 @@ function validateField(f, v){
     return '';
 }
 
-export default {
+const validation = {
 
     valRegEx: {
         email: /^[\w.-]+@[\w.-]+\.[\w.-]+$/,
@@ -140,3 +140,5 @@ export default {
     validateField: validateField,
 
 }
+
+export default validation;

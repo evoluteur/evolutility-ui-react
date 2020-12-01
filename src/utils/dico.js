@@ -161,7 +161,7 @@ export const fieldIsText = f => [ft.text, ft.textml, ft.url, ft.html, ft.email].
 
 export const fieldId2Field = (fieldIds, fieldsH) => fieldIds ? fieldIds.map(id => fieldsH[id] || null) : null
 
-export default {
+const dico = {
 	fieldTypes: ft,
 	fieldTypeStrings: fta,
 	fieldIsNumber: fieldIsNumber,
@@ -178,3 +178,5 @@ export default {
 	fieldIsText: fieldIsText,
 	fieldId2Field: fieldId2Field,
 }
+
+export default  dico;

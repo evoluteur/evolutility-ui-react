@@ -41,10 +41,12 @@ export function getUrlMap(url){
 	}
 }
 
-export default {
+const urlModule = {
 	queryUrl: queryUrl,
 	querySearch: querySearch,
 	parseQuery: parseQuery,
 	getSearchText: getSearchText,
 	getUrlMap: getUrlMap,
 }
+
+export default urlModule
