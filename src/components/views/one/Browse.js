@@ -4,7 +4,7 @@
 // Read-only view to browse one record.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2020 Olivier Giulieri
+// (c) 2021 Olivier Giulieri
 
 import React from 'react'
 import PropTypes from 'prop-types';
@@ -23,126 +23,116 @@ import Header from '../../shell/Header'
 
 export default class Browse extends OneRead {
 
-  viewId = 'browse'
-/*
-  propTypes: {
-    params: React.PropTypes.shape({
-      entity: React.PropTypes.string.isRequired,
-      id: React.PropTypes.string.isRequired
-    }).isRequired
-  },
-*/
-  //mixins: [oneRead()],
+    viewId = 'browse'
 
-  render() {
-    const { id=0, entity=null } = this.props.match.params
-    const linkEdit = '/'+entity+'/edit/'+id,
-        linkList = '/'+entity+'/list',
-        m = this.model,
-        data = this.state.data || {},
-        title = dataTitle(m, data, false);
-		const listData = cid => data.collections ? data.collections[cid] : null;
+    render() {
+        const { id = 0, entity = null } = this.props.match.params
+        const linkEdit = '/' + entity + '/edit/' + id,
+            linkList = '/' + entity + '/list',
+            m = this.model,
+            data = this.state.data || {},
+            title = dataTitle(m, data, false);
+        const collecData = cid => data.collections ? data.collections[cid] : null;
 
-    function fnFieldReadOnly(f){
-      if(f){
-        const isLOV = f.type==='lov';
-        const attr = isLOV ? f.id+'_txt' : f.id
-        return (
-          <Field 
-            key={f.id} 
-            model={f} 
-            value={data[attr]} 
-            valueId={isLOV?data[f.id]:null}
-            icon={isLOV?data[f.id+'_icon']:null}
-            readOnly={true}
-            entity={entity}
-          />
-        )
-      }
-      return null
-    }
+        function fnFieldReadOnly(f) {
+            if (f) {
+                const isLOV = f.type === 'lov';
+                const attr = isLOV ? f.id + '_txt' : f.id
+                return (
+                    <Field
+                        key={f.id}
+                        model={f}
+                        value={data[attr]}
+                        valueId={isLOV ? data[f.id] : null}
+                        icon={isLOV ? data[f.id + '_icon'] : null}
+                        readOnly={true}
+                        entity={entity}
+                    />
+                )
+            }
+            return null
+        }
+        if (!m) {
+            return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)} />
+        } else if (this.state.loading) {
+            return <Spinner></Spinner>
+        } else {
+            document.title = title
+            return (
+                <div className="evolutility">
+                    <Header {...this.props.match.params} title={title}
+                        model={m}
+                        comments={data.nb_comments} count={null}
+                        cardinality='1' view={this.viewId} />
 
-    if(!m){
-      return <Alert title="Error" message={i18n_errors.badEntity.replace('{0}', entity)}/>
-    }else if(this.state.loading){
-      return <Spinner></Spinner>
-    }else{
-      document.title = title
-      return ( 
-        <div className="evolutility">
-          <Header {...this.props.match.params} title={title} 
-              model={m}
-              comments={data.nb_comments} count={null}
-              cardinality='1' view={this.viewId} />
+                    <div className="evo-one-edit">
 
-          <div className="evo-one-edit">
+                        {this.state.error ? (
+                            <Alert title="Error" message={this.state.error.message} />
+                        ) : (
+                                <div className="evol-pnls">
 
-                {this.state.error ? (
-                    <Alert title="Error" message={this.state.error.message}/>
-                  ):(
-                    <div className="evol-pnls">
+                                    {m.groups ? (
+                                        m.groups.map(function (g, idx) {
+                                            const groupFields = fieldId2Field(g.fields, m.fieldsH)
+                                            return (
+                                                <Panel key={g.id || ('g' + idx)}
+                                                    title={g.label || g.title || ''}
+                                                    header={g.header}
+                                                    footer={g.footer}
+                                                    width={g.width}>
+                                                    <div className="evol-fset">
+                                                        {groupFields.map(fnFieldReadOnly)}
+                                                    </div>
+                                                </Panel>
+                                            )
+                                        })
+                                    ) : (
+                                            <Panel key="pOne" title={title}>
+                                                <div className="evol-fset">
+                                                    {m.fields.map(fnFieldReadOnly)}
+                                                </div>
+                                            </Panel>
+                                        )}
 
-                      {m.groups ? (
-                          m.groups.map(function(g, idx){
-                            const groupFields = fieldId2Field(g.fields, m.fieldsH)
-                            return (
-                              <Panel key={g.id||('g'+idx)} 
-                                  title={g.label || g.title || ''} 
-                                  header={g.header}
-                                  footer={g.footer}
-                                  width={g.width}>
-                                <div className="evol-fset">
-                                  {groupFields.map(fnFieldReadOnly)}
+                                    {m.collections ? (
+                                        m.collections.map((c, idx) => {
+                                            return (
+                                                <Panel title={c.title} key={'collec_' + c.id} collapsible={true}
+                                                    header={c.header}
+                                                    footer={c.footer}>
+                                                    <List key={'collec' + idx}
+                                                        isNested={true}
+                                                        data={collecData(c.id)}
+                                                        match={this.props.match}
+                                                        paramsCollec={c}
+                                                        style={{ width: '100%' }}
+                                                        location={this.props.location}
+                                                    />
+                                                </Panel>
+                                            )
+                                        })
+                                    ) : null}
+
+                                    <Panel key="formButtons">
+                                        <div className="evol-buttons">
+                                            <Link className="btn btn-default" to={linkList}>
+                                                <i className="glyphicon glyphicon-remove"></i> {i18n_actions.cancel}
+                                            </Link>
+                                            <Link to={linkEdit} className="btn btn-primary">
+                                                <i className="glyphicon glyphicon-edit"></i> {i18n_actions.edit}
+                                            </Link>
+                                        </div>
+                                    </Panel>
+
                                 </div>
-                              </Panel>
                             )
-                          })
-                      ) : (
-                        <Panel key="pOne" title={title}>
-                          <div className="evol-fset"> 
-                            {m.fields.map(fnFieldReadOnly)}
-                          </div>
-                        </Panel>
-                      )}
-
-                      {m.collections ? (
-                        m.collections.map((c, idx)=>{
-                          return (
-                            <Panel title={c.title} key={'collec_'+c.id} collapsible={true}
-                                header={c.header}
-                                footer={c.footer}>
-                              <List key={'collec'+idx}
-                                isNested={true}
-                                data={listData(c.id)}
-                                match={this.props.match} 
-                                paramsCollec={c}
-                                style={{width:'100%'}}
-                                location={this.props.location}
-                              />
-                            </Panel>
-                          )
-                        })
-                      ) : null}
-
-                      <Panel key="formButtons">
-                        <div className="evol-buttons"> 
-                            <Link className="btn btn-default" to={linkList}>
-                                <i className="glyphicon glyphicon-remove"></i> {i18n_actions.cancel}
-                            </Link>
-                            <Link to={linkEdit} className="btn btn-primary">
-                                <i className="glyphicon glyphicon-edit"></i> {i18n_actions.edit}
-                            </Link>
-                        </div>
-                      </Panel>
-
+                        }
                     </div>
-                  )
-                }
-          </div>
-        </div>
-      )
+                </div>
+            )
+        }
     }
-  }
 
 }
 

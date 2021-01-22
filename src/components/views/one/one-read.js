@@ -4,10 +4,10 @@
 // Super-class used in Views for One (Browse, Edit but not Card) to get data by ID.
  
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2020 Olivier Giulieri
+// (c) 2021 Olivier Giulieri
 
 import React from 'react'
-import axios from 'axios'
+import dao from '../../../utils/dao.js'
 //import { withRouter, browserHistory } from 'react-router'
 
 import {i18n_errors} from '../../../i18n/i18n'
@@ -47,12 +47,13 @@ export default class OneRead extends React.Component{
 			});
 			const qUrl = apiPath+e+'/'+id
 			this.lastQuery = qUrl
-			axios.get(qUrl)
-			.then((response)=>{
+
+			dao.getOne(e, id)
+			.then((data)=>{
 				if(this.lastQuery === qUrl){
-					if(response.data!==null && response.data!==''){
+					if(data!==null && data!==''){
 						this.emptyDelta(false)
-						newState.data = response.data
+						newState.data = data
 					}else{
 						newState.info = i18n_errors.badId.replace('{0}', id)
 					}

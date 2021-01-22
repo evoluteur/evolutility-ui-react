@@ -4,13 +4,13 @@
     Views to document and test object's REST API 
 
     https://github.com/evoluteur/evolutility-ui-react
-    (c) 2020 Olivier Giulieri
+    (c) 2021 Olivier Giulieri
 */
 
 import React from 'react'
-import axios from 'axios'
 
 import { apiPath } from '../../../config.js'
+import dao from '../../../utils/dao'
 import { getModel } from '../../../utils/moMa'
 import { i18n_stats } from '../../../i18n/i18n'
 import Header from '../../shell/Header'
@@ -338,7 +338,7 @@ export default class ApiDoc extends React.Component {
 
     getData(entity){
         var e = entity || this.props.match.params.entity
-        axios.get(apiPath+'?id='+e)
+        dao.getAPI(e)
             .then(response => {
                 this.setState({
                     data: response.data,
@@ -359,7 +359,7 @@ export default class ApiDoc extends React.Component {
         let url = evt.currentTarget.innerText
         url = url===apiPath ? '' : url
 
-        axios.get(apiPath+url)
+        dao.getUrl(url)
             .then(response => {
                 this.setState({
                     dataJson: response.data,

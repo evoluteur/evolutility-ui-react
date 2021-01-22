@@ -5,17 +5,16 @@
     like min, max, average... for numeric fields
 
     https://github.com/evoluteur/evolutility-ui-react
-    (c) 2020 Olivier Giulieri
+    (c) 2021 Olivier Giulieri
 */
 
 import React from 'react'
-import axios from 'axios'
-
-import { apiPath, wTimestamp, wComments } from '../../../config.js'
+import { wTimestamp, wComments } from '../../../config.js'
 import Icon from "react-crud-icons";
 import models from '../../../models/all_models'
 import { i18n_stats, i18n_comments } from '../../../i18n/i18n'
 import { fieldIsDateOrTime, fieldIsNumeric, fieldInCharts } from '../../../utils/dico'
+import dao from '../../../utils/dao'
 import format from '../../../utils/format'
 import Header from '../../shell/Header'
 import Spinner from '../../shell/Spinner'
@@ -90,7 +89,7 @@ export default class Stats extends React.Component {
         var e = entity || this.props.match.params.entity,
             fields = models[e].fields
 
-        axios.get(apiPath+e+'/stats')
+        dao.getStats(e)
             .then(response => {
                 this.setState({
                     data: this.prepData(response.data, fields),
@@ -109,7 +108,6 @@ export default class Stats extends React.Component {
 
     prepData(data, fields){
         const ks=[];
-
         if(data){
             fields.forEach((f)=>{
                 if(fieldIsNumeric(f) && !f.noStats){ 

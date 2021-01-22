@@ -3,11 +3,10 @@
 // Toolbar w/ icons for CRUD, export, and charts.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2020 Olivier Giulieri
+// (c) 2021 Olivier Giulieri
 
 import React from 'react'
 import PropTypes from 'prop-types';
-import axios from 'axios'
 import { withRouter, Link } from 'react-router-dom'
 import Modal from 'react-modal'
 import SearchBox from '../views/actions/SearchBox'
@@ -15,6 +14,7 @@ import { toast } from 'react-toastify';
 import Icon from "react-crud-icons";
 
 import { capitalize, urlJoin } from '../../utils/format'
+import dao from '../../utils/dao'
 import url from '../../utils/url'
 import evoGlobals from '../../utils/evoGlobals'
 import { apiPath } from '../../config.js'
@@ -115,7 +115,10 @@ class Toolbar extends React.Component {
             if(view!=='charts' && view!=='stats'){
                 //actions.push(buttonLink(menuItems.filter, this.toggleFilter));
                 //actions.push(buttonLink(menuItems.views.charts, ''));
-                actions.push(buttonLink(menuItems.export, this.exportMany, q));
+                if(dao.apiType!=='graphql'){
+                    // TODO: graphQL implementation
+                    actions.push(buttonLink(menuItems.export, this.exportMany, q));
+                }
             }
         }
 
@@ -186,7 +189,7 @@ class Toolbar extends React.Component {
         const m = models[entity]
 
         if(entity && id && m){
-            axios.delete(apiPath+entity+'/'+id)
+            dao.deleteOne(entity, id)
                 .then(response => {
                     evoGlobals.skip_confirm = true
                     toast.success(i18n_actions.deleted.replace('{0}', capitalize(m.name)), {

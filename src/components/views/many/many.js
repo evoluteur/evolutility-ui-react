@@ -4,11 +4,10 @@
 	Super-class for most Views for Many (List, Cards but not Charts).
 
 	https://github.com/evoluteur/evolutility-ui-react
-	(c) 2020 Olivier Giulieri
+	(c) 2021 Olivier Giulieri
 */
 
 import React from 'react'
-import axios from 'axios'
 
 import {i18n_msg} from '../../../i18n/i18n.js'
 import {apiPath, pageSize} from '../../../config.js'
@@ -16,6 +15,7 @@ import url from '../../../utils/url'
 import models from '../../../models/all_models'
 
 import './many.scss'
+import dao from '../../../utils/dao.js'
 export default class Many extends React.Component {
 
 	viewSuperType = 'n' // = many
@@ -47,26 +47,34 @@ export default class Many extends React.Component {
 			this._sortField = orderParams[0]
 			this._sortDirection = orderParams[1]
 		}
-		if(query){
-			qUrl += '?'+url.querySearch(query)
-		}
 		if(pageSize){
 			qUrl += (qUrl.indexOf('?')<0 ? '?' : '&') + 'pageSize='+pageSize 
+			if(query){
+				query.pageSize = pageSize
+			}
 		}
 		this.setState({
 			loading: true
 		})
 		this.lastQuery = qUrl
-		axios.get(qUrl)
+
+		dao.getMany(e, query)
 			.then(response => {
+                if(response.errors){
+                    this.setState({
+                        error: {
+                            title: 'Error',
+                            message: response.errors.map(err => err.message).join(', ')
+                        },
+                        loading: false
+                    })
+                }
 				if(this.lastQuery === qUrl){
 					this.lastQuery = null
 					this.setState({
-						data: response.data,
+						data: response.data  || response,
 						loading: false
 					})
-				}else{
-					console.log('Navigated before response: '+qUrl)
 				}
 			})
 			.catch(err => {
@@ -77,7 +85,7 @@ export default class Many extends React.Component {
 				this.setState({
 					error: {
 						title: 'Error',
-						message: 'Couldn\'t retrieve data at '+qUrl +'. '+msg
+						message: 'Couldn\'t retrieve data. '+msg
 					},
 					loading: false
 				})
@@ -110,7 +118,7 @@ export default class Many extends React.Component {
 	pageSummary(data){
 		const size = data ? data.length : 0;
 		if (size && !this.props.isNested) {
-			const totalSize = data[0]._full_count
+            const totalSize = data._full_count
 			if (size === 1) {
 				return size + ' ' + this.model.name + (totalSize>size ? ' in '+totalSize : '');
 			}else if(size >= totalSize) {

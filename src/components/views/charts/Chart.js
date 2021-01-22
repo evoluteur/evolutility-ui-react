@@ -3,16 +3,15 @@
 // Parent Component for Bars charts, Pie charts, or list
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2020 Olivier Giulieri
+// (c) 2021 Olivier Giulieri
 
 import React from 'react'
 import PropTypes from 'prop-types';
-import axios from 'axios'
-import { apiPath } from '../../../config.js'
 
 import Icon from 'react-crud-icons'
 import { i18n_charts } from '../../../i18n/i18n'
 import Alert from '../../widgets/Alert'
+import dao from '../../../utils/dao'
 import { lcWrite } from '../../../utils/localStorage'
 import Spinner from '../../shell/Spinner'
 import ChartTable from './ChartTable'
@@ -77,8 +76,7 @@ export default class Chart extends React.Component {
         let urlparams = ''//?token='+localStorage.token
 
         if(fid){
-            const url = apiPath+''+e+'/chart/'+fid+urlparams
-            axios.get(url)
+            dao.getChart(e, fid+urlparams)
                 .then(response => {
                     if(!this.done){
                         this.setState({

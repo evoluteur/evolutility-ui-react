@@ -3,7 +3,7 @@
 // Cards view to display a collection as a set of Cards.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2020 Olivier Giulieri
+// (c) 2021 Olivier Giulieri
 
 import React from 'react'
 import PropTypes from 'prop-types';
@@ -31,7 +31,7 @@ export default class Cards extends Many {
 	  	if(m){
 			const data = this.state.data ? this.state.data : [],
 				full_count = this.pageSummary(data),
-				fullCount = data.length ? (data[0]._full_count || 0) : 0,
+				fullCount = data._full_count ? data._full_count : (data.length ? (data[0]._full_count || 0) : 0),
 				title = m.title || m.label
 			let body
 			

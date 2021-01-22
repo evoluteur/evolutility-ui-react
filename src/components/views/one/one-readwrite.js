@@ -4,16 +4,15 @@
 // Super-class used in Views for One for Insert and Update (only view Edit for now maybe more later).
  
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2020 Olivier Giulieri
+// (c) 2021 Olivier Giulieri
 
 import React from 'react'
-import axios from 'axios'
 
 import models from '../../../models/all_models'
 //import evoGlobals from 'utils/evoGlobals'
+import dao from '../../../utils/dao'
 import { capitalize } from '../../../utils/format'
 import { i18n_msg, i18n_actions, i18n_errors } from '../../../i18n/i18n'
-import { apiPath } from '../../../config.js'
 import OneRead from './one-read'
 
 import { toast } from 'react-toastify';
@@ -24,12 +23,11 @@ export default class OneReadWrite extends OneRead{
 		const e = entity || this.props.match.params.entity,
 			m = models[e],
 			id = parseInt(this.props.match.params.id || '', 10),
-			data = this.delta,
-			url = apiPath+e+'/'+(id?id:'')
+			data = this.delta
 
 		if(data && Object.keys(data).length){
-			axios[id?'put':'post'](url, data)
-				.then(response => {
+			const prom = id ? dao.updateOne(e, id, data) : dao.addOne(e, data)
+			prom.then(response => {
 					let toastMsg
 					this.emptyDelta(false)					
 					if(id){
@@ -38,7 +36,7 @@ export default class OneReadWrite extends OneRead{
 	                    toastMsg = i18n_actions.added.replace('{0}', m.name)
 						this.props.history.push('/'+e+'/edit/'+response.data.id)
 					}
-					toast.success(toastMsg)
+                    toast.success(toastMsg)
 					this.setState({
 						data: response.data,
 						invalid: false
@@ -75,9 +73,7 @@ export default class OneReadWrite extends OneRead{
 		}
 
 		if(formData && (f.type==='image' || f.type==='document')){
-			let url = apiPath+mid+'/upload/'+stateData.id+'?field='+f.id
-
-			axios.post(url, formData)
+			dao.uploadOne(mid, stateData.id, f.id, formData)
 				.then(response => {
 					setData(mid+'/'+response.data.fileName)
 				})
@@ -99,10 +95,10 @@ export default class OneReadWrite extends OneRead{
 	}
 
 	getLOV(fid){
-		const mid = this.model.id
+		const e = this.model.id
 
 		if(!this.lovs){
-			axios.get(apiPath+mid+'/lov/'+fid)
+			dao.getLov(e, fid)
 			.then(response => {
 				this.model.fieldsH[fid].list = response.data.map(d => ({
 					id: d.id, 
