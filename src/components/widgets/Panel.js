@@ -3,10 +3,11 @@
 // Panel to group fields in views Edit and Browse (styled w/ Bootstrap).
  
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2021 Olivier Giulieri
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import  Icon from 'react-crud-icons'
 
 import './Panel.scss'
 
@@ -27,10 +28,7 @@ export default class Panel extends React.Component {
 		const props = this.props
 		const title = props.title ? (
 				<div className="panel-heading">
-					{props.collapsible ? (
-						<i className={'evol-title-toggle glyphicon glyphicon-chevron-'+(this.state.opened ? 'up':'down')} 
-							onClick={this.clickToggle}></i> 
-						) : null}
+					{props.collapsible ? <Icon name={this.state.opened ? 'up2':'down2'} onClick={this.clickToggle} size="tiny" theme="none"></Icon> : null}
 					<h3 className="panel-title">
 						{props.title}
 					</h3>

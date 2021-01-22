@@ -11,6 +11,19 @@
   //    display: inline-block;
   //    margin-left:.4em;
   //  }
+
+  svg {
+    position: absolute;
+    top: 8px;
+    right: 5px;
+    cursor: pointer;
+    height: 26px;
+    width: 26px;
+    fill: $color-icon;
+    &:hover {
+        fill: $color-icon-hover;
+    }
+  }
 }
 
 .panel{
