@@ -5,6 +5,7 @@
 
 module.exports = {
 	"id": "restaurant",
+	"qid": "evol_restaurant",
 	"oid": 4,
 	"title": "Restaurants",
 	"world": "organizer",

@@ -5,6 +5,7 @@
 
 module.exports = {
 	"id": "album",
+	"qid": "evol_music_album",
 	"oid": 7,
 	"title": "Albums",
 	"world": "music",

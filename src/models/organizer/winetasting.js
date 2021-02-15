@@ -5,6 +5,7 @@
 
 module.exports = {
 	"id": "winetasting",
+	"qid": "evol_wine_tasting",
 	"oid": 6,
 	"title": "Wine tastings",
 	"world": "organizer",

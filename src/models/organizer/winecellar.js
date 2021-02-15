@@ -5,6 +5,7 @@
 
 module.exports = {
 	"id": "winecellar",
+	"qid": "evol_wine",
 	"oid": 5,
 	"title": "Wine cellar",
 	"world": "organizer",
@@ -87,7 +88,7 @@ module.exports = {
 			"width": 38
 		},
 		{
-			"id": "grape",
+			"id": "wgrape",
 			"type": "lov",
 			"label": "Grape",
 			"list": [
@@ -408,7 +409,7 @@ module.exports = {
 			"width": 62
 		},
 		{
-			"id": "type",
+			"id": "wtype",
 			"type": "lov",
 			"label": "Type",
 			"list": [
@@ -450,7 +451,7 @@ module.exports = {
 			"help": "An appellation is a legally defined and protected geographical indication used to identify where the grapes for a wine were grown."
 		},
 		{
-			"id": "country",
+			"id": "wcountry",
 			"type": "lov",
 			"label": "Country",
 			"list": [
@@ -660,7 +661,7 @@ module.exports = {
 			"height": 2
 		},
 		{
-			"id": "score",
+			"id": "wscore",
 			"type": "lov",
 			"label": "My Score",
 			"list": [
@@ -724,10 +725,10 @@ module.exports = {
 				"vintage",
 				"winery",
 				"bsize",
-				"grape",
-				"type",
+				"wgrape",
+				"wtype",
 				"appellation",
-				"country",
+				"wcountry",
 				"region",
 				"area"
 			]
