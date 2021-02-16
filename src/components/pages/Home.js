@@ -58,7 +58,7 @@ export default class Home extends React.PureComponent {
                 
                 <section>
                     <p>No hand-coding necessary. All views, validation code, and API calls are derived from the models. It works with REST using <a href="https://github.com/evoluteur/evolutility-server-node" target="esn" rel="noopener noreferrer" className="extlink">Evolutility-Server-Node</a> or GraphQL using <a href="https://hasura.io" target="h" rel="noopener noreferrer" className="extlink">Hasura</a>.</p>
-                    <p>Code and documentation at <a href="https://github.com/evoluteur/evolutility-ui-react" target="_blank" rel="noopener noreferrer" className="extlink">GitHub</a> with MIT license.</p>
+                    <p>Code and documentation available at <a href="https://github.com/evoluteur/evolutility-ui-react" target="_blank" rel="noopener noreferrer" className="extlink">GitHub</a> with MIT license.</p>
                 </section>
 
             </div>
