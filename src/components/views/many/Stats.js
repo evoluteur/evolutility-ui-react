@@ -153,7 +153,8 @@ export default class Stats extends React.Component {
     render(){
         const e = this.props.match.params.entity,
             model = models[e] || null,
-            data = this.state.data || null
+            data = this.state.data || null,
+            chartsOK = dao.apiType !== 'graphql'
 
         if(model){
             if(data){
@@ -167,7 +168,7 @@ export default class Stats extends React.Component {
             <div key={k.field.id} className="f-stats">
                 <label className="stat-label">
                     {k.field.label}
-                    {k.chartable ? (
+                    {(chartsOK && k.chartable) ? (
                         <Icon id={k.field.id} onClick={this.toggleChart} name="bars" theme="light" size="small" />
                     ) : null }
                 </label>
@@ -194,15 +195,17 @@ export default class Stats extends React.Component {
                             )
                         )}
                     </div>
-                    <div>
-                        { k.chartable && this.state[k.field.id + '_Chart'] ? (
-                            <Chart entity={ e } field={ k.field }
-                                title={ format.capitalize(model.namePlural) + ' / ' + k.field.label } 
-                                type="bars"
-                                canExpend={false}
-                                size="small"></Chart>
-                        ) : null }
-                    </div>
+                    { chartsOK ? (
+                        <div>
+                            { k.chartable && this.state[k.field.id + '_Chart'] ? (
+                                <Chart entity={ e } field={ k.field }
+                                    title={ format.capitalize(model.namePlural) + ' / ' + k.field.label } 
+                                    type="bars"
+                                    canExpend={false}
+                                    size="small"></Chart>
+                            ) : null }
+                        </div>
+                    ) : null}
                 </div>
             </div>
 

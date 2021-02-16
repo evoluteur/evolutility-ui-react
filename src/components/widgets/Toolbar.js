@@ -90,6 +90,7 @@ class Toolbar extends React.Component {
         let navViews = []
         let actions = []
         const q = (window.location && window.location.search) ? window.location.search : ''
+        const canSearch = dao.apiType !== 'graphql' // TODO: implement search for graphql
         
         function buttonLink(menu, idOrFun, urlQuery = '') {
             return isFunction(idOrFun) ? (
@@ -157,11 +158,11 @@ class Toolbar extends React.Component {
                     </div>
                     <div className="evo-nav-pills">
                         { actions }
-                        {isNew ? null : (
+                        {(canSearch && !isNew) ? (
                             <div className="searchbox">
                                 <SearchBox fnSearch={this.fnSearch} searchValue={this.searchValue}></SearchBox>
                             </div>
-                        )}
+                        ) : null }
                     </div>
                     <div className="clearfix"/>
                     { delModal }

@@ -3,7 +3,7 @@
 // Model-driven field (possible types specified in dico.fieldTypes).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2020 Olivier Giulieri
+// (c) 2021 Olivier Giulieri
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -90,7 +90,10 @@ export default class Field extends React.Component {
 						className="form-control" 
 						value={isObject(d) ? JSON.stringify(d, null, 2) : (d || '')}
 					/>
-		}else if(f.type===ft.lov){
+		}else if(f.type===ft.lov){ 
+            if(isObject(d)){ // for GraphQL
+                d = d.id
+            }
 			let opts = f.list ? f.list.map(item => createOption(item.id, item.text))
 				: [createOption(f.id+"loading", i18n_msg.loading)]
 			return <select {...usualProps}
