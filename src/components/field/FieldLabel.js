@@ -3,7 +3,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import  Icon from 'react-crud-icons'
+import Icon from 'react-crud-icons'
 
 const FieldLabel=(props)=>{
 	// - props = label, field, readOnly, clickHelp

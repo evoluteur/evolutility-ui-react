@@ -3,7 +3,7 @@
 // Helpers for string, numbers, and date formats
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2020 Olivier Giulieri
+// (c) 2021 Olivier Giulieri
 
 import React from 'react'
 import numeral from 'numeral'
@@ -53,7 +53,9 @@ function dateOpt(d, type){
     return dateString(d);
 }
 
-const dateString = d => mFormat(d, 'L')
+export const dateTZ = d => d ? d.toISOString() : null
+
+export const dateString = d => mFormat(d, 'L')
 //const timeString = d => mFormat(moment(d, 'HH:mm:ss'), 'LTS')
 const timeString = d => mFormat(moment(d, 'HH:mm:ss'), 'hh:mm A')
 const datetimeString = d => mFormat(d, 'L hh:mm A')

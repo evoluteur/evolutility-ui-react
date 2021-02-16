@@ -33,7 +33,7 @@ module.exports = {
 			"type": "integer",
 			"label": "Vintage",
 			"required": true,
-			"max": 2020,
+			"max": 2021,
 			"min": 1900,
 			"maxLength": 4,
 			"inMany": true,

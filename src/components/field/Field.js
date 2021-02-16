@@ -328,8 +328,15 @@ export default class Field extends React.Component {
 			const formData = new FormData()
 			files.forEach((f, idx)=>{
 				formData.append('filename', files[idx])
-			})			
-			this.props.callbacks.dropFile(f.id, formData)
+            })
+            if(this.props.callbacks.dropFile){
+                try{
+                    this.props.callbacks.dropFile(f.id, formData)
+                } catch (error) {
+                    // TODO: better handling
+                    alert('Error in upload.')
+                }
+            }
 		}
 	}
 

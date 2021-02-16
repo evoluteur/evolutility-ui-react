@@ -1,7 +1,7 @@
 /*! 
 Evolutility-UI-React
 https://github.com/evoluteur/evolutility-ui-react
-(c) 2020 Olivier Giulieri
+(c) 2021 Olivier Giulieri
 */
 
 
@@ -67,7 +67,7 @@ export function prepModel(m){
 		if(!m._prepared){
 			// - Model
 			m.defaultViewOne = m.defaultViewOne || 'browse'
-			//m.defaultViewMany = m.defaultViewMany || 'list'
+			m.defaultViewMany = m.defaultViewMany || 'list'
 			if(!m.label){
 				m.label = m.title || m.namePlural || m.name;
 			}
