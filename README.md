@@ -1,7 +1,7 @@
 # Evolutility-UI-React &middot; [![GitHub license](https://img.shields.io/github/license/evoluteur/evolutility-ui-react)](https://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/evolutility-ui-react)](https://www.npmjs.com/package/evolutility-ui-react) 
 
 
-Evolutility-UI-React is a set of **model-driven views** to Browse, Edit, List, Cards, and Charts data. With it you can build applications by writing models rather than code. 
+Evolutility-UI-React is a set of **model-driven views** to [Browse](#Browse), [Edit](#Edit), [List](#List), [Cards](#Cards), [Charts](#Charts), [Statistics](#Stats), and [API Documentation](#Api). With it you can build applications by writing models rather than code. It can work with REST (using [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node)) or GraphQL (using [Hasura](https://hasura.io)).
 
 ![Edit](public/screenshots/comics/one-edit.gif)
 
@@ -56,9 +56,12 @@ Configurations options are specified in the file [/src/config.js](https://github
 | Option     | Description      | Example             |
 |------------|------------------|---------------------|
 | apiPath    | Path to REST API (can use "proxy" from package.json). | "http://localhost:2000/api/v1/" |
+| apiPathGraphQL | Path to GraphQL API. | "https://localhost:2000/v1/graphql" |
+| apiType | Type of API. | "rest" or "graphql" |
 | filesUrl   | Path to upload files to. | "http://localhost:3000/pix/" |
 | pageSize   | Page size in pagination.  | 50 |
 | locale     | Date format (no translation yet). | en/fr |
+| queryModels | Get models from JSON files or from the database through the API. |
 | wTimestamp | Add timestamp columns u_date and c_date to track record creation and update times. | true |
 
 
@@ -73,10 +76,10 @@ Evolutility-UI-React provides different types of view:
 * Views for Many - a collection of records: [List](#List), [Cards](#Cards), [Charts](#Charts), [Stats](#Stats).
 * Views for documentation: [REST API Doc](#Api).
 
+Evolutility can be configured to use REST (using [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node)) or GraphQL (using [Hasura](https://hasura.io)).
 
 Notes: Views for actions (search, filter, export) will come later.
 
-A large part of the API (methods, options and events) is similar in all views. Some views have additional endpoints. For convenience, there is an [API documentation view](#api) to document and test the API.
 
 <a name="ViewsOne"></a>
 ## Views for One object
@@ -141,6 +144,8 @@ Code: [/src/components/views/charts/Charts.js](https://github.com/evoluteur/evol
 
 View: [http://localhost:3000/comics/charts](http://localhost:3000/comics/charts)
 
+Note: The "Charts" view is currently only implemented for REST, not available with GraphQL yet.
+
 <a name="Stats"></a>
 ### Stats
 Display last update, number of updates in the last week, and for numeric fields the min, max, count, average.
@@ -164,6 +169,7 @@ Code: [/src/components/views/doc/Api.js](https://github.com/evoluteur/evolutilit
 
 View: [http://localhost:3000/comics/api](http://localhost:3000/comics/api)
 
+Note: This view is only useful when using REST. For GraphQL third party tools like [GraphiQL](https://github.com/graphql/graphiql) can be used.
 
 <a name="Models"></a>
 ## Models
@@ -178,7 +184,8 @@ All Fields are present in the Edit and Browse views. Fields can be flagged with 
 
 | Property     | Meaning                                 |
 |--------------|-----------------------------------------|
-| id           | Unique key to identify the entity (used as API parameter). |
+| id           | Unique key to identify the entity (used in route and as API parameter). |
+| qid          | Entity ID used in GraphQL (may be different from id in route). |
 | icon         | Icon file name for the entity (example: "cube.gif"). |
 | name         | Object name (singular).    |
 | namePlural   | Object name (plural).      |
@@ -383,7 +390,7 @@ More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-rea
 <a name="License"></a>
 ## License
 
-Copyright (c) 2020 [Olivier Giulieri](https://evoluteur.github.io/).
+Copyright (c) 2021 [Olivier Giulieri](https://evoluteur.github.io/).
 
 Evolutility-UI-React is released under the [MIT license](http://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE).
 
