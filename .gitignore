@@ -4,8 +4,11 @@ build/
 
 public/bundle.js
 
+*.zip
+
 *-nogit/
 *-nogit.*
+*copy.*
 
 Thumbs.db
 Desktop.ini
