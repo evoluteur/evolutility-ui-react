@@ -1,7 +1,7 @@
 # Evolutility-UI-React &middot; [![GitHub license](https://img.shields.io/github/license/evoluteur/evolutility-ui-react)](https://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/evolutility-ui-react)](https://www.npmjs.com/package/evolutility-ui-react) 
 
 
-Evolutility-UI-React is a set of **model-driven views** to [Browse](#Browse), [Edit](#Edit), [List](#List), [Cards](#Cards), [Charts](#Charts), [Statistics](#Stats), and [API Documentation](#Api). With it you can build applications by writing models rather than code. It can work with REST (using [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node)) or GraphQL (using [Hasura](https://hasura.io)).
+Evolutility-UI-React is a set of **model-driven views** to [Browse](#Browse), [Edit](#Edit), [List](#List), [Cards](#Cards), [Charts](#Charts), [Statistics](#Stats), and [API Documentation](#Api). With it you can easily build CRUD applications by writing models rather than code. It works with REST APIs (using [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node)) or GraphQL (using [Hasura](https://hasura.io)). No hand-coding is necessary.
 
 ![Edit](public/screenshots/comics/one-edit.gif)
 
