@@ -19,14 +19,14 @@ import artist from './music/artist'
 import track from './music/track'
 
 // - Tests
-import test from './tests/test'
+//import test from './tests/test'
 
 // - Designer
-import field from './designer/field'
-import object from './designer/object'
-import group from './designer/group'
-import collection from './designer/collection'
-import world from './designer/world'
+//import field from './designer/field'
+//import object from './designer/object'
+//import group from './designer/group'
+//import collection from './designer/collection'
+//import world from './designer/world'
 
 let models = {
     // - Organizer
@@ -43,14 +43,14 @@ let models = {
     track: track,
 
     // - Tests
-    test: test,
+    //test: test,
 
     // - Designer
-    field: field,
-    object: object,
-    group: group,
-    collection: collection,
-    world: world,
+    //field: field,
+    //object: object,
+    //group: group,
+    //collection: collection,
+    //world: world,
 }
 
 prepModels(models)
