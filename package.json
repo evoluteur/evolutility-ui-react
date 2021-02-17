@@ -1,6 +1,6 @@
 {
   "name": "evolutility-ui-react",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "Model-driven Web UI for CRUD and more",
   "repository": {
     "type": "git",
@@ -73,6 +73,8 @@
     "forms",
     "CRUD",
     "MDA",
+    "graphql",
+    "hasura",
     "javascript",
     "generic-forms",
     "view",
