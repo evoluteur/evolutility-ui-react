@@ -5,8 +5,8 @@ module.exports = [
         title: 'Organizer',
         icon: 'briefcase',
         menus: [
-            {qid: 2, id: "contact", text: "Address Book", icon: "contact.gif"},
             {qid: 1, id: "todo", text: "To-Do List", icon: "todo.gif"},
+            {qid: 2, id: "contact", text: "Address Book", icon: "contact.gif"},
             {qid: 4, id: "restaurant", text: "Restaurants", icon: "resto.gif"},
             {qid: 3, id: "comics", text: "Graphic novels", icon: "comics.png", defaultViewMany: 'cards'},
             {qid: 5, id: "winecellar", text: "Wine Cellar", icon: "wine-bottle.png", defaultViewMany: 'cards'},
@@ -41,7 +41,7 @@ module.exports = [
             {id: 'field', text: 'Fields', icon: 'designer/field.png'},
             {id: 'group', text: 'Field Groups', icon: "designer/group.png"},
             {id: 'collection', text: 'Collections', icon: "designer/collection.png"},
-            //{id: 'test', text: 'Test', defaultViewMany: 'cards'}, 
+            //{id: 'test', text: 'Test', icon: "car.png", defaultViewMany: 'cards'}, 
         ],
     },*/
 ];

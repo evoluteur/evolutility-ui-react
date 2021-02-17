@@ -1,7 +1,7 @@
 
-// Evolutility-UI-React :: /utils/data-layer.js
+// Evolutility-UI-React
 
-// access to data via server-node REST API
+// access to data via REST API
 
 // (c) 2021 Olivier Giulieri
 

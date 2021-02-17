@@ -16,6 +16,8 @@ import models from '../../../models/all_models'
 
 import './one.scss'
 
+const isGQL = dao.apiType === 'graphql'
+
 export default class OneRead extends React.Component{
 
 	viewSuperType = '1' // = one
@@ -49,7 +51,14 @@ export default class OneRead extends React.Component{
 			this.lastQuery = qUrl
 
 			dao.getOne(e, id)
-			.then((data)=>{
+			.then((data) => {
+                if(isGQL && data.errors){
+                    // TODO: show better msg or all errors?
+                    newState.error = {
+                        message: data.errors[0].message
+                    }
+                    this.setState(newState)
+                }
 				if(this.lastQuery === qUrl){
 					if(data!==null && data!==''){
 						this.emptyDelta(false)

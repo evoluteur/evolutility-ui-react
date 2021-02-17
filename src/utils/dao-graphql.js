@@ -1,5 +1,5 @@
 
-// Evolutility-UI-React :: /utils/data-layer.js
+// Evolutility-UI-React
 
 // access to data via GraphQL API (using Hasura)
 
@@ -11,6 +11,9 @@ import config from '../config'
 import { fullCount, gqlOptions, qModels, qOne, qField, qStats, qDelete, qUpdateOne, qInsertOne } from '../utils/graphQLQueries.js'
 import { apiPath, apiPathGraphQL, pageSize } from '../config.js'
 import { proxy } from '../../package.json'
+
+
+// TODO: error handling
 
 const notImplementedYet = () => alert('Not implemented for GraphQL yet (but working with REST).')
 

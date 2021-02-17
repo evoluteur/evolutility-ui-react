@@ -233,7 +233,6 @@ export const qOne = (entity, id) => {
       qFields(m)+
       qCollecs(m)+
     ' }}'
-    console.log(q)
     return q
   }else{
     console.error('Model not found '+entity)
