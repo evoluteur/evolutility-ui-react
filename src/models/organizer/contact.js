@@ -112,7 +112,7 @@ module.exports = {
 			"width": 100
 		},
 		{
-			"id": "phonework",
+			"id": "phone",
 			"type": "text",
 			"label": "Work Phone",
 			"maxLength": 20,
@@ -121,7 +121,7 @@ module.exports = {
 		{
 			"id": "phonecell",
 			"type": "text",
-			"label": "Cell.",
+			"label": "Mobile",
 			"maxLength": 20,
 			"width": 100
 		},
