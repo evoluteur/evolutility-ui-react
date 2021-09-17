@@ -28,7 +28,6 @@ import Api from './components/views/doc/Api';
 
 import PageNotFound from './components/pages/PageNotFound.js';
 
-import 'react-toastify/dist/ReactToastify.min.css';
 
 let queryModels = config.queryModels || false
 
