@@ -136,26 +136,25 @@ label{
   margin-bottom: 2px;
 }
 
-.evo-fld-help{
-  background: #FFF8E1; // amber-50
-  border: solid 1px #FFE082; // amber-200
-  border-left: solid 4px #FFE082; // amber-200
-}
-.evo-fld-invalid{
-  background: #FBE9E7;//Deep Orange 50
-  border: solid 1px #FF8A65; //Deep Orange 300
-  border-left: solid 4px #FF8A65; //Deep Orange 300
-}
 
 .evo-fld-help,
 .evo-fld-invalid{
   color: #737373;
   display: inline-block;
-  padding: 4px 5px 4px 10px;
   @include border-radius(2px);
   font-style: italic;
-  margin: 5px 5px 5px 0;
   clear: both;
+}
+.evo-fld-help{
+  font-size: .9em;
+  margin: 0 0 5px 0;
+}
+.evo-fld-invalid{
+  background: #FBE9E7;//Deep Orange 50
+  border: solid 1px #FF8A65; //Deep Orange 300
+  border-left: solid 4px #FF8A65; //Deep Orange 300
+  padding: 4px 5px 4px 10px;
+  margin: 5px 5px 5px 0;
 }
 
 .evo-one-edit,
