@@ -195,7 +195,7 @@ a.skipNav {
 }
 
 .nav-l2 > li{
-	@include border-radius(5px);
+	border-radius: 5px;
 	padding: 5px 0 5px 5px;
 	> a {
 		padding: 5px;
