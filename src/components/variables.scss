@@ -10,12 +10,12 @@ $color-label: grey;
 $color-title: #428bca;
 $color-border: #ddd;
 $color-border-hover: silver;
-$color-disabled:silver;
+$color-disabled: silver;
 $color-panel: #f7f7f7;
 $bgcolor-panel-header: $bgcolor-header;
 $bgcolor-panel-footer: $bgcolor-header;
 
-$color-blue1: #259DCB;
+$color-blue1: #259dcb;
 $color-red: #b94a48;
 
 $border: solid 1px $color-border;
@@ -29,10 +29,10 @@ $golden-ratio-big: 62%;
 $golden-ratio-small: 38%;
 
 // top nav bar including toolbar
-$color-nav: #BBDEFB; //#23527c;//#FFE0B2;
+$color-nav: #bbdefb; //#23527c;//#FFE0B2;
 $color-nav-hover: white; //#337ab7; //#E0F7FA;
-$color-nav-active: #E0F7FA;
-$color-icon-hover: #0D47A1;
+$color-nav-active: #e0f7fa;
+$color-icon-hover: #0d47a1;
 $color-icon: #428bca;
 $ease-time: 0.2s;
 $delay-time: 0.2s;
@@ -47,61 +47,60 @@ $field-h-spacing: 16px;
 $weight-label: 500;
 
 // page footer
-$color-text-footer: #607D8B;
+$color-text-footer: #607d8b;
 $bgcolor-text-footer: #f8f8f8;
 
 $radius: 8px;
 
 // mixins
-@mixin flex-holder(){
-	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
-	display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
-	display: -ms-flexbox;      /* TWEENER - IE 10 */
-	display: -webkit-flex;     /* NEW - Chrome */
-	display: flex;
-	flex-wrap: wrap;
+@mixin flex-holder() {
+  display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box; /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox; /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Chrome */
+  display: flex;
+  flex-wrap: wrap;
 }
-@mixin flex-item(){
-	box-sizing: border-box;
-	flex-grow: 1;
+@mixin flex-item() {
+  box-sizing: border-box;
+  flex-grow: 1;
 }
-@mixin ellipsis(){
+@mixin ellipsis() {
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
 }
 
-
-@mixin icons-actions{
-	svg{
-		fill: $color-icon;
-		cursor: pointer;
-		&:hover{
-			fill: $color-icon-hover;
-		}
-		&.active{
-			fill: black;
-			cursor: default;
-		}
-	}
-	&.sort{
-		position: absolute;
-		top: 30px;
-		right: 5px;
-	}
+@mixin icons-actions {
+  svg {
+    fill: $color-icon;
+    cursor: pointer;
+    &:hover {
+      fill: $color-icon-hover;
+    }
+    &.active {
+      fill: black;
+      cursor: default;
+    }
+  }
+  &.sort {
+    position: absolute;
+    top: 30px;
+    right: 5px;
+  }
 }
 .table {
-	border-top: $border;
-	border-bottom: $border;
+  border-top: $border;
+  border-bottom: $border;
 }
 
-.list-tags{
-	> div {
-	  border: $border;
-	  border-radius: 8px;
-	  padding: 2px 7px;
-	  margin: 0 5px 0 0;
-	  width: auto !important;
-	  display: inline-block;
-	}
+.list-tags {
+  > div {
+    border: $border;
+    border-radius: 8px;
+    padding: 2px 7px;
+    margin: 0 5px 0 0;
+    width: auto !important;
+    display: inline-block;
+  }
 }

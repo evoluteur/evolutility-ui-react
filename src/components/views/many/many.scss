@@ -1,26 +1,26 @@
 /*
   evolutility-ui-react : many
 */
-@import '../../variables';
+@import "../../variables";
 
-.evol-many-icon{
-	position: relative;
-	top:-2px;
-	margin-right: 6px !important;
+.evol-many-icon {
+  position: relative;
+  top: -2px;
+  margin-right: 6px !important;
 }
 
-.evo-badge{
-	//background-color: $bgcolor-header;
-	//padding: 5px 10px;
-	//border-radius: 10px;
-	//border: $border;
-	margin-left: 10px;
-	font-size: 16px;
-	font-weight: 400;
-	margin-left: 20px;
-	//&:before{content:"( "}
-	//&:after{content:" )"}
+.evo-badge {
+  //background-color: $bgcolor-header;
+  //padding: 5px 10px;
+  //border-radius: 10px;
+  //border: $border;
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  margin-left: 20px;
+  //&:before{content:"( "}
+  //&:after{content:" )"}
 }
 .lov-icon {
-	margin-right: 5px;
+  margin-right: 5px;
 }

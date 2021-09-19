@@ -1,5 +1,4 @@
-@import '../../variables';
-
+@import "../../variables";
 
 $chart-width: 490px;
 $label-width: 270px;
@@ -7,92 +6,91 @@ $label2-width: 100px;
 
 // view Stats
 .evol-stats {
-	margin: 0 10px;
-	label {
-		display: block;
-	}
-	> div {
-		margin-bottom: 5px;
-	}
-	.evol-chart-holder {
-		display: block;
-		margin-left: 10px;
-		width: $chart-width;
-		max-width: $chart-width;
-	}
-	.cols-2{
-		@include flex-holder();
-		.col-1,
-		.col-2 {
-			margin-right: 10px;
-			@include flex-item();
-		}
-	}
-	.evo-label{
-		margin-bottom: 7px;
-	}
-	.label-count{
-		font-size: 1.4em;
-		margin-bottom: 10px;
-	}
-	
-	.field-range {
-		position: relative;
-		width: 360px;
-		margin-bottom: 20px;
-		> div {
-			display: inline-block;
-			&:first-child {
-				text-align: right;
-			}
-			&:nth-child(2) {
-				text-align: right;
-				margin: 0 10px;
-			}
-		}
-	}
+  margin: 0 10px;
+  label {
+    display: block;
+  }
+  > div {
+    margin-bottom: 5px;
+  }
+  .evol-chart-holder {
+    display: block;
+    margin-left: 10px;
+    width: $chart-width;
+    max-width: $chart-width;
+  }
+  .cols-2 {
+    @include flex-holder();
+    .col-1,
+    .col-2 {
+      margin-right: 10px;
+      @include flex-item();
+    }
+  }
+  .evo-label {
+    margin-bottom: 7px;
+  }
+  .label-count {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+  }
+
+  .field-range {
+    position: relative;
+    width: 360px;
+    margin-bottom: 20px;
+    > div {
+      display: inline-block;
+      &:first-child {
+        text-align: right;
+      }
+      &:nth-child(2) {
+        text-align: right;
+        margin: 0 10px;
+      }
+    }
+  }
 }
 .f-stats {
-	margin: 10px 0;
-	> label {
-		display: block;
-		width: $label-width;
-		@include icons-actions();
-		> i {
-			margin-left: 10px;
-			cursor: pointer;
-		}
+  margin: 10px 0;
+  > label {
+    display: block;
+    width: $label-width;
+    @include icons-actions();
+    > i {
+      margin-left: 10px;
+      cursor: pointer;
     }
-    .crud-icon{
-        position: relative;
-        top: 3px;
-    }
+  }
+  .crud-icon {
+    position: relative;
+    top: 3px;
+  }
 }
-.fl-stats { 
-	min-width: 300px;
-	> div {
-		display: inline-block;
-		margin: 0 10px 10px 10px;
-		min-width: 100px;
-	}
+.fl-stats {
+  min-width: 300px;
+  > div {
+    display: inline-block;
+    margin: 0 10px 10px 10px;
+    min-width: 100px;
+  }
 }
-.weekupdates{
-	margin-left: 10px;
-
+.weekupdates {
+  margin-left: 10px;
 }
-.stat-fn{
-	display: block;
+.stat-fn {
+  display: block;
 }
-.stat-label{
-	margin-bottom: 10px;
+.stat-label {
+  margin-bottom: 10px;
 }
-.stat-field{
-	line-height: 30px;
-	> span {
-		display: inline-block;
-		color: $grey-color;
-		width: 100px;
-		min-width: $label2-width;
-		margin-right: 7px;
-	}
+.stat-field {
+  line-height: 30px;
+  > span {
+    display: inline-block;
+    color: $grey-color;
+    width: 100px;
+    min-width: $label2-width;
+    margin-right: 7px;
+  }
 }

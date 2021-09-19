@@ -1,14 +1,14 @@
 /*
   evolutility-ui-react : one
 */
-@import '../../variables';
+@import "../../variables";
 
 /* --- panels & tabs --- */
-.evol-pnls{
+.evol-pnls {
   @include flex-holder();
 
-  .panel{
-    height: calc( 100% - 20px );
+  .panel {
+    height: calc(100% - 20px);
   }
   .evol-pnl {
     @include flex-item();
@@ -36,22 +36,21 @@
         max-height: 60px;
         padding: 0;
       }
-      .evol-money{
+      .evol-money {
         //TODO: better fix
         width: 200px;
       }
     }
-  // nested panel
-  //  .evol-pnl {
-  //     > .panel{
-  //        margin-bottom: 12px;
-  //    }
-  //    > div > fieldset{
-  //      padding: 10px 10px 5px 2px;
-  //    }
-  //  }
+    // nested panel
+    //  .evol-pnl {
+    //     > .panel{
+    //        margin-bottom: 12px;
+    //    }
+    //    > div > fieldset{
+    //      padding: 10px 10px 5px 2px;
+    //    }
+    //  }
   }
-
 }
 
 //.evo-plist{
@@ -62,8 +61,8 @@
 //    }
 //    &[type="number"]{
 //      min-width: 100px;
-//    } 
-//    &[type="text"], 
+//    }
+//    &[type="text"],
 //    textarea{
 //      min-width: 120px;
 //    }
@@ -84,18 +83,18 @@
 //}
 
 /* --- fields --- */
-.evol-fset{
-    @include flex-holder();
-    padding: 16px $field-h-spacing 10px 0;
-    //input[type="checkbox"]{
-    //    height: 30px;
-    //}
+.evol-fset {
+  @include flex-holder();
+  padding: 16px $field-h-spacing 10px 0;
+  //input[type="checkbox"]{
+  //    height: 30px;
+  //}
 }
-.evol-buttons{
+.evol-buttons {
   clear: both;
   padding: 7px 10px;
 
-  > button, 
+  > button,
   > a {
     margin: 10px;
     > i {
@@ -104,16 +103,16 @@
   }
 }
 
-.evol-title-toggle{
+.evol-title-toggle {
   cursor: pointer;
   position: absolute;
   right: 10px;
   top: 12px;
   color: grey;
-  &:hover{
-    color: $color-icon-hover
+  &:hover {
+    color: $color-icon-hover;
   }
-}/*
+} /*
 .evol-json{
     width:100%;
     //height:350px;
@@ -127,47 +126,46 @@
 }*/
 
 /* bootstrap customizations*/
-.table > thead > tr > th{
+.table > thead > tr > th {
   font-weight: $weight-label;
   background-color: #fbfbfb;
 }
-label{
+label {
   font-weight: $weight-label;
   margin-bottom: 2px;
 }
 
-
 .evo-fld-help,
-.evo-fld-invalid{
+.evo-fld-invalid {
   color: #737373;
   display: inline-block;
   border-radius: 2px;
   font-style: italic;
   clear: both;
 }
-.evo-fld-help{
-  font-size: .9em;
+.evo-fld-help {
+  font-size: 0.9em;
   margin: 0 0 5px 0;
 }
-.evo-fld-invalid{
-  background: #FBE9E7;//Deep Orange 50
-  border: solid 1px #FF8A65; //Deep Orange 300
-  border-left: solid 4px #FF8A65; //Deep Orange 300
+.evo-fld-invalid {
+  background: #fbe9e7; //Deep Orange 50
+  border: solid 1px #ff8a65; //Deep Orange 300
+  border-left: solid 4px #ff8a65; //Deep Orange 300
   padding: 4px 5px 4px 10px;
   margin: 5px 5px 5px 0;
 }
 
 .evo-one-edit,
 .evo-one-browse,
-.evo-one-wiz{
-    margin-left:-10px;
+.evo-one-wiz {
+  margin-left: -10px;
 }
 
-.evol-pl-nodata{
+.evol-pl-nodata {
   text-align: center;
 
-  [data-id="bPlus"]{
-    margin-left:10px;
+  [data-id="bPlus"] {
+    margin-left: 10px;
     cursor: pointer;
   }
 }
@@ -206,17 +204,16 @@ label{
   }
 }
 */
-#isDirty [data-id="nosave"]{
+#isDirty [data-id="nosave"] {
   float: left;
 }
 
-.evo-color-box{
+.evo-color-box {
   display: inline-block;
   height: 20px;
   width: 20px;
   border: $border;
-  span{
+  span {
     margin-left: 24px;
   }
 }
-

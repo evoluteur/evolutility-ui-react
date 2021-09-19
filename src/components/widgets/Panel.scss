@@ -1,13 +1,15 @@
-@import '../variables';
+@import "../variables";
 
-.panel-heading { // panel-heading from Bootstrap
-    position: relative;
-    border-radius: $radius $radius 0 0;
-    > .panel-title { // panel-title from Bootstrap
-      display: inline-block;
-      font-weight: 400;
-      font-size: 1.2em;
-    }
+.panel-heading {
+  // panel-heading from Bootstrap
+  position: relative;
+  border-radius: $radius $radius 0 0;
+  > .panel-title {
+    // panel-title from Bootstrap
+    display: inline-block;
+    font-weight: 400;
+    font-size: 1.2em;
+  }
   //  >.evol-subtitle{
   //    display: inline-block;
   //    margin-left:.4em;
@@ -22,12 +24,12 @@
     width: 26px;
     fill: $color-icon;
     &:hover {
-        fill: $color-icon-hover;
+      fill: $color-icon-hover;
     }
   }
 }
 
-.panel{
+.panel {
   border-radius: $radius;
   div.panel-header,
   div.panel-footer {
@@ -35,8 +37,8 @@
   }
 }
 
-.evo-panel-help{
-    margin-top:5px;
+.evo-panel-help {
+  margin-top: 5px;
 }
 
 .panel-default > .panel-heading {

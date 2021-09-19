@@ -1,4 +1,4 @@
-@import './components/variables';
+@import "./components/variables";
 
 html {
   height: 100%; // IE
@@ -8,13 +8,16 @@ body {
   padding: 0;
   width: 100%; // IE
   height: 100%; // IE
-	font-size: $text-font-size;
-  font-family: 'Open Sans', sans-serif;
+  font-size: $text-font-size;
+  font-family: "Open Sans", sans-serif;
 }
-p, legend{
-  font-size: 16px;    
+p,
+legend {
+  font-size: 16px;
 }
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 300;
   margin-bottom: 20px;
 }
@@ -26,13 +29,13 @@ h3 {
   position: relative;
   min-height: 100vh;
   display: flex;
-	flex-direction: column;
+  flex-direction: column;
 }
-.loading-evol{
+.loading-evol {
   margin: 100px 20px 20px 20px;
 }
-.w-timestamp{
-	padding: 10px 20px;
+.w-timestamp {
+  padding: 10px 20px;
 }
 /*
 .form-range {
@@ -45,7 +48,7 @@ h3 {
     max-width: 60%;
   }
 
-} 
+}
 .input-range__slider {
 	border-radius:0 !important;
 	width:.5rem !important;
@@ -58,32 +61,31 @@ h3 {
 
 /* TODO: for now here */
 
-.blue_title{
-	background-color: #b3e5fc;
-	color: white;
-	padding:40px;
+.blue_title {
+  background-color: #b3e5fc;
+  color: white;
+  padding: 40px;
 }
 
-.black{
-	color: black !important;
+.black {
+  color: black !important;
 }
-.fakeLink{
-	cursor: pointer;
-}
-
-
-.mr10{
-	margin-right: 10px;
+.fakeLink {
+  cursor: pointer;
 }
 
-.grey{
-	color: silver;
+.mr10 {
+  margin-right: 10px;
 }
-.navy{
+
+.grey {
+  color: silver;
+}
+.navy {
   color: navy;
   font-weight: 300;
 }
-.clearer{
+.clearer {
   clear: both;
 }
 .pc50 {
@@ -92,23 +94,24 @@ h3 {
 .pc100 {
   width: 100%;
 }
-.ReactModal__Overlay{
+.ReactModal__Overlay {
   z-index: 110;
 }
 
-.btn{
+.btn {
   font-size: 16px;
 }
 
 .extlink:after {
-  content: " " url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAVklEQVR4Xn3PgQkAMQhDUXfqTu7kTtkpd5RA8AInfArtQ2iRXFWT2QedAfttj2FsPIOE1eCOlEuoWWjgzYaB/IkeGOrxXhqB+uA9Bfcm0lAZuh+YIeAD+cAqSz4kCMUAAAAASUVORK5CYII=);
+  content: " "
+    url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAVklEQVR4Xn3PgQkAMQhDUXfqTu7kTtkpd5RA8AInfArtQ2iRXFWT2QedAfttj2FsPIOE1eCOlEuoWWjgzYaB/IkeGOrxXhqB+uA9Bfcm0lAZuh+YIeAD+cAqSz4kCMUAAAAASUVORK5CYII=);
 }
 
 @media print {
   // things to hide
-    .evol-buttons,
-    .evo-toolbar,
-    .evo-noprint{
-      display: none !important;
-    }
+  .evol-buttons,
+  .evo-toolbar,
+  .evo-noprint {
+    display: none !important;
+  }
 }

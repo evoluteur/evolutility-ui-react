@@ -1,15 +1,16 @@
 /*
   evolutility-ui-react : many-cards
 */
-@import '../../variables';
+@import "../../variables";
 
-.evol-cards-body {/*
+.evol-cards-body {
+  /*
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;*/
   width: 100%;
-  
+
   > .panel {
     float: left;
     //flex-grow: 1;
@@ -20,15 +21,15 @@
     margin: 5px;
     padding: 2px 10px 10px;
     overflow: auto;
-    
-    &:hover{
+
+    &:hover {
       border-color: $color-border-hover;
-      .card-actions{
+      .card-actions {
         //display: block;
         width: 58px;
       }
     }
-    .card-actions{
+    .card-actions {
       z-index: 50;
       //display: none;
       position: absolute;
@@ -46,26 +47,26 @@
       -o-transition: width $ease-time ease $delay-time;
       transition: width $ease-time ease $delay-time;
       @include icons-actions();
-      i{
+      i {
         margin: 5px 0 0 0;
       }
       background-color: white;
     }
-    .img-thumbnail{
+    .img-thumbnail {
       padding: 0 !important;
     }
-    > div{
-      > h4{
+    > div {
+      > h4 {
         margin-bottom: 12px;
         @include ellipsis();
       }
-      > label{
+      > label {
         width: $golden-ratio-small;
         @include ellipsis();
         vertical-align: top;
         font-weight: 300;
       }
-      > div:not(.card-actions){
+      > div:not(.card-actions) {
         display: inline-block;
         padding-right: 5px;
         width: $golden-ratio-big;
@@ -76,14 +77,14 @@
           width: 100%;
         }
       }
-      > img{
-        margin-top:5px;
+      > img {
+        margin-top: 5px;
       }
     }
   }
 }
 
-.card-fld-center{
+.card-fld-center {
   margin-top: 5px;
   text-align: center;
 }

@@ -2,72 +2,72 @@
   evolutility-ui-react : field
 */
 
-@import '../variables';
+@import "../variables";
 
-.inline{
+.inline {
   display: inline;
 }
 .form-control {
-	padding: 6px;
+  padding: 6px;
 }
-.scroll-y{
+.scroll-y {
   overflow-y: scroll;
 }
 .evol-fld {
-    @include flex-item();
-    padding-left: $field-h-spacing !important;
-    margin-bottom: 12px;
-    min-width: 62px;
-    input, textarea, select{
-      font-size: $text-font-size;
-    }
-    
-    .evo-rdonly {
-          // todo: use or remove line below?
-          // border-bottom: 1px solid silver;
-      > img {
-        position: relative;
-        top: -2px;
-        margin-right: 3px;
-      }
-    }
-    >div{
-      width: 100%;
-    }
-    > .evo-fld-invalid {
-        margin-bottom: 0 !important;
-        
-    }
-    .img-thumbnail {
-      padding: 0 !important;
-    }
-    input[type="time"]{
-      display: inline-block;
-      width: 130px;
-    }
-    textarea {
-      max-width: 100%;
-    }
-    .react-datepicker-wrapper{
-      display: inline;
-    }
-    .evo-rdonly{
-      > pre{
-        margin-top: 0;
-        padding: 5px;
-        font-size: 12px;
-        background-color: #eceff1;
-        border: solid 1px #b0bec5;
-        min-height: 30px;
-      }
-    }
+  @include flex-item();
+  padding-left: $field-h-spacing !important;
+  margin-bottom: 12px;
+  min-width: 62px;
+  input,
+  textarea,
+  select {
+    font-size: $text-font-size;
+  }
 
+  .evo-rdonly {
+    // todo: use or remove line below?
+    // border-bottom: 1px solid silver;
+    > img {
+      position: relative;
+      top: -2px;
+      margin-right: 3px;
+    }
+  }
+  > div {
+    width: 100%;
+  }
+  > .evo-fld-invalid {
+    margin-bottom: 0 !important;
+  }
+  .img-thumbnail {
+    padding: 0 !important;
+  }
+  input[type="time"] {
+    display: inline-block;
+    width: 130px;
+  }
+  textarea {
+    max-width: 100%;
+  }
+  .react-datepicker-wrapper {
+    display: inline;
+  }
+  .evo-rdonly {
+    > pre {
+      margin-top: 0;
+      padding: 5px;
+      font-size: 12px;
+      background-color: #eceff1;
+      border: solid 1px #b0bec5;
+      min-height: 30px;
+    }
+  }
 }
 .evol-field-label {
   > label {
     color: $color-label !important;
     font-weight: normal;
-    font-size: .9em;
+    font-size: 0.9em;
     svg {
       cursor: pointer;
       margin: 0 5px;
@@ -88,10 +88,10 @@
 
 .evol-required,
 .evol-asterix {
-    margin-left: 3px;
-    font-weight: bold;
+  margin-left: 3px;
+  font-weight: bold;
 }
-.evol-required{
+.evol-required {
   color: $color-red;
 }
 .evol-asterix {
@@ -100,33 +100,33 @@
 .evo-rdonly {
   min-height: 32px;
   padding-top: 5px;
-  >a{
+  > a {
     display: block;
     @include ellipsis();
   }
 }
-.lov-icon{
+.lov-icon {
   margin-right: 5px;
 }
 .evol-remove {
-	margin-top: 5px;
-	i {
-		position: relative;
-		top: 2px;
-		color: $color-red;
-		margin-right: 5px;
-	}
+  margin-top: 5px;
+  i {
+    position: relative;
+    top: 2px;
+    color: $color-red;
+    margin-right: 5px;
+  }
 }
 
 .pixdrop {
-  margin-top:7px;
-  width:100%;
-  min-height:100px;
-  border:2px dashed $grey-color;
-  padding:10px;
+  margin-top: 7px;
+  width: 100%;
+  min-height: 100px;
+  border: 2px dashed $grey-color;
+  padding: 10px;
   > p {
     font-style: italic;
-    font-size: .9em;
+    font-size: 0.9em;
   }
 }
 
@@ -140,7 +140,8 @@
 .react-datepicker__month {
   margin: 0.4em;
 }
-.react-datepicker__day-name, .react-datepicker__day {
+.react-datepicker__day-name,
+.react-datepicker__day {
   width: 1.9em;
   line-height: 1.9em;
   margin: 0.166em;

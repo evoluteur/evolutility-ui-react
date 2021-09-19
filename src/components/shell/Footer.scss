@@ -1,24 +1,24 @@
-@import '../variables';
+@import "../variables";
 
-.Footer{
-	z-index: 100;
-	margin: 50px 0 0 180px;
-	padding: 10px 10px 20px;
-	color: $color-text-footer;
-	// background-color: $bgcolor-text-footer;
-	border-top: $border;
-	text-align: center;
-	font-size: .9em;
-	> .copyright{
-		display: block;
-		margin-top: 10px;
-		color: silver;
-		color: $color-text-footer !important;
-	}
+.Footer {
+  z-index: 100;
+  margin: 50px 0 0 180px;
+  padding: 10px 10px 20px;
+  color: $color-text-footer;
+  // background-color: $bgcolor-text-footer;
+  border-top: $border;
+  text-align: center;
+  font-size: 0.9em;
+  > .copyright {
+    display: block;
+    margin-top: 10px;
+    color: silver;
+    color: $color-text-footer !important;
+  }
 }
 
 @media print {
-	.Footer {
-		page-break-inside: avoid;
-	}
+  .Footer {
+    page-break-inside: avoid;
+  }
 }

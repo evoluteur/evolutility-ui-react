@@ -2,9 +2,9 @@
   evolutility-ui-react : toolbar
 */
 
-@import '../variables';
+@import "../variables";
 
-.evo-toolbar{
+.evo-toolbar {
   position: fixed;
   top: -1px;
   left: 420px;
@@ -20,11 +20,11 @@
 }
 
 /* bootstrap override */
-.dropdown-menu>li>a{
+.dropdown-menu > li > a {
   padding: 3px 10px;
 }
 
-.evo-filter-on{
+.evo-filter-on {
   background-color: #e0f2f1;
 }
 @media only screen and (max-width: 780px) {

@@ -1,35 +1,34 @@
-
-.evo-range{
+.evo-range {
   display: block;
-	position: relative;
-	height: 30px;
+  position: relative;
+  height: 30px;
   width: 200px;
-  > div{
+  > div {
     position: absolute;
     top: 5px;
     height: 10px;
   }
-  .range-line{
+  .range-line {
     height: 20px;
     width: 100%;
     border-left: 4px solid black;
     border-right: 4px solid black;
     > div {
-      position:absolute;
+      position: absolute;
       top: 9px;
       height: 2px;
       width: 100%;
       background-color: silver;
     }
   }
-  .range-avg{
-    position:absolute;
+  .range-avg {
+    position: absolute;
     top: 6px;
     height: 16px;
     width: 16px;
     border-radius: 3px;
-    background: #0277BD;
-    border: 1px solid #01579B;
+    background: #0277bd;
+    border: 1px solid #01579b;
     > div {
       display: none;
       position: relative;
@@ -41,5 +40,4 @@
       }
     }
   }
-
 }

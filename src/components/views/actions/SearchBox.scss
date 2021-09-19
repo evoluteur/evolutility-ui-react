@@ -5,31 +5,31 @@
 */
 // - Search box for Evolutility toolbar
 
-@import '../../variables';
+@import "../../variables";
 
 // -- search
-.evo-search{
+.evo-search {
   position: relative;
   top: 14px;
   width: 200px;
   margin-left: 20px;
   padding: 3px 4px 2px 2px;
-  .evo-field{
+  .evo-field {
     &:not(:valid) ~ .clear-icon {
       opacity: 0;
     }
   }
   input,
-  >.btn{
+  > .btn {
     position: relative;
     top: -1px;
     color: white;
     background-color: #0f0f0f;
-    &:hover{
+    &:hover {
       color: $color-nav-hover;
     }
   }
-  input:hover{
+  input:hover {
     background-color: #414141;
   }
 }
@@ -44,13 +44,13 @@
 }
 
 @media only screen and (max-width: 700px) {
-  .evo-search{
+  .evo-search {
     margin-left: 10px;
     width: 120px;
   }
 }
 @media only screen and (max-width: 600px) {
-  .evo-search{
+  .evo-search {
     display: none;
   }
 }

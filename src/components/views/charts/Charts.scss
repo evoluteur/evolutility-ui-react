@@ -1,112 +1,112 @@
 /*
   evolutility-ui-react : many-charts
 */
-@import '../../variables';
+@import "../../variables";
 
-.evol-many-charts{
-	width: 100%;
-	@include flex-holder();
-	> .evol-chart-holder{
-		@include flex-item();
-	}
+.evol-many-charts {
+  width: 100%;
+  @include flex-holder();
+  > .evol-chart-holder {
+    @include flex-item();
+  }
 }
 
-.evol-chart-holder{
-	position: relative;
-	text-align: center;
-	background-color :#FFFFFF;
-	margin: 0 10px 20px 5px;
-	width: 400px;
-	min-height:286px;
-	&.size-large{
-		width: 100%;
-		.i-chart{
-			height: 600px;
-		}
-		/*
+.evol-chart-holder {
+  position: relative;
+  text-align: center;
+  background-color: #ffffff;
+  margin: 0 10px 20px 5px;
+  width: 400px;
+  min-height: 286px;
+  &.size-large {
+    width: 100%;
+    .i-chart {
+      height: 600px;
+    }
+    /*
 		@media only screen and (max-width: 700px) {
 			.i-chart{
 				height: 400px;
 			}
 		}*/
-	}
+  }
 }
-.chart-holder{
-	position: relative;
-	border: 1px solid white;
-	overflow: hidden;
-	min-height: 100%;
-	.chart-actions-left,
-	.chart-actions-right {
-		display: block;
-		top: -40px;
-		opacity: 100%;
-	}
-	&:hover {
-		.chart-actions-left,
-		.chart-actions-right {
-			top: 5px;
-			opacity: 100%;
-		}
-		border-color: $color-border-hover;
-	}
-	> h3{
-		display: block;
-		font-weight: 400;
-		font-size: 1.2em;
-		text-align: center;
-		padding: 10px 20px 30px;
-	}
-	> i{
-		position: relative;
-		top: 50px;
-	}
-	> .i-chart{
-		padding: 0 10px;
-		height: 300px;
-		min-width: 300px;
-		min-height: 100px;
-	}
-	.alert {
-		text-align: left;
-		margin: 0 10px;
-	}
-	i[data-id="Resize"] {
-		margin-left: 8px;
-	}
+.chart-holder {
+  position: relative;
+  border: 1px solid white;
+  overflow: hidden;
+  min-height: 100%;
+  .chart-actions-left,
+  .chart-actions-right {
+    display: block;
+    top: -40px;
+    opacity: 100%;
+  }
+  &:hover {
+    .chart-actions-left,
+    .chart-actions-right {
+      top: 5px;
+      opacity: 100%;
+    }
+    border-color: $color-border-hover;
+  }
+  > h3 {
+    display: block;
+    font-weight: 400;
+    font-size: 1.2em;
+    text-align: center;
+    padding: 10px 20px 30px;
+  }
+  > i {
+    position: relative;
+    top: 50px;
+  }
+  > .i-chart {
+    padding: 0 10px;
+    height: 300px;
+    min-width: 300px;
+    min-height: 100px;
+  }
+  .alert {
+    text-align: left;
+    margin: 0 10px;
+  }
+  i[data-id="Resize"] {
+    margin-left: 8px;
+  }
 }
 
-.singleChart{
-	display: block;
-	padding: 0 5px 20px;
+.singleChart {
+  display: block;
+  padding: 0 5px 20px;
 }
 .chart-actions-left,
 .chart-actions-right {
-	position: absolute;
-	top: 0;
-	//display: none;
-	-webkit-transition: top $ease-time ease $delay-time;
-	-moz-transition: top $ease-time ease $delay-time;
-	-o-transition: top $ease-time ease $delay-time;
-	transition: top $ease-time ease $delay-time;
-	@include icons-actions();
-	> i.crud-icon.light > svg {
-		fill: $color-icon;
-	}
+  position: absolute;
+  top: 0;
+  //display: none;
+  -webkit-transition: top $ease-time ease $delay-time;
+  -moz-transition: top $ease-time ease $delay-time;
+  -o-transition: top $ease-time ease $delay-time;
+  transition: top $ease-time ease $delay-time;
+  @include icons-actions();
+  > i.crud-icon.light > svg {
+    fill: $color-icon;
+  }
 }
-.chart-actions-left{
-	left: 5px;
+.chart-actions-left {
+  left: 5px;
 }
 .chart-actions-right {
-	right: 5px;
+  right: 5px;
 }
-.charts-stats{
-	margin-top: 20px;
-	i {
-		margin-right: 5px;
-	}
+.charts-stats {
+  margin-top: 20px;
+  i {
+    margin-right: 5px;
+  }
 }
 // no data in charts
 .chart-holder > .alert {
-	margin-top: 50px;
+  margin-top: 50px;
 }

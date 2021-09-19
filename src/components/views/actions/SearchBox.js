@@ -4,57 +4,74 @@
   (c) 2020 Olivier Giulieri
 */
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
-import './SearchBox.scss'
+import "./SearchBox.scss";
 
 export default class SearchBox extends React.Component {
-
   constructor(props) {
-		super(props);
-		this.searchValue = this.props.searchValue;
-	}
-	
-	clear = () => {
-		this.searchValue = this.refs.text.value = ''
-		this.props.fnSearch({
-			entity: this.props.entity,
-			value: this.searchValue,
-		})
-	}
+    super(props);
+    this.searchValue = this.props.searchValue;
+  }
 
-	keyUp = evt => {
-		if(evt.keyCode === 13){
-			this.clickSearch()
-		}else{
-			this.searchValue = evt.currentTarget.value
-		}
-	}
+  clear = () => {
+    this.searchValue = this.refs.text.value = "";
+    this.props.fnSearch({
+      entity: this.props.entity,
+      value: this.searchValue,
+    });
+  };
 
-	clickSearch = () => {
-		this.searchValue = this.refs.text.value
-		this.props.fnSearch({
-			entity: this.props.entity,
-			value: this.searchValue,
-		})
-	}
+  keyUp = (evt) => {
+    if (evt.keyCode === 13) {
+      this.clickSearch();
+    } else {
+      this.searchValue = evt.currentTarget.value;
+    }
+  };
 
-	render() {
-		return (
-			<div className="input-group evo-search">
-				<input ref="text" key="text" onChange={this.change} onKeyUp={this.keyUp} 
-					defaultValue={this.props.searchValue} className="evo-field form-control" type="text" maxLength="100"/>
-				<div key="clear" onClick={this.clear} className={"clear-icon glyphicon glyphicon-remove "+(this.searchValue?'':'hidden')}></div>
-				<span key="search" onClick={this.clickSearch} className="btn input-group-addon glyphicon glyphicon-search"></span>
-			</div>
-		)
-	}
-	
+  clickSearch = () => {
+    this.searchValue = this.refs.text.value;
+    this.props.fnSearch({
+      entity: this.props.entity,
+      value: this.searchValue,
+    });
+  };
+
+  render() {
+    return (
+      <div className="input-group evo-search">
+        <input
+          ref="text"
+          key="text"
+          onChange={this.change}
+          onKeyUp={this.keyUp}
+          defaultValue={this.props.searchValue}
+          className="evo-field form-control"
+          type="text"
+          maxLength="100"
+        />
+        <div
+          key="clear"
+          onClick={this.clear}
+          className={
+            "clear-icon glyphicon glyphicon-remove " +
+            (this.searchValue ? "" : "hidden")
+          }
+        ></div>
+        <span
+          key="search"
+          onClick={this.clickSearch}
+          className="btn input-group-addon glyphicon glyphicon-search"
+        ></span>
+      </div>
+    );
+  }
 }
 
 SearchBox.propTypes = {
-	entity: PropTypes.string,
-	fnSearch: PropTypes.func,
-	searchText: PropTypes.string,
-}
+  entity: PropTypes.string,
+  fnSearch: PropTypes.func,
+  searchText: PropTypes.string,
+};

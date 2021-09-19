@@ -1,5 +1,3 @@
+let evoGlobals = {};
 
-let evoGlobals = {
-}
-
-module.exports = evoGlobals
+module.exports = evoGlobals;

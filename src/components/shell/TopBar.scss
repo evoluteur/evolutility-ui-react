@@ -1,4 +1,4 @@
-@import '../variables';
+@import "../variables";
 
 .TopBar {
   z-index: 101;
@@ -10,7 +10,7 @@
   padding: 20px;
   color: $almostwhite-color;
 
-  > .views{
+  > .views {
     top: 2px;
     left: 150px !important;
   }
@@ -19,23 +19,23 @@
     top: 4px;
     right: 5px;
     @media only screen and (max-width: 650px) {
-        display: none; 
+      display: none;
     }
   }
   .navlinks {
     min-width: 280px;
   }
-  >iframe{
+  > iframe {
     right: 5px;
     top: 15px;
     position: absolute;
     @media only screen and (max-width: 800px) {
-        display: none; 
+      display: none;
     }
   }
 }
 
-.tbLogo{
+.tbLogo {
   position: absolute;
   left: 7px;
   top: 7px;
