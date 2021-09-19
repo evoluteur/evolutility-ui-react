@@ -112,12 +112,12 @@ export default class Nav extends React.Component {
         menus = [];
       }
       footer = (
-        <React.Fragment>
+        <>
           <Link to="/demo">
-            <img alt="Demos" src={"/pix/cup.png"} /> Demos
+            <img alt="Demos" src="/pix/cup.png" /> Demos
           </Link>
           <br />
-        </React.Fragment>
+        </>
       );
       // <Link to="/designer"><img alt="Designer" src={'/pix/bricks.png'} /> Designer</Link>
     }
@@ -157,12 +157,12 @@ export default class Nav extends React.Component {
             name="list"
             theme="light"
             onClick={this.toggleNav}
-          ></Icon>
+          />
           <span className="embossed">Evolutility</span>
         </div>
         <ul>{menus.map(Section)}</ul>
         <div className="footLinks">{footer}</div>
-        <div id="afterNav"></div>
+        <div id="afterNav" />
         <GitHub />
       </nav>
     );

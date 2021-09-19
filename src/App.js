@@ -82,12 +82,12 @@ export default class App extends React.Component {
       <div className="App">
         {this.state.loading ? (
           <div className="loading-evol">
-            <Spinner message="Fetching Evolutility UI models..."></Spinner>
+            <Spinner message="Fetching Evolutility UI models..." />
           </div>
         ) : (
           <BrowserRouter>
-            <Route path="*" exact={true} component={TopBar} />
-            <Route path="*" exact={true} component={Nav} />
+            <Route path="*" exact component={TopBar} />
+            <Route path="*" exact component={Nav} />
             <div className="pageContent" role="main">
               <AppRoutes />
             </div>

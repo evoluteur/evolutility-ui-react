@@ -9,13 +9,14 @@
 
 import React from "react";
 
-import { i18n_msg } from "../../../i18n/i18n.js";
-import { apiPath, pageSize } from "../../../config.js";
+import { i18n_msg } from "../../../i18n/i18n";
+import { apiPath, pageSize } from "../../../config";
 import url from "../../../utils/url";
 import models from "../../../models/all_models";
 
 import "./many.scss";
-import dao from "../../../utils/dao.js";
+import dao from "../../../utils/dao";
+
 export default class Many extends React.Component {
   viewSuperType = "n"; // = many
 

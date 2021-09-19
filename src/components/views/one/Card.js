@@ -30,9 +30,9 @@ export default class Card extends React.PureComponent {
 
     return (
       <div className="panel panel-default">
-        {fields.map(function (f, idx) {
-          const attr = f.type === ft.lov ? f.id + "_txt" : f.id,
-            fv = fieldValue(f, d[attr]);
+        {fields.map((f, idx) => {
+          const attr = f.type === ft.lov ? `${f.id}_txt` : f.id;
+          const fv = fieldValue(f, d[attr]);
           //  <Link to={link+d.id}><Icon name="browse" size="small"></Icon></Link>
 
           if (idx === 0) {
@@ -40,8 +40,14 @@ export default class Card extends React.PureComponent {
               <div key={f.id}>
                 <h4>
                   <Link to={link + d.id}>
-                    {icon}
-                    {fv ? fv : "( " + d.id + " )"}
+                    {m.icon && (
+                      <img
+                        className="evol-many-icon"
+                        src={`/pix/${m.icon}`}
+                        alt=""
+                      />
+                    )}
+                    {fv || `( ${d.id} )`}
                   </Link>
                 </h4>
                 <div className="card-actions">
