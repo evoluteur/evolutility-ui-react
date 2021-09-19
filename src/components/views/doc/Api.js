@@ -9,7 +9,7 @@
 
 import React from "react";
 
-import { apiPath } from "../../../config.js";
+import { apiPath } from "../../../config";
 import dao from "../../../utils/dao";
 import { getModel } from "../../../utils/moMa";
 import { i18n_stats } from "../../../i18n/i18n";
@@ -17,8 +17,8 @@ import Header from "../../shell/Header";
 import Spinner from "../../shell/Spinner";
 import Alert from "../../widgets/Alert";
 
-import dico from "../../../utils/dico.js";
-import { capitalize } from "../../../utils/format.js";
+import dico from "../../../utils/dico";
+import { capitalize } from "../../../utils/format";
 
 import "./Api.scss";
 

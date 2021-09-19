@@ -46,7 +46,7 @@ export default class Pie extends React.Component {
           radialLabelsLinkColor={{ from: "color" }}
           slicesLabelsSkipAngle={10}
           slicesLabelsTextColor="#333333"
-          animate={true}
+          animate
           motionStiffness={90}
           motionDamping={15}
           defs={[

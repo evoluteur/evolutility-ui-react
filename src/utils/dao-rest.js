@@ -5,7 +5,7 @@
 // (c) 2021 Olivier Giulieri
 
 import axios from "axios";
-import { apiPath } from "../config.js";
+import { apiPath } from "../config";
 import { proxy } from "../../package.json";
 
 const daoRest = {

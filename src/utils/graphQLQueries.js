@@ -12,21 +12,21 @@ import {
   fieldIsNumber,
   fieldIsNumeric,
   fieldIsDateOrTime,
-} from "./dico.js";
-import config from "../config.js";
-import moMa from "./moMa.js";
-import { dateTZ } from "../utils/format.js";
+} from "./dico";
+import config from "../config";
+import { getModel } from "./moMa";
+import { dateTZ } from "./format";
 
 const ft = fieldTypes;
 
 const prepData = (entity, data) => {
-  const m = moMa.getModel(entity);
+  const m = getModel(entity);
   let d = "{";
   m.fields.forEach((f) => {
     const v = data[f.id];
     if (v !== undefined) {
       if (f.type === ft.lov) {
-        var vv = parseInt(v, 10);
+        const vv = parseInt(v, 10);
         if (vv) {
           //const s = f.list.find(d => d.id === vv)
           d += f.id + "_id: " + vv + " ";
@@ -48,7 +48,7 @@ export const gqlOptions = (query) => ({
     "Content-Type": "application/json",
     Accept: "application/json",
   },
-  body: JSON.stringify({ query: query }),
+  body: JSON.stringify({ query }),
 });
 
 export const runQuery = (q, cb, cbError) => {
@@ -254,7 +254,7 @@ export const statsAggregate = (m) => {
 export const qStats = (m) => "query {" + statsAggregate(m) + "}";
 
 export const qOne = (entity, id) => {
-  const m = moMa.getModel(entity);
+  const m = getModel(entity);
   if (m) {
     let q =
       "query { one: " +
@@ -279,7 +279,7 @@ export const qDelete = (mqid, id) => `mutation {
 }`;
 
 export const qUpdateOne = (entity, mqid, id, data) => {
-  const m = moMa.getModel(entity);
+  const m = getModel(entity);
   return `mutation {
     updated: ${"update_" + mqid} (
         where: {id: {_eq: ${id}}}
@@ -290,7 +290,7 @@ export const qUpdateOne = (entity, mqid, id, data) => {
 // ) {returning ${ qOne(entity, id) }  }
 
 export const qInsertOne = (entity, mqid, data) => {
-  const m = moMa.getModel(entity);
+  const m = getModel(entity);
   return `mutation {
     inserted: ${"insert_" + mqid} (
       objects: [${prepData(entity, data)}]

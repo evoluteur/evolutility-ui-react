@@ -17,7 +17,7 @@ import { capitalize, urlJoin } from "../../utils/format";
 import dao from "../../utils/dao";
 import url from "../../utils/url";
 import evoGlobals from "../../utils/evoGlobals";
-import { apiPath } from "../../config.js";
+import { apiPath } from "../../config";
 import pkg from "../../../package.json";
 //import {i18n_actions, i18n_msg} from '../../i18n/i18n'
 import { i18n_msg, i18n_actions } from "../../i18n/i18n";

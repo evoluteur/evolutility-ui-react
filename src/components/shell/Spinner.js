@@ -6,23 +6,23 @@ import "./Spinner.scss";
 
 // HTML & CSS from http://tobiasahlin.com/spinkit/
 
-export default class Spinner extends React.PureComponent {
-  render() {
-    return (
-      <div className="evol-loading">
-        <div className="loading_txt">
-          {this.props.message || i18n_msg.loading}
-        </div>
-        <div className="spinner">
-          <div className="bounce1"></div>
-          <div className="bounce2"></div>
-          <div className="bounce3"></div>
-        </div>
-      </div>
-    );
-  }
-}
+const Spinner = ({ message }) => (
+  <div className="evol-loading">
+    <div className="loading_txt">{message || i18n_msg.loading}</div>
+    <div className="spinner">
+      <div className="bounce1" />
+      <div className="bounce2" />
+      <div className="bounce3" />
+    </div>
+  </div>
+);
+
+export default Spinner;
 
 Spinner.propTypes = {
   message: PropTypes.string,
+};
+
+Spinner.defaultProps = {
+  message: null,
 };

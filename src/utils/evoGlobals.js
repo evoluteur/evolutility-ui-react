@@ -1,3 +1,3 @@
-let evoGlobals = {};
+const evoGlobals = {};
 
 module.exports = evoGlobals;

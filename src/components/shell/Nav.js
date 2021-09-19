@@ -2,15 +2,15 @@ import React from "react";
 import { Route, Link } from "react-router-dom";
 import Icon from "react-crud-icons";
 import { i18n_nav } from "../../i18n/i18n";
-import AppMenus from "../../AppMenus.js";
-import url from "../../utils/url.js";
+import AppMenus from "../../AppMenus";
+import url from "../../utils/url";
 import GitHub from "./GitHub";
 import models from "../../models/all_models";
 
 import "./Nav.scss";
 
-let item2Group_Map = {};
-let sections = {};
+const item2Group_Map = {};
+const sections = {};
 const setup = () =>
   AppMenus.forEach((menuGroup) => {
     const groupId = menuGroup.id;

@@ -48,7 +48,7 @@ const chartIcon = (chartType, props) => (
     name={chartType === "table" ? "list" : chartType}
     tooltip={i18n_charts[chartType]}
     className={cssActive(chartType === props.chartType)}
-  ></Icon>
+  />
 );
 
 export default class Chart extends React.Component {
@@ -148,7 +148,7 @@ export default class Chart extends React.Component {
       );
     } else if (this.state.loading) {
       // - loading
-      body = <Spinner></Spinner>;
+      body = <Spinner />;
     } else if (!data || data.length === 0) {
       // - no data
       body = (
@@ -190,7 +190,7 @@ export default class Chart extends React.Component {
                 name={size === "large" ? "collapse" : "expand"}
                 size="small"
                 tooltip={size === "large" ? "Collapse" : "Expand"}
-              ></Icon>
+              />
             </div>
           ) : null}
           <div className="chart-actions-right">

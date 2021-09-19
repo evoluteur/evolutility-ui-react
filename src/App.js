@@ -8,12 +8,12 @@ import { toast, ToastContainer } from "react-toastify";
 import config from "./config";
 import { fetchModels } from "./utils/moMa";
 import Spinner from "./components/shell/Spinner";
-import Nav from "./components/shell/Nav.js";
-import TopBar from "./components/shell/TopBar.js";
-import Footer from "./components/shell/Footer.js";
+import Nav from "./components/shell/Nav";
+import TopBar from "./components/shell/TopBar";
+import Footer from "./components/shell/Footer";
 
-import Home from "./components/pages/Home.js";
-import Demo from "./components/pages/Demo.js";
+import Home from "./components/pages/Home";
+import Demo from "./components/pages/Demo";
 
 import List from "./components/views/many/List";
 import Cards from "./components/views/many/Cards";
@@ -25,7 +25,7 @@ import Edit from "./components/views/one/Edit";
 
 import Api from "./components/views/doc/Api";
 
-import PageNotFound from "./components/pages/PageNotFound.js";
+import PageNotFound from "./components/pages/PageNotFound";
 
 let queryModels = config.queryModels || false;
 
@@ -33,7 +33,7 @@ const AppRoutes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
     <Route exact path="/demo" component={Demo} />
-    <Route path="/:entity" exact={true} component={List} />
+    <Route path="/:entity" exact component={List} />
 
     <Route path="/:entity/browse/:id" component={Browse} />
     <Route path="/:entity/browse" component={Browse} />
@@ -47,7 +47,7 @@ const AppRoutes = () => (
     <Route path="/:entity/stats" component={Stats} />
     <Route path="/:entity/api" component={Api} />
 
-    <Route path="*" exact={true} component={PageNotFound} />
+    <Route path="*" exact component={PageNotFound} />
   </Switch>
 );
 

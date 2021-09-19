@@ -9,8 +9,8 @@
 */
 
 import React from "react";
-import { wTimestamp, wComments } from "../../../config.js";
 import Icon from "react-crud-icons";
+import { wTimestamp, wComments } from "../../../config";
 import models from "../../../models/all_models";
 import { i18n_stats, i18n_comments } from "../../../i18n/i18n";
 import {
@@ -24,7 +24,7 @@ import Header from "../../shell/Header";
 import Spinner from "../../shell/Spinner";
 import Alert from "../../widgets/Alert";
 import Range from "../../widgets/Range";
-import Chart from "../../views/charts/Chart";
+import Chart from "../charts/Chart";
 
 import "./Stats.scss";
 
@@ -62,7 +62,7 @@ export default class Stats extends React.Component {
   }
 
   setModel(entity) {
-    var e = entity;
+    let e = entity;
     if (!e) {
       if (this.props.match && this.props.match.params) {
         e = this.props.match.params.entity;
@@ -91,8 +91,8 @@ export default class Stats extends React.Component {
   }
 
   getData(entity) {
-    var e = entity || this.props.match.params.entity,
-      fields = models[e].fields;
+    const e = entity || this.props.match.params.entity;
+    const { fields } = models[e];
 
     dao
       .getStats(e)
@@ -117,7 +117,7 @@ export default class Stats extends React.Component {
     if (data) {
       fields.forEach((f) => {
         if (fieldIsNumeric(f) && !f.noStats) {
-          let item = data[f.id];
+          const item = data[f.id];
           if (item) {
             item.type = f.type;
             item.field = f;
@@ -157,10 +157,10 @@ export default class Stats extends React.Component {
   }
 
   render() {
-    const e = this.props.match.params.entity,
-      model = models[e] || null,
-      data = this.state.data || null,
-      chartsOK = dao.apiType !== "graphql";
+    const e = this.props.match.params.entity;
+    const model = models[e] || null;
+    const data = this.state.data || null;
+    const chartsOK = dao.apiType !== "graphql";
 
     if (model) {
       if (data) {

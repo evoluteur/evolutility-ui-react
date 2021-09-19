@@ -41,7 +41,7 @@ const itemLink = (id, mid, view) => {
 export default class DemosList extends React.PureComponent {
   render = () => {
     const showTitle = this.props.title || false;
-    let view = this.props.view;
+    const { view } = this.props;
 
     return (
       <div className="d-worlds">

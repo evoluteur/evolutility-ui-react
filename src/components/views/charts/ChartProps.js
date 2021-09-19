@@ -4,8 +4,8 @@ const sizes = ["small", "large"];
 const chartTypes = ["bars", "pie", "table"];
 
 const chartProps = {
-  sizes: sizes,
-  chartTypes: chartTypes,
+  sizes,
+  chartTypes,
   chartProps: {
     data: PropTypes.any,
     size: PropTypes.oneOf(sizes),

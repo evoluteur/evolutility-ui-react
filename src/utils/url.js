@@ -10,8 +10,8 @@ export const queryUrl = () => window.location.search || "";
 export function querySearch(query) {
   // - make uri params string from query object
   // - example: {a:1, b: 'bbb'} => "a=1&b=bbb"
-  var urlParams = [];
-  for (var prop in query) {
+  const urlParams = [];
+  for (const prop in query) {
     if (query[prop] !== "") {
       urlParams.push(prop + "=" + encodeURI(query[prop]));
     }
@@ -30,7 +30,7 @@ export function parseQuery(qString) {
 }
 
 export function getSearchText() {
-  let search = parseQuery(window.location.search);
+  const search = parseQuery(window.location.search);
   return search && search.search ? search.search : null;
 }
 
@@ -44,11 +44,11 @@ export function getUrlMap(url) {
 }
 
 const urlModule = {
-  queryUrl: queryUrl,
-  querySearch: querySearch,
-  parseQuery: parseQuery,
-  getSearchText: getSearchText,
-  getUrlMap: getUrlMap,
+  queryUrl,
+  querySearch,
+  parseQuery,
+  getSearchText,
+  getUrlMap,
 };
 
 export default urlModule;

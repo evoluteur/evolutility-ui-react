@@ -59,12 +59,12 @@ export default class SearchBox extends React.Component {
             "clear-icon glyphicon glyphicon-remove " +
             (this.searchValue ? "" : "hidden")
           }
-        ></div>
+        />
         <span
           key="search"
           onClick={this.clickSearch}
           className="btn input-group-addon glyphicon glyphicon-search"
-        ></span>
+        />
       </div>
     );
   }

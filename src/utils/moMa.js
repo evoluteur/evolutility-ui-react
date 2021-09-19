@@ -6,7 +6,7 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2021 Olivier Giulieri
 
-import dao from "../utils/dao";
+import dao from "./dao";
 import models from "../models/all_models";
 import { prepModel } from "./dico";
 
@@ -35,13 +35,13 @@ export function addModels(ms) {
   });
 }
 
-export let modelIds = Object.keys(models);
+export const modelIds = Object.keys(models);
 
 const moma = {
-  fetchModels: fetchModels,
-  addModels: addModels,
-  getModel: getModel,
-  models: models,
-  modelIds: modelIds,
+  fetchModels,
+  addModels,
+  getModel,
+  models,
+  modelIds,
 };
 export default moma;

@@ -25,11 +25,11 @@ export default class Browse extends OneRead {
 
   render() {
     const { id = 0, entity = null } = this.props.match.params;
-    const linkEdit = "/" + entity + "/edit/" + id,
-      linkList = "/" + entity + "/list",
-      m = this.model,
-      data = this.state.data || {},
-      title = dataTitle(m, data, false);
+    const linkEdit = `/${entity}/edit/${id}`;
+    const linkList = `/${entity}/list`;
+    const m = this.model;
+    const data = this.state.data || {};
+    const title = dataTitle(m, data, false);
     const collecData = (cid) =>
       data.collections ? data.collections[cid] : null;
 

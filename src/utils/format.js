@@ -10,14 +10,14 @@ import numeral from "numeral";
 import moment from "moment";
 
 // include locale support for a few chosen countries -- add more as needed
-//import 'moment/locale/en-gb'
-//import 'moment/locale/en-au'
-//import 'moment/locale/fr'
-//import 'moment/locale/de'
-//import 'moment/locale/es'
+// import 'moment/locale/en-gb'
+// import 'moment/locale/en-au'
+// import 'moment/locale/fr'
+// import 'moment/locale/de'
+// import 'moment/locale/es'
 
-import { filesUrl, locale } from "../config.js";
-import { fieldTypes as ft } from "./dico.js";
+import { filesUrl, locale } from "../config";
+import { fieldTypes as ft } from "./dico";
 
 // Set the locale from the browser -- which may need to be configured
 moment.locale(
@@ -54,7 +54,8 @@ export function doc(d, path) {
 function dateOpt(d, type) {
   if (type === ft.time) {
     return timeString(d);
-  } else if (type === ft.datetime) {
+  }
+  if (type === ft.datetime) {
     return dateString(d);
   }
   return dateString(d);
@@ -138,22 +139,22 @@ const formatLib = {
 
   now: () => moment(),
 
-  fieldValue: fieldValue,
-  image: image,
-  doc: doc,
+  fieldValue,
+  image,
+  doc,
 
   // --- date formats ---
-  dateOpt: dateOpt,
-  dateString: dateString,
-  timeString: timeString,
-  datetimeString: datetimeString,
-  decimalString: decimalString,
-  moneyString: moneyString,
-  jsonString: jsonString,
+  dateOpt,
+  dateString,
+  timeString,
+  datetimeString,
+  decimalString,
+  moneyString,
+  jsonString,
 
-  urlJoin: urlJoin,
+  urlJoin,
 
-  capitalize: capitalize,
+  capitalize,
 };
 
 export default formatLib;

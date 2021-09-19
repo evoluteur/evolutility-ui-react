@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import Icon from "react-crud-icons";
-import { queryUrl, getSearchText } from "../../utils/url.js";
+import { queryUrl, getSearchText } from "../../utils/url";
 
 import "./Header.scss";
 

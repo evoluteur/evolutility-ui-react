@@ -7,7 +7,7 @@
 import React from "react";
 import pkg from "../../../package.json";
 import { modelIds, getModel } from "../../utils/moMa";
-import DemosList from "./DemosList.js";
+import DemosList from "./DemosList";
 
 import "./Home.scss";
 

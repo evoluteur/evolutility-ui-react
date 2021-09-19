@@ -10,7 +10,7 @@ export default class GitHub extends React.PureComponent {
         scrolling="0"
         width="100px"
         height="30px"
-      ></iframe>
+      />
     );
   }
 }

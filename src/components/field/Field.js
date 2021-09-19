@@ -9,19 +9,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
+import Datepicker from "react-datepicker";
+import Dropzone from "react-dropzone";
+import MultiSelect from "@khanacademy/react-multi-select";
 import { fieldTypes as ft } from "../../utils/dico";
 import { fieldValue, image, doc } from "../../utils/format";
 import { i18n_actions, i18n_msg } from "../../i18n/i18n";
-import { filesUrl } from "../../config.js";
+import { filesUrl } from "../../config";
 import FieldLabel from "./FieldLabel";
-
-// - components for some field types:
-// - date
-import Datepicker from "react-datepicker";
-// - image & documents
-import Dropzone from "react-dropzone";
-// - list
-import MultiSelect from "@khanacademy/react-multi-select";
 
 import "./Field.scss";
 

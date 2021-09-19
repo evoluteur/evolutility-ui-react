@@ -9,10 +9,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Icon from "react-crud-icons";
+import { Link } from "react-router-dom";
 import models from "../../../models/all_models";
 import { fieldValue } from "../../../utils/format";
 import { fieldTypes as ft } from "../../../utils/dico";
-import { Link } from "react-router-dom";
 
 export default class Card extends React.PureComponent {
   viewId = "card";
@@ -20,16 +20,13 @@ export default class Card extends React.PureComponent {
   lovMaps = {};
 
   render() {
-    const d = this.props.data || {},
-      fields = this.props.fields || [],
-      entity = this.props.entity,
-      m = models[entity],
-      link = "/" + entity + "/" + m.defaultViewOne + "/",
-      linkEdit = "/" + entity + "/edit/",
-      icon = m.icon ? (
-        <img className="evol-many-icon" src={"/pix/" + m.icon} alt="" />
-      ) : null,
-      getLovMap = this.getLovMap;
+    const d = this.props.data || {};
+    const fields = this.props.fields || [];
+    const { entity } = this.props;
+    const m = models[entity];
+    const link = `/${entity}/${m.defaultViewOne}/`;
+    const linkEdit = `/${entity}/edit/`;
+    const { getLovMap } = this;
 
     return (
       <div className="panel panel-default">
@@ -49,19 +46,21 @@ export default class Card extends React.PureComponent {
                 </h4>
                 <div className="card-actions">
                   <Link to={linkEdit + d.id}>
-                    <Icon name="edit" size="small"></Icon>
+                    <Icon name="edit" size="small" />
                   </Link>
                 </div>
               </div>
             );
             // <i data-id="Delete" title="Delete" className="glyphicon glyphicon-trash"></i>
-          } else if (f.type === ft.image) {
+          }
+          if (f.type === ft.image) {
             return (
               <div key={f.id} className="card-fld-center">
                 <Link to={link + d.id}>{fv}</Link>
               </div>
             );
-          } else if (f.type === ft.list) {
+          }
+          if (f.type === ft.list) {
             const lovMap = getLovMap(f);
             return (
               <div key={f.id}>
@@ -73,23 +72,21 @@ export default class Card extends React.PureComponent {
                 </div>
               </div>
             );
-          } else {
-            const icon =
-              f.type === ft.lov && f.lovIcon ? d[f.id + "_icon"] : "";
-            return (
-              <div key={f.id}>
-                <label>{f.labelShort || f.label}: </label>
-                <div>
-                  {icon ? (
-                    <img src={"/pix/" + icon} className="lov-icon" alt="" />
-                  ) : (
-                    ""
-                  )}
-                  {fv}
-                </div>
-              </div>
-            );
           }
+          const icon = f.type === ft.lov && f.lovIcon ? d[`${f.id}_icon`] : "";
+          return (
+            <div key={f.id}>
+              <label>{f.labelShort || f.label}: </label>
+              <div>
+                {icon ? (
+                  <img src={`/pix/${icon}`} className="lov-icon" alt="" />
+                ) : (
+                  ""
+                )}
+                {fv}
+              </div>
+            </div>
+          );
         })}
       </div>
     );

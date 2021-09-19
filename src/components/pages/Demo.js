@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DemosList from "./DemosList.js";
+import DemosList from "./DemosList";
 import { apiType } from "../../utils/dao";
 
 export default class Demo extends React.PureComponent {
@@ -28,7 +28,7 @@ export default class Demo extends React.PureComponent {
           on Heroku.
         </p>
 
-        <DemosList title={true} />
+        <DemosList title />
 
         <p>
           <br />

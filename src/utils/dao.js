@@ -7,9 +7,9 @@
 // Data Access Object
 // loads DAO for REST or DAO for GraphQL based on config option
 
-import { apiType as zAPI } from "../config.js";
-import daoREST from "./dao-rest.js";
-import daoGraphQL from "./dao-graphql.js";
+import { apiType as zAPI } from "../config";
+import daoREST from "./dao-rest";
+import daoGraphQL from "./dao-graphql";
 
 const dao = zAPI === "graphql" ? daoGraphQL : daoREST;
 

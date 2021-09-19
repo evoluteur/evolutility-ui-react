@@ -55,9 +55,9 @@ export const fieldChartable = (f) =>
   f.type === ft.lov || f.type === ft.bool || fieldIsNumber(f);
 
 export function hById(arr, prop = "id") {
-  var objH = {};
+  const objH = {};
   if (arr) {
-    arr.forEach(function (o) {
+    arr.forEach((o) => {
       objH[o[prop]] = o;
     });
   }
@@ -143,10 +143,10 @@ export const prepModels = (models) => {
 
 export const dataTitle = (m, data, isNew) => {
   if (m) {
-    let f,
-      title = "";
+    let f;
+    let title = "";
     if (isNew) {
-      title = "New " + (m.name || "item");
+      title = `New ${m.name || "item"}`;
     } else if (m.titleField) {
       if (isFunction(m.titleField)) {
         title = m.titleField(data);
@@ -161,9 +161,8 @@ export const dataTitle = (m, data, isNew) => {
       }
     }
     return title;
-  } else {
-    return "New item";
   }
+  return "New item";
 };
 
 export const isFieldMany = (f) => f.inList || f.inMany;
@@ -177,19 +176,19 @@ export const fieldId2Field = (fieldIds, fieldsH) =>
 const dico = {
   fieldTypes: ft,
   fieldTypeStrings: fta,
-  fieldIsNumber: fieldIsNumber,
-  fieldIsDateOrTime: fieldIsDateOrTime,
-  fieldIsNumeric: fieldIsNumeric,
-  fieldInCharts: fieldInCharts,
-  fieldChartable: fieldChartable,
-  hById: hById,
+  fieldIsNumber,
+  fieldIsDateOrTime,
+  fieldIsNumeric,
+  fieldInCharts,
+  fieldChartable,
+  hById,
   hByX: hById,
-  prepModel: prepModel,
-  prepModelCollecs: prepModelCollecs,
-  dataTitle: dataTitle,
-  isFieldMany: isFieldMany,
-  fieldIsText: fieldIsText,
-  fieldId2Field: fieldId2Field,
+  prepModel,
+  prepModelCollecs,
+  dataTitle,
+  isFieldMany,
+  fieldIsText,
+  fieldId2Field,
 };
 
 export default dico;

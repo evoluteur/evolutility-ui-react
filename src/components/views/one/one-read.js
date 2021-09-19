@@ -6,11 +6,11 @@
 // (c) 2021 Olivier Giulieri
 
 import React from "react";
-import dao from "../../../utils/dao.js";
+import dao from "../../../utils/dao";
 //import { withRouter, browserHistory } from 'react-router'
 
 import { i18n_errors } from "../../../i18n/i18n";
-import { apiPath } from "../../../config.js";
+import { apiPath } from "../../../config";
 import models from "../../../models/all_models";
 
 import "./one.scss";
