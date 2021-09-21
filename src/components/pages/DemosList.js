@@ -16,26 +16,26 @@ const itemLink = (id, mid, view) => {
   const m = getModel(mid);
   if (view === "api") {
     return (
-      <Link to={"/" + mid + "/api"}>
+      <Link to={`/${mid}/api`}>
         <img src="/pix/designer/api.png" alt={m.title} title={m.title} />
         {m.title}
       </Link>
     );
-  } else if (view === "model") {
+  }
+  if (view === "model") {
     return (
-      <Link to={"/object/browse/" + id}>
+      <Link to={`/object/browse/${id}`}>
         <img src="/pix/designer/object.png" alt={m.title} title={m.title} />
         {m.title}
       </Link>
     );
-  } else {
-    return (
-      <Link to={"/" + mid + "/" + (m.defaultViewMany || "list")}>
-        <img src={"/pix/" + m.icon} alt={m.title} title={m.title} />
-        {m.title}
-      </Link>
-    );
   }
+  return (
+    <Link to={`/${mid}/${m.defaultViewMany || "list"}`}>
+      <img src={`/pix/${m.icon}`} alt={m.title} title={m.title} />
+      {m.title}
+    </Link>
+  );
 };
 
 export default class DemosList extends React.PureComponent {

@@ -43,7 +43,7 @@ function createMarkup(d) {
 
 function createOption(id, text) {
   return (
-    <option key={id} value={"" + id}>
+    <option key={id} value={`${id}`}>
       {text}
     </option>
   );
@@ -65,7 +65,7 @@ export default class Field extends React.Component {
     };
   }
 
-  _fieldElem(f, d, cbs) {
+  fieldElem(f, d, cbs) {
     // - return the widget needed for the specific field type
     const usualProps = {
       id: f.id,
@@ -74,19 +74,19 @@ export default class Field extends React.Component {
     };
 
     if (f.type === ft.bool) {
-      return (
-        <input {...usualProps} type="checkbox" checked={d ? true : false} />
-      );
-    } else if (f.type === ft.textml) {
+      return <input {...usualProps} type="checkbox" checked={!!d} />;
+    }
+    if (f.type === ft.textml) {
       return (
         <textarea
           {...usualProps}
           rows={f.height || 4}
           className="form-control"
-          value={d ? d : ""}
+          value={d || ""}
         />
       );
-    } else if (f.type === ft.json) {
+    }
+    if (f.type === ft.json) {
       return (
         <textarea
           {...usualProps}
@@ -95,22 +95,24 @@ export default class Field extends React.Component {
           value={isObject(d) ? JSON.stringify(d, null, 2) : d || ""}
         />
       );
-    } else if (f.type === ft.lov) {
+    }
+    if (f.type === ft.lov) {
       if (isObject(d)) {
         // for GraphQL
         d = d.id;
       }
-      let opts = f.list
+      const opts = f.list
         ? f.list.map((item) => createOption(item.id, item.text))
-        : [createOption(f.id + "loading", i18n_msg.loading)];
+        : [createOption(`${f.id}loading`, i18n_msg.loading)];
       return (
         <select {...usualProps} className="form-control" value={d || ""}>
           <option />
           {opts}
         </select>
       );
-    } else if (f.type === ft.list) {
-      let opts = f.list
+    }
+    if (f.type === ft.list) {
+      const opts = f.list
         ? f.list.map((item) => ({
             value: item.id,
             label: item.text,
@@ -123,7 +125,8 @@ export default class Field extends React.Component {
           onSelectedChanged={this.getMultiselectFieldChange(f)}
         />
       );
-    } else if (f.type === ft.date) {
+    }
+    if (f.type === ft.date) {
       return (
         <Datepicker
           {...usualProps}
@@ -132,9 +135,10 @@ export default class Field extends React.Component {
           onChange={this.getDateFieldChange(f.id)}
         />
       );
-    } else if (f.type === ft.datetime) {
+    }
+    if (f.type === ft.datetime) {
       return (
-        <React.Fragment>
+        <>
           <Datepicker
             {...usualProps}
             className="form-control inline"
@@ -143,23 +147,25 @@ export default class Field extends React.Component {
           />
           <input
             {...usualProps}
-            key={usualProps.key + "_time"}
+            key={`${usualProps.key}_time`}
             type="time"
-            value={d ? (d + "").substr(11, 8) : ""}
+            value={d ? `${d}`.substr(11, 8) : ""}
             className="form-control"
           />
-        </React.Fragment>
+        </>
       );
-    } else if (f.type === ft.time) {
+    }
+    if (f.type === ft.time) {
       return (
         <input
           {...usualProps}
           type="time"
-          value={d ? d : ""}
+          value={d || ""}
           className="form-control"
         />
       );
-    } else if (f.type === ft.image || f.type === ft.doc) {
+    }
+    if (f.type === ft.image || f.type === ft.doc) {
       let pix = null;
       if (d) {
         if (f.type === ft.image && d) {
@@ -188,29 +194,27 @@ export default class Field extends React.Component {
             </div>
           ) : null}
           <Dropzone onDrop={this.onDropFile}>
-            {({ getRootProps, getInputProps, isDragActive }) => {
-              return (
-                <div
-                  {...getRootProps()}
-                  className={
-                    "pixdrop dropzone " +
-                    (isDragActive ? "dropzone--isActive" : "")
-                  }
-                >
-                  <input {...getInputProps()} />
-                  {isDragActive ? (
-                    <p>Drop files here...</p>
-                  ) : (
-                    <p>{i18n_actions.dropFile}</p>
-                  )}
-                </div>
-              );
-            }}
+            {({ getRootProps, getInputProps, isDragActive }) => (
+              <div
+                {...getRootProps()}
+                className={`pixdrop dropzone ${
+                  isDragActive ? "dropzone--isActive" : ""
+                }`}
+              >
+                <input {...getInputProps()} />
+                {isDragActive ? (
+                  <p>Drop files here...</p>
+                ) : (
+                  <p>{i18n_actions.dropFile}</p>
+                )}
+              </div>
+            )}
           </Dropzone>
-          <i></i>
+          <i />
         </div>
       );
-    } else if (f.type === ft.email || f.type === ft.money) {
+    }
+    if (f.type === ft.email || f.type === ft.money) {
       const symbol = f.type === ft.email ? "@" : "$";
       return (
         <div className="input-group">
@@ -230,7 +234,7 @@ export default class Field extends React.Component {
       inputType = "number";
       usualProps.step = f.type === ft.int ? "1" : "0.1";
     } else {
-      //if(f.type==='email'){
+      // if(f.type==='email'){
       inputType = "text";
     }
 
@@ -245,7 +249,7 @@ export default class Field extends React.Component {
     );
   }
 
-  _fieldElemReadOnly(f, d, d_id) {
+  fieldElemReadOnly(f, d, d_id) {
     // - return the formatted field value
     let fw;
 
@@ -259,7 +263,8 @@ export default class Field extends React.Component {
           dangerouslySetInnerHTML={createMarkup(d)}
         />
       );
-    } else if (f.type === ft.image && d) {
+    }
+    if (f.type === ft.image && d) {
       fw = image(filesUrl + d);
     } else if (f.type === ft.doc) {
       fw = doc(d, filesUrl);
@@ -271,26 +276,20 @@ export default class Field extends React.Component {
             {fieldValue(f, d)}
           </Link>
         );
+      } else if (f.lovIcon && this.props.icon) {
+        fw = (
+          <span>
+            <img src={`/pix/${this.props.icon}`} className="lov-icon" alt="" />
+            {fieldValue(f, d)}
+          </span>
+        );
       } else {
-        if (f.lovIcon && this.props.icon) {
-          fw = (
-            <span>
-              <img
-                src={"/pix/" + this.props.icon}
-                className="lov-icon"
-                alt=""
-              />
-              {fieldValue(f, d)}
-            </span>
-          );
-        } else {
-          fw = fieldValue(f, d);
-        }
+        fw = fieldValue(f, d);
       }
     } else if (f.type === ft.list) {
       if (f.list) {
         fw = (
-          <div key={f.id + "_list"} className="list-tags">
+          <div key={`${f.id}_list`} className="list-tags">
             {(d || []).map((itemid) => (
               <div key={itemid}>{itemInList(itemid, f.list)}</div>
             ))}
@@ -318,17 +317,17 @@ export default class Field extends React.Component {
   };
 
   render() {
-    const f = this.props.model || { type: "text" },
-      readOnly = this.props.readOnly || f.readOnly,
-      cbs = this.props.callbacks || {},
-      { value, valueId } = this.props,
-      invalid = this.state.invalid,
-      label = this.props.label || f.label;
+    const f = this.props.model || { type: "text" };
+    const readOnly = this.props.readOnly || f.readOnly;
+    const cbs = this.props.callbacks || {};
+    const { value, valueId } = this.props;
+    const { invalid } = this.state;
+    const label = this.props.label || f.label;
 
     return (
       <div
-        className={"evol-fld" + (invalid ? " has-error" : "")}
-        style={{ width: (f.width || 100) + "%" }}
+        className={`evol-fld${invalid ? " has-error" : ""}`}
+        style={{ width: `${f.width || 100}%` }}
       >
         <FieldLabel
           label={label}
@@ -342,8 +341,8 @@ export default class Field extends React.Component {
         ) : null}
 
         {readOnly
-          ? this._fieldElemReadOnly(f, value, valueId)
-          : this._fieldElem(f, value, cbs)}
+          ? this.fieldElemReadOnly(f, value, valueId)
+          : this.fieldElem(f, value, cbs)}
 
         {invalid ? (
           <div className="evo-fld-invalid">{this.state.message}</div>
@@ -364,9 +363,10 @@ export default class Field extends React.Component {
     };
   }
 
-  getMultiselectFieldChange = () => {
+  getMultiselectFieldChange =
+    () =>
     // - for fields of type list (using react-multi-select)
-    return (v) => {
+    (v) => {
       const f = this.props.model;
       this.props.callbacks.change({
         target: {
@@ -375,7 +375,6 @@ export default class Field extends React.Component {
         },
       });
     };
-  };
 
   onDropFile = (files) => {
     // - only for fields of type image or document
@@ -415,4 +414,13 @@ Field.propTypes = {
   value: PropTypes.any, // field value
   label: PropTypes.string, // override label in model
   readOnly: PropTypes.bool, // override readOnly in model
+  icon: PropTypes.string,
+};
+
+Field.defaultProps = {
+  data: null,
+  value: null,
+  label: null,
+  readOnly: null,
+  icon: null,
 };

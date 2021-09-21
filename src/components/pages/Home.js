@@ -22,7 +22,7 @@ modelIds.forEach((mid) => {
         id: m.id,
         oid: m.oid,
         world: m.world,
-        icon: "pix/" + m.icon,
+        icon: `pix/${m.icon}`,
         label: m.title || m.label,
       };
       if (m.world === "organizer") {

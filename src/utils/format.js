@@ -27,7 +27,7 @@ moment.locale(
 export function capitalize(word) {
   // TODO: maybe use _.string.capitalize(word);
   if (word && word.length > 0) {
-    return word.substring(0, 1).toUpperCase() + word.substring(1); //.toLowerCase();
+    return word.substring(0, 1).toUpperCase() + word.substring(1); // .toLowerCase();
   }
   return "";
 }
@@ -64,7 +64,7 @@ function dateOpt(d, type) {
 export const dateTZ = (d) => (d ? d.toISOString() : null);
 
 export const dateString = (d) => mFormat(d, "L");
-//const timeString = d => mFormat(moment(d, 'HH:mm:ss'), 'LTS')
+// const timeString = d => mFormat(moment(d, 'HH:mm:ss'), 'LTS')
 const timeString = (d) => mFormat(moment(d, "HH:mm:ss"), "hh:mm A");
 const datetimeString = (d) => mFormat(d, "L hh:mm A");
 const decimalString = (d) => numFormat(d, d > 1 ? "0.00" : "0.000");
@@ -73,14 +73,18 @@ const jsonString = (js) => (js ? JSON.stringify(js, null, "\t") : "");
 
 export function fieldValue(f, d, abbr) {
   if (f.type === ft.bool) {
-    return d ? <i className="glyphicon glyphicon-ok"></i> : "";
-  } else if (f.type === ft.date) {
+    return d ? <i className="glyphicon glyphicon-ok" /> : "";
+  }
+  if (f.type === ft.date) {
     return dateString(d);
-  } else if (f.type === ft.time) {
+  }
+  if (f.type === ft.time) {
     return timeString(d);
-  } else if (f.type === ft.datetime) {
+  }
+  if (f.type === ft.datetime) {
     return datetimeString(d);
-  } else if (f.type === ft.color) {
+  }
+  if (f.type === ft.color) {
     return (
       <div>
         <div
@@ -93,25 +97,31 @@ export function fieldValue(f, d, abbr) {
         </div>
       </div>
     );
-  } else if (f.type === ft.image && d) {
+  }
+  if (f.type === ft.image && d) {
     return image(filesUrl + d);
-  } else if (f.type === ft.url && d) {
+  }
+  if (f.type === ft.url && d) {
     return (
       <a href={d} target="_blank" rel="noopener noreferrer">
         {d}
       </a>
     );
-  } else if (f.type === ft.email && d) {
-    return <a href={"mailto:" + d}>{d}</a>;
-  } else if (f.type === ft.json && d) {
+  }
+  if (f.type === ft.email && d) {
+    return <a href={`mailto:${d}`}>{d}</a>;
+  }
+  if (f.type === ft.json && d) {
     return jsonString(d);
-  } else if (f.type === ft.dec && d) {
+  }
+  if (f.type === ft.dec && d) {
     return decimalString(d);
-  } else if (f.type === ft.money && d) {
+  }
+  if (f.type === ft.money && d) {
     return moneyString(d);
-  } /*else if(f.type===ft.lov && icon){
+  } /* else if(f.type===ft.lov && icon){
         return <React.Fragment><img src={icon} alt=""></img>{d}</React.Fragment>
-    }*/
+    } */
   return d;
 }
 
@@ -126,11 +136,11 @@ export function urlJoin(u1, u2) {
   const slashu1 = u1[u1.length - 1] === "/";
   if (slashu2 && slashu1) {
     return u1 + u2.substring(1);
-  } else if (!slashu2 && !slashu1) {
-    return u1 + "/" + u2;
-  } else {
-    return u1 + u2;
   }
+  if (!slashu2 && !slashu1) {
+    return `${u1}/${u2}`;
+  }
+  return u1 + u2;
 }
 
 const formatLib = {

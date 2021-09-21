@@ -9,11 +9,11 @@ const allStrings = {
   name: "English",
 
   i18n_nav: {
-    //TODO: section to be a REST call
-    //t_home: 'Home',
-    //t_demos: 'Apps',
-    //t_designer: 'Designer',
-    //t_community: 'Community',
+    // TODO: section to be a REST call
+    // t_home: 'Home',
+    // t_demos: 'Apps',
+    // t_designer: 'Designer',
+    // t_community: 'Community',
     /*
         comics: 'Comics',
         contact: 'Contacts',
@@ -36,28 +36,28 @@ const allStrings = {
     edit: "Edit",
     // login: 'Login',
     new: "New",
-    newEntity: "New {0}", //'New Item',
-    //newUpload: 'New Upload',
-    //search: 'Search',
-    //newSearch: 'New Search',
-    //searchRes: 'Search Result',
-    //selection: 'Selection',
-    //selections: 'Selections',
+    newEntity: "New {0}", // 'New Item',
+    // newUpload: 'New Upload',
+    // search: 'Search',
+    // newSearch: 'New Search',
+    // searchRes: 'Search Result',
+    // selection: 'Selection',
+    // selections: 'Selections',
     export1: "Export",
-    //import: 'Import',
-    //massUpdate: 'Mass Update',
+    // import: 'Import',
+    // massUpdate: 'Mass Update',
     delete1: "Delete",
-    //bAll: 'All',
+    // bAll: 'All',
     list: "List",
     cards: "Cards",
-    //bJSON: 'JSON',
+    // bJSON: 'JSON',
     filter: "Filter",
-    //bScatter:'Scatter',
-    charts: "Dashboard", //'Charts',
-    //refresh: 'Refresh',
-    //print: 'Print',
+    // bScatter:'Scatter',
+    charts: "Dashboard", // 'Charts',
+    // refresh: 'Refresh',
+    // print: 'Print',
     save: "Save",
-    //saveAdd: 'Save and Add Another',
+    // saveAdd: 'Save and Add Another',
     ok: "OK",
     cancel: "Cancel",
 
@@ -66,7 +66,7 @@ const allStrings = {
     next: "Next",
 
     dropFile: "Drop the file here, or click to select the file to upload.",
-    //dropFiles: 'Drop files here, or click to select files to upload.',
+    // dropFiles: 'Drop files here, or click to select files to upload.',
     remove_image: "Remove image",
     remove_document: "Remove document",
 
@@ -85,26 +85,26 @@ const allStrings = {
     confirmLeave: "Your work is not saved! Are you sure you want to leave?",
     range: "{0} to {1} of {2} {3}", // 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'
     xinz: "{0} of {1} {2}", // 0=mSize, 1=totSize, 2=entities'
-    //sgn_money: '$', // indicator for money
-    //sgn_email: '@', // indicator for email
+    // sgn_money: '$', // indicator for money
+    // sgn_email: '@', // indicator for email
     added: 'New {0} "{1}" added.',
     updated: '{0} "{1}" updated.',
     deleted: '{0} "{1}" deleted.',
-    //error: 'Error',
+    // error: 'Error',
     noUpdate: "No update necessary.",
-    //deleteSelectionConfirmation: 'Do you really want to delete the selected {0}?',
+    // deleteSelectionConfirmation: 'Do you really want to delete the selected {0}?',
     deleteConfirmation: 'Do you really want to delete the {0} "{1}"?',
     delete: "Delete {0}?",
   },
 
   // --- validation ---
   i18n_validation: {
-    //incomplete: 'Some information is missing or invalid.',
+    // incomplete: 'Some information is missing or invalid.',
     incomplete: "Missing information.",
     invalid: "Invalid format.",
-    //invalidList: '{0} values in "{1}" are invalid.',
-    //invalidList1: '1 value in "{1}" is invalid.',
-    //intro: 'You are not finished yet: ',
+    // invalidList: '{0} values in "{1}" are invalid.',
+    // invalidList1: '1 value in "{1}" is invalid.',
+    // intro: 'You are not finished yet: ',
     empty: '"{0}" must have a value.',
     email: '"{0}" must be a valid email formatted like "name@domain.com".',
     integer: '"{0}" must only use numbers.',
@@ -121,7 +121,7 @@ const allStrings = {
     minLength: '"{0}" must be at least {1} characters long.',
     minMaxLength: '"{0}" must be between {1} and {2} characters long.',
     regExp: '"{0}" is not of the expected format.',
-    //regExp: '"{0}" must match the regular expression pattern for "{1}".'
+    // regExp: '"{0}" must match the regular expression pattern for "{1}".'
   },
 
   // --- charts ---

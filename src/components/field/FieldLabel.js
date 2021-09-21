@@ -5,23 +5,18 @@ import PropTypes from "prop-types";
 
 import Icon from "react-crud-icons";
 
-const FieldLabel = (props) => {
+const FieldLabel = ({ field, label, required, readOnly, clickHelp }) => {
   // - props = label, field, readOnly, clickHelp
-  const f = props.field || { type: "text" },
-    required = (f.required || props.required) && !props.readOnly;
+  const f = field || { type: "text" };
+  const required2 = (f.required || required) && !readOnly;
 
   return (
     <div className="evol-field-label">
       <label className="control-label">
-        {props.label || f.label}
-        {required ? <span className="evol-required">*</span> : null}
+        {label || f.label}
+        {required2 ? <span className="evol-required">*</span> : null}
         {f.help ? (
-          <Icon
-            name="help"
-            onClick={props.clickHelp}
-            size="tiny"
-            theme="none"
-          ></Icon>
+          <Icon name="help" onClick={clickHelp} size="tiny" theme="none" />
         ) : null}
       </label>
     </div>
@@ -35,4 +30,12 @@ FieldLabel.propTypes = {
   field: PropTypes.object,
   required: PropTypes.bool, // override for field.required
   clickHelp: PropTypes.func,
+  readOnly: PropTypes.bool,
+};
+
+FieldLabel.defaultProps = {
+  field: null,
+  required: false,
+  clickHelp: null,
+  readOnly: null,
 };

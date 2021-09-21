@@ -32,7 +32,7 @@ const iconViews = (mid, f) => (
   <div className="mIcons">
     {vwIcons(models[mid] || []).map((menu) =>
       f.url ? null : (
-        <Link to={"/" + mid + menu.id} key={menu.id}>
+        <Link to={`/${mid}${menu.id}`} key={menu.id}>
           <Icon name={menu.icon} size="small" theme="none" />
         </Link>
       )
@@ -134,7 +134,7 @@ export default class Nav extends React.Component {
             <div>
               <img
                 alt={section.title}
-                src={"/svg/" + section.icon + ".svg"}
+                src={`/svg/${section.icon}.svg`}
                 className="cpnSvg"
               />
               {section.title}
