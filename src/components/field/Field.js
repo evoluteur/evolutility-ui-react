@@ -189,7 +189,7 @@ export default class Field extends React.Component {
             <div className="evol-remove" onClick={this.removeFile}>
               <span className="fakeLink">
                 <i className="glyphicon glyphicon-remove" />
-                {i18n_actions["remove_" + f.type]}
+                {i18n_actions[`remove_${f.type}`]}
               </span>
             </div>
           ) : null}
@@ -222,7 +222,7 @@ export default class Field extends React.Component {
           <input
             {...usualProps}
             type="text"
-            value={d ? d : ""}
+            value={d || ""}
             onChange={cbs.change}
             className="form-control"
           />
@@ -242,7 +242,7 @@ export default class Field extends React.Component {
       <input
         {...usualProps}
         type={inputType}
-        value={d ? d : ""}
+        value={d || ""}
         onChange={cbs.change}
         className="form-control"
       />
@@ -254,12 +254,12 @@ export default class Field extends React.Component {
     let fw;
 
     if (f.type === ft.textml) {
-      const height = emHeight(f) + "em";
+      const height = `${emHeight(f)}em`;
       return (
         <div
           key={f.id}
           className="disabled evo-rdonly scroll-y"
-          style={{ height: height }}
+          style={{ height }}
           dangerouslySetInnerHTML={createMarkup(d)}
         />
       );
@@ -268,7 +268,7 @@ export default class Field extends React.Component {
       fw = image(filesUrl + d);
     } else if (f.type === ft.doc) {
       fw = doc(d, filesUrl);
-      //{f.country_icon && d.country_icon ? <img src={d.country_icon}/> : null}
+      // {f.country_icon && d.country_icon ? <img src={d.country_icon}/> : null}
     } else if (f.type === ft.lov) {
       if (f.object) {
         fw = (
@@ -309,12 +309,6 @@ export default class Field extends React.Component {
       </div>
     );
   }
-
-  clickHelp = () => {
-    this.setState({
-      help: !this.state.help,
-    });
-  };
 
   render() {
     const f = this.props.model || { type: "text" };
@@ -362,6 +356,12 @@ export default class Field extends React.Component {
       });
     };
   }
+
+  clickHelp = () => {
+    this.setState({
+      help: !this.state.help,
+    });
+  };
 
   getMultiselectFieldChange =
     () =>
@@ -411,7 +411,7 @@ Field.propTypes = {
     dropFile: PropTypes.func,
   }),
   data: PropTypes.any, // object or atomic values depending on field type
-  value: PropTypes.any, // field value
+  value: PropTypes.any.isRequired, // field value
   label: PropTypes.string, // override label in model
   readOnly: PropTypes.bool, // override readOnly in model
   icon: PropTypes.string,
@@ -419,7 +419,6 @@ Field.propTypes = {
 
 Field.defaultProps = {
   data: null,
-  value: null,
   label: null,
   readOnly: null,
   icon: null,

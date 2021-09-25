@@ -9,6 +9,7 @@
 */
 
 import React from "react";
+import PropTypes from "prop-types";
 import Icon from "react-crud-icons";
 import { wTimestamp, wComments } from "../../../config";
 import models from "../../../models/all_models";
@@ -112,6 +113,14 @@ export default class Stats extends React.Component {
       });
   }
 
+  toggleChart(evt) {
+    const fid = evt.currentTarget.id;
+    const chartOn = this.state[fid + "_Chart"] || false;
+    this.setState({
+      [fid + "_Chart"]: !chartOn,
+    });
+  }
+
   prepData(data, fields) {
     const ks = [];
     if (data) {
@@ -148,7 +157,7 @@ export default class Stats extends React.Component {
     if (wTimestamp) {
       formatTime("u_date_max");
       formatTime("c_date_min");
-      ks["u_date_week_count"] = data["u_date_week_count"];
+      ks.u_date_week_count = data.u_date_week_count;
     }
     if (wComments) {
       ks.nb_comments = data.nb_comments || 0;
@@ -214,7 +223,7 @@ export default class Stats extends React.Component {
                     formattedValue(k.min, k.field)
                   )}
                   <div>
-                    <Range min={k.min} max={k.max} avg={k.avg}></Range>
+                    <Range min={k.min} max={k.max} avg={k.avg} />
                   </div>
                   {itemAggr(
                     k.id + "max",
@@ -223,10 +232,10 @@ export default class Stats extends React.Component {
                   )}
                 </div>
               ) : (
-                <React.Fragment>
+                <>
                   {itemAggr(k.id + "min", i18n_stats.min, k.min)}
                   {itemAggr(k.id + "max", i18n_stats.max, k.max)}
-                </React.Fragment>
+                </>
               )}
             </div>
             {chartsOK ? (
@@ -243,7 +252,7 @@ export default class Stats extends React.Component {
                     type="bars"
                     canExpend={false}
                     size="small"
-                  ></Chart>
+                  />
                 ) : null}
               </div>
             ) : null}
@@ -324,12 +333,8 @@ export default class Stats extends React.Component {
       </div>
     );
   }
-
-  toggleChart = (evt) => {
-    const fid = evt.currentTarget.id;
-    let chartOn = this.state[fid + "_Chart"] || false;
-    this.setState({
-      [fid + "_Chart"]: !chartOn,
-    });
-  };
 }
+
+Stats.propTypes = {
+  entity: PropTypes.string,
+};

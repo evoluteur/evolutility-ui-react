@@ -19,7 +19,7 @@ import url from "../../utils/url";
 import evoGlobals from "../../utils/evoGlobals";
 import { apiPath } from "../../config";
 import pkg from "../../../package.json";
-//import {i18n_actions, i18n_msg} from '../../i18n/i18n'
+// import {i18n_actions, i18n_msg} from '../../i18n/i18n'
 import { i18n_msg, i18n_actions } from "../../i18n/i18n";
 import models from "../../models/all_models";
 
@@ -27,7 +27,7 @@ import "./Toolbar.scss";
 
 const proxy = pkg.proxy || "";
 const menuItems = {
-  //new: {id: 'edit/0', label: i18n_actions.new, icon:'add', n:'x', readonly:false},
+  // new: {id: 'edit/0', label: i18n_actions.new, icon:'add', n:'x', readonly:false},
   del: {
     id: "del",
     label: i18n_actions.delete1,
@@ -35,7 +35,7 @@ const menuItems = {
     n: "1",
     readonly: false,
   },
-  //filter: {id:'filter', label: i18n_actions.filter, icon:'filter', n:'n'},
+  // filter: {id:'filter', label: i18n_actions.filter, icon:'filter', n:'n'},
   export: { id: "export", label: i18n_actions.export1, icon: "export", n: "x" },
   save: {
     id: "save",
@@ -44,12 +44,12 @@ const menuItems = {
     n: "1",
     readonly: false,
   },
-  //import: {id:'import', label: i18n_actions.bImport, icon:'import',n:'x'},
-  //cog: {id:'cog',label: 'Customize', icon:'cog', n:'x'},
-  //print: {id: 'print', label: '', icon:'print', n:'x'},
-  //prev: {id:'prev', label: '', icon:'chevron-left', n:'x'},
-  //next: {id:'next', label: '', icon:'chevron-right', n:'x'}
-  //sel: {id: 'selections', label: i18n_actions.Selections, icon:'star', n:'x'},
+  // import: {id:'import', label: i18n_actions.bImport, icon:'import',n:'x'},
+  // cog: {id:'cog',label: 'Customize', icon:'cog', n:'x'},
+  // print: {id: 'print', label: '', icon:'print', n:'x'},
+  // prev: {id:'prev', label: '', icon:'chevron-left', n:'x'},
+  // next: {id:'next', label: '', icon:'chevron-right', n:'x'}
+  // sel: {id: 'selections', label: i18n_actions.Selections, icon:'star', n:'x'},
   views: {
     browse: {
       id: "browse",
@@ -67,16 +67,16 @@ const menuItems = {
 
     list: { id: "list", label: i18n_actions.list, icon: "list", n: "n" },
     cards: { id: "cards", label: i18n_actions.cards, icon: "cards", n: "n" },
-    //scatter: {id:'scatter', label: i18n_actions.bScatter, icon:'certificate',n:'n'},
+    // scatter: {id:'scatter', label: i18n_actions.bScatter, icon:'certificate',n:'n'},
     charts: {
       id: "charts",
       label: i18n_actions.charts,
       icon: "dashboard",
       n: "n",
     },
-    //stats: {id:'stats', label: i18n_actions.stats, icon:'equalizer', n:'n'},
+    // stats: {id:'stats', label: i18n_actions.stats, icon:'equalizer', n:'n'},
   },
-  //search: true
+  // search: true
 };
 
 const isFunction = (x) => typeof x === "function";
@@ -100,42 +100,41 @@ class Toolbar extends React.Component {
       deleteConfirmation: false,
     };
     this.searchValue = url.parseQuery(window.location.href).search || "";
-    //this.toggleFilter = this.toggleFilter.bind(this);
-    //this.onFilterChange = this.onFilterChange.bind(this);
+    // this.toggleFilter = this.toggleFilter.bind(this);
+    // this.onFilterChange = this.onFilterChange.bind(this);
     this.deleteOne = this.deleteOne.bind(this);
   }
 
   render() {
     const { entity, id = "" } = this.props;
-    //const useParams = this.props.match && this.props.match.params
-    //let {entity, id = ''} = useParams ? this.props.match.params : this.props
+    // const useParams = this.props.match && this.props.match.params
+    // let {entity, id = ''} = useParams ? this.props.match.params : this.props
     const ep = "/" + entity + "/";
-    let view = this.props.view || getViewFromURL(),
-      idx = 0;
+    const view = this.props.view || getViewFromURL();
+    let idx = 0;
     const isNew = this.props.isNew || id === "0" || id === 0;
     let navViews = [];
-    let actions = [];
+    const actions = [];
     const q =
       window.location && window.location.search ? window.location.search : "";
     const canSearch = dao.apiType !== "graphql"; // TODO: implement search for graphql
 
-    function buttonLink(menu, idOrFun, urlQuery = "") {
-      return isFunction(idOrFun) ? (
+    const buttonLink = (menu, idOrFun, urlQuery = "") =>
+      isFunction(idOrFun) ? (
         <span key={idx++} onClick={idOrFun} className="fakeLink">
-          <Icon name={menu.icon} tooltip={menu.label} theme="dark"></Icon>{" "}
+          <Icon name={menu.icon} tooltip={menu.label} theme="dark" />{" "}
         </span>
       ) : (
         <Link key={idx++} to={ep + menu.id + "/" + idOrFun + urlQuery}>
-          <Icon name={menu.icon} tooltip={menu.label} theme="dark"></Icon>{" "}
+          <Icon name={menu.icon} tooltip={menu.label} theme="dark" />{" "}
         </Link>
       );
-    }
 
-    navViews = null; //['list', 'cards', 'charts'].map(menu => buttonLink(menuItems.views[menu], id))
+    navViews = null; // ['list', 'cards', 'charts'].map(menu => buttonLink(menuItems.views[menu], id))
     if (id) {
       if (view === "edit" && !isNew) {
         actions.push(buttonLink(menuItems.views.browse, id));
-        //actions.push(buttonLink(menuItems.save, id));
+        // actions.push(buttonLink(menuItems.save, id));
       }
       if (view === "browse") {
         actions.push(buttonLink(menuItems.views.edit, id));
@@ -145,8 +144,8 @@ class Toolbar extends React.Component {
       }
     } else {
       if (view !== "charts" && view !== "stats") {
-        //actions.push(buttonLink(menuItems.filter, this.toggleFilter));
-        //actions.push(buttonLink(menuItems.views.charts, ''));
+        // actions.push(buttonLink(menuItems.filter, this.toggleFilter));
+        // actions.push(buttonLink(menuItems.views.charts, ''));
         if (dao.apiType !== "graphql") {
           // TODO: graphQL implementation
           actions.push(buttonLink(menuItems.export, this.exportMany, q));
@@ -226,7 +225,7 @@ class Toolbar extends React.Component {
                 <SearchBox
                   fnSearch={this.fnSearch}
                   searchValue={this.searchValue}
-                ></SearchBox>
+                />
               </div>
             ) : null}
           </div>
@@ -252,7 +251,7 @@ class Toolbar extends React.Component {
 
   deleteOne = () => {
     // TODO:
-    const { entity, id } = this.props; //.match.params
+    const { entity, id } = this.props; // .match.params
     const m = models[entity];
 
     if (entity && id && m) {
@@ -333,6 +332,8 @@ class Toolbar extends React.Component {
 Toolbar.propTypes = {
   entity: PropTypes.string.isRequired,
   id: PropTypes.string,
+  view: PropTypes.string,
+  isNew: PropTypes.bool,
 };
 
 export default withRouter(Toolbar);

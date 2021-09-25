@@ -5,7 +5,7 @@
 // (c) 2021 Olivier Giulieri
 
 import moMa from "./moMa";
-import { fieldTypes, isFieldMany } from "../utils/dico.js";
+import { fieldTypes, isFieldMany } from "./dico.js";
 import config from "../config";
 import {
   fullCount,
@@ -17,7 +17,7 @@ import {
   qDelete,
   qUpdateOne,
   qInsertOne,
-} from "../utils/graphQLQueries.js";
+} from "./graphQLQueries.js";
 import { apiPath, apiPathGraphQL, pageSize } from "../config.js";
 import { proxy } from "../../package.json";
 
@@ -91,8 +91,8 @@ const daoGraphQL = {
       const m = moMa.getModel(entity);
       if (m) {
         const count = fullCount(m);
-        let gOpts = ["limit:" + pageSize];
-        let gOptsSearch = [];
+        const gOpts = ["limit:" + pageSize];
+        const gOptsSearch = [];
         if (options) {
           Object.keys(options).forEach((opt) => {
             if (opt === "page") {
@@ -143,16 +143,15 @@ const daoGraphQL = {
                         }
                         ${count}
                     }`;
-      } else {
-        return null;
       }
+      return null;
     };
 
     return fetch(config.apiPathGraphQL, gqlOptions(qMany(entity)))
       .then(toJSON)
       .then((r) => {
         if (r.data && r.data.many) {
-          let data = r.data.many;
+          const data = r.data.many;
           const m = moMa.getModel(entity);
           const lovFields = m.fields.filter((f) => f.type === ft.lov);
           if (lovFields.length) {
@@ -167,7 +166,7 @@ const daoGraphQL = {
   },
 
   // get a collection of sub-items (details for master)
-  //getCollec: (entity, collid, id) => axios.get(apiPath + entity + '/collec/'+ collid + '?id=' + id + '&pageSize=' + pageSize),
+  // getCollec: (entity, collid, id) => axios.get(apiPath + entity + '/collec/'+ collid + '?id=' + id + '&pageSize=' + pageSize),
 
   // delete an item
   deleteOne: function (entity, id) {
@@ -229,10 +228,10 @@ const daoGraphQL = {
       .then((r) => {
         if (r.data && r.data.stats) {
           let data = r.data.stats.aggregate;
-          //const m = moMa.getModel(entity)
+          // const m = moMa.getModel(entity)
           let d = {};
           for (let pMath in data) {
-            for (let pField in data[pMath]) {
+            for (const pField in data[pMath]) {
               if (!d[pField]) {
                 d[pField] = {};
               }

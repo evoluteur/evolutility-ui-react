@@ -9,20 +9,21 @@ import { i18n_charts } from "../../../i18n/i18n";
 
 import "./ChartTable.scss";
 
-const percent = (value, total) => parseInt((10000 * value) / total) / 100 + "%";
+const percent = (value, total) =>
+  `${parseInt((10000 * value) / total, 10) / 100}%`;
 
 export default class ChartTable extends React.PureComponent {
   viewId = "charttable";
 
   render() {
     const sLink =
-        "../../" + this.props.entity + "?" + this.props.field.id + "=",
-      makeLink = (d) => {
-        let param = "" + (d.id || d.label);
-        param = param === "null" ? "null" : "eq." + param;
-        return sLink + param;
-      },
-      data = this.props.data;
+      "../../" + this.props.entity + "?" + this.props.field.id + "=";
+    const makeLink = (d) => {
+      let param = "" + (d.id || d.label);
+      param = param === "null" ? "null" : "eq." + param;
+      return sLink + param;
+    };
+    const data = this.props.data;
 
     let totalCount = 0;
     data.forEach((d) => (totalCount += d.value));
@@ -78,4 +79,9 @@ ChartTable.propTypes = {
   field: PropTypes.object.isRequired,
   sortTable: PropTypes.func,
   data: PropTypes.array,
+};
+
+ChartTable.defaultProps = {
+  sortTable: null,
+  data: null,
 };

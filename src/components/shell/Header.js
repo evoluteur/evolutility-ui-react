@@ -17,7 +17,7 @@ const iconH = {
   1: {
     edit: { id: "edit", icon: "edit", label: "Edit" },
     browse: { id: "browse", icon: "browse", label: "Browse" },
-    //'json': {id: 'json',  icon: 'json', label: 'JSON', option: true},
+    // 'json': {id: 'json',  icon: 'json', label: 'JSON', option: true},
   },
 };
 
@@ -25,18 +25,17 @@ function getIcons(cardinality, model) {
   const ih = iconH[cardinality];
   if (cardinality === "1") {
     return [ih.edit, ih.browse];
-  } else {
-    const cardiIcons = [ih.list, ih.cards];
-    if (model) {
-      if (!model.noCharts) {
-        cardiIcons.push(ih.charts);
-      }
-      if (!model.noStats) {
-        cardiIcons.push(ih.stats);
-      }
-    }
-    return cardiIcons;
   }
+  const cardiIcons = [ih.list, ih.cards];
+  if (model) {
+    if (!model.noCharts) {
+      cardiIcons.push(ih.charts);
+    }
+    if (!model.noStats) {
+      cardiIcons.push(ih.stats);
+    }
+  }
+  return cardiIcons;
 }
 
 function iconViews(mid, cardinality, id, view, model) {
@@ -53,18 +52,18 @@ function iconViews(mid, cardinality, id, view, model) {
           className={view === ico.id ? "active" : ico.id}
           key={ico.id}
         >
-          <Icon name={ico.icon} tooltip={ico.label} theme="light"></Icon>
+          <Icon name={ico.icon} tooltip={ico.label} theme="light" />
         </Link>
       ))}
     </div>
   );
 }
 
-export default class Header extends React.Component {
+export default class Header extends React.PureComponent {
   render() {
     // TODO: make charts work w/ search & filters (and switch comment below)
     // const m = models[this.props.entity]
-    let search = this.props.view === "charts" ? null : getSearchText();
+    const search = this.props.view === "charts" ? null : getSearchText();
     let { count, comments } = this.props;
     if (comments) {
       comments += comments === 1 ? " comment" : " comments";
@@ -93,6 +92,7 @@ export default class Header extends React.Component {
 }
 
 Header.propTypes = {
+  title: PropTypes.string,
   model: PropTypes.object.isRequired,
   view: PropTypes.string,
   count: PropTypes.string,

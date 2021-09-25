@@ -10,6 +10,14 @@ import dao from "./dao";
 import models from "../models/all_models";
 import { prepModel } from "./dico";
 
+export const getModel = (mId) => models[mId] || null;
+
+export function addModels(ms) {
+  ms.forEach((m) => {
+    models[m.id] = prepModel(m);
+  });
+}
+
 export function fetchModels(cb, cbErr) {
   dao
     .getModels()
@@ -25,14 +33,6 @@ export function fetchModels(cb, cbErr) {
         cbErr(err);
       }
     });
-}
-
-export const getModel = (mId) => models[mId] || null;
-
-export function addModels(ms) {
-  ms.forEach((m) => {
-    models[m.id] = prepModel(m);
-  });
 }
 
 export const modelIds = Object.keys(models);

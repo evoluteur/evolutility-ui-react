@@ -17,12 +17,14 @@ import Header from "../../shell/Header";
 import Spinner from "../../shell/Spinner";
 import Alert from "../../widgets/Alert";
 
-import dico from "../../../utils/dico";
+import {
+  fieldTypes as fts,
+  fieldIsNumber,
+  fieldIsDateOrTime,
+} from "../../../utils/dico";
 import { capitalize } from "../../../utils/format";
 
 import "./Api.scss";
-
-const fts = dico.fieldTypes;
 
 /*
     TODO: implement between for date and time
@@ -31,7 +33,7 @@ const fts = dico.fieldTypes;
 */
 const fieldConditions = (f) => {
   // - list of possible filter conditions based on field type
-  if (dico.fieldIsNumber(f)) {
+  if (fieldIsNumber(f)) {
     return (
       <ul>
         <li>eq - =</li>
@@ -42,14 +44,16 @@ const fieldConditions = (f) => {
         <li>nn - is not empty</li>
       </ul>
     );
-  } else if (f.type === fts.bool) {
+  }
+  if (f.type === fts.bool) {
     return (
       <ul>
         <li>eq.1 - true</li>
         <li>eq.0 - false</li>
       </ul>
     );
-  } else if (f.type === fts.lov) {
+  }
+  if (f.type === fts.lov) {
     return (
       <ul>
         <li>eq - equals</li>
@@ -58,7 +62,8 @@ const fieldConditions = (f) => {
         <li>nn - is not empty</li>
       </ul>
     );
-  } else if (dico.fieldIsDateOrTime(f)) {
+  }
+  if (fieldIsDateOrTime(f)) {
     return (
       <ul>
         <li>eq - on</li>
@@ -69,32 +74,32 @@ const fieldConditions = (f) => {
         <li>nn - is not empty</li>
       </ul>
     );
-  } else if (f.type === fts.list || f.type === fts.json) {
-    return <div>( Not implemented yet )</div>;
-  } else {
-    return (
-      <ul>
-        <li>eq - equals</li>
-        <li>ne - not equal</li>
-        <li>sw - starts with</li>
-        <li>ct - contains</li>
-        <li>nct - doesn't contain</li>
-        <li>fw - finishes with</li>
-        <li>null - is empty</li>
-        <li>nn - is not empty</li>
-      </ul>
-    );
   }
+  if (f.type === fts.list || f.type === fts.json) {
+    return <div>( Not implemented yet )</div>;
+  }
+  return (
+    <ul>
+      <li>eq - equals</li>
+      <li>ne - not equal</li>
+      <li>sw - starts with</li>
+      <li>ct - contains</li>
+      <li>nct - doesn't contain</li>
+      <li>fw - finishes with</li>
+      <li>null - is empty</li>
+      <li>nn - is not empty</li>
+    </ul>
+  );
 };
 const filterExample = (f) => {
   let conds = [];
-  if (dico.fieldIsNumber(f)) {
+  if (fieldIsNumber(f)) {
     conds = [f.id + "=gt.2", f.id + "=lt.100", f.id + "=nn"];
   } else if (f.type === fts.bool) {
     conds = [f.id + "=eq.1", f.id + "=eq.0"];
   } else if (f.type === fts.lov) {
     conds = [f.id + "=eq.1", f.id + "=in.1,2,3", f.id + "=null", f.id + "=nn"];
-  } else if (dico.fieldIsDateOrTime(f)) {
+  } else if (fieldIsDateOrTime(f)) {
     conds = [f.id + "=eq.2020-01-01", f.id + "=lt.2020-12-24", f.id + "=nn"];
   } else if (f.type === fts.list || f.type === fts.json) {
     conds = ["( Not implemented yet )"];
@@ -157,8 +162,8 @@ export default class ApiDoc extends React.Component {
       model = getModel(e),
       data = this.state.data || null,
       getJSON = this.getJSON;
-    let idx,
-      rootep = "N/A";
+    let idx;
+    let rootep = "N/A";
     if (data && data.list) {
       idx = data.list.lastIndexOf("/");
       rootep = data.list.substr(0, idx + 1);
@@ -204,7 +209,7 @@ export default class ApiDoc extends React.Component {
       body = <Alert title="Error" message={this.state.error.message} />;
     } else if (model && data) {
       body = (
-        <React.Fragment>
+        <>
           <div className="api-holder">
             <div className="api-toc">
               <h3>Live REST APIs</h3>
@@ -252,7 +257,7 @@ export default class ApiDoc extends React.Component {
               .
             </p>
           </div>
-        </React.Fragment>
+        </>
       );
     } else {
       body = <div>REST API is not published by server.</div>;

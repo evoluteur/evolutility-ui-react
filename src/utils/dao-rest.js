@@ -16,8 +16,8 @@ const daoRest = {
     axios.get(apiPath + entity + "/" + id).then((resp) => resp.data),
 
   // get an array of items
-  getMany: function (entity, options) {
-    let tail = options
+  getMany(entity, options) {
+    const tail = options
       ? "?" +
         Object.entries(options)
           .map(([k, v]) => `${k}=${v}`)
@@ -31,7 +31,7 @@ const daoRest = {
   },
 
   // get a collection of sub-items (details for master)
-  //getCollec: (entity, collid, id) => axios.get(apiPath + entity + '/collec/'+ collid + '?id=' + id + '&pageSize=' + pageSize),
+  // getCollec: (entity, collid, id) => axios.get(apiPath + entity + '/collec/'+ collid + '?id=' + id + '&pageSize=' + pageSize),
 
   // delete an item
   deleteOne: (entity, id) => axios.delete(apiPath + entity + "/" + id),

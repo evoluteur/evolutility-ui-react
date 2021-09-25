@@ -19,6 +19,17 @@ export default class Card extends React.PureComponent {
 
   lovMaps = {};
 
+  getLovMap = (f) => {
+    let map = this.lovMaps[f.id];
+    if (!map && f.list) {
+      map = {};
+      f.list.forEach((item) => (map[item.id] = item.text));
+      // - it would be better to not duplicate lovMap for fields sharing the same list
+      this.lovMaps[f.id] = map;
+    }
+    return map;
+  };
+
   render() {
     const d = this.props.data || {};
     const fields = this.props.fields || [];
@@ -97,17 +108,6 @@ export default class Card extends React.PureComponent {
       </div>
     );
   }
-
-  getLovMap = (f) => {
-    let map = this.lovMaps[f.id];
-    if (!map && f.list) {
-      map = {};
-      f.list.forEach((item) => (map[item.id] = item.text));
-      // - it would be better to not duplicate lovMap for fields sharing the same list
-      this.lovMaps[f.id] = map;
-    }
-    return map;
-  };
 }
 
 Card.propTypes = {

@@ -15,49 +15,45 @@ import { pageSize } from "../../config";
 export default class Pagination extends React.PureComponent {
   _paginationBody() {
     let pIdx;
-    const totalSize = this.props.fullCount,
-      size = this.props.count,
-      query = queryString.parse(this.props.location.search); //this.props.location.query
+    const totalSize = this.props.fullCount;
+    const size = this.props.count;
+    const query = queryString.parse(this.props.location.search); // this.props.location.query
 
     if (query) {
-      //if(query.page==='p--' || query.page==='p++'){
-      //}
+      // if(query.page==='p--' || query.page==='p++'){
+      // }
       pIdx = parseInt(query.page || "0", 10);
     } else {
       pIdx = 0;
     }
-    let h = [];
+    const h = [];
     let gapIdx = 0;
 
     if (totalSize > size && !(pIdx === 0 && size < pageSize)) {
-      const fnClick = this.props.fnClick,
-        nbPages = Math.ceil(totalSize / pageSize),
-        wPrev = pIdx > 0,
-        wNext = nbPages > pIdx + 1;
-      let pId = pIdx + 1,
-        bPage = function (id) {
-          h.push(
-            <li
-              key={id}
-              className={pId === id ? "active" : ""}
-              onClick={fnClick}
-            >
-              <span className="fakeLink">{id}</span>
-            </li>
-          );
-        },
-        bPageRange = function (pStart, pEnd) {
-          for (var i = pStart; i <= pEnd; i++) {
-            bPage(i);
-          }
-        },
-        bGap = function (idx) {
-          h.push(
-            <li key={"gap" + idx} className="disabled">
-              <span className="fakeLink">...</span>
-            </li>
-          );
-        };
+      const fnClick = this.props.fnClick;
+      const nbPages = Math.ceil(totalSize / pageSize);
+      const wPrev = pIdx > 0;
+      const wNext = nbPages > pIdx + 1;
+      const pId = pIdx + 1;
+      const bPage = function (id) {
+        h.push(
+          <li key={id} className={pId === id ? "active" : ""} onClick={fnClick}>
+            <span className="fakeLink">{id}</span>
+          </li>
+        );
+      };
+      const bPageRange = function (pStart, pEnd) {
+        for (let i = pStart; i <= pEnd; i++) {
+          bPage(i);
+        }
+      };
+      const bGap = function (idx) {
+        h.push(
+          <li key={"gap" + idx} className="disabled">
+            <span className="fakeLink">...</span>
+          </li>
+        );
+      };
 
       h.push(
         <li
@@ -72,22 +68,20 @@ export default class Pagination extends React.PureComponent {
 
       if (nbPages < 17) {
         bPageRange(2, nbPages);
-      } else {
-        if (pId < 5) {
-          bPageRange(2, 5);
-          if (nbPages > 5) {
-            bGap(gapIdx++);
-            bPage(nbPages);
-          }
-        } else {
+      } else if (pId < 5) {
+        bPageRange(2, 5);
+        if (nbPages > 5) {
           bGap(gapIdx++);
-          bPageRange(pId - 2, Math.min(pId + 2, nbPages));
-          if (nbPages > pId + 2) {
-            if (nbPages > pId + 3) {
-              bGap(gapIdx++);
-            }
-            bPage(nbPages);
+          bPage(nbPages);
+        }
+      } else {
+        bGap(gapIdx++);
+        bPageRange(pId - 2, Math.min(pId + 2, nbPages));
+        if (nbPages > pId + 2) {
+          if (nbPages > pId + 3) {
+            bGap(gapIdx++);
           }
+          bPage(nbPages);
         }
       }
 

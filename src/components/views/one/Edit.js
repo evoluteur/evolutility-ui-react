@@ -10,15 +10,12 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-//import moment from 'moment'
-//import { withRouter } from 'react-router'
-//import {wTimestamp} from "../../../config"
+// import moment from 'moment'
+// import { withRouter } from 'react-router'
+// import {wTimestamp} from "../../../config"
 import { i18n_actions, i18n_validation, i18n_errors } from "../../../i18n/i18n";
-import {
-  dataTitle,
-  fieldId2Field,
-  fieldTypes as ft,
-} from "../../../utils/dico";
+import { fieldId2Field, fieldTypes as ft } from "../../../utils/dico";
+import { dataTitle } from "../../../utils/format";
 import validation from "../../../utils/validation";
 import OneReadWrite from "./one-readwrite";
 import List from "../many/List";
@@ -30,6 +27,7 @@ import Header from "../../shell/Header";
 
 export default class Edit extends OneReadWrite {
   viewId = "edit";
+
   _validationOn = false;
 
   getDataDelta() {
@@ -37,8 +35,8 @@ export default class Edit extends OneReadWrite {
   }
 
   clickSave = (evt) => {
-    const fields = this.model.fields,
-      v = this.validate(fields, this.state.data);
+    const fields = this.model.fields;
+    const v = this.validate(fields, this.state.data);
 
     if (v.valid) {
       this.upsertOne();
@@ -50,8 +48,8 @@ export default class Edit extends OneReadWrite {
   };
 
   fieldChange = (evt) => {
-    const fid = evt.target.id,
-      newData = JSON.parse(JSON.stringify(this.state.data || {}));
+    const fid = evt.target.id;
+    const newData = JSON.parse(JSON.stringify(this.state.data || {}));
     let v = evt.target.value;
 
     if (evt.target.type === "checkbox") {
@@ -67,19 +65,19 @@ export default class Edit extends OneReadWrite {
   }
 
   render() {
-    const { id = 0, entity = null, view = "browse" } = this.props.match.params,
-      isNew = id === 0 || id === "0",
-      ep = "/" + entity + "/",
-      m = this.model,
-      data = this.state.data || {},
-      cbs = {
-        //click: this.fieldClick,
-        //leave: this.fieldLeave,
-        change: this.fieldChange,
-        dropFile: this.uploadFileOne,
-      },
-      title = this.state.error ? "No data" : dataTitle(m, data, isNew),
-      linkBrowse = isNew ? ep + "list" : ep + view + (id ? "/" + id : "");
+    const { id = 0, entity = null, view = "browse" } = this.props.match.params;
+    const isNew = id === 0 || id === "0";
+    const ep = "/" + entity + "/";
+    const m = this.model;
+    const data = this.state.data || {};
+    const cbs = {
+      // click: this.fieldClick,
+      // leave: this.fieldLeave,
+      change: this.fieldChange,
+      dropFile: this.uploadFileOne,
+    };
+    const title = this.state.error ? "No data" : dataTitle(m, data, isNew);
+    const linkBrowse = isNew ? ep + "list" : ep + view + (id ? "/" + id : "");
     const listData = (cid) => (data.collections ? data.collections[cid] : null);
     const fnField = (f) => {
       if (f) {
@@ -103,12 +101,12 @@ export default class Edit extends OneReadWrite {
     };
 
     if (this.state.loading && !isNew) {
-      return <Spinner></Spinner>;
+      return <Spinner />;
     }
 
     document.title = title;
     this.isNew = isNew;
-    //const date = wTimestamp ? moment(data['u_date']) : null
+    // const date = wTimestamp ? moment(data['u_date']) : null
     if (!m) {
       return (
         <Alert
@@ -116,98 +114,91 @@ export default class Edit extends OneReadWrite {
           message={i18n_errors.badEntity.replace("{0}", entity)}
         />
       );
-    } else {
-      return (
-        <div className="evolutility" role="form">
-          <Header
-            {...this.props.match.params}
-            title={title}
-            model={m}
-            comments={data.nb_comments}
-            count={null}
-            cardinality="1"
-            view={this.viewId}
-          />
-
-          <div className="evo-one-edit">
-            {this.state.error ? (
-              <Alert title="Error" message={this.state.error.message} />
-            ) : (
-              <div className="evol-pnls">
-                {m && m.groups ? (
-                  m.groups.map(function (g, idx) {
-                    const groupFields = fieldId2Field(g.fields, m.fieldsH);
-                    return (
-                      <Panel
-                        key={g.id || "g" + idx}
-                        title={g.label || g.title || ""}
-                        header={g.header}
-                        footer={g.footer}
-                        width={g.width}
-                      >
-                        <div className="evol-fset">
-                          {groupFields.map(fnField)}
-                        </div>
-                      </Panel>
-                    );
-                  })
-                ) : (
-                  <Panel title={title} key="pAllFields">
-                    <div className="evol-fset">{m.fields.map(fnField)}</div>
-                  </Panel>
-                )}
-
-                {m.collections && !isNew
-                  ? m.collections.map((c, idx) => {
-                      return (
-                        <Panel
-                          key={"collec_" + c.id}
-                          title={c.title}
-                          collapsible={true}
-                          header={c.header}
-                          footer={c.footer}
-                        >
-                          <List
-                            isNested={true}
-                            match={this.props.match}
-                            paramsCollec={c}
-                            style={{ width: "100%" }}
-                            data={listData(c.id)}
-                            location={this.props.location}
-                          />
-                        </Panel>
-                      );
-                    })
-                  : null}
-
-                <Panel key="formButtons">
-                  <div className="evol-buttons">
-                    <Link className="btn btn-default" to={linkBrowse}>
-                      <i className="glyphicon glyphicon-remove"></i>{" "}
-                      {i18n_actions.cancel}
-                    </Link>
-                    <button
-                      className="btn btn-primary"
-                      onClick={this.clickSave}
-                    >
-                      <i className="glyphicon glyphicon-ok"></i>{" "}
-                      {i18n_actions.save}
-                    </button>
-                    {this.state.error ? i18n_validation.incomplete : null}
-                  </div>
-                </Panel>
-              </div>
-            )}
-          </div>
-        </div>
-      );
     }
+    return (
+      <div className="evolutility" role="form">
+        <Header
+          {...this.props.match.params}
+          title={title}
+          model={m}
+          comments={data.nb_comments}
+          count={null}
+          cardinality="1"
+          view={this.viewId}
+        />
+
+        <div className="evo-one-edit">
+          {this.state.error ? (
+            <Alert title="Error" message={this.state.error.message} />
+          ) : (
+            <div className="evol-pnls">
+              {m && m.groups ? (
+                m.groups.map(function (g, idx) {
+                  const groupFields = fieldId2Field(g.fields, m.fieldsH);
+                  return (
+                    <Panel
+                      key={g.id || "g" + idx}
+                      title={g.label || g.title || ""}
+                      header={g.header}
+                      footer={g.footer}
+                      width={g.width}
+                    >
+                      <div className="evol-fset">
+                        {groupFields.map(fnField)}
+                      </div>
+                    </Panel>
+                  );
+                })
+              ) : (
+                <Panel title={title} key="pAllFields">
+                  <div className="evol-fset">{m.fields.map(fnField)}</div>
+                </Panel>
+              )}
+
+              {m.collections && !isNew
+                ? m.collections.map((c) => (
+                    <Panel
+                      key={"collec_" + c.id}
+                      title={c.title}
+                      collapsible
+                      header={c.header}
+                      footer={c.footer}
+                    >
+                      <List
+                        isNested
+                        match={this.props.match}
+                        paramsCollec={c}
+                        style={{ width: "100%" }}
+                        data={listData(c.id)}
+                        location={this.props.location}
+                      />
+                    </Panel>
+                  ))
+                : null}
+
+              <Panel key="formButtons">
+                <div className="evol-buttons">
+                  <Link className="btn btn-default" to={linkBrowse}>
+                    <i className="glyphicon glyphicon-remove" />{" "}
+                    {i18n_actions.cancel}
+                  </Link>
+                  <button className="btn btn-primary" onClick={this.clickSave}>
+                    <i className="glyphicon glyphicon-ok" /> {i18n_actions.save}
+                  </button>
+                  {this.state.error ? i18n_validation.incomplete : null}
+                </div>
+              </Panel>
+            </div>
+          )}
+        </div>
+      </div>
+    );
   }
 
   validate = (fields, data) => {
-    let messages = [],
-      invalids = {},
-      cMsg;
+    const messages = [];
+    const invalids = {};
+    let cMsg;
 
     this.clearValidation();
     fields.forEach((f) => {
@@ -240,8 +231,8 @@ export default class Edit extends OneReadWrite {
     }
     return {
       valid: messages.length < 1,
-      messages: messages,
-      invalids: invalids,
+      messages,
+      invalids,
     };
   };
 

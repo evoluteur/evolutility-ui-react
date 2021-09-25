@@ -8,6 +8,7 @@
 */
 
 import React from "react";
+import PropTypes from "prop-types";
 
 import { i18n_msg } from "../../../i18n/i18n";
 import { apiPath, pageSize } from "../../../config";
@@ -37,13 +38,13 @@ export default class Many extends React.Component {
       });
       return;
     }
-    const params = this.props.match.params,
-      e = entity || params.entity,
-      query = query1
-        ? query1
-        : this.props.location
-        ? url.parseQuery(this.props.location.search)
-        : null;
+    const params = this.props.match.params;
+    const e = entity || params.entity;
+    const query = query1
+      ? query1
+      : this.props.location
+      ? url.parseQuery(this.props.location.search)
+      : null;
     let qUrl = apiPath + e;
 
     if (query && query.order) {
@@ -145,23 +146,21 @@ export default class Many extends React.Component {
               .replace("{0}", size)
               .replace("{1}", totalSize)
               .replace("{2}", this.model.namePlural);
-          } else {
-            let rangeBegin = pageIdx * pageSize + 1,
-              rangeEnd;
-            if (pageIdx < 1) {
-              rangeEnd = Math.min(pageSize, totalSize);
-            } else {
-              rangeEnd = Math.min(rangeBegin + pageSize - 1, totalSize);
-            }
-            return i18n_msg.range // - '{0} to {1} of {2} {3}' w/ 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'
-              .replace("{0}", rangeBegin)
-              .replace("{1}", rangeEnd)
-              .replace("{2}", totalSize)
-              .replace("{3}", this.model.namePlural);
           }
-        } else {
-          return totalSize + " " + this.model.namePlural;
+          const rangeBegin = pageIdx * pageSize + 1;
+          let rangeEnd;
+          if (pageIdx < 1) {
+            rangeEnd = Math.min(pageSize, totalSize);
+          } else {
+            rangeEnd = Math.min(rangeBegin + pageSize - 1, totalSize);
+          }
+          return i18n_msg.range // - '{0} to {1} of {2} {3}' w/ 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'
+            .replace("{0}", rangeBegin)
+            .replace("{1}", rangeEnd)
+            .replace("{2}", totalSize)
+            .replace("{3}", this.model.namePlural);
         }
+        return `${totalSize} ${this.model.namePlural}`;
       }
     }
     return "";
@@ -197,9 +196,9 @@ export default class Many extends React.Component {
   };
 
   clickPagination = (evt) => {
-    const e = this.props.match.params.entity,
-      id = evt.currentTarget.textContent,
-      query = url.parseQuery(this.props.location.search) || {};
+    const e = this.props.match.params.entity;
+    const id = evt.currentTarget.textContent;
+    const query = url.parseQuery(this.props.location.search) || {};
     let pageIdx;
 
     if (id === "»" || id === "«") {
@@ -220,7 +219,16 @@ export default class Many extends React.Component {
     this.props.history.push(
       "/" + e + "/" + this.viewId + "?" + url.querySearch(query)
     );
-    //TODO: scroll to top
-    //ReactDOM.findDOMNode(this).scrollTop = 0
+    // TODO: scroll to top
+    // ReactDOM.findDOMNode(this).scrollTop = 0
   };
 }
+
+Many.propTypes = {
+  isNested: PropTypes.bool,
+  data: PropTypes.object,
+};
+
+Many.defaultProps = {
+  isNested: false,
+};

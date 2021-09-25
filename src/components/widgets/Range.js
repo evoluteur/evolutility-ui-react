@@ -19,7 +19,7 @@ export default class Range extends React.PureComponent {
     return (
       <div className="evo-range">
         <div className="range-line">
-          <div className="range-line"></div>
+          <div className="range-line" />
         </div>
         <div style={css} className="range-avg">
           <div>{avg}</div>

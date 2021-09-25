@@ -6,8 +6,6 @@ https://github.com/evoluteur/evolutility-ui-react
 
 // Helpers for models
 
-import { fieldValue } from "./format";
-
 // - Field Types
 const ft = {
   text: "text",
@@ -26,17 +24,15 @@ const ft = {
   email: "email",
   image: "image",
   doc: "document",
-  //geoloc: 'geolocation',
+  // geoloc: 'geolocation',
   url: "url",
   color: "color",
   hidden: "hidden",
   json: "json",
-  //rating: 'rating',
-  //widget: 'widget'
+  // rating: 'rating',
+  // widget: 'widget'
 };
 const fta = Object.keys(ft).map((k) => ft[k]);
-
-const isFunction = (x) => typeof x === "function";
 
 export const fieldTypes = ft;
 export const fieldTypeStrings = fta;
@@ -49,10 +45,10 @@ export const fieldIsDateOrTime = (f) =>
 
 export const fieldIsNumeric = (f) => fieldIsNumber(f) || fieldIsDateOrTime(f);
 
-export const fieldInCharts = (f) => fieldChartable(f) && !f.noCharts;
-
 export const fieldChartable = (f) =>
   f.type === ft.lov || f.type === ft.bool || fieldIsNumber(f);
+
+export const fieldInCharts = (f) => fieldChartable(f) && !f.noCharts;
 
 export function hById(arr, prop = "id") {
   const objH = {};
@@ -141,30 +137,6 @@ export const prepModels = (models) => {
   return models;
 };
 
-export const dataTitle = (m, data, isNew) => {
-  if (m) {
-    let f;
-    let title = "";
-    if (isNew) {
-      title = `New ${m.name || "item"}`;
-    } else if (m.titleField) {
-      if (isFunction(m.titleField)) {
-        title = m.titleField(data);
-      } else {
-        f = m.fieldsH[m.titleField];
-        if (!f) {
-          f = m.fields[0];
-        }
-        if (f && data) {
-          title = fieldValue(f, data[f.id]);
-        }
-      }
-    }
-    return title;
-  }
-  return "New item";
-};
-
 export const isFieldMany = (f) => f.inList || f.inMany;
 
 export const fieldIsText = (f) =>
@@ -185,7 +157,6 @@ const dico = {
   hByX: hById,
   prepModel,
   prepModelCollecs,
-  dataTitle,
   isFieldMany,
   fieldIsText,
   fieldId2Field,

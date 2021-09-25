@@ -7,21 +7,20 @@
 
 import React from "react";
 
+import { toast } from "react-toastify";
 import models from "../../../models/all_models";
-//import evoGlobals from 'utils/evoGlobals'
+// import evoGlobals from 'utils/evoGlobals'
 import dao from "../../../utils/dao";
 import { capitalize } from "../../../utils/format";
 import { i18n_msg, i18n_actions, i18n_errors } from "../../../i18n/i18n";
 import OneRead from "./one-read";
 
-import { toast } from "react-toastify";
-
 export default class OneReadWrite extends OneRead {
   upsertOne = (entity) => {
-    const e = entity || this.props.match.params.entity,
-      m = models[e],
-      id = parseInt(this.props.match.params.id || "", 10),
-      data = this.delta;
+    const e = entity || this.props.match.params.entity;
+    const m = models[e];
+    const id = parseInt(this.props.match.params.id || "", 10);
+    const data = this.delta;
 
     if (data && Object.keys(data).length) {
       const prom = id ? dao.updateOne(e, id, data) : dao.addOne(e, data);
@@ -70,9 +69,9 @@ export default class OneReadWrite extends OneRead {
 
   uploadFileOne = (fieldId, formData) => {
     // - only for fields of type image or document
-    const mid = this.model.id,
-      f = this.model.fieldsH[fieldId],
-      stateData = this.state.data || {};
+    const mid = this.model.id;
+    const f = this.model.fieldsH[fieldId];
+    const stateData = this.state.data || {};
 
     const setData = (filePath) => {
       const newData = JSON.parse(JSON.stringify(stateData));
@@ -132,6 +131,7 @@ export default class OneReadWrite extends OneRead {
         });
     }
   }
+
   /*
 	routerWillLeave(nextLocation) {
 		// - return false to prevent a transition w/o prompting the user,
@@ -149,7 +149,7 @@ export default class OneReadWrite extends OneRead {
   getDefaultData() {
     const obj = {};
     if (this.model) {
-      this.model.fields.forEach(function (f) {
+      this.model.fields.forEach((f) => {
         if (f.defaultValue != null) {
           obj[f.id] = f.defaultValue;
         }

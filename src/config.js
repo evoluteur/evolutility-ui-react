@@ -3,11 +3,11 @@
 module.exports = {
   // - apiType possible values: 'graphql' or 'rest' (in lowercase),
   apiType: "graphql",
-  //apiType: 'rest',
+  // apiType: 'rest',
 
   // - Path to REST API
   // - apiPath is prefixed w/ "proxy" from package.json
-  //apiPath: '/api/v1/',
+  // apiPath: '/api/v1/',
   apiPath: "http://localhost:2000/api/v1/",
 
   // - Path to GraphQL API
@@ -25,7 +25,7 @@ module.exports = {
   // - Language (en/fr)
   // defaults to getting locale from browser
   locale: "en",
-  //locale: 'fr',
+  // locale: 'fr',
 
   // - Timestamp columns u_date and c_date w/ date of record creation and last update
   wTimestamp: true,

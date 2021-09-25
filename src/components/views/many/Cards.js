@@ -24,54 +24,45 @@ export default class Cards extends Many {
   viewId = "cards";
 
   render() {
-    const entity = this.props.match.params.entity,
-      m = this.model;
+    const entity = this.props.match.params.entity;
+    const m = this.model;
 
     if (m) {
-      const data = this.state.data ? this.state.data : [],
-        full_count = this.pageSummary(data),
-        fullCount = data._full_count
-          ? data._full_count
-          : data.length
-          ? data[0]._full_count || 0
-          : 0,
-        title = m.title || m.label;
+      const data = this.state.data ? this.state.data : [];
+      const full_count = this.pageSummary(data);
+      const fullCount = data._full_count
+        ? data._full_count
+        : data.length
+        ? data[0]._full_count || 0
+        : 0;
+      const title = m.title || m.label;
       let body;
 
       document.title = title;
       if (this.state.loading) {
-        body = <Spinner></Spinner>;
+        body = <Spinner />;
       } else if (this.state.error) {
         body = <Alert title="Error" message={this.state.error.message} />;
+      } else if (data.length) {
+        const fieldCols = m.fields.filter(isFieldMany);
+        body = (
+          <>
+            <div className="evol-cards-body">
+              {this.state.data.map((d, idx) => (
+                <Card key={idx} data={d} fields={fieldCols} entity={entity} />
+              ))}
+              <span className="clearer" />
+            </div>
+            <Pagination
+              count={data.length}
+              fullCount={fullCount}
+              fnClick={this.clickPagination}
+              location={this.props.location}
+            />
+          </>
+        );
       } else {
-        if (data.length) {
-          const fieldCols = m.fields.filter(isFieldMany);
-          body = (
-            <React.Fragment>
-              <div className="evol-cards-body">
-                {this.state.data.map(function (d, idx) {
-                  return (
-                    <Card
-                      key={idx}
-                      data={d}
-                      fields={fieldCols}
-                      entity={entity}
-                    />
-                  );
-                })}
-                <span className="clearer"></span>
-              </div>
-              <Pagination
-                count={data.length}
-                fullCount={fullCount}
-                fnClick={this.clickPagination}
-                location={this.props.location}
-              />
-            </React.Fragment>
-          );
-        } else {
-          body = <NoData name={m.name} namePlural={m.namePlural}></NoData>;
-        }
+        body = <NoData name={m.name} namePlural={m.namePlural} />;
       }
       return (
         <div data-entity={entity} className="evol-many-cards">
@@ -86,14 +77,13 @@ export default class Cards extends Many {
           {body}
         </div>
       );
-    } else {
-      return (
-        <Alert
-          title="Error"
-          message={i18n_errors.badEntity.replace("{0}", entity)}
-        />
-      );
     }
+    return (
+      <Alert
+        title="Error"
+        message={i18n_errors.badEntity.replace("{0}", entity)}
+      />
+    );
   }
 }
 

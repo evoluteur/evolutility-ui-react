@@ -55,7 +55,7 @@ export default class List extends Many {
                   "glyphicon glyphicon-arrow-" +
                   (this._sortDirection === "desc" ? "down" : "up")
                 }
-              ></i>
+              />
             ) : null}
           </th>
         );
@@ -64,12 +64,11 @@ export default class List extends Many {
   }
 
   render() {
-    const props = this.props,
-      isNested = props.isNested,
-      e = props.match.params.entity,
-      m = this.model,
-      paramsCollec = props.paramsCollec,
-      search = getSearchText();
+    const props = this.props;
+    const { isNested, paramsCollec } = props;
+    const e = props.match.params.entity;
+    const m = this.model;
+    const search = getSearchText();
 
     if (m || isNested) {
       const ico =
@@ -99,7 +98,8 @@ export default class List extends Many {
               {d.nb_comments ? " " + d.nb_comments + " comments" : null}
             </td>
           );
-        } else if (f.type === ft.image) {
+        }
+        if (f.type === ft.image) {
           return (
             <td key={f.id}>
               {value ? (
@@ -109,7 +109,8 @@ export default class List extends Many {
               )}
             </td>
           );
-        } else if (f.type === ft.color) {
+        }
+        if (f.type === ft.color) {
           return (
             <td key={f.id}>
               <div
@@ -120,13 +121,14 @@ export default class List extends Many {
               />
             </td>
           );
-        } else if (lovField && f.lovIcon) {
-          let icon = d[f.id + "_icon"];
+        }
+        if (lovField && f.lovIcon) {
+          const icon = d[`${f.id}_icon`];
           if (icon) {
             return (
               <td key={f.id}>
                 <div className="nobr">
-                  <img src={"/pix/" + icon} className="lov-icon" alt="" />
+                  <img src={`/pix/${icon}`} className="lov-icon" alt="" />
                   {fieldValue(f, value, true)}
                 </div>
               </td>
@@ -161,8 +163,8 @@ export default class List extends Many {
         fullCount = data._full_count || data.length,
         title = m ? m.title || m.label : "N/A",
         css = paramsCollec ? "table sub" : "table table-hover main";
-      let body,
-        pagination = null;
+      let body;
+      let pagination = null;
 
       document.title = title;
       if (this.state.loading) {
@@ -173,50 +175,48 @@ export default class List extends Many {
         } else {
           body = <Alert title="Error" message={this.state.error.message} />;
         }
-      } else {
-        if (data.length) {
-          const fields = paramsCollec
-            ? paramsCollec.fields
-            : m.fields.filter(isFieldMany);
+      } else if (data.length) {
+        const fields = paramsCollec
+          ? paramsCollec.fields
+          : m.fields.filter(isFieldMany);
 
-          if (!fields.length) {
-            body = (
-              <Alert
-                title="Error"
-                message="No fields are flagged as inMany to show in list."
-              />
-            );
-          } else {
-            body = (
-              <table className={css}>
-                <thead>{this.tableHeader(fields)}</thead>
-                <tbody>
-                  {data.length
-                    ? sliceData(data).map((d) => (
-                        <tr key={d.id}>
-                          {fields.map((f, idx) => cell(d, f, idx))}
-                        </tr>
-                      ))
-                    : null}
-                </tbody>
-              </table>
-            );
-            pagination = isNested ? null : (
-              <Pagination
-                count={data.length}
-                fullCount={fullCount}
-                fnClick={this.clickPagination}
-                location={this.props.location}
-              />
-            );
-          }
+        if (!fields.length) {
+          body = (
+            <Alert
+              title="Error"
+              message="No fields are flagged as inMany to show in list."
+            />
+          );
         } else {
-          // TODO: get model of nested obj
-          if (this.props.isNested) {
-            body = <div className="nodata">No data.</div>;
-          } else {
-            body = <NoData name={m.name} namePlural={m.namePlural}></NoData>;
-          }
+          body = (
+            <table className={css}>
+              <thead>{this.tableHeader(fields)}</thead>
+              <tbody>
+                {data.length
+                  ? sliceData(data).map((d) => (
+                      <tr key={d.id}>
+                        {fields.map((f, idx) => cell(d, f, idx))}
+                      </tr>
+                    ))
+                  : null}
+              </tbody>
+            </table>
+          );
+          pagination = isNested ? null : (
+            <Pagination
+              count={data.length}
+              fullCount={fullCount}
+              fnClick={this.clickPagination}
+              location={this.props.location}
+            />
+          );
+        }
+      } else {
+        // TODO: get model of nested obj
+        if (this.props.isNested) {
+          body = <div className="nodata">No data.</div>;
+        } else {
+          body = <NoData name={m.name} namePlural={m.namePlural} />;
         }
       }
       return (
@@ -237,9 +237,8 @@ export default class List extends Many {
           </div>
         </div>
       );
-    } else {
-      return <PageNotFound location={this.props.location} />;
     }
+    return <PageNotFound location={this.props.location} />;
   }
 
   getLovMap = (f) => {

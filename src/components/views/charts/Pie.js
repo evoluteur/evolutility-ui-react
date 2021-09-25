@@ -6,21 +6,21 @@ import ChartProps from "./ChartProps";
 
 export default class Pie extends React.Component {
   render() {
-    let data = this.props.data;
+    let { data } = this.props;
     if (data) {
-      let dh = {};
+      const dh = {};
       let label;
       data = data.map((d) => {
         label = d.label;
         if (dh[label]) {
           dh[label] += 1;
-          label += " (" + dh[label] + ")";
+          label += ` (${dh[label]})`;
         } else {
           dh[label] = 1;
         }
         return {
-          id: "" + label,
-          label: "" + label,
+          id: `${label}`,
+          label: `${label}`,
           value: d.value,
         };
       });

@@ -24,7 +24,7 @@ export default class Panel extends React.Component {
   };
 
   render() {
-    const props = this.props;
+    const { props } = this;
     const title = props.title ? (
       <div className="panel-heading">
         {props.collapsible ? (
@@ -33,7 +33,7 @@ export default class Panel extends React.Component {
             onClick={this.clickToggle}
             size="tiny"
             theme="none"
-          ></Icon>
+          />
         ) : null}
         <h3 className="panel-title">{props.title}</h3>
       </div>
@@ -61,10 +61,17 @@ export default class Panel extends React.Component {
 Panel.propTypes = {
   title: PropTypes.string,
   width: PropTypes.number,
-  collapsible: PropTypes.any,
+  collapsible: PropTypes.bool,
+  header: PropTypes.node,
+  footer: PropTypes.node,
+  children: PropTypes.node,
 };
 
 Panel.defaultProps = {
+  title: null,
   collapsible: false,
   width: 100,
+  header: null,
+  footer: null,
+  children: null,
 };

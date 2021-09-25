@@ -31,17 +31,16 @@ export default class Charts extends React.Component {
   }
 
   render() {
-    const e = this.props.match.params.entity,
-      m = getModel(e);
+    const e = this.props.match.params.entity;
+    const m = getModel(e);
     this.model = m;
 
     if (m) {
-      const title = m.title || m.label,
-        chartFields = m.fields.filter(fieldInCharts),
-        nbCharts = chartFields.length,
-        css =
-          "evolutility evol-many-charts " +
-          (nbCharts === 1 ? "single" : "many");
+      const title = m.title || m.label;
+      const chartFields = m.fields.filter(fieldInCharts);
+      const nbCharts = chartFields.length;
+      const css =
+        "evolutility evol-many-charts " + (nbCharts === 1 ? "single" : "many");
       const chartTitle = (f) =>
         capitalize(m.namePlural) + " / " + (f.labelCharts || f.label);
       let charts;
@@ -50,33 +49,31 @@ export default class Charts extends React.Component {
         charts = (
           <Alert title="No data" message={i18n_charts.nocharts} type="info" />
         );
+      } else if (nbCharts === 1) {
+        const f = chartFields[0];
+        charts = (
+          <Chart
+            entity={e}
+            field={f}
+            title={chartTitle(f)}
+            chartType={lcRead(`${m.id}-charts-${f.id}`) || f.chartType}
+            key={"c0-" + f.id}
+            size="large"
+            className="panel-default singleChart"
+          />
+        );
       } else {
-        if (nbCharts === 1) {
-          const f = chartFields[0];
-          charts = (
-            <Chart
-              entity={e}
-              field={f}
-              title={chartTitle(f)}
-              chartType={lcRead(m.id + "-charts-" + f.id) || f.chartType}
-              key={"c0-" + f.id}
-              size={"large"}
-              className="panel-default singleChart"
-            />
-          );
-        } else {
-          charts = chartFields.map((f) => (
-            <Chart
-              entity={e}
-              size="small"
-              className="panel-default"
-              key={"c-" + f.id}
-              field={f}
-              title={chartTitle(f)}
-              chartType={lcRead(m.id + "-charts-" + f.id) || f.chartType}
-            />
-          ));
-        }
+        charts = chartFields.map((f) => (
+          <Chart
+            entity={e}
+            size="small"
+            className="panel-default"
+            key={"c-" + f.id}
+            field={f}
+            title={chartTitle(f)}
+            chartType={lcRead(m.id + "-charts-" + f.id) || f.chartType}
+          />
+        ));
       }
 
       return (
@@ -92,11 +89,8 @@ export default class Charts extends React.Component {
           <div className={css}>{charts}</div>
         </div>
       );
-    } else {
-      return (
-        <Alert title="Error" message={'Invalid input parameter "' + e + '".'} />
-      );
     }
+    return <Alert title="Error" message={`Invalid input parameter "${e}".`} />;
   }
 }
 

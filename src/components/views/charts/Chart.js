@@ -19,7 +19,7 @@ import chartProps from "./ChartProps";
 
 import Bars from "./Bars";
 import Pie from "./Pie";
-//import TreeMap from './TreeMap'
+// import TreeMap from './TreeMap'
 
 import "./Charts.scss";
 
@@ -77,7 +77,7 @@ export default class Chart extends React.Component {
   getData() {
     const e = this.props.entity;
     const fid = this.props.field.id;
-    let urlparams = ""; //?token='+localStorage.token
+    let urlparams = ""; // ?token='+localStorage.token
 
     if (fid) {
       dao
@@ -123,16 +123,36 @@ export default class Chart extends React.Component {
     });
   };
 
+  sortTable = (evt) => {
+    // - client-side sort (we have all the data no need to re-query)
+    const sortId = evt.currentTarget.id || "count";
+    let data = this.state.data
+      ? JSON.parse(JSON.stringify(this.state.data))
+      : null;
+    if (data && data.length > 1) {
+      const sortFn = sortId === "label" ? sortLabel : sortCount;
+      if (this.state.sortId === sortId) {
+        data = data.reverse();
+      } else {
+        data = data.sort(sortFn);
+      }
+      this.setState({
+        data,
+        sortId,
+      });
+    }
+  };
+
   render() {
-    const props = this.props,
-      { data = [], size, chartType } = this.state;
+    const props = this.props;
+    const { data = [], size, chartType } = this.state;
     let body;
 
     data.forEach((row) => {
       row.id = "" + row.id;
     });
     const params = {
-      data: data,
+      data,
       entity: props.entity,
       sortTable: this.sortTable,
     };
@@ -158,17 +178,15 @@ export default class Chart extends React.Component {
           message={i18n_charts.emptyData}
         />
       );
+    } else if (chartType === cTypes.table) {
+      // - table view
+      body = <ChartTable {...params} field={props.field} />;
+    } else if (chartType === cTypes.pie) {
+      // - Pie charts
+      body = <Pie {...params} />;
     } else {
-      if (chartType === cTypes.table) {
-        // - table view
-        body = <ChartTable {...params} field={props.field} />;
-      } else if (chartType === cTypes.pie) {
-        // - Pie charts
-        body = <Pie {...params} />;
-      } else {
-        // - Bars charts
-        body = <Bars {...params} />;
-      }
+      // - Bars charts
+      body = <Bars {...params} />;
     }
     const iconProps = {
       size: "small",
@@ -206,37 +224,19 @@ export default class Chart extends React.Component {
       </div>
     );
   }
-
-  sortTable = (evt) => {
-    // - client-side sort (we have all the data no need to re-query)
-    const sortId = evt.currentTarget.id || "count";
-    let data = this.state.data
-      ? JSON.parse(JSON.stringify(this.state.data))
-      : null;
-    if (data && data.length > 1) {
-      const sortFn = sortId === "label" ? sortLabel : sortCount;
-      if (this.state.sortId === sortId) {
-        data = data.reverse();
-      } else {
-        data = data.sort(sortFn);
-      }
-      this.setState({
-        data: data,
-        sortId: sortId,
-      });
-    }
-  };
 }
 
 Chart.propTypes = {
   entity: PropTypes.string.isRequired,
   field: PropTypes.object.isRequired,
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   size: PropTypes.oneOf(chartProps.sizes),
   type: PropTypes.oneOf(chartProps.chartTypes),
   sort: PropTypes.string,
   canExpend: PropTypes.bool,
+  chartType: PropTypes.oneOf(["Pie", "Bars", "Table"]),
 };
+
 Chart.defaultProps = {
   chartType: cTypes.bars,
   size: "small",

@@ -53,8 +53,8 @@ module.exports = [
         menus: [
             {id: 'test', text: 'Tests', defaultViewMany: 'cards'},
         ],
-    },*/,
-  /*{
+    }, */,
+  /* {
         id: 'designer',
         title: 'Designer',
         icon: 'cogs',
@@ -66,5 +66,5 @@ module.exports = [
             {id: 'collection', text: 'Collections', icon: "designer/collection.png"},
             //{id: 'test', text: 'Test', icon: "car.png", defaultViewMany: 'cards'},
         ],
-    },*/
+    }, */
 ];

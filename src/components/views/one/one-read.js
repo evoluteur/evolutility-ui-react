@@ -7,7 +7,7 @@
 
 import React from "react";
 import dao from "../../../utils/dao";
-//import { withRouter, browserHistory } from 'react-router'
+// import { withRouter, browserHistory } from 'react-router'
 
 import { i18n_errors } from "../../../i18n/i18n";
 import { apiPath } from "../../../config";
@@ -34,8 +34,8 @@ export default class OneRead extends React.Component {
   }
 
   getData(entity, nid) {
-    const e = entity || this.props.match.params.entity,
-      id = nid || this.props.match.params.id;
+    const e = entity || this.props.match.params.entity;
+    const id = nid || this.props.match.params.id;
     let newState = {
       data: {},
       loading: false,
@@ -122,7 +122,7 @@ export default class OneRead extends React.Component {
       this.setModel(nextProps.match.params.entity);
       // TODO: alternative to isMounted
       if (!this.done) {
-        //if(this.isMounted()){
+        // if(this.isMounted()){
         const isNew = nextProps.match.params.id === "0";
         this.emptyDelta(isNew);
         this.setState({

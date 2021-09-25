@@ -19,18 +19,33 @@ import moment from "moment";
 import { filesUrl, locale } from "../config";
 import { fieldTypes as ft } from "./dico";
 
-// Set the locale from the browser -- which may need to be configured
-moment.locale(
-  locale || window.navigator.userLanguage || window.navigator.language
-);
+const isFunction = (x) => typeof x === "function";
 
-export function capitalize(word) {
-  // TODO: maybe use _.string.capitalize(word);
-  if (word && word.length > 0) {
-    return word.substring(0, 1).toUpperCase() + word.substring(1); // .toLowerCase();
+const nullOrUndefined = (v) => v === null || v === undefined;
+const mFormat = (d, format) =>
+  nullOrUndefined(d) ? "" : moment(d).format(format);
+const numFormat = (d, format) =>
+  nullOrUndefined(d) ? "" : numeral(d).format(format);
+
+// --- date formats ---
+export const dateTZ = (d) => (d ? d.toISOString() : null);
+export const dateString = (d) => mFormat(d, "L");
+// const timeString = d => mFormat(moment(d, 'HH:mm:ss'), 'LTS')
+const timeString = (d) => mFormat(moment(d, "HH:mm:ss"), "hh:mm A");
+const datetimeString = (d) => mFormat(d, "L hh:mm A");
+function dateOpt(d, type) {
+  if (type === ft.time) {
+    return timeString(d);
   }
-  return "";
+  // if (type === ft.datetime) {
+  //   return dateString(d);
+  // }
+  return dateString(d);
 }
+
+const decimalString = (d) => numFormat(d, d > 1 ? "0.00" : "0.000");
+const moneyString = (d) => numFormat(d, "$0,0.00");
+const jsonString = (js) => (js ? JSON.stringify(js, null, "\t") : "");
 
 export function image(d) {
   if (d === null) {
@@ -38,38 +53,6 @@ export function image(d) {
   }
   return <img src={d} className="img-thumbnail" alt="" />;
 }
-
-export function doc(d, path) {
-  if (nullOrUndefined(d)) {
-    return null;
-  }
-  return (
-    <a href={encodeURI(path + d)} target="_blank" rel="noopener noreferrer">
-      {d}
-    </a>
-  );
-}
-
-// --- date formats ---
-function dateOpt(d, type) {
-  if (type === ft.time) {
-    return timeString(d);
-  }
-  if (type === ft.datetime) {
-    return dateString(d);
-  }
-  return dateString(d);
-}
-
-export const dateTZ = (d) => (d ? d.toISOString() : null);
-
-export const dateString = (d) => mFormat(d, "L");
-// const timeString = d => mFormat(moment(d, 'HH:mm:ss'), 'LTS')
-const timeString = (d) => mFormat(moment(d, "HH:mm:ss"), "hh:mm A");
-const datetimeString = (d) => mFormat(d, "L hh:mm A");
-const decimalString = (d) => numFormat(d, d > 1 ? "0.00" : "0.000");
-const moneyString = (d) => numFormat(d, "$0,0.00");
-const jsonString = (js) => (js ? JSON.stringify(js, null, "\t") : "");
 
 export function fieldValue(f, d, abbr) {
   if (f.type === ft.bool) {
@@ -125,11 +108,53 @@ export function fieldValue(f, d, abbr) {
   return d;
 }
 
-const mFormat = (d, format) =>
-  nullOrUndefined(d) ? "" : moment(d).format(format);
-const numFormat = (d, format) =>
-  nullOrUndefined(d) ? "" : numeral(d).format(format);
-const nullOrUndefined = (v) => v === null || v === undefined;
+export const dataTitle = (m, data, isNew) => {
+  if (m) {
+    let f;
+    let title = "";
+    if (isNew) {
+      title = `New ${m.name || "item"}`;
+    } else if (m.titleField) {
+      if (isFunction(m.titleField)) {
+        title = m.titleField(data);
+      } else {
+        f = m.fieldsH[m.titleField];
+        if (!f) {
+          f = m.fields[0];
+        }
+        if (f && data) {
+          title = fieldValue(f, data[f.id]);
+        }
+      }
+    }
+    return title;
+  }
+  return "New item";
+};
+
+// Set the locale from the browser -- which may need to be configured
+moment.locale(
+  locale || window.navigator.userLanguage || window.navigator.language
+);
+
+export function capitalize(word) {
+  // TODO: maybe use _.string.capitalize(word);
+  if (word && word.length > 0) {
+    return word.substring(0, 1).toUpperCase() + word.substring(1); // .toLowerCase();
+  }
+  return "";
+}
+
+export function doc(d, path) {
+  if (nullOrUndefined(d)) {
+    return null;
+  }
+  return (
+    <a href={encodeURI(path + d)} target="_blank" rel="noopener noreferrer">
+      {d}
+    </a>
+  );
+}
 
 export function urlJoin(u1, u2) {
   const slashu2 = u2[0] === "/";

@@ -7,7 +7,7 @@ const icons = {
   info: "info-sign",
   success: "ok-sign",
   warning: "warning-sign",
-  danger: "exclamation-sign", //'remove-sign'
+  danger: "exclamation-sign", // 'remove-sign'
 };
 function icon(name) {
   return <i className={"glyphicon glyphicon-" + icons[name]} />;
@@ -35,5 +35,6 @@ Alert.propTypes = {
 };
 
 Alert.defaultProps = {
+  title: null,
   type: "danger",
 };
