@@ -27,6 +27,8 @@ import Api from "./components/views/doc/Api";
 
 import PageNotFound from "./components/pages/PageNotFound";
 
+import "./App.scss";
+
 let queryModels = config.queryModels || false;
 
 const AppRoutes = () => (

@@ -12,7 +12,7 @@ export default class Demo extends React.PureComponent {
   render() {
     return (
       <div className="evo-demo">
-        <h1>Evolutility Demo Apps</h1>
+        <h1>Evolutility Demo</h1>
 
         <p>
           These are a few sample apps built with Evolutility using a GraphQL API

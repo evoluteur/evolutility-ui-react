@@ -114,7 +114,7 @@ export default class Nav extends React.Component {
       footer = (
         <>
           <Link to="/demo">
-            <img alt="Demos" src="/pix/cup.png" /> Demos
+            <img alt="Demos" src="/svg/human-greeting.svg" /> Demo
           </Link>
           <br />
         </>
@@ -132,12 +132,14 @@ export default class Nav extends React.Component {
         <li className={section.id === g ? "active-li" : ""} key={section.id}>
           {navOpened && section.title ? (
             <div>
-              <img
-                alt={section.title}
-                src={`/svg/${section.icon}.svg`}
-                className="cpnSvg"
-              />
-              {section.title}
+              <Link to="/demo">
+                <img
+                  alt={section.title}
+                  src={`/svg/${section.icon}.svg`}
+                  className="cpnSvg"
+                />
+                {section.title}{" "}
+              </Link>
             </div>
           ) : null}
           <ul className="nav-l2">
@@ -160,14 +162,23 @@ export default class Nav extends React.Component {
           />
           <span className="embossed">Evolutility</span>
         </div>
+
         <ul>{menus.map(Section)}</ul>
         <div className="footLinks">{footer}</div>
+
         <div id="afterNav" />
         <GitHub />
       </nav>
     );
-  }
+    /*
 
+          <div>
+            <img alt="Doc" src={`/svg/book.svg`} className="cpnSvg" />
+            {"Doc"}
+          </div>
+
+          */
+  }
   toggleNav = () => {
     const opened = !this.state.navOpened;
     const nav = document.getElementsByClassName("Nav")[0];

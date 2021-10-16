@@ -1,8 +1,8 @@
 module.exports = [
   {
     id: "organizer",
-    title: "Organizer",
-    icon: "briefcase",
+    title: "Demo",
+    icon: "human-greeting",
     menus: [
       { qid: 1, id: "todo", text: "To-Do List", icon: "todo.gif" },
       { qid: 2, id: "contact", text: "Address Book", icon: "contact.gif" },

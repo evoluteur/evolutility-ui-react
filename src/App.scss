@@ -1,0 +1,21 @@
+@import "./components/variables";
+
+.table {
+  border-top: $border;
+  border-bottom: $border;
+}
+
+.list-tags {
+  > div {
+    border: $border;
+    border-radius: 8px;
+    padding: 2px 7px;
+    margin: 0 5px 0 0;
+    width: auto !important;
+    display: inline-block;
+  }
+}
+
+label {
+  color: $color-label;
+}

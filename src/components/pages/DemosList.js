@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { getModel } from "../../utils/moMa";
 
 import "./DemosList.scss";
-
+/*
 const titleElem = (label, url, showTitle) =>
   showTitle ? (
     <h3>
@@ -12,7 +12,7 @@ const titleElem = (label, url, showTitle) =>
       {label}
     </h3>
   ) : null;
-
+*/
 const itemLink = (id, mid, view) => {
   const m = getModel(mid);
   if (view === "api") {
@@ -39,40 +39,30 @@ const itemLink = (id, mid, view) => {
   );
 };
 
-export default class DemosList extends React.PureComponent {
-  render = () => {
-    const showTitle = this.props.title || false;
-    const { view } = this.props;
-
-    return (
-      <div className="d-worlds">
-        <div>
-          {titleElem("Organizer", "/svg/briefcase.svg", showTitle)}
-          <div className="demoLinks">
-            {itemLink(1, "todo", view)}
-            {itemLink(2, "contact", view)}
-            {itemLink(4, "restaurant", view)}
-          </div>
-          <div className="demoLinks">
-            {itemLink(3, "comics", view)}
-            {itemLink(5, "winecellar", view)}
-            {itemLink(6, "winetasting", view)}
-          </div>
-        </div>
-        <div>
-          {titleElem("Music", "/svg/music.svg", showTitle)}
-          <div className="demoLinks">
-            {itemLink(8, "artist", view)}
-            {itemLink(7, "album", view)}
-            {itemLink(9, "track", view)}
-          </div>
-        </div>
+const DemosList = ({ view }) => (
+  <div className="d-worlds">
+    <div>
+      <div className="demoLinks">
+        {itemLink(1, "todo", view)}
+        {itemLink(2, "contact", view)}
+        {itemLink(4, "restaurant", view)}
       </div>
-    );
-  };
-}
+      <div className="demoLinks">
+        {itemLink(3, "comics", view)}
+        {itemLink(5, "winecellar", view)}
+        {itemLink(6, "winetasting", view)}
+      </div>
+    </div>
+  </div>
+);
+// {titleElem("Demo", "/svg/human-greeting.svg", showTitle)}
+
+export default DemosList;
 
 DemosList.propTypes = {
-  title: PropTypes.string,
   view: PropTypes.string,
+};
+
+DemosList.defaultProps = {
+  view: "list",
 };

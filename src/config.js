@@ -28,7 +28,7 @@ module.exports = {
   // locale: 'fr',
 
   // - Timestamp columns u_date and c_date w/ date of record creation and last update
-  wTimestamp: true,
+  wTimestamp: false,
   // - "WhoIs" columns u_uid and c_uid w/ userid of creator and last modifier
   wWhoIs: false,
 

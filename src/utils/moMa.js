@@ -22,7 +22,11 @@ export function fetchModels(cb, cbErr) {
   dao
     .getModels()
     .then((response) => {
-      addModels(response.data);
+      let data = response.data;
+      if (data.objects) {
+        data = data.objects;
+      }
+      addModels(data);
       if (cb) {
         cb(models);
       }
@@ -44,4 +48,5 @@ const moma = {
   models,
   modelIds,
 };
+
 export default moma;

@@ -107,7 +107,16 @@ export default class Home extends React.PureComponent {
             >
               GitHub
             </a>{" "}
-            with MIT license.
+            with{" "}
+            <a
+              href="https://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="extlink"
+            >
+              MIT license
+            </a>
+            .
           </p>
         </section>
       </div>
