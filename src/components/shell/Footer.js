@@ -6,14 +6,18 @@ import "./Footer.scss";
 
 const Footer = () => (
   <div className="Footer" role="contentinfo">
-    <a
-      className="copyright"
-      target="ui"
-      rel="noopener noreferrer"
-      href="https://github.com/evoluteur/evolutility-ui-react"
-    >
-      <span>Evolutility-UI-React v{version}</span>
-    </a>
+    <div>
+      <a
+        className="copyright"
+        target="ui"
+        rel="noopener noreferrer"
+        href="https://github.com/evoluteur/evolutility-ui-react"
+      >
+        Evolutility-UI-React v{version}
+      </a>
+      . Made in California with <div className="heart">♥</div>.
+    </div>
+    <div></div>
     <div>
       &copy; {copyright.substring(4, 9)}
       <a href="https://evoluteur.github.io/" target="og">
