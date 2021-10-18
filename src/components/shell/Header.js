@@ -1,17 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-
 import Icon from "react-crud-icons";
+
 import { queryUrl, getSearchText } from "../../utils/url";
 
+import { isREST } from "../../utils/dao";
+
 import "./Header.scss";
+import "@szhsin/react-menu/dist/index.css";
 
 const iconH = {
   n: {
     list: { id: "list", icon: "list", label: "List" },
     cards: { id: "cards", icon: "cards", label: "Cards" },
-    charts: { id: "charts", icon: "dashboard", label: "Dashboard" },
+    // charts: { id: "charts", icon: "dashboard", label: "Dashboard" },
     stats: { id: "stats", icon: "stats", label: "Stats" },
   },
   1: {
@@ -20,6 +23,9 @@ const iconH = {
     // 'json': {id: 'json',  icon: 'json', label: 'JSON', option: true},
   },
 };
+if (isREST) {
+  iconH.n.charts = { id: "charts", icon: "dashboard", label: "Dashboard" };
+}
 
 function getIcons(cardinality, model) {
   const ih = iconH[cardinality];
@@ -28,7 +34,7 @@ function getIcons(cardinality, model) {
   }
   const cardiIcons = [ih.list, ih.cards];
   if (model) {
-    if (!model.noCharts) {
+    if (isREST && !model.noCharts) {
       cardiIcons.push(ih.charts);
     }
     if (!model.noStats) {
@@ -59,37 +65,38 @@ function iconViews(mid, cardinality, id, view, model) {
   );
 }
 
-export default class Header extends React.PureComponent {
-  render() {
-    // TODO: make charts work w/ search & filters (and switch comment below)
-    // const m = models[this.props.entity]
-    const search = this.props.view === "charts" ? null : getSearchText();
-    let { count, comments } = this.props;
-    if (comments) {
-      comments += comments === 1 ? " comment" : " comments";
-    }
+const Header = ({
+  title,
+  count,
+  comments,
+  entity,
+  cardinality,
+  id,
+  view,
+  model,
+}) => {
+  // TODO: make charts work w/ search & filters (and switch comment below)
+  // const m = models[this.props.entity]
+  const search = view === "charts" ? null : getSearchText();
 
-    return (
-      <div className="evo-page-header">
-        <h2 className="page-title">
-          <span id="itemTitle">{this.props.title}</span>
-          {search ? <span className="evo-badge">Search "{search}"</span> : null}
-          {count ? <span className="evo-badge">{count}</span> : null}
-          {comments ? <span className="evo-badge">{comments}</span> : null}
-        </h2>
-        <div>
-          {iconViews(
-            this.props.entity,
-            this.props.cardinality,
-            this.props.id,
-            this.props.view,
-            this.props.model
-          )}
-        </div>
-      </div>
-    );
+  if (comments) {
+    comments += comments === 1 ? " comment" : " comments";
   }
-}
+
+  return (
+    <div className="evo-page-header">
+      <h2 className="page-title">
+        <span id="itemTitle">{title}</span>
+        {search ? <span className="evo-badge">Search "{search}"</span> : null}
+        {count ? <span className="evo-badge">{count}</span> : null}
+        {comments ? <span className="evo-badge">{comments}</span> : null}
+      </h2>
+      <div>{iconViews(entity, cardinality, id, view, model)}</div>
+    </div>
+  );
+};
+
+export default Header;
 
 Header.propTypes = {
   title: PropTypes.string,
