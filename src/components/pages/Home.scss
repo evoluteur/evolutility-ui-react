@@ -1,4 +1,10 @@
 .evo-home {
+  h1 {
+    margin: 30px 0 40px !important;
+    .version {
+      font-size: 0.3em;
+    }
+  }
   section {
     margin-top: 40px;
     > div:first-child {
@@ -32,6 +38,9 @@
     font-size: 80px;
     padding: 2px 0;
     margin: 0 10px 20px 0;
+    .utility {
+      color: black;
+    }
   }
   .tBlue {
     color: #2e9ec9;

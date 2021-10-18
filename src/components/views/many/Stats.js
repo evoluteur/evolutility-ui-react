@@ -181,7 +181,7 @@ export default class Stats extends React.Component {
       field.type === "money" ? format.moneyString(value) : value;
     const itemAggr = (id, label, value) => (
       <div key={id}>
-        <label className="grey stat-fn">{label}</label> {value}
+        <label className="stat-fn">{label}</label> {value}
       </div>
     );
     const item = (k) =>

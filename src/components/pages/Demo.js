@@ -14,21 +14,9 @@ export default class Demo extends React.PureComponent {
       <div className="evo-demo">
         <h1>Evolutility Demo</h1>
 
-        <p>
-          These are a few sample apps built with Evolutility using a GraphQL API
-          served by{" "}
-          <a
-            href="https://hasura.io"
-            target="h"
-            rel="noopener noreferrer"
-            className="extlink"
-          >
-            Hasura
-          </a>{" "}
-          on Heroku.
-        </p>
+        <p>These are a few sample apps built with Evolutility.</p>
 
-        <DemosList title />
+        <DemosList />
 
         <p>
           <br />
@@ -46,6 +34,36 @@ export default class Demo extends React.PureComponent {
           .
         </p>
 
+        <p>
+          The demo uses the{" "}
+          <a
+            href="https://graphql.org/"
+            target="gql"
+            rel="noopener noreferrer"
+            className="extlink"
+          >
+            GraphQL APIs
+          </a>
+          {" of "}
+          <a
+            href="https://hasura.io"
+            target="ha"
+            rel="noopener noreferrer"
+            className="extlink"
+          >
+            Hasura
+          </a>{" "}
+          on{" "}
+          <a
+            href="https://heroku.com/"
+            target="he"
+            rel="noopener noreferrer"
+            className="extlink"
+          >
+            Heroku
+          </a>
+          .{" "}
+        </p>
         {apiType !== "graphql" ? (
           <p>
             <Link to="/test/cards">Test App</Link> with fields of all possible

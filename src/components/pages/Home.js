@@ -45,8 +45,8 @@ export default class Home extends React.PureComponent {
       <div className="evo-home">
         <h1 className="siteTitle">
           <span>Evol</span>
-          <span className="navy">utility</span>{" "}
-          <span style={{ fontSize: ".5em" }}>v{pkg.version}</span>{" "}
+          <span className="utility">utility</span>-UI-React{" "}
+          <span className="version">v{pkg.version}</span>{" "}
         </h1>
         <h2 className="tBlue">
           Toolkit for building CRUD applications with models rather than code
@@ -77,16 +77,10 @@ export default class Home extends React.PureComponent {
         <section>
           <p>
             No hand-coding necessary. All views, validation code, and API calls
-            are derived from the models. It works with REST using{" "}
-            <a
-              href="https://github.com/evoluteur/evolutility-server-node"
-              target="esn"
-              rel="noopener noreferrer"
-              className="extlink"
-            >
-              Evolutility-Server-Node
-            </a>{" "}
-            or GraphQL using{" "}
+            are derived from the models.
+          </p>
+          <p>
+            Evolutility-UI-React can use GraphQL with{" "}
             <a
               href="https://hasura.io"
               target="h"
@@ -94,11 +88,21 @@ export default class Home extends React.PureComponent {
               className="extlink"
             >
               Hasura
+            </a>{" "}
+            or REST with{" "}
+            <a
+              href="https://github.com/evoluteur/evolutility-server-node"
+              target="esn"
+              rel="noopener noreferrer"
+              className="extlink"
+            >
+              Evolutility-Server-Node
             </a>
             .
           </p>
           <p>
-            Code and documentation available at{" "}
+            Evolutility-UI-React is Open source. The code and documentation are
+            available at{" "}
             <a
               href="https://github.com/evoluteur/evolutility-ui-react"
               target="_blank"

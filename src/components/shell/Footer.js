@@ -15,7 +15,7 @@ const Footer = () => (
       >
         Evolutility-UI-React v{version}
       </a>
-      . Made in California with <div className="heart">♥</div>.
+      &nbsp; is made in California with <div className="heart">♥</div>
     </div>
     <div></div>
     <div>
