@@ -51,7 +51,6 @@ export default class Cards extends Many {
               {this.state.data.map((d, idx) => (
                 <Card key={idx} data={d} fields={fieldCols} entity={entity} />
               ))}
-              <span className="clearer" />
             </div>
             <Pagination
               count={data.length}

@@ -4,24 +4,18 @@
 @import "../../variables";
 
 .evol-cards-body {
-  /*
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;*/
   width: 100%;
 
   > .panel {
-    float: left;
-    //flex-grow: 1;
+    flex-grow: 1;
     position: relative;
-    height: 182px;
     width: 240px;
     min-width: 240px;
     margin: 5px;
-    padding: 2px 10px 10px;
+    padding: 10px 20px;
     overflow: auto;
-
     &:hover {
       border-color: $color-border-hover;
       .card-actions {
@@ -42,9 +36,6 @@
       border-left-color: $color-border;
       border-bottom-color: $color-border;
       border-bottom-left-radius: 6px;
-      -webkit-transition: width $ease-time ease $delay-time;
-      -moz-transition: width $ease-time ease $delay-time;
-      -o-transition: width $ease-time ease $delay-time;
       transition: width $ease-time ease $delay-time;
       @include icons-actions();
       i {
@@ -57,7 +48,7 @@
     }
     > div {
       > h4 {
-        margin-bottom: 12px;
+        margin-bottom: 14px;
         @include ellipsis();
       }
       > label {
