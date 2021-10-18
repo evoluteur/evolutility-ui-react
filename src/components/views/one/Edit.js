@@ -9,6 +9,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import Icon from "react-crud-icons";
 
 // import moment from 'moment'
 // import { withRouter } from 'react-router'
@@ -179,11 +180,17 @@ export default class Edit extends OneReadWrite {
               <Panel key="formButtons">
                 <div className="evol-buttons">
                   <Link className="btn btn-default" to={linkBrowse}>
-                    <i className="glyphicon glyphicon-remove" />{" "}
+                    <Icon
+                      className="ico-cancel"
+                      name="close"
+                      size="medium"
+                      theme="none"
+                    />{" "}
                     {i18n_actions.cancel}
                   </Link>
                   <button className="btn btn-primary" onClick={this.clickSave}>
-                    <i className="glyphicon glyphicon-ok" /> {i18n_actions.save}
+                    <Icon name="save" size="medium" theme="none" />{" "}
+                    {i18n_actions.save}
                   </button>
                   {this.state.error ? i18n_validation.incomplete : null}
                 </div>

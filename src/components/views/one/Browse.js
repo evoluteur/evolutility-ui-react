@@ -8,6 +8,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Icon from "react-crud-icons";
 
 import { i18n_actions, i18n_errors } from "../../../i18n/i18n";
 import { fieldId2Field } from "../../../utils/dico";
@@ -131,11 +132,16 @@ export default class Browse extends OneRead {
               <Panel key="formButtons">
                 <div className="evol-buttons">
                   <Link className="btn btn-default" to={linkList}>
-                    <i className="glyphicon glyphicon-remove" />{" "}
+                    <Icon
+                      className="ico-cancel"
+                      name="close"
+                      size="medium"
+                      theme="none"
+                    />
                     {i18n_actions.cancel}
                   </Link>
                   <Link to={linkEdit} className="btn btn-primary">
-                    <i className="glyphicon glyphicon-edit" />{" "}
+                    <Icon name="edit" size="medium" theme="none" />
                     {i18n_actions.edit}
                   </Link>
                 </div>

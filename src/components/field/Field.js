@@ -8,7 +8,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-
+import Icon from "react-crud-icons";
 import Datepicker from "react-datepicker";
 import Dropzone from "react-dropzone";
 import MultiSelect from "@khanacademy/react-multi-select";
@@ -187,10 +187,15 @@ export default class Field extends React.Component {
           {pix}
           {d ? (
             <div className="evol-remove" onClick={this.removeFile}>
-              <span className="fakeLink">
-                <i className="glyphicon glyphicon-remove" />
+              <button className="btn btn-default">
+                <Icon
+                  className="ddd"
+                  name="remove"
+                  size="medium"
+                  theme="none"
+                />
                 {i18n_actions[`remove_${f.type}`]}
-              </span>
+              </button>
             </div>
           ) : null}
           <Dropzone onDrop={this.onDropFile}>
@@ -210,7 +215,6 @@ export default class Field extends React.Component {
               </div>
             )}
           </Dropzone>
-          <i />
         </div>
       );
     }

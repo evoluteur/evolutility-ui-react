@@ -19,3 +19,20 @@
 label {
   color: $color-label;
 }
+
+.btn {
+  > svg {
+    position: relative;
+    top: 2px;
+    height: 16px;
+    // fill: $color-red !important;
+    fill: white;
+    margin-right: 5px;
+  }
+}
+
+.btn-default {
+  > svg {
+    fill: black !important;
+  }
+}

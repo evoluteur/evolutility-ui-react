@@ -110,10 +110,13 @@
 }
 .evol-remove {
   margin-top: 5px;
-  i {
+  // color: $color-red;
+  svg {
     position: relative;
     top: 2px;
-    color: $color-red;
+    height: 16px;
+    // fill: $color-red !important;
+    fill: black !important;
     margin-right: 5px;
   }
 }
