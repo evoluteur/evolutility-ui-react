@@ -3,7 +3,7 @@
 // Pagination for List and Cards views (styled w/ Bootstrap).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2018 Olivier Giulieri
+// (c) 2021 Olivier Giulieri
 
 import React from "react";
 import PropTypes from "prop-types";
@@ -11,6 +11,8 @@ import PropTypes from "prop-types";
 import queryString from "query-string";
 
 import { pageSize } from "../../config";
+
+import "./Pagination.scss";
 
 export default class Pagination extends React.PureComponent {
   _paginationBody() {

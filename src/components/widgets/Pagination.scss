@@ -1,0 +1,11 @@
+@import "../variables";
+
+.pagination {
+  border-radius: $radius !important;
+  li:first-child > span {
+    border-radius: $radius 0 0 $radius !important;
+  }
+  li:last-child > span {
+    border-radius: 0 $radius $radius 0 !important;
+  }
+}
