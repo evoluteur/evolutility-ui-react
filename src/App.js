@@ -14,16 +14,7 @@ import Footer from "./components/shell/Footer";
 
 import Home from "./components/pages/Home";
 import Demo from "./components/pages/Demo";
-
-import List from "./components/views/many/List";
-import Cards from "./components/views/many/Cards";
-import Charts from "./components/views/charts/Charts";
-import Stats from "./components/views/many/Stats";
-
-import Browse from "./components/views/one/Browse";
-import Edit from "./components/views/one/Edit";
-
-import Api from "./components/views/doc/Api";
+import EvolRoutes from "./components/EvolRoutes";
 
 import PageNotFound from "./components/pages/PageNotFound";
 
@@ -35,20 +26,7 @@ const AppRoutes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
     <Route exact path="/demo" component={Demo} />
-    <Route path="/:entity" exact component={List} />
-
-    <Route path="/:entity/browse/:id" component={Browse} />
-    <Route path="/:entity/browse" component={Browse} />
-    <Route path="/:entity/edit/:id" component={Edit} />
-    <Route path="/:entity/edit" component={Edit} />
-
-    <Route path="/:entity/cards" component={Cards} />
-    <Route path="/:entity/list" component={List} />
-
-    <Route path="/:entity/charts" component={Charts} />
-    <Route path="/:entity/stats" component={Stats} />
-    <Route path="/:entity/api" component={Api} />
-
+    <EvolRoutes />
     <Route path="*" exact component={PageNotFound} />
   </Switch>
 );
