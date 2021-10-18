@@ -6,7 +6,7 @@
 // (c) 2021 Olivier Giulieri
 
 import React from "react";
-import dao from "../../../utils/dao";
+import dao, { isGraphQL } from "../../../utils/dao";
 // import { withRouter, browserHistory } from 'react-router'
 
 import { i18n_errors } from "../../../i18n/i18n";
@@ -14,8 +14,6 @@ import { apiPath } from "../../../config";
 import models from "../../../models/all_models";
 
 import "./one.scss";
-
-const isGQL = dao.apiType === "graphql";
 
 export default class OneRead extends React.Component {
   viewSuperType = "1"; // = one
@@ -54,7 +52,7 @@ export default class OneRead extends React.Component {
       dao
         .getOne(e, id)
         .then((data) => {
-          if (isGQL && data.errors) {
+          if (isGraphQL && data.errors) {
             // TODO: show better msg or all errors?
             newState.error = {
               message: data.errors[0].message,

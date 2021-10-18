@@ -25,6 +25,7 @@ import Field from "../../field/Field";
 import Panel from "../../widgets/Panel";
 import Spinner from "../../shell/Spinner";
 import Header from "../../shell/Header";
+import { isGraphQL } from "../../../utils/dao";
 
 export default class Edit extends OneReadWrite {
   viewId = "edit";
@@ -84,7 +85,18 @@ export default class Edit extends OneReadWrite {
       if (f) {
         if (f.type === ft.lov && !f.list) {
           // - fetch list values
-          this.getLOV(f.id);
+          if (isGraphQL) {
+            // TODO: dynamically get the LOV
+            const dId = data[f.id];
+            const dLabel = data[f.id + "_txt"];
+            // TODO: too hacky, really modify model?
+            f.list = [
+              { id: dId, text: dLabel },
+              { id: 0, text: " - Dynamic LOVs is no implemented yet -" },
+            ];
+          } else {
+            this.getLOV(f.id);
+          }
         }
         return (
           <Field

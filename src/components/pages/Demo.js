@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import DemosList from "./DemosList";
-import { apiType } from "../../utils/dao";
+import { isREST } from "../../utils/dao";
 
 export default class Demo extends React.PureComponent {
   componentDidMount() {
@@ -64,7 +64,7 @@ export default class Demo extends React.PureComponent {
           </a>
           .{" "}
         </p>
-        {apiType !== "graphql" ? (
+        {isREST ? (
           <p>
             <Link to="/test/cards">Test App</Link> with fields of all possible
             types.

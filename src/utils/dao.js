@@ -11,8 +11,10 @@ import { apiType as zAPI } from "../config";
 import daoREST from "./dao-rest";
 import daoGraphQL from "./dao-graphql";
 
-const dao = zAPI === "graphql" ? daoGraphQL : daoREST;
-
 export const apiType = zAPI;
+export const isGraphQL = zAPI === "graphql";
+export const isREST = !isGraphQL;
+
+const dao = isGraphQL ? daoGraphQL : daoREST;
 
 export default dao;

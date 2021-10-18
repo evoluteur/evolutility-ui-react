@@ -16,6 +16,7 @@ import { getModel } from "../../../utils/moMa";
 import { fieldInCharts } from "../../../utils/dico";
 import { lcRead } from "../../../utils/localStorage";
 import { capitalize } from "../../../utils/format";
+import { isGraphQL } from "../../../utils/dao";
 import Header from "../../shell/Header";
 import Alert from "../../widgets/Alert";
 import Chart from "./Chart";
@@ -45,35 +46,45 @@ export default class Charts extends React.Component {
         capitalize(m.namePlural) + " / " + (f.labelCharts || f.label);
       let charts;
 
-      if (nbCharts === 0) {
+      if (isGraphQL) {
         charts = (
-          <Alert title="No data" message={i18n_charts.nocharts} type="info" />
-        );
-      } else if (nbCharts === 1) {
-        const f = chartFields[0];
-        charts = (
-          <Chart
-            entity={e}
-            field={f}
-            title={chartTitle(f)}
-            chartType={lcRead(`${m.id}-charts-${f.id}`) || f.chartType}
-            key={"c0-" + f.id}
-            size="large"
-            className="panel-default singleChart"
+          <Alert
+            title="Feature not implemented yet"
+            message="Dashboard is only available w/ REST. It is not implemented yet for GraphQL."
+            type="warning"
           />
         );
       } else {
-        charts = chartFields.map((f) => (
-          <Chart
-            entity={e}
-            size="small"
-            className="panel-default"
-            key={"c-" + f.id}
-            field={f}
-            title={chartTitle(f)}
-            chartType={lcRead(m.id + "-charts-" + f.id) || f.chartType}
-          />
-        ));
+        if (nbCharts === 0) {
+          charts = (
+            <Alert title="No data" message={i18n_charts.nocharts} type="info" />
+          );
+        } else if (nbCharts === 1) {
+          const f = chartFields[0];
+          charts = (
+            <Chart
+              entity={e}
+              field={f}
+              title={chartTitle(f)}
+              chartType={lcRead(`${m.id}-charts-${f.id}`) || f.chartType}
+              key={"c0-" + f.id}
+              size="large"
+              className="panel-default singleChart"
+            />
+          );
+        } else {
+          charts = chartFields.map((f) => (
+            <Chart
+              entity={e}
+              size="small"
+              className="panel-default"
+              key={"c-" + f.id}
+              field={f}
+              title={chartTitle(f)}
+              chartType={lcRead(m.id + "-charts-" + f.id) || f.chartType}
+            />
+          ));
+        }
       }
 
       return (

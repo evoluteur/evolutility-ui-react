@@ -14,12 +14,11 @@ import { toast } from "react-toastify";
 import Icon from "react-crud-icons";
 
 import { capitalize, urlJoin } from "../../utils/format";
-import dao from "../../utils/dao";
+import dao, { isREST } from "../../utils/dao";
 import url from "../../utils/url";
 import evoGlobals from "../../utils/evoGlobals";
 import { apiPath } from "../../config";
 import pkg from "../../../package.json";
-// import {i18n_actions, i18n_msg} from '../../i18n/i18n'
 import { i18n_msg, i18n_actions } from "../../i18n/i18n";
 import models from "../../models/all_models";
 
@@ -117,7 +116,8 @@ class Toolbar extends React.Component {
     const actions = [];
     const q =
       window.location && window.location.search ? window.location.search : "";
-    const canSearch = dao.apiType !== "graphql"; // TODO: implement search for graphql
+    const canSearch = isREST;
+    // TODO: implement search for graphql
 
     const buttonLink = (menu, idOrFun, urlQuery = "") =>
       isFunction(idOrFun) ? (
@@ -143,11 +143,11 @@ class Toolbar extends React.Component {
         actions.push(buttonLink(menuItems.del, this.confirmDelete));
       }
     } else {
-      if (view !== "charts" && view !== "stats") {
-        // actions.push(buttonLink(menuItems.filter, this.toggleFilter));
-        // actions.push(buttonLink(menuItems.views.charts, ''));
-        if (dao.apiType !== "graphql") {
-          // TODO: graphQL implementation
+      if (isREST) {
+        // TODO: graphQL implementation
+        if (view !== "charts" && view !== "stats") {
+          // actions.push(buttonLink(menuItems.filter, this.toggleFilter));
+          // actions.push(buttonLink(menuItems.views.charts, ''));
           actions.push(buttonLink(menuItems.export, this.exportMany, q));
         }
       }
