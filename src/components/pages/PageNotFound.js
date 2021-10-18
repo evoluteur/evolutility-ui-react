@@ -23,6 +23,17 @@ const PageNotFound = (props) => {
           Back to Home Page
         </Link>
       </p>
+      <div class="circles404">
+        <div class="left404">
+          <p>I broke it</p>
+          <div class="spot404">
+            <p>404 Page</p>
+          </div>
+        </div>
+        <div class="right404">
+          <p>You can't type</p>
+        </div>
+      </div>
     </div>
   );
 };
