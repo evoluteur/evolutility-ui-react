@@ -29,7 +29,7 @@ export default class Panel extends React.Component {
       <div className="panel-heading">
         {props.collapsible ? (
           <Icon
-            name={this.state.opened ? "up2" : "down2"}
+            name={this.state.opened ? "chevron-up" : "chevron-down"}
             onClick={this.clickToggle}
             size="tiny"
             theme="none"
