@@ -8,7 +8,6 @@ import { queryUrl, getSearchText } from "../../utils/url";
 import { isREST } from "../../utils/dao";
 
 import "./Header.scss";
-import "@szhsin/react-menu/dist/index.css";
 
 const iconH = {
   n: {
