@@ -1,6 +1,6 @@
 {
   "name": "evolutility-ui-react",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "description": "Low-code UI for GraphQL or REST APIs",
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
     "@nivo/core": "^0.73.0",
     "@nivo/bar": "^0.73.1",
     "@nivo/pie": "^0.73.0",
-    "axios": "^0.21.4",
+    "axios": "^0.24.0",
     "moment": "^2.29.1",
     "sass": "^1.41.1",
     "numeral": "^2.0.6",
