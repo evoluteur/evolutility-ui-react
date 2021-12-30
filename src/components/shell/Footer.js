@@ -1,8 +1,10 @@
 import React from "react";
 // import { Link } from "react-router-dom";
-import { version, copyright } from "../../../package.json";
+import * as packageInfo from "../../../package.json";
 
 import "./Footer.scss";
+
+const { version, copyright } = packageInfo;
 
 const Footer = () => (
   <div className="Footer" role="contentinfo">

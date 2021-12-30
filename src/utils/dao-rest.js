@@ -6,7 +6,9 @@
 
 import axios from "axios";
 import { apiPath } from "../config";
-import { proxy } from "../../package.json";
+import * as packageInfo from "../../package.json";
+
+const { proxy } = packageInfo;
 
 const daoRest = {
   apiType: "rest",

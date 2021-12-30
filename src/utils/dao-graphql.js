@@ -19,7 +19,9 @@ import {
   qInsertOne,
 } from "./graphQLQueries.js";
 import { apiPath, apiPathGraphQL, pageSize } from "../config.js";
-import { proxy } from "../../package.json";
+import * as packageInfo from "../../package.json";
+
+const { proxy } = packageInfo;
 
 // TODO: error handling
 
