@@ -2,7 +2,7 @@
 
 // access to data via GraphQL API (using Hasura)
 
-// (c) 2021 Olivier Giulieri
+// (c) 2022 Olivier Giulieri
 
 import moMa from "./moMa";
 import { fieldTypes, isFieldMany } from "./dico.js";

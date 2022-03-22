@@ -6,7 +6,7 @@
     "type": "git",
     "url": "git://github.com/evoluteur/evolutility-ui-react.git"
   },
-  "copyright": "(c) 2021 Olivier Giulieri",
+  "copyright": "(c) 2022 Olivier Giulieri",
   "author": "Olivier Giulieri (https://evoluteur.github.io/)",
   "license": "MIT",
   "proxy": "http://localhost:2000",

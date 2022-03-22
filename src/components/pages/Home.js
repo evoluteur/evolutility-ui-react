@@ -1,7 +1,7 @@
 /*
   Evolutility-UI-React
   https://github.com/evoluteur/evolutility-ui-react
-  (c) 2021 Olivier Giulieri
+  (c) 2022 Olivier Giulieri
 */
 
 import React from "react";
@@ -49,7 +49,7 @@ export default class Home extends React.PureComponent {
           <span className="version">v{pkg.version}</span>{" "}
         </h1>
         <h2 className="tBlue">
-          Toolkit for building CRUD applications with models rather than code
+          Toolkit to build applications with models rather than code
         </h2>
 
         <section>

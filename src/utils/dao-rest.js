@@ -2,7 +2,7 @@
 
 // access to data via REST API
 
-// (c) 2021 Olivier Giulieri
+// (c) 2022 Olivier Giulieri
 
 import axios from "axios";
 import { apiPath } from "../config";

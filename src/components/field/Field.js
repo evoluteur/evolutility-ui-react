@@ -3,7 +3,7 @@
 // Model-driven field (possible types specified in dico.fieldTypes).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2021 Olivier Giulieri
+// (c) 2022 Olivier Giulieri
 
 import React from "react";
 import PropTypes from "prop-types";
@@ -415,7 +415,7 @@ Field.propTypes = {
     dropFile: PropTypes.func,
   }),
   data: PropTypes.any, // object or atomic values depending on field type
-  value: PropTypes.any.isRequired, // field value
+  value: PropTypes.any, // field value
   label: PropTypes.string, // override label in model
   readOnly: PropTypes.bool, // override readOnly in model
   icon: PropTypes.string,
@@ -423,6 +423,7 @@ Field.propTypes = {
 
 Field.defaultProps = {
   data: null,
+  value: null,
   label: null,
   readOnly: null,
   icon: null,

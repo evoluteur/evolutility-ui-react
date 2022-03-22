@@ -2,7 +2,7 @@
     Evolutility-UI-React
 
     https://github.com/evoluteur/evolutility-ui-react
-    (c) 2021 Olivier Giulieri
+    (c) 2022 Olivier Giulieri
 */
 
 // Helpers functions for GraphQL

@@ -4,7 +4,7 @@
 // models can be stored in JSON files or in the database
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2021 Olivier Giulieri
+// (c) 2022 Olivier Giulieri
 
 import dao from "./dao";
 import models from "../models/all_models";
