@@ -48,12 +48,14 @@ $nav-trans-time: 0.1s;
       top: 2px;
     }
   }
-  > ul > li > div > img {
-    position: relative;
-    top: -2px;
-    margin-right: 8px;
-    width: 20px;
-    height: 20px;
+  > ul > li {
+    > div > img {
+      position: relative;
+      top: -2px;
+      margin-right: 8px;
+      width: 20px;
+      height: 20px;
+    }
   }
   ul {
     list-style-type: none;
@@ -89,7 +91,7 @@ $nav-trans-time: 0.1s;
     overflow: hidden;
     transition: width $ease-time ease 0s;
     position: absolute;
-    top: 5px;
+    top: 10px;
     right: -1px;
     height: 20px;
     font-size: 12px;
@@ -193,21 +195,27 @@ a.skipNav {
 }
 
 .nav-l2 > li {
-  border-radius: 5px;
-  padding: 5px 0 5px 5px;
+  border-radius: 10px;
+  padding: 10px 0 5px 5px;
   > a {
     padding: 5px;
+    img {
+      min-width: 16px;
+      min-height: 16px;
+    }
   }
   > a.ev-actions {
     display: inline-block;
     max-width: 90px;
   }
+  transition: background-color 0.3s;
   &:hover,
   &.active {
     background-color: white;
     > .mIcons {
       display: inline-block;
       width: 65px;
+      margin-right: 10px;
       transition: width $ease-time ease $delay-time2;
       //padding-right: 14px;
       > a:hover {
