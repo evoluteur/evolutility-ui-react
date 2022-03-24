@@ -1,6 +1,4 @@
-/*
-  Routes for Evolutility apps
-*/
+// Routes for Evolutility apps
 
 import { Route } from "react-router-dom";
 

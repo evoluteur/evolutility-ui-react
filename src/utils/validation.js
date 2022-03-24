@@ -1,7 +1,7 @@
 // Evolutility-UI-React :: utils/validation.js
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2020 Olivier Giulieri
+// (c) 2022 Olivier Giulieri
 
 import _ from "underscore";
 import { fieldTypes, fieldIsNumber } from "./dico";

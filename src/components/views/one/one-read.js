@@ -3,7 +3,7 @@
 // Super-class used in Views for One (Browse, Edit but not Card) to get data by ID.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2021 Olivier Giulieri
+// (c) 2022 Olivier Giulieri
 
 import React from "react";
 import dao, { isGraphQL } from "../../../utils/dao";

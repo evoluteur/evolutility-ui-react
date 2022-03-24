@@ -1,7 +1,7 @@
 // Evolutility-UI-React :: utils/url.js
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2020 Olivier Giulieri
+// (c) 2022 Olivier Giulieri
 
 const queryString = require("query-string");
 

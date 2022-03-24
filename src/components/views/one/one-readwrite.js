@@ -3,7 +3,7 @@
 // Super-class used in Views for One for Insert and Update (only view Edit for now maybe more later).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2021 Olivier Giulieri
+// (c) 2022 Olivier Giulieri
 
 import React from "react";
 

@@ -132,7 +132,10 @@
     font-size: 0.9em;
   }
 }
-
+.react-datepicker__navigation {
+  top: 3px !important;
+  border: none !important;
+}
 /* https://github.com/Hacker0x01/react-datepicker/issues/624 */
 .react-datepicker {
   font-size: 0.8em;

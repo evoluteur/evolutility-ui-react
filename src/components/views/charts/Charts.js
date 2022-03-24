@@ -3,7 +3,7 @@
 // Dashboard style set of charts (bars or pies).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2020 Olivier Giulieri
+// (c) 2022 Olivier Giulieri
 
 // Quick and easy implementation w/ the old version of google charts
 // must be re-written using D3.js or other cool charting library

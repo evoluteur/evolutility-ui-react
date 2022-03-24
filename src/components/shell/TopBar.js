@@ -40,9 +40,7 @@ const TopBar = () => {
       path.splice(0, 1);
     }
   }
-  const e = path[0];
-  const vw = path[1];
-  const id = path[2];
+  const [e, vw, id] = path;
   const model = getModel(e);
   const eSlash = `/${e}/`;
   return (

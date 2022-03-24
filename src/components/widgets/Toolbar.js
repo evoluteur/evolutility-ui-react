@@ -3,7 +3,7 @@
 // Toolbar w/ icons for CRUD, export, and charts.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2021 Olivier Giulieri
+// (c) 2022 Olivier Giulieri
 
 import React from "react";
 import PropTypes from "prop-types";

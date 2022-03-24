@@ -3,7 +3,7 @@
 // Single card (usually part of a set of Cards)
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2020 Olivier Giulieri
+// (c) 2022 Olivier Giulieri
 
 import React from "react";
 import PropTypes from "prop-types";
@@ -48,7 +48,7 @@ export default class Card extends React.PureComponent {
 
           if (idx === 0) {
             return (
-              <div key={f.id}>
+              <div key={f.id} className="evo-card-title">
                 <h4>
                   <Link to={link + d.id}>
                     {m.icon && (
