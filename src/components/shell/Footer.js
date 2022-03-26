@@ -1,6 +1,6 @@
 import React from "react";
 // import { Link } from "react-router-dom";
-import * as packageInfo from "../../../package.json";
+import packageInfo from "../../../package.json";
 
 import "./Footer.scss";
 

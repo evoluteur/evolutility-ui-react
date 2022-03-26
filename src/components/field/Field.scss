@@ -48,6 +48,7 @@
   }
   textarea {
     max-width: 100%;
+    resize: vertical;
   }
   .react-datepicker-wrapper {
     display: inline;
@@ -67,7 +68,6 @@
   > label {
     color: $color-label !important;
     font-weight: normal;
-    font-size: 0.9em;
     svg {
       cursor: pointer;
       margin: 0 5px;

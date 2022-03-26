@@ -19,7 +19,7 @@ import {
   qInsertOne,
 } from "./graphQLQueries.js";
 import { apiPath, apiPathGraphQL, pageSize } from "../config.js";
-import * as packageInfo from "../../package.json";
+import packageInfo from "../../package.json";
 
 const { proxy } = packageInfo;
 

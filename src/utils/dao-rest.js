@@ -6,7 +6,7 @@
 
 import axios from "axios";
 import { apiPath } from "../config";
-import * as packageInfo from "../../package.json";
+import packageInfo from "../../package.json";
 
 const { proxy } = packageInfo;
 
