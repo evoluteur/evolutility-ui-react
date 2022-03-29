@@ -25,8 +25,8 @@ const { proxy } = packageInfo;
 
 // TODO: error handling
 
-const notImplementedYet = () =>
-  alert("Not implemented for GraphQL yet (but working with REST).");
+const notImplementedYet = () => console.log("Not implemented yet.");
+//alert("Not implemented for GraphQL yet (but working with REST).");
 
 const ft = fieldTypes;
 

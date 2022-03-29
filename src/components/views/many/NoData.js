@@ -13,11 +13,11 @@ const NoData = ({ model }) => (
     <Alert
       type="info"
       title="No data"
-      message={i18n_msg.nodata.replace("{0}", model.namePlural)}
+      message={i18n_msg.nodata.replaceAll("{0}", model.namePlural)}
     />
     <Link to="edit/0">
       <Icon name="add" theme="light" />
-      <span>{i18n_msg.addTheFirst.replace("{0}", model.name)}</span>
+      <span>{i18n_msg.addTheFirst.replaceAll("{0}", model.name)}</span>
     </Link>
   </div>
 );

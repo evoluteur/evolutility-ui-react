@@ -7,19 +7,15 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-
 import queryString from "query-string";
-
 import { pageSize } from "../../config";
 
 import "./Pagination.scss";
 
-export default class Pagination extends React.PureComponent {
-  _paginationBody() {
+const Pagination = ({ pageIdx, count, fullCount, location, fnClick }) => {
+  const paginationBody = () => {
     let pIdx;
-    const totalSize = this.props.fullCount;
-    const size = this.props.count;
-    const query = queryString.parse(this.props.location.search); // this.props.location.query
+    const query = queryString.parse(location.search); // this.props.location.query
 
     if (query) {
       // if(query.page==='p--' || query.page==='p++'){
@@ -31,9 +27,8 @@ export default class Pagination extends React.PureComponent {
     const h = [];
     let gapIdx = 0;
 
-    if (totalSize > size && !(pIdx === 0 && size < pageSize)) {
-      const fnClick = this.props.fnClick;
-      const nbPages = Math.ceil(totalSize / pageSize);
+    if (fullCount > count && !(pIdx === 0 && count < pageSize)) {
+      const nbPages = Math.ceil(fullCount / pageSize);
       const wPrev = pIdx > 0;
       const wNext = nbPages > pIdx + 1;
       const pId = pIdx + 1;
@@ -44,12 +39,12 @@ export default class Pagination extends React.PureComponent {
           </li>
         );
       };
-      const bPageRange = function (pStart, pEnd) {
+      const bPageRange = (pStart, pEnd) => {
         for (let i = pStart; i <= pEnd; i++) {
           bPage(i);
         }
       };
-      const bGap = function (idx) {
+      const bGap = (idx) => {
         h.push(
           <li key={"gap" + idx} className="disabled">
             <span className="fakeLink">...</span>
@@ -98,16 +93,18 @@ export default class Pagination extends React.PureComponent {
       );
     }
     return h;
-  }
+  };
 
-  render() {
-    return this.props.fullCount > pageSize ? (
+  return (
+    fullCount > pageSize && (
       <nav className="clearer">
-        <ul className="pagination">{this._paginationBody()}</ul>
+        <ul className="pagination">{paginationBody()}</ul>
       </nav>
-    ) : null;
-  }
-}
+    )
+  );
+};
+
+export default Pagination;
 
 Pagination.propTypes = {
   pageIdx: PropTypes.number,

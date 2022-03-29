@@ -11,12 +11,10 @@ function validateField(f, v) {
   var isNumberField = fieldIsNumber(f);
   var ft = fieldTypes;
 
-  function formatMsg(fLabel, msg, r2, r3) {
-    return msg.replace("{0}", fLabel).replace("{1}", r2).replace("{2}", r3);
-  }
-  function fieldLabel(f) {
-    return f.label || f.labelShort;
-  }
+  const formatMsg = (fLabel, msg, r2, r3) =>
+    msg.replace("{0}", fLabel).replace("{1}", r2).replace("{2}", r3);
+
+  const fieldLabel = (f) => f.label || f.labelShort;
 
   if (!f.readOnly) {
     // Check required and empty
