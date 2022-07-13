@@ -390,7 +390,7 @@ More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-rea
 <a name="License"></a>
 ## License
 
-Copyright (c) 2021 [Olivier Giulieri](https://evoluteur.github.io/).
+Copyright (c) 2022 [Olivier Giulieri](https://evoluteur.github.io/).
 
 Evolutility-UI-React is released under the [MIT license](http://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE).
 
