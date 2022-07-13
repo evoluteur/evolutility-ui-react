@@ -3,7 +3,7 @@
 .panel-heading {
   // panel-heading from Bootstrap
   position: relative;
-  border-radius: $radius $radius 0 0;
+  border-radius: $radius $radius 0 0 !important;
   > .panel-title {
     // panel-title from Bootstrap
     display: inline-block;
@@ -30,7 +30,7 @@
 }
 
 .panel {
-  border-radius: $radius;
+  border-radius: $radius !important;
   div.panel-header,
   div.panel-footer {
     background-color: $bgcolor-panel-footer;
