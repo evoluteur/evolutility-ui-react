@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import Icon from "react-crud-icons";
 
 const FieldLabel = ({ field, label, required, readOnly, clickHelp }) => {
-  // - props = label, field, readOnly, clickHelp
   const f = field || { type: "text" };
   const required2 = (f.required || required) && !readOnly;
 
