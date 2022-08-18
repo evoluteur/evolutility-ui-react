@@ -5,7 +5,7 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2022 Olivier Giulieri
 
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Icon from "react-crud-icons";
@@ -20,9 +20,8 @@ import FieldLabel from "./FieldLabel";
 
 import "./Field.scss";
 
-function isObject(obj) {
-  return typeof obj === "object" && obj !== null; // || typeof obj === "function";
-}
+// #region ---------------- Helpers ----------------
+const isObject = (obj) => typeof obj === "object" && obj !== null;
 
 function emHeight(f) {
   let fh = parseInt(f.height || 2, 10);
@@ -41,31 +40,95 @@ function createMarkup(d) {
   };
 }
 
-function createOption(id, text) {
-  return (
-    <option key={id} value={`${id}`}>
-      {text}
-    </option>
-  );
-}
+const createOption = (id, text) => (
+  <option key={id} value={`${id}`}>
+    {text}
+  </option>
+);
 
-function itemInList(id, list) {
+const itemInList = (id, list) => {
   const tag = list.find((item) => item.id === id);
   if (tag) {
     return tag.text;
   }
   return "N/A";
-}
+};
+// #endregion
 
-export default class Field extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      help: false,
+const Field = ({
+  model,
+  callbacks,
+  data,
+  label,
+  readOnly,
+  icon,
+  value,
+  valueId,
+  invalid,
+  message,
+  msg,
+}) => {
+  const [showHelp, setShowHelp] = useState(false);
+  // const [invalid, setInvalid] = useState(false);
+  // const [message, setMessage] = useState(false);
+
+  const getDateFieldChange = (fid) => {
+    // - for fields of type date (using react-datepicker)
+    return (v) => {
+      callbacks.change({
+        target: {
+          id: fid,
+          value: v,
+        },
+      });
     };
-  }
+  };
 
-  fieldElem(f, d, cbs) {
+  const clickHelp = () => {
+    setShowHelp(!showHelp);
+  };
+
+  const getMultiselectFieldChange =
+    () =>
+    // - for fields of type list (using react-multi-select)
+    (v) => {
+      const f = model;
+      callbacks.change({
+        target: {
+          id: f.id,
+          value: v,
+        },
+      });
+    };
+
+  const onDropFile = (files) => {
+    // - only for fields of type image or document
+    const f = model;
+    if (files.length && (f.type === ft.image || f.type === ft.doc)) {
+      const formData = new FormData();
+      files.forEach((f, idx) => {
+        formData.append("filename", files[idx]);
+      });
+      if (callbacks.dropFile) {
+        try {
+          callbacks.dropFile(f.id, formData);
+        } catch (error) {
+          // TODO: better handling
+          alert("Error in upload.");
+        }
+      }
+    }
+  };
+
+  const removeFile = () => {
+    // - only for fields of type image or document
+    const f = model;
+    if (callbacks.dropFile) {
+      callbacks.dropFile(f.id, null);
+    }
+  };
+
+  const fieldElem = (f, d, cbs) => {
     // - return the widget needed for the specific field type
     const usualProps = {
       id: f.id,
@@ -122,7 +185,7 @@ export default class Field extends React.Component {
         <MultiSelect
           options={opts}
           selected={d || []}
-          onSelectedChanged={this.getMultiselectFieldChange(f)}
+          onSelectedChanged={getMultiselectFieldChange(f)}
         />
       );
     }
@@ -132,7 +195,7 @@ export default class Field extends React.Component {
           {...usualProps}
           className="form-control"
           selected={d ? new Date(d) : null}
-          onChange={this.getDateFieldChange(f.id)}
+          onChange={getDateFieldChange(f.id)}
         />
       );
     }
@@ -143,7 +206,7 @@ export default class Field extends React.Component {
             {...usualProps}
             className="form-control inline"
             selected={d ? new Date(d) : null}
-            onChange={this.getDateFieldChange(f.id)}
+            onChange={getDateFieldChange(f.id)}
           />
           <input
             {...usualProps}
@@ -186,7 +249,7 @@ export default class Field extends React.Component {
         <div>
           {pix}
           {d ? (
-            <div className="evol-remove" onClick={this.removeFile}>
+            <div className="evol-remove" onClick={removeFile}>
               <button className="btn btn-default">
                 <Icon
                   className="ddd"
@@ -198,7 +261,7 @@ export default class Field extends React.Component {
               </button>
             </div>
           ) : null}
-          <Dropzone onDrop={this.onDropFile}>
+          <Dropzone onDrop={onDropFile}>
             {({ getRootProps, getInputProps, isDragActive }) => (
               <div
                 {...getRootProps()}
@@ -251,12 +314,13 @@ export default class Field extends React.Component {
         className="form-control"
       />
     );
-  }
+  };
 
-  fieldElemReadOnly(f, d, d_id) {
+  const fieldElemReadOnly = (f, d, d_id) => {
     // - return the formatted field value
     let fw;
 
+    const icon = null; // TODO: dynamic
     if (f.type === ft.textml) {
       const height = `${emHeight(f)}em`;
       return (
@@ -280,10 +344,10 @@ export default class Field extends React.Component {
             {fieldValue(f, d)}
           </Link>
         );
-      } else if (f.lovIcon && this.props.icon) {
+      } else if (f.lovIcon && icon) {
         fw = (
           <span>
-            <img src={`/pix/${this.props.icon}`} className="lov-icon" alt="" />
+            <img src={`/pix/${icon}`} className="lov-icon" alt="" />
             {fieldValue(f, d)}
           </span>
         );
@@ -312,101 +376,37 @@ export default class Field extends React.Component {
         {fw}
       </div>
     );
-  }
-
-  render() {
-    const f = this.props.model || { type: "text" };
-    const readOnly = this.props.readOnly || f.readOnly;
-    const cbs = this.props.callbacks || {};
-    const { value, valueId } = this.props;
-    const { invalid } = this.state;
-    const label = this.props.label || f.label;
-
-    return (
-      <div
-        className={`evol-fld${invalid ? " has-error" : ""}`}
-        style={{ width: `${f.width || 100}%` }}
-      >
-        <FieldLabel
-          label={label}
-          field={f}
-          readOnly={readOnly}
-          clickHelp={this.clickHelp}
-        />
-
-        {f.help && this.state.help ? (
-          <div className="evo-fld-help">{f.help}</div>
-        ) : null}
-
-        {readOnly
-          ? this.fieldElemReadOnly(f, value, valueId)
-          : this.fieldElem(f, value, cbs)}
-
-        {invalid ? (
-          <div className="evo-fld-invalid">{this.state.message}</div>
-        ) : null}
-      </div>
-    );
-  }
-
-  getDateFieldChange(fid) {
-    // - for fields of type date (using react-datepicker)
-    return (v) => {
-      this.props.callbacks.change({
-        target: {
-          id: fid,
-          value: v,
-        },
-      });
-    };
-  }
-
-  clickHelp = () => {
-    this.setState({
-      help: !this.state.help,
-    });
   };
 
-  getMultiselectFieldChange =
-    () =>
-    // - for fields of type list (using react-multi-select)
-    (v) => {
-      const f = this.props.model;
-      this.props.callbacks.change({
-        target: {
-          id: f.id,
-          value: v,
-        },
-      });
-    };
+  const f = model || { type: "text" };
+  const fReadOnly = readOnly || f.readOnly;
+  const cbs = callbacks || {};
+  const fLabel = label || f.label;
 
-  onDropFile = (files) => {
-    // - only for fields of type image or document
-    const f = this.props.model;
-    if (files.length && (f.type === ft.image || f.type === ft.doc)) {
-      const formData = new FormData();
-      files.forEach((f, idx) => {
-        formData.append("filename", files[idx]);
-      });
-      if (this.props.callbacks.dropFile) {
-        try {
-          this.props.callbacks.dropFile(f.id, formData);
-        } catch (error) {
-          // TODO: better handling
-          alert("Error in upload.");
-        }
-      }
-    }
-  };
+  return (
+    <div
+      className={`evol-fld${invalid ? " has-error" : ""}`}
+      style={{ width: `${f.width || 100}%` }}
+    >
+      <FieldLabel
+        label={fLabel}
+        field={f}
+        readOnly={fReadOnly}
+        clickHelp={clickHelp}
+      />
 
-  removeFile = () => {
-    // - only for fields of type image or document
-    const f = this.props.model;
-    if (this.props.callbacks.dropFile) {
-      this.props.callbacks.dropFile(f.id, null);
-    }
-  };
-}
+      {showHelp && f.help && <div className="evo-fld-help">{f.help}</div>}
+
+      {fReadOnly
+        ? fieldElemReadOnly(f, value, valueId)
+        : fieldElem(f, value, cbs)}
+
+      {invalid && message && <div className="evo-fld-invalid">{message}</div>}
+    </div>
+  );
+};
+
+export default Field;
 
 Field.propTypes = {
   model: PropTypes.object.isRequired, // model is a field definition (field model)
@@ -415,7 +415,8 @@ Field.propTypes = {
     dropFile: PropTypes.func,
   }),
   data: PropTypes.any, // object or atomic values depending on field type
-  value: PropTypes.any, // field value
+  value: PropTypes.any,
+  valueId: PropTypes.any,
   label: PropTypes.string, // override label in model
   readOnly: PropTypes.bool, // override readOnly in model
   icon: PropTypes.string,
@@ -424,6 +425,7 @@ Field.propTypes = {
 Field.defaultProps = {
   data: null,
   value: null,
+  valueId: null,
   label: null,
   readOnly: null,
   icon: null,

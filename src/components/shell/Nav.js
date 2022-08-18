@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Link } from "react-router-dom";
 import Icon from "react-crud-icons";
 import { i18n_nav } from "../../i18n/i18n";
@@ -9,6 +9,7 @@ import models from "../../models/all_models";
 
 import "./Nav.scss";
 
+// #region ------- layout ---------
 const item2Group_Map = {};
 const sections = {};
 const setup = () =>
@@ -83,104 +84,12 @@ const MenuLinkSimple = ({ menu }) => (
     )}
   />
 );
+//#endregion
+const Nav = ({ match }) => {
+  const [navOpened, setNavOpened] = useState(true);
 
-export default class Nav extends React.Component {
-  state = {
-    navOpened: true,
-  };
-
-  render() {
-    setup();
-    const navOpened = this.state.navOpened;
-    const urlw = this.props.match ? this.props.match.url : "";
-    const w = url.getUrlMap(urlw);
-    const g = item2Group_Map[w.entity];
-    let footer;
-
-    let menus = [];
-    if (g === "designer") {
-      menus = [sections.designer];
-      footer = <Link to="/">Home</Link>;
-    } else if (g === "organizer" || g === "music" || w.entity === "demo") {
-      menus = [sections.organizer, sections.music];
-      //menus = [sections.organizer, sections.music, sections.test]
-      //footer = <Link to="/world/list">Designer</Link>
-    } else {
-      if (w.entity === "test") {
-        menus = []; //[sections.test]
-      } else {
-        menus = [];
-      }
-      footer = (
-        <>
-          <Link to="/demo">
-            <img alt="Demos" src="/svg/human-greeting.svg" /> Demo
-          </Link>
-          <br />
-        </>
-      );
-      // <Link to="/designer"><img alt="Designer" src={'/pix/bricks.png'} /> Designer</Link>
-    }
-
-    const link = navOpened
-      ? (menu) => <MenuLink menu={menu} key={menu.id} />
-      : (menu) => <MenuLinkSimple menu={menu} key={menu.id} />;
-    const MenuLinks = ({ menus }) => menus.map((menu) => link(menu));
-
-    const Section = (section) =>
-      section ? (
-        <li className={section.id === g ? "active-li" : ""} key={section.id}>
-          {navOpened && section.title ? (
-            <div>
-              <Link to="/demo">
-                <img
-                  alt={section.title}
-                  src={`/svg/${section.icon}.svg`}
-                  className="cpnSvg"
-                />
-                {section.title}{" "}
-              </Link>
-            </div>
-          ) : null}
-          <ul className="nav-l2">
-            <MenuLinks menus={section.menus} />
-          </ul>
-        </li>
-      ) : null;
-
-    return (
-      <nav className="Nav">
-        <a className="skipNav" href="#afterNav">
-          {i18n_nav.skip}
-        </a>
-        <div className="navTop">
-          <Icon
-            id="navToggle"
-            name="list"
-            theme="light"
-            onClick={this.toggleNav}
-          />
-          <span className="embossed">Evolutility</span>
-        </div>
-
-        <ul>{menus.map(Section)}</ul>
-        <div className="footLinks">{footer}</div>
-
-        <div id="afterNav" />
-        <GitHub />
-      </nav>
-    );
-    /*
-
-          <div>
-            <img alt="Doc" src={`/svg/book.svg`} className="cpnSvg" />
-            {"Doc"}
-          </div>
-
-          */
-  }
-  toggleNav = () => {
-    const opened = !this.state.navOpened;
+  const toggleNav = () => {
+    const opened = !navOpened;
     const nav = document.getElementsByClassName("Nav")[0];
     const c = document.getElementsByClassName("pageContent")[0];
 
@@ -191,8 +100,96 @@ export default class Nav extends React.Component {
       nav.style.width = "50px";
       c.style.marginLeft = "50px";
     }
-    this.setState({
-      navOpened: opened,
-    });
+    setNavOpened(opened);
   };
-}
+
+  setup();
+  const urlw = match ? match.url : "";
+  const w = url.getUrlMap(urlw);
+  const g = item2Group_Map[w.entity];
+  let footer;
+
+  let menus = [];
+  if (g === "designer") {
+    menus = [sections.designer];
+    footer = <Link to="/">Home</Link>;
+  } else if (g === "organizer" || g === "music" || w.entity === "demo") {
+    menus = [sections.organizer, sections.music];
+    //menus = [sections.organizer, sections.music, sections.test]
+    //footer = <Link to="/world/list">Designer</Link>
+  } else {
+    if (w.entity === "test") {
+      menus = []; //[sections.test]
+    } else {
+      menus = [];
+    }
+    footer = (
+      <>
+        <Link to="/demo">
+          <img alt="Demos" src="/svg/human-greeting.svg" /> Demo
+        </Link>
+        <br />
+        <br />
+        <Link to="/doc">
+          <img alt="Doc" src="/svg/book.svg" /> Doc
+        </Link>
+        <br />
+      </>
+    );
+    // <Link to="/designer"><img alt="Designer" src={'/pix/bricks.png'} /> Designer</Link>
+  }
+
+  const link = navOpened
+    ? (menu) => <MenuLink menu={menu} key={menu.id} />
+    : (menu) => <MenuLinkSimple menu={menu} key={menu.id} />;
+  const MenuLinks = ({ menus }) => menus.map((menu) => link(menu));
+
+  const Section = (section) =>
+    section ? (
+      <li className={section.id === g ? "active-li" : ""} key={section.id}>
+        {navOpened && section.title ? (
+          <div>
+            <Link to="/demo">
+              <img
+                alt={section.title}
+                src={`/svg/${section.icon}.svg`}
+                className="cpnSvg"
+              />
+              {section.title}{" "}
+            </Link>
+          </div>
+        ) : null}
+        <ul className="nav-l2">
+          <MenuLinks menus={section.menus} />
+        </ul>
+      </li>
+    ) : null;
+
+  return (
+    <nav className="Nav">
+      <a className="skipNav" href="#afterNav">
+        {i18n_nav.skip}
+      </a>
+      <div className="navTop">
+        <Icon id="navToggle" name="list" theme="light" onClick={toggleNav} />
+        <span className="embossed">Evolutility</span>
+      </div>
+
+      <ul>{menus.map(Section)}</ul>
+      <div className="footLinks">{footer}</div>
+
+      <div id="afterNav" />
+      <GitHub />
+    </nav>
+  );
+  /*
+
+          <div>
+            <img alt="Doc" src={`/svg/book.svg`} className="cpnSvg" />
+            {"Doc"}
+          </div>
+
+          */
+};
+
+export default Nav;
