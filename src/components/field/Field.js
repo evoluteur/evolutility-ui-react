@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import Icon from "react-crud-icons";
 import Datepicker from "react-datepicker";
 import Dropzone from "react-dropzone";
-import MultiSelect from "@khanacademy/react-multi-select";
+// import MultiSelect from "@khanacademy/react-multi-select";
 import { fieldTypes as ft } from "../../utils/dico";
 import { fieldValue, image, doc } from "../../utils/format";
 import { i18n_actions, i18n_msg } from "../../i18n/i18n";
@@ -88,18 +88,18 @@ const Field = ({
     setShowHelp(!showHelp);
   };
 
-  const getMultiselectFieldChange =
-    () =>
-    // - for fields of type list (using react-multi-select)
-    (v) => {
-      const f = model;
-      callbacks.change({
-        target: {
-          id: f.id,
-          value: v,
-        },
-      });
-    };
+  // const getMultiselectFieldChange =
+  //   () =>
+  //   // - for fields of type list (using react-multi-select)
+  //   (v) => {
+  //     const f = model;
+  //     callbacks.change({
+  //       target: {
+  //         id: f.id,
+  //         value: v,
+  //       },
+  //     });
+  //   };
 
   const onDropFile = (files) => {
     // - only for fields of type image or document
@@ -174,21 +174,21 @@ const Field = ({
         </select>
       );
     }
-    if (f.type === ft.list) {
-      const opts = f.list
-        ? f.list.map((item) => ({
-            value: item.id,
-            label: item.text,
-          }))
-        : null;
-      return (
-        <MultiSelect
-          options={opts}
-          selected={d || []}
-          onSelectedChanged={getMultiselectFieldChange(f)}
-        />
-      );
-    }
+    // if (f.type === ft.list) {
+    //   const opts = f.list
+    //     ? f.list.map((item) => ({
+    //         value: item.id,
+    //         label: item.text,
+    //       }))
+    //     : null;
+    //   return (
+    //     <MultiSelect
+    //       options={opts}
+    //       selected={d || []}
+    //       onSelectedChanged={getMultiselectFieldChange(f)}
+    //     />
+    //   );
+    // }
     if (f.type === ft.date) {
       return (
         <Datepicker
