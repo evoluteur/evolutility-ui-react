@@ -2,7 +2,7 @@ module.exports = [
   {
     id: "organizer",
     title: "Demo",
-    icon: "human-greeting",
+    icon: "eye",
     menus: [
       { qid: 1, id: "todo", text: "To-Do List", icon: "todo.gif" },
       { qid: 2, id: "contact", text: "Address Book", icon: "contact.gif" },

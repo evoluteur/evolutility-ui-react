@@ -1,7 +1,9 @@
 # Evolutility-UI-React &middot; [![GitHub license](https://img.shields.io/github/license/evoluteur/evolutility-ui-react)](https://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/evolutility-ui-react)](https://www.npmjs.com/package/evolutility-ui-react) 
 
 
-Evolutility-UI-React is a set of **model-driven views** to [Browse](#Browse), [Edit](#Edit), [List](#List), [Cards](#Cards), [Charts](#Charts), [Statistics](#Stats), and [API Documentation](#Api). With it you can easily build CRUD applications by writing models rather than code. It works with REST APIs (using [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node)) or GraphQL (using [Hasura](https://hasura.io)). No hand-coding is necessary.
+Evolutility-UI-React is a set of **model-driven views** to [Browse](#Browse), [Edit](#Edit), [List](#List), [Cards](#Cards), [Charts](#Charts), and [Stats](#Stats). 
+
+With it you can easily build CRUD applications by writing models rather than code. It works with REST APIs (using [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node)) or GraphQL (using [Hasura](https://hasura.io)). No hand-coding is necessary.
 
 ![Edit](public/screenshots/comics/one-edit.gif)
 
@@ -9,7 +11,7 @@ Evolutility-UI-React is a set of **model-driven views** to [Browse](#Browse), [E
 ### Table of Contents
 1. [Installation](#Installation)
 2. [Configuration](#Configuration)
-3. [Views](#Views): [One](#ViewsOne) - [Many](#ViewsMany) - [Doc](#ViewsDoc)
+3. [Views](#Views) for [One](#ViewsOne) or [Many](#ViewsMany) records
 4. [Models](#Models)
 5. [Backend](#Backend)
 6. [License](#License)
@@ -155,21 +157,6 @@ Display last update, number of updates in the last week, and for numeric fields 
 Code: [/src/components/views/many/Stats.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Stats.js)
 
 View: [http://localhost:3000/comics/stats](http://localhost:3000/comics/stats)
-
-<a name="ViewsDoc"></a>
-## Views for Documentation
-
-<a name="Api"></a>
-### REST API
-Documentation and test for the model's REST endpoints.
-
-![API](public/screenshots/comics/doc-api.gif)
-
-Code: [/src/components/views/doc/Api.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/doc/Api.js)
-
-View: [http://localhost:3000/comics/api](http://localhost:3000/comics/api)
-
-Note: This view is only useful when using REST. For GraphQL third party tools like [GraphiQL](https://github.com/graphql/graphiql) can be used.
 
 <a name="Models"></a>
 ## Models

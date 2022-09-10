@@ -14,6 +14,8 @@ import Footer from "./components/shell/Footer";
 
 import Home from "./components/pages/Home";
 import Demo from "./components/pages/Demo";
+import Doc from "./components/pages/doc/Doc";
+
 import EvolRoutes from "./components/EvolRoutes";
 
 import PageNotFound from "./components/pages/PageNotFound";
@@ -26,6 +28,7 @@ const AppRoutes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
     <Route exact path="/demo" component={Demo} />
+    <Route exact path="/doc" component={Doc} />
     <EvolRoutes />
     <Route path="*" exact component={PageNotFound} />
   </Switch>
