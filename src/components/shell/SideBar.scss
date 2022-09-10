@@ -1,11 +1,11 @@
 @import "../variables";
 
-$nav-width: 180px;
+$nav-width: 190px;
 //$nav-width-c: 50px;
 
 $nav-trans-time: 0.1s;
 
-.Nav {
+.evo-sidebar {
   z-index: 5;
   font-family: Droid, Lato, "Helvetica Neue", Arial, Helvetica;
   position: fixed;
@@ -51,10 +51,10 @@ $nav-trans-time: 0.1s;
   > ul {
     padding: 0 4px !important;
     > li {
-      > div > img {
+      > div > a > img {
         position: relative;
         top: -2px;
-        margin-right: 8px;
+        margin-right: 12px;
         width: 20px;
         height: 20px;
       }
@@ -142,6 +142,9 @@ $nav-trans-time: 0.1s;
     padding: 10px 10px 10px 0;
     a {
       font-weight: 400;
+      > img {
+        margin-right: 10px;
+      }
     }
   }
 }

@@ -8,7 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import config from "./config";
 import { fetchModels } from "./utils/moMa";
 import Spinner from "./components/shell/Spinner";
-import Nav from "./components/shell/Nav";
+import SideBar from "./components/shell/SideBar";
 import TopBar from "./components/shell/TopBar";
 import Footer from "./components/shell/Footer";
 
@@ -67,7 +67,7 @@ export default class App extends React.Component {
         ) : (
           <BrowserRouter>
             <Route path="*" exact component={TopBar} />
-            <Route path="*" exact component={Nav} />
+            <Route path="*" exact component={SideBar} />
             <div className="pageContent" role="main">
               <AppRoutes />
             </div>

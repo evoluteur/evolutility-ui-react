@@ -7,7 +7,7 @@ import url from "../../utils/url";
 import GitHub from "./GitHub";
 import models from "../../models/all_models";
 
-import "./Nav.scss";
+import "./SideBar.scss";
 
 // #region ------- layout ---------
 const item2Group_Map = {};
@@ -85,7 +85,7 @@ const MenuLinkSimple = ({ menu }) => (
   />
 );
 //#endregion
-const Nav = ({ match }) => {
+const SideBar = ({ match }) => {
   const [navOpened, setNavOpened] = useState(true);
 
   const toggleNav = () => {
@@ -126,7 +126,7 @@ const Nav = ({ match }) => {
     footer = (
       <>
         <Link to="/demo">
-          <img alt="Demos" src="/svg/human-greeting.svg" /> Demo
+          <img alt="Demos" src="/svg/eye.svg" /> Demo
         </Link>
         <br />
         <br />
@@ -166,7 +166,7 @@ const Nav = ({ match }) => {
     ) : null;
 
   return (
-    <nav className="Nav">
+    <nav className="evo-sidebar">
       <a className="skipNav" href="#afterNav">
         {i18n_nav.skip}
       </a>
@@ -192,4 +192,4 @@ const Nav = ({ match }) => {
           */
 };
 
-export default Nav;
+export default SideBar;
