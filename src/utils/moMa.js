@@ -7,14 +7,14 @@
 // (c) 2022 Olivier Giulieri
 
 import dao from "./dao";
-import models from "../models/all_models";
+import all_models from "../models/all_models";
 import { prepModel } from "./dico";
 
-export const getModel = (mId) => models[mId] || null;
+export const getModel = (mId) => all_models[mId] || null;
 
 export function addModels(ms) {
   ms.forEach((m) => {
-    models[m.id] = prepModel(m);
+    all_models[m.id] = prepModel(m);
   });
 }
 
@@ -28,7 +28,7 @@ export function fetchModels(cb, cbErr) {
       }
       addModels(data);
       if (cb) {
-        cb(models);
+        cb(all_models);
       }
     })
     .catch((err) => {
@@ -39,7 +39,9 @@ export function fetchModels(cb, cbErr) {
     });
 }
 
-export const modelIds = Object.keys(models);
+export const modelIds = Object.keys(all_models);
+
+export const models = all_models;
 
 const moma = {
   fetchModels,

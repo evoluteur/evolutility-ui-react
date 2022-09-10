@@ -4,8 +4,7 @@ import Icon from "react-crud-icons";
 import { i18n_nav } from "../../i18n/i18n";
 import AppMenus from "../../AppMenus";
 import url from "../../utils/url";
-import GitHub from "./GitHub";
-import models from "../../models/all_models";
+import models from "../../utils/moMa";
 
 import "./SideBar.scss";
 
@@ -84,6 +83,7 @@ const MenuLinkSimple = ({ menu }) => (
     )}
   />
 );
+
 //#endregion
 const SideBar = ({ match }) => {
   const [navOpened, setNavOpened] = useState(true);
@@ -107,23 +107,37 @@ const SideBar = ({ match }) => {
   const urlw = match ? match.url : "";
   const w = url.getUrlMap(urlw);
   const g = item2Group_Map[w.entity];
-  let footer;
+  let links = [];
 
   let menus = [];
-  if (g === "designer") {
-    menus = [sections.designer];
-    footer = <Link to="/">Home</Link>;
-  } else if (g === "organizer" || g === "music" || w.entity === "demo") {
-    menus = [sections.organizer, sections.music];
+  if (g === "designer" || w.entity === "designer") {
+    menus = [sections.designer, sections.demo];
+    links = <Link to="/">Home</Link>;
+  } else if (w.entity === "demo" || g === "organizer") {
+    //  || g === "music"
+    menus = [sections.organizer];
     //menus = [sections.organizer, sections.music, sections.test]
-    //footer = <Link to="/world/list">Designer</Link>
+    //links = <Link to="/world/list">Designer</Link>
+    links = (
+      <>
+        <Link to="/doc">
+          <img alt="Doc" src="/svg/book.svg" /> Doc
+        </Link>
+        <br />
+        <br />
+        <Link to="/designer">
+          <img alt="Designer" src="/svg/cogs.svg" /> Designer
+        </Link>
+        <br />
+      </>
+    );
   } else {
-    if (w.entity === "test") {
-      menus = []; //[sections.test]
-    } else {
-      menus = [];
-    }
-    footer = (
+    // if (w.entity === "test") {
+    //   menus = []; //[sections.test]
+    // } else {
+    //   menus = [];
+    // }
+    links = (
       <>
         <Link to="/demo">
           <img alt="Demos" src="/svg/eye.svg" /> Demo
@@ -132,6 +146,11 @@ const SideBar = ({ match }) => {
         <br />
         <Link to="/doc">
           <img alt="Doc" src="/svg/book.svg" /> Doc
+        </Link>
+        <br />
+        <br />
+        <Link to="/designer">
+          <img alt="Designer" src="/svg/cogs.svg" /> Designer
         </Link>
         <br />
       </>
@@ -149,13 +168,14 @@ const SideBar = ({ match }) => {
       <li className={section.id === g ? "active-li" : ""} key={section.id}>
         {navOpened && section.title ? (
           <div>
-            <Link to="/demo">
+            <br />
+            <Link to={"/" + section?.id}>
               <img
                 alt={section.title}
                 src={`/svg/${section.icon}.svg`}
                 className="cpnSvg"
               />
-              {section.title}{" "}
+              {section.title}
             </Link>
           </div>
         ) : null}
@@ -176,10 +196,10 @@ const SideBar = ({ match }) => {
       </div>
 
       <ul>{menus.map(Section)}</ul>
-      <div className="footLinks">{footer}</div>
+
+      <div className="footLinks">{links}</div>
 
       <div id="afterNav" />
-      <GitHub />
     </nav>
   );
   /*

@@ -24,7 +24,7 @@ module.exports = [
       { qid: 6, id: "winetasting", text: "Wine Tasting", icon: "wine.gif" },
     ],
   },
-  {
+  /*  {
     id: "music",
     title: "Music",
     icon: "music",
@@ -45,7 +45,7 @@ module.exports = [
       },
       { qid: 9, id: "track", text: "Tracks", icon: "music.png" },
     ],
-  } /*
+  },
     {
         id: 'test',
         title: 'Test',
@@ -53,18 +53,23 @@ module.exports = [
         menus: [
             {id: 'test', text: 'Tests', defaultViewMany: 'cards'},
         ],
-    }, */,
-  /* {
-        id: 'designer',
-        title: 'Designer',
-        icon: 'cogs',
-        menus: [
-            {id: 'world', text: 'Apps', icon: 'designer/world.png'},
-            {id: 'object', text: 'Objects', icon: 'designer/object.png'},
-            {id: 'field', text: 'Fields', icon: 'designer/field.png'},
-            {id: 'group', text: 'Field Groups', icon: "designer/group.png"},
-            {id: 'collection', text: 'Collections', icon: "designer/collection.png"},
-            //{id: 'test', text: 'Test', icon: "car.png", defaultViewMany: 'cards'},
-        ],
     }, */
+  {
+    id: "designer",
+    title: "Designer",
+    icon: "cogs",
+    menus: [
+      { id: "world", text: "Apps", icon: "designer/world.png" },
+      { id: "object", text: "Objects", icon: "designer/object.png" },
+      { id: "field", text: "Fields", icon: "designer/field.png" },
+      // { id: "group", text: "Field Groups", icon: "designer/group.png" },
+      {
+        id: "collection",
+        text: "Collections",
+        icon: "designer/collection.png",
+      },
+      //{id: 'test', text: 'Test', icon: "car.png", defaultViewMany: 'cards'},
+    ],
+  },
+  ,
 ];

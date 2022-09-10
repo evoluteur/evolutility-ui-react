@@ -15,6 +15,7 @@ import Footer from "./components/shell/Footer";
 import Home from "./components/pages/Home";
 import Demo from "./components/pages/Demo";
 import Doc from "./components/pages/doc/Doc";
+import Designer from "./components/pages/Designer";
 
 import EvolRoutes from "./components/EvolRoutes";
 
@@ -27,8 +28,9 @@ let queryModels = config.queryModels || false;
 const AppRoutes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route exact path="/demo" component={Demo} />
+    <Route exact path={["/demo", "/organizer"]} component={Demo} />
     <Route exact path="/doc" component={Doc} />
+    <Route exact path="/designer" component={Designer} />
     <EvolRoutes />
     <Route path="*" exact component={PageNotFound} />
   </Switch>
