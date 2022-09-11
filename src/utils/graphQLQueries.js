@@ -80,17 +80,15 @@ export const qField = (f) =>
 
 export const qFields = (m) => "id " + m.fields.map(qField).join(" ");
 
+const gqlFields = (fields) => fields.map(qField).join(" ");
+
 export const qCollecs = (m) =>
   m.collections
     .map(
       (c) =>
-        " " +
-        c.id +
-        "(order_by:{" +
-        (c.order || "id") +
-        ": asc}) { id " +
-        c.fields.map(qField).join(" ") +
-        "}"
+        ` ${c.id}(order_by:{${c.order || "id"}: asc}) { id ${gqlFields(
+          c.fields
+        )}}`
     )
     .join(" ");
 
@@ -230,7 +228,8 @@ export const statsAggregate = (m) => {
   m.fields.forEach((f) => {
     if (fieldIsNumeric(f) && !f.noStats) {
       if (f.type !== "money" && fieldIsNumber(f)) {
-        // TODO mane it work for money fields
+        // if (fieldIsNumber(f)) {
+        // TODO make it work for money fields
         props.forEach((p) => sag[p].push(f.id));
       }
       if (fieldIsDateOrTime(f)) {
@@ -256,15 +255,13 @@ export const qStats = (m) => "query {" + statsAggregate(m) + "}";
 export const qOne = (entity, id) => {
   const m = getModel(entity);
   if (m) {
-    let q =
-      "query { one: " +
-      m.qid +
-      "_by_pk(id:" +
-      id +
-      ") { " +
-      qFields(m) +
-      qCollecs(m) +
-      " }}";
+    let q = "query { one: " + m.qid;
+    // if (m.collections?.length) {
+    //   q += `(where:{id:{_eq:${id}}})`;
+    // } else {
+    q += `_by_pk(id:${id})`;
+    // }
+    q += " { " + qFields(m) + qCollecs(m) + " }}";
     return q;
   } else {
     console.error("Model not found " + entity);

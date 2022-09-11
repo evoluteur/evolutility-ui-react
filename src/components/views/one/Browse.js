@@ -108,25 +108,26 @@ export default class Browse extends OneRead {
               )}
 
               {m.collections
-                ? m.collections.map((c, idx) => (
-                    <Panel
-                      title={c.title}
-                      key={"collec_" + c.id}
-                      collapsible
-                      header={c.header}
-                      footer={c.footer}
-                    >
-                      <List
-                        key={`collec${idx}`}
-                        isNested
-                        data={collecData(c.id)}
-                        match={this.props.match}
-                        paramsCollec={c}
-                        style={{ width: "100%" }}
-                        location={this.props.location}
-                      />
-                    </Panel>
-                  ))
+                ? m.collections.map((c, idx) =>
+                    !collecData(c.id) ? null : (
+                      <Panel
+                        title={c.title}
+                        key={"collec_" + c.id}
+                        collapsible
+                        header={c.header}
+                        footer={c.footer}
+                      >
+                        <List
+                          isNested
+                          data={collecData(c.id)}
+                          match={this.props.match}
+                          paramsCollec={c}
+                          style={{ width: "100%" }}
+                          location={this.props.location}
+                        />
+                      </Panel>
+                    )
+                  )
                 : null}
 
               <Panel key="formButtons">

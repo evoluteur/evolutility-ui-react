@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { getModel } from "../../utils/moMa";
+import { demoModelIds, getModel } from "../../utils/moMa";
 
 import "./DemosList.scss";
 /*
@@ -39,22 +39,24 @@ const itemLink = (id, mid, view) => {
   );
 };
 
-const DemosList = ({ view }) => (
-  <div className="d-worlds">
-    <div>
+const DemosList = ({ view }) => {
+  const columnBreakIdx = parseInt(demoModelIds.length / 2) + 1;
+
+  return (
+    <div className="d-worlds">
       <div className="demoLinks">
-        {itemLink(1, "todo", view)}
-        {itemLink(2, "contact", view)}
-        {itemLink(4, "restaurant", view)}
+        {demoModelIds
+          .slice(0, columnBreakIdx)
+          .map((id) => itemLink(1, id, view))}{" "}
       </div>
       <div className="demoLinks">
-        {itemLink(3, "comics", view)}
-        {itemLink(5, "winecellar", view)}
-        {itemLink(6, "winetasting", view)}
+        {demoModelIds
+          .slice(parseInt(columnBreakIdx))
+          .map((id) => itemLink(1, id, view))}
       </div>
     </div>
-  </div>
-);
+  );
+};
 // {titleElem("Demo", "/svg/human-greeting.svg", showTitle)}
 
 export default DemosList;

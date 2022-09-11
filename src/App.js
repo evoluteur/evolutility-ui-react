@@ -1,7 +1,7 @@
 // Evolutility-UI-React
 // https://github.com/evoluteur/evolutility-ui-react
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -36,51 +36,41 @@ const AppRoutes = () => (
   </Switch>
 );
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: queryModels,
-    };
-  }
+const App = () => {
+  const [isLoading, setIsLoading] = useState(queryModels);
 
-  componentDidMount() {
+  useEffect(() => {
     if (queryModels) {
       fetchModels(
-        () =>
-          this.setState({
-            loading: false,
-          }),
+        () => setIsLoading(false),
         (err) => {
-          this.setState({
-            loading: false,
-          });
+          setIsLoading(false);
           toast.error("Error fetching models: " + err.message);
         }
       );
       queryModels = false;
     }
-  }
+  });
 
-  render() {
-    return (
-      <div className="App">
-        {this.state.loading ? (
-          <div className="loading-evol">
-            <Spinner message="Fetching Evolutility UI models..." />
+  return (
+    <div className="App">
+      {isLoading ? (
+        <div className="loading-evol">
+          <Spinner message="Fetching Evolutility UI models..." />
+        </div>
+      ) : (
+        <BrowserRouter>
+          <Route path="*" exact component={TopBar} />
+          <Route path="*" exact component={SideBar} />
+          <div className="pageContent" role="main">
+            <AppRoutes />
           </div>
-        ) : (
-          <BrowserRouter>
-            <Route path="*" exact component={TopBar} />
-            <Route path="*" exact component={SideBar} />
-            <div className="pageContent" role="main">
-              <AppRoutes />
-            </div>
-            <Footer />
-          </BrowserRouter>
-        )}
-        <ToastContainer autoClose={5000} />
-      </div>
-    );
-  }
-}
+          <Footer />
+        </BrowserRouter>
+      )}
+      <ToastContainer autoClose={5000} />
+    </div>
+  );
+};
+
+export default App;

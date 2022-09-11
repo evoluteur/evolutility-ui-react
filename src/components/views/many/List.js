@@ -122,15 +122,23 @@ export default class List extends Many {
             </td>
           );
         }
-        if (lovField && f.lovIcon) {
-          const icon = d[`${f.id}_icon`];
-          if (icon) {
+        if (lovField) {
+          if (f.lovIcon) {
+            const icon = d[`${f.id}_icon`];
+            if (icon) {
+              return (
+                <td key={f.id}>
+                  <div className="nobr">
+                    <img src={`/pix/${icon}`} className="lov-icon" alt="" />
+                    {fieldValue(f, value, true)}
+                  </div>
+                </td>
+              );
+            }
+          } else {
             return (
               <td key={f.id}>
-                <div className="nobr">
-                  <img src={`/pix/${icon}`} className="lov-icon" alt="" />
-                  {fieldValue(f, value, true)}
-                </div>
+                <div className="nobr">{fieldValue(f, value, true)}</div>
               </td>
             );
           }

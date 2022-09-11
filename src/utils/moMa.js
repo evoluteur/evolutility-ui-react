@@ -10,6 +10,18 @@ import dao from "./dao";
 import all_models from "../models/all_models";
 import { prepModel } from "./dico";
 
+export const modelIds = Object.keys(all_models).sort(
+  (a, b) => (all_models[a]?.position || 0) - (all_models[b]?.position || 0)
+);
+
+const getByWorld = (w) => (m) => all_models[m]?.world === w;
+
+export const demoModelIds = modelIds.filter(getByWorld("organizer"));
+
+export const designerModelIds = modelIds.filter(getByWorld("designer"));
+
+export const models = all_models;
+
 export const getModel = (mId) => all_models[mId] || null;
 
 export function addModels(ms) {
@@ -39,16 +51,14 @@ export function fetchModels(cb, cbErr) {
     });
 }
 
-export const modelIds = Object.keys(all_models);
-
-export const models = all_models;
-
 const moma = {
   fetchModels,
   addModels,
   getModel,
   models,
   modelIds,
+  demoModelIds,
+  designerModelIds,
 };
 
 export default moma;

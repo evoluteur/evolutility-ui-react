@@ -85,6 +85,7 @@ const MenuLinkSimple = ({ menu }) => (
 );
 
 //#endregion
+
 const SideBar = ({ match }) => {
   const [navOpened, setNavOpened] = useState(true);
 
@@ -155,7 +156,6 @@ const SideBar = ({ match }) => {
         <br />
       </>
     );
-    // <Link to="/designer"><img alt="Designer" src={'/pix/bricks.png'} /> Designer</Link>
   }
 
   const link = navOpened

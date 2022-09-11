@@ -22,17 +22,6 @@ const PageNotFound = ({ location }) => {
           Back to Home Page
         </Link>
       </p>
-      <div className="circles404">
-        <div className="left404">
-          <p>I broke it</p>
-          <div class="spot404">
-            <p>404 Page</p>
-          </div>
-        </div>
-        <div className="right404">
-          <p>You can't type</p>
-        </div>
-      </div>
     </div>
   );
 };
