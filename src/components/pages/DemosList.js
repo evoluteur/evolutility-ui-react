@@ -40,7 +40,7 @@ const itemLink = (id, mid, view) => {
 };
 
 const DemosList = ({ view }) => {
-  const columnBreakIdx = parseInt(demoModelIds.length / 2) + 1;
+  const columnBreakIdx = Math.round(demoModelIds.length / 2);
 
   return (
     <div className="d-worlds">

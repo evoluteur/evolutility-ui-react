@@ -10,9 +10,11 @@ import dao from "./dao";
 import all_models from "../models/all_models";
 import { prepModel } from "./dico";
 
-export const modelIds = Object.keys(all_models).sort(
-  (a, b) => (all_models[a]?.position || 0) - (all_models[b]?.position || 0)
-);
+export const modelIds = Object.keys(all_models)
+  .filter((m) => all_models[m]?.active)
+  .sort(
+    (a, b) => (all_models[a]?.position || 0) - (all_models[b]?.position || 0)
+  );
 
 const getByWorld = (w) => (m) => all_models[m]?.world === w;
 
