@@ -320,7 +320,6 @@ const Field = ({
     // - return the formatted field value
     let fw;
 
-    const icon = null; // TODO: dynamic
     if (f.type === ft.textml) {
       const height = `${emHeight(f)}em`;
       return (
