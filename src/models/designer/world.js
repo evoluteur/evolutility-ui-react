@@ -3,8 +3,9 @@
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-module.exports = {
+const modelWorld = {
   id: "world",
+  qid: "evol_evol_world",
   title: "Worlds",
   world: "designer",
   name: "world",
@@ -14,6 +15,7 @@ module.exports = {
   defaultViewMany: "list",
   defaultViewOne: "browse",
   titleField: "name",
+  noStats: true,
   fields: [
     {
       id: "name",
@@ -50,10 +52,12 @@ module.exports = {
   ],
   collections: [
     {
-      id: "collec-objects",
+      id: "objects",
       title: "Objects",
       object: "object",
       fields: ["title", "icon", "active"],
     },
   ],
 };
+
+export default modelWorld;

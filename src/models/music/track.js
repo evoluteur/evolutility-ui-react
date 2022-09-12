@@ -3,7 +3,7 @@
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-module.exports = {
+const modelTrack = {
   id: "track",
   qid: "evol_music_track",
   oid: 9,
@@ -99,3 +99,5 @@ module.exports = {
   collections: [],
   noStats: true,
 };
+
+export default modelTrack;

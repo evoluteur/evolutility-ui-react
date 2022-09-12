@@ -3,8 +3,9 @@
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-module.exports = {
+const modelGroup = {
   id: "group",
+  qid: "evol_evol_group",
   title: "Field Groups",
   world: "designer",
   name: "group",
@@ -135,3 +136,5 @@ module.exports = {
   ],
   collections: [],
 };
+
+export default modelGroup;

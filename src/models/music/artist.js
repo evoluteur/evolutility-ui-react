@@ -3,7 +3,7 @@
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-module.exports = {
+const modelArtist = {
   id: "artist",
   qid: "evol_music_artist",
   oid: 8,
@@ -81,3 +81,5 @@ module.exports = {
   noCharts: true,
   noStats: true,
 };
+
+export default modelArtist;

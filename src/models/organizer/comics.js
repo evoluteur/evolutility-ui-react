@@ -3,7 +3,7 @@
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-module.exports = {
+const comicsObject = {
   id: "comics",
   oid: 3,
   qid: "evol_comics",
@@ -26,6 +26,7 @@ module.exports = {
       required: true,
       maxLength: 255,
       inMany: true,
+      inSearch: true,
       width: 100,
     },
     {
@@ -33,6 +34,7 @@ module.exports = {
       type: "text",
       label: "Authors",
       inMany: true,
+      inSearch: true,
       width: 62,
     },
     {
@@ -98,6 +100,7 @@ module.exports = {
         },
       ],
       inMany: true,
+      inSearch: true,
       width: 38,
     },
     {
@@ -219,3 +222,5 @@ module.exports = {
   ],
   collections: [],
 };
+
+export default comicsObject;

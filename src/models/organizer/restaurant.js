@@ -24,6 +24,7 @@ module.exports = {
       label: "Name",
       required: true,
       inMany: true,
+      inSearch: true,
       width: 62,
     },
     {
@@ -176,6 +177,7 @@ module.exports = {
       label: "City",
       maxLength: 100,
       inMany: true,
+      inSearch: true,
       width: 50,
     },
     {

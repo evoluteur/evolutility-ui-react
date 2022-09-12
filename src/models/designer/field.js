@@ -3,8 +3,10 @@
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-module.exports = {
+const modelField = {
   id: "field",
+  // qid: "evol_evol_field",
+  qid: "evol_evol_field",
   title: "Fields",
   world: "designer",
   name: "field",
@@ -14,6 +16,7 @@ module.exports = {
   defaultViewMany: "list",
   defaultViewOne: "browse",
   titleField: "label",
+  noStats: true,
   fields: [
     {
       id: "label",
@@ -107,28 +110,28 @@ module.exports = {
           icon: "designer/ft-json.png",
         },
       ],
-      lovIcon: true,
+      lovIcon: false,
       defaultValue: 1,
       inMany: true,
       width: 38,
       help: "Type of field: UI type rather than data type.",
     },
-    {
-      id: "column",
-      type: "text",
-      label: "Column",
-      required: true,
-      maxLength: 63,
-      width: 62,
-      help: "Database column name",
-    },
+    // {
+    //   id: "dbcolumn",
+    //   type: "text",
+    //   label: "Column",
+    //   required: true,
+    //   maxLength: 63,
+    //   width: 62,
+    //   help: "Database column name",
+    // },
     {
       id: "fid",
       type: "text",
       label: "Field ID",
       required: true,
       inMany: true,
-      width: 38,
+      width: 62,
       help: "Field ID is not visible to the user but used in API and routing.",
     },
     {
@@ -139,7 +142,7 @@ module.exports = {
       required: true,
       noCharts: true,
       inMany: true,
-      width: 32,
+      width: 38,
     },
     {
       id: "lovTable",
@@ -159,7 +162,7 @@ module.exports = {
     },
     {
       id: "lovIcon",
-      type: "text",
+      type: "boolean",
       label: "LOV Icon",
       maxLength: 63,
       width: 38,
@@ -177,15 +180,13 @@ module.exports = {
       id: "inSearch",
       type: "boolean",
       label: "In Search",
-      inMany: true,
       width: 50,
       help: "Field is used for text searches.",
     },
     {
       id: "noFilter",
       type: "boolean",
-      label: "In Filter",
-      inMany: true,
+      label: "No Filter",
       width: 50,
       help: "Excludes the field from filters' conditions.",
     },
@@ -339,13 +340,13 @@ module.exports = {
       label: "Default Value",
       width: 50,
     },
-    {
-      id: "deleteTrigger",
-      type: "boolean",
-      label: "Delete trigger",
-      width: 50,
-      help: "If checked, deleting records in the lovTable will trigger a cascade delete (only for list (dropdown) fields).",
-    },
+    // {
+    //   id: "deleteTrigger",
+    //   type: "boolean",
+    //   label: "Delete trigger",
+    //   width: 50,
+    //   help: "If checked, deleting records in the lovTable will trigger a cascade delete (only for list (dropdown) fields).",
+    // },
   ],
   groups: [
     {
@@ -355,7 +356,7 @@ module.exports = {
       fields: [
         "label",
         "type",
-        "column",
+        // "column",
         "fid",
         "object",
         "lovTable",
@@ -392,8 +393,8 @@ module.exports = {
         "minLength",
         "maxLength",
         "regExp",
-        "deleteTrigger",
-        "noCharts",
+        // "deleteTrigger",
+        // "noCharts",
         "noStats",
       ],
     },
@@ -407,3 +408,8 @@ module.exports = {
   ],
   collections: [],
 };
+
+modelField.fields.forEach((f) => {
+  f.id = f.id.toLowerCase();
+});
+export default modelField;

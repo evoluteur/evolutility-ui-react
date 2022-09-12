@@ -3,7 +3,7 @@
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-module.exports = {
+const modelAlbum = {
   id: "album",
   qid: "evol_music_album",
   oid: 7,
@@ -94,3 +94,5 @@ module.exports = {
   ],
   noStats: true,
 };
+
+export default modelAlbum;

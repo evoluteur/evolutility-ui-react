@@ -3,8 +3,9 @@
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-module.exports = {
+const modelCollection = {
   id: "collection",
+  qid: "evol_evol_object_collec",
   title: "Collection",
   world: "designer",
   name: "collection",
@@ -14,6 +15,7 @@ module.exports = {
   defaultViewMany: "list",
   defaultViewOne: "browse",
   titleField: "label",
+  noStats: true,
   fields: [
     {
       id: "label",
@@ -48,6 +50,7 @@ module.exports = {
       inMany: true,
       width: 32,
     },
+    /*
     {
       id: "column",
       type: "text",
@@ -57,7 +60,7 @@ module.exports = {
       inMany: true,
       width: 30,
       help: "Column to filter by.",
-    },
+    },*/
     {
       id: "object",
       type: "lov",
@@ -87,3 +90,9 @@ module.exports = {
   ],
   collections: [],
 };
+
+modelCollection.fields.forEach((f) => {
+  f.id = f.id.toLowerCase();
+});
+
+export default modelCollection;

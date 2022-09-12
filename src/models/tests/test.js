@@ -2,7 +2,7 @@
   Evolutility UI model for Test List
   https://github.com/evoluteur/evolutility-ui-react
 */
-var lov = [
+const lov = [
   {
     id: 1,
     text: "Vanilla",
@@ -24,7 +24,7 @@ var lov = [
     text: "Lemon Cookie",
   },
 ];
-var fields = [
+const fields = [
   {
     id: "name",
     type: "text",
@@ -173,7 +173,7 @@ var fields = [
   },
 ];
 
-module.exports = {
+const modelTest = {
   id: "test",
   title: "Test List",
   name: "test",
@@ -230,3 +230,5 @@ module.exports = {
     },
   ],
 };
+
+export default modelTest;

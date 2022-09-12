@@ -3,8 +3,9 @@
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-module.exports = {
+const modelObject = {
   id: "object",
+  qid: "evol_evol_object",
   title: "Objects",
   world: "designer",
   name: "object",
@@ -14,6 +15,7 @@ module.exports = {
   defaultViewMany: "list",
   defaultViewOne: "browse",
   titleField: "title",
+  noStats: true,
   fields: [
     {
       id: "title",
@@ -22,7 +24,8 @@ module.exports = {
       required: true,
       maxLength: 200,
       inMany: true,
-      width: 82,
+      inSearch: true,
+      width: 62,
       help: "example: 'Address book'",
     },
     {
@@ -30,43 +33,45 @@ module.exports = {
       type: "boolean",
       label: "Active",
       inMany: true,
-      width: 18,
+      width: 38,
     },
     {
       id: "world",
       type: "lov",
       label: "World",
-      object: "world",
+      // object: "world",
       inMany: true,
       width: 62,
+      noLink: true,
     },
-    {
-      id: "noCharts",
-      type: "boolean",
-      label: "No Charts",
-      width: 35,
-    },
+    //   {
+    //     id: "noCharts",
+    //     type: "boolean",
+    //     label: "No Charts",
+    //     width: 35,
+    //   },
     {
       id: "noStats",
       type: "boolean",
       label: "No Stats",
-      width: 30,
+      width: 38,
     },
+    //   {
+    //     id: "table",
+    //     type: "text",
+    //     label: "DB Table name",
+    //     required: true,
+    //     maxLength: 63,
+    //     inMany: true,
+    //     width: 62,
+    //   },
     {
-      id: "table",
-      type: "text",
-      label: "DB Table name",
-      required: true,
-      maxLength: 63,
-      inMany: true,
-      width: 62,
-    },
-    {
+      // qid
       id: "pKey",
       type: "text",
-      label: "Primary key column",
+      label: "GraphQL Node ID",
       width: 38,
-      help: 'By default the primary key is called "id". This property let\'s you use another column name.',
+      help: "",
     },
     {
       id: "entity",
@@ -75,9 +80,21 @@ module.exports = {
       required: true,
       maxLength: 100,
       inMany: true,
-      width: 75,
+      inSearch: true,
+      width: 62,
       help: "Unique identifier for the object",
     },
+    // {
+    //   id: "qid",
+    //   type: "text",
+    //   label: "GraphQL Object Id",
+    //   required: true,
+    //   maxLength: 200,
+    //   inMany: true,
+    //   inSearch: true,
+    //   width: 75,
+    //   help: "Unique identifier for the object",
+    // },
     {
       id: "name",
       type: "text",
@@ -85,6 +102,7 @@ module.exports = {
       required: true,
       maxLength: 50,
       inMany: true,
+      inSearch: true,
       width: 62,
       help: "example: 'contact'",
     },
@@ -135,8 +153,9 @@ module.exports = {
         "name",
         "namePlural",
         "world",
-        "table",
-        "titleField",
+        // "table",
+        // "titleField",
+        "description",
       ],
     },
     {
@@ -144,35 +163,32 @@ module.exports = {
       type: "panel",
       label: "Info",
       width: 38,
-      fields: ["entity", "icon", "noCharts", "noStats", "description"],
+      fields: ["entity", "pKey", "icon", "noStats"],
     },
   ],
   collections: [
     {
-      id: "collec-fields",
+      id: "fields",
       title: "Fields",
       object: "field",
-      fields: [
-        "fid",
-        "label",
-        "column",
-        "type",
-        "inMany",
-        "inSearch",
-        "required",
-      ],
+      fields: ["fid", "label", "type", "inMany", "inSearch", "required"],
     },
+    // {
+    //   id: "fieldgroups",
+    //   title: "Field groups",
+    //   object: "group",
+    //   fields: ["id", "label", "type", "fields"],
+    // },
     {
-      id: "collec-groups",
-      title: "Field groups",
-      object: "group",
-      fields: ["gid", "label", "type", "fields"],
-    },
-    {
-      id: "collec-collecs",
+      id: "collecs",
       title: "Collections",
       object: "collection",
-      fields: ["cid", "label", "column", "object", "fields"],
+      fields: ["cid", "label", "object", "fields"],
     },
   ],
 };
+
+modelObject.fields.forEach((f) => {
+  f.id = f.id.toLowerCase();
+});
+export default modelObject;
