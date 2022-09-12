@@ -5,7 +5,7 @@
 
 const modelGroup = {
   id: "group",
-  qid: "evol_evol_group",
+  qid: "evol_evol_object_group",
   title: "Field Groups",
   world: "designer",
   name: "group",

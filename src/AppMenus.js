@@ -62,7 +62,7 @@ module.exports = [
       { id: "world", text: "Apps", icon: "designer/world.png" },
       { id: "object", text: "Objects", icon: "designer/object.png" },
       { id: "field", text: "Fields", icon: "designer/field.png" },
-      // { id: "group", text: "Field Groups", icon: "designer/group.png" },
+      { id: "group", text: "Field Groups", icon: "designer/group.png" },
       {
         id: "collection",
         text: "Collections",
