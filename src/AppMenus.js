@@ -1,8 +1,9 @@
-module.exports = [
+const menus = [
   {
     id: "organizer",
     title: "Demo",
     icon: "eye",
+    world: "organizer",
     menus: [
       { qid: 1, id: "todo", text: "To-Do List", icon: "todo.gif" },
       { qid: 2, id: "contact", text: "Address Book", icon: "contact.gif" },
@@ -58,6 +59,7 @@ module.exports = [
     id: "designer",
     title: "Designer",
     icon: "cogs",
+    world: "designer",
     menus: [
       { id: "world", text: "Apps", icon: "designer/world.png" },
       { id: "object", text: "Objects", icon: "designer/object.png" },
@@ -71,5 +73,6 @@ module.exports = [
       //{id: 'test', text: 'Test', icon: "car.png", defaultViewMany: 'cards'},
     ],
   },
-  ,
 ];
+
+export default menus;
