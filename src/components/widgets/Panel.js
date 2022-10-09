@@ -5,58 +5,48 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2022 Olivier Giulieri
 
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Icon from "react-crud-icons";
 
 import "./Panel.scss";
 
-export default class Panel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      opened: true,
-    };
-  }
+const Panel = ({ title, header, width, collapsible, children, footer }) => {
+  const [opened, setOpened] = useState(true);
 
-  clickToggle = () => {
-    this.setState({ opened: !this.state.opened });
+  const clickToggle = () => {
+    setOpened(!opened);
   };
 
-  render() {
-    const { props } = this;
-    const title = props.title ? (
-      <div className="panel-heading">
-        {props.collapsible ? (
-          <Icon
-            name={this.state.opened ? "chevron-up" : "chevron-down"}
-            onClick={this.clickToggle}
-            size="tiny"
-            theme="none"
-          />
-        ) : null}
-        <h3 className="panel-title">{props.title}</h3>
-      </div>
-    ) : null;
+  const titleElem = title ? (
+    <div className="panel-heading">
+      {collapsible && (
+        <Icon
+          name={opened ? "chevron-up" : "chevron-down"}
+          onClick={clickToggle}
+          size="tiny"
+          theme="none"
+        />
+      )}
+      <h3 className="panel-title">{title}</h3>
+    </div>
+  ) : null;
 
-    return (
-      <div className="evol-pnl" style={{ width: props.width + "%" }}>
-        <div className="panel panel-default">
-          {title}
-          {props.header ? (
-            <div className="panel-heading panel-header">{props.header}</div>
-          ) : null}
-          <fieldset style={{ display: this.state.opened ? "block" : "none" }}>
-            {props.children}
-          </fieldset>
-          {props.footer ? (
-            <div className="panel-footer">{props.footer}</div>
-          ) : null}
-        </div>
+  return (
+    <div className="evol-pnl" style={{ width: width + "%" }}>
+      <div className="panel panel-default">
+        {titleElem}
+        {header && <div className="panel-heading panel-header">{header}</div>}
+        <fieldset style={{ display: opened ? "block" : "none" }}>
+          {children}
+        </fieldset>
+        {footer ? <div className="panel-footer">{footer}</div> : null}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default Panel;
 
 Panel.propTypes = {
   title: PropTypes.string,

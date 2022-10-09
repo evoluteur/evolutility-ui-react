@@ -12,7 +12,7 @@ import { pageSize } from "../../config";
 
 import "./Pagination.scss";
 
-const Pagination = ({ pageIdx, count, fullCount, location, fnClick }) => {
+const Pagination = ({ count, fullCount, location, fnClick }) => {
   const paginationBody = () => {
     let pIdx;
     const query = queryString.parse(location.search); // this.props.location.query

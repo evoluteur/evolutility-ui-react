@@ -14,47 +14,7 @@ const Designer = () => (
     <p>Models can be stored in the database or in JSON.</p>
 
     <div className="row-2-cols">
-      <div>
-        <h3>Models in the DB</h3>
-
-        <p>
-          The App Designer is simply an app to manage Objects and Fields in apps
-          models (treating metadata like data).
-        </p>
-        <div className="row-2-cols">
-          <ul className="evo-links">
-            <li>
-              <Link to="/object/list">Objects</Link>
-            </li>
-            <li>
-              <Link to="/field/list">Fields</Link>
-            </li>
-            <li>
-              <Link to="/collection/list">Collections</Link>
-            </li>
-          </ul>
-          <ul className="evo-links">
-            <li>
-              <Link to="/object/browse/1">To-Do list</Link>
-            </li>
-            <li>
-              <Link to="/object/browse/2">Address book</Link>
-            </li>
-            <li>
-              <Link to="/object/browse/4">Restaurant</Link>
-            </li>
-            <li>
-              <Link to="/object/browse/3">Graphic novels</Link>
-            </li>
-            <li>
-              <Link to="/object/browse/5">Wine cellar</Link>
-            </li>
-            <li>
-              <Link to="/object/browse/6">Wine tasting</Link>
-            </li>
-          </ul>
-        </div>
-      </div>
+      {" "}
       <div>
         <h3>Models in JSON files</h3>
 
@@ -119,7 +79,52 @@ const Designer = () => (
           </li>
         </ul>
       </div>
+      <div>
+        <h3>Models in the DB</h3>
+
+        <p>
+          The App Designer is simply an app to manage Objects and Fields in apps
+          models (treating metadata like data).
+        </p>
+        <div className="row-2-cols">
+          <ul className="evo-links">
+            <li>
+              <Link to="/object/browse/1">To-Do list</Link>
+            </li>
+            <li>
+              <Link to="/object/browse/2">Address book</Link>
+            </li>
+            <li>
+              <Link to="/object/browse/4">Restaurant</Link>
+            </li>
+            <li>
+              <Link to="/object/browse/3">Graphic novels</Link>
+            </li>
+            <li>
+              <Link to="/object/browse/5">Wine cellar</Link>
+            </li>
+            <li>
+              <Link to="/object/browse/6">Wine tasting</Link>
+            </li>
+          </ul>
+          <ul className="evo-links">
+            <li>
+              <Link to="/object/list">Objects</Link>
+            </li>
+            <li>
+              <Link to="/field/list">Fields</Link>
+            </li>
+            <li>
+              <Link to="/collection/list">Collections</Link>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+
+    <p>
+      The <Link to="./demo">demos</Link> on this site are models in JSON files.
+    </p>
   </div>
 );
 

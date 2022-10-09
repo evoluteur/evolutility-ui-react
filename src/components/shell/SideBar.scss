@@ -7,7 +7,6 @@ $nav-trans-time: 0.1s;
 
 .evo-sidebar {
   z-index: 5;
-  font-family: Droid, Lato, "Helvetica Neue", Arial, Helvetica;
   position: fixed;
   overflow: hidden;
   left: 0;
@@ -16,7 +15,6 @@ $nav-trans-time: 0.1s;
   transition: width $nav-trans-time ease;
   height: 100%;
   color: #455a64;
-  padding-top: 10px;
   border-right: 1px solid #e0e0e0;
   background-color: #eee;
   user-select: none;
@@ -48,18 +46,6 @@ $nav-trans-time: 0.1s;
       top: 2px;
     }
   }
-  > ul {
-    padding: 0 4px !important;
-    > li {
-      > div > a > img {
-        position: relative;
-        top: -2px;
-        margin-right: 12px;
-        width: 20px;
-        height: 20px;
-      }
-    }
-  }
   ul {
     list-style-type: none;
     margin-bottom: 12px;
@@ -72,19 +58,24 @@ $nav-trans-time: 0.1s;
     padding: 5px 3px;
     margin: 0 0 4px 0;
   }
-
   > ul {
+    padding: 0 4px !important;
     > li {
-      border-left: solid 4px #eee;
-      font-size: 16px;
-      margin: 0 0 10px 0;
-      padding: 0;
-      white-space: nowrap;
+      // border-left: solid 4px #eee;
+      // font-size: 16px;
+      // margin: 0 0 10px 0;
+      // padding: 0;
+      // white-space: nowrap;
       /*
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
-		*/
+		  */
+      > div > a > img {
+        position: relative;
+        top: -2px;
+        margin-right: 12px
+      }
     }
   }
   .mIcons {
@@ -137,13 +128,20 @@ $nav-trans-time: 0.1s;
   a:hover {
     color: $color-icon-hover;
   }
-  .footLinks {
+  .side-links {
     margin: 30px 10px 10px 20px;
     padding: 10px 10px 10px 0;
     a {
       font-weight: 400;
       > img {
         margin-right: 10px;
+      }
+    }
+    > a  {
+      font-weight: 600;
+      > img {
+        height: 24px;
+        width: 24px;
       }
     }
   }

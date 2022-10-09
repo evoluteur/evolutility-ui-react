@@ -26,7 +26,7 @@ if (isREST) {
   iconH.n.charts = { id: "charts", icon: "dashboard", label: "Dashboard" };
 }
 
-function getIcons(cardinality, model) {
+const getIcons = (cardinality, model) => {
   const ih = iconH[cardinality];
   if (cardinality === "1") {
     return [ih.edit, ih.browse];
@@ -41,9 +41,9 @@ function getIcons(cardinality, model) {
     }
   }
   return cardiIcons;
-}
+};
 
-function iconViews(mid, cardinality, id, view, model) {
+const iconViews = (mid, cardinality, id, view, model) => {
   if (cardinality === "1" && id === "0") {
     return null;
   }
@@ -62,7 +62,7 @@ function iconViews(mid, cardinality, id, view, model) {
       ))}
     </div>
   );
-}
+};
 
 const Header = ({
   title,

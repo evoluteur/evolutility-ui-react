@@ -716,7 +716,8 @@ const Doc = () => {
             <span className="dt">text</span>:{" "}
             <span className="st">&#39;American&#39;</span>,{" "}
             <span className="dt">icon</span>:
-            <span className="st">&#39;comics/flags/us.png&#39;</span>}
+            <span className="st">&#39;comics/flags/us.png&#39;</span>
+            {"}"}
             ]&lbrace;, &rbrace;
             <span className="dt">id</span>:{" "}
             <span className="st">&quot;complete&quot;</span>,{" "}
@@ -757,7 +758,8 @@ const Doc = () => {
             <span className="dt">height</span>: <span className="dv">7</span>,{" "}
             <span className="dt">maxLength</span>:{" "}
             <span className="dv">5000</span>,<span className="dt">inMany</span>:{" "}
-            <span className="kw">false</span>} ],
+            <span className="kw">false</span>
+            {"}"} ],
             <span className="dt">groups</span>: [&rbrace;
             <span className="dt">id</span>:
             <span className="st">&quot;serie&quot;</span>,{" "}
@@ -785,7 +787,7 @@ const Doc = () => {
             <span className="st">&quot;Cover&quot;</span>,{" "}
             <span className="dt">width</span>: <span className="dv">30</span>,
             <span className="dt">fields</span>: [
-            <span className="st">&quot;pix&quot;</span>]&rbrace;] }
+            <span className="st">&quot;pix&quot;</span>]&rbrace;] {"}"}
           </code>
         </pre>
         <p>

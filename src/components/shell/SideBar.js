@@ -141,17 +141,20 @@ const SideBar = ({ match }) => {
     links = (
       <>
         <Link to="/demo">
-          <img alt="Demos" src="/svg/eye.svg" /> Demo
+          <img alt="Demos" src="svg/eye.svg" />
+          Demo
         </Link>
         <br />
         <br />
         <Link to="/doc">
-          <img alt="Doc" src="/svg/book.svg" /> Doc
+          <img alt="Doc" src="svg/book.svg" />
+          Doc
         </Link>
         <br />
         <br />
         <Link to="/designer">
-          <img alt="Designer" src="/svg/cogs.svg" /> Designer
+          <img alt="Designer" src="svg/cogs.svg" />
+          Designer
         </Link>
         <br />
       </>
@@ -172,7 +175,7 @@ const SideBar = ({ match }) => {
             <Link to={"/" + section?.id}>
               <img
                 alt={section.title}
-                src={`/svg/${section.icon}.svg`}
+                src={`svg/${section.icon}.svg`}
                 className="cpnSvg"
               />
               {section.title}
@@ -197,7 +200,7 @@ const SideBar = ({ match }) => {
 
       <ul>{menus.map(Section)}</ul>
 
-      <div className="footLinks">{links}</div>
+      <div className="side-links">{links}</div>
 
       <div id="afterNav" />
     </nav>

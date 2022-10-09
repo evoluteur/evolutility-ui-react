@@ -110,7 +110,7 @@ const modelField = {
           icon: "designer/ft-json.png",
         },
       ],
-      lovIcon: false,
+      lovIcon: true,
       defaultValue: 1,
       inMany: true,
       width: 38,

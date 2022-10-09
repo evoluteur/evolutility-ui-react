@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import Icon from "react-crud-icons";
 import logoEvol from "./evologo.gif";
@@ -14,14 +14,15 @@ const views = {
   // new: {id: 'edit/0', label: i18n_actions.new, icon:'add', n:'x', marginLeft: 10, readonly:false},
   list: { id: "list", label: i18n_actions.list, icon: "list", n: "n" },
   cards: { id: "cards", label: i18n_actions.cards, icon: "cards", n: "n" },
-  charts: {
-    id: "charts",
-    label: i18n_actions.charts,
-    icon: "dashboard",
-    n: "n",
-  },
+  // charts: {
+  //   id: "charts",
+  //   label: i18n_actions.charts,
+  //   icon: "dashboard",
+  //   n: "n",
+  // },
   // stats: {id:'stats', label: i18n_actions.stats, icon:'equalizer', n:'n'},
 };
+
 const getViewsList = (model) =>
   model.noCharts
     ? {
@@ -34,7 +35,7 @@ const newEntity = (m) => i18n_actions.newEntity.replace("{0}", m.name);
 
 // TODO: use Portal to nest toolbar
 const TopBar = () => {
-  const path = window.location.pathname.split("/");
+  const path = useParams()[0]?.split("/");
   if (path.length > 1) {
     if (path[0] === "") {
       path.splice(0, 1);

@@ -83,6 +83,9 @@ $label2-width: 100px;
 }
 .stat-label {
   margin-bottom: 10px;
+  &::after{
+    content: ":";
+  }
 }
 .stat-field {
   line-height: 30px;
