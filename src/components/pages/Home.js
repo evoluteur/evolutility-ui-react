@@ -43,20 +43,21 @@ const Home = () => {
   return (
     <div className="evo-home">
       <section className="co-splash">
-        <h1 className="siteTitle">
+        <h1 className="siteTitle text-center">
           <span>Evol</span>
           <span className="utility">utility</span>-UI-React{" "}
           <span className="version">v{pkg.version}</span>{" "}
         </h1>
         <h2 className="tBlue">
-          Toolkit to build applications with models rather than code
+          Toolkit to build CRUD UIs with models rather than code
         </h2>
       </section>
       <section>
         <div>
-          Evolutility is simple Low-Code platform for CRUD applications. It is
-          so DRY that all views (List, Cards, Browse, Edit...) are driven from a
-          single model.
+          Evolutility provides an integrated set of model-driven React
+          components for CRUD UIs using GraphQL. No hand-coding necessary. For
+          each application, all views, form validation, and API calls are
+          defined in a single model.
         </div>
         <div>With it, you can build UIs like these:</div>
         <DemosList />
@@ -75,10 +76,6 @@ const Home = () => {
       </section>
 
       <section>
-        <p>
-          No hand-coding necessary. All views, validation code, and API calls
-          are derived from the models.
-        </p>
         <p>
           Evolutility-UI-React can use GraphQL with{" "}
           <a
@@ -123,6 +120,10 @@ const Home = () => {
           .
         </p>
       </section>
+      <div className="text-center">
+        <img src="pix/react.png" alt="React" />
+        <img src="pix/graphql.png" alt="GraphQL" />
+      </div>
     </div>
   );
 };
