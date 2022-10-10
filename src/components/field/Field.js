@@ -68,7 +68,6 @@ const Field = ({
   message,
   msg,
 }) => {
-  const [showHelp, setShowHelp] = useState(false);
   // const [invalid, setInvalid] = useState(false);
   // const [message, setMessage] = useState(false);
 
@@ -82,10 +81,6 @@ const Field = ({
         },
       });
     };
-  };
-
-  const clickHelp = () => {
-    setShowHelp(!showHelp);
   };
 
   // const getMultiselectFieldChange =
@@ -387,14 +382,7 @@ const Field = ({
       className={`evol-fld${invalid ? " has-error" : ""}`}
       style={{ width: `${f.width || 100}%` }}
     >
-      <FieldLabel
-        label={fLabel}
-        field={f}
-        readOnly={fReadOnly}
-        clickHelp={clickHelp}
-      />
-
-      {showHelp && f.help && <div className="evo-fld-help">{f.help}</div>}
+      <FieldLabel label={fLabel} field={f} readOnly={fReadOnly} />
 
       {fReadOnly
         ? fieldElemReadOnly(f, value, valueId)
