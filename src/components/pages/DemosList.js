@@ -17,7 +17,7 @@ const itemLink = (id, mid, view) => {
   const m = getModel(mid);
   if (view === "api") {
     return (
-      <Link to={`/${mid}/api`}>
+      <Link to={`/${mid}/api`} key={mid + "-api"}>
         <img src="/pix/designer/api.png" alt={m.title} title={m.title} />
         {m.title}
       </Link>
@@ -25,14 +25,14 @@ const itemLink = (id, mid, view) => {
   }
   if (view === "model") {
     return (
-      <Link to={`/object/browse/${id}`}>
+      <Link to={`/object/browse/${id}`} key={id + "-m"}>
         <img src="/pix/designer/object.png" alt={m.title} title={m.title} />
         {m.title}
       </Link>
     );
   }
   return (
-    <Link to={`/${mid}/${m.defaultViewMany || "list"}`}>
+    <Link to={`/${mid}/${m.defaultViewMany || "list"}`} key={mid}>
       <img src={`/pix/${m.icon}`} alt={m.title} title={m.title} />
       {m.title}
     </Link>

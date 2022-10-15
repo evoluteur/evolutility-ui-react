@@ -103,19 +103,14 @@ const daoGraphQL = {
               // do nothing
             } else if (opt === "order") {
               const orderParams = options.order.split(".");
-              const f = m.fieldsH[orderParams[0]];
-              if (f && f.type === ft.lov) {
-                gOpts.push(
-                  "order_by:{" +
-                    orderParams[0] +
-                    ":{name:" +
-                    orderParams[1] +
-                    "}}"
-                );
-              } else {
-                gOpts.push(
-                  "order_by:{" + orderParams[0] + ":" + orderParams[1] + "}"
-                );
+              const [oField, oDirection] = orderParams;
+              const f = m.fieldsH[oField];
+              if (f) {
+                if (f.type === ft.lov) {
+                  gOpts.push(`order_by:{${oField}:{name:${oDirection}}}`);
+                } else {
+                  gOpts.push(`order_by:{${oField}:${oDirection}}`);
+                }
               }
             } else if (opt === "search") {
               // do nothing

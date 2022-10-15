@@ -13,7 +13,7 @@ import PropTypes from "prop-types";
 import { i18n_msg } from "../../../i18n/i18n";
 import { apiPath, pageSize } from "../../../config";
 import url from "../../../utils/url";
-import models from "../../../models/all_models";
+import { getModel } from "../../../utils/moMa";
 
 import "./many.scss";
 import dao from "../../../utils/dao";
@@ -167,7 +167,7 @@ export default class Many extends React.Component {
   }
 
   setModel(entity) {
-    this.model = models[entity || this.props.match.params.entity];
+    this.model = getModel(entity || this.props.match.params.entity);
   }
 
   clickSort = (evt) => {
