@@ -141,19 +141,19 @@ const SideBar = ({ match }) => {
     links = (
       <>
         <Link to="/demo">
-          <img alt="Demos" src="svg/eye.svg" />
+          <img alt="Demos" src="/svg/eye.svg" />
           Demo
         </Link>
         <br />
         <br />
         <Link to="/doc">
-          <img alt="Doc" src="svg/book.svg" />
+          <img alt="Doc" src="/svg/book.svg" />
           Doc
         </Link>
         <br />
         <br />
         <Link to="/designer">
-          <img alt="Designer" src="svg/cogs.svg" />
+          <img alt="Designer" src="/svg/cogs.svg" />
           Designer
         </Link>
         <br />
