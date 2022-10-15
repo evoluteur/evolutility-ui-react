@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/anchor-has-content */
 /*
   Evolutility-UI-React
   https://github.com/evoluteur/evolutility-ui-react
