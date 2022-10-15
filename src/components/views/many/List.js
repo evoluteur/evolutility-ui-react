@@ -134,6 +134,16 @@ export default class List extends Many {
                   </div>
                 </td>
               );
+            } else {
+              const fv = d[f.id];
+              return (
+                <td key={f.id}>
+                  <div className="nobr">
+                    {fv.icon && <img src={"/pix/" + fv.icon} alt="" />}
+                    {fv.name}
+                  </div>
+                </td>
+              );
             }
           } else {
             return (
