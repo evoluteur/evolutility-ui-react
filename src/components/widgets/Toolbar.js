@@ -20,7 +20,7 @@ import evoGlobals from "../../utils/evoGlobals";
 import { apiPath } from "../../config";
 import pkg from "../../../package.json";
 import { i18n_msg, i18n_actions } from "../../i18n/i18n";
-import models from "../../models/all_models";
+import { getModel } from "../../utils/moMa";
 
 import "./Toolbar.scss";
 
@@ -153,87 +153,90 @@ class Toolbar extends React.Component {
       }
     }
 
-    if (entity && models[entity]) {
-      const m = models[entity];
-      const item = document.getElementById("itemTitle");
-      const itemName = item ? item.innerHTML : "";
-      const delModal = this.state.deleteConfirmation ? (
-        <Modal
-          className="modal-dialog"
-          ariaHideApp={false}
-          isOpen={this.state.deleteConfirmation}
-          onRequestClose={this.closeModal}
-          style={{
-            content: {
-              position: "absolute",
-              top: "calc(50% - 200px)",
-              left: "calc(50% - 150px)",
-              width: "360px",
-            },
-          }}
-        >
-          <div>
-            <div className="modal-content">
-              <div className="modal-header">
-                <button
-                  onClick={this.closeModal}
-                  className="close"
-                  data-dismiss="modal"
-                  aria-hidden="true"
-                >
-                  ×
-                </button>
-                <h4 className="modal-title">
-                  {i18n_msg.delete.replace("{0}", m.name)}
-                </h4>
-              </div>
-              <div className="modal-body">
-                {i18n_msg.deleteConfirmation
-                  .replace("{0}", m.name)
-                  .replace("{1}", itemName)}
-              </div>
-              <div className="modal-footer">
-                <button
-                  key="bDelCancel"
-                  onClick={this.closeModal}
-                  className="btn btn-default"
-                  data-dismiss="modal"
-                >
-                  {i18n_actions.cancel}
-                </button>
-                <button
-                  key="bDelOK"
-                  onClick={this.deleteOne}
-                  className="btn btn-primary"
-                  data-dismiss="modal"
-                >
-                  {i18n_actions.ok}
-                </button>
+    if (entity) {
+      const m = getModel(entity);
+      if (m) {
+        const item = document.getElementById("itemTitle");
+        const itemName = item ? item.innerHTML : "";
+        const delModal = this.state.deleteConfirmation ? (
+          <Modal
+            className="modal-dialog"
+            ariaHideApp={false}
+            isOpen={this.state.deleteConfirmation}
+            onRequestClose={this.closeModal}
+            style={{
+              content: {
+                position: "absolute",
+                top: "calc(50% - 200px)",
+                left: "calc(50% - 150px)",
+                width: "360px",
+              },
+            }}
+          >
+            <div>
+              <div className="modal-content">
+                <div className="modal-header">
+                  <button
+                    onClick={this.closeModal}
+                    className="close"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                  >
+                    ×
+                  </button>
+                  <h4 className="modal-title">
+                    {i18n_msg.delete.replace("{0}", m.name)}
+                  </h4>
+                </div>
+                <div className="modal-body">
+                  {i18n_msg.deleteConfirmation
+                    .replace("{0}", m.name)
+                    .replace("{1}", itemName)}
+                </div>
+                <div className="modal-footer">
+                  <button
+                    key="bDelCancel"
+                    onClick={this.closeModal}
+                    className="btn btn-default"
+                    data-dismiss="modal"
+                  >
+                    {i18n_actions.cancel}
+                  </button>
+                  <button
+                    key="bDelOK"
+                    onClick={this.deleteOne}
+                    className="btn btn-primary"
+                    data-dismiss="modal"
+                  >
+                    {i18n_actions.ok}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </Modal>
-      ) : null;
+          </Modal>
+        ) : null;
 
-      return (
-        <div className="evo-toolbar" role="navigation">
-          <div className="navlinks evo-nav-pills">{navViews}</div>
-          <div className="evo-nav-pills">
-            {actions}
-            {canSearch && !isNew ? (
-              <div className="searchbox">
-                <SearchBox
-                  fnSearch={this.fnSearch}
-                  searchValue={this.searchValue}
-                />
-              </div>
-            ) : null}
+        return (
+          <div className="evo-toolbar" role="navigation">
+            <div className="navlinks evo-nav-pills">{navViews}</div>
+            <div className="evo-nav-pills">
+              {actions}
+              {canSearch && !isNew && (
+                <div className="searchbox">
+                  <SearchBox
+                    fnSearch={this.fnSearch}
+                    searchValue={this.searchValue}
+                  />
+                </div>
+              )}
+            </div>
+            <div className="clearfix" />
+            {delModal}
           </div>
-          <div className="clearfix" />
-          {delModal}
-        </div>
-      );
+        );
+      }
     }
+
     return null;
   }
 
@@ -252,7 +255,7 @@ class Toolbar extends React.Component {
   deleteOne = () => {
     // TODO:
     const { entity, id } = this.props; // .match.params
-    const m = models[entity];
+    const m = getModel(entity);
 
     if (entity && id && m) {
       dao

@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 
 import Icon from "react-crud-icons";
 import { Link } from "react-router-dom";
-import models from "../../../models/all_models";
+import { getModel } from "../../../utils/moMa";
 import { fieldValue } from "../../../utils/format";
 import { fieldTypes as ft } from "../../../utils/dico";
 
@@ -34,7 +34,7 @@ export default class Card extends React.PureComponent {
     const d = this.props.data || {};
     const fields = this.props.fields || [];
     const { entity } = this.props;
-    const m = models[entity];
+    const m = getModel(entity);
     const link = `/${entity}/${m.defaultViewOne}/`;
     const linkEdit = `/${entity}/edit/`;
     const { getLovMap } = this;

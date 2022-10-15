@@ -11,7 +11,7 @@ import dao, { isGraphQL } from "../../../utils/dao";
 
 import { i18n_errors } from "../../../i18n/i18n";
 import { apiPath } from "../../../config";
-import models from "../../../models/all_models";
+import { getModel } from "../../../utils/moMa";
 
 import "./one.scss";
 
@@ -138,7 +138,7 @@ export default class OneRead extends React.Component {
   }
 
   setModel(entity) {
-    this.model = models[entity || this.props.match.params.entity];
+    this.model = getModel(entity || this.props.match.params.entity);
   }
 
   emptyDelta(useDefault) {

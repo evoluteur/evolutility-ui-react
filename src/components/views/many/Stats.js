@@ -12,7 +12,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Icon from "react-crud-icons";
 import { wTimestamp, wComments } from "../../../config";
-import models from "../../../models/all_models";
+import { getModel } from "../../../utils/moMa";
 import { i18n_stats, i18n_comments } from "../../../i18n/i18n";
 import {
   fieldIsDateOrTime,
@@ -71,7 +71,7 @@ export default class Stats extends React.Component {
         e = this.props.params.entity || this.props.entity || null;
       }
     }
-    this.model = models[e];
+    this.model = getModel(e);
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -93,7 +93,7 @@ export default class Stats extends React.Component {
 
   getData(entity) {
     const e = entity || this.props.match.params.entity;
-    const { fields } = models[e];
+    const { fields } = getModel(e);
 
     dao
       .getStats(e)
@@ -167,7 +167,7 @@ export default class Stats extends React.Component {
 
   render() {
     const e = this.props.match.params.entity;
-    const model = models[e] || null;
+    const model = getModel(e) || null;
     const data = this.state.data || null;
     const chartsOK = isREST;
 
@@ -238,7 +238,7 @@ export default class Stats extends React.Component {
                 </>
               )}
             </div>
-            {chartsOK ? (
+            {chartsOK && (
               <div>
                 {k.chartable && this.state[k.field.id + "_Chart"] ? (
                   <Chart
@@ -255,7 +255,7 @@ export default class Stats extends React.Component {
                   />
                 ) : null}
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       );

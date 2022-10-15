@@ -8,7 +8,7 @@
 import React from "react";
 
 import { toast } from "react-toastify";
-import models from "../../../models/all_models";
+import { getModel } from "../../../utils/moMa";
 // import evoGlobals from 'utils/evoGlobals'
 import dao from "../../../utils/dao";
 import { capitalize } from "../../../utils/format";
@@ -18,7 +18,7 @@ import OneRead from "./one-read";
 export default class OneReadWrite extends OneRead {
   upsertOne = (entity) => {
     const e = entity || this.props.match.params.entity;
-    const m = models[e];
+    const m = getModel(e);
     const id = parseInt(this.props.match.params.id || "", 10);
     const data = this.delta;
 

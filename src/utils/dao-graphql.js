@@ -5,7 +5,8 @@
 // (c) 2022 Olivier Giulieri
 
 import moMa from "./moMa";
-import { fieldTypes, isFieldMany } from "./dico.js";
+import { fieldTypes, isFieldMany, fieldIsText } from "./dico.js";
+
 import config from "../config";
 import {
   fullCount,
@@ -113,8 +114,15 @@ const daoGraphQL = {
                 }
               }
             } else if (opt === "search") {
-              // do nothing
-              // debugger
+              const { search } = options;
+              debugger;
+              const searchFields = m.fields.filter(
+                (f) => f.inSearch || (f.inMany && fieldIsText(f))
+              );
+              const searchStr = `%${search}%`;
+              searchFields.forEach((f) => {
+                gOptsSearch.push(`{ ${f.id}: { _ilike: "${searchStr}" } }`);
+              });
             } else {
               const f = m.fieldsH[opt];
               if (f) {
@@ -129,17 +137,17 @@ const daoGraphQL = {
             }
           });
           if (gOptsSearch.length) {
-            gOpts.push("where:{" + gOptsSearch.join(",") + "}");
+            gOpts.push("where:{_or:[" + gOptsSearch.join(",") + "]}");
           }
         }
         const qParam = gOpts.length ? "(" + gOpts.join(", ") + ")" : "";
         return `
-                    query {
-                        many: ${m.qid} ${qParam}{
-                            ${gqlFields(m)}
-                        }
-                        ${count}
-                    }`;
+          query {
+              many: ${m.qid} ${qParam}{
+                  ${gqlFields(m)}
+              }
+              ${count}
+          }`;
       }
       return null;
     };
