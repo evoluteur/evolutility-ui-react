@@ -161,8 +161,8 @@ export const qModels = `{ objects: evol_evol_object {
       description
     }
     active
-    name
     icon
+    name
     nameplural
     nostats
     pkey
