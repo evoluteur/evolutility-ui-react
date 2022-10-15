@@ -107,7 +107,7 @@ const modelObject = {
       help: "example: 'contact'",
     },
     {
-      id: "namePlural",
+      id: "nameplural",
       type: "text",
       label: "name (plural)",
       required: true,
@@ -151,8 +151,7 @@ const modelObject = {
         "title",
         "active",
         "name",
-        "namePlural",
-        "world",
+        "nameplural",
         // "table",
         // "titleField",
         "description",
@@ -163,7 +162,7 @@ const modelObject = {
       type: "panel",
       label: "Info",
       width: 38,
-      fields: ["entity", "pKey", "icon", "noStats"],
+      fields: ["entity", "pKey", "icon", "world", "noStats"],
     },
   ],
   collections: [
