@@ -175,7 +175,7 @@ const SideBar = ({ match }) => {
             <Link to={"/" + section?.id}>
               <img
                 alt={section.title}
-                src={`svg/${section.icon}.svg`}
+                src={`/svg/${section.icon}.svg`}
                 className="cpnSvg"
               />
               {section.title}
