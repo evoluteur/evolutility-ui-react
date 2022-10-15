@@ -75,9 +75,28 @@ const Home = () => {
         </div>
       </section>
 
+      <div className="text-center">
+        <a href="https://reactjs.org/" target="react" rel="noopener noreferrer">
+          <img src="pix/react.png" alt="React" />
+        </a>
+        <a
+          href="https://graphql.org/"
+          target="graphql"
+          rel="noopener noreferrer"
+        >
+          <img src="pix/graphql.png" alt="GraphQL" />
+        </a>
+        <a href="https://hasura.io" target="hasura" rel="noopener noreferrer">
+          <img
+            src="pix/hasura.png"
+            alt="Hasura"
+            style={{ maxWidth: "230px" }}
+          />
+        </a>
+      </div>
       <section>
         <p>
-          Evolutility-UI-React can use GraphQL with{" "}
+          The demos on this site are using{" "}
           <a
             href="https://hasura.io"
             target="h"
@@ -86,16 +105,7 @@ const Home = () => {
           >
             Hasura
           </a>{" "}
-          or REST with{" "}
-          <a
-            href="https://github.com/evoluteur/evolutility-server-node"
-            target="esn"
-            rel="noopener noreferrer"
-            className="extlink"
-          >
-            Evolutility-Server-Node
-          </a>
-          .
+          GraphQL API.
         </p>
         <p>
           Evolutility-UI-React is Open source. The code and documentation are
@@ -120,10 +130,6 @@ const Home = () => {
           .
         </p>
       </section>
-      <div className="text-center">
-        <img src="pix/react.png" alt="React" />
-        <img src="pix/graphql.png" alt="GraphQL" />
-      </div>
     </div>
   );
 };
