@@ -5,6 +5,9 @@ import PropTypes from "prop-types";
 import Tooltip from "rc-tooltip";
 import Icon from "react-crud-icons";
 
+// import "rc-tootip/assets/bootstrap_white.css";
+import "../bootstrap_white.css";
+
 const FieldLabel = ({ field, label, required, readOnly }) => {
   const f = field || { type: "text" };
   const required2 = (f.required || required) && !readOnly;
