@@ -112,7 +112,7 @@ export default class Browse extends OneRead {
                     !collecData(c.id) ? null : (
                       <Panel
                         title={c.title}
-                        key={"collec_" + c.id}
+                        key={"collec-b_" + c.id + "-" + idx}
                         collapsible
                         header={c.header}
                         footer={c.footer}

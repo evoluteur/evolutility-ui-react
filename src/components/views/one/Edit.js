@@ -171,7 +171,7 @@ export default class Edit extends OneReadWrite {
               {m.collections && !isNew
                 ? m.collections.map((c) => (
                     <Panel
-                      key={"collec_" + c.id}
+                      key={"collec-e_" + c.id}
                       title={c.title}
                       collapsible
                       header={c.header}
