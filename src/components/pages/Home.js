@@ -90,7 +90,7 @@ const Home = () => {
           <img
             src="pix/hasura.png"
             alt="Hasura"
-            style={{ maxWidth: "230px" }}
+            style={{ maxWidth: "230px", marginTop: "5px" }}
           />
         </a>
       </div>
