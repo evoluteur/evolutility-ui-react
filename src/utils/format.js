@@ -102,11 +102,12 @@ export function fieldValue(f, d, abbr) {
   }
   if (f.type === ft.money && d) {
     return moneyString(d);
-  } else if (f.type === ft.lov) {
+  }
+  if (f.type === ft.lov) {
     return (
       <>
         {f.lovIcon && <img src={f.lovIcon} alt=""></img>}
-        {d?.name}
+        {d}
       </>
     );
   }
