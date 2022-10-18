@@ -47,12 +47,9 @@ const MenuLink = ({ menu }) => (
     children={({ match }) => (
       <li className={match ? "active" : ""}>
         <Link
-          to={
-            "/" +
-            menu.id +
-            "/" +
-            (menu.defaultViewMany ? menu.defaultViewMany : "list")
-          }
+          to={`/${menu.id}/${
+            menu.defaultViewMany ? menu.defaultViewMany : "list"
+          }`}
         >
           <img className="evol-many-icon" src={"/pix/" + menu.icon} alt="" />
           {menu.text}

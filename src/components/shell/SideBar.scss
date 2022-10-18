@@ -14,9 +14,9 @@ $nav-trans-time: 0.1s;
   width: $nav-width;
   transition: width $nav-trans-time ease;
   height: 100%;
-  color: #455a64;
+  color: white;
   border-right: 1px solid #e0e0e0;
-  background-color: #eee;
+  background-color: #1976D2;
   user-select: none;
   -moz-user-select: none;
   &:hover {
@@ -30,9 +30,10 @@ $nav-trans-time: 0.1s;
   }
 
   a {
+    color: white !important;
     text-decoration: none;
+    &:hover,
     &.active {
-      color: black;
       text-decoration: none;
     }
   }
@@ -106,14 +107,6 @@ $nav-trans-time: 0.1s;
         margin: 0 2px;
       }
     }
-  }
-  .active-li {
-    > div {
-      background-color: $almostwhite-color;
-    }
-    //> ul {
-    //	border-left: 3px solid grey;
-    //}
   }
   i {
     color: #455a64;
@@ -215,16 +208,17 @@ a.skipNav {
   transition: background-color 0.3s;
   &:hover,
   &.active {
-    background-color: white;
+    background-color: #1E88E5;
+    color:white;
     > .mIcons {
       display: inline-block;
       width: 65px;
       margin-right: 10px;
       transition: width $ease-time ease $delay-time2;
       //padding-right: 14px;
-      > a:hover {
-        color: $color-icon-hover;
-      }
+      // > a:hover {
+      //   color: $color-icon-hover;
+      // }
     }
   }
 }
