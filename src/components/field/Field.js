@@ -334,11 +334,7 @@ const Field = ({
       // {f.country_icon && d.country_icon ? <img src={d.country_icon}/> : null}
     } else if (f.type === ft.lov) {
       if (f.object) {
-        fw = (
-          <Link to={"/" + f.object + "/browse/" + d_id}>
-            {fieldValue(f, d)}
-          </Link>
-        );
+        fw = <Link to={`/${f.object}/browse/${d_id}`}>{fieldValue(f, d)}</Link>;
       } else if (f.lovIcon && icon) {
         fw = (
           <span>

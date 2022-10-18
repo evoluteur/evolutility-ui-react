@@ -55,9 +55,7 @@ const Home = () => {
       <section>
         <div>
           Evolutility provides an integrated set of model-driven React
-          components for CRUD UIs using GraphQL. No hand-coding necessary. For
-          each application, all views, form validation, and API calls are
-          defined in a single model.
+          components for CRUD UIs using GraphQL.
         </div>
         <div>With it, you can build UIs like these:</div>
         <DemosList />
@@ -72,6 +70,11 @@ const Home = () => {
             these JSON files
           </a>
           .
+        </div>
+        <div>
+          <br />
+          No hand-coding necessary. For each application, all views, form
+          validation, and API calls are defined in a single model.
         </div>
       </section>
 

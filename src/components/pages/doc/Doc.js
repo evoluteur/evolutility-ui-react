@@ -44,14 +44,12 @@ const Doc = () => {
           Evolutility-UI-React is a set of <strong>model-driven views</strong>{" "}
           to <a href="#Browse">Browse</a>, <a href="#Edit">Edit</a>,{" "}
           <a href="#List">List</a>, <a href="#Cards">Cards</a>,{" "}
-          <a href="#Charts">Charts</a>, and <a href="#Stats">Stats</a>.
+          <a href="#Charts">Charts</a>, and <a href="#Stats">Stats</a> for
+          graphQL with <a href="https://hasura.io">Hasura</a>.
         </p>
         <p>
           With it you can easily build CRUD applications by writing models
           rather than code.
-        </p>
-        <p>
-          It uses graphQL with <a href="https://hasura.io">Hasura</a>.
         </p>
         <h3 id="table-of-contents">Table of Contents</h3>
         <ol style={{ "list-style-type": "decimal" }}>
@@ -128,13 +126,6 @@ const Doc = () => {
         <p>
           In a web browser, go to the url{" "}
           <a href="http://localhost:3000/">http://localhost:3000/</a>.
-        </p>
-        <p>
-          For the REST endpoints, you also need to install and run{" "}
-          <a href="https://github.com/evoluteur/evolutility-server-node">
-            Evolutility-Server-Node
-          </a>{" "}
-          which provides the matching REST endpoints based on the same metadata.
         </p>
         <p>
           <a name="Configuration"></a>
@@ -307,14 +298,6 @@ const Doc = () => {
             <tr>
               <th>Property</th>
               <th>Meaning</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
             </tr>
           </thead>
 

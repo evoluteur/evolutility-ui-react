@@ -6,8 +6,9 @@
   width: 100%;
   margin: 5px 0 30px;
   .page-title {
-    width: 100%;
     height: 40px;
+    width: 100%;
+    width: calc(100% - 90px);
     @include ellipsis();
   }
   .hIcons {
@@ -31,8 +32,14 @@
       }
     }
 
-    @media (max-width: 600px) {
+  }
+
+  @media (max-width: 600px) {
+    .hIcons {
       display: none !important;
+    }
+    .page-title {
+      width: 100%;
     }
   }
 }

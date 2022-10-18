@@ -3,7 +3,7 @@
 
 Evolutility-UI-React is a set of **model-driven views** to [Browse](#Browse), [Edit](#Edit), [List](#List), [Cards](#Cards), [Charts](#Charts), and [Stats](#Stats). 
 
-With it you can easily build CRUD applications by writing models rather than code. It works with REST APIs (using [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node)) or GraphQL (using [Hasura](https://hasura.io)). No hand-coding is necessary.
+With it you can easily build CRUD applications by writing models rather than code. It use GraphQL with [Hasura](https://hasura.io). No hand-coding is necessary.
 
 ![Edit](public/screenshots/comics/one-edit.gif)
 
@@ -75,10 +75,9 @@ For any object, a single model defines UI elements across views in a simple decl
 Evolutility-UI-React provides different types of view:
 
 * Views for One - a single record: [Browse](#Browse), [Edit](#Edit).
-* Views for Many - a collection of records: [List](#List), [Cards](#Cards), [Charts](#Charts), [Stats](#Stats).
-* Views for documentation: [REST API Doc](#Api).
+* Views for Many - a collection of records: [List](#List), [Cards](#Cards), [Charts](#Charts), [Stats](#Stats). 
 
-Evolutility can be configured to use REST (using [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node)) or GraphQL (using [Hasura](https://hasura.io)).
+Evolutility uses GraphQL with [Hasura](https://hasura.io).
 
 Notes: Views for actions (search, filter, export) will come later.
 
@@ -365,14 +364,7 @@ More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-rea
 <a name="Backend"></a>
 ## Evolutility backend
 
-[Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) provides REST or GraphQL end-points for Evolutility-UI-React using the same models.
-
-### Earlier implementations for other stacks
-
-[Evolutility-UI-jQuery](https://github.com/evoluteur/evolutility-ui-jquery) - Model-driven Web UI for CRUD using jQuery and Backbone (for REST or localStorage).
-
-[Evolutility-ASP.net](https://github.com/evoluteur/evolutility-asp.net) - Lightweight CRUD framework for heavy lifting with ASP.net and Microsoft SQL-Server.
-
+Evolutility-UI-React uses GraphQL with [Hasura](https://hasura.io).
 
 <a name="License"></a>
 ## License
