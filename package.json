@@ -9,7 +9,6 @@
   "copyright": "(c) 2022 Olivier Giulieri",
   "author": "Olivier Giulieri (https://evoluteur.github.io/)",
   "license": "MIT",
-  "proxy": "http://localhost:2000",
   "engines": {
     "node": "12.12.0",
     "npm": "6.11.3"
