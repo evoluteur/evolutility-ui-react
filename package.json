@@ -1,7 +1,7 @@
 {
   "name": "evolutility-ui-react",
   "version": "0.5.2",
-  "description": "Low-code UI for GraphQL or REST APIs",
+  "description": "Low-code UI for GraphQL",
   "repository": {
     "type": "git",
     "url": "git://github.com/evoluteur/evolutility-ui-react.git"

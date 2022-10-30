@@ -8,7 +8,7 @@ module.exports = {
   // - Path to REST API
   // - apiPath is prefixed w/ "proxy" from package.json
   // apiPath: '/api/v1/',
-  apiPath: "http://localhost:2000/api/v1/",
+  // apiPath: "http://localhost:2000/api/v1/",
 
   // - Path to GraphQL API
   apiPathGraphQL: "https://evol-hasura.herokuapp.com/v1/graphql",

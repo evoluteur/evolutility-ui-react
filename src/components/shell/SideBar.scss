@@ -97,11 +97,11 @@ $nav-trans-time: 0.1s;
       display: inline-block;
       &:hover {
         > svg {
-          fill: $color-icon-hover;
+          fill: orange;
         }
       }
       > svg {
-        fill: $color-icon;
+        fill: white;
         height: 16px;
         width: 16px;
         margin: 0 2px;
