@@ -12,7 +12,6 @@ import { toast } from "react-toastify";
 import Icon from "react-crud-icons";
 
 // import moment from 'moment'
-// import { withRouter } from 'react-router'
 // import {wTimestamp} from "../../../config"
 import { i18n_actions, i18n_validation, i18n_errors } from "../../../i18n/i18n";
 import { fieldId2Field, fieldTypes as ft } from "../../../utils/dico";
@@ -31,6 +30,13 @@ export default class Edit extends OneReadWrite {
   viewId = "edit";
 
   _validationOn = false;
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      invalids: {},
+    };
+  }
 
   getDataDelta() {
     return this.delta || null;
@@ -98,6 +104,7 @@ export default class Edit extends OneReadWrite {
             this.getLOV(f.id);
           }
         }
+        const invalidMsg = this.state.invalids[f.id];
         return (
           <Field
             key={f.id}
@@ -107,6 +114,8 @@ export default class Edit extends OneReadWrite {
             data={data}
             callbacks={cbs}
             entity={entity}
+            message={invalidMsg}
+            invalid={!!invalidMsg}
           />
         );
       }
@@ -224,30 +233,15 @@ export default class Edit extends OneReadWrite {
       cMsg = validation.validateField(f, data[f.id]);
       if (cMsg) {
         messages.push(cMsg);
-        invalids[f.id] = true;
-        if (this.refs[f.id]) {
-          this.refs[f.id].setState({
-            invalid: true,
-            message: cMsg,
-          });
-          this._validationOn = true;
-        } else {
-          console.error(
-            'Field ref for "' +
-              f.id +
-              "\" not found. The field doesn't not belong to any group in the model."
-          );
-        }
-      } else if (this.refs[f.id] && this.refs[f.id].invalid) {
-        this.refs[f.id].setState({
-          invalid: false,
-          message: null,
-        });
+        invalids[f.id] = cMsg;
       }
     });
     if (messages.length) {
       toast.error(i18n_validation.incomplete + " " + messages.join(" "));
     }
+    this.setState({
+      invalids,
+    });
     return {
       valid: messages.length < 1,
       messages,
@@ -256,19 +250,7 @@ export default class Edit extends OneReadWrite {
   };
 
   clearValidation() {
-    if (this.model) {
-      this.model.fields.forEach((f) => {
-        if (this.refs[f.id]) {
-          this.refs[f.id].setState({
-            invalid: false,
-            message: null,
-          });
-        } else {
-          console.log('Missing field "' + f.id + '" in clearValidation.');
-        }
-      });
-    }
-    this._validationOn = false;
+    this.setState({ invalids: {} });
   }
 
   setDeltaField(fid, value) {

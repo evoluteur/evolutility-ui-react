@@ -59,7 +59,7 @@ const itemInList = (id, list) => {
 const Field = ({
   model,
   callbacks,
-  data,
+  // data,
   label,
   readOnly,
   icon,
@@ -67,7 +67,6 @@ const Field = ({
   valueId,
   invalid,
   message,
-  msg,
 }) => {
   // const [invalid, setInvalid] = useState(false);
   // const [message, setMessage] = useState(false);
@@ -405,6 +404,7 @@ Field.propTypes = {
   label: PropTypes.string, // override label in model
   readOnly: PropTypes.bool, // override readOnly in model
   icon: PropTypes.string,
+  message: PropTypes.string,
 };
 
 Field.defaultProps = {
@@ -414,4 +414,5 @@ Field.defaultProps = {
   label: null,
   readOnly: null,
   icon: null,
+  message: null,
 };
