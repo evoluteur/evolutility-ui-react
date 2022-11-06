@@ -11,7 +11,7 @@ const Designer = () => (
   <div className="evo-designer">
     <h1>Evolutility Designer</h1>
 
-    <p>Models can be stored in the database or in JSON.</p>
+    <p>Models can be stored in JSON, or in the database.</p>
 
     <div className="row-2-cols">
       {" "}
@@ -78,13 +78,20 @@ const Designer = () => (
             </a>
           </li>
         </ul>
+
+        <p>
+          <br />
+          The <Link to="./demo">demos</Link> on this site are models in JSON
+          files.
+        </p>
       </div>
       <div>
         <h3>Models in the DB</h3>
 
+        <p>Work in progress.</p>
         <p>
-          The App Designer is simply an app to manage Objects and Fields in apps
-          models (treating metadata like data).
+          If we store the models in the DB, we can create apps to manage models
+          (treating metadata like data).
         </p>
         <div className="row-2-cols">
           <ul className="evo-links">
@@ -121,10 +128,6 @@ const Designer = () => (
         </div>
       </div>
     </div>
-
-    <p>
-      The <Link to="./demo">demos</Link> on this site are models in JSON files.
-    </p>
   </div>
 );
 

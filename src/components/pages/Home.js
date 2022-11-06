@@ -78,7 +78,7 @@ const Home = () => {
         </div>
       </section>
 
-      <div className="text-center">
+      <div className="text-center tech-logos">
         <a href="https://reactjs.org/" target="react" rel="noopener noreferrer">
           <img src="pix/react.png" alt="React" />
         </a>
@@ -90,11 +90,7 @@ const Home = () => {
           <img src="pix/graphql.png" alt="GraphQL" />
         </a>
         <a href="https://hasura.io" target="hasura" rel="noopener noreferrer">
-          <img
-            src="pix/hasura.png"
-            alt="Hasura"
-            style={{ maxWidth: "230px", marginTop: "5px" }}
-          />
+          <img src="pix/hasura.png" alt="Hasura" className="hasura" />
         </a>
       </div>
       <section>
