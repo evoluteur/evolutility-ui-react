@@ -14,19 +14,7 @@ const allStrings = {
     // t_demos: 'Apps',
     // t_designer: 'Designer',
     // t_community: 'Community',
-    /*
-        comics: 'Comics',
-        contact: 'Contacts',
-        todo: 'Tasks',
-        winecellar: 'Wine cellar',
-        winetasting: 'Wine tasting',
 
-        object: 'Objects',
-        field: 'Fields',
-
-        test: 'Test',
-        test_ft: 'Field Types',
-*/
     skip: "Skip navigation",
   },
 

@@ -4,7 +4,7 @@
 
 // (c) 2022 Olivier Giulieri
 
-import moMa from "./moMa";
+import { getModel } from "./moMa";
 import { fieldTypes, isFieldMany, fieldIsText } from "./dico.js";
 
 import config from "../config";
@@ -45,7 +45,7 @@ const cleanLOV = (f, data) => {
 };
 
 const mLOVFields = (entity) =>
-  moMa.getModel(entity).fields.filter((f) => f.type === ft.lov);
+  getModel(entity).fields.filter((f) => f.type === ft.lov);
 
 const daoGraphQL = {
   apiType: "graphql",
@@ -57,7 +57,7 @@ const daoGraphQL = {
         .then(toJSON)
         .then((r) => {
           if (r.data && r.data.one) {
-            const m = moMa.getModel(entity);
+            const m = getModel(entity);
             let data = r.data.one;
             const lovFields = mLOVFields(entity);
             if (lovFields.length) {
@@ -91,7 +91,7 @@ const daoGraphQL = {
     const fields = (m) => m.fields.filter(isFieldMany);
     const gqlFields = (m) => "id " + fields(m).map(qField).join(" ");
     const qMany = (entity) => {
-      const m = moMa.getModel(entity);
+      const m = getModel(entity);
       if (m) {
         const count = fullCount(m);
         const gOpts = ["limit:" + pageSize];
@@ -115,7 +115,7 @@ const daoGraphQL = {
               }
             } else if (opt === "search") {
               const { search } = options;
-              debugger;
+              // debugger;
               const searchFields = m.fields.filter(
                 (f) => f.inSearch || (f.inMany && fieldIsText(f))
               );
@@ -157,7 +157,7 @@ const daoGraphQL = {
       .then((r) => {
         if (r.data && r.data.many) {
           const data = r.data.many;
-          const m = moMa.getModel(entity);
+          const m = getModel(entity);
           const lovFields = m.fields.filter((f) => f.type === ft.lov);
           if (lovFields.length) {
             data.forEach((d) => lovFields.forEach((f) => cleanLOV(f, d)));
@@ -175,7 +175,7 @@ const daoGraphQL = {
 
   // delete an item
   deleteOne: function (entity, id) {
-    const m = moMa.getModel(entity);
+    const m = getModel(entity);
     return fetch(config.apiPathGraphQL, gqlOptions(qDelete(m.qid, id))).then(
       toJSON
     );
@@ -183,7 +183,7 @@ const daoGraphQL = {
 
   // add an item
   addOne: function (entity, data) {
-    const m = moMa.getModel(entity);
+    const m = getModel(entity);
     return fetch(
       config.apiPathGraphQL,
       gqlOptions(qInsertOne(entity, m.qid, data))
@@ -200,7 +200,7 @@ const daoGraphQL = {
 
   // update (replace) an item
   updateOne: function (entity, id, data) {
-    const m = moMa.getModel(entity);
+    const m = getModel(entity);
     return fetch(
       config.apiPathGraphQL,
       gqlOptions(qUpdateOne(m.id, m.qid, id, data))
@@ -227,13 +227,13 @@ const daoGraphQL = {
 
   // get entity statistics
   getStats: (entity) => {
-    const m = moMa.getModel(entity);
+    const m = getModel(entity);
     return fetch(config.apiPathGraphQL, gqlOptions(qStats(m)))
       .then(toJSON)
       .then((r) => {
         if (r.data && r.data.stats) {
           let data = r.data.stats.aggregate;
-          // const m = moMa.getModel(entity)
+          // const m = getModel(entity)
           let d = {};
           for (let pMath in data) {
             for (const pField in data[pMath]) {

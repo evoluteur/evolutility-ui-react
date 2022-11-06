@@ -339,7 +339,7 @@ const Field = ({
           <span>
             <img src={`/pix/${icon}`} className="lov-icon" alt="" />
             {fieldValue(f, d)}
-            {d.name}
+            {d?.name}
           </span>
         );
       } else {

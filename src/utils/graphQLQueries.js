@@ -78,9 +78,9 @@ export const qField = (f) =>
       "} "
     : f.id;
 
-export const qFields = (m) => "id " + m.fields.map(qField).join(" ");
+export const qFields = (m) => "id " + m.fields?.map(qField).join(" ");
 
-const gqlFields = (fields) => fields.map(qField).join(" ");
+const gqlFields = (fields) => fields?.map(qField).join(" ");
 
 export const qCollecs = (m) =>
   m.collections
@@ -239,9 +239,7 @@ export const statsAggregate = (m) => {
     }
   });
   return (
-    "stats: " +
-    m.qid +
-    "_aggregate { aggregate {" +
+    `stats: ${m.qid}_aggregate { aggregate {` +
     props
       .map((p) => (sag[p].length ? p + " {" + sag[p].join(" ") + "}" : ""))
       .join(" ") +

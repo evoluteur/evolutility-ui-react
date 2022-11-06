@@ -58,6 +58,26 @@ export function fieldValue(f, d, abbr) {
   if (f.type === ft.bool) {
     return d ? <i className="glyphicon glyphicon-ok" /> : "";
   }
+  if (f.type === ft.email && d) {
+    return <a href={`mailto:${d}`}>{d}</a>;
+  }
+  if (f.type === ft.json && d) {
+    return jsonString(d);
+  }
+  if (f.type === ft.dec && d) {
+    return decimalString(d);
+  }
+  if (f.type === ft.money && d) {
+    return moneyString(d);
+  }
+  if (f.type === ft.lov) {
+    return (
+      <>
+        {f.lovIcon && <img src={f.lovIcon} alt=""></img>}
+        {d}
+      </>
+    );
+  }
   if (f.type === ft.date) {
     return dateString(d);
   }
@@ -91,40 +111,21 @@ export function fieldValue(f, d, abbr) {
       </a>
     );
   }
-  if (f.type === ft.email && d) {
-    return <a href={`mailto:${d}`}>{d}</a>;
-  }
-  if (f.type === ft.json && d) {
-    return jsonString(d);
-  }
-  if (f.type === ft.dec && d) {
-    return decimalString(d);
-  }
-  if (f.type === ft.money && d) {
-    return moneyString(d);
-  }
-  if (f.type === ft.lov) {
-    return (
-      <>
-        {f.lovIcon && <img src={f.lovIcon} alt=""></img>}
-        {d}
-      </>
-    );
-  }
   return d;
 }
 
 export const dataTitle = (m, data, isNew) => {
   if (m) {
-    let f;
-    let title = "";
+    let f,
+      title = "";
     if (isNew) {
       title = `New ${m.name || "item"}`;
     } else if (m.titleField) {
       if (isFunction(m.titleField)) {
         title = m.titleField(data);
       } else {
-        f = m.fieldsH[m.titleField];
+        const tf = m.titleField + "";
+        f = m.fieldsH[tf];
         if (!f) {
           f = m.fields[0];
         }
