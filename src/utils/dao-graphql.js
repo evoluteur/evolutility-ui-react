@@ -15,6 +15,7 @@ import {
   qOne,
   qField,
   qStats,
+  qChart,
   qDelete,
   qUpdateOne,
   qInsertOne,
@@ -223,7 +224,19 @@ const daoGraphQL = {
   getLov: (entity, field) => notImplementedYet(),
 
   // get list of chartable values for field
-  getChart: (entity, field) => notImplementedYet(),
+  getChart: (entity, field) => {
+    const m = getModel(entity);
+    return fetch(config.apiPathGraphQL, gqlOptions(qChart(m, field)))
+      .then((r) => {
+        if (r.data) {
+          let data = r.data[m.qid + "_" + field];
+          return data;
+        } else {
+          return r;
+        }
+      })
+      .then(toJSON);
+  },
 
   // get entity statistics
   getStats: (entity) => {

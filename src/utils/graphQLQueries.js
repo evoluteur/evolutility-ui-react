@@ -82,15 +82,20 @@ export const qFields = (m) => "id " + m.fields?.map(qField).join(" ");
 
 const gqlFields = (fields) => fields?.map(qField).join(" ");
 
-export const qCollecs = (m) =>
-  m.collections
-    .map(
-      (c) =>
-        ` ${c.id}(order_by:{${c.order || "id"}: asc}) { id ${gqlFields(
-          c.fields
-        )}}`
-    )
-    .join(" ");
+export const qCollecs = (m) => {
+  const collecs = m?.collections;
+  if (collecs) {
+    return collecs
+      .map(
+        (c) =>
+          ` ${c.id}(order_by:{${c.order || "id"}: asc}) { id ${gqlFields(
+            c.fields
+          )}}`
+      )
+      .join(" ");
+  }
+  return "";
+};
 
 export const qMenus = `{
   menus: evol_evol_world(where:{ active: { _eq: true}}, order_by:{position:asc}) {
@@ -214,6 +219,38 @@ export const qOrderBy = (m, sortField, sortDirection = "asc") => {
     orderBy += sortDirection + "}";
   }
   return orderBy;
+};
+
+
+export const qChart = (m, field) => {
+  const f = m.fieldsH[field];
+  if (f.type === "lov") {
+    return `query {${m.qid}_${field}(limit: 20) {
+    id
+    name
+    ${m.qid}_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+}`;
+  }
+  if (f.type === "boolean") {
+    return `query {
+    true: ${m.qid}_aggregate(where: {${field}: {_eq: true}}) {
+        aggregate {
+        count
+      }
+    }
+    total: ${m.qid}_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }`;
+  }
+  return null;
 };
 
 // stats: evol_wine_aggregate{ }
