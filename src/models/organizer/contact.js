@@ -16,7 +16,7 @@ module.exports = {
   position: 10,
   defaultViewMany: "list",
   defaultViewOne: "browse",
-  titleField: "fistname",
+  titleField: "firstname",
   fields: [
     {
       id: "lastname",

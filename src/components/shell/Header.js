@@ -13,7 +13,7 @@ const iconH = {
   n: {
     list: { id: "list", icon: "list", label: "List" },
     cards: { id: "cards", icon: "cards", label: "Cards" },
-    // charts: { id: "charts", icon: "dashboard", label: "Dashboard" },
+    charts: { id: "charts", icon: "dashboard", label: "Dashboard" },
     stats: { id: "stats", icon: "stats", label: "Stats" },
   },
   1: {

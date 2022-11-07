@@ -231,10 +231,9 @@ Chart.propTypes = {
   field: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
   size: PropTypes.oneOf(chartProps.sizes),
-  type: PropTypes.oneOf(chartProps.chartTypes),
+  chartType: PropTypes.oneOf(chartProps.chartTypes),
   sort: PropTypes.string,
   canExpend: PropTypes.bool,
-  chartType: PropTypes.oneOf(["Pie", "Bars", "Table"]),
 };
 
 Chart.defaultProps = {
