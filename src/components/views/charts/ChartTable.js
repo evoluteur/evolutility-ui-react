@@ -19,8 +19,6 @@ const ChartTable = ({ entity, field, sortTable, data }) => {
     param = param === "null" ? "null" : "eq." + param;
     return sLink + param;
   };
-  // const data = data;
-
   let totalCount = 0;
   data.forEach((d) => (totalCount += d.value));
 
