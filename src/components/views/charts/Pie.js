@@ -92,4 +92,6 @@ const Pie = ({ data }) => {
   );
 };
 
+export default Pie;
+
 Pie.propTypes = ChartProps.chartProps;
