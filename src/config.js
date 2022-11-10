@@ -31,6 +31,10 @@ module.exports = {
   wTimestamp: false,
   // - "WhoIs" columns u_uid and c_uid w/ userid of creator and last modifier
   wWhoIs: false,
+  // - Track last viewed record names in localstorage
+  wActivity: true,
+  // max number of activity records tracked
+  activityListSize: 50,
 
   // - Comments & Ratings (community feature)
   wComments: false, // not implemented yet

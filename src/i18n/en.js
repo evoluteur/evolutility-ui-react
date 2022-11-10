@@ -136,8 +136,13 @@ export const i18n_stats = {
 };
 
 export const i18n_activity = {
+  activitySince: "My {0} activity since {1}.", // {0} = model.namePlural, {1} = startDate
   lastViewed: "Last viewed {0}",
+  mostViewed: "Most viewed {0}",
   noActivity: "No activity recorded yet.",
+  views0: "never viewed",
+  views1: "1 view",
+  viewsN: `{0} views`,
 };
 
 export const i18n_errors = {

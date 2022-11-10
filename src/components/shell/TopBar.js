@@ -3,8 +3,8 @@ import { Link, useParams } from "react-router-dom";
 
 import Icon from "react-crud-icons";
 import logoEvol from "./evologo.gif";
-import { i18n_actions } from "../../i18n/i18n";
-
+import { i18n_actions, i18n_activity } from "../../i18n/i18n";
+import { wActivity } from "../../config";
 import { getModel } from "../../utils/moMa";
 import Toolbar from "../widgets/Toolbar";
 
@@ -21,15 +21,24 @@ const views = {
   //   n: "n",
   // },
   // stats: {id:'stats', label: i18n_actions.stats, icon:'equalizer', n:'n'},
+  activity: {
+    id: "activity",
+    label: i18n_activity.activity,
+    icon: "history",
+    n: "n",
+  },
 };
 
-const getViewsList = (model) =>
-  model.noCharts
-    ? {
-        list: views.list,
-        cards: views.cards,
-      }
-    : views;
+const getViewsList = (model) => {
+  const vs = {
+    list: views.list,
+    cards: views.cards,
+  };
+  if (wActivity && !model.noActivity) {
+    vs.activity = views.activity;
+  }
+  return vs;
+};
 
 const newEntity = (m) => i18n_actions.newEntity.replace("{0}", m.name);
 

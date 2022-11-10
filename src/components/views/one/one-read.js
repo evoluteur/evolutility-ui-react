@@ -8,6 +8,8 @@
 import React from "react";
 import dao, { isGraphQL } from "../../../utils/dao";
 // import { withRouter, browserHistory } from 'react-router'
+import { wActivity } from "../../../config";
+import { logActivity } from "../../../utils/localStorage";
 
 import { i18n_errors } from "../../../i18n/i18n";
 import { apiPath } from "../../../config";
@@ -48,7 +50,7 @@ export default class OneRead extends React.Component {
       });
       const qUrl = apiPath + e + "/" + id;
       this.lastQuery = qUrl;
-
+      const m = getModel(e);
       dao
         .getOne(e, id)
         .then((data) => {
@@ -65,6 +67,9 @@ export default class OneRead extends React.Component {
               newState.data = data;
             } else {
               newState.info = i18n_errors.badId.replace("{0}", id);
+            }
+            if (wActivity) {
+              logActivity(e, id, data ? data[m.titleField] : id, "read");
             }
             this.lastQuery = null;
             this.setState(newState);
@@ -93,7 +98,9 @@ export default class OneRead extends React.Component {
     }
     window.scrollTo(0, 0);
     // - get data or if new then clear data
-    if (this.props.match.params.id && this.props.match.params.id !== "0") {
+    const id = this.props.match.params.id;
+
+    if (id !== "0") {
       this.getData();
     } else {
       this.emptyDelta(true);
