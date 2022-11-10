@@ -324,7 +324,10 @@ export default class Stats extends React.Component {
       <div className="">
         <Header
           entity={e}
-          title={(model.label || model.title) + " Stats"}
+          title={i18n_stats.statsTitle.replace(
+            "{0}",
+            model.label || model.title
+          )}
           model={model}
           cardinality="n"
           view={this.viewId}

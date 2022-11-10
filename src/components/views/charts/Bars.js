@@ -6,7 +6,7 @@ import ChartProps from "./ChartProps";
 
 const Bars = ({ data }) => {
   const d2 = {
-    _name: "",
+    // _name: "",
   };
   data.forEach((row) => {
     d2[row.label] = row.value;
@@ -18,7 +18,7 @@ const Bars = ({ data }) => {
       <ResponsiveBar
         data={[d2]}
         keys={keys}
-        indexBy="_name"
+        indexBy="label"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
         colors={{ scheme: "category10" }}

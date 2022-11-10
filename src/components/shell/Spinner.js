@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { i18n_msg } from "../../i18n/i18n";
+import { i18n_nav } from "../../i18n/i18n";
 
 import "./Spinner.scss";
 
@@ -8,7 +8,7 @@ import "./Spinner.scss";
 
 const Spinner = ({ message }) => (
   <div className="evol-loading">
-    <div className="loading_txt">{message || i18n_msg.loading}</div>
+    <div className="loading_txt">{message || i18n_nav.loading}</div>
     <div className="spinner">
       <div className="bounce1" />
       <div className="bounce2" />
