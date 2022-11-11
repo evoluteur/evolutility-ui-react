@@ -54,10 +54,26 @@ const Home = () => {
       </section>
       <section>
         <div>
-          Evolutility provides an integrated set of model-driven React
-          components for CRUD UIs using GraphQL.
+          Evolutility provides an meta-model to define your models and a set of
+          model-driven Views (Browse, Edit, List, Cards, Dashboards...) to give
+          them life without writing code.
         </div>
-        <div>With it, you can build UIs like these:</div>
+        <div>
+          It's a React SPA using GraphQL on{" "}
+          <a
+            href="https://hasura.io"
+            target="h"
+            rel="noopener noreferrer"
+            className="extlink"
+          >
+            Hasura
+          </a>
+          .
+        </div>
+        <div>
+          <br />
+          With it, you can build UIs like these:
+        </div>
         <DemosList />
         <div>
           ... simply by making models like{" "}
@@ -94,7 +110,7 @@ const Home = () => {
         </a>
       </div>
       <section>
-        <p>
+        <div>
           The demos on this site are using{" "}
           <a
             href="https://hasura.io"
@@ -105,8 +121,8 @@ const Home = () => {
             Hasura
           </a>{" "}
           GraphQL API.
-        </p>
-        <p>
+        </div>
+        <div>
           Evolutility-UI-React is Open source. The code and documentation are
           available at{" "}
           <a
@@ -127,7 +143,7 @@ const Home = () => {
             MIT license
           </a>
           .
-        </p>
+        </div>
       </section>
     </div>
   );

@@ -122,6 +122,7 @@ export const i18n_comments = {
 };
 
 export const i18n_stats = {
+  statsTitle: "{0} Stats",
   weekUpdates: " records added or updated this week",
   lastUpdate: "Last update",
   firstInsert: "First insert",

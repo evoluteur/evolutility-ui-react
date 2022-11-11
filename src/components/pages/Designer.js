@@ -14,14 +14,13 @@ const Designer = () => (
     <p>Models can be stored in JSON, or in the database.</p>
 
     <div className="row-2-cols">
-      {" "}
       <div>
-        <h3>Models in JSON files</h3>
+        <h3>
+          <img src="/svg/json.svg" className="svg-meta" alt="" /> Models in JSON
+          files
+        </h3>
 
-        <p>
-          Models are stored with the code. The demos get their models from JSON
-          files.
-        </p>
+        <p>Models can be stored with the UI code as JSON files.</p>
         <ul className="evo-links">
           <li>
             <a
@@ -81,17 +80,20 @@ const Designer = () => (
 
         <p>
           <br />
-          The <Link to="./demo">demos</Link> on this site are models in JSON
-          files.
+          The <Link to="./demo">demos</Link> use models in JSON files.
         </p>
       </div>
       <div>
-        <h3>Models in the DB</h3>
+        <h3>
+          <img src="/svg/db.svg" className="svg-meta" alt="" />
+          Models in the DB
+        </h3>
 
         <p>Work in progress.</p>
         <p>
-          If we store the models in the DB, we can create apps to manage models
-          (treating metadata like data).
+          Models can be stored in the database. That way we create and modify
+          apps by manage models like any other objects (treating metadata like
+          data).
         </p>
         <div className="row-2-cols">
           <ul className="evo-links">

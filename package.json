@@ -10,8 +10,8 @@
   "author": "Olivier Giulieri (https://evoluteur.github.io/)",
   "license": "MIT",
   "engines": {
-    "node": "12.12.0",
-    "npm": "6.11.3"
+    "node": "14.17.0",
+    "npm": "8.11.0"
   },
   "dependencies": {
     "@nivo/bar": "^0.80.0",
@@ -71,20 +71,18 @@
   ],
   "keywords": [
     "low-code",
+    "no-code",
     "model-driven",
     "metadata-driven",
     "metadata",
-    "no-code",
+    "graphql",
     "UI",
     "forms",
-    "CRUD",
     "MDA",
-    "graphql",
-    "REST",
+    "CRUD",
     "hasura",
     "javascript",
     "generic-forms",
-    "MVC",
     "platform",
     "framework",
     "evolutility",
