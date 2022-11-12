@@ -1,20 +1,14 @@
-.row-2-cols {
-  display:flex;
-  gap: 20px;
-  > div {
-    flex-basis: 50%;
+.evo-designer {
+  .row-2-cols {
+    display:flex;
+    gap: 20px;
+    > div {
+      flex-basis: 50%;
+    }
   }
-}
-.pros-cons {
-  margin-top: 20px;
-  display:flex;
-  gap: 10px;
-  > div {
-    flex-grow: 0;
-    width: 50px;
+  .svg-meta {
+    position:relative;
+    top: -2px;
+    margin-right: 6px;
   }
-  > ul {
-    flex-grow: 1;
-  }
-
 }
