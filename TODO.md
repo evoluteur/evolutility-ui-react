@@ -24,6 +24,8 @@
 - Add checkboxes for selection to the List and Cards views
 - Add "Compare" view for side-by-side comparaison and averages
 - Add "Kanban" view w/ drag & drop
+- Add Kaggle style table view
+- Dependent fields
 - Integrate Designer inside each views
 - plug RTKQuery or TanStack Query (=> caching)
 - Add checkboxes for selection to the List and Cards views

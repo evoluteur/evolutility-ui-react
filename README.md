@@ -162,7 +162,7 @@ View: [http://localhost:3000/comics/stats](http://localhost:3000/comics/stats)
 
 Each model describe an object and its list of fields. A single model is used for all views (Browse, Edit, List, Cards...).
 
-For any object, all UI views (List, Cards, Edit, Charts...) share the same model. 
+For any object, all UI views (List, Cards, Edit, Charts...) share the same model.
 All Fields are present in the Edit and Browse views. Fields can be flagged with "inMany" to be included in the List and Cards views, or "noCharts" and "noStats" to be excluded from the Charts or Stats views.
 
 
@@ -197,14 +197,14 @@ Objects have fields.
 | required     | Determines if the field is required for saving.      |
 | readOnly     | If set to true, the field value cannot be changed.   |
 | defaultValue | Default field value for new records.                 |
-| hideIfEmpty  | Hide field when empty in Browse view.                                                                                                                                                                                                                                                                                                             |
-| dependantField		| ID of an optional dependant field. Used when selecting in one list changes the content of dependant list (among 2 fields of type "lov").records.                                                                                                                                                                                                                                                                                                             |
+| hideIfEmpty  | Hide field when empty in Browse view.                |
+| dependantField | ID of an optional dependant field. Used when selecting in one list changes the content of dependant list (among 2 fields of type "lov").records. |
 | max, min     | Maximum/Minimum value allowed (only applies to numeric fields).      |
 | maxLength, minLength | Maximum/Minimum length allowed (only applies to text fields).      |
 | lovIcon      | Set to True to include icon with LOV items.    |
 | object       | Model id for the object to link to (only for fields of "lov" type).     |
 | inMany       | Determines if the field is present (by default) in lists of records. |
-| inSearch     | Determine if the field is used in text searches.                                                                                                                                                                                                                                                                                     |
+| inSearch     | Determine if the field is used in text searches.  |
 | height       | For fields of type "textmultiline", number of lines used in the field (in Browse and Edit views). |
 | width        | Field width in Browse and Edit views (in percent of parent width). |
 | help         | Optional help on the field. |
@@ -225,17 +225,18 @@ Groups are used to separate Fields into panels in the Edit and Browse views.
 | label        | Group title displayed in the group header.      |
 | fields       | Array of field ids.       |
 | width        | Width (in % of the container total width).        |
-| header       | Text to be displayed at the top of the group (just below the group title).|
-| footer       | Text to be displayed at the bottom of the group.    |
+| help         | Optional help tooltip text.|
+| header       | Optional text displayed at the top of the group (just below the group title).|
+| footer       | Optional text displayed at the bottom of the group.    |
 
-Notes: 
+Notes:
 - Groups are optional. By default a single group holds all fields.
 - Groups are positioned based on their "width" property the same way than fields are positioned inside groups.
 
 <a name="Collection"></a>
 ### Collection
 
-Multiple details tables can be specified with "collections". 
+Multiple details tables can be specified with "collections".
 
 | Property     | Meaning                               |
 |--------------|---------------------------------------|
@@ -243,6 +244,8 @@ Multiple details tables can be specified with "collections".
 | title        | Collection title.                     |
 | object       | Model.id for the Object to link to.   |
 | fields       | Array of fields (objects or ids). Fields in collections can be field objects or just ids of fields in the collection's object.    |
+| readOnly     | Specify if the collection is readOnly.   |
+| help         | Optional help tooltip text.|
 | header       | Text to be displayed before the collection.   |
 | footer       | Text to be displayed after the collection.    |
 
