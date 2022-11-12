@@ -197,11 +197,14 @@ Objects have fields.
 | required     | Determines if the field is required for saving.      |
 | readOnly     | If set to true, the field value cannot be changed.   |
 | defaultValue | Default field value for new records.                 |
+| hideIfEmpty  | Hide field when empty in Browse view.                                                                                                                                                                                                                                                                                                             |
+| dependantField		| ID of an optional dependant field. Used when selecting in one list changes the content of dependant list (among 2 fields of type "lov").records.                                                                                                                                                                                                                                                                                                             |
 | max, min     | Maximum/Minimum value allowed (only applies to numeric fields).      |
 | maxLength, minLength | Maximum/Minimum length allowed (only applies to text fields).      |
 | lovIcon      | Set to True to include icon with LOV items.    |
 | object       | Model id for the object to link to (only for fields of "lov" type).     |
 | inMany       | Determines if the field is present (by default) in lists of records. |
+| inSearch     | Determine if the field is used in text searches.                                                                                                                                                                                                                                                                                     |
 | height       | For fields of type "textmultiline", number of lines used in the field (in Browse and Edit views). |
 | width        | Field width in Browse and Edit views (in percent of parent width). |
 | help         | Optional help on the field. |
