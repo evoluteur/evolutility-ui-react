@@ -1,10 +1,17 @@
 .evol-activity {
-  > div > div {
-    display: inline-block;
-    margin-left: 10px;
-    color: silver;
-  }
-  .visits{
-    color: grey;
+  > div {
+    display: flex;
+    > a {
+      min-width: 220px;
+    }
+    > div {
+      display: inline-block;
+      margin-left: 20px;
+      color: silver;
+      &.visits{
+        color: grey;
+        min-width: 70px;
+      }
+    }
   }
 }
