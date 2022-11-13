@@ -4,8 +4,8 @@
 */
 
 module.exports = {
-  id: "winetasting",
   qid: "evol_wine_tasting",
+  id: "wine_tasting",
   oid: 6,
   title: "Wine tastings",
   world: "organizer",
@@ -17,6 +17,9 @@ module.exports = {
   defaultViewMany: "list",
   defaultViewOne: "browse",
   titleField: "drink_date",
+  titleFunction: (d) => {
+    return d ? d.wine_txt + " " + d.drink_date : "";
+  },
   fields: [
     {
       id: "drink_date",

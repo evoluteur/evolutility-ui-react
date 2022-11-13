@@ -17,6 +17,7 @@ module.exports = {
   defaultViewMany: "list",
   defaultViewOne: "browse",
   titleField: "firstname",
+  titleFunction: (d) => (d.firstname ? d.firstname + " " : "") + d?.lastname,
   fields: [
     {
       id: "lastname",

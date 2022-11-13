@@ -120,18 +120,20 @@ export const dataTitle = (m, data, isNew) => {
       title = "";
     if (isNew) {
       title = `New ${m.name || "item"}`;
+    } else if (m.titleFunction) {
+      // Note: would this be unsecure?
+      // title = m.titleFunction(data, m);
+      title = m.titleFunction(Object.assign({}, data));
     } else if (m.titleField) {
-      if (isFunction(m.titleField)) {
-        title = m.titleField(data);
-      } else {
-        const tf = m.titleField + "";
-        f = m.fieldsH[tf];
-        if (!f) {
-          f = m.fields[0];
-        }
-        if (f && data) {
-          title = fieldValue(f, data[f.id]);
-        }
+      title = data[m.titleField];
+    } else {
+      const tf = m.titleField + "";
+      f = m.fieldsH[tf];
+      if (!f) {
+        f = m.fields[0];
+      }
+      if (f && data) {
+        title = fieldValue(f, data[f.id]);
       }
     }
     return title;
