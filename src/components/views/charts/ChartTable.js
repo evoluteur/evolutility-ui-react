@@ -12,15 +12,17 @@ import "./ChartTable.scss";
 const percent = (value, total) =>
   `${parseInt((10000 * value) / total, 10) / 100}%`;
 
-const ChartTable = ({ entity, field, sortTable, data }) => {
-  const sLink = "../../" + entity + "?" + field.id + "=";
+const ChartTable = ({ entity, field, sortTable, data, showTotal = true }) => {
+  const sLink = "../../" + entity + "?" + field.id + "_id=";
   const makeLink = (d) => {
     let param = "" + (d.id || d.label);
     param = param === "null" ? "null" : "eq." + param;
     return sLink + param;
   };
   let totalCount = 0;
-  data.forEach((d) => (totalCount += d.value));
+  if (showTotal) {
+    data?.forEach((d) => (totalCount += d.value));
+  }
 
   return (
     <div className="chartTable">
@@ -50,7 +52,7 @@ const ChartTable = ({ entity, field, sortTable, data }) => {
                 </tr>
               ))
             : null}
-          {totalCount ? (
+          {showTotal && totalCount ? (
             <tr className="footer">
               <td>{i18n_charts.total}</td>
               <td className="alignR">{totalCount}</td>
