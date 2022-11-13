@@ -19,7 +19,7 @@ import moment from "moment";
 import { filesUrl, locale } from "../config";
 import { fieldTypes as ft } from "./dico";
 
-const isFunction = (x) => typeof x === "function";
+// const isFunction = (x) => typeof x === "function";
 
 const nullOrUndefined = (v) => v === null || v === undefined;
 const mFormat = (d, format) =>
