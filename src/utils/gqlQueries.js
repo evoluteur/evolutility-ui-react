@@ -5,7 +5,7 @@
     (c) 2022 Olivier Giulieri
 */
 
-// Helpers functions for GraphQL
+//#region Helpers functions for GraphQL
 
 import {
   fieldTypes,
@@ -13,6 +13,7 @@ import {
   fieldIsNumeric,
   fieldIsDateOrTime,
 } from "./dico";
+
 import config from "../config";
 import { getModel } from "./moMa";
 import { dateTZ } from "./format";
@@ -82,133 +83,9 @@ export const qFields = (m) => "id " + m.fields?.map(qField).join(" ");
 
 const gqlFields = (fields) => fields?.map(qField).join(" ");
 
-export const qCollecs = (m) => {
-  const collecs = m?.collections;
-  if (collecs) {
-    return collecs
-      .map(
-        (c) =>
-          ` ${c.id}(order_by:{${c.order || "id"}: asc}) { id ${gqlFields(
-            c.fields
-          )}}`
-      )
-      .join(" ");
-  }
-  return "";
-};
+//#endregion
 
-export const qMenus = `{
-  menus: evol_evol_world(where:{ active: { _eq: true}}, order_by:{position:asc}) {
-    id
-    name
-    menus: objects(where:{ active: { _eq: true}}, order_by:{title:asc}) {
-      qid: id
-      id: entity
-      text: title
-      icon
-    }
-  }
-}`;
-
-export const qModels = `{ objects: evol_evol_object {
-    id
-    entity
-    title
-    fields {
-      id
-      label
-      labelshort
-      css
-      defaultvalue
-      height
-      help
-      inmany
-      format
-      fieldType {
-        id
-        name
-        icon
-      }
-      insearch
-      lovcolumn
-      lovicon
-      lovtable
-      maxlength
-      maxvalue
-      minlength
-      minvalue
-      nocharts
-      nofilter
-      nostats
-      position
-      readonly
-      regexp
-      required
-      type_id
-      u_date
-      width
-      description
-      fid
-      object_id
-    }
-    groups {
-      id
-      gid
-      header
-      footer
-      fields
-      label
-      object_id
-      position
-      type_id
-      width
-      css
-      description
-    }
-    active
-    icon
-    name
-    nameplural
-    nostats
-    pkey
-    titlefield
-    world_id
-    nocharts
-    table
-    collecs {
-      c_date
-      cid
-      dbcolumn
-      description
-      id
-      label
-      object_id
-      position
-      table
-      fields
-    }
-    description
-  }
-} `;
-
-export const qSchema = `{
-  __schema {
-    queryType{
-      name
-      fields{
-        name
-        description
-        type{
-          name
-          fields{
-            name
-            description
-          }
-        }
-      }
-    }
-  }
-}`;
+//#region Many ----------------------------
 
 export const qOrderBy = (m, sortField, sortDirection = "asc") => {
   const mft = m.fieldsH[sortField];
@@ -221,7 +98,6 @@ export const qOrderBy = (m, sortField, sortDirection = "asc") => {
   return orderBy;
 };
 
-
 export const qChart = (m, field) => {
   const f = m.fieldsH[field];
   if (f.type === "lov") {
@@ -229,9 +105,7 @@ export const qChart = (m, field) => {
     id
     name
     ${m.qid}_aggregate {
-      aggregate {
-        count
-      }
+      aggregate {count}
     }
   }
 }`;
@@ -239,14 +113,10 @@ export const qChart = (m, field) => {
   if (f.type === "boolean") {
     return `query {
     true: ${m.qid}_aggregate(where: {${field}: {_eq: true}}) {
-        aggregate {
-        count
-      }
+      aggregate {count}
     }
     total: ${m.qid}_aggregate {
-      aggregate {
-        count
-      }
+      aggregate {count}
     }
   }`;
   }
@@ -286,6 +156,25 @@ export const statsAggregate = (m) => {
 };
 
 export const qStats = (m) => "query {" + statsAggregate(m) + "}";
+
+//#endregion
+
+//#region One ----------------------------
+
+export const qCollecs = (m) => {
+  const collecs = m?.collections;
+  if (collecs) {
+    return collecs
+      .map(
+        (c) =>
+          ` ${c.id}(order_by:{${c.order || "id"}: asc}) { id ${gqlFields(
+            c.fields
+          )}}`
+      )
+      .join(" ");
+  }
+  return "";
+};
 
 export const qOne = (entity, id) => {
   const m = getModel(entity);
@@ -329,3 +218,5 @@ export const qInsertOne = (entity, mqid, data) => {
     ) {returning {id ${qFields(m)}}}
   }`;
 };
+
+//#endregion
