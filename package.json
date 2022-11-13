@@ -1,7 +1,7 @@
 {
   "name": "evolutility-ui-react",
-  "version": "0.5.2",
-  "description": "Low-code UI for GraphQL",
+  "version": "0.6.0",
+  "description": "No-Code UI for Hasura GraphQL",
   "repository": {
     "type": "git",
     "url": "git://github.com/evoluteur/evolutility-ui-react.git"
@@ -77,6 +77,7 @@
     "metadata",
     "graphql",
     "UI",
+    "frontend",
     "forms",
     "MDA",
     "CRUD",
