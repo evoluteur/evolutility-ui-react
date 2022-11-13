@@ -1,7 +1,7 @@
-# Evolutility-UI-React &middot; [![GitHub license](https://img.shields.io/github/license/evoluteur/evolutility-ui-react)](https://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/evolutility-ui-react)](https://www.npmjs.com/package/evolutility-ui-react) 
+# Evolutility-UI-React &middot; [![GitHub license](https://img.shields.io/github/license/evoluteur/evolutility-ui-react)](https://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/evolutility-ui-react)](https://www.npmjs.com/package/evolutility-ui-react)
 
 
-Evolutility-UI-React is a set of **model-driven views** to [Browse](#Browse), [Edit](#Edit), [List](#List), [Cards](#Cards), [Charts](#Charts), and [Stats](#Stats). 
+Evolutility-UI-React is a set of **model-driven views** to [Browse](#Browse), [Edit](#Edit), [List](#List), [Cards](#Cards), [Charts](#Charts), and [Stats](#Stats).
 
 With it you can easily build CRUD applications by writing models rather than code. It use GraphQL with [Hasura](https://hasura.io). No hand-coding is necessary.
 
@@ -202,7 +202,7 @@ Objects have fields.
 | dependantField | ID of an optional dependant field. Used when selecting in one list changes the content of dependant list (among 2 fields of type "lov").records. |
 | max, min     | Maximum/Minimum value allowed (only applies to numeric fields).      |
 | maxLength, minLength | Maximum/Minimum length allowed (only applies to text fields).      |
-| regExp               | Regular expression used to validate the field value.                                                                                                                                                                                                                                                                                             |
+| regExp       | Regular expression used to validate the field value.     |
 | lovIcon      | Set to True to include icon with LOV items.    |
 | object       | Model id for the object to link to (only for fields of "lov" type).     |
 | inMany       | Determines if the field is present (by default) in lists of records. |
@@ -245,8 +245,9 @@ Multiple details tables can be specified with "collections".
 | id           | Unique key for the collection.        |
 | title        | Collection title.                     |
 | object       | Model.id for the Object to link to.   |
-| fields       | Array of fields (objects or ids). Fields in collections can be field objects or just ids of fields in the collection's object.    |
+| fields       | Array of fields (objects or ids). Fields in collections can be field objects or just ids of fields in the collection's object.   |
 | readOnly     | Specify if the collection is readOnly.   |
+| hideIfEmpty  | Hide Collection when it is empty in Edit view (always hidden when empty in Browse view).  |
 | help         | Optional help tooltip text.|
 | header       | Text to be displayed before the collection.   |
 | footer       | Text to be displayed below the collection.    |
@@ -366,7 +367,7 @@ module.exports = {
 More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/todo.js),
 [Address book](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/contact.js),
 [Restaurants list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/restaurant.js),
-[Wine cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/winecellar.js). 
+[Wine cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/winecellar.js).
 
 
 <a name="Backend"></a>

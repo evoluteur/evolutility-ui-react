@@ -77,7 +77,8 @@
       margin: 0 5px;
       height: 14px;
       width: 14px;
-      fill: $color-icon;
+      fill: $color-help-icon;
+      transition: fill .2s ease .2s;
     }
     &:hover {
       svg {

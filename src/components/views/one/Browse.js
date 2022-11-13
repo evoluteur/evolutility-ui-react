@@ -109,7 +109,8 @@ export default class Browse extends OneRead {
 
               {m.collections
                 ? m.collections.map((c, idx) =>
-                    !collecData(c.id) ? null : (
+                    !collecData(c.id) ||
+                    collecData(c.id).length === 0 ? null : (
                       <Panel
                         title={c.title}
                         key={"collec-b_" + c.id + "-" + idx}

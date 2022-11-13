@@ -103,7 +103,7 @@ const modelObject = {
       maxLength: 50,
       inMany: true,
       inSearch: true,
-      width: 62,
+      width: 50,
       help: "example: 'contact'",
     },
     {
@@ -112,7 +112,7 @@ const modelObject = {
       label: "name (plural)",
       required: true,
       maxLength: 50,
-      width: 38,
+      width: 50,
       help: "example: 'contacts'",
     },
     {
@@ -182,6 +182,7 @@ const modelObject = {
       id: "collecs",
       title: "Collections",
       object: "collection",
+      hideIfEmpty: true,
       fields: ["cid", "label", "object", "fields"],
     },
   ],

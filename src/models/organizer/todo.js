@@ -109,7 +109,7 @@ module.exports = {
       maxLength: 1000,
       inMany: false,
       inSearch: true,
-      height: 5,
+      height: 3,
     },
   ],
   groups: [

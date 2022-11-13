@@ -154,7 +154,7 @@ export default class Edit extends OneReadWrite {
           ) : (
             <div className="evol-pnls">
               {m && m.groups ? (
-                m.groups.map(function (g, idx) {
+                m.groups?.map(function (g, idx) {
                   const groupFields = fieldId2Field(g.fields, m.fieldsH);
                   return (
                     <Panel
@@ -165,7 +165,7 @@ export default class Edit extends OneReadWrite {
                       width={g.width}
                     >
                       <div className="evol-fset">
-                        {groupFields.map(fnField)}
+                        {groupFields?.map(fnField)}
                       </div>
                     </Panel>
                   );
@@ -177,24 +177,28 @@ export default class Edit extends OneReadWrite {
               )}
 
               {m.collections && !isNew
-                ? m.collections.map((c) => (
-                    <Panel
-                      key={"collec-e_" + c.id}
-                      title={c.title}
-                      collapsible
-                      header={c.header}
-                      footer={c.footer}
-                    >
-                      <List
-                        isNested
-                        match={this.props.match}
-                        paramsCollec={c}
-                        style={{ width: "100%" }}
-                        data={listData(c.id)}
-                        location={this.props.location}
-                      />
-                    </Panel>
-                  ))
+                ? m.collections.map((c, idx) => {
+                    const lData = listData(c.id);
+                    return c.hideIfEmpty &&
+                      (!lData || lData.length === 0) ? null : (
+                      <Panel
+                        key={"collec-e_" + c.id + idx}
+                        title={c.title}
+                        collapsible
+                        header={c.header}
+                        footer={c.footer}
+                      >
+                        <List
+                          isNested
+                          match={this.props.match}
+                          paramsCollec={c}
+                          style={{ width: "100%" }}
+                          data={lData}
+                          location={this.props.location}
+                        />
+                      </Panel>
+                    );
+                  })
                 : null}
 
               <Panel key="formButtons">
@@ -223,6 +227,7 @@ export default class Edit extends OneReadWrite {
   }
 
   validate = (fields, data) => {
+    // TODO: use yup instead of hand-coding it
     const messages = [];
     const invalids = {};
     let cMsg;

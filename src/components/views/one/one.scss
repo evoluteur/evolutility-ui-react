@@ -149,8 +149,10 @@ label {
   margin: 0 0 5px 0;
 }
 .evo-fld-invalid {
+  position: relative;
+  top: -5px;
   background: #fbe9e7; //Deep Orange 50
-  border: solid 1px #ff8a65; //Deep Orange 300
+  // border: solid 1px #ff8a65; //Deep Orange 300
   padding: 4px 5px 4px 10px;
   margin: 5px 5px 5px 0;
 }
