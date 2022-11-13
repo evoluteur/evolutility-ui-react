@@ -108,7 +108,6 @@ export default class Edit extends OneReadWrite {
         return (
           <Field
             key={f.id}
-            ref={f.id}
             model={f}
             value={data[f.id]}
             data={data}
