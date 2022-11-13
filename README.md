@@ -75,7 +75,7 @@ For any object, a single model defines UI elements across views in a simple decl
 Evolutility-UI-React provides different types of view:
 
 * Views for One - a single record: [Browse](#Browse), [Edit](#Edit).
-* Views for Many - a collection of records: [List](#List), [Cards](#Cards), [Charts](#Charts), [Stats](#Stats). 
+* Views for Many - a collection of records: [List](#List), [Cards](#Cards), [Charts](#Charts), [Stats](#Stats).
 
 Evolutility uses GraphQL with [Hasura](https://hasura.io).
 
@@ -114,7 +114,7 @@ View: [http://localhost:3000/comics/edit/{id}](http://localhost:3000/comics/edit
 ## Views for Many objects
 
 [List](#List) - [Cards](#Cards) - [Charts](#Charts) - [Stats](#Stats)
- 
+
 <a name="List"></a>
 ### List
 Gives a tabular view of a collection.
@@ -179,7 +179,8 @@ All Fields are present in the Edit and Browse views. Fields can be flagged with 
 | fields       | Array of [Fields](#Field). |
 | groups       | Array of [Groups](#Group). If not provided a single group will be used.   |
 | collections  | Array of [Collections](#Collection).      |
-| titleField   | Field id for the column value used as record title. titleField can also be a function. |
+| titleField      | Id of the field which value is used as record title. titleField can also be a function.                       |
+| titleFunction  | Function to calculate the record title based it's data. Example: titleFunction = (data, model) => data.firstname + " " + data.lastname;       | X   | X   |
 | defaultViewOne | To have List and Cards link to Edit instead of Browse, set defaultViewOne="edit". |
 
 
@@ -201,6 +202,7 @@ Objects have fields.
 | dependantField | ID of an optional dependant field. Used when selecting in one list changes the content of dependant list (among 2 fields of type "lov").records. |
 | max, min     | Maximum/Minimum value allowed (only applies to numeric fields).      |
 | maxLength, minLength | Maximum/Minimum length allowed (only applies to text fields).      |
+| regExp               | Regular expression used to validate the field value.                                                                                                                                                                                                                                                                                             |
 | lovIcon      | Set to True to include icon with LOV items.    |
 | object       | Model id for the object to link to (only for fields of "lov" type).     |
 | inMany       | Determines if the field is present (by default) in lists of records. |
@@ -214,9 +216,9 @@ Objects have fields.
 | unique       | Requires value to be unique (not implemented yet).   |
 
 <a name="Group"></a>
-### Group
+### Field Group
 
-Groups are used to separate Fields into panels in the Edit and Browse views.
+Field Groups are used to separate Fields into panels in the Edit and Browse views.
 
 | Property     | Meaning                               |
 |--------------|---------------------------------------|
@@ -227,11 +229,11 @@ Groups are used to separate Fields into panels in the Edit and Browse views.
 | width        | Width (in % of the container total width).        |
 | help         | Optional help tooltip text.|
 | header       | Optional text displayed at the top of the group (just below the group title).|
-| footer       | Optional text displayed at the bottom of the group.    |
+| footer       | Optional text displayed below the group.    |
 
 Notes:
-- Groups are optional. By default a single group holds all fields.
-- Groups are positioned based on their "width" property the same way than fields are positioned inside groups.
+- Field Groups are optional. By default a single group holds all fields.
+- Field Groups are positioned based on their "width" property the same way than fields are positioned inside groups.
 
 <a name="Collection"></a>
 ### Collection
@@ -247,13 +249,13 @@ Multiple details tables can be specified with "collections".
 | readOnly     | Specify if the collection is readOnly.   |
 | help         | Optional help tooltip text.|
 | header       | Text to be displayed before the collection.   |
-| footer       | Text to be displayed after the collection.    |
+| footer       | Text to be displayed below the collection.    |
 
 Sample model using collections: [Wine Cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/winecellar.js).
 
 ### Sample model
 
-The following example is the model for a simple graphic novels inventory app. 
+The following example is the model for a simple graphic novels inventory app.
 
 ```javascript
 module.exports = {
@@ -371,6 +373,9 @@ More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-rea
 ## Evolutility backend
 
 Evolutility-UI-React uses GraphQL with [Hasura](https://hasura.io).
+
+Notes: Use the scrits from [evolutility-models](https://github.com/evoluteur/evolutility-models) to generate SQL scripts to create the database with tables and columns according to the models.
+
 
 <a name="License"></a>
 ## License
