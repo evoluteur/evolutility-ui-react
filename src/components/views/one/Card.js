@@ -111,7 +111,10 @@ export default class Card extends React.PureComponent {
 }
 
 Card.propTypes = {
+  /** Object Unique key. */
   entity: PropTypes.string.isRequired,
+  /** List of fields metadata. */
   fields: PropTypes.array,
+  /** Data (1 single record/Object). */
   data: PropTypes.object,
 };

@@ -319,7 +319,6 @@ const Field = ({
       const height = `${emHeight(f)}em`;
       return (
         <div
-          key={f.id}
           className="disabled evo-rdonly scroll-y"
           style={{ height }}
           dangerouslySetInnerHTML={createMarkup(d)}
@@ -362,11 +361,7 @@ const Field = ({
     } else {
       fw = fieldValue(f, d);
     }
-    return (
-      <div key={f.id} className="disabled evo-rdonly">
-        {fw}
-      </div>
-    );
+    return <div className="disabled evo-rdonly">{fw}</div>;
   };
 
   const f = model || { type: "text" };

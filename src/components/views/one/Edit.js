@@ -172,7 +172,7 @@ export default class Edit extends OneReadWrite {
                 })
               ) : (
                 <Panel title={title} key="pAllFields">
-                  <div className="evol-fset">{m.fields.map(fnField)}</div>
+                  <div className="evol-fset">{m.fields?.map(fnField)}</div>
                 </Panel>
               )}
 
@@ -233,7 +233,7 @@ export default class Edit extends OneReadWrite {
     let cMsg;
 
     this.clearValidation();
-    fields.forEach((f) => {
+    fields?.forEach((f) => {
       cMsg = validation.validateField(f, data[f.id]);
       if (cMsg) {
         messages.push(cMsg);

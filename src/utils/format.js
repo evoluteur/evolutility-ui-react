@@ -73,7 +73,7 @@ export function fieldValue(f, d, abbr) {
   if (f.type === ft.lov) {
     return (
       <>
-        {f.lovIcon && <img src={f.lovIcon} alt=""></img>}
+        {f.lovIcon && <img src={d.icon} alt=""></img>}
         {d}
       </>
     );

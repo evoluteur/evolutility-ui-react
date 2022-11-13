@@ -92,7 +92,7 @@ const mLOVFields = (entity) =>
 // get an array of items
 export const getMany = (entity, options) => {
   const fields = (m) => m.fields.filter(isFieldMany);
-  const gqlFields = (m) => "id " + fields(m).map(qField).join(" ");
+  const gqlFields = (m) => "id " + fields(m)?.map(qField).join(" ");
   const qMany = (entity) => {
     const m = getModel(entity);
     if (m) {

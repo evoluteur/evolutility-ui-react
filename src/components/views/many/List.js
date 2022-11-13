@@ -275,6 +275,7 @@ List.propTypes = {
     entity: PropTypes.string.isRequired,
   }),
   paramsCollec: PropTypes.object,
+  /** Indicates that the list instance is nested in a form. */
   isNested: PropTypes.bool,
   data: PropTypes.any,
 };
