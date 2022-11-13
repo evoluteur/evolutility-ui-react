@@ -53,7 +53,7 @@ export const gqlOptions = (query) => ({
 });
 
 export const runQuery = (q, cb, cbError) => {
-  return fetch(config.apiPathGraphQL, gqlOptions(q))
+  return fetch(config.pathGraphQL, gqlOptions(q))
     .then((r) => r.json())
     .then((data) => {
       if (data.errors) {

@@ -11,7 +11,7 @@ module.exports = {
   // apiPath: "http://localhost:2000/api/v1/",
 
   // - Path to GraphQL API
-  apiPathGraphQL: "https://evol-hasura.herokuapp.com/v1/graphql",
+  pathGraphQL: "https://evol-hasura.herokuapp.com/v1/graphql",
 
   // - Path to uploaded files
   filesUrl: "http://localhost:3000/pix/",

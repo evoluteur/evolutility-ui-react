@@ -18,7 +18,7 @@ import {
   qUpdateOne,
   qInsertOne,
 } from "./gqlQueries.js";
-import { apiPath, apiPathGraphQL, pageSize } from "../config.js";
+import { apiPath, pathGraphQL, pageSize } from "../config.js";
 import packageInfo from "../../package.json";
 
 const { proxy } = packageInfo;
@@ -153,7 +153,7 @@ export const getMany = (entity, options) => {
     return null;
   };
 
-  return fetch(apiPathGraphQL, gqlOptions(qMany(entity)))
+  return fetch(pathGraphQL, gqlOptions(qMany(entity)))
     .then(toJSON)
     .then((r) => {
       if (r.data && r.data.many) {
@@ -174,7 +174,7 @@ export const getMany = (entity, options) => {
 // get list of chartable values for field
 export const getChart = (entity, field) => {
   const m = getModel(entity);
-  return fetch(apiPathGraphQL, gqlOptions(qChart(m, field)))
+  return fetch(pathGraphQL, gqlOptions(qChart(m, field)))
     .then(toJSON)
     .then((r) => {
       if (r.data) {
@@ -191,7 +191,7 @@ export const getChart = (entity, field) => {
 // get entity statistics
 export const getStats = (entity) => {
   const m = getModel(entity);
-  return fetch(apiPathGraphQL, gqlOptions(qStats(m)))
+  return fetch(pathGraphQL, gqlOptions(qStats(m)))
     .then(toJSON)
     .then((r) => {
       if (r.data && r.data.stats) {
@@ -224,7 +224,7 @@ export const getManyCSV = (entity) => notImplementedYet();
 // get a single item by id
 export const getOne = (entity, id) => {
   if (id) {
-    return fetch(apiPathGraphQL, gqlOptions(qOne(entity, id)))
+    return fetch(pathGraphQL, gqlOptions(qOne(entity, id)))
       .then(toJSON)
       .then((r) => {
         if (r.data && r.data.one) {
@@ -260,13 +260,13 @@ export const getOne = (entity, id) => {
 // delete an item
 export const deleteOne = (entity, id) => {
   const m = getModel(entity);
-  return fetch(apiPathGraphQL, gqlOptions(qDelete(m.qid, id))).then(toJSON);
+  return fetch(pathGraphQL, gqlOptions(qDelete(m.qid, id))).then(toJSON);
 };
 
 // add an item
 export const addOne = (entity, data) => {
   const m = getModel(entity);
-  return fetch(apiPathGraphQL, gqlOptions(qInsertOne(entity, m.qid, data)))
+  return fetch(pathGraphQL, gqlOptions(qInsertOne(entity, m.qid, data)))
     .then(toJSON)
     .then((data) => {
       data.data =
@@ -280,7 +280,7 @@ export const addOne = (entity, data) => {
 // update (replace) an item
 export const updateOne = (entity, id, data) => {
   const m = getModel(entity);
-  return fetch(apiPathGraphQL, gqlOptions(qUpdateOne(m.id, m.qid, id, data)))
+  return fetch(pathGraphQL, gqlOptions(qUpdateOne(m.id, m.qid, id, data)))
     .then(toJSON)
     .then((data) => {
       data.data =
@@ -317,7 +317,7 @@ const daoGraphQL = {
   getManyCSV,
 
   // get the models
-  getModels: () => fetch(apiPathGraphQL, gqlOptions(qModels)).then(toJSON),
+  getModels: () => fetch(pathGraphQL, gqlOptions(qModels)).then(toJSON),
   getFileModel: (entity, path) => proxy + apiPath + entity + `'?model=${path}`,
   getUrl: (url) => notImplementedYet(),
 };
