@@ -250,7 +250,7 @@ export default class Stats extends React.Component {
                       k.field.label
                     }
                     type="bars"
-                    canExpend={false}
+                    canExpand={false}
                     size="small"
                   />
                 ) : null}

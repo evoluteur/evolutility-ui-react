@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import DemosList from "./DemosList";
-import { isREST } from "../../utils/dao";
 
 const Demos = () => {
   useEffect(() => {
@@ -61,16 +60,16 @@ const Demos = () => {
         >
           Heroku
         </a>
-        .{" "}
+        .
       </p>
-      {isREST ? (
-        <p>
-          <Link to="/test/cards">Test App</Link> with fields of all possible
-          types.
-        </p>
-      ) : null}
     </div>
   );
 };
 
 export default Demos;
+
+/* <p>
+<Link to="/test/cards">Test App</Link> with fields of all possible
+types.
+</p>
+*/

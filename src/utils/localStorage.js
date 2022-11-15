@@ -13,31 +13,35 @@ export const lcRemove = (key) => localStorage.removeItem(prefix + key);
 
 export const logActivity = (modelId, recordId, recordTitle, actionId) => {
   if (wActivity) {
-    const key = `${modelId}-activity`;
-    const now = new Date();
-    const date = now.toLocaleDateString() + " " + now.toLocaleTimeString();
-    const v = {
-      id: recordId,
-      title: recordTitle,
-      action: actionId,
-      date,
-      visits: 1,
-    };
-    let activity = lcRead(key);
-    if (activity) {
-      activity = JSON.parse(activity);
-      const prevActivity = activity.find((a) => a.id === recordId);
-      const visits = prevActivity?.visits;
-      if (visits) {
-        v.visits += visits;
+    if (recordTitle && modelId && recordId) {
+      const key = `${modelId}-activity`;
+      const now = new Date();
+      const date = now.toLocaleDateString() + " " + now.toLocaleTimeString();
+      const v = {
+        id: recordId,
+        title: recordTitle,
+        action: actionId,
+        date,
+        visits: 1,
+      };
+      let activity = lcRead(key);
+      if (activity) {
+        activity = JSON.parse(activity);
+        const prevActivity = activity.find((a) => a.id === recordId);
+        const visits = prevActivity?.visits;
+        if (visits) {
+          v.visits += visits;
+        }
+        activity = activity.filter((a) => a.id !== recordId);
+        activity.unshift(v);
+        activity = activity.slice(0, activityListSize || 50);
+      } else {
+        activity = [v];
       }
-      activity = activity.filter((a) => a.id !== recordId);
-      activity.unshift(v);
-      activity = activity.slice(0, activityListSize || 50);
+      lcWrite(key, JSON.stringify(activity));
     } else {
-      activity = [v];
+      debugger;
     }
-    lcWrite(key, JSON.stringify(activity));
   }
   return null;
 };

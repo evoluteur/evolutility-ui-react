@@ -97,9 +97,7 @@ export default class Card extends React.PureComponent {
               <div>
                 {icon ? (
                   <img src={`/pix/${icon}`} className="lov-icon" alt="" />
-                ) : (
-                  ""
-                )}
+                ) : null}
                 {fv}
               </div>
             </div>

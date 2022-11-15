@@ -201,7 +201,7 @@ export default class Chart extends React.Component {
         }
       >
         <div className="chart-holder">
-          {props.canExpend ? (
+          {props.canExpand ? (
             <div className="chart-actions-left">
               <Icon
                 onClick={this.click_resize}
@@ -233,11 +233,11 @@ Chart.propTypes = {
   size: PropTypes.oneOf(chartProps.sizes),
   chartType: PropTypes.oneOf(chartProps.chartTypes),
   sort: PropTypes.string,
-  canExpend: PropTypes.bool,
+  canExpand: PropTypes.bool,
 };
 
 Chart.defaultProps = {
   chartType: cTypes.bars,
   size: "small",
-  canExpend: true,
+  canExpand: true,
 };
