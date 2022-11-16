@@ -4,7 +4,7 @@ import React from "react";
 import { ResponsivePie } from "@nivo/pie";
 import ChartProps from "./ChartProps";
 
-const Pie = ({ data }) => {
+const Pie = ({ data, showLegend = true }) => {
   if (data) {
     const dh = {};
     let label;
@@ -67,26 +67,28 @@ const Pie = ({ data }) => {
             spacing: 10,
           },
         ]}
-        legends={[
-          {
-            anchor: "bottom",
-            direction: "row",
-            translateY: 56,
-            itemWidth: 100,
-            itemHeight: 18,
-            itemTextColor: "#999",
-            symbolSize: 18,
-            symbolShape: "square",
-            effects: [
-              {
-                on: "hover",
-                style: {
-                  itemTextColor: "#000",
+        legends={
+          showLegend && [
+            {
+              anchor: "bottom",
+              direction: "row",
+              translateY: 56,
+              itemWidth: 100,
+              itemHeight: 18,
+              itemTextColor: "#999",
+              symbolSize: 18,
+              symbolShape: "square",
+              effects: [
+                {
+                  on: "hover",
+                  style: {
+                    itemTextColor: "#000",
+                  },
                 },
-              },
-            ],
-          },
-        ]}
+              ],
+            },
+          ]
+        }
       />
     </div>
   );

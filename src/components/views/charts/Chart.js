@@ -183,7 +183,7 @@ export default class Chart extends React.Component {
       body = <ChartTable {...params} field={props.field} />;
     } else if (chartType === cTypes.pie) {
       // - Pie charts
-      body = <Pie {...params} />;
+      body = <Pie {...params} showLegend={!size === "tiny"} />;
     } else {
       // - Bars charts
       body = <Bars {...params} />;

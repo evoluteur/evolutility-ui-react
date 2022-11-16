@@ -18,10 +18,13 @@
   margin: 0 10px 20px 5px;
   width: 400px;
   min-height: 286px;
+  &.size-tiny {
+    width: 300px;
+  }
   &.size-large {
     width: 100%;
     .i-chart {
-      height: 500px;
+      max-height: 500px;
     }
     /*
 		@media only screen and (max-width: 700px) {
