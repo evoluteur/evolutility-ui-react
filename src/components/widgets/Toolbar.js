@@ -24,6 +24,8 @@ import { getModel } from "../../utils/moMa";
 
 import "./Toolbar.scss";
 
+import views from "../../utils/dicoViews";
+
 const proxy = pkg.proxy || "";
 const menuItems = {
   // new: {id: 'edit/0', label: i18n_actions.new, icon:'add', n:'x', readonly:false},
@@ -49,32 +51,7 @@ const menuItems = {
   // prev: {id:'prev', label: '', icon:'chevron-left', n:'x'},
   // next: {id:'next', label: '', icon:'chevron-right', n:'x'}
   // sel: {id: 'selections', label: i18n_actions.Selections, icon:'star', n:'x'},
-  views: {
-    browse: {
-      id: "browse",
-      label: i18n_actions.browse,
-      icon: "browse",
-      n: "1",
-    }, // // ReadOnly
-    edit: {
-      id: "edit",
-      label: i18n_actions.edit,
-      icon: "edit",
-      n: "1",
-      readonly: false,
-    }, // // All Fields for editing
-
-    list: { id: "list", label: i18n_actions.list, icon: "list", n: "n" },
-    cards: { id: "cards", label: i18n_actions.cards, icon: "cards", n: "n" },
-    // scatter: {id:'scatter', label: i18n_actions.bScatter, icon:'certificate',n:'n'},
-    charts: {
-      id: "charts",
-      label: i18n_actions.charts,
-      icon: "dashboard",
-      n: "n",
-    },
-    // stats: {id:'stats', label: i18n_actions.stats, icon:'equalizer', n:'n'},
-  },
+  views,
   // search: true
 };
 

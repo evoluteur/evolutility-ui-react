@@ -3,42 +3,12 @@ import { Link, useParams } from "react-router-dom";
 
 import Icon from "react-crud-icons";
 import logoEvol from "./evologo.gif";
-import { i18n_actions, i18n_activity } from "../../i18n/i18n";
-import { wActivity } from "../../config";
+import { i18n_actions } from "../../i18n/i18n";
+import { views, modelViewsMany } from "../../utils/dicoViews";
 import { getModel } from "../../utils/moMa";
 import Toolbar from "../widgets/Toolbar";
 
 import "./TopBar.scss";
-
-const views = {
-  // new: {id: 'edit/0', label: i18n_actions.new, icon:'add', n:'x', marginLeft: 10, readonly:false},
-  list: { id: "list", label: i18n_actions.list, icon: "list", n: "n" },
-  cards: { id: "cards", label: i18n_actions.cards, icon: "cards", n: "n" },
-  // charts: {
-  //   id: "charts",
-  //   label: i18n_actions.charts,
-  //   icon: "dashboard",
-  //   n: "n",
-  // },
-  // stats: {id:'stats', label: i18n_actions.stats, icon:'equalizer', n:'n'},
-  activity: {
-    id: "activity",
-    label: i18n_activity.activity,
-    icon: "history",
-    n: "n",
-  },
-};
-
-const getViewsList = (model) => {
-  const vs = {
-    list: views.list,
-    cards: views.cards,
-  };
-  if (wActivity && !model.noActivity) {
-    vs.activity = views.activity;
-  }
-  return vs;
-};
 
 const newEntity = (m) => i18n_actions.newEntity.replace("{0}", m.name);
 
@@ -66,7 +36,7 @@ const TopBar = () => {
                 <Icon name="add" tooltip={newEntity(model)} theme="dark" />
               </Link>
             )}
-            {Object.keys(getViewsList(model)).map((vid) => {
+            {Object.keys(modelViewsMany(model)).map((vid) => {
               const v = views[vid];
               return (
                 <Link to={eSlash + v.id} key={v.id}>

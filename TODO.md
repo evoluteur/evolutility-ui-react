@@ -8,7 +8,7 @@
 
 - Make a JIRA style app to track evolutility development (and replace this list) or do it in GitHub.
 
-- Plug UI library - thinking mantine...
+- Plug UI library - thinking mantine or @adobe/react-spectrum...
 - search
 - filters
 - Add "confort" models & views (saved filters, handpicked sets, dashboards...)

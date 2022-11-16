@@ -125,27 +125,26 @@ export default class Many extends React.Component {
   }
 
   pageSummary(data) {
+    const namePlural = this.model.namePlural;
     const size = data ? data.length : 0;
     if (size && !this.props.isNested) {
       const totalSize = data._full_count;
       if (size === 1) {
         return (
-          size +
-          " " +
-          this.model.name +
+          `${size} ${this.model.name}` +
           (totalSize > size ? " in " + totalSize : "")
         );
       } else if (size >= totalSize) {
-        return totalSize + " " + this.model.namePlural;
+        return totalSize + " " + namePlural;
       } else {
         const query = url.parseQuery(this.props.location.search);
         if (query) {
           const pageIdx = query.page || 0;
           if (!pageIdx && pageSize > size) {
-            return i18n_msg.xinz // - '{0} to {1} of {2}' w/ 0=mSize, 1=totSize, 2=entity'
+            return i18n_msg.aToBOfC // - '{0} to {1} {2}' w/ 0=mSize, 1=totalSize, 2=namePlural'
               .replace("{0}", size)
               .replace("{1}", totalSize)
-              .replace("{2}", this.model.namePlural);
+              .replace("{2}", namePlural);
           }
           const rangeBegin = pageIdx * pageSize + 1;
           let rangeEnd;
@@ -158,9 +157,9 @@ export default class Many extends React.Component {
             .replace("{0}", rangeBegin)
             .replace("{1}", rangeEnd)
             .replace("{2}", totalSize)
-            .replace("{3}", this.model.namePlural);
+            .replace("{3}", namePlural);
         }
-        return `${totalSize} ${this.model.namePlural}`;
+        return `${totalSize} ${namePlural}`;
       }
     }
     return "";

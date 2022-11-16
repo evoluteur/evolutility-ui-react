@@ -101,7 +101,7 @@ export const qOrderBy = (m, sortField, sortDirection = "asc") => {
 export const qChart = (m, field) => {
   const f = m.fieldsH[field];
   if (f.type === "lov") {
-    return `query {${m.qid}_${field}(limit: 20) {
+    return `query {chart: ${m.qid}_${field}(limit: 20) {
     id
     name
     ${m.qid}_aggregate {
