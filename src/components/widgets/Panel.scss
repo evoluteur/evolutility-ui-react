@@ -34,6 +34,8 @@
   div.panel-header,
   div.panel-footer {
     background-color: $bgcolor-panel-footer;
+    border-bottom-left-radius: $radius;
+    border-bottom-right-radius: $radius;
   }
 }
 

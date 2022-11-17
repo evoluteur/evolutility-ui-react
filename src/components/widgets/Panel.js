@@ -8,10 +8,19 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Icon from "react-crud-icons";
+import classnames from "classnames";
 
 import "./Panel.scss";
 
-const Panel = ({ title, header, width, collapsible, children, footer }) => {
+const Panel = ({
+  title,
+  header,
+  width,
+  collapsible,
+  children,
+  footer,
+  className,
+}) => {
   const [opened, setOpened] = useState(true);
 
   const clickToggle = () => {
@@ -33,7 +42,10 @@ const Panel = ({ title, header, width, collapsible, children, footer }) => {
   ) : null;
 
   return (
-    <div className="evol-pnl" style={{ width: width + "%" }}>
+    <div
+      className={classnames("evol-pnl", className)}
+      style={{ width: width + "%" }}
+    >
       <div className="panel panel-default">
         {titleElem}
         {header && <div className="panel-heading panel-header">{header}</div>}
@@ -55,6 +67,7 @@ Panel.propTypes = {
   header: PropTypes.node,
   footer: PropTypes.node,
   children: PropTypes.node,
+  className: PropTypes.string,
 };
 
 Panel.defaultProps = {
@@ -64,4 +77,5 @@ Panel.defaultProps = {
   header: null,
   footer: null,
   children: null,
+  className: null,
 };

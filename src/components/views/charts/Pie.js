@@ -17,8 +17,8 @@ const Pie = ({ data, showLegend = true }) => {
         dh[label] = 1;
       }
       return {
-        id: `${label}`,
-        label: `${label}`,
+        id: label,
+        label,
         value: d.value,
       };
     });

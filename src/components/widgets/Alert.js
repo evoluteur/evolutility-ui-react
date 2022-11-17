@@ -9,9 +9,7 @@ const icons = {
   warning: "warning-sign",
   danger: "exclamation-sign", // 'remove-sign'
 };
-function icon(name) {
-  return <i className={"glyphicon glyphicon-" + icons[name]} />;
-}
+const icon = (name) => <i className={"glyphicon glyphicon-" + icons[name]} />;
 
 const Alert = ({ title, message, type }) => (
   <div className={"alert alert-" + type} role="alert">

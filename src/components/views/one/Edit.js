@@ -201,7 +201,7 @@ export default class Edit extends OneReadWrite {
                   })
                 : null}
 
-              <Panel key="formButtons">
+              <Panel className="pnl-actions">
                 <div className="evol-buttons">
                   <Link className="btn btn-default" to={linkBrowse}>
                     <Icon
