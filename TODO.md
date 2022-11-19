@@ -11,13 +11,11 @@
 - Plug UI library - thinking mantine or @adobe/react-spectrum...
 - search
 - filters
-- Add "confort" models & views (saved filters, handpicked sets, dashboards...)
+- Add "comfort" models & views (saved filters, handpicked sets, dashboards...)
 - WIP: Add Activity feature + View
 - WIP: Add Summary view
 - Every field type can also be an array of values of that type
 - evolutility-models generate list of relationships to create in hasura admin
-- Use Yup for validation (maybe validation rules in json or keep the main ones in separate columns like now)
-- Add Groups (handpicked lists)
 - Choice of UX pattern: Drawer / navigation / dual pane
 - translate in other languages (/src/i18n/XX.js)
 - In code, use functions rather then classes for components (in views)
@@ -41,11 +39,12 @@
 - Add sorting for Cards
 - Tooltip style Confirmation on delete.
 - Warning when leaving page w/ unsaved changes.
+- pluggins for views ( w/ single-spa?) + make Stats & Charts pluggins
 - pluggins for FieldTypes
-- pluggins for views
 - Add Kaggle style table view
 - routes overriding mechanism for custom build views
-- json-schema to Evolutility models script
-- CI/CD pipelines on GitHub
+- Use Yup for validation (maybe validation rules in json or keep the main ones in separate columns like now)
 - Adding tests
+- CI/CD pipelines on GitHub
 - scripts to run all tests on each model
+- json-schema to Evolutility models script

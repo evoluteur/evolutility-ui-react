@@ -51,6 +51,15 @@ function formatNum(k, value, zero) {
 const no01n = (n, ns, np) =>
   n === 0 ? "No " + np : n === 1 ? "1 " + ns : n + " " + np;
 
+const formattedValue = (value, field) =>
+  field.type === "money" ? format.moneyString(value) : value;
+
+const itemAggr = (id, label, value) => (
+  <div key={id}>
+    <label className="stat-fn">{label}</label> {value}
+  </div>
+);
+
 export default class Stats extends React.Component {
   viewId = "stats";
 
@@ -177,13 +186,6 @@ export default class Stats extends React.Component {
       }
     }
 
-    const formattedValue = (value, field) =>
-      field.type === "money" ? format.moneyString(value) : value;
-    const itemAggr = (id, label, value) => (
-      <div key={id}>
-        <label className="stat-fn">{label}</label> {value}
-      </div>
-    );
     const item = (k) =>
       k.min === null ? null : (
         <div key={k.field.id} className="f-stats">
