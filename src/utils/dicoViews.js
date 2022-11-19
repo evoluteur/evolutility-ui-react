@@ -36,6 +36,8 @@ export const viewsMany = {
 };
 
 export const views = { ...viewsOne, ...viewsMany };
+export const viewsList = Object.values(views);
+export const viewIds = Object.keys(views);
 
 export const modelViewsMany = (model) => {
   const vs = {

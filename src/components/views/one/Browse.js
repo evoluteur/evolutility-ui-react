@@ -42,7 +42,7 @@ export default class Browse extends OneRead {
         return (
           <Field
             key={f.id}
-            model={f}
+            fieldDef={f}
             value={data[attr]}
             valueId={isLOV ? data[f.id] : null}
             icon={isLOV ? data[f.id + "_icon"] : null}

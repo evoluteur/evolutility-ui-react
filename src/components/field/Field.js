@@ -57,7 +57,7 @@ const itemInList = (id, list) => {
 // #endregion
 
 const Field = ({
-  model,
+  fieldDef,
   callbacks,
   // data,
   label,
@@ -87,10 +87,9 @@ const Field = ({
   //   () =>
   //   // - for fields of type list (using react-multi-select)
   //   (v) => {
-  //     const f = model;
   //     callbacks.change({
   //       target: {
-  //         id: f.id,
+  //         id: fieldDef.id,
   //         value: v,
   //       },
   //     });
@@ -98,7 +97,7 @@ const Field = ({
 
   const onDropFile = (files) => {
     // - only for fields of type image or document
-    const f = model;
+    const f = fieldDef;
     if (files.length && (f.type === ft.image || f.type === ft.doc)) {
       const formData = new FormData();
       files.forEach((f, idx) => {
@@ -117,7 +116,7 @@ const Field = ({
 
   const removeFile = () => {
     // - only for fields of type image or document
-    const f = model;
+    const f = fieldDef;
     if (callbacks.dropFile) {
       callbacks.dropFile(f.id, null);
     }
@@ -363,8 +362,7 @@ const Field = ({
     }
     return <div className="disabled evo-rdonly">{fw}</div>;
   };
-
-  const f = model || { type: "text" };
+  const f = fieldDef || { type: "text" };
   const fReadOnly = readOnly || f.readOnly;
   const cbs = callbacks || {};
   const fLabel = label || f.label;
@@ -388,7 +386,7 @@ const Field = ({
 export default Field;
 
 Field.propTypes = {
-  model: PropTypes.object.isRequired, // model is a field definition (field model)
+  fieldDef: PropTypes.object.isRequired, // field definition (field model)
   callbacks: PropTypes.shape({
     change: PropTypes.func,
     dropFile: PropTypes.func,

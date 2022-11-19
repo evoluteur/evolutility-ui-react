@@ -104,7 +104,7 @@ export default class Edit extends OneReadWrite {
         return (
           <Field
             key={f.id}
-            model={f}
+            fieldDef={f}
             value={data[f.id]}
             data={data}
             callbacks={cbs}

@@ -20,6 +20,7 @@
 - translate in other languages (/src/i18n/XX.js)
 - In code, use functions rather then classes for components (in views)
 - Add checkboxes for selection to the List and Cards views
+= Add JSON view (w/ react-json-view?)
 - Add "Compare" view for side-by-side comparaison and averages
 - Add "Kanban" view w/ drag & drop
 - Dependent fields
