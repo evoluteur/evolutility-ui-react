@@ -212,6 +212,7 @@ Objects have fields.
 | noCharts     | Exclude field from charts (only applies to fields of type integer, decimal, money, boolean, list of values which are "chartable"). |
 | noStats      | Exclude field from Stats.   |
 | unique       | Requires value to be unique (not implemented yet).   |
+| pii          | Flag for personally identifiable information.   |
 
 <a name="Group"></a>
 ### Field Group

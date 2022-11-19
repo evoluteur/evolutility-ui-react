@@ -39,6 +39,7 @@
   border: 1px solid white;
   overflow: hidden;
   min-height: 100%;
+
   .chart-actions-left,
   .chart-actions-right {
     display: block;
@@ -79,18 +80,20 @@
   }
 }
 
-.singleChart {
+.single-chart {
   display: block;
   padding: 0 5px 20px;
+  .chart-actions-left,
+  .chart-actions-right {
+    top: 5px;
+    opacity: 100%;
+  }
 }
 .chart-actions-left,
 .chart-actions-right {
   position: absolute;
   top: 0;
   //display: none;
-  -webkit-transition: top $ease-time ease $delay-time;
-  -moz-transition: top $ease-time ease $delay-time;
-  -o-transition: top $ease-time ease $delay-time;
   transition: top $ease-time ease $delay-time;
   @include icons-actions();
   > i.crud-icon.light > svg {

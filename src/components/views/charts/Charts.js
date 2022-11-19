@@ -8,6 +8,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
+import classnames from "classnames";
 import { i18n_charts } from "../../../i18n/i18n";
 import { getModel } from "../../../utils/moMa";
 import { fieldInCharts } from "../../../utils/dico";
@@ -32,10 +33,15 @@ const Charts = (props) => {
     const title = m.title || m.label;
     const chartFields = m.fields.filter(fieldInCharts);
     const nbCharts = chartFields.length;
-    const css =
-      "evolutility evol-many-charts " + (nbCharts === 1 ? "single" : "many");
+    const css = classnames(
+      "evolutility evol-many-charts",
+      nbCharts === 1 ? "single-chart" : null
+    );
+
     const chartTitle = (f) =>
-      capitalize(m.namePlural) + " / " + (f.labelCharts || f.label);
+      i18n_charts.objectByField
+        .replace("{0}", capitalize(m.namePlural))
+        .replace("{1}", f.labelCharts || f.label);
     let charts;
 
     if (nbCharts === 0) {
@@ -52,7 +58,8 @@ const Charts = (props) => {
           chartType={lcRead(`${m.id}-charts-${f.id}`) || f.chartType}
           key={"c0-" + f.id}
           size="large"
-          className="panel-default singleChart"
+          className="panel-default single-chart"
+          canExpand={false}
         />
       );
     } else {

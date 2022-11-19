@@ -80,29 +80,26 @@ export default class Chart extends React.Component {
     let urlparams = ""; // ?token='+localStorage.token
 
     if (fid) {
-      dao
-        .getChart(e, fid + urlparams)
-        .then((response) => {
-          if (!this.done) {
-            this.setState({
-              data: response.data,
-              loading: false,
-            });
-          }
-        })
-        .catch((err) => {
-          if (!this.done) {
-            console.error(err);
+      dao.getChart(e, fid + urlparams).then((response) => {
+        if (!this.done) {
+          if (response.errors) {
+            console.error(response.errors);
             this.setState({
               error: {
                 title: "Server error",
                 message:
-                  "Couldn't retrieve charts data for field \"" + fid + '".',
+                  "Couldn't retrieve charts data for field \"" + fid + '". ',
+                //  + response.errors[0]?.message,
               },
               loading: false,
             });
           }
-        });
+          this.setState({
+            data: response.data,
+            loading: false,
+          });
+        }
+      });
     }
   }
 

@@ -111,6 +111,7 @@ export const i18n_charts = {
   nocharts: "No default charts, the object doesn't have numeric fields.",
   total: "Total",
   noData: "No data",
+  objectByField: "{0} by {1}",
   emptyData: "The query returned no results.",
   pie: "Pie",
   bars: "Bars",
