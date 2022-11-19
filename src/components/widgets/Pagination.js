@@ -97,7 +97,7 @@ const Pagination = ({ count, fullCount, location, fnClick }) => {
 
   return (
     fullCount > pageSize && (
-      <nav className="clearer">
+      <nav className="clearer pagination-center">
         <ul className="pagination">{paginationBody()}</ul>
       </nav>
     )
