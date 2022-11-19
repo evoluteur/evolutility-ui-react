@@ -19,7 +19,7 @@ import {
   fieldIsNumeric,
   fieldInCharts,
 } from "../../../utils/dico";
-import dao, { isREST } from "../../../utils/dao";
+import dao from "../../../utils/dao";
 import format from "../../../utils/format";
 import Header from "../../shell/Header";
 import Spinner from "../../shell/Spinner";
@@ -178,7 +178,7 @@ export default class Stats extends React.Component {
     const e = this.props.match.params.entity;
     const model = getModel(e) || null;
     const data = this.state.data || null;
-    const chartsOK = isREST;
+    const chartsOK = !model.noCharts;
 
     if (model) {
       if (data) {

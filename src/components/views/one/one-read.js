@@ -6,7 +6,7 @@
 // (c) 2022 Olivier Giulieri
 
 import React from "react";
-import dao, { isGraphQL } from "../../../utils/dao";
+import dao from "../../../utils/dao";
 // import { withRouter, browserHistory } from 'react-router'
 import { wActivity } from "../../../config";
 import { logActivity } from "../../../utils/localStorage";
@@ -54,7 +54,7 @@ export default class OneRead extends React.Component {
       dao
         .getOne(e, id)
         .then((data) => {
-          if (isGraphQL && data.errors) {
+          if (data.errors) {
             // TODO: show better msg or all errors?
             newState.error = {
               message: data.errors[0].message,

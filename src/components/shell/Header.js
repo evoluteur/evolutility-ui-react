@@ -5,8 +5,6 @@ import Icon from "react-crud-icons";
 
 import { queryUrl, getSearchText } from "../../utils/url";
 
-import { isREST } from "../../utils/dao";
-
 import "./Header.scss";
 
 const iconH = {
@@ -22,9 +20,6 @@ const iconH = {
     // 'json': {id: 'json',  icon: 'json', label: 'JSON', option: true},
   },
 };
-if (isREST) {
-  iconH.n.charts = { id: "charts", icon: "dashboard", label: "Dashboard" };
-}
 
 const getIcons = (cardinality, model) => {
   const ih = iconH[cardinality];
@@ -33,7 +28,7 @@ const getIcons = (cardinality, model) => {
   }
   const cardiIcons = [ih.list, ih.cards];
   if (model) {
-    if (isREST && !model.noCharts) {
+    if (!model.noCharts) {
       cardiIcons.push(ih.charts);
     }
     if (!model.noStats) {

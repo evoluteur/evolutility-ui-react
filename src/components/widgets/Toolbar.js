@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 import Icon from "react-crud-icons";
 
 import { capitalize, urlJoin } from "../../utils/format";
-import dao, { isREST } from "../../utils/dao";
+import dao from "../../utils/dao";
 import url from "../../utils/url";
 import evoGlobals from "../../utils/evoGlobals";
 import { apiPath } from "../../config";
@@ -91,10 +91,10 @@ class Toolbar extends React.Component {
     const isNew = this.props.isNew || id === "0" || id === 0;
     let navViews = [];
     const actions = [];
-    const q =
-      window.location && window.location.search ? window.location.search : "";
-    const canSearch = isREST;
+    // const q =
+    //   window.location && window.location.search ? window.location.search : "";
     // TODO: implement search for graphql
+    const canSearch = false;
 
     const buttonLink = (menu, idOrFun, urlQuery = "") =>
       isFunction(idOrFun) ? (
@@ -118,15 +118,6 @@ class Toolbar extends React.Component {
       }
       if (!isNew) {
         actions.push(buttonLink(menuItems.del, this.confirmDelete));
-      }
-    } else {
-      if (isREST) {
-        // TODO: graphQL implementation
-        if (view !== "charts" && view !== "stats") {
-          // actions.push(buttonLink(menuItems.filter, this.toggleFilter));
-          // actions.push(buttonLink(menuItems.views.charts, ''));
-          actions.push(buttonLink(menuItems.export, this.exportMany, q));
-        }
       }
     }
 

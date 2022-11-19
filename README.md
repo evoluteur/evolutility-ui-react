@@ -57,9 +57,7 @@ Configurations options are specified in the file [/src/config.js](https://github
 
 | Option     | Description      | Example             |
 |------------|------------------|---------------------|
-| apiPath    | Path to REST API (can use "proxy" from package.json). | "http://localhost:2000/api/v1/" |
 | pathGraphQL | Path to GraphQL API. | "https://localhost:2000/v1/graphql" |
-| apiType | Type of API. | "rest" or "graphql" |
 | filesUrl   | Path to upload files to. | "http://localhost:3000/pix/" |
 | pageSize   | Page size in pagination.  | 50 |
 | locale     | Date format (no translation yet). | en/fr |
