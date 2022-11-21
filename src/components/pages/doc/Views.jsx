@@ -49,7 +49,7 @@ const Views = () => (
     </div>
     <div>
       Code:{" "}
-      <a href="https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/one/Browse.js">
+      <a href="https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/one/Browse.js">
         /src/components/views/one/Browse.js
       </a>
     </div>
@@ -70,7 +70,7 @@ const Views = () => (
     </div>
     <div>
       Code:{" "}
-      <a href="https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/one/Edit.js">
+      <a href="https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/one/Edit.js">
         /src/components/views/one/Edit.js
       </a>
     </div>
@@ -97,7 +97,7 @@ const Views = () => (
     </div>
     <div>
       Code:{" "}
-      <a href="https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/List.js">
+      <a href="https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/List.js">
         /src/components/views/many/List.js
       </a>
     </div>
@@ -116,7 +116,7 @@ const Views = () => (
     </div>
     <div>
       Code:{" "}
-      <a href="https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Cards.js">
+      <a href="https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/Cards.js">
         /src/components/views/many/Cards.js
       </a>
     </div>
@@ -138,7 +138,7 @@ const Views = () => (
     </div>
     <div>
       Code:{" "}
-      <a href="https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/charts/Charts.js">
+      <a href="https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/charts/Charts.js">
         /src/components/views/charts/Charts.js
       </a>
     </div>
@@ -162,7 +162,7 @@ const Views = () => (
     </div>
     <div>
       Code:{" "}
-      <a href="https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Stats.js">
+      <a href="https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/Stats.js">
         /src/components/views/many/Stats.js
       </a>
     </div>

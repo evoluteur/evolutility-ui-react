@@ -27,7 +27,7 @@ const Doc = () => {
           id="evolutility-ui-react-github-license-npm-version"
           className="mit-npm"
         >
-          <a href="https://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE">
+          <a href="https://github.com/evoluteur/evolutility-ui-react/blob/main/LICENSE">
             <img
               src="https://img.shields.io/github/license/evoluteur/evolutility-ui-react"
               alt="GitHub license"
@@ -133,7 +133,7 @@ const Doc = () => {
         <h2>Configuration</h2>
         <p>
           Configurations options are specified in the file{" "}
-          <a href="https://github.com/evoluteur/evolutility-ui-react/blob/master/src/config.js">
+          <a href="https://github.com/evoluteur/evolutility-ui-react/blob/main/src/config.js">
             /src/config.js
           </a>
           . They apply to all apps (app specific options are specified in
@@ -537,7 +537,7 @@ const Doc = () => {
         </table>
         <p>
           Sample model using collections:{" "}
-          <a href="https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/winecellar.js">
+          <a href="https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/winecellar.js">
             Wine Cellar
           </a>
           .
@@ -777,19 +777,19 @@ const Doc = () => {
         </pre>
         <p>
           More sample models:{" "}
-          <a href="https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/todo.js">
+          <a href="https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/todo.js">
             To-do list
           </a>
           ,{" "}
-          <a href="https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/contact.js">
+          <a href="https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/contact.js">
             Address book
           </a>
           ,{" "}
-          <a href="https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/restaurant.js">
+          <a href="https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/restaurant.js">
             Restaurants list
           </a>
           ,{" "}
-          <a href="https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/winecellar.js">
+          <a href="https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/winecellar.js">
             Wine cellar
           </a>
           .
@@ -815,7 +815,7 @@ const Doc = () => {
         </p>
         <p>
           Evolutility-UI-React is released under the{" "}
-          <a href="http://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE">
+          <a href="http://github.com/evoluteur/evolutility-ui-react/blob/main/LICENSE">
             MIT license
           </a>
           .

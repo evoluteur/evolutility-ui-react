@@ -68,19 +68,14 @@ const Field = ({
   invalid,
   message,
 }) => {
-  // const [invalid, setInvalid] = useState(false);
-  // const [message, setMessage] = useState(false);
-
-  const getDateFieldChange = (fid) => {
+  const getDateFieldChange = (fid) => (v) => {
     // - for fields of type date (using react-datepicker)
-    return (v) => {
-      callbacks.change({
-        target: {
-          id: fid,
-          value: v,
-        },
-      });
-    };
+    callbacks.change({
+      target: {
+        id: fid,
+        value: v,
+      },
+    });
   };
 
   // const getMultiselectFieldChange =

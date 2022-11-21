@@ -5,7 +5,7 @@
 // (c) 2022 Olivier Giulieri
 
 import { getModel } from "./moMa";
-import { fieldTypes, isFieldMany, fieldIsText } from "./dico.js";
+import { fieldTypes as ft, isFieldMany, fieldIsText } from "./dico.js";
 import { qModels } from "./gqlQueriesMD.js";
 import {
   fullCount,
@@ -29,8 +29,6 @@ const { proxy } = packageInfo;
 const notImplementedYet = () => console.log("Not implemented yet.");
 //alert("Not implemented for GraphQL yet (but working with REST).");
 
-const ft = fieldTypes;
-
 const toJSON = (r) => r.json();
 
 const cleanLOV = (f, data) => {
@@ -49,7 +47,7 @@ const cleanChartData = (e, data, fieldType) => {
   const mid = m.qid;
   const d2 = [];
 
-  if (fieldType === "lov") {
+  if (fieldType === ft.lov) {
     data?.forEach((row) => {
       const c = row[mid + "_aggregate"]?.aggregate?.count;
       if (c > 0) {
@@ -63,7 +61,7 @@ const cleanChartData = (e, data, fieldType) => {
       }
     });
   }
-  if (fieldType === "boolean") {
+  if (fieldType === ft.bool) {
     const countTrue = data.true.aggregate.count;
     d2.push(
       {

@@ -1,6 +1,7 @@
 {
   "extends": ["react-app", "react-app/jest"],
   "plugins": ["prettier"],
+  "parser":"babel-eslint",
   "settings": {
     "import/resolver": {
       "node": {

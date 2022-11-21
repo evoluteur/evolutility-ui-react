@@ -5,7 +5,7 @@ import "./Designer.scss";
 
 const ghLink = (key2) =>
   // key2 example "organizer/todo"
-  `https://github.com/evoluteur/evolutility-models/blob/master/models/${key2}.js`;
+  `https://github.com/evoluteur/evolutility-models/blob/main/models/${key2}.js`;
 
 const Designer = () => (
   <div className="evo-designer">

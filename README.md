@@ -1,4 +1,4 @@
-# Evolutility-UI-React &middot; [![GitHub license](https://img.shields.io/github/license/evoluteur/evolutility-ui-react)](https://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/evolutility-ui-react)](https://www.npmjs.com/package/evolutility-ui-react)
+# Evolutility-UI-React &middot; [![GitHub license](https://img.shields.io/github/license/evoluteur/evolutility-ui-react)](https://github.com/evoluteur/evolutility-ui-react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/evolutility-ui-react)](https://www.npmjs.com/package/evolutility-ui-react)
 
 
 Evolutility-UI-React is a set of **model-driven views** to [Browse](#Browse), [Edit](#Edit), [List](#List), [Cards](#Cards), [Charts](#Charts), and [Stats](#Stats).
@@ -53,7 +53,7 @@ For the REST endpoints, you also need to install and run [Evolutility-Server-Nod
 <a name="Configuration"></a>
 ## Configuration
 
-Configurations options are specified in the file [/src/config.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/config.js). They apply to all apps (app specific options are specified in models).
+Configurations options are specified in the file [/src/config.js](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/config.js). They apply to all apps (app specific options are specified in models).
 
 | Option     | Description      | Example             |
 |------------|------------------|---------------------|
@@ -91,7 +91,7 @@ Shows all fields for viewing (read only). Fields are grouped in panels.
 
 ![Browse](public/screenshots/comics/one-browse.gif)
 
-Code: [/src/components/views/one/Browse.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/one/Browse.jsx)
+Code: [/src/components/views/one/Browse.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/one/Browse.jsx)
 
 View: [http://localhost:3000/comics/browse/{id}](http://localhost:3000/comics/browse/14)
 
@@ -103,7 +103,7 @@ Fields are grouped in panels and tabs.
 
 ![Edit](public/screenshots/comics/one-edit.gif)
 
-Code: [/src/components/views/one/Edit.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/one/Edit.jsx)
+Code: [/src/components/views/one/Edit.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/one/Edit.jsx)
 
 View: [http://localhost:3000/comics/edit/{id}](http://localhost:3000/comics/edit/14)
 
@@ -119,7 +119,7 @@ Gives a tabular view of a collection.
 
 ![List](public/screenshots/comics/many-list.gif)
 
-Code: [/src/components/views/many/List.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/List.jsx)
+Code: [/src/components/views/many/List.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/List.jsx)
 
 View: [http://localhost:3000/comics/list](http://localhost:3000/comics/list)
 
@@ -129,7 +129,7 @@ Shows records side by side as cards.
 
 ![Cards](public/screenshots/comics/many-cards.gif)
 
-Code: [/src/components/views/many/Cards.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Cards.jsx)
+Code: [/src/components/views/many/Cards.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/Cards.jsx)
 
 View: [http://localhost:3000/comics/cards](http://localhost:3000/comics/cards)
 
@@ -139,7 +139,7 @@ Draws charts about the collection. Currently bars and pie charts are implemented
 
 ![Charts](public/screenshots/comics/many-charts.gif)
 
-Code: [/src/components/views/charts/Charts.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/charts/Charts.jsx)
+Code: [/src/components/views/charts/Charts.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/charts/Charts.jsx)
 
 View: [http://localhost:3000/comics/charts](http://localhost:3000/comics/charts)
 
@@ -151,7 +151,7 @@ Display last update, number of updates in the last week, and for numeric fields 
 
 ![Stats](public/screenshots/comics/many-stats.gif)
 
-Code: [/src/components/views/many/Stats.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Stats.jsx)
+Code: [/src/components/views/many/Stats.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/Stats.jsx)
 
 View: [http://localhost:3000/comics/stats](http://localhost:3000/comics/stats)
 
@@ -251,7 +251,7 @@ Multiple details tables can be specified with "collections".
 | header       | Text to be displayed before the collection.   |
 | footer       | Text to be displayed below the collection.    |
 
-Sample model using collections: [Wine Cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/winecellar.js).
+Sample model using collections: [Wine Cellar](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/winecellar.js).
 
 ### Sample model
 
@@ -363,10 +363,10 @@ module.exports = {
 
 ```
 
-More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/todo.js),
-[Address book](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/contact.js),
-[Restaurants list](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/restaurant.js),
-[Wine cellar](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/models/organizer/winecellar.js).
+More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/todo.js),
+[Address book](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/contact.js),
+[Restaurants list](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/restaurant.js),
+[Wine cellar](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/winecellar.js).
 
 
 <a name="Backend"></a>
@@ -382,7 +382,7 @@ Notes: Use the scrits from [evolutility-models](https://github.com/evoluteur/evo
 
 Copyright (c) 2022 [Olivier Giulieri](https://evoluteur.github.io/).
 
-Evolutility-UI-React is released under the [MIT license](http://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE).
+Evolutility-UI-React is released under the [MIT license](http://github.com/evoluteur/evolutility-ui-react/blob/main/LICENSE).
 
 To suggest a feature or report a bug: [https://github.com/evoluteur/evolutility-ui-react/issues](https://github.com/evoluteur/evolutility-ui-react/issues)
 

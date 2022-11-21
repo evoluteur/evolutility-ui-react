@@ -78,7 +78,7 @@ const Home = () => {
         <div>
           ... simply by making models like{" "}
           <a
-            href="https://github.com/evoluteur/evolutility-ui-react/tree/master/src/models/organizer"
+            href="https://github.com/evoluteur/evolutility-ui-react/tree/main/src/models/organizer"
             target="jsm"
             rel="noopener noreferrer"
             className="extlink"
@@ -135,7 +135,7 @@ const Home = () => {
           </a>{" "}
           with{" "}
           <a
-            href="https://github.com/evoluteur/evolutility-ui-react/blob/master/LICENSE"
+            href="https://github.com/evoluteur/evolutility-ui-react/blob/main/LICENSE"
             target="_blank"
             rel="noopener noreferrer"
             className="extlink"

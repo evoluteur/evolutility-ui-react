@@ -100,7 +100,8 @@ export const qOrderBy = (m, sortField, sortDirection = "asc") => {
 
 export const qChart = (m, field) => {
   const f = m.fieldsH[field];
-  if (f.type === "lov") {
+  // TODO: number fields
+  if (f.type === ft.lov) {
     return `query {chart: ${m.qid}_${field}(limit: 20) {
     id
     name
@@ -110,7 +111,7 @@ export const qChart = (m, field) => {
   }
 }`;
   }
-  if (f.type === "boolean") {
+  if (f.type === ft.bool) {
     return `query {
     true: ${m.qid}_aggregate(where: {${field}: {_eq: true}}) {
       aggregate {count}
@@ -123,7 +124,6 @@ export const qChart = (m, field) => {
   return null;
 };
 
-// stats: evol_wine_aggregate{ }
 export const statsAggregate = (m) => {
   const props = ["min", "max", "avg", "sum"];
   const sag = {
