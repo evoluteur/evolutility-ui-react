@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Route, Link } from "react-router-dom";
 import Icon from "react-crud-icons";
 import { i18n_nav } from "../../i18n/i18n";
-import AppMenus from "../../AppMenus";
+import appMenus from "../../appMenus";
 import url from "../../utils/url";
 import models from "../../utils/moMa";
 
@@ -12,7 +12,7 @@ import "./SideBar.scss";
 const item2Group_Map = {};
 const sections = {};
 const setup = () =>
-  AppMenus.forEach((menuGroup) => {
+  appMenus.forEach((menuGroup) => {
     const groupId = menuGroup.id;
     sections[groupId] = menuGroup;
     menuGroup.menus.forEach((menuItem) => {

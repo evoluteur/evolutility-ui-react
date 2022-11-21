@@ -91,7 +91,7 @@ Shows all fields for viewing (read only). Fields are grouped in panels.
 
 ![Browse](public/screenshots/comics/one-browse.gif)
 
-Code: [/src/components/views/one/Browse.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/one/Browse.js)
+Code: [/src/components/views/one/Browse.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/one/Browse.jsx)
 
 View: [http://localhost:3000/comics/browse/{id}](http://localhost:3000/comics/browse/14)
 
@@ -103,7 +103,7 @@ Fields are grouped in panels and tabs.
 
 ![Edit](public/screenshots/comics/one-edit.gif)
 
-Code: [/src/components/views/one/Edit.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/one/Edit.js)
+Code: [/src/components/views/one/Edit.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/one/Edit.jsx)
 
 View: [http://localhost:3000/comics/edit/{id}](http://localhost:3000/comics/edit/14)
 
@@ -119,7 +119,7 @@ Gives a tabular view of a collection.
 
 ![List](public/screenshots/comics/many-list.gif)
 
-Code: [/src/components/views/many/List.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/List.js)
+Code: [/src/components/views/many/List.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/List.jsx)
 
 View: [http://localhost:3000/comics/list](http://localhost:3000/comics/list)
 
@@ -129,7 +129,7 @@ Shows records side by side as cards.
 
 ![Cards](public/screenshots/comics/many-cards.gif)
 
-Code: [/src/components/views/many/Cards.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Cards.js)
+Code: [/src/components/views/many/Cards.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Cards.jsx)
 
 View: [http://localhost:3000/comics/cards](http://localhost:3000/comics/cards)
 
@@ -139,7 +139,7 @@ Draws charts about the collection. Currently bars and pie charts are implemented
 
 ![Charts](public/screenshots/comics/many-charts.gif)
 
-Code: [/src/components/views/charts/Charts.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/charts/Charts.js)
+Code: [/src/components/views/charts/Charts.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/charts/Charts.jsx)
 
 View: [http://localhost:3000/comics/charts](http://localhost:3000/comics/charts)
 
@@ -151,7 +151,7 @@ Display last update, number of updates in the last week, and for numeric fields 
 
 ![Stats](public/screenshots/comics/many-stats.gif)
 
-Code: [/src/components/views/many/Stats.js](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Stats.js)
+Code: [/src/components/views/many/Stats.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/master/src/components/views/many/Stats.jsx)
 
 View: [http://localhost:3000/comics/stats](http://localhost:3000/comics/stats)
 
@@ -267,20 +267,20 @@ module.exports = {
     titleField: "title",
     fields:[
       {
-          id: "title", type: "text", 
-          label: "Title", 
+          id: "title", type: "text",
+          label: "Title",
           required: true, maxLength: 255,
-          width: 100, inMany: true, 
+          width: 100, inMany: true,
       },
       {
-          id: "authors", type: "text", 
+          id: "authors", type: "text",
           label: "Authors",
-          inMany: true, width: 62, 
-          
+          inMany: true, width: 62,
+
       },
       {
-          id: "genre", type: "lov", 
-          label: "Genre", 
+          id: "genre", type: "lov",
+          label: "Genre",
           width: 38, inMany: true,
           list: [
             {id: 1, text: "Adventure"},
@@ -295,27 +295,27 @@ module.exports = {
             {id: 10, text: "Thriller"},
             {id: 11, text: "Science-fiction"},
             {id: 12, text: "Super Heros"},
-            {id: 13, text: "Western"} 
+            {id: 13, text: "Western"}
           ]
       },
       {
           id: "serie_nb", type: "integer",
-          label: "Albums", noCharts: true, 
-          width: 15, inMany: false 
+          label: "Albums", noCharts: true,
+          width: 15, inMany: false
       },
       {
           id: "have_nb", type: "integer",
-          label: "Owned", 
+          label: "Owned",
           width: 15, inMany: false, noCharts: true
       },
       {
           id: "have", type: "text",
-          label: "Have", 
+          label: "Have",
           width: 15, inMany: false
       },
       {
-          id: "language", type: "lov", 
-          label: "Language", 
+          id: "language", type: "lov",
+          label: "Language",
           width: 17, inMany: true,
           lovIcon: true,
           list: [
@@ -325,36 +325,36 @@ module.exports = {
       },
       {
           id: "complete", type: "boolean",
-          label: "Complete", 
+          label: "Complete",
           width: 19, inMany: false
       },
       {
           id: "finished", type: "boolean",
-          label: "Finished", 
+          label: "Finished",
           width: 19, inMany: false
       },
       {
           id: "pix", type: "image",
-          label: "Cover", 
+          label: "Cover",
           width: 30, inMany: true
       },
       {
-          id: "notes", type: "textmultiline", 
-          label: "Notes", 
+          id: "notes", type: "textmultiline",
+          label: "Notes",
           width: 70, height: 7, maxLength: 5000,
           inMany: false
       }
   ],
 
   groups: [
-      { 
+      {
         id:"serie", type: "panel", label: "Serie", width: 70,
-        fields: ["title", "authors", "genre", 
-              "serie_nb", "have_nb", "have", 
+        fields: ["title", "authors", "genre",
+              "serie_nb", "have_nb", "have",
               "language", "complete", "finished", "notes"
         ]
       },
-      { 
+      {
         id:"pix", type: "panel", label: "Cover", width: 30,
         fields: ["pix"]
       }

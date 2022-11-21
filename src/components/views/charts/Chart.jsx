@@ -15,7 +15,7 @@ import dao from "../../../utils/dao";
 import { lcWrite } from "../../../utils/localStorage";
 import Spinner from "../../shell/Spinner";
 import ChartTable from "./ChartTable";
-import chartProps from "./ChartProps";
+import { chartSizes, chartTypes } from "./chartProps";
 
 import Bars from "./Bars";
 import Pie from "./Pie";
@@ -198,7 +198,7 @@ export default class Chart extends React.Component {
         }
       >
         <div className="chart-holder">
-          {props.canExpand ? (
+          {props.canExpand && (
             <div className="chart-actions-left">
               <Icon
                 onClick={this.click_resize}
@@ -207,7 +207,7 @@ export default class Chart extends React.Component {
                 tooltip={size === "large" ? "Collapse" : "Expand"}
               />
             </div>
-          ) : null}
+          )}
           <div className="chart-actions-right">
             {[
               chartIcon("pie", iconProps),
@@ -227,8 +227,8 @@ Chart.propTypes = {
   entity: PropTypes.string.isRequired,
   field: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(chartProps.sizes),
-  chartType: PropTypes.oneOf(chartProps.chartTypes),
+  size: PropTypes.oneOf(chartSizes),
+  chartType: PropTypes.oneOf(chartTypes),
   sort: PropTypes.string,
   canExpand: PropTypes.bool,
 };

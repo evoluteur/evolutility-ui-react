@@ -1,4 +1,4 @@
-const menus = [
+const appMenus = [
   {
     id: "organizer",
     title: "Demo",
@@ -75,4 +75,4 @@ const menus = [
   },
 ];
 
-export default menus;
+export default appMenus;

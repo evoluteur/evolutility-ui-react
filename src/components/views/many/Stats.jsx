@@ -29,7 +29,8 @@ import Chart from "../charts/Chart";
 
 import "./Stats.scss";
 
-function formatNum(k, value, zero) {
+// #region ---------------- Helpers ----------------
+const formatNum = (k, value, zero) => {
   if (typeof value !== "undefined" && value !== null) {
     if (k.type === "money") {
       return format.moneyString(value);
@@ -46,7 +47,7 @@ function formatNum(k, value, zero) {
     return Math.round(value * 100) / 100;
   }
   return null;
-}
+};
 
 const no01n = (n, ns, np) =>
   n === 0 ? "No " + np : n === 1 ? "1 " + ns : n + " " + np;
@@ -59,6 +60,7 @@ const itemAggr = (id, label, value) => (
     <label className="stat-fn">{label}</label> {value}
   </div>
 );
+// #endregion
 
 export default class Stats extends React.Component {
   viewId = "stats";
@@ -158,11 +160,11 @@ export default class Stats extends React.Component {
     }
     ks.count = data.count;
 
-    function formatTime(propName) {
+    const formatTime = (propName) => {
       ks[propName] = data[propName]
         ? format.datetimeString(data[propName])
         : "N/A";
-    }
+    };
     if (wTimestamp) {
       formatTime("u_date_max");
       formatTime("c_date_min");
@@ -298,18 +300,18 @@ export default class Stats extends React.Component {
             </div>
             <div className="col-2">
               {wTimestamp &&
-              (data.u_date_max !== "N/A" || data.c_date_min !== "N/A") ? (
-                <div>
-                  <div className="stat-field">
-                    <span>{i18n_stats.lastUpdate}:</span>
-                    {data.u_date_max}
+                (data.u_date_max !== "N/A" || data.c_date_min !== "N/A") && (
+                  <div>
+                    <div className="stat-field">
+                      <span>{i18n_stats.lastUpdate}:</span>
+                      {data.u_date_max}
+                    </div>
+                    <div className="stat-field">
+                      <span>{i18n_stats.firstInsert}:</span>
+                      {data.c_date_min}
+                    </div>
                   </div>
-                  <div className="stat-field">
-                    <span>{i18n_stats.firstInsert}:</span>
-                    {data.c_date_min}
-                  </div>
-                </div>
-              ) : null}
+                )}
             </div>
           </div>
           <div className="kpi_list">
@@ -323,7 +325,7 @@ export default class Stats extends React.Component {
       );
     }
     return (
-      <div className="">
+      <div>
         <Header
           entity={e}
           title={i18n_stats.statsTitle.replace(
