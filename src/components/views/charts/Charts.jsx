@@ -30,7 +30,7 @@ const Charts = (props) => {
   });
 
   if (m) {
-    const title = m.title || m.label;
+    const title = i18n_charts.dash.replace("{0}", capitalize(m.namePlural));
     const chartFields = m.fields.filter(fieldInCharts);
     const nbCharts = chartFields.length;
     const css = classnames(

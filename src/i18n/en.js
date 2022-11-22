@@ -108,6 +108,7 @@ export const i18n_validation = {
 
 // --- charts ---
 export const i18n_charts = {
+  dash: "{0} Dashboard",
   nocharts: "No default charts, the object doesn't have numeric fields.",
   total: "Total",
   noData: "No data",
