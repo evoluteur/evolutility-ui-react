@@ -148,16 +148,12 @@ const Doc = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="odd">
+            <tr className="even">
               <td align="left">apiPath</td>
               <td align="left">
-                Path to REST API (can use &quot;proxy&quot; from package.json).
+                Path to GraphQL API (can use &quot;proxy&quot; from
+                package.json).
               </td>
-              <td align="left">&quot;http://localhost:2000/api/v1/&quot;</td>
-            </tr>
-            <tr className="even">
-              <td align="left">apiPathGraphQL</td>
-              <td align="left">Path to GraphQL API.</td>
               <td align="left">
                 &quot;https://localhost:2000/v1/graphql&quot;
               </td>

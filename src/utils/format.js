@@ -9,11 +9,8 @@ import React from "react";
 import numeral from "numeral";
 import moment from "moment";
 
-// include locale support for a few chosen countries -- add more as needed
-// import 'moment/locale/en-gb'
-// import 'moment/locale/en-au'
+// include locale support for other languages
 // import 'moment/locale/fr'
-// import 'moment/locale/de'
 // import 'moment/locale/es'
 
 import { filesUrl, locale } from "../config";
@@ -43,8 +40,9 @@ function dateOpt(d, type) {
   return dateString(d);
 }
 
-const decimalString = (d) => numFormat(d, d > 1 ? "0.00" : "0.000");
-const moneyString = (d) => numFormat(d, "$0,0.00");
+export const integerString = (d) => numFormat(d, "0,0");
+export const decimalString = (d) => numFormat(d, d > 1 ? "0.00" : "0.000");
+export const moneyString = (d) => numFormat(d, "$0,0.00");
 const jsonString = (js) => (js ? JSON.stringify(js, null, "\t") : "");
 
 export function image(d) {
@@ -58,11 +56,8 @@ export function fieldValue(f, d, abbr) {
   if (f.type === ft.bool) {
     return d ? <i className="glyphicon glyphicon-ok" /> : "";
   }
-  if (f.type === ft.email && d) {
-    return <a href={`mailto:${d}`}>{d}</a>;
-  }
-  if (f.type === ft.json && d) {
-    return jsonString(d);
+  if (f.type === ft.int && d) {
+    return integerString(d);
   }
   if (f.type === ft.dec && d) {
     return decimalString(d);
@@ -70,10 +65,16 @@ export function fieldValue(f, d, abbr) {
   if (f.type === ft.money && d) {
     return moneyString(d);
   }
+  if (f.type === ft.email && d) {
+    return <a href={`mailto:${d}`}>{d}</a>;
+  }
+  if (f.type === ft.json && d) {
+    return jsonString(d);
+  }
   if (f.type === ft.lov) {
     return (
       <>
-        {f.lovIcon && <img src={d.icon} alt=""></img>}
+        {f.lovIcon && <img src={d?.icon} alt=""></img>}
         {d}
       </>
     );

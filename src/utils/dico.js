@@ -148,6 +148,17 @@ export const fieldIsText = (f) =>
 export const fieldId2Field = (fieldIds, fieldsH) =>
   fieldIds ? fieldIds.map((id) => fieldsH[id] || null) : null;
 
+export const fieldInStats = (f) => fieldIsNumeric(f) && !f.noStats;
+
+export const allStats = ["sum", "avg", "stddev", "min", "max"];
+export const statsFunctions = (f) => {
+  // TODO: more field types
+  if (f.type === "date") {
+    return ["avg", "stddev", "min", "max"];
+  }
+  return allStats;
+};
+
 const dico = {
   fieldTypes: ft,
   fieldTypeStrings: fta,

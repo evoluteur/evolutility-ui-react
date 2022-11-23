@@ -18,6 +18,7 @@ import {
   fieldIsDateOrTime,
   fieldIsNumeric,
   fieldInCharts,
+  fieldTypes as ft,
 } from "../../../utils/dico";
 import dao from "../../../utils/dao";
 import format from "../../../utils/format";
@@ -52,8 +53,12 @@ const formatNum = (k, value, zero) => {
 const no01n = (n, ns, np) =>
   n === 0 ? "No " + np : n === 1 ? "1 " + ns : n + " " + np;
 
-const formattedValue = (value, field) =>
-  field.type === "money" ? format.moneyString(value) : value;
+const formattedValue = (value, field) => {
+  if (field.type === ft.money) {
+    return format.moneyString(value);
+  }
+  return value;
+};
 
 const itemAggr = (id, label, value) => (
   <div key={id}>

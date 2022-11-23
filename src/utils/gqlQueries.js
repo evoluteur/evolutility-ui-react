@@ -12,6 +12,8 @@ import {
   fieldIsNumber,
   fieldIsNumeric,
   fieldIsDateOrTime,
+  statsFunctions,
+  allStats,
 } from "./dico";
 
 import config from "../config";
@@ -125,19 +127,15 @@ export const qChart = (m, field) => {
 };
 
 export const statsAggregate = (m) => {
-  const props = ["min", "max", "avg", "sum"];
-  const sag = {
-    min: [],
-    max: [],
-    avg: [],
-    sum: [],
-  };
+  const sag = {};
+  allStats.forEach((stat) => (sag[stat] = []));
+
   m.fields.forEach((f) => {
     if (fieldIsNumeric(f) && !f.noStats) {
       if (f.type !== "money" && fieldIsNumber(f)) {
         // if (fieldIsNumber(f)) {
         // TODO make it work for money fields
-        props.forEach((p) => sag[p].push(f.id));
+        statsFunctions(f)?.forEach((p) => sag[p].push(f.id));
       }
       if (fieldIsDateOrTime(f)) {
         sag.min.push(f.id);
@@ -147,11 +145,10 @@ export const statsAggregate = (m) => {
   });
   return (
     `stats: ${m.qid}_aggregate { aggregate {` +
-    props
+    allStats
       .map((p) => (sag[p].length ? p + " {" + sag[p].join(" ") + "}" : ""))
       .join(" ") +
-    " count" +
-    "}}"
+    " count}}"
   );
 };
 

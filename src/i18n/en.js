@@ -126,6 +126,8 @@ export const i18n_comments = {
 };
 
 export const i18n_stats = {
+  metaCount: "{0} records, {1} fields",
+  collecsCount: ", {0} collections",
   statsTitle: "{0} Stats",
   weekUpdates: " records added or updated this week",
   lastUpdate: "Last update",
@@ -133,8 +135,10 @@ export const i18n_stats = {
   totalComments: "Number of comments",
   total: "Total",
   avg: "Average",
-  min: "Min.",
-  max: "Max.",
+  stddev: "Std Dev",
+  min: "Min",
+  max: "Max",
+  sum: "Sum", // "Total", ?
   noFit: "The data doesn't have any numeric fields necessary for stats.",
   noData: "No data",
   emptyData: "The query returned no results.",

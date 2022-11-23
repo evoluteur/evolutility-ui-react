@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { i18n_stats } from "i18n/i18n";
 
 import "./Range.scss";
 
@@ -15,13 +16,14 @@ const Range = (props) => {
   if (min === max || avg === undefined) {
     return null;
   }
+  const avgTxt = i18n_stats.avg + ": " + avg;
   return (
     <div className="evo-range">
       <div className="range-line">
         <div className="range-line" />
       </div>
       <div style={css} className="range-avg">
-        <div>{avg}</div>
+        <div>{avgTxt}</div>
       </div>
     </div>
   );
