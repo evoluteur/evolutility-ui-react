@@ -41,24 +41,22 @@ const ChartTable = ({ entity, field, sortTable, data, showTotal = true }) => {
           </tr>
         </thead>
         <tbody>
-          {data
-            ? data.map((d) => (
-                <tr key={d.value + d.id}>
-                  <td>
-                    {d.label ? <Link to={makeLink(d)}>{d.label}</Link> : " N/A"}
-                  </td>
-                  <td className="alignR">{d.value}</td>
-                  <td className="alignR">{percent(d.value, totalCount)}</td>
-                </tr>
-              ))
-            : null}
-          {showTotal && totalCount ? (
+          {data?.map((d) => (
+            <tr key={d.id}>
+              <td>
+                <Link to={makeLink(d)}>{d.label || "N/A"}</Link>
+              </td>
+              <td className="alignR">{d.value}</td>
+              <td className="alignR">{percent(d.value, totalCount)}</td>
+            </tr>
+          ))}
+          {showTotal && totalCount && (
             <tr className="footer">
               <td>{i18n_charts.total}</td>
               <td className="alignR">{totalCount}</td>
               <td className="alignR">100%</td>
             </tr>
-          ) : null}
+          )}
         </tbody>
       </table>
     </div>

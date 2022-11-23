@@ -3,6 +3,7 @@
 import React from "react";
 import { ResponsivePie } from "@nivo/pie";
 import chartProps from "./chartProps";
+import { colors } from "./chartOptions";
 
 const Pie = ({ data, showLegend = true }) => {
   if (data) {
@@ -31,7 +32,7 @@ const Pie = ({ data, showLegend = true }) => {
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
         padAngle={0.7}
         cornerRadius={3}
-        colors={{ scheme: "category10" }}
+        colors={colors}
         borderWidth={1}
         borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
         radialLabelsSkipAngle={10}

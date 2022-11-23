@@ -26,6 +26,8 @@ export const i18n_actions = {
   export1: "Export",
   // import: 'Import',
   // massUpdate: 'Mass Update',
+  expend: "Expend",
+  collapse: "Collapse",
   delete1: "Delete",
   // bAll: 'All',
   list: "List",

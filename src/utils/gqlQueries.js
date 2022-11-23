@@ -45,17 +45,8 @@ const prepData = (entity, data) => {
   return d;
 };
 
-export const gqlOptions = (query) => ({
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    Accept: "application/json",
-  },
-  body: JSON.stringify({ query }),
-});
-
 export const runQuery = (q, cb, cbError) => {
-  return fetch(config.pathGraphQL, gqlOptions(q))
+  return fetch(config.apiPath, gqlOptions(q))
     .then((r) => r.json())
     .then((data) => {
       if (data.errors) {
@@ -100,11 +91,11 @@ export const qOrderBy = (m, sortField, sortDirection = "asc") => {
   return orderBy;
 };
 
-export const qChart = (m, field) => {
-  const f = m.fieldsH[field];
+export const qChart = (m, fieldId) => {
+  const f = m.fieldsH[fieldId];
   // TODO: number fields
   if (f.type === ft.lov) {
-    return `query {chart: ${m.qid}_${field}(limit: 20) {
+    return `query {chart: ${m.qid}_${fieldId}(limit: 20) {
     id
     name
     ${m.qid}_aggregate {
@@ -115,7 +106,7 @@ export const qChart = (m, field) => {
   }
   if (f.type === ft.bool) {
     return `query {
-    true: ${m.qid}_aggregate(where: {${field}: {_eq: true}}) {
+    true: ${m.qid}_aggregate(where: {${fieldId}: {_eq: true}}) {
       aggregate {count}
     }
     total: ${m.qid}_aggregate {

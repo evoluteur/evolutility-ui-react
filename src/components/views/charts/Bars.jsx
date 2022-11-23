@@ -3,11 +3,10 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import chartProps from "./chartProps";
+import { colors } from "./chartOptions";
 
 const Bars = ({ data, showLegend = true }) => {
-  const d2 = {
-    // _name: "",
-  };
+  const d2 = {};
   data.forEach((row) => {
     d2[row.label] = row.value;
   });
@@ -21,7 +20,7 @@ const Bars = ({ data, showLegend = true }) => {
         indexBy="label"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
-        colors={{ scheme: "category10" }}
+        colors={colors}
         groupMode="grouped"
         defs={[
           {
