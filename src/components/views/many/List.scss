@@ -51,10 +51,8 @@
     }
   }
   .nobr {
-    white-space: nowrap;
     max-width: 500px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    @include ellipsis();
   }
 }
 .list-new {

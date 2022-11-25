@@ -2,6 +2,8 @@
 
 .chartTable {
   padding: 0 10px;
+  height: 100%;
+  overflow-y: scroll;
   .alignR {
     text-align: right;
   }

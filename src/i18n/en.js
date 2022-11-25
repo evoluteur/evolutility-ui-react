@@ -137,9 +137,10 @@ export const i18n_stats = {
   totalComments: "Number of comments",
   total: "Total",
   avg: "Average",
-  stddev: "Std Dev",
-  min: "Min",
-  max: "Max",
+  stddev: "Std. Deviation",
+  variance: "Variance",
+  min: "Minimum",
+  max: "Maximum",
   sum: "Sum", // "Total", ?
   noFit: "The data doesn't have any numeric fields necessary for stats.",
   noData: "No data",

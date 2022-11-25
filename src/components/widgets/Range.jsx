@@ -4,8 +4,7 @@ import { i18n_stats } from "i18n/i18n";
 
 import "./Range.scss";
 
-const Range = (props) => {
-  const { min, max, avg } = props;
+const Range = ({ min, max, avg }) => {
   const css = {
     left:
       Math.round(max === min ? 0 : ((avg - min) / (max - min)) * 200) +
@@ -16,7 +15,7 @@ const Range = (props) => {
   if (min === max || avg === undefined) {
     return null;
   }
-  const avgTxt = i18n_stats.avg + ": " + avg;
+  const avgTxt = avg;
   return (
     <div className="evo-range">
       <div className="range-line">
@@ -31,8 +30,13 @@ const Range = (props) => {
 
 export default Range;
 
+const stringOrNumber = PropTypes.oneOfType([
+  PropTypes.number,
+  PropTypes.string,
+]);
+
 Range.propTypes = {
-  min: PropTypes.number.isRequired,
-  max: PropTypes.number.isRequired,
-  avg: PropTypes.number,
+  min: stringOrNumber.isRequired,
+  max: stringOrNumber.isRequired,
+  avg: stringOrNumber,
 };

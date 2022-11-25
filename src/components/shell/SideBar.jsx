@@ -194,11 +194,8 @@ const SideBar = ({ match }) => {
         <Icon id="navToggle" name="list" theme="light" onClick={toggleNav} />
         <span className="embossed">Evolutility</span>
       </div>
-
       <ul>{menus.map(Section)}</ul>
-
       <div className="side-links">{links}</div>
-
       <div id="afterNav" />
     </nav>
   );
