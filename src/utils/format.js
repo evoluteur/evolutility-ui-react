@@ -25,7 +25,7 @@ const numFormat = (d, format) =>
   nullOrUndefined(d) ? "" : numeral(d).format(format);
 
 // --- date formats ---
-export const dateTZ = (d) => (d ? d.toISOString() : null);
+export const dateTZ = (d) => (d !== null ? d.toISOString() : null);
 export const dateString = (d) => mFormat(d, "L");
 // const timeString = d => mFormat(moment(d, 'HH:mm:ss'), 'LTS')
 const timeString = (d) => mFormat(moment(d, "HH:mm:ss"), "hh:mm A");

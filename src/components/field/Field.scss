@@ -36,9 +36,7 @@
   > div {
     width: 100%;
   }
-  > .evo-fld-invalid {
-    margin-bottom: 0 !important;
-  }
+
   .img-thumbnail {
     padding: 0 !important;
   }
@@ -89,6 +87,18 @@
   .crud-icon > svg {
     fill: $color-label;
   }
+}
+.evo-fld-invalid {
+  color: #737373;
+  display: inline-block;
+  border-radius: 2px;
+  font-size: 12px;
+  clear: both;
+  background: #fbe9e7; //Deep Orange 50
+  // border: solid 1px #ff8a65; //Deep Orange 300
+  padding: 4px 5px 4px 10px;
+  margin: 5px 5px 0 0;
+  border-radius: $radius;
 }
 
 .evol-required,

@@ -1,7 +1,7 @@
 const appMenus = [
   {
     id: "organizer",
-    title: "Demo",
+    title: "Demos",
     icon: "eye",
     world: "organizer",
     menus: [

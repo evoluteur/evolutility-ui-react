@@ -26,13 +26,13 @@ export const models = all_models;
 
 export const getModel = (mId) => all_models[mId] || null;
 
-export function addModels(ms) {
+export const addModels = (ms) => {
   ms.forEach((m) => {
     all_models[m.id] = prepModel(m);
   });
-}
+};
 
-export function fetchModels(cb, cbErr) {
+export const fetchModels = (cb, cbErr) => {
   dao
     .getModels()
     .then((response) => {
@@ -51,7 +51,7 @@ export function fetchModels(cb, cbErr) {
         cbErr(err);
       }
     });
-}
+};
 
 const moma = {
   fetchModels,

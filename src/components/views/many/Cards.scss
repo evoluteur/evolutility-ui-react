@@ -53,6 +53,7 @@
       > h4 {
         margin-bottom: 14px;
         @include ellipsis();
+        min-height: 1.2em;
       }
       > label {
         width: $golden-ratio-small;

@@ -7,7 +7,7 @@ import _ from "underscore";
 import { fieldTypes, fieldIsNumber } from "./dico";
 import { locale, i18n_validation } from "../i18n/i18n";
 
-function validateField(f, v) {
+export const validateField = (f, v) => {
   var isNumberField = fieldIsNumber(f);
   var ft = fieldTypes;
 
@@ -139,7 +139,21 @@ function validateField(f, v) {
   }
 
   return "";
-}
+};
+
+export const diffData = (model, data, userData) => {
+  const diffs = {};
+  model.fields.forEach((f) => {
+    if (data[f.id] !== userData[f.id]) {
+      diffs[f.id] = userData[f.id];
+    }
+  });
+  const diffsCount = Object.keys(diffs).length;
+  if (diffsCount) {
+    return diffs;
+  }
+  return null;
+};
 
 const validation = {
   valRegEx: {
@@ -149,8 +163,8 @@ const validation = {
     decimalFR: /(\+|-)?(\d*,\d*)?$/,
     //decimalDA: /(\+|-)?(\d*\,\d*)?$/,
   },
-
-  validateField: validateField,
+  validateField,
+  diffData,
 };
 
 export default validation;

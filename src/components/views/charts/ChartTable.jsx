@@ -33,10 +33,10 @@ const ChartTable = ({ entity, field, sortTable, data, showTotal = true }) => {
               {field.label}
             </th>
             <th onClick={sortTable} className="alignR">
-              Count
+              {i18n_charts.count}
             </th>
             <th onClick={sortTable} className="alignR">
-              Percentage
+              {i18n_charts.percentage}
             </th>
           </tr>
         </thead>

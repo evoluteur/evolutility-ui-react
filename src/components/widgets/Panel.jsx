@@ -52,7 +52,7 @@ const Panel = ({
         <fieldset style={{ display: opened ? "block" : "none" }}>
           {children}
         </fieldset>
-        {footer ? <div className="panel-footer">{footer}</div> : null}
+        {footer && <div className="panel-footer">{footer}</div>}
       </div>
     </div>
   );

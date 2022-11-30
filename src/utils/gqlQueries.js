@@ -76,10 +76,6 @@ export const qFields = (m) => "id " + m.fields?.map(qField).join(" ");
 
 const gqlFields = (fields) => fields?.map(qField).join(" ");
 
-//#endregion
-
-//#region Many ----------------------------
-
 export const qOrderBy = (m, sortField, sortDirection = "asc") => {
   const mft = m.fieldsH[sortField];
   let orderBy = ", order_by:{" + sortField + ":";
@@ -90,6 +86,10 @@ export const qOrderBy = (m, sortField, sortDirection = "asc") => {
   }
   return orderBy;
 };
+//#endregion
+
+//#region Many ----------------------------
+
 
 export const qChart = (m, fieldId) => {
   const f = m.fieldsH[fieldId];

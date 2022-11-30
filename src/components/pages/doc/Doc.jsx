@@ -41,18 +41,15 @@ const Doc = () => {
           </a>
         </div>
         <p>
-          Evolutility-UI-React is a set of <strong>model-driven views</strong>{" "}
-          to <a href="#Browse">Browse</a>, <a href="#Edit">Edit</a>,{" "}
-          <a href="#List">List</a>, <a href="#Cards">Cards</a>,{" "}
-          <a href="#Charts">Charts</a>, and <a href="#Stats">Stats</a> for
-          graphQL with <a href="https://hasura.io">Hasura</a>.
-        </p>
-        <p>
-          With it you can easily build CRUD applications by writing models
-          rather than code.
+          Evolutility-UI-React provides a set of{" "}
+          <strong>model-driven views</strong> to <a href="#Browse">Browse</a>,{" "}
+          <a href="#Edit">Edit</a>, <a href="#List">List</a>,{" "}
+          <a href="#Cards">Cards</a>, <a href="#Charts">Charts</a>, and{" "}
+          <a href="#Stats">Stats</a> data of different shape with graphQL on{" "}
+          <a href="https://hasura.io">Hasura</a>.
         </p>
         <h3 id="table-of-contents">Table of Contents</h3>
-        <ol style={{ "list-style-type": "decimal" }}>
+        <ol style={{ listStyleType: "decimal" }}>
           <li>
             <a href="#Installation">Installation</a>
           </li>
@@ -65,9 +62,6 @@ const Doc = () => {
           </li>
           <li>
             <a href="#Models">Models</a>
-          </li>
-          <li>
-            <a href="#Backend">Backend</a>
           </li>
           <li>
             <a href="#License">License</a>
@@ -789,17 +783,6 @@ const Doc = () => {
             Wine cellar
           </a>
           .
-        </p>
-        <p>
-          <a name="Backend"></a>
-        </p>{" "}
-        <h2>Evolutility backend</h2>
-        <p>
-          <a href="https://github.com/evoluteur/evolutility-server-node">
-            Evolutility-Server-Node
-          </a>{" "}
-          provides REST or GraphQL end-points for Evolutility-UI-React using the
-          same models.
         </p>
         <p>
           <a name="License"></a>

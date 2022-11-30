@@ -1,9 +1,4 @@
-// Evolutility-UI-React :: utils/url.js
-
-// https://github.com/evoluteur/evolutility-ui-react
-// (c) 2022 Olivier Giulieri
-
-const queryString = require("query-string");
+import queryString from "query-string";
 
 export const queryUrl = () => window.location.search || "";
 

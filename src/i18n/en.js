@@ -84,7 +84,7 @@ export const i18n_msg = {
 // --- validation ---
 export const i18n_validation = {
   // incomplete: 'Some information is missing or invalid.',
-  incomplete: "Missing information.",
+  incomplete: "Incomplete or invalid information.",
   invalid: "Invalid format.",
   // invalidList: '{0} values in "{1}" are invalid.',
   // invalidList1: '1 value in "{1}" is invalid.',
@@ -119,6 +119,8 @@ export const i18n_charts = {
   pie: "Pie",
   bars: "Bars",
   table: "Table",
+  percentage: "Percentage",
+  count: "Count",
 };
 
 // --- comments ---

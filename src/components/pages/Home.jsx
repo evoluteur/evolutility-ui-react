@@ -45,8 +45,10 @@ const Home = () => {
       <section className="co-splash">
         <h1 className="siteTitle text-center">
           <span>Evol</span>
-          <span className="utility">utility</span>-UI-React{" "}
-          <span className="version">v{pkg.version}</span>{" "}
+          <span className="utility">utility</span>-UI-
+          <span className="ns">
+            React <span className="version">v{pkg.version}</span>
+          </span>
         </h1>
         <h2 className="tBlue">
           Toolkit to build CRUD UIs with models rather than code

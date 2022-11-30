@@ -11,12 +11,16 @@ export const lcRead = (key) => localStorage.getItem(prefix + key) || null;
 
 export const lcRemove = (key) => localStorage.removeItem(prefix + key);
 
+// #region --- Activity ---
 export const logActivity = (modelId, recordId, recordTitle, actionId) => {
   if (wActivity) {
     if (recordTitle && modelId && recordId) {
       const key = `${modelId}-activity`;
       const now = new Date();
-      const date = now.toLocaleDateString() + " " + now.toLocaleTimeString();
+      const date =
+        now.toLocaleDateString() +
+        " " +
+        now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
       const v = {
         id: recordId,
         title: recordTitle,
@@ -53,4 +57,8 @@ export const getActivity = (modelId) => {
     return JSON.parse(activity);
   }
   return [];
+
+export const clearActivity = (modelId) => {
+  lcRemove(`${modelId}-activity`);
 };
+// #endregion

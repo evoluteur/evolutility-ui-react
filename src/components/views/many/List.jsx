@@ -5,6 +5,7 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2022 Olivier Giulieri
 
+// #region ---------------- Imports ----------------
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -26,6 +27,7 @@ import PageNotFound from "../../pages/PageNotFound";
 import Pagination from "../../widgets/Pagination";
 
 import "./List.scss";
+// #endregion
 
 const sliceData = (data) =>
   data.length > pageSize ? data.slice(0, pageSize) : data || [];

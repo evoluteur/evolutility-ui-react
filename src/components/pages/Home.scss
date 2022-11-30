@@ -21,6 +21,9 @@
   .text-center {
     text-align: center;
   }
+  .home-demos {
+    margin: 20px;
+  }
   .comp {
     h2 {
       margin-bottom: 30px;
@@ -37,6 +40,9 @@
     .utility {
       color: black;
     }
+    .ns {
+      white-space: nowrap;
+    }
   }
   .tBlue {
     color: #2e9ec9;
@@ -44,7 +50,7 @@
   .w100 {
     width: 100%;
   }
-  .tech-logos{
+  .tech-logos {
     margin-top: 20px;
     img {
       margin: 10px 20px;

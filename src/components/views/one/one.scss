@@ -135,28 +135,6 @@ label {
   margin-bottom: 2px;
 }
 
-.evo-fld-help,
-.evo-fld-invalid {
-  color: #737373;
-  display: inline-block;
-  border-radius: 2px;
-  font-style: italic;
-  font-size: 12px;
-  clear: both;
-}
-.evo-fld-help {
-  font-size: 0.9em;
-  margin: 0 0 5px 0;
-}
-.evo-fld-invalid {
-  position: relative;
-  top: -5px;
-  background: #fbe9e7; //Deep Orange 50
-  // border: solid 1px #ff8a65; //Deep Orange 300
-  padding: 4px 5px 4px 10px;
-  margin: 5px 5px 5px 0;
-}
-
 .evo-one-edit,
 .evo-one-browse,
 .evo-one-wiz {
