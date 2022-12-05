@@ -19,12 +19,11 @@ import url from "../../utils/url";
 import evoGlobals from "../../utils/evoGlobals";
 import { apiPath } from "../../config";
 import pkg from "../../../package.json";
+import views from "../../utils/dicoViews";
 import { i18n_msg, i18n_actions } from "../../i18n/i18n";
 import { getModel } from "../../utils/moMa";
 
 import "./Toolbar.scss";
-
-import views from "../../utils/dicoViews";
 
 const proxy = pkg.proxy || "";
 const menuItems = {

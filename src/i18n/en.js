@@ -17,7 +17,6 @@ export const i18n_actions = {
   // login: 'Login',
   new: "New",
   newEntity: "New {0}", // 'New Item',
-  // newUpload: 'New Upload',
   // search: 'Search',
   // newSearch: 'New Search',
   // searchRes: 'Search Result',
@@ -83,12 +82,10 @@ export const i18n_msg = {
 
 // --- validation ---
 export const i18n_validation = {
-  // incomplete: 'Some information is missing or invalid.',
   incomplete: "Incomplete or invalid information.",
   invalid: "Invalid format.",
   // invalidList: '{0} values in "{1}" are invalid.',
   // invalidList1: '1 value in "{1}" is invalid.',
-  // intro: 'You are not finished yet: ',
   empty: '"{0}" must have a value.',
   email: '"{0}" must be a valid email formatted like "name@domain.com".',
   integer: '"{0}" must only use numbers.',
@@ -105,7 +102,6 @@ export const i18n_validation = {
   minLength: '"{0}" must be at least {1} characters long.',
   minMaxLength: '"{0}" must be between {1} and {2} characters long.',
   regExp: '"{0}" is not of the expected format.',
-  // regExp: '"{0}" must match the regular expression pattern for "{1}".'
 };
 
 // --- charts ---
@@ -174,9 +170,13 @@ export const i18n_errors = {
         invalid: 'Invalid username/password combination.',
     },
 */
+
+export const locale = "en";
+export const language = "English";
+
 const allStrings = {
-  id: "en",
-  name: "English",
+  locale,
+  language,
   i18n_nav,
   i18n_actions,
   i18n_msg,
@@ -188,8 +188,5 @@ const allStrings = {
   i18n_errors,
   // i18n_login,
 };
-
-export const id = allStrings.id;
-export const locale = allStrings.name;
 
 export default allStrings;

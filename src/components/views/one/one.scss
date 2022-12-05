@@ -53,35 +53,6 @@
   }
 }
 
-//.evo-plist{
-//  overflow-x: auto;
-//  input{
-//    &[type="date"]{
-//      max-width: 160px;
-//    }
-//    &[type="number"]{
-//      min-width: 100px;
-//    }
-//    &[type="text"],
-//    textarea{
-//      min-width: 120px;
-//    }
-//  }
-//  select{
-//    min-width: 120px;
-//  }
-//  .table{
-//    margin-bottom: 0;
-//  }
-//}
-
-//.evol-tabs{
-//    margin: 0 10px 10px !important;
-//    >li>a{
-//      transition: all 0.6s ease;
-//    }
-//}
-
 /* --- fields --- */
 .evol-fset {
   @include flex-holder();
@@ -184,16 +155,3 @@ label {
   }
 }
 */
-#isDirty [data-id="nosave"] {
-  float: left;
-}
-
-.evo-color-box {
-  display: inline-block;
-  height: 20px;
-  width: 20px;
-  border: $border;
-  span {
-    margin-left: 24px;
-  }
-}

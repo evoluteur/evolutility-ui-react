@@ -1,7 +1,5 @@
 // Evolutility-UI-React
-
 // access to data via GraphQL API (using Hasura)
-
 // (c) 2022 Olivier Giulieri
 
 import { getModel } from "./moMa";
@@ -23,7 +21,7 @@ import packageInfo from "../../package.json";
 
 const { proxy } = packageInfo;
 
-//#region Helpers
+//#region Helpers ----------------------------
 
 // TODO: error handling
 const notImplementedYet = () => console.log("Not implemented yet.");

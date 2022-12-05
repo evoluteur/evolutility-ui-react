@@ -38,7 +38,8 @@ export default FieldLabel;
 FieldLabel.propTypes = {
   label: PropTypes.string.isRequired,
   field: PropTypes.object,
-  required: PropTypes.bool, // override for field.required
+  /**  Override for field.required */
+  required: PropTypes.bool,
   readOnly: PropTypes.bool,
 };
 

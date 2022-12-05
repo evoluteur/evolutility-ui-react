@@ -39,7 +39,6 @@ const Card = ({ entity, data, fields = [] }) => {
       {fields.map((f, idx) => {
         const attr = f.type === ft.lov ? `${f.id}_txt` : f.id;
         const fv = fieldValue(f, d[attr]);
-        //  <Link to={link+d.id}><Icon name="browse" size="small"></Icon></Link>
 
         if (idx === 0) {
           return (

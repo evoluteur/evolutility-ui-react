@@ -3,9 +3,18 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2022 Olivier Giulieri
 
+// TODO: use Yup
 import _ from "underscore";
 import { fieldTypes, fieldIsNumber } from "./dico";
 import { locale, i18n_validation } from "../i18n/i18n";
+
+export const valRegExp = {
+  email: /^[\w.-]+@[\w.-]+\.[\w.-]+$/,
+  integer: /^[-+]?\d+$/, // /^[0-9]*/,
+  decimal_en: /(\+|-)?(\d*\.\d*)?$/,
+  decimal_fr: /(\+|-)?(\d*,\d*)?$/,
+  //decimalDA: /(\+|-)?(\d*\,\d*)?$/,
+};
 
 export const validateField = (f, v) => {
   var isNumberField = fieldIsNumber(f);
@@ -36,14 +45,14 @@ export const validateField = (f, v) => {
           switch (f.type) {
             case ft.int:
             case ft.email:
-              if (!this.valRegEx[f.type].test(v)) {
+              if (!valRegExp[f.type].test(v)) {
                 return formatMsg(fieldLabel(f), i18n_validation[f.type]);
               }
               break;
             case ft.dec:
             case ft.money:
               var regex =
-                this.valRegEx[ft.dec + locale] || this.valRegEx[ft.dec + "EN"];
+                valRegExp["decimal_" + locale] || valRegExp.decimal_en;
               if (!regex.test(v)) {
                 return formatMsg(fieldLabel(f), i18n_validation[f.type]);
               }
@@ -156,13 +165,7 @@ export const diffData = (model, data, userData) => {
 };
 
 const validation = {
-  valRegEx: {
-    email: /^[\w.-]+@[\w.-]+\.[\w.-]+$/,
-    integer: /^[-+]?\d+$/, // /^[0-9]*/,
-    decimalEN: /(\+|-)?(\d*\.\d*)?$/,
-    decimalFR: /(\+|-)?(\d*,\d*)?$/,
-    //decimalDA: /(\+|-)?(\d*\,\d*)?$/,
-  },
+  valRegExp,
   validateField,
   diffData,
 };
