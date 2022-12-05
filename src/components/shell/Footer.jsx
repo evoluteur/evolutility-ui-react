@@ -18,7 +18,6 @@ const Footer = () => (
       </a>
       &nbsp; is made in California with <div className="heart">♥</div>
     </div>
-    <div></div>
     <div>
       &copy; {copyright.substring(4, 9)}
       <a

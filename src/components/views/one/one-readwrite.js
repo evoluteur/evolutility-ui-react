@@ -6,7 +6,6 @@
 // (c) 2022 Olivier Giulieri
 
 import React from "react";
-
 import { toast } from "react-toastify";
 import { getModel } from "../../../utils/moMa";
 // import evoGlobals from 'utils/evoGlobals'

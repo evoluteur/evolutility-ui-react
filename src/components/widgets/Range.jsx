@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { i18n_stats } from "i18n/i18n";
 
 import "./Range.scss";
 

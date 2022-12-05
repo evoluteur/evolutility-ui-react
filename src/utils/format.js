@@ -30,7 +30,7 @@ export const dateString = (d) => mFormat(d, "L");
 // const timeString = d => mFormat(moment(d, 'HH:mm:ss'), 'LTS')
 const timeString = (d) => mFormat(moment(d, "HH:mm:ss"), "hh:mm A");
 const datetimeString = (d) => mFormat(d, "L hh:mm A");
-function dateOpt(d, type) {
+const dateOpt = (d, type) => {
   if (type === ft.time) {
     return timeString(d);
   }
@@ -38,21 +38,21 @@ function dateOpt(d, type) {
   //   return dateString(d);
   // }
   return dateString(d);
-}
+};
 
 export const integerString = (d) => numFormat(d, "0,0");
 export const decimalString = (d) => numFormat(d, d > 1 ? "0.00" : "0.000");
 export const moneyString = (d) => numFormat(d, "$0,0.00");
 const jsonString = (js) => (js ? JSON.stringify(js, null, "\t") : "");
 
-export function image(d) {
+export const image = (d) => {
   if (d === null) {
     return null;
   }
   return <img src={d} className="img-thumbnail" alt="" />;
-}
+};
 
-export function fieldValue(f, d, abbr) {
+export const fieldValue = (f, d, abbr) => {
   if (f.type === ft.bool) {
     return d ? <i className="glyphicon glyphicon-ok" /> : "";
   }
@@ -113,7 +113,7 @@ export function fieldValue(f, d, abbr) {
     );
   }
   return d;
-}
+};
 
 export const dataTitle = (m, data, isNew) => {
   if (m) {
@@ -147,15 +147,15 @@ moment.locale(
   locale || window.navigator.userLanguage || window.navigator.language
 );
 
-export function capitalize(word) {
+export const capitalize = (word) => {
   // TODO: maybe use _.string.capitalize(word);
   if (word && word.length > 0) {
     return word.substring(0, 1).toUpperCase() + word.substring(1); // .toLowerCase();
   }
   return "";
-}
+};
 
-export function doc(d, path) {
+export const doc = (d, path) => {
   if (nullOrUndefined(d)) {
     return null;
   }
@@ -164,9 +164,9 @@ export function doc(d, path) {
       {d}
     </a>
   );
-}
+};
 
-export function urlJoin(u1, u2) {
+export const urlJoin = (u1, u2) => {
   const slashu2 = u2[0] === "/";
   const slashu1 = u1[u1.length - 1] === "/";
   if (slashu2 && slashu1) {
@@ -176,7 +176,7 @@ export function urlJoin(u1, u2) {
     return `${u1}/${u2}`;
   }
   return u1 + u2;
-}
+};
 
 const formatLib = {
   // config to override browser

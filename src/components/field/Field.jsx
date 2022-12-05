@@ -24,22 +24,22 @@ import "./Field.scss";
 // #region ---------------- Helpers ----------------
 const isObject = (obj) => typeof obj === "object" && obj !== null;
 
-function emHeight(f) {
+const emHeight = (f) => {
   let fh = parseInt(f.height || 2, 10);
   if (fh < 2) {
     fh = 2;
   }
   return Math.trunc(fh * 1.6);
-}
+};
 
-function createMarkup(d) {
+const createMarkup = (d) => {
   // TODO: good enough?
   return {
     __html: d
       ? d.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br/>")
       : "",
   };
-}
+};
 
 const createOption = (id, text) => (
   <option key={id} value={`${id}`}>

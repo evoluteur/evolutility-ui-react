@@ -67,7 +67,10 @@ export default ChartTable;
 
 ChartTable.propTypes = {
   entity: PropTypes.string.isRequired,
-  field: PropTypes.object.isRequired,
+  field: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired,
   sortTable: PropTypes.func,
   data: PropTypes.array,
 };

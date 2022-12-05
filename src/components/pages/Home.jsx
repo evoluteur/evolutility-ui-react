@@ -16,7 +16,7 @@ const musicIcons = [];
 
 modelIds.forEach((mid) => {
   const m = getModel(mid);
-  if (m.active) {
+  if (m && m.active) {
     if (m.world === "organizer" || m.world === "music") {
       const menuItem = {
         id: m.id,
@@ -56,25 +56,12 @@ const Home = () => {
       </section>
       <section>
         <div>
-          Evolutility provides an meta-model to define your models and a set of
-          model-driven Views (Browse, Edit, List, Cards, Dashboards...) to give
-          them life without writing code.
+          Evolutility provides a <strong>metamodel</strong> (model structure) to
+          define your models and <strong>a set of model-driven Views</strong>{" "}
+          (Browse, Edit, List, Cards, Dashboards...) to give them life without
+          writing code.
         </div>
-        <div>
-          It's a React SPA using GraphQL on{" "}
-          <a
-            href="https://hasura.io"
-            target="h"
-            rel="noopener noreferrer"
-            className="extlink"
-          >
-            Hasura
-          </a>
-          .
-        </div>
-        <div>
-          <br />
-          With it, you can build UIs like these:
+        <div>With it, you can build UIs like these:</div>
         </div>
         <DemosList />
         <div>
@@ -113,7 +100,7 @@ const Home = () => {
       </div>
       <section>
         <div>
-          The demos on this site are using{" "}
+          Evolutility is a React SPA using GraphQL on{" "}
           <a
             href="https://hasura.io"
             target="h"
@@ -121,8 +108,8 @@ const Home = () => {
             className="extlink"
           >
             Hasura
-          </a>{" "}
-          GraphQL API.
+          </a>
+          .
         </div>
         <div>
           Evolutility-UI-React is Open source. The code and documentation are

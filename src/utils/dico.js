@@ -153,7 +153,7 @@ export const fieldInStats = (f) => fieldIsNumeric(f) && !f.noStats;
 export const allStats = ["sum", "avg", "stddev", "min", "max"];
 export const statsFunctions = (f) => {
   // TODO: more field types
-  if (f.type === "date") {
+  if (fieldIsDateOrTime(f)) {
     return ["avg", "stddev", "min", "max"];
   }
   return allStats;

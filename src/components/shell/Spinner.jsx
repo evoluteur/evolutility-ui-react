@@ -4,11 +4,11 @@ import { i18n_nav } from "../../i18n/i18n";
 
 import "./Spinner.scss";
 
-// HTML & CSS from http://tobiasahlin.com/spinkit/
+// Credits: HTML & CSS from http://tobiasahlin.com/spinkit/
 
 const Spinner = ({ message }) => (
   <div className="evol-loading">
-    <div className="loading_txt">{message || i18n_nav.loading}</div>
+    <div className="loading_txt">{message}</div>
     <div className="spinner">
       <div className="bounce1" />
       <div className="bounce2" />
@@ -24,5 +24,5 @@ Spinner.propTypes = {
 };
 
 Spinner.defaultProps = {
-  message: null,
+  message: i18n_nav.loading,
 };
