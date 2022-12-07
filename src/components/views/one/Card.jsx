@@ -14,9 +14,7 @@ import { getModel } from "../../../utils/moMa";
 import { fieldValue } from "../../../utils/format";
 import { fieldTypes as ft } from "../../../utils/dico";
 
-// // TODO: check for possible bugs (quick port from old class)
 // const lovMaps = {};
-
 // const getLovMap = (f) => {
 //   let map = this.lovMaps[f.id];
 //   if (!map && f.list) {

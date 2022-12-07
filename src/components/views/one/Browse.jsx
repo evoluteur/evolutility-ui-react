@@ -5,6 +5,7 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2022 Olivier Giulieri
 
+// #region ---------------- Imports ----------------
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -21,6 +22,7 @@ import Panel from "../../widgets/Panel";
 import List from "../many/List";
 import Spinner from "../../shell/Spinner";
 import Header from "../../shell/Header";
+// #endregion
 
 export default class Browse extends OneRead {
   viewId = "browse";

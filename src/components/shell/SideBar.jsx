@@ -8,7 +8,7 @@ import models from "../../utils/moMa";
 
 import "./SideBar.scss";
 
-// #region ------- layout ---------
+// #region ------- Helpers ---------
 const item2Group_Map = {};
 const sections = {};
 const setup = () =>
