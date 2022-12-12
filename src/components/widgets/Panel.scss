@@ -1,20 +1,13 @@
 @import "../variables";
 
 .panel-heading {
-  // panel-heading from Bootstrap
   position: relative;
   border-radius: $radius $radius 0 0 !important;
   > .panel-title {
-    // panel-title from Bootstrap
     display: inline-block;
     font-weight: 400;
     font-size: 1.2em;
   }
-  //  >.evol-subtitle{
-  //    display: inline-block;
-  //    margin-left:.4em;
-  //  }
-
   svg {
     position: absolute;
     top: 8px;

@@ -87,9 +87,7 @@ const Card = ({ entity, data, fields = [] }) => {
           <div key={f.id}>
             <label>{f.labelShort || f.label}: </label>
             <div>
-              {icon ? (
-                <img src={`/pix/${icon}`} className="lov-icon" alt="" />
-              ) : null}
+              {icon && <img src={`/pix/${icon}`} className="lov-icon" alt="" />}
               {fv}
             </div>
           </div>

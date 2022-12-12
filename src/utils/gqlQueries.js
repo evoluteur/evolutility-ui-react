@@ -37,7 +37,7 @@ const prepData = (entity, data) => {
       } else if (f.type === ft.date) {
         d += f.id + ':"' + dateTZ(v) + '" ';
       } else {
-        d += f.id + ':"' + v + '" ';
+        d += `${f.id}:"${v}" `;
       }
     }
   });

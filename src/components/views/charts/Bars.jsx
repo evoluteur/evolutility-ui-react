@@ -1,21 +1,26 @@
 // - Wrapper for @nivo ResponsiveBar
 
-import React from "react";
+import React, { useMemo } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import chartProps from "./chartProps";
 import { colors } from "./chartOptions";
 
 const Bars = ({ data, showLegend = true }) => {
-  const d2 = {};
-  data.forEach((row) => {
-    d2[row.label] = row.value;
-  });
-  const keys = Object.keys(d2);
+  const { cleanData, keys } = useMemo(() => {
+    const cleanData = {};
+    data.forEach((row) => {
+      cleanData[row.label] = row.value;
+    });
+    return {
+      cleanData,
+      keys: Object.keys(cleanData),
+    };
+  }, [data]);
 
   return (
     <div className="i-chart" role="contentinfo">
       <ResponsiveBar
-        data={[d2]}
+        data={[cleanData]}
         keys={keys}
         indexBy="label"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
@@ -42,9 +47,6 @@ const Bars = ({ data, showLegend = true }) => {
             spacing: 10,
           },
         ]}
-        axisTop={null}
-        axisRight={null}
-        axisBottom={null}
         axisLeft={{
           tickSize: 5,
           tickPadding: 5,

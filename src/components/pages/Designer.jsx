@@ -92,7 +92,7 @@ const Designer = () => (
         <p>Work in progress.</p>
         <p>
           Models can be stored in the database. That way we create and modify
-          apps by manage models like any other objects (treating metadata like
+          apps by managing models like any other objects (treating metadata like
           data).
         </p>
         <div className="row-2-cols">

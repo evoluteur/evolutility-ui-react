@@ -27,7 +27,7 @@ const Panel = ({
     setOpened(!opened);
   };
 
-  const titleElem = title ? (
+  const titleElem = title && (
     <div className="panel-heading">
       {collapsible && (
         <Icon
@@ -39,7 +39,7 @@ const Panel = ({
       )}
       <h3 className="panel-title">{title}</h3>
     </div>
-  ) : null;
+  );
 
   return (
     <div
