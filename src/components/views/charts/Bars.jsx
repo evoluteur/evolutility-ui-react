@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import { ResponsiveBar } from "@nivo/bar";
-import chartProps from "./chartProps";
+import chartPropTypes from "./chartProps";
 import { colors, labelColor } from "./chartOptions";
 
 const Bars = ({ data, showLegend = true }) => {
@@ -95,4 +95,4 @@ const Bars = ({ data, showLegend = true }) => {
 
 export default Bars;
 
-Bars.propTypes = chartProps.props;
+Bars.propTypes = chartPropTypes;

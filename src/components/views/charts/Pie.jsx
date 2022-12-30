@@ -2,7 +2,7 @@
 
 import React from "react";
 import { ResponsivePie } from "@nivo/pie";
-import chartProps from "./chartProps";
+import chartPropTypes from "./chartProps";
 import { colors, labelColor } from "./chartOptions";
 
 const Pie = ({ data, showLegend = true }) => {
@@ -97,4 +97,4 @@ const Pie = ({ data, showLegend = true }) => {
 
 export default Pie;
 
-Pie.propTypes = chartProps;
+Pie.propTypes = chartPropTypes;

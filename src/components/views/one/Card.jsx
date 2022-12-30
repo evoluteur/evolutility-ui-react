@@ -105,5 +105,7 @@ Card.propTypes = {
   /** List of fields metadata. */
   fields: PropTypes.array,
   /** Data (1 single record/Object). */
-  data: PropTypes.object,
+  data: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  }),
 };

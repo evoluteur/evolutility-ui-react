@@ -12,10 +12,10 @@ export const chartDataPropType = PropTypes.arrayOf(
   })
 );
 
-const chartProps = {
+const chartPropTypes = {
   data: chartDataPropType,
   size: PropTypes.oneOf(chartSizes),
   showLegend: PropTypes.bool,
 };
 
-export default chartProps;
+export default chartPropTypes;
