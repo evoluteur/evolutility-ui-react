@@ -3,7 +3,7 @@
 import React from "react";
 import { ResponsivePie } from "@nivo/pie";
 import chartProps from "./chartProps";
-import { colors } from "./chartOptions";
+import { colors, labelColor } from "./chartOptions";
 
 const Pie = ({ data, showLegend = true }) => {
   if (data) {
@@ -37,14 +37,14 @@ const Pie = ({ data, showLegend = true }) => {
         borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
         radialLabelsSkipAngle={10}
         radialLabelsTextXOffset={6}
-        radialLabelsTextColor="#333333"
+        radialLabelsTextColor={labelColor}
         radialLabelsLinkOffset={0}
         radialLabelsLinkDiagonalLength={16}
         radialLabelsLinkHorizontalLength={24}
         radialLabelsLinkStrokeWidth={1}
         radialLabelsLinkColor={{ from: "color" }}
         slicesLabelsSkipAngle={10}
-        slicesLabelsTextColor="#333333"
+        slicesLabelsTextColor={labelColor}
         animate
         motionStiffness={90}
         motionDamping={15}

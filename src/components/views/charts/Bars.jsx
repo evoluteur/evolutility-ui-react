@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import chartProps from "./chartProps";
-import { colors } from "./chartOptions";
+import { colors, labelColor } from "./chartOptions";
 
 const Bars = ({ data, showLegend = true }) => {
   const { cleanData, keys } = useMemo(() => {
@@ -58,7 +58,7 @@ const Bars = ({ data, showLegend = true }) => {
         borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
         labelSkipWidth={12}
         labelSkipHeight={12}
-        labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+        labelTextColor={labelColor}
         legends={
           showLegend && [
             {

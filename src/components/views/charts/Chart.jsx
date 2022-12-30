@@ -110,8 +110,8 @@ const Chart = ({ entity, field, title, size, chartType, canExpand }) => {
 
   const params = {
     data,
-    entity: entity,
-    sortTable: sortTable,
+    entity,
+    sortTable,
   };
 
   let body;
