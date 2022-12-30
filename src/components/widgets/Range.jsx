@@ -7,7 +7,7 @@ const Range = ({ min, max, avg }) => {
   const css = {
     left:
       Math.round(max === min ? 0 : ((avg - min) / (max - min)) * 200) +
-      6 +
+      10 +
       "px",
   };
 
@@ -29,13 +29,11 @@ const Range = ({ min, max, avg }) => {
 
 export default Range;
 
-const stringOrNumber = PropTypes.oneOfType([
-  PropTypes.number,
-  PropTypes.string,
-]);
-
 Range.propTypes = {
-  min: stringOrNumber.isRequired,
-  max: stringOrNumber.isRequired,
-  avg: stringOrNumber,
+  /** Minimum value */
+  min: PropTypes.number.isRequired,
+  /** Maximum value */
+  max: PropTypes.number.isRequired,
+  /** Average value */
+  avg: PropTypes.number,
 };

@@ -1,9 +1,9 @@
 @import "../variables";
 
 .evo-range {
-  display: block;
   position: relative;
-  height: 30px;
+  display: block;
+  height: 38px;
   width: 200px;
   > div {
     position: absolute;
@@ -11,6 +11,7 @@
     height: 10px;
   }
   .range-line {
+    top: 3px;
     height: 20px;
     width: 100%;
     border-left: 4px solid black;
@@ -25,15 +26,15 @@
   }
   .range-avg {
     position: absolute;
-    top: 6px;
+    top: 5px;
     height: 16px;
-    width: 16px;
+    width: 8px;
     border-radius: 3px;
     background: #0277bd;
-    border: 1px solid #01579b;
     > div {
       position: relative;
       top: 16px;
+      left: -5px;
     }
   }
 }
