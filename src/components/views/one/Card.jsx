@@ -53,7 +53,7 @@ const Card = ({ entity, data, fields = [] }) => {
                   {fv || `( ${d.id} )`}
                 </Link>
               </h4>
-              <div className="card-actions">
+              <div className="card-actions noprint">
                 <Link to={linkEdit + d.id}>
                   <Icon name="edit" size="small" />
                 </Link>

@@ -26,7 +26,7 @@ const TopBar = () => {
   return (
     <header className="TopBar" role="banner">
       <Link to="/">
-        <img src={logoEvol} className="tbLogo" alt="" />
+        <img src={logoEvol} className="evo-logo" alt="" />
       </Link>
       {model ? (
         <div className="evo-toolbar views">

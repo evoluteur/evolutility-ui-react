@@ -9,18 +9,19 @@
   text-align: center;
   width: 100%;
   .loading_txt {
-    margin: 10px;
+    margin: 40px 0 0 0;
   }
 }
 
 .spinner {
-  margin: 100px auto 0;
-  width: 70px;
+  margin: 20px auto 0;
+  width: 90px;
   height: 40px;
   text-align: center;
   > div {
     width: 18px;
     height: 18px;
+    margin: 5px;
     background-color: $color-blue1;
     border-radius: 100%;
     display: inline-block;

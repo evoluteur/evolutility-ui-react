@@ -7,6 +7,7 @@ import Icon from "react-crud-icons";
 
 // import "rc-tootip/assets/bootstrap_white.css";
 import "../bootstrap_white.css";
+import "./FieldLabel.scss";
 
 const FieldLabel = ({ field, label, required, readOnly }) => {
   const f = field || { type: "text" };
