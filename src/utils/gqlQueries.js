@@ -45,6 +45,19 @@ const prepData = (entity, data) => {
   return d;
 };
 
+const reqHeader = {
+  "Content-Type": "application/json",
+  Accept: "application/json",
+};
+export const gqlOptions = (query, variables) => ({
+  method: "POST",
+  headers: reqHeader,
+  body: JSON.stringify({ query, variables }),
+});
+if (config.token) {
+  reqHeader["X-Hasura-Admin-Secret"] = config.token;
+}
+
 export const runQuery = (q, cb, cbError) => {
   return fetch(config.apiPath, gqlOptions(q))
     .then((r) => r.json())
@@ -89,7 +102,6 @@ export const qOrderBy = (m, sortField, sortDirection = "asc") => {
 //#endregion
 
 //#region Many ----------------------------
-
 
 export const qChart = (m, fieldId) => {
   const f = m.fieldsH[fieldId];

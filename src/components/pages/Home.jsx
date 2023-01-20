@@ -61,8 +61,7 @@ const Home = () => {
           (Browse, Edit, List, Cards, Dashboards...) to give them life without
           writing code.
         </div>
-        <div>With it, you can build UIs like these:</div>
-        </div>
+        <div>With it, you can build UIs like these:</div> 
         <DemosList />
         <div>
           ... simply by making models like{" "}
