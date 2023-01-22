@@ -32,10 +32,9 @@ const ft = {
   // rating: 'rating',
   // widget: 'widget'
 };
-const fta = Object.keys(ft).map((k) => ft[k]);
 
 export const fieldTypes = ft;
-export const fieldTypeStrings = fta;
+export const fieldTypeStrings = Object.keys(ft).map((k) => ft[k]);
 
 export const fieldIsNumber = (f) =>
   f.type === ft.int || f.type === ft.dec || f.type === ft.money;

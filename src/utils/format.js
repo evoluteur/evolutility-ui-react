@@ -28,8 +28,8 @@ const numFormat = (d, format) =>
 export const dateTZ = (d) => (d !== null ? d.toISOString() : null);
 export const dateString = (d) => mFormat(d, "L");
 // const timeString = d => mFormat(moment(d, 'HH:mm:ss'), 'LTS')
-const timeString = (d) => mFormat(moment(d, "HH:mm:ss"), "hh:mm A");
-const datetimeString = (d) => mFormat(d, "L hh:mm A");
+export const timeString = (d) => mFormat(moment(d, "HH:mm:ss"), "hh:mm A");
+export const datetimeString = (d) => mFormat(d, "L hh:mm A");
 const dateOpt = (d, type) => {
   if (type === ft.time) {
     return timeString(d);

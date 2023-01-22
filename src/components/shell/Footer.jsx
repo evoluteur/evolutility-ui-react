@@ -3,10 +3,11 @@ import packageInfo from "../../../package.json";
 
 import "./Footer.scss";
 
-const { version, copyright } = packageInfo;
+const { version } = packageInfo;
+const currentYear = new Date().getFullYear();
 
 const Footer = () => (
-  <div className="Footer" role="contentinfo">
+  <div className="evo-footer" role="contentinfo">
     <div>
       <a
         className="copyright"
@@ -14,12 +15,13 @@ const Footer = () => (
         rel="noopener noreferrer"
         href="https://github.com/evoluteur/evolutility-ui-react"
       >
-        Evolutility-UI-React v{version}
-      </a>
+        Evolutility-UI-React
+      </a>{" "}
+      v{version}
       &nbsp; is made in California with <div className="heart">♥</div>
     </div>
     <div>
-      &copy; {copyright.substring(4, 9)}
+      &copy; {currentYear}{" "}
       <a
         href="https://evoluteur.github.io/"
         target="og"

@@ -43,7 +43,7 @@ const ChartTable = ({ entity, field, sortTable, data, showTotal }) => {
         </thead>
         <tbody>
           {data?.map((d) => (
-            <tr key={d.id}>
+            <tr key={d.label}>
               <td>
                 <Link to={makeLink(d)}>{d.label || "N/A"}</Link>
               </td>

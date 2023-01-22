@@ -4,16 +4,15 @@ import PropTypes from "prop-types";
 import "./Range.scss";
 
 const Range = ({ min, max, avg }) => {
-  const css = {
-    left:
-      Math.round(max === min ? 0 : ((avg - min) / (max - min)) * 200) +
-      10 +
-      "px",
-  };
-
   if (min === max || avg === undefined) {
     return null;
   }
+  const css = {
+    left:
+      "calc(" +
+      Math.round(max === min ? 0 : ((avg - min) / (max - min)) * 100) +
+      "% + 4px)",
+  };
   const avgTxt = avg;
   return (
     <div className="evo-range">

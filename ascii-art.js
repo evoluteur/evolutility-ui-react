@@ -1,6 +1,6 @@
 var pkg = require("./package.json");
 
-var sig =
+var splash =
   "  ______          _       _   _ _ _ _\n" +
   " |  ____|        | |     | | (_) (_) |\n" +
   " | |____   _____ | |_   _| |_ _| |_| |_ _   _\n" +
@@ -15,4 +15,4 @@ var sig =
   Date() +
   "\n";
 
-console.log(sig);
+console.log(splash);

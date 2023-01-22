@@ -14,18 +14,6 @@ import { getModel } from "../../../utils/moMa";
 import { fieldValue } from "../../../utils/format";
 import { fieldTypes as ft } from "../../../utils/dico";
 
-// const lovMaps = {};
-// const getLovMap = (f) => {
-//   let map = this.lovMaps[f.id];
-//   if (!map && f.list) {
-//     map = {};
-//     f.list.forEach((item) => (map[item.id] = item.text));
-//     // - it would be better to not duplicate lovMap for fields sharing the same list
-//     lovMaps[f.id] = map;
-//   }
-//   return map;
-// };
-
 const Card = ({ entity, data, fields = [] }) => {
   const d = data || {};
   const m = getModel(entity);
@@ -60,7 +48,6 @@ const Card = ({ entity, data, fields = [] }) => {
               </div>
             </div>
           );
-          // <i data-id="Delete" title="Delete" className="glyphicon glyphicon-trash"></i>
         }
         if (f.type === ft.image) {
           return (
@@ -69,19 +56,6 @@ const Card = ({ entity, data, fields = [] }) => {
             </div>
           );
         }
-        // if (f.type === ft.list) {
-        //   const lovMap = getLovMap(f);
-        //   return (
-        //     <div key={f.id}>
-        //       <label>{f.labelShort || f.label}: </label>
-        //       <div className="list-tags">
-        //         {fv
-        //           ? fv.map((v) => <div key={v}>{lovMap[v] || "N/A"}</div>)
-        //           : null}
-        //       </div>
-        //     </div>
-        //   );
-        // }
         const icon = f.type === ft.lov && f.lovIcon ? d[`${f.id}_icon`] : "";
         return (
           <div key={f.id}>

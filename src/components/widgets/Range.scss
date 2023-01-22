@@ -4,11 +4,12 @@
   position: relative;
   display: block;
   height: 38px;
-  width: 200px;
+  width: 100%;
   > div {
     position: absolute;
     top: 5px;
     height: 10px;
+    width: 100%;
   }
   .range-line {
     top: 3px;
