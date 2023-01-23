@@ -1,7 +1,8 @@
-@import "./components/variables";
+@import "./variables";
 
 html {
   height: 100%; // IE
+  font-size: 14px;
 }
 body {
   margin: 0;
@@ -11,40 +12,21 @@ body {
   font-size: $text-font-size;
   font-family: "Open Sans", sans-serif;
 }
-p,
-legend {
+p {
   font-size: 16px;
 }
-h1,
+h1 {
+  margin-bottom: 30px;
+}
 h2,
 h3 {
-  font-weight: 300;
   margin-bottom: 20px;
 }
 h3 {
   margin-bottom: 16px;
 }
 
-.App {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-.loading-evol {
-  margin: 100px 20px 20px 20px;
-}
-.w-timestamp {
-  padding: 10px 20px;
-}
-
 /* TODO: for now here */
-
-.blue_title {
-  background-color: #b3e5fc;
-  color: white;
-  padding: 40px;
-}
 
 .black {
   color: black !important;
@@ -53,34 +35,11 @@ h3 {
   cursor: pointer;
 }
 
-.mr10 {
-  margin-right: 10px;
-}
-
 .grey {
   color: silver;
 }
-.navy {
-  color: navy;
-  font-weight: 300;
-}
-.clearer {
-  clear: both;
-}
-.pc50 {
-  width: 50%;
-}
-.pc100 {
-  width: 100%;
-}
 .ReactModal__Overlay {
   z-index: 110;
-}
-
-.btn {
-  font-size: 16px;
-  border-radius: 20px;
-  padding: 7px 20px;
 }
 
 .extlink:after {
@@ -90,12 +49,8 @@ h3 {
 
 @media print {
   // things to hide
-  .evol-buttons,
   .evo-toolbar,
   .noprint {
     display: none !important;
   }
-}
-.btn > svg {
-  margin-right: 10px;
 }

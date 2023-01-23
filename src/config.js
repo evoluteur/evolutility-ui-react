@@ -1,14 +1,12 @@
 /* Evolutility config options */
 
-module.exports = {
-  // - apiType possible values: 'graphql' or 'rest' (in lowercase),
-  apiType: "graphql",
-
+const config = {
   // - Path to GraphQL API
-  pathGraphQL: "https://evol-hasura.herokuapp.com/v1/graphql",
+  apiPath: "https://bds.hasura.app/v1/graphql",
+  token: "ENTER-SECRET-HERE",
 
   // - Path to uploaded files
-  filesUrl: "http://localhost:3000/pix/",
+  filesUrl: "/pix/",
 
   // - get models from server at startup (and add/replace json models)
   queryModels: false,
@@ -16,21 +14,21 @@ module.exports = {
   // - Pagination
   pageSize: 50,
 
-  // - Language (en/fr)
-  // defaults to getting locale from browser
+  // - Language
   locale: "en",
-  // locale: 'fr',
 
   // - Timestamp columns u_date and c_date w/ date of record creation and last update
-  wTimestamp: false,
+  withTimestamp: true,
   // - "WhoIs" columns u_uid and c_uid w/ userid of creator and last modifier
-  wWhoIs: false,
+  withWhoIs: false,
   // - Track last viewed record names in localstorage
-  wActivity: true,
+  withActivity: true,
   // max number of activity records tracked
   activityListSize: 50,
 
   // - Comments & Ratings (community feature)
-  wComments: false, // not implemented yet
-  wRating: false, // not implemented yet
+  withComments: false, // not implemented yet
+  withRating: false, // not implemented yet
 };
+
+export default config;

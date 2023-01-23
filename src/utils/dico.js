@@ -1,7 +1,7 @@
 /*!
 Evolutility-UI-React
 https://github.com/evoluteur/evolutility-ui-react
-(c) 2022 Olivier Giulieri
+(c) 2023 Olivier Giulieri
 */
 
 // Helpers for models
@@ -52,105 +52,17 @@ export const fieldChartable = (f) =>
 
 export const fieldInCharts = (f) => fieldChartable(f) && !f.noCharts;
 
-export function hById(arr, prop = "id") {
-  const objH = {};
-  if (arr) {
-    arr.forEach((o) => {
-      objH[o[prop]] = o;
-    });
-  }
-  return objH;
-}
-
-export function prepModel(m) {
-  if (m) {
-    if (!m._prepared) {
-      // - Model
-      m.defaultViewOne = m.defaultViewOne || "browse";
-      m.defaultViewMany = m.defaultViewMany || "list";
-      if (!m.label) {
-        m.label = m.title || m.namePlural || m.name;
-      }
-      // - Fields
-      if (!m.fieldsH) {
-        m.fieldsH = hById(m.fields);
-      }
-      if (!m.titleField) {
-        m.titleField = m.fields[0];
-      }
-      if (m.fields.filter(fieldInCharts).length < 1) {
-        m.noCharts = true;
-      }
-      m._prepared = true;
-    }
-    return m;
-  }
-  return null;
-}
-
-const prepModelCollecs = (m, models) => {
-  if (m) {
-    if (!m._preparedCollecs) {
-      if (m.collections) {
-        m.collections.forEach((c) => {
-          if (c.object) {
-            const collecModel = models[c.object];
-            if (collecModel) {
-              // - if no icon, get it from collec object
-              if (!c.icon && collecModel.icon) {
-                c.icon = collecModel.icon;
-              }
-              // - if no fields, get it from collec object (fields in list but not the object)
-              if (!c.fields) {
-                c.fields = collecModel.fields.filter(
-                  (f) => f.inMany && !f.object === c.object
-                );
-              }
-              const fsh = collecModel.fieldsH;
-              c.fields.forEach((f, idx) => {
-                if (typeof f === "string") {
-                  c.fields[idx] = JSON.parse(JSON.stringify(fsh[f] || {}));
-                }
-              });
-            } else {
-              console.log(
-                'Model "' + c.object + '" not found in model "' + m.id + '".'
-              );
-            }
-          }
-        });
-      }
-      m._preparedCollecs = true;
-    }
-    return m;
-  }
-  return null;
-};
-
-export const prepModels = (models) => {
-  const ms = Object.keys(models);
-  // need 2 passes for field map to be populated first, then collecs
-  ms.forEach((m) => {
-    models[m] = prepModel(models[m]);
-  });
-  ms.forEach((m) => {
-    models[m] = prepModelCollecs(models[m], models);
-  });
-  return models;
-};
-
-export const isFieldMany = (f) => f.inList || f.inMany;
-
 export const fieldIsText = (f) =>
   [ft.text, ft.textml, ft.url, ft.html, ft.email].indexOf(f.type) > -1;
 
 export const fieldId2Field = (fieldIds, fieldsH) =>
   fieldIds ? fieldIds.map((id) => fieldsH[id] || null) : null;
 
-export const fieldInStats = (f) => fieldIsNumeric(f) && !f.noStats;
+export const fieldInStats = (f) =>
+  fieldIsNumeric(f) && !f.noStats && f.type !== ft.money;
 
-export const allStats = ["sum", "avg", "stddev", "min", "max"];
-export const statsFunctions = (f) => {
+export const allStats = ["avg", "stddev", "variance", "min", "max"];
+export const fieldStatsFunctions = (f) => {
   // TODO: more field types
   if (fieldIsDateOrTime(f)) {
     return ["avg", "stddev", "min", "max"];
@@ -160,18 +72,13 @@ export const statsFunctions = (f) => {
 
 const dico = {
   fieldTypes: ft,
-  fieldTypeStrings: fta,
+  fieldTypeStrings,
+  fieldIsText,
   fieldIsNumber,
   fieldIsDateOrTime,
   fieldIsNumeric,
   fieldInCharts,
   fieldChartable,
-  hById,
-  hByX: hById,
-  prepModel,
-  prepModelCollecs,
-  isFieldMany,
-  fieldIsText,
   fieldId2Field,
 };
 

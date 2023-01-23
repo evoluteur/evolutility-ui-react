@@ -1,6 +1,7 @@
-import { wActivity } from "../config";
+import config from "../config";
 import { i18n_actions } from "../i18n/i18n";
 
+const { withActivity } = config;
 export const viewsOne = {
   browse: {
     id: "browse",
@@ -36,8 +37,6 @@ export const viewsMany = {
 };
 
 export const views = { ...viewsOne, ...viewsMany };
-export const viewsList = Object.values(views);
-export const viewIds = Object.keys(views);
 
 export const modelViewsMany = (model) => {
   const vs = {
@@ -50,7 +49,7 @@ export const modelViewsMany = (model) => {
   if (!model.noStats) {
     vs.stats = views.stats;
   }
-  if (wActivity && !model.noActivity) {
+  if (withActivity && !model.noActivity) {
     vs.activity = views.activity;
   }
   return vs;

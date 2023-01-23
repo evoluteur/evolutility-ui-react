@@ -1,25 +1,39 @@
 /*
   evolutility-ui-react : many-charts
 */
-@import "../../variables";
+@import "../../../variables";
 
 .evol-many-charts {
   width: 100%;
   @include flex-holder();
-  > .evol-chart-holder {
+  gap: $gap;
+  > .chart-card {
     @include flex-item();
+    width: 400px;
   }
 }
 
-.evol-chart-holder {
+.chart-card {
   position: relative;
   text-align: center;
-  background-color: #ffffff;
-  margin: 0 10px 20px 5px;
-  width: 400px;
-  min-height: 286px;
+  background-color: white;
+  min-height: 300px;
   &.size-tiny {
-    width: 300px;
+    // width: 280px !important;
+    height: 300px;
+    .chart-content > h3 {
+      font-size: 1em;
+      padding-left: 0;
+    }
+    // .i-chart {
+    //   position: relative;
+    //   top: -30px;
+    //   left: -10px;
+    //   width: 300px;
+    // }
+  }
+  &small {
+    min-height: 200px;
   }
   &.size-large {
     width: 100%;
@@ -33,34 +47,24 @@
 			}
 		}*/
   }
+  &.hidden-chart {
+    display: none;
+  }
 }
-.chart-holder {
+.chart-content {
   position: relative;
   border: 1px solid white;
   overflow: hidden;
   min-height: 100%;
   border-radius: $radius;
-
-  .chart-actions-left,
-  .chart-actions-right {
-    display: block;
-    top: -40px;
-    opacity: 100%;
-  }
-  &:hover {
-    border-color: $color-border-hover;
-    .chart-actions-left,
-    .chart-actions-right {
-      top: 5px;
-      opacity: 100%;
-    }
-  }
   > h3 {
     display: block;
     font-weight: 400;
     font-size: 1.2em;
     text-align: center;
-    padding: 10px 20px 30px;
+    padding: 10px 40px 30px;
+    margin-right: 70px;
+    @include ellipsis();
   }
   > i {
     position: relative;
@@ -69,12 +73,7 @@
   > .i-chart {
     padding: 0 10px;
     height: 300px;
-    min-width: 300px;
     min-height: 100px;
-  }
-  .alert {
-    text-align: left;
-    margin: 0 10px;
   }
   i[data-id="Resize"] {
     margin-left: 8px;
@@ -87,17 +86,25 @@
   .chart-actions-left,
   .chart-actions-right {
     top: 5px;
-    opacity: 100%;
   }
 }
 .chart-actions-left,
 .chart-actions-right {
   position: absolute;
-  top: 0;
-  transition: top $ease-time ease $delay-time;
+  top: 1px;
   @include icons-actions();
-  > i.crud-icon.light > svg {
-    fill: $color-icon;
+  > i {
+    border: solid 1px transparent;
+    &.active {
+      cursor: default !important;
+      border-color: $color-icon-active;
+      > svg {
+        fill: black !important;
+      }
+    }
+    > svg {
+      fill: $color-icon !important;
+    }
   }
 }
 .chart-actions-left {
@@ -113,6 +120,7 @@
   }
 }
 // no data in charts
-.chart-holder > .alert {
-  margin-top: 50px;
+.chart-content > .alert {
+  margin: 50px 10px 10px 10px;
+  text-align: left;
 }

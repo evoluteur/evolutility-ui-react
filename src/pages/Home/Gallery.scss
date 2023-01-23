@@ -1,0 +1,16 @@
+@import "../../variables";
+
+.alice-carousel {
+  margin: 30px 0;
+  .item {
+    max-height: 240px;
+    width: 250px;
+    padding: 10px;
+    > div {
+      max-height: 239px;
+      margin-top: 5px;
+      border: $border;
+      overflow-y: hidden;
+    }
+  }
+}

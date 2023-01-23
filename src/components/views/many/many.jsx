@@ -1,208 +1,129 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /*
 	Evolutility-UI-React :: /views/many.js
 
 	Super-class for most Views for Many (List, Cards but not Charts).
 
 	https://github.com/evoluteur/evolutility-ui-react
-	(c) 2022 Olivier Giulieri
+	(c) 2023 Olivier Giulieri
 */
 
-import React from "react";
+// #region ---------------- Imports ----------------
+import React, { useEffect, useState, useMemo } from "react";
 import PropTypes from "prop-types";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 
-import { i18n_msg } from "../../../i18n/i18n";
-import { apiPath, pageSize } from "../../../config";
+import List from "./List";
+import Cards from "./Cards";
+
+import PageTitle from "../../shell/PageTitle";
+import Pagination from "../../widgets/Pagination";
+import Spinner from "../../widgets/Spinner";
+import Alert from "../../widgets/Alert";
+import EmptyState from "./EmptyState";
+import { i18n_msg, i18n_errors } from "../../../i18n/i18n";
+import config from "../../../config";
 import url from "../../../utils/url";
 import { getModel } from "../../../utils/moMa";
-
-import "./many.scss";
 import dao from "../../../utils/dao";
 
-export default class Many extends React.Component {
-  viewSuperType = "n"; // = many
+import "./Many.scss";
+// #endregion
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-      loading: true,
-    };
-  }
+const { pageSize } = config;
 
-  getData(entity, query1) {
-    if (this.props.isNested) {
-      this.lastQuery = null;
-      this.setState({
-        data: this.props.data,
-        loading: false,
-      });
-      return;
-    }
-    const params = this.props.match.params;
-    const e = entity || params.entity;
-    const query = query1
-      ? query1
-      : this.props.location
-      ? url.parseQuery(this.props.location.search)
-      : null;
-    let qUrl = apiPath + e;
+const getRange = (pageIdx, pageSize, totalSize) => {
+  const start = pageIdx * pageSize + 1;
+  const end = pageIdx < 1 ? pageSize : start + pageSize - 1;
+  return { start, end: Math.min(end, totalSize) };
+};
 
-    if (query && query.order) {
-      const orderParams = query.order.split(".");
-      this._sortField = orderParams[0];
-      this._sortDirection = orderParams[1];
-    }
-    if (pageSize) {
-      qUrl += (qUrl.indexOf("?") < 0 ? "?" : "&") + "pageSize=" + pageSize;
-      if (query) {
-        query.pageSize = pageSize;
-      }
-    }
-    this.setState({
-      loading: true,
-    });
-    this.lastQuery = qUrl;
+const Many = () => {
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+  const [fullCount, setFullCount] = useState(null);
+  const [error, setError] = useState(null);
+  const [sortDirection, setSortDirection] = useState("asc");
+  const [sortField, setSortField] = useState(null);
 
-    dao
-      .getMany(e, query)
-      .then((response) => {
+  const { entity, view } = useParams();
+  const { search } = useLocation();
+  const navigate = useNavigate();
+  const model = getModel(entity);
+  const title = model?.title;
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+
+  useEffect(() => {
+    let done = false;
+    setError(null);
+    const getData = (entity) => {
+      const query = url.parseQuery(search);
+      setLoading(true);
+      dao.getMany(entity, query).then((response) => {
+        if (done) {
+          return;
+        }
         if (response.errors) {
-          this.setState({
-            error: {
-              title: "Error",
-              message: response.errors.map((err) => err.message).join(", "),
-            },
-            loading: false,
-          });
+          setError(response.errors[0]);
         }
-        if (this.lastQuery === qUrl) {
-          this.lastQuery = null;
-          this.setState({
-            data: response.data || response,
-            loading: false,
-          });
-        }
-      })
-      .catch((err) => {
-        let msg = "";
-        if (err.response && err.response.statusText) {
-          msg = err.response.statusText + ".";
-        }
-        this.setState({
-          error: {
-            title: "Error",
-            message: "Couldn't retrieve data. " + msg,
-          },
-          loading: false,
-        });
+        setFullCount(response._full_count);
+        setData(response.data || response);
+        setLoading(false);
       });
-  }
-
-  UNSAFE_componentWillMount() {
-    this.setModel();
-  }
-
-  componentDidMount() {
-    document.title = this.model ? this.model.label : "Evolutility";
+      //     .catch((err) => {
+      //       let msg = "";
+      //       if (err.response && err.response.statusText) {
+      //         msg = err.response.statusText + ".";
+      //       }
+      //       this.setState({
+      //         error: {
+      //           title: "Error",
+      //           message: "Couldn't retrieve data. " + msg,
+      //         },
+      //         loading: false,
+      //       });
+      //     });
+    };
     window.scrollTo(0, 0);
-    this.getData();
-  }
+    getData(entity);
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (
-      nextProps.match.params &&
-      nextProps.match.params.entity !== this.props.match.params.entity
-    ) {
-      this.setModel(nextProps.match.params.entity);
-      this.setState({
-        data: [],
-        error: false,
-      });
-      this.getData(nextProps.match.params.entity);
-    } else if (nextProps.location.search !== this.props.location.search) {
-      this.getData(null, url.parseQuery(nextProps.location.search) || {});
-    }
-  }
+    return () => {
+      done = true;
+    };
+  }, [entity, search]);
 
-  pageSummary(data) {
-    const namePlural = this.model.namePlural;
-    const size = data ? data.length : 0;
-    if (size && !this.props.isNested) {
-      const totalSize = data._full_count;
-      if (size === 1) {
-        return (
-          `${size} ${this.model.name}` +
-          (totalSize > size ? " in " + totalSize : "")
-        );
-      } else if (size >= totalSize) {
-        return totalSize + " " + namePlural;
-      } else {
-        const query = url.parseQuery(this.props.location.search);
-        if (query) {
-          const pageIdx = query.page || 0;
-          if (!pageIdx && pageSize > size) {
-            return i18n_msg.aToBOfC // - '{0} to {1} {2}' w/ 0=mSize, 1=totalSize, 2=namePlural'
-              .replace("{0}", size)
-              .replace("{1}", totalSize)
-              .replace("{2}", namePlural);
-          }
-          const rangeBegin = pageIdx * pageSize + 1;
-          let rangeEnd;
-          if (pageIdx < 1) {
-            rangeEnd = Math.min(pageSize, totalSize);
-          } else {
-            rangeEnd = Math.min(rangeBegin + pageSize - 1, totalSize);
-          }
-          return i18n_msg.range // - '{0} to {1} of {2} {3}' w/ 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'
-            .replace("{0}", rangeBegin)
-            .replace("{1}", rangeEnd)
-            .replace("{2}", totalSize)
-            .replace("{3}", namePlural);
-        }
-        return `${totalSize} ${namePlural}`;
-      }
-    }
-    return "";
-  }
+  const clickSort = (evt) => {
+    const fid = evt.currentTarget.id,
+      query = url.parseQuery(search) || {};
 
-  setModel(entity) {
-    this.model = getModel(entity || this.props.match.params.entity);
-  }
-
-  clickSort = (evt) => {
-    const e = this.props.match.params.entity,
-      fid = evt.currentTarget.id,
-      query = url.parseQuery(this.props.location.search) || {};
-    let direc = "asc";
-
-    if (this._sortField === fid) {
-      if (this._sortDirection === "asc") {
-        direc = "desc";
-      }
+    let direc;
+    if (sortField === fid) {
+      direc = sortDirection === "asc" ? "desc" : "asc";
     } else {
-      this._sortField = fid;
+      direc = "asc";
+      setSortField(fid);
     }
-    this._sortDirection = direc;
+    setSortDirection(direc);
     query.order = fid + "." + direc;
-    if (query.page) {
-      query.page = 0;
-    }
-    let link = "/" + e + "/" + (this.viewId || "list");
+    query.page = 0;
+    let link = `/${entity}/${view}`;
     if (query) {
       link += "?" + url.querySearch(query);
     }
-    this.props.history.push(link);
+    navigate(link);
   };
 
-  clickPagination = (evt) => {
-    const e = this.props.match.params.entity;
+  const clickPagination = (evt) => {
     const id = evt.currentTarget.textContent;
-    const query = url.parseQuery(this.props.location.search) || {};
+    const query = url.parseQuery(search) || {};
     let pageIdx;
 
-    if (id === "»" || id === "«") {
+    if (id === ">" || id === "<") {
       pageIdx = query.page || 0;
-      if (id === "«") {
+      if (id === "<") {
         pageIdx--;
       } else {
         pageIdx++;
@@ -215,17 +136,105 @@ export default class Many extends React.Component {
     } else {
       query.page = pageIdx;
     }
-    this.props.history.push(
-      "/" + e + "/" + this.viewId + "?" + url.querySearch(query)
-    );
-    // TODO: scroll to top
-    // ReactDOM.findDOMNode(this).scrollTop = 0
+    navigate(`/${entity}/${view}?` + url.querySearch(query));
   };
-}
+
+  const pageSummary = useMemo(() => {
+    const namePlural = model?.namePlural;
+    const size = data ? data.length : 0;
+    if (size) {
+      const totalSize = data._full_count;
+      if (totalSize === size) {
+        return null;
+      }
+      if (size === 1) {
+        return (
+          `${size} ${model.name}` + (totalSize > size ? " in " + totalSize : "")
+        );
+      } else {
+        const query = url.parseQuery(search);
+        if (query) {
+          const pageIdx = query.page || 0;
+          if (!pageIdx && pageSize > size) {
+            return (
+              i18n_msg.aToBOfC // - '{0} to {1} {2}' w/ 0=mSize, 1=totalSize, 2=namePlural'
+                .replace("{0}", size)
+                .replace("{1}", totalSize)
+                // .replace("{2}", namePlural);
+                .replace("{2}", "")
+            );
+          }
+          const { start, end } = getRange(pageIdx, pageSize, totalSize);
+          return i18n_msg.range // - '{0} to {1} of {2} {3}' w/ 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'
+            .replace("{0}", start)
+            .replace("{1}", end)
+            .replace("{2}", totalSize)
+            .replace("{3}", namePlural);
+        }
+        return ""; //`${totalSize} ${namePlural}`;
+      }
+    }
+    return "";
+  }, [data, search]);
+
+  const viewProps = {
+    entity,
+    model,
+    data,
+    onClickSort: clickSort,
+    sortField,
+    sortDirection,
+  };
+
+  let body;
+  if (!model) {
+    body = (
+      <Alert
+        title={i18n_errors.error}
+        message={i18n_errors.badEntity.replace("{0}", entity)}
+      />
+    );
+  } else if (loading) {
+    body = <Spinner />;
+  } else if (error) {
+    body = <Alert title={i18n_errors.serverError} message={error.message} />;
+  } else if (data.length === 0) {
+    body = <EmptyState model={model} />;
+  } else {
+    body = (
+      <>
+        {view === "list" ? <List {...viewProps} /> : <Cards {...viewProps} />}
+        {fullCount > 0 && (
+          <Pagination
+            count={data.length}
+            fullCount={fullCount || 0}
+            onClick={clickPagination}
+          />
+        )}
+      </>
+    );
+  }
+
+  return (
+    <div className={"evol-many model_" + entity}>
+      <PageTitle
+        entity={entity}
+        title={title}
+        model={model}
+        count={fullCount}
+        cardinality="n"
+        view={view}
+        text={pageSummary}
+      />
+      {body}
+    </div>
+  );
+};
+
+export default Many;
 
 Many.propTypes = {
   isNested: PropTypes.bool,
-  data: PropTypes.object,
 };
 
 Many.defaultProps = {

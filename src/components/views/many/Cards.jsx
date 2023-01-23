@@ -1,93 +1,63 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Evolutility-UI-React :: /views/many/Cards.js
 
 // Cards view to display a collection as a set of Cards.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2022 Olivier Giulieri
+// (c) 2023 Olivier Giulieri
 
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
+import modelPropTypes from "../modelPropTypes";
 
 import { i18n_errors } from "../../../i18n/i18n";
-import Header from "../../shell/Header";
-import { isFieldMany } from "../../../utils/dico";
-import Many from "./many";
 import Card from "../one/Card";
 import Alert from "../../widgets/Alert";
-import Pagination from "../../widgets/Pagination";
-import Spinner from "../../shell/Spinner";
-import NoData from "./NoData";
+import EmptyState from "./EmptyState";
 
 import "./Cards.scss";
 
-export default class Cards extends Many {
-  viewId = "cards";
+const Cards = ({ entity, model, data }) => {
+  const fieldCols = useMemo(
+    () => model?.fields.filter((f) => f.inMany),
+    [entity]
+  );
 
-  render() {
-    const entity = this.props.match.params.entity;
-    const m = this.model;
-
-    if (m) {
-      const data = this.state.data ? this.state.data : [];
-      const full_count = this.pageSummary(data);
-      const fullCount = data._full_count
-        ? data._full_count
-        : data.length
-        ? data[0]._full_count || 0
-        : 0;
-      const title = m.title || m.label;
-      let body;
-
-      document.title = title;
-      if (this.state.loading) {
-        body = <Spinner />;
-      } else if (this.state.error) {
-        body = <Alert title="Error" message={this.state.error.message} />;
-      } else if (data.length) {
-        const fieldCols = m.fields.filter(isFieldMany);
-        body = (
-          <>
-            <div className="evol-cards-body">
-              {this.state.data.map((d, idx) => (
-                <Card key={idx} data={d} fields={fieldCols} entity={entity} />
-              ))}
-            </div>
-            <Pagination
-              count={data.length}
-              fullCount={fullCount}
-              fnClick={this.clickPagination}
-              location={this.props.location}
-            />
-          </>
-        );
-      } else {
-        body = <NoData name={m.name} namePlural={m.namePlural} />;
-      }
-      return (
-        <div data-entity={entity} className="evol-many-cards">
-          <Header
-            model={m}
-            entity={entity}
-            title={title}
-            count={full_count}
-            cardinality="n"
-            view={this.viewId}
-          />
-          {body}
+  if (model) {
+    let body;
+    if (data?.length) {
+      body = (
+        <div className="evol-cards">
+          {data?.map((d, idx) => (
+            <Card key={idx} data={d} fields={fieldCols} entity={entity} />
+          ))}
         </div>
       );
+    } else {
+      body = <EmptyState model={model} />;
     }
     return (
-      <Alert
-        title="Error"
-        message={i18n_errors.badEntity.replace("{0}", entity)}
-      />
+      <div data-entity={entity} className="evol-many-cards">
+        {body}
+      </div>
     );
   }
-}
+  return (
+    <Alert
+      title="Error"
+      message={i18n_errors.badEntity.replace("{0}", entity)}
+    />
+  );
+};
+
+export default Cards;
 
 Cards.propTypes = {
-  params: PropTypes.shape({
-    entity: PropTypes.string.isRequired,
-  }),
+  entity: PropTypes.string.isRequired,
+  model: modelPropTypes,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    })
+  ),
 };

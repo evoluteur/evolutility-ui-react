@@ -1,0 +1,18 @@
+@import "../../../variables";
+
+.timestamps {
+  display: block;
+  width: 100%;
+  margin: 20px 0 0 10px;
+  color: $color-label;
+  > div {
+    margin-bottom: 5px;
+    > label {
+      font-size: $text-font-size;
+      margin-right: 10px;
+      &:after {
+        content: ":";
+      }
+    }
+  }
+}

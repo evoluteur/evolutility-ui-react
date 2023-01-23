@@ -3,10 +3,11 @@
 // Dashboard style set of charts (bars or pies).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2022 Olivier Giulieri
+// (c) 2023 Olivier Giulieri
 
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+//#region Imports ----------------------------
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import classnames from "classnames";
 import { i18n_charts } from "../../../i18n/i18n";
@@ -14,18 +15,26 @@ import { getModel } from "../../../utils/moMa";
 import { fieldInCharts } from "../../../utils/dico";
 import { lcRead } from "../../../utils/localStorage";
 import { capitalize } from "../../../utils/format";
-import Header from "../../shell/Header";
+import Header from "../../shell/PageTitle";
 import Alert from "../../widgets/Alert";
 import Chart from "./Chart";
 
 import "./Charts.scss";
+//#endregion
 
-const Charts = (props) => {
-  const e = props.match.params.entity;
-  const m = getModel(e);
-
+const Charts = () => {
+  const [expandedChart, setExpandedChart] = useState(null);
+  const toggleExpandedChart = (fid, expanded) => {
+    if (fid === expandedChart) {
+      setExpandedChart(expanded ? fid : null);
+    } else {
+      setExpandedChart(fid);
+    }
+  };
+  const { entity } = useParams();
+  const m = getModel(entity);
   useEffect(() => {
-    document.title = m ? m.label + " Charts" : "Evolutility";
+    document.title = m?.label + " Charts";
     window.scrollTo(0, 0);
   });
 
@@ -34,7 +43,7 @@ const Charts = (props) => {
     const chartFields = m.fields.filter(fieldInCharts);
     const nbCharts = chartFields.length;
     const css = classnames(
-      "evolutility evol-many-charts",
+      "evol-many-charts",
       nbCharts === 1 ? "single-chart" : null
     );
 
@@ -44,61 +53,70 @@ const Charts = (props) => {
         .replace("{1}", f.labelCharts || f.label);
     let charts;
 
+    const cssChart = (f) => {
+      let css = "panel";
+      if (expandedChart && expandedChart !== f.id) {
+        css += " hidden-chart";
+      }
+      return css;
+    };
+
     if (nbCharts === 0) {
       charts = (
         <Alert title="No data" message={i18n_charts.nocharts} type="info" />
       );
-    } else if (nbCharts === 1) {
-      const f = chartFields[0];
-      charts = (
-        <Chart
-          entity={e}
-          field={f}
-          title={chartTitle(f)}
-          chartType={lcRead(`${m.id}-charts-${f.id}`) || f.chartType}
-          key={"c0-" + f.id}
-          size="large"
-          className="panel-default single-chart"
-          canExpand={false}
-        />
-      );
     } else {
-      charts = chartFields.map((f) => (
-        <Chart
-          entity={e}
-          size="small"
-          className="panel-default"
-          key={"c-" + f.id}
-          field={f}
-          title={chartTitle(f)}
-          chartType={lcRead(m.id + "-charts-" + f.id) || f.chartType}
-        />
-      ));
+      const chartFieldProps = (f) => ({
+        entity: entity,
+        key: f.id,
+        field: f,
+        title: chartTitle(f),
+        chartType: lcRead(`${m.id}-charts-${f.id}`) || f.chartType,
+        className: cssChart(f),
+      });
+      if (nbCharts === 1) {
+        const f = chartFields[0];
+        charts = (
+          <Chart
+            {...chartFieldProps(f)}
+            size="large"
+            isExpanded={true}
+            className="panel single-chart"
+          />
+        );
+      } else {
+        charts = chartFields.map((f) => (
+          <Chart
+            {...chartFieldProps(f)}
+            size={f?.id === expandedChart ? "large" : "small"}
+            setExpanded={toggleExpandedChart}
+            isExpanded={f?.id === expandedChart}
+            hidden={expandedChart && expandedChart !== f?.id}
+            className={cssChart(f)}
+          />
+        ));
+      }
     }
 
     return (
       <div className="">
         <Header
-          entity={e}
+          entity={entity}
           model={m}
           title={title}
           count={null}
           cardinality="n"
-          view="Charts"
+          view="charts"
         />
         <div className={css}>{charts}</div>
       </div>
     );
   }
-  return <Alert title="Error" message={`Invalid input parameter "${e}".`} />;
+  return (
+    <Alert title="Error" message={`Invalid input parameter "${entity}".`} />
+  );
 };
 
 export default Charts;
 
-Charts.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      entity: PropTypes.string.isRequired,
-    }),
-  }).isRequired,
-};
+// Charts.propTypes = {};

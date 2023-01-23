@@ -1,19 +1,21 @@
 // Evolutility-UI-React :: /views/charts/Chart.js
 
-// Parent Component for Bars charts, Pie charts, or list
+// Parent Component for charts w/ togglee Bars, Pie, or table
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2022 Olivier Giulieri
+// (c) 2023 Olivier Giulieri
 
+// #region ---------------- Imports ----------------
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
+import classnames from "classnames";
 import Icon from "react-crud-icons";
-import { i18n_charts, i18n_actions } from "../../../i18n/i18n";
+import { i18n_charts, i18n_actions, i18n_errors } from "../../../i18n/i18n";
 import Alert from "../../widgets/Alert";
 import dao from "../../../utils/dao";
 import { lcWrite } from "../../../utils/localStorage";
-import Spinner from "../../shell/Spinner";
+import Spinner from "../../widgets/Spinner";
 import ChartTable from "./ChartTable";
 import { chartSizes, chartTypes } from "./chartProps";
 
@@ -22,6 +24,7 @@ import Pie from "./Pie";
 // import TreeMap from './TreeMap'
 
 import "./Charts.scss";
+// #endregion
 
 //#region  ---------------- Helpers ----------------
 const cTypes = {
@@ -30,56 +33,66 @@ const cTypes = {
   table: "table",
 };
 
-const sortLabel = (a, b) => (a.label || "").localeCompare(b.label || "");
-const sortCount = (a, b) => {
-  if (a.value < b.value) {
-    return 1;
-  }
-  if (b.value < a.value) {
-    return -1;
-  }
-  return 0;
+const sortByLabel = (a, b) => (a.label || "").localeCompare(b.label || "");
+const sortByCount = (a, b) => a.value - b.value;
+
+const chartIcon = (chartType, props) => {
+  return (
+    <Icon
+      id={chartType}
+      key={chartType}
+      {...props}
+      name={chartType === "table" ? "list" : chartType}
+      tooltip={i18n_charts[chartType]}
+      className={chartType === props.chartType ? "active" : ""}
+    />
+  );
 };
-const cssActive = (active) => (active ? "active" : "");
-const chartIcon = (chartType, props) => (
-  <Icon
-    id={chartType}
-    key={chartType}
-    {...props}
-    name={chartType === "table" ? "list" : chartType}
-    tooltip={i18n_charts[chartType]}
-    className={cssActive(chartType === props.chartType)}
-  />
-);
+const isFunction = (x) => typeof x === "function";
 //#endregion
 
-const Chart = ({ entity, field, title, size, chartType, canExpand }) => {
+const Chart = ({
+  entity,
+  field,
+  title,
+  size,
+  chartType,
+  setExpanded,
+  isExpanded,
+  hidden,
+  className,
+}) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [curSize, setCurSize] = useState(size);
   const [curChartType, setCurChartType] = useState(chartType);
-  const [curSortId, setCurSortId] = useState("count");
+  const [curSortId, setCurSortId] = useState("");
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let done = false;
     const getData = () => {
-      const fid = field.id;
+      const fid = field?.id;
       if (fid) {
+        // TODO timeout to show spinner
+        // setLoading(true); // Loose animation w/ it
         dao.getChart(entity, fid).then((response) => {
-          if (response.errors) {
-            console.error(response.errors);
-            const msg = response.errors[0]?.message;
-            setError({
-              title: "Server error",
-              message: `Couldn't retrieve charts data for field "${fid}". ${msg}`,
-            });
+          if (done) {
+            return;
           }
-          setData(response.data);
+          if (response.errors) {
+            setError(response.errors[0]);
+          } else {
+            setData(response.data);
+          }
           setLoading(false);
         });
       }
     };
     getData();
+
+    return () => {
+      done = true;
+    };
   }, [entity, field]);
 
   const clickView = (evt) => {
@@ -89,7 +102,7 @@ const Chart = ({ entity, field, title, size, chartType, canExpand }) => {
   };
 
   const clickResize = () => {
-    setCurSize(curSize !== "large" ? "large" : "small");
+    setExpanded(field.id, !isExpanded);
   };
 
   const sortTable = (evt) => {
@@ -97,10 +110,10 @@ const Chart = ({ entity, field, title, size, chartType, canExpand }) => {
     const sortId = evt.currentTarget.id || "count";
     if (data?.length > 1) {
       let data2 = JSON.parse(JSON.stringify(data));
-      const sortFn = sortId === "label" ? sortLabel : sortCount;
       if (curSortId === sortId) {
         data2 = data2.reverse();
       } else {
+        const sortFn = sortId === "label" ? sortByLabel : sortByCount;
         data2 = data2.sort(sortFn);
       }
       setData(data2);
@@ -112,6 +125,7 @@ const Chart = ({ entity, field, title, size, chartType, canExpand }) => {
     data,
     entity,
     sortTable,
+    className,
   };
 
   let body;
@@ -120,9 +134,8 @@ const Chart = ({ entity, field, title, size, chartType, canExpand }) => {
     body = (
       <Alert
         type="danger"
-        title={error.title}
+        title={i18n_errors.serverError}
         message={error.message}
-        more={error.messageMore}
       />
     );
   } else if (loading) {
@@ -137,12 +150,12 @@ const Chart = ({ entity, field, title, size, chartType, canExpand }) => {
         message={i18n_charts.emptyData}
       />
     );
-  } else if (curChartType === cTypes.table) {
-    // - table view
-    body = <ChartTable {...params} field={field} />;
   } else if (curChartType === cTypes.pie) {
     // - Pie charts
-    body = <Pie {...params} showLegend={curSize === "large"} />;
+    body = <Pie {...params} showLegend={size === "large"} />;
+  } else if (curChartType === cTypes.table) {
+    // - Table view
+    body = <ChartTable {...params} field={field} />;
   } else {
     // - Bars charts
     body = <Bars {...params} />;
@@ -152,19 +165,18 @@ const Chart = ({ entity, field, title, size, chartType, canExpand }) => {
     size: "small",
     theme: "light",
     onClick: clickView,
+    chartType: curChartType,
   };
 
   const actionsIcons = (
     <>
-      {canExpand && (
+      {isFunction(setExpanded) && (
         <div className="chart-actions-left">
           <Icon
             onClick={clickResize}
-            name={curSize === "large" ? "collapse" : "expand"}
+            name={isExpanded ? "collapse" : "expand"}
             size="small"
-            tooltip={
-              curSize === "large" ? i18n_actions.collapse : i18n_actions.expand
-            }
+            tooltip={isExpanded ? i18n_actions.collapse : i18n_actions.expand}
           />
         </div>
       )}
@@ -179,8 +191,12 @@ const Chart = ({ entity, field, title, size, chartType, canExpand }) => {
   );
 
   return (
-    <div className={"evol-chart-holder panel panel-default size-" + curSize}>
-      <div className="chart-holder">
+    <div
+      className={classnames("chart-card panel size-" + size, {
+        "hidden-chart": hidden,
+      })}
+    >
+      <div className="chart-content">
         <h3 className="panel-title">{title}</h3>
         {body}
       </div>
@@ -193,15 +209,25 @@ export default Chart;
 
 Chart.propTypes = {
   entity: PropTypes.string.isRequired,
+  /** Field to aggregate data by */
   field: PropTypes.object.isRequired,
+  /** Chart title */
   title: PropTypes.string.isRequired,
   size: PropTypes.oneOf(chartSizes),
   chartType: PropTypes.oneOf(chartTypes),
-  canExpand: PropTypes.bool,
+  /** Callback function to expend the chart */
+  setExpanded: PropTypes.func,
+  /** Show Chart in full screen */
+  expanded: PropTypes.bool,
+  hidden: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 Chart.defaultProps = {
   chartType: cTypes.bars,
   size: "small",
-  canExpand: true,
+  setExpanded: null,
+  expanded: false,
+  hidden: false,
+  className: "panel",
 };

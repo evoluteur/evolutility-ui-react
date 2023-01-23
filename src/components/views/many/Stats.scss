@@ -1,99 +1,75 @@
-@import "../../variables";
+@import "../../../variables";
 
-$chart-width: 490px;
+$chart-width: 300px;
 $label-width: 270px;
 $label2-width: 100px;
 
-// view Stats
 .evol-stats {
-  margin: 0 10px;
-  label {
+  .chart-card {
     display: block;
-  }
-  > div {
-    margin-bottom: 5px;
-  }
-  .evol-chart-holder {
-    display: block;
-    margin-left: 10px;
-    width: $chart-width;
-    max-width: $chart-width;
-  }
-  .cols-2 {
-    @include flex-holder();
-    .col-1,
-    .col-2 {
-      margin-right: 10px;
-      @include flex-item();
-    }
+    margin-top: 10px;
+    min-width: 200px;
+    border: none;
   }
   .evo-label {
     margin-bottom: 7px;
   }
   .label-count {
-    font-size: 1.4em;
     margin-bottom: 10px;
   }
-
+  // .field-range {
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   width: 100%;
+  //   > div {
+  //     width: 100%;
+  //     position: relative;
+  //     display: flex;
+  //     gap: 5px;
+  //     align-content: center;
+  //     margin: 20px 0 0;
+  //   }
+  // }
   .field-range {
+    width: 100%;
+    display: flex;
+    gap: 5px;
+    align-content: center;
+    margin: 20px 0 0;
+  }
+}
+.stat-field-title {
+  margin-bottom: 15px;
+  color: black;
+}
+.stat-field-id {
+  color: grey;
+  position: absolute;
+  top: 18px;
+  right: 20px;
+}
+.stats-fields {
+  @include flex-holder();
+  gap: $gap;
+  .f-stats {
+    flex: 1 1 0px;
+    flex-grow: 1;
     position: relative;
-    width: 360px;
-    margin-bottom: 20px;
-    > div {
-      display: inline-block;
-      &:first-child {
-        text-align: right;
-      }
-      &:nth-child(2) {
-        text-align: right;
-        margin: 0 10px;
-      }
+    @include flex-item();
+    min-width: 340px;
+    padding: 10px 20px;
+    .stat-values > div {
+      margin-bottom: 10px;
     }
   }
 }
-.f-stats {
-  margin: 10px 0;
-  > label {
-    display: block;
-    width: $label-width;
-    @include icons-actions();
-    > i {
-      margin-left: 10px;
-      cursor: pointer;
-    }
-  }
-  .crud-icon {
-    position: relative;
-    top: 3px;
-  }
-}
-.fl-stats {
-  min-width: 300px;
-  > div {
-    display: inline-block;
-    margin: 0 10px 10px 10px;
-    min-width: 100px;
-  }
+.stat-chart-holder {
+  border-top: $border;
 }
 .weekupdates {
   margin-left: 10px;
 }
 .stat-fn {
   display: block;
-}
-.stat-label {
-  margin-bottom: 10px;
-  &::after{
-    content: ":";
-  }
-}
-.stat-field {
-  line-height: 30px;
-  > span {
-    display: inline-block;
-    color: $grey-color;
-    width: 100px;
-    min-width: $label2-width;
-    margin-right: 7px;
-  }
 }

@@ -1,73 +1,64 @@
 // Evolutility-UI-React
 // https://github.com/evoluteur/evolutility-ui-react
+// (c) 2023 Olivier Giulieri
 
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import classnames from "classnames";
+import { ToastContainer } from "react-toastify";
 
-import config from "./config";
-import { fetchModels } from "./utils/moMa";
-import Spinner from "./components/shell/Spinner";
 import SideBar from "./components/shell/SideBar";
 import TopBar from "./components/shell/TopBar";
 import Footer from "./components/shell/Footer";
 
-import Home from "./components/pages/Home";
-import Demo from "./components/pages/Demo";
-import Doc from "./components/pages/doc/Doc";
-import Designer from "./components/pages/Designer";
-
+import Home from "./pages/Home/Home";
+import Demos from "./pages/Demos/Demos";
+import DocsRoutes from "./pages/Docs/DocsRoutes";
 import EvolRoutes from "./components/EvolRoutes";
-
-import PageNotFound from "./components/pages/PageNotFound";
+import PageNotFound from "./pages/PageNotFound";
 
 import "./App.scss";
-
-let queryModels = config.queryModels || false;
+import "react-toastify/scss/main.scss";
+import "react-crud-icons/src/Icon.scss";
 
 const AppRoutes = () => (
-  <Switch>
-    <Route exact path="/" component={Home} />
-    <Route exact path={["/demo", "/organizer"]} component={Demo} />
-    <Route exact path="/doc" component={Doc} />
-    <Route exact path="/designer" component={Designer} />
-    <EvolRoutes />
-    <Route path="*" exact component={PageNotFound} />
-  </Switch>
+  <Routes>
+    <Route exact path="/" element={<Home />} />
+    <Route exact path="/docs/*" element={<DocsRoutes />} />
+    <Route exact path="/demos" element={<Demos />} />
+    <Route path="*" element={<EvolRoutes />} />
+    <Route path="*" exact element={<PageNotFound />} />
+  </Routes>
 );
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(queryModels);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
-  useEffect(() => {
-    if (queryModels) {
-      fetchModels(
-        () => setIsLoading(false),
-        (err) => {
-          setIsLoading(false);
-          toast.error("Error fetching models: " + err.message);
-        }
-      );
-      queryModels = false;
-    }
-  });
+  const onClickToggle = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
+  const css = classnames("app", { "side-collapsed": isCollapsed });
 
   return (
-    <div className="App">
-      {isLoading ? (
-        <div className="loading-evol">
-          <Spinner message="Fetching Evolutility UI models..." />
+    <div className={css} data-testid="app">
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="*"
+            element={
+              <>
+                <TopBar />
+                <SideBar onClickToggle={onClickToggle} />
+              </>
+            }
+          />
+        </Routes>
+        <div className="pageContent" role="main">
+          <AppRoutes />
         </div>
-      ) : (
-        <BrowserRouter>
-          <Route path="*" exact component={TopBar} />
-          <Route path="*" exact component={SideBar} />
-          <div className="pageContent" role="main">
-            <AppRoutes />
-          </div>
-          <Footer />
-        </BrowserRouter>
-      )}
+        <Footer />
+      </BrowserRouter>
       <ToastContainer autoClose={5000} />
     </div>
   );

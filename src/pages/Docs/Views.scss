@@ -1,0 +1,48 @@
+@import "../../variables";
+
+.evo-doc-views {
+  .anchor {
+    position: absolute;
+    top: -60px;
+    height: 0;
+    width: 0;
+  }
+  h3 {
+    margin-top: 30px;
+  }
+  .views-list {
+    line-height: 30px;
+    margin-bottom: 30px;
+    > li {
+      margin-bottom: 10px;
+    }
+  }
+  .doc-view {
+    padding: 0 0 10px 20px;
+    h3 {
+      position: relative;
+      > svg {
+        position: relative;
+        top: 6px;
+        margin-right: 8px;
+        height: 30px;
+        width: 30px;
+      }
+    }
+    .shadowpix {
+      max-width: 600px;
+      width: 100%;
+      border: $border;
+      box-shadow: 2px 2px 4px #aaaaaa;
+    }
+  }
+  .toc-view {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+    > a > i {
+      position: relative;
+      top: 4px;
+    }
+  }
+}

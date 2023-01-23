@@ -5,7 +5,7 @@ Evolutility-UI-React is a set of **model-driven views** to [Browse](#Browse), [E
 
 With it you can easily build CRUD applications by writing models rather than code. It use GraphQL with [Hasura](https://hasura.io). No hand-coding is necessary.
 
-![Edit](public/screenshots/comics/one-edit.gif)
+![Edit](public/screenshots/one-edit.png)
 
 
 ### Table of Contents
@@ -45,9 +45,7 @@ npm start
 
 ```
 
-In a web browser, go to the url [http://localhost:3000/](http://localhost:3000/).
-
-For the REST endpoints, you also need to install and run [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) which provides the matching REST endpoints based on the same metadata.
+In a web browser, go to the url [http://localhost:3000/ the REST endpoints, you also need to install and run [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) which provides the matching REST endpoints based on the same metadata.
 
 
 <a name="Configuration"></a>
@@ -62,7 +60,7 @@ Configurations options are specified in the file [/src/config.js](https://github
 | pageSize   | Page size in pagination.  | 50 |
 | locale     | Date format (no translation yet). | en/fr |
 | queryModels | Get models from JSON files or from the database through the API. |
-| wTimestamp | Add timestamp columns u_date and c_date to track record creation and update times. | true |
+| withTimestamp | Add timestamp columns u_date and c_date to track record creation and update times. | true |
 
 
 <a name="Views"></a>
@@ -89,11 +87,11 @@ Notes: Views for actions (search, filter, export) will come later.
 ### Browse
 Shows all fields for viewing (read only). Fields are grouped in panels.
 
-![Browse](public/screenshots/comics/one-browse.gif)
+![Browse](public/screenshots/one-browse.png)
 
 Code: [/src/components/views/one/Browse.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/one/Browse.jsx)
 
-View: [http://localhost:3000/comics/browse/{id}](http://localhost:3000/comics/browse/14)
+Route: "/{entity}/browse/{id}"
 
 <a name="Edit"></a>
 ### Edit
@@ -101,11 +99,11 @@ This view shows all fields for edition to create or update records.
 It automatically performs validation based on the model.
 Fields are grouped in panels and tabs.
 
-![Edit](public/screenshots/comics/one-edit.gif)
+![Edit](public/screenshots/one-edit.png)
 
 Code: [/src/components/views/one/Edit.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/one/Edit.jsx)
 
-View: [http://localhost:3000/comics/edit/{id}](http://localhost:3000/comics/edit/14)
+Route: "/{entity}/edit/{id}"
 
 
 <a name="ViewsMany"></a>
@@ -117,31 +115,31 @@ View: [http://localhost:3000/comics/edit/{id}](http://localhost:3000/comics/edit
 ### List
 Gives a tabular view of a collection.
 
-![List](public/screenshots/comics/many-list.gif)
+![List](public/screenshots/many-list.png)
 
 Code: [/src/components/views/many/List.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/List.jsx)
 
-View: [http://localhost:3000/comics/list](http://localhost:3000/comics/list)
+Route: "/{entity}/list"
 
 <a name="Cards"></a>
 ### Cards
 Shows records side by side as cards.
 
-![Cards](public/screenshots/comics/many-cards.gif)
+![Cards](public/screenshots/many-cards.png)
 
 Code: [/src/components/views/many/Cards.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/Cards.jsx)
 
-View: [http://localhost:3000/comics/cards](http://localhost:3000/comics/cards)
+Route: "/{entity}/cards"
 
 <a name="Charts"></a>
 ### Charts
 Draws charts about the collection. Currently bars and pie charts are implemented, a list with count and percentages is also available. Only provided for fields of types like boolean, lov, integer, decimal, date... (not text or textmultilines).
 
-![Charts](public/screenshots/comics/many-charts.gif)
+![Charts](public/screenshots/many-charts.png)
 
 Code: [/src/components/views/charts/Charts.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/charts/Charts.jsx)
 
-View: [http://localhost:3000/comics/charts](http://localhost:3000/comics/charts)
+Route: "/{entity}/charts"
 
 Note: The "Charts" view is currently only implemented for REST, not available with GraphQL yet.
 
@@ -149,11 +147,11 @@ Note: The "Charts" view is currently only implemented for REST, not available wi
 ### Stats
 Display last update, number of updates in the last week, and for numeric fields the min, max, count, average.
 
-![Stats](public/screenshots/comics/many-stats.gif)
+![Stats](public/screenshots/many-stats.png)
 
 Code: [/src/components/views/many/Stats.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/Stats.jsx)
 
-View: [http://localhost:3000/comics/stats](http://localhost:3000/comics/stats)
+Route: "/{entity}/stats"
 
 <a name="Models"></a>
 ## Models
@@ -258,7 +256,7 @@ Sample model using collections: [Wine Cellar](https://github.com/evoluteur/evolu
 The following example is the model for a simple graphic novels inventory app.
 
 ```javascript
-module.exports = {
+{
     id: "comics",
     label: "Graphic Novels",
     name: "graphic novel serie",
@@ -380,7 +378,7 @@ Notes: Use the scrits from [evolutility-models](https://github.com/evoluteur/evo
 <a name="License"></a>
 ## License
 
-Copyright (c) 2022 [Olivier Giulieri](https://evoluteur.github.io/).
+Copyright (c) 2023 [Olivier Giulieri](https://evoluteur.github.io/).
 
 Evolutility-UI-React is released under the [MIT license](http://github.com/evoluteur/evolutility-ui-react/blob/main/LICENSE).
 

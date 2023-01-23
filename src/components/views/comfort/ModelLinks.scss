@@ -1,0 +1,13 @@
+@import "../../../variables";
+
+.evo-models-list {
+  padding-left: 20px;
+  > a {
+    display: inline-block;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 2px 10px 5px;
+  }
+}

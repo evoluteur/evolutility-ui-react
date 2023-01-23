@@ -8,19 +8,19 @@
 
 - Make a JIRA style app to track evolutility development (and replace this list) or do it in GitHub.
 
-- Plug UI library - thinking mantine or @adobe/react-spectrum...
+- WIP: Add Summary view
+- WIP: Upgrqde to react-router-dom v6.4.5
+- Plug UI library? - thinking mantine or @adobe/react-spectrum...
 - search
 - filters
 - Add "comfort" models & views (saved filters, handpicked sets, dashboards...)
-- WIP: Add Activity feature + View
-- WIP: Add Summary view
 - Every field type can also be an array of values of that type
+- replace numeral and moment by Intl
 - evolutility-models generate list of relationships to create in hasura admin
 - Choice of UX pattern: Drawer / navigation / dual pane
 - translate in other languages (/src/i18n/XX.js)
-- In code, use functions rather then classes for components (in views)
 - Add checkboxes for selection to the List and Cards views
-= Add JSON view (w/ react-json-view?)
+- Add JSON view (w/ react-json-view?)
 - Add "Compare" view for side-by-side comparaison and averages
 - Add "Kanban" view w/ drag & drop
 - Dependent fields

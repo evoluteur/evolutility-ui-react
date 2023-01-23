@@ -3,19 +3,17 @@
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-module.exports = {
+const model = {
   id: "todo",
-  qid: "evol_task",
+  qid: "task",
   oid: 1,
   title: "To-Do List",
-  world: "organizer",
+  world: "demos",
   name: "task",
   namePlural: "tasks",
   icon: "todo.gif",
   active: true,
   position: 1,
-  defaultViewMany: "list",
-  defaultViewOne: "browse",
   titleField: "title",
   fields: [
     {
@@ -135,6 +133,7 @@ module.exports = {
       fields: ["description"],
     },
   ],
-  collections: [],
   noStats: true,
 };
+
+export default model;

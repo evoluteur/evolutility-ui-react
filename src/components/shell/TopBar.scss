@@ -1,8 +1,9 @@
-@import "../variables";
+@import "../../variables";
 
 .TopBar {
   z-index: 101;
   position: fixed;
+  display: block;
   top: 0;
   width: 100%;
   background-color: $almostblack-color;
@@ -14,6 +15,14 @@
     position: absolute;
     right: 10px;
     top: 10px;
+    > svg {
+      fill: $background-color;
+    }
+    &:hover {
+      > svg {
+        fill: orange;
+      }
+    }
     @media (max-width: 600px) {
       display: none;
     }

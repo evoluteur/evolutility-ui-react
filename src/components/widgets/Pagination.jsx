@@ -1,30 +1,25 @@
-// Evolutility-UI-React :: /widget/Pagination.js
-
-// Pagination for List and Cards views (styled w/ Bootstrap).
-
-// https://github.com/evoluteur/evolutility-ui-react
-// (c) 2022 Olivier Giulieri
-
 import React from "react";
 import PropTypes from "prop-types";
 import queryString from "query-string";
-import { pageSize } from "../../config";
+import { useLocation } from "react-router-dom";
+import config from "../../config";
 
 import "./Pagination.scss";
 
-const Pagination = ({ count, fullCount, location, fnClick }) => {
-  const paginationBody = () => {
+const { pageSize } = config;
+
+const Pagination = ({ count, fullCount, onClick }) => {
+  const { search } = useLocation();
+  if (fullCount > pageSize) {
     let pIdx;
-    const query = queryString.parse(location.search); // this.props.location.query
+    const query = search ? queryString.parse(search) : null;
 
     if (query) {
-      // if(query.page==='p--' || query.page==='p++'){
-      // }
       pIdx = parseInt(query.page || "0", 10);
     } else {
       pIdx = 0;
     }
-    const h = [];
+    const paginationBody = [];
     let gapIdx = 0;
 
     if (fullCount > count && !(pIdx === 0 && count < pageSize)) {
@@ -33,8 +28,8 @@ const Pagination = ({ count, fullCount, location, fnClick }) => {
       const wNext = nbPages > pIdx + 1;
       const pId = pIdx + 1;
       const bPage = function (id) {
-        h.push(
-          <li key={id} className={pId === id ? "active" : ""} onClick={fnClick}>
+        paginationBody.push(
+          <li key={id} className={pId === id ? "active" : ""} onClick={onClick}>
             <span className="fakeLink">{id}</span>
           </li>
         );
@@ -45,18 +40,18 @@ const Pagination = ({ count, fullCount, location, fnClick }) => {
         }
       };
       const bGap = (idx) => {
-        h.push(
+        paginationBody.push(
           <li key={"gap" + idx} className="disabled">
             <span className="fakeLink">...</span>
           </li>
         );
       };
 
-      h.push(
+      paginationBody.push(
         <li
           key="prev"
           className={wPrev ? "" : "disabled"}
-          onClick={wPrev ? fnClick : null}
+          onClick={wPrev ? onClick : null}
         >
           <span className="fakeLink">&laquo;</span>
         </li>
@@ -82,36 +77,40 @@ const Pagination = ({ count, fullCount, location, fnClick }) => {
         }
       }
 
-      h.push(
+      paginationBody.push(
         <li
           key="next"
           className={wNext ? "" : "disabled"}
-          onClick={wNext ? fnClick : null}
+          onClick={wNext ? onClick : null}
         >
           <span className="fakeLink">&raquo;</span>
         </li>
       );
     }
-    return h;
-  };
 
-  return (
-    fullCount > pageSize && (
-      <nav className="clearer pagination-center">
-        <ul className="pagination">{paginationBody()}</ul>
-      </nav>
-    )
-  );
+    return (
+      fullCount > pageSize && (
+        <nav className="pagination-center">
+          <ul className="pagination">{paginationBody}</ul>
+        </nav>
+      )
+    );
+  }
+  return null;
 };
 
 export default Pagination;
 
 Pagination.propTypes = {
+  /** Page index (default 0) */
   pageIdx: PropTypes.number,
+  /** Number of records in the page */
   count: PropTypes.number.isRequired,
+  /** Total number of records */
   fullCount: PropTypes.number.isRequired,
+  /** Callback function for pagination click */
+  onClick: PropTypes.func.isRequired,
   location: PropTypes.object,
-  fnClick: PropTypes.func.isRequired,
 };
 
 Pagination.defaultProps = {

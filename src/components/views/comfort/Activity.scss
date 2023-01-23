@@ -1,5 +1,7 @@
+@import "../../../variables";
+
 .evol-activity {
-  > div {
+  > section > div {
     display: flex;
     > a {
       min-width: 120px;
@@ -17,5 +19,8 @@
         min-width: 70px;
       }
     }
+  }
+  button {
+    margin: 10px 20px;
   }
 }

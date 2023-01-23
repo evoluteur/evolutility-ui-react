@@ -3,7 +3,7 @@
 // Panel to group fields in views Edit and Browse (styled w/ Bootstrap).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2022 Olivier Giulieri
+// (c) 2023 Olivier Giulieri
 
 import React, { useState } from "react";
 import PropTypes from "prop-types";
@@ -46,9 +46,9 @@ const Panel = ({
       className={classnames("evol-pnl", className)}
       style={{ width: width + "%" }}
     >
-      <div className="panel panel-default">
+      <div className="panel">
         {titleElem}
-        {header && <div className="panel-heading panel-header">{header}</div>}
+        {header && <div className="panel-header">{header}</div>}
         <fieldset style={{ display: opened ? "block" : "none" }}>
           {children}
         </fieldset>
@@ -61,12 +61,19 @@ const Panel = ({
 export default Panel;
 
 Panel.propTypes = {
+  /** Panel title */
   title: PropTypes.string,
+  /** Panel width (% width of parent) */
   width: PropTypes.number,
+  /** Panel can be collapsed */
   collapsible: PropTypes.bool,
+  /** Panel header */
   header: PropTypes.node,
+  /** Panel footer */
   footer: PropTypes.node,
+  /** Panel content */
   children: PropTypes.node,
+  /** Optional additional CSS class name */
   className: PropTypes.string,
 };
 

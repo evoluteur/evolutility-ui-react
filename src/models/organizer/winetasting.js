@@ -3,19 +3,18 @@
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-module.exports = {
-  qid: "evol_wine_tasting",
-  id: "wine_tasting",
+const model = {
+  qid: "wine_tasting",
+  id: "winetasting",
   oid: 6,
   title: "Wine tastings",
-  world: "organizer",
+  world: "demos",
   name: "wine tasting",
   namePlural: "wine tastings",
   icon: "wine.gif",
   active: true,
   position: 55,
   defaultViewMany: "list",
-  defaultViewOne: "browse",
   titleField: "drink_date",
   titleFunction: (d) => {
     return d ? d.wine_txt + " " + d.drink_date : "";
@@ -91,3 +90,5 @@ module.exports = {
   collections: [],
   noStats: true,
 };
+
+export default model;

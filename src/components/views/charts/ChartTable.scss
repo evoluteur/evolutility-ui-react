@@ -1,4 +1,4 @@
-@import "../../variables";
+@import "../../../variables";
 
 .chartTable {
   padding: 0 10px;
@@ -20,4 +20,10 @@
   .footer:hover {
     background-color: $bgcolor-header;
   }
+}
+.chart-card.size-tiny .chartTable {
+  font-size: 0.8em;
+  padding: 5px 8px;
+  height: 230px;
+  overflow-y: scroll;
 }

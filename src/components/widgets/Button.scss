@@ -1,0 +1,150 @@
+@import "../../variables";
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 600;
+  // white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0);
+  font-size: 16px;
+  border-radius: 20px;
+  padding: 7px 20px;
+  line-height: 1.428571429;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  > svg {
+    position: relative;
+    top: 2px;
+    height: 16px;
+    margin-right: 10px;
+  }
+  &:hover,
+  &:focus,
+  &.focus {
+    color: #333;
+    text-decoration: none;
+  }
+  &:active,
+  &.active {
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  }
+}
+
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  opacity: 0.65;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+a.btn.disabled,
+fieldset[disabled] a.btn {
+  pointer-events: none;
+}
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+  > svg {
+    fill: #333 !important;
+  }
+  &:focus,
+  &.focus {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #8c8c8c;
+  }
+  &:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+  }
+}
+.btn-default:active,
+.btn-default.active,
+.open > .btn-default.dropdown-toggle {
+  color: #333;
+  background-color: #e6e6e6;
+  background-image: none;
+  border-color: #adadad;
+}
+.btn-default:active:hover,
+.btn-default:active:focus,
+.btn-default:active.focus,
+.btn-default.active:hover,
+.btn-default.active:focus,
+.btn-default.active.focus {
+  color: #333;
+  background-color: #d4d4d4;
+  border-color: #8c8c8c;
+}
+.btn-default.disabled:hover,
+.btn-default.disabled:focus,
+.btn-default.disabled.focus,
+.btn-default[disabled]:hover,
+.btn-default[disabled]:focus,
+.btn-default[disabled].focus,
+fieldset[disabled] .btn-default:hover,
+fieldset[disabled] .btn-default:focus,
+fieldset[disabled] .btn-default.focus {
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-primary {
+  color: #fff;
+  background-color: $color-btn-primary;
+  border-color: $color-btn-primary-border;
+  > svg {
+    fill: #fff;
+  }
+  &:focus,
+  &.focus {
+    color: #fff;
+    background-color: #286090;
+    border-color: #122b40;
+  }
+  &:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+  }
+  &:active,
+  &.active {
+    color: #fff;
+    background-color: #286090;
+    background-image: none;
+    border-color: #204d74;
+  }
+  &:active:hover,
+  &:active:focus,
+  &:active.focus,
+  &.active:hover,
+  &.active:focus,
+  &.active.focus {
+    color: #fff;
+    background-color: #204d74;
+    border-color: #122b40;
+  }
+}
+.btn-primary.disabled:hover,
+.btn-primary.disabled:focus,
+.btn-primary.disabled.focus,
+.btn-primary[disabled]:hover,
+.btn-primary[disabled]:focus,
+.btn-primary[disabled].focus,
+fieldset[disabled] .btn-primary:hover,
+fieldset[disabled] .btn-primary:focus,
+fieldset[disabled] .btn-primary.focus {
+  background-color: $color-btn-primary;
+  border-color: #2e6da4;
+}

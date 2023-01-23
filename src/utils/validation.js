@@ -1,14 +1,14 @@
 // Evolutility-UI-React :: utils/validation.js
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2022 Olivier Giulieri
+// (c) 2023 Olivier Giulieri
 
-// TODO: use Yup
-import _ from "underscore";
+// TODO: use Yup instead of this code
+import { isUndefined, isObject, isArray, isDate, isString } from "underscore";
 import { fieldTypes, fieldIsNumber } from "./dico";
 import { locale, i18n_validation } from "../i18n/i18n";
 
-export const valRegExp = {
+const valRegExp = {
   email: /^[\w.-]+@[\w.-]+\.[\w.-]+$/,
   integer: /^[-+]?\d+$/, // /^[0-9]*/,
   decimal_en: /(\+|-)?(\d*\.\d*)?$/,
@@ -31,17 +31,17 @@ export const validateField = (f, v) => {
       f.required &&
       (v === null ||
         v === "" ||
-        _.isUndefined(v) ||
+        isUndefined(v) ||
         (isNumberField && isNaN(v)) ||
         (f.type === ft.lov && v === "0") ||
         (f.type === ft.list && v && !v.length)) //||
       //(f.type===ft.color && v==='#000000')
     ) {
       return formatMsg(f.label, i18n_validation.empty);
-    } else if (!_.isUndefined(v)) {
+    } else if (!isUndefined(v)) {
       // Check field type
       if (!(isNaN(v) && isNumberField)) {
-        if (v !== null && v !== "" && !_.isArray(v)) {
+        if (v !== null && v !== "" && !isArray(v)) {
           switch (f.type) {
             case ft.int:
             case ft.email:
@@ -60,19 +60,19 @@ export const validateField = (f, v) => {
             case ft.date:
             case ft.datetime:
             case ft.time:
-              if (v !== "" && !_.isDate(new Date(v))) {
+              if (v !== "" && !isDate(new Date(v))) {
                 return formatMsg(fieldLabel(f), i18n_validation[f.type]);
               }
               break;
             case ft.json:
               var obj;
-              if (_.isObject(v)) {
+              if (isObject(v)) {
                 obj = v;
               } else {
                 try {
                   obj = JSON.parse(v);
                 } catch (err) {}
-                if (_.isUndefined(obj)) {
+                if (isUndefined(obj)) {
                   return formatMsg(fieldLabel(f), i18n_validation[f.type]);
                 }
               }
@@ -85,7 +85,7 @@ export const validateField = (f, v) => {
       }
 
       // Check regexp
-      if (f.regExp !== null && !_.isUndefined(f.regExp)) {
+      if (f.regExp !== null && !isUndefined(f.regExp)) {
         var rg = new RegExp(f.regExp);
         if (!v.match(rg)) {
           return formatMsg(
@@ -118,7 +118,7 @@ export const validateField = (f, v) => {
     }
 
     // Check minLength and maxLength
-    if (_.isString(v) && !isNumberField) {
+    if (isString(v) && !isNumberField) {
       var len = v.length,
         badMax = f.maxLength ? len > f.maxLength : false,
         badMin = f.minLength ? len < f.minLength : false;
@@ -146,15 +146,35 @@ export const validateField = (f, v) => {
       }
     }
   }
-
   return "";
+};
+
+export const validate = (model, data) => {
+  // TODO: use yup instead of hand-coding it
+  const fields = model.fields;
+  const messages = [];
+  const invalids = {};
+  let cMsg;
+  fields?.forEach((f) => {
+    cMsg = validateField(f, data[f.id]);
+    if (cMsg) {
+      messages.push(cMsg);
+      invalids[f.id] = cMsg;
+    }
+  });
+  return {
+    isValid: messages.length < 1,
+    messages,
+    invalids,
+  };
 };
 
 export const diffData = (model, data, userData) => {
   const diffs = {};
   model.fields.forEach((f) => {
-    if (data[f.id] !== userData[f.id]) {
-      diffs[f.id] = userData[f.id];
+    const fid = f.id;
+    if (data[fid] !== userData[fid]) {
+      diffs[fid] = userData[fid];
     }
   });
   const diffsCount = Object.keys(diffs).length;
@@ -165,7 +185,6 @@ export const diffData = (model, data, userData) => {
 };
 
 const validation = {
-  valRegExp,
   validateField,
   diffData,
 };

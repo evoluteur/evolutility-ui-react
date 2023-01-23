@@ -3,19 +3,17 @@
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-module.exports = {
+const model = {
   id: "contact",
-  qid: "evol_contact",
+  qid: "contact",
   oid: 2,
   title: "Address book",
-  world: "organizer",
+  world: "demos",
   name: "contact",
   namePlural: "contacts",
   icon: "contact.gif",
   active: true,
   position: 10,
-  defaultViewMany: "list",
-  defaultViewOne: "browse",
   titleField: "firstname",
   titleFunction: (d) => d.firstname + " " + d?.lastname,
   fields: [
@@ -180,7 +178,7 @@ module.exports = {
       label: "Notes",
       maxLength: 1000,
       width: 100,
-      height: 6,
+      height: 9,
     },
   ],
   groups: [
@@ -212,3 +210,5 @@ module.exports = {
   collections: [],
   noStats: true,
 };
+
+export default model;

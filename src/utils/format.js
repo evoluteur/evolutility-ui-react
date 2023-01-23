@@ -3,22 +3,32 @@
 // Helpers for string, numbers, and date formats
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2022 Olivier Giulieri
+// (c) 2023 Olivier Giulieri
 
 import React from "react";
+import Icon from "react-crud-icons";
 import numeral from "numeral";
 import moment from "moment";
 
+import { locale } from "../i18n/i18n";
 // include locale support for other languages
 // import 'moment/locale/fr'
 // import 'moment/locale/es'
 
-import { filesUrl, locale } from "../config";
+import config from "../config";
 import { fieldTypes as ft } from "./dico";
+
+const { filesUrl } = config;
+export const xItemsCount = (count, nameSingular, namePlural) =>
+  count === 0
+    ? "No " + namePlural
+    : count === 1
+    ? "1 " + nameSingular
+    : count + " " + namePlural;
 
 // const isFunction = (x) => typeof x === "function";
 
-const nullOrUndefined = (v) => v === null || v === undefined;
+export const nullOrUndefined = (v) => v === null || v === undefined;
 const mFormat = (d, format) =>
   nullOrUndefined(d) ? "" : moment(d).format(format);
 const numFormat = (d, format) =>
@@ -40,21 +50,22 @@ const dateOpt = (d, type) => {
   return dateString(d);
 };
 
-export const integerString = (d) => numFormat(d, "0,0");
-export const decimalString = (d) => numFormat(d, d > 1 ? "0.00" : "0.000");
-export const moneyString = (d) => numFormat(d, "$0,0.00");
-const jsonString = (js) => (js ? JSON.stringify(js, null, "\t") : "");
-
 export const image = (d) => {
   if (d === null) {
     return null;
   }
   return <img src={d} className="img-thumbnail" alt="" />;
 };
+//const intFormatter = new Intl.NumberFormat(locale);
+export const integerString = (d) => numFormat(d, "0,0");
+// export const integerString = (d) => numFormat(d, "0");
+export const decimalString = (d) => numFormat(d, d > 1 ? "0.00" : "0.000");
+export const moneyString = (d) => numFormat(d, "$0,0.00");
+const jsonString = (js) => (js ? JSON.stringify(js, null, "\t") : "");
 
 export const fieldValue = (f, d, abbr) => {
   if (f.type === ft.bool) {
-    return d ? <i className="glyphicon glyphicon-ok" /> : "";
+    return d ? <Icon className="checkbox" name="check" theme="none" /> : "";
   }
   if (f.type === ft.int && d) {
     return integerString(d);
@@ -115,33 +126,6 @@ export const fieldValue = (f, d, abbr) => {
   return d;
 };
 
-export const dataTitle = (m, data, isNew) => {
-  if (m) {
-    let f,
-      title = "";
-    if (isNew) {
-      title = `New ${m.name || "item"}`;
-    } else if (m.titleFunction) {
-      // Note: would this be unsecure?
-      // title = m.titleFunction(data, m);
-      title = m.titleFunction(Object.assign({}, data));
-    } else if (m.titleField) {
-      title = data[m.titleField];
-    } else {
-      const tf = m.titleField + "";
-      f = m.fieldsH[tf];
-      if (!f) {
-        f = m.fields[0];
-      }
-      if (f && data) {
-        title = fieldValue(f, data[f.id]);
-      }
-    }
-    return title;
-  }
-  return "New item";
-};
-
 // Set the locale from the browser -- which may need to be configured
 moment.locale(
   locale || window.navigator.userLanguage || window.navigator.language
@@ -155,29 +139,6 @@ export const capitalize = (word) => {
   return "";
 };
 
-export const doc = (d, path) => {
-  if (nullOrUndefined(d)) {
-    return null;
-  }
-  return (
-    <a href={encodeURI(path + d)} target="_blank" rel="noopener noreferrer">
-      {d}
-    </a>
-  );
-};
-
-export const urlJoin = (u1, u2) => {
-  const slashu2 = u2[0] === "/";
-  const slashu1 = u1[u1.length - 1] === "/";
-  if (slashu2 && slashu1) {
-    return u1 + u2.substring(1);
-  }
-  if (!slashu2 && !slashu1) {
-    return `${u1}/${u2}`;
-  }
-  return u1 + u2;
-};
-
 const formatLib = {
   // config to override browser
   locale: moment.locale(),
@@ -185,10 +146,7 @@ const formatLib = {
   now: () => moment(),
 
   fieldValue,
-  image,
-  doc,
 
-  // --- date formats ---
   dateOpt,
   dateString,
   timeString,
@@ -196,10 +154,6 @@ const formatLib = {
   decimalString,
   moneyString,
   jsonString,
-
-  urlJoin,
-
-  capitalize,
 };
 
 export default formatLib;

@@ -1,12 +1,15 @@
 /*
     Evolutility-UI-React Localized strings in ENGLISH
-    (c) 2022 Olivier Giulieri
+    (c) 2023 Olivier Giulieri
     https://github.com/evoluteur/evolutility-ui-react
 */
 
+export const locale = "en-US";
+export const language = "English";
+
 export const i18n_nav = {
-  loading: "Loading...",
-  longLoading: "Still loading...",
+  fetchingModels: "Fetching models...",
+  loading: "Fetching data...",
   skip: "Skip navigation",
 };
 
@@ -14,7 +17,6 @@ export const i18n_nav = {
 export const i18n_actions = {
   browse: "Browse",
   edit: "Edit",
-  // login: 'Login',
   new: "New",
   newEntity: "New {0}", // 'New Item',
   // search: 'Search',
@@ -35,7 +37,6 @@ export const i18n_actions = {
   filter: "Filter",
   // bScatter:'Scatter',
   charts: "Dashboard", // 'Charts',
-  // refresh: 'Refresh',
   // print: 'Print',
   stats: "Stats",
   activity: "Activity",
@@ -49,21 +50,22 @@ export const i18n_actions = {
   next: "Next",
 
   dropFile: "Drop the file here, or click to select the file to upload.",
-  // dropFiles: 'Drop files here, or click to select files to upload.',
   remove_image: "Remove image",
   remove_document: "Remove document",
 
   deleted: "{0} deleted.",
   updated: "{0} updated.",
   added: "New {0} added.",
-  downloadingCSV: "Downloading CSV export.",
+  // downloadingCSV: "Downloading CSV export.",
 };
 
 // --- status ---
 export const i18n_msg = {
-  nodata: "No {0} found.", // 0=entities
-  nodataSearch: 'No {0} found in search for "{1}".',
-  addTheFirst: "Add the first {0}",
+  noResults: "No results",
+  empty: "You do not have any {0}.", // 0=entities
+  noData: "No {0} found.", // 0=entities
+  addTheFirst: "Create the first {0}",
+  newCriteria: "Please check  spelling or different criteria.",
   loading: "Loading data...",
   confirmLeave: "Your work is not saved! Are you sure you want to leave?",
   range: "{0} to {1} of {2} {3}", // 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'
@@ -73,7 +75,6 @@ export const i18n_msg = {
   added: 'New {0} "{1}" added.',
   updated: '{0} "{1}" updated.',
   deleted: '{0} "{1}" deleted.',
-  // error: 'Error',
   noUpdate: "No update necessary.",
   // deleteSelectionConfirmation: 'Do you really want to delete the selected {0}?',
   deleteConfirmation: 'Do you really want to delete the {0} "{1}"?',
@@ -135,7 +136,7 @@ export const i18n_stats = {
   totalComments: "Number of comments",
   total: "Total",
   avg: "Average",
-  stddev: "Std. Deviation",
+  stddev: "Std. deviation",
   variance: "Variance",
   min: "Minimum",
   max: "Maximum",
@@ -156,9 +157,10 @@ export const i18n_activity = {
 };
 
 export const i18n_errors = {
+  error: "Error",
+  serverError: "Server Error",
   badId: 'No data found for id="{0}".',
-  badEntity: 'Invalid parameter: entity="{0}".',
-  badChart: "Couldn't retrieve charts data.",
+  badEntity: 'Model "{0}" not found.',
   badUpload: "Error uploading file.",
 };
 /*
@@ -170,9 +172,6 @@ export const i18n_errors = {
         invalid: 'Invalid username/password combination.',
     },
 */
-
-export const locale = "en";
-export const language = "English";
 
 const allStrings = {
   locale,

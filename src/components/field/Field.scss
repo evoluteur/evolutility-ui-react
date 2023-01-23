@@ -2,11 +2,8 @@
   evolutility-ui-react : field
 */
 
-@import "../variables";
+@import "../../variables";
 
-.inline {
-  display: inline;
-}
 .form-control {
   padding: 6px;
 }
@@ -24,7 +21,6 @@
   select {
     font-size: $text-font-size;
   }
-
   .evo-rdonly {
     // todo: use or remove line below?
     // border-bottom: 1px solid silver;
@@ -38,9 +34,6 @@
     width: 100%;
   }
 
-  .img-thumbnail {
-    padding: 0 !important;
-  }
   input[type="time"] {
     display: inline-block;
     width: 130px;
@@ -85,22 +78,24 @@
     @include ellipsis();
   }
 }
+div > .checkbox {
+  position: relative;
+  top: -7px;
+  height: 16px;
+  width: 16px;
+}
 .lov-icon {
   margin-right: 5px;
 }
-.evol-remove {
+.field-remove {
   margin-top: 5px;
-  // color: $color-red;
   svg {
     position: relative;
     top: 2px;
     height: 16px;
-    // fill: $color-red !important;
-    fill: black !important;
     margin-right: 5px;
   }
 }
-
 .evo-color-box {
   display: inline-block;
   height: 20px;

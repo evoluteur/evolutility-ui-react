@@ -2,12 +2,11 @@
   evolutility-ui-react : field
 */
 
-@import "../variables";
+@import "../../variables";
 
 .evol-field-label {
   > label {
-    color: $color-label !important;
-    font-weight: normal;
+    color: $color-label;
     &::after {
       content: ":";
     }
@@ -31,14 +30,8 @@
   }
 }
 
-.evol-required,
-.evol-asterix {
+.field-required {
   margin-left: 3px;
   font-weight: bold;
-}
-.evol-required {
   color: $color-red;
-}
-.evol-asterix {
-  color: $color-icon-hover;
 }

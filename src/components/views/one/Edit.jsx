@@ -3,270 +3,180 @@
 // View to add or update one record at a time.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2022 Olivier Giulieri
+// (c) 2023 Olivier Giulieri
 
-import React from "react";
+// #region ---------------- Imports ----------------
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import modelPropType from "../modelPropTypes";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import Icon from "react-crud-icons";
 
 // import moment from 'moment'
-// import {wTimestamp} from "../../../config"
-import { i18n_actions, i18n_validation, i18n_errors } from "../../../i18n/i18n";
+// import {withTimestamp} from "../../../config"
+import { i18n_actions, i18n_validation } from "../../../i18n/i18n";
 import { fieldId2Field, fieldTypes as ft } from "../../../utils/dico";
-import { dataTitle } from "../../../utils/format";
-import validation from "../../../utils/validation";
-import OneReadWrite from "./one-readwrite";
+import { validate, validateField } from "../../../utils/validation";
 import List from "../many/List";
+import Button from "../../widgets/Button";
 import Alert from "../../widgets/Alert";
 import Field from "../../field/Field";
 import Panel from "../../widgets/Panel";
-import Spinner from "../../shell/Spinner";
-import Header from "../../shell/Header";
+import Timestamps from "./Timestamps";
 
-export default class Edit extends OneReadWrite {
-  viewId = "edit";
+// #endregion
 
-  _validationOn = false;
+const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
+  const [invalids, setInvalids] = useState(null);
+  const { id = 0 } = useParams();
+  const isNew = id === 0 || id === "0";
+  const error = null; // TODO:
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      invalids: {},
-    };
-  }
-
-  getDataDelta() {
-    return this.delta || null;
-  }
-
-  clickSave = (evt) => {
-    const fields = this.model.fields;
-    const v = this.validate(fields, this.state.data);
-
-    if (v.valid) {
-      this.upsertOne();
+  const clickSave = () => {
+    const v = validate(model, data);
+    if (v.isValid) {
+      setInvalids(null);
+      onSave(data);
     } else {
-      this.setState({
-        invalid: !v.valid,
-      });
+      setInvalids(v.invalids);
+      toast.error(i18n_validation.incomplete + " " + v.messages.join(" "));
     }
   };
 
-  fieldChange = (evt) => {
+  const fieldChange = (evt) => {
     const fid = evt.target.id;
-    const newData = JSON.parse(JSON.stringify(this.state.data || {}));
     let v = evt.target.value;
-
     if (evt.target.type === "checkbox") {
       v = evt.target.checked;
     }
-    newData[fid] = v;
-    this.setDeltaField(fid, v);
-    this.setState({ data: newData });
+    if (invalids && invalids[fid]) {
+      const f = model.fieldsH[fid];
+      const fValidation = validateField(f, data[fid]);
+      if (!fValidation) {
+        let newInvalids = { ...invalids };
+        delete newInvalids[fid];
+        if (Object.keys(newInvalids).length === 0) {
+          newInvalids = null;
+        }
+        setInvalids(newInvalids);
+      }
+    }
+    onFieldChange(fid, v);
   };
 
-  isDirty() {
-    return this._dirty;
-  }
-
-  render() {
-    const { id = 0, entity = null, view = "browse" } = this.props.match.params;
-    const isNew = id === 0 || id === "0";
-    const ep = "/" + entity + "/";
-    const m = this.model;
-    const data = this.state.data || {};
-    const cbs = {
-      // click: this.fieldClick,
-      // leave: this.fieldLeave,
-      change: this.fieldChange,
-      dropFile: this.uploadFileOne,
-    };
-    const title = this.state.error ? "No data" : dataTitle(m, data, isNew);
-    const linkBrowse = isNew ? ep + "list" : ep + view + (id ? "/" + id : "");
-    const listData = (cid) => (data.collections ? data.collections[cid] : null);
-    const fnField = (f) => {
-      if (f) {
-        if (f.type === ft.lov && !f.list) {
-          // - fetch list values
-          // TODO: dynamically get the LOV
-          // this.getLOV(f.id);
-          const dId = data[f.id];
-          const dLabel = data[f.id + "_txt"];
-          // TODO: too hacky, really modify model?
-          f.list = [
-            { id: dId, text: dLabel },
-            { id: 0, text: " - Dynamic LOVs is no implemented yet -" },
-          ];
-        }
-        const invalidMsg = this.state.invalids[f.id];
-        return (
-          <Field
-            key={f.id}
-            fieldDef={f}
-            value={data[f.id]}
-            data={data}
-            callbacks={cbs}
-            entity={entity}
-            message={invalidMsg}
-            invalid={!!invalidMsg}
-          />
-        );
+  const ep = "/" + entity + "/";
+  const cbs = {
+    change: fieldChange,
+    // dropFile: uploadFileOne,
+  };
+  const linkBrowse = isNew ? ep + "list" : ep + "browse" + (id ? "/" + id : "");
+  const listData = (cid) => (data.collections ? data.collections[cid] : null);
+  const fnField = (f) => {
+    if (f) {
+      if (f.type === ft.lov && !f.list) {
+        // - fetch list values
+        // TODO: dynamically get the LOV
+        // this.getLOV(f.id);
+        const dId = data[f.id];
+        const dLabel = data[f.id + "_txt"];
+        // TODO: too hacky, really modify model?
+        f.list = [
+          { id: dId, text: dLabel },
+          { id: 0, text: " - Dynamic LOVs is no implemented yet -" },
+        ];
       }
-      return null;
-    };
-
-    if (this.state.loading && !isNew) {
-      return <Spinner />;
-    }
-
-    document.title = title;
-    this.isNew = isNew;
-    // const date = wTimestamp ? moment(data['u_date']) : null
-    if (!m) {
+      const invalidMsg = invalids ? invalids[f.id] : null;
       return (
-        <Alert
-          title="Error"
-          message={i18n_errors.badEntity.replace("{0}", entity)}
+        <Field
+          key={f.id}
+          fieldDef={f}
+          value={data[f.id]}
+          data={data}
+          callbacks={cbs}
+          entity={entity}
+          message={invalidMsg}
+          invalid={!!invalidMsg}
         />
       );
     }
-    return (
-      <div className="evolutility" role="form">
-        <Header
-          {...this.props.match.params}
-          title={title}
-          model={m}
-          comments={data.nb_comments}
-          count={null}
-          cardinality="1"
-          view={this.viewId}
-        />
-
-        <div className="evo-one-edit">
-          {this.state.error ? (
-            <Alert title="Error" message={this.state.error.message} />
-          ) : (
-            <div className="evol-pnls">
-              {m && m.groups ? (
-                m.groups?.map(function (g, idx) {
-                  const groupFields = fieldId2Field(g.fields, m.fieldsH);
-                  return (
-                    <Panel
-                      key={g.id || "g" + idx}
-                      title={g.label || g.title || ""}
-                      header={g.header}
-                      footer={g.footer}
-                      width={g.width}
-                    >
-                      <div className="evol-fset">
-                        {groupFields?.map(fnField)}
-                      </div>
-                    </Panel>
-                  );
-                })
-              ) : (
-                <Panel title={title} key="pAllFields">
-                  <div className="evol-fset">{m.fields?.map(fnField)}</div>
-                </Panel>
-              )}
-
-              {m.collections && !isNew
-                ? m.collections.map((c, idx) => {
-                    const lData = listData(c.id);
-                    return c.hideIfEmpty &&
-                      (!lData || lData.length === 0) ? null : (
-                      <Panel
-                        key={"collec-e_" + c.id + idx}
-                        title={c.title}
-                        collapsible
-                        header={c.header}
-                        footer={c.footer}
-                      >
-                        <List
-                          isNested
-                          match={this.props.match}
-                          paramsCollec={c}
-                          style={{ width: "100%" }}
-                          data={lData}
-                          location={this.props.location}
-                        />
-                      </Panel>
-                    );
-                  })
-                : null}
-
-              <Panel className="pnl-actions">
-                <div className="evol-buttons">
-                  <Link className="btn btn-default" to={linkBrowse}>
-                    <Icon
-                      className="ico-cancel"
-                      name="close"
-                      size="medium"
-                      theme="none"
-                    />{" "}
-                    {i18n_actions.cancel}
-                  </Link>
-                  <button className="btn btn-primary" onClick={this.clickSave}>
-                    <Icon name="save" size="medium" theme="none" />{" "}
-                    {i18n_actions.save}
-                  </button>
-                  {this.state.error ? i18n_validation.incomplete : null}
-                </div>
-              </Panel>
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  validate = (fields, data) => {
-    // TODO: use yup instead of hand-coding it
-    const messages = [];
-    const invalids = {};
-    let cMsg;
-
-    this.clearValidation();
-    fields?.forEach((f) => {
-      cMsg = validation.validateField(f, data[f.id]);
-      if (cMsg) {
-        messages.push(cMsg);
-        invalids[f.id] = cMsg;
-      }
-    });
-    if (messages.length) {
-      toast.error(i18n_validation.incomplete + " " + messages.join(" "));
-    }
-    this.setState({
-      invalids,
-    });
-    return {
-      valid: messages.length < 1,
-      messages,
-      invalids,
-    };
+    return null;
   };
 
-  clearValidation() {
-    this.setState({ invalids: {} });
-  }
+  const panelActions = (
+    <div className="form-buttons noprint">
+      <Button type="default" label={i18n_actions.cancel} url={linkBrowse} />
+      <Button
+        type="primary"
+        onClick={clickSave}
+        icon="save"
+        label={i18n_actions.save}
+      />
+      {invalids && (
+        <span className="evo-fld-invalid">{i18n_validation.incomplete}</span>
+      )}
+    </div>
+  );
 
-  setDeltaField(fid, value) {
-    if (!this.delta) {
-      this.delta = {};
-    }
-    this.delta[fid] = value;
-    this._dirty = true;
-  }
-}
+  return (
+    <div className="evo-one-edit" role="form">
+      {error ? (
+        <Alert title="Error" message={error.message} />
+      ) : (
+        <div className="evol-pnls">
+          {model.groups.map((g, idx) => {
+            const groupFields = fieldId2Field(g.fields, model.fieldsH);
+            return (
+              <Panel
+                key={g.id || "g" + idx}
+                title={g.label || g.title || ""}
+                header={g.header}
+                footer={g.footer}
+                width={g.width}
+              >
+                <div className="evol-fset">{groupFields?.map(fnField)}</div>
+              </Panel>
+            );
+          })}
+          {model.collections &&
+            !isNew &&
+            model.collections?.map((c, idx) => {
+              const lData = listData(c.id);
+              return c.hideIfEmpty && (!lData || lData.length === 0) ? null : (
+                <Panel
+                  key={"collec-e_" + c.id + idx}
+                  title={c.title}
+                  collapsible
+                  header={c.header}
+                  footer={c.footer}
+                >
+                  <List
+                    isNested
+                    match={this.props.match}
+                    paramsCollec={c}
+                    style={{ width: "100%" }}
+                    data={lData}
+                    location={this.props.location}
+                  />
+                </Panel>
+              );
+            })}
+          {panelActions}
+          <Timestamps data={data} />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Edit;
 
 Edit.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      entity: PropTypes.string.isRequired,
-      id: PropTypes.string,
-    }).isRequired,
-  }).isRequired,
+  entity: PropTypes.string.isRequired,
+  model: modelPropType,
+  data: PropTypes.shape({
+    id: PropTypes.number,
+  }),
+  onFieldChange: PropTypes.func,
+  onSave: PropTypes.func,
+  // onCancel: PropTypes.func,
 };

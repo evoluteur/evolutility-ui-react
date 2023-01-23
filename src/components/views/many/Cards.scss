@@ -1,58 +1,31 @@
-@import "../../variables";
+@import "../../../variables";
 
-.evo-card-title {
-  margin-bottom: 20px;
-}
-.evol-cards-body {
+.evol-cards {
   display: flex;
   flex-wrap: wrap;
+  gap: $gap;
   width: 100%;
-
   > .panel {
     flex-grow: 1;
     position: relative;
     width: 240px;
     min-width: 240px;
-    margin: 5px;
     padding: 10px 20px;
     overflow: auto;
     &:hover {
       border-color: $color-border-hover;
       .card-actions {
-        //display: block;
-        width: 58px;
+        right: 0;
       }
-    }
-    .card-actions {
-      z-index: 50;
-      //display: none;
-      position: absolute;
-      top: 0;
-      right: -10px;
-      width: 2px;
-      padding: 0 4px 4px 4px;
-      background-color: white;
-      border: 1px solid white;
-      border-left-color: $color-border;
-      border-bottom-color: $color-border;
-      border-bottom-left-radius: 6px;
-      transition: width $ease-time ease $delay-time;
-      @include icons-actions();
-      i {
-        margin: 5px 0 0 0;
-      }
-      background-color: white;
-    }
-    .img-thumbnail {
-      padding: 0 !important;
     }
     > div {
       padding: 3px 0;
       min-height: 30px;
       > h4 {
-        margin-bottom: 5px;
+        margin: 0;
         @include ellipsis();
         min-height: 1.2em;
+        font-weight: bold;
       }
       > label {
         width: $golden-ratio-small;
@@ -78,6 +51,26 @@
   }
 }
 
+.card-title {
+  margin-bottom: 20px;
+  .card-actions {
+    z-index: 50;
+    position: absolute;
+    top: 0;
+    right: -50px;
+    padding: 0 4px 4px 4px;
+    background-color: $background-color;
+    border: 1px solid $background-color;
+    border-left-color: $color-border;
+    border-bottom-color: $color-border;
+    border-bottom-left-radius: $radius;
+    transition: right $ease-time ease $delay-time;
+    @include icons-actions();
+    i {
+      margin: 5px 0 0 0;
+    }
+  }
+}
 .card-fld-center {
   margin-top: 5px;
   text-align: center;

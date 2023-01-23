@@ -3,19 +3,17 @@
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-module.exports = {
+const model = {
   id: "restaurant",
-  qid: "evol_restaurant",
+  qid: "restaurant",
   oid: 4,
   title: "Restaurants",
-  world: "organizer",
+  world: "demos",
   name: "restaurant",
   namePlural: "restaurants",
   icon: "resto.gif",
   active: true,
   position: 30,
-  defaultViewMany: "list",
-  defaultViewOne: "browse",
   titleField: "name",
   fields: [
     {
@@ -222,3 +220,5 @@ module.exports = {
   collections: [],
   noStats: true,
 };
+
+export default model;

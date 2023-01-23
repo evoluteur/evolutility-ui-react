@@ -3,21 +3,19 @@
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-const comicsObject = {
+const model = {
   id: "comics",
   oid: 3,
-  qid: "evol_comics",
+  qid: "comics",
   title: "Graphic Novels",
-  world: "organizer",
+  world: "demos",
   name: "serie",
   namePlural: "series",
   icon: "comics.png",
   active: true,
   position: 40,
   defaultViewMany: "cards",
-  defaultViewOne: "browse",
   titleField: "title",
-  noStats: true,
   fields: [
     {
       id: "title",
@@ -33,7 +31,6 @@ const comicsObject = {
       id: "authors",
       type: "text",
       label: "Authors",
-      inMany: true,
       inSearch: true,
       width: 62,
     },
@@ -109,7 +106,6 @@ const comicsObject = {
       min: 0,
       label: "Albums",
       noCharts: true,
-      inMany: true,
       width: 15,
     },
     {
@@ -118,7 +114,6 @@ const comicsObject = {
       min: 0,
       label: "Owned",
       noCharts: true,
-      inMany: true,
       width: 15,
     },
     {
@@ -144,7 +139,7 @@ const comicsObject = {
           icon: "comics/flags/us.png",
         },
       ],
-      lovIcon: true,
+      // lovIcon: true,
       inMany: true,
       width: 17,
     },
@@ -152,13 +147,6 @@ const comicsObject = {
       id: "complete",
       type: "boolean",
       label: "Complete",
-      inMany: true,
-      width: 19,
-    },
-    {
-      id: "finished",
-      type: "boolean",
-      label: "Finished",
       inMany: true,
       width: 19,
     },
@@ -223,4 +211,4 @@ const comicsObject = {
   collections: [],
 };
 
-export default comicsObject;
+export default model;

@@ -1,13 +1,18 @@
-@import "../variables";
+@import "../../variables";
 
+.panel {
+  background-color: #fff;
+  border: $border;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-radius: $radius;
+}
 .panel-heading {
   position: relative;
-  border-radius: $radius $radius 0 0 !important;
-  > .panel-title {
-    display: inline-block;
-    font-weight: 400;
-    font-size: 1.2em;
-  }
+  border-radius: $radius $radius 0 0;
+  padding: 10px 15px;
+  border-bottom: $border;
+  background-color: $bgcolor-panel-header;
   svg {
     position: absolute;
     top: 8px;
@@ -21,17 +26,23 @@
     }
   }
 }
-
-.panel {
-  border-radius: $radius !important;
-  div.panel-header,
-  div.panel-footer {
-    background-color: $bgcolor-panel-footer;
-    border-bottom-left-radius: $radius;
-    border-bottom-right-radius: $radius;
-  }
+.panel-title {
+  display: inline-block;
+  font-weight: 400;
+  font-size: 1.2em;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: inherit;
 }
-
-.panel-default > .panel-heading {
-  background-color: $bgcolor-panel-header !important;
+.panel-header,
+.panel-footer {
+  padding: 10px 15px;
+  background-color: $bgcolor-panel-footer;
+}
+.panel-header {
+  border-bottom: $border;
+}
+.panel-footer {
+  border-top: $border;
+  border-radius: 0 0 $radius $radius;
 }

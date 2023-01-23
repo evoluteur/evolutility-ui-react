@@ -1,20 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Icon from "react-crud-icons";
 
 import "./Alert.scss";
 
 const icons = {
-  info: "info-sign",
-  success: "ok-sign",
-  warning: "warning-sign",
-  danger: "exclamation-sign", // 'remove-sign'
+  info: "info",
+  success: "check",
+  warning: "alert",
+  danger: "error",
 };
-const icon = (name) => <i className={"glyphicon glyphicon-" + icons[name]} />;
+
+const icon = (name) => <Icon name={icons[name]} size="medium" theme="none" />;
 
 const Alert = ({ title, message, type }) => (
   <div className={"alert alert-" + type} role="alert">
-    {title ? icon(type) : null}
-    <strong>{title}</strong>
+    <h3 className="alert-title">
+      {title && icon(type)}
+      <strong>{title}</strong>
+    </h3>
     <p>{message}</p>
   </div>
 );

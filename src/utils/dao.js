@@ -1,25 +1,23 @@
 // Evolutility-UI-React
 // access to data via GraphQL API (using Hasura)
-// (c) 2022 Olivier Giulieri
+// (c) 2023 Olivier Giulieri
 
 import { getModel } from "./moMa";
-import { fieldTypes as ft, isFieldMany, fieldIsText } from "./dico.js";
-import { qModels } from "./gqlQueriesMD.js";
+import { fieldTypes as ft } from "./dico.js";
 import {
-  fullCount,
   gqlOptions,
   qOne,
-  qField,
   qStats,
   qChart,
   qDelete,
   qUpdateOne,
   qInsertOne,
+  qMany,
+  qLov,
 } from "./gqlQueries.js";
-import { apiPath, pathGraphQL, pageSize } from "../config.js";
-import packageInfo from "../../package.json";
+import config from "../config.js";
 
-const { proxy } = packageInfo;
+const { apiPath } = config;
 
 //#region Helpers ----------------------------
 
@@ -85,71 +83,8 @@ const mLOVFields = (entity) =>
 
 //#region Many ----------------------------
 
-// get an array of items
 export const getMany = (entity, options) => {
-  const fields = (m) => m.fields.filter(isFieldMany);
-  const gqlFields = (m) => "id " + fields(m)?.map(qField).join(" ");
-  const qMany = (entity) => {
-    const m = getModel(entity);
-    if (m) {
-      const count = fullCount(m);
-      const gOpts = ["limit:" + pageSize];
-      const gOptsSearch = [];
-      if (options) {
-        Object.keys(options).forEach((opt) => {
-          if (opt === "page") {
-            gOpts.push("offset:" + options.page * pageSize);
-          } else if (opt === "pageSize") {
-            // do nothing
-          } else if (opt === "order") {
-            const orderParams = options.order.split(".");
-            const [oField, oDirection] = orderParams;
-            const f = m.fieldsH[oField];
-            if (f) {
-              if (f.type === ft.lov) {
-                gOpts.push(`order_by:{${oField}:{name:${oDirection}}}`);
-              } else {
-                gOpts.push(`order_by:{${oField}:${oDirection}}`);
-              }
-            }
-          } else if (opt === "search") {
-            const { search } = options;
-            // debugger;
-            const searchFields = m.fields.filter(
-              (f) => f.inSearch || (f.inMany && fieldIsText(f))
-            );
-            const searchStr = `%${search}%`;
-            searchFields.forEach((f) => {
-              gOptsSearch.push(`{ ${f.id}: { _ilike: "${searchStr}" } }`);
-            });
-          } else {
-            const f = m.fieldsH[opt];
-            if (f) {
-              const fn = f.type === ft.lov ? opt + "_id" : opt;
-              const params = options[opt].split(".");
-              gOptsSearch.push(fn + ":{_" + params[0] + ":" + params[1] + "}");
-            } else {
-              console.error('Unexpected param "' + opt + '".');
-            }
-          }
-        });
-        if (gOptsSearch.length) {
-          gOpts.push("where:{_or:[" + gOptsSearch.join(",") + "]}");
-        }
-      }
-      const qParam = gOpts.length ? "(" + gOpts.join(", ") + ")" : "";
-      return `
-        query {
-            many: ${m.qid} ${qParam}{
-                ${gqlFields(m)}
-            }
-            ${count}
-        }`;
-    }
-    return null;
-  };
-
-  return fetch(pathGraphQL, gqlOptions(qMany(entity)))
+  return fetch(apiPath, gqlOptions(qMany(entity, options)))
     .then(toJSON)
     .then((r) => {
       if (r.data && r.data.many) {
@@ -170,7 +105,7 @@ export const getMany = (entity, options) => {
 // get list of chartable values for field
 export const getChart = (entity, field) => {
   const m = getModel(entity);
-  return fetch(pathGraphQL, gqlOptions(qChart(m, field)))
+  return fetch(apiPath, gqlOptions(qChart(m, field)))
     .then(toJSON)
     .then((r) => {
       if (r.data) {
@@ -187,12 +122,11 @@ export const getChart = (entity, field) => {
 // get entity statistics
 export const getStats = (entity) => {
   const m = getModel(entity);
-  return fetch(pathGraphQL, gqlOptions(qStats(m)))
+  return fetch(apiPath, gqlOptions(qStats(m)))
     .then(toJSON)
     .then((r) => {
       if (r.data && r.data.stats) {
         let data = r.data.stats.aggregate;
-        // const m = getModel(entity)
         let d = {};
         for (let pMath in data) {
           for (const pField in data[pMath]) {
@@ -209,29 +143,22 @@ export const getStats = (entity) => {
       }
     });
 };
-
-// get entity as CSV file
-export const getManyCSV = (entity) => notImplementedYet();
-
 //#endregion
 
 //#region One ----------------------------
 
 // get a single item by id
-export const getOne = (entity, id) => {
+export const getOne = (entity, id, nextOrPrevious) => {
   if (id) {
-    return fetch(pathGraphQL, gqlOptions(qOne(entity, id)))
+    return fetch(apiPath, gqlOptions(qOne(entity, id, nextOrPrevious)))
       .then(toJSON)
       .then((r) => {
-        if (r.data && r.data.one) {
+        if (r.data && r.data.one !== null) {
           const m = getModel(entity);
           let data = r.data.one;
           const lovFields = mLOVFields(entity);
           if (lovFields.length) {
             lovFields.forEach((f) => cleanLOV(f, data));
-          }
-          if (!data.collections) {
-            data.collections = {};
           }
           if (m.collections) {
             m.collections.forEach((c) => {
@@ -245,7 +172,13 @@ export const getOne = (entity, id) => {
           }
           return data;
         } else {
-          return r;
+          return {
+            errors: [
+              {
+                message: `No data found for ID="${id}"`,
+              },
+            ],
+          };
         }
       });
   } else {
@@ -256,13 +189,13 @@ export const getOne = (entity, id) => {
 // delete an item
 export const deleteOne = (entity, id) => {
   const m = getModel(entity);
-  return fetch(pathGraphQL, gqlOptions(qDelete(m.qid, id))).then(toJSON);
+  return fetch(apiPath, gqlOptions(qDelete(m.qid), { id })).then(toJSON);
 };
 
 // add an item
 export const addOne = (entity, data) => {
   const m = getModel(entity);
-  return fetch(pathGraphQL, gqlOptions(qInsertOne(entity, m.qid, data)))
+  return fetch(apiPath, gqlOptions(qInsertOne(entity, m.qid, data)))
     .then(toJSON)
     .then((data) => {
       data.data =
@@ -276,7 +209,7 @@ export const addOne = (entity, data) => {
 // update (replace) an item
 export const updateOne = (entity, id, data) => {
   const m = getModel(entity);
-  return fetch(pathGraphQL, gqlOptions(qUpdateOne(m.id, m.qid, id, data)))
+  return fetch(apiPath, gqlOptions(qUpdateOne(m.id, m.qid, id, data)))
     .then(toJSON)
     .then((data) => {
       data.data =
@@ -292,7 +225,40 @@ export const updateOne = (entity, id, data) => {
 export const uploadOne = (entity, id, field, data) => notImplementedYet();
 
 // get list of values for field
-export const getLov = (entity, field) => notImplementedYet();
+export const getLov = (entity, fieldId) => {
+  const m = getModel(entity);
+  const f = m?.fieldsH[fieldId];
+  if (f) {
+    return fetch(apiPath, gqlOptions(qLov(entity, fieldId))).then((r) => {
+      if (r.data && r.data.one) {
+        const m = getModel(entity);
+        let data = r.data.one;
+        const lovFields = mLOVFields(entity);
+        if (lovFields.length) {
+          lovFields.forEach((f) => cleanLOV(f, data));
+        }
+        if (!data.collections) {
+          data.collections = {};
+        }
+        if (m.collections) {
+          m.collections.forEach((c) => {
+            const cid = c.id;
+            const d = data[cid];
+            if (d) {
+              data.collections[cid] = d;
+              delete data[cid];
+            }
+          });
+        }
+        return data;
+      } else {
+        return r;
+      }
+    });
+  } else {
+    return null;
+  }
+};
 
 // get a collection of sub-items (details for master)
 // getCollec: (entity, collid, id) => axios.get(apiPath + entity + '/collec/'+ collid + '?id=' + id + '&pageSize=' + pageSize),
@@ -300,8 +266,6 @@ export const getLov = (entity, field) => notImplementedYet();
 //#endregion
 
 const daoGraphQL = {
-  apiType: "graphql",
-
   getOne,
   deleteOne,
   updateOne,
@@ -311,12 +275,6 @@ const daoGraphQL = {
   getMany,
   getStats,
   getChart,
-  getManyCSV,
-
-  // get the models
-  getModels: () => fetch(pathGraphQL, gqlOptions(qModels)).then(toJSON),
-  getFileModel: (entity, path) => proxy + apiPath + entity + `'?model=${path}`,
-  getUrl: (url) => notImplementedYet(),
 };
 
 export default daoGraphQL;

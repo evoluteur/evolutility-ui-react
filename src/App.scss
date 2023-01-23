@@ -1,10 +1,26 @@
-@import "./components/variables";
+@import "./variables";
 
-.table {
-  border-top: $border;
-  border-bottom: $border;
+img {
+  border: 0;
+  max-width: 100%;
 }
-
+a {
+  text-decoration: none;
+  color: #337ab7;
+}
+a:hover,
+a:focus {
+  color: #23527c;
+  text-decoration: underline;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+tr,
+img {
+  page-break-inside: avoid;
+}
 .list-tags {
   > div {
     border: $border;
@@ -15,25 +31,89 @@
     display: inline-block;
   }
 }
-
 label {
   color: $color-label;
   font-size: 14px;
 }
 
-.btn {
-  > svg {
-    position: relative;
-    top: 2px;
-    height: 16px;
-    // fill: $color-red !important;
-    fill: white;
-    margin-right: 5px;
+.cols-2 {
+  @include flex-holder();
+  > div {
+    margin-right: 10px;
+    @include flex-item();
+    flex: 1 1 0px;
   }
 }
 
-.btn-default {
-  > svg {
-    fill: black !important;
+.app {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+th {
+  text-align: left;
+}
+.table {
+  border-top: $border;
+  border-bottom: $border;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+.table > thead > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > th,
+.table > tbody > tr > td,
+.table > tfoot > tr > th,
+.table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.428571429;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+.table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
+}
+// .table-striped > tbody > tr:nth-of-type(odd) {
+//   background-color: #f9f9f9;
+// }
+.table-hover > tbody > tr:hover {
+  background-color: #f5f5f5;
+}
+@media print {
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  thead {
+    display: table-header-group;
+  }
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  img {
+    max-width: 100% !important;
+  }
+  .table {
+    border-collapse: collapse !important;
+  }
+  .table td,
+  .table th {
+    background-color: #fff !important;
   }
 }

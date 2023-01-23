@@ -3,10 +3,11 @@
 // Single card (usually part of a set of Cards)
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2022 Olivier Giulieri
+// (c) 2023 Olivier Giulieri
 
 import React from "react";
 import PropTypes from "prop-types";
+import { fieldPropTypes } from "../modelPropTypes";
 
 import Icon from "react-crud-icons";
 import { Link } from "react-router-dom";
@@ -21,22 +22,18 @@ const Card = ({ entity, data, fields = [] }) => {
   const linkEdit = `/${entity}/edit/`;
 
   return (
-    <div className="panel panel-default">
+    <div className="panel">
       {fields.map((f, idx) => {
         const attr = f.type === ft.lov ? `${f.id}_txt` : f.id;
         const fv = fieldValue(f, d[attr]);
 
         if (idx === 0) {
           return (
-            <div key={f.id} className="evo-card-title">
+            <div key={f.id} className="card-title">
               <h4>
                 <Link to={link + d.id}>
                   {m.icon && (
-                    <img
-                      className="evol-many-icon"
-                      src={`/pix/${m.icon}`}
-                      alt=""
-                    />
+                    <img className="e-icon" src={`/pix/${m.icon}`} alt="" />
                   )}
                   {fv || `( ${d.id} )`}
                 </Link>
@@ -77,7 +74,7 @@ Card.propTypes = {
   /** Object Unique key. */
   entity: PropTypes.string.isRequired,
   /** List of fields metadata. */
-  fields: PropTypes.array,
+  fields: PropTypes.arrayOf(fieldPropTypes),
   /** Data (1 single record/Object). */
   data: PropTypes.shape({
     id: PropTypes.number.isRequired,

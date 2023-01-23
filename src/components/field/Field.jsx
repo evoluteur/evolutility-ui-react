@@ -3,25 +3,28 @@
 // Model-driven field (possible types specified in dico.fieldTypes).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2022 Olivier Giulieri
+// (c) 2023 Olivier Giulieri
 
 // import React, { useState } from "react";
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import Icon from "react-crud-icons";
 import Datepicker from "react-datepicker";
 import Dropzone from "react-dropzone";
 // import MultiSelect from "@khanacademy/react-multi-select";
 import { fieldTypes as ft } from "../../utils/dico";
-import { fieldValue, image, doc } from "../../utils/format";
+import { fieldValue, image, nullOrUndefined } from "../../utils/format";
 import { i18n_actions, i18n_msg } from "../../i18n/i18n";
-import { filesUrl } from "../../config";
+import config from "../../config";
 import FieldLabel from "./FieldLabel";
+import Button from "../widgets/Button";
 
 import "./Field.scss";
+import "react-datepicker/dist/react-datepicker.css";
 
 // #region ---------------- Helpers ----------------
+const { filesUrl } = config;
+
 const isObject = (obj) => typeof obj === "object" && obj !== null;
 
 const emHeight = (f) => {
@@ -32,14 +35,11 @@ const emHeight = (f) => {
   return Math.trunc(fh * 1.6);
 };
 
-const createMarkup = (d) => {
-  // TODO: good enough?
-  return {
-    __html: d
-      ? d.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br/>")
-      : "",
-  };
-};
+const createMarkup = (d) => ({
+  __html: d
+    ? d.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br/>")
+    : "",
+});
 
 const createOption = (id, text) => (
   <option key={id} value={`${id}`}>
@@ -53,6 +53,17 @@ const itemInList = (id, list) => {
     return tag.text;
   }
   return "N/A";
+};
+
+const document = (d, path) => {
+  if (nullOrUndefined(d)) {
+    return null;
+  }
+  return (
+    <a href={encodeURI(path + d)} target="_blank" rel="noopener noreferrer">
+      {d}
+    </a>
+  );
 };
 // #endregion
 
@@ -230,26 +241,22 @@ const Field = ({
             />
           );
         } else {
-          pix = doc(d, filesUrl);
+          pix = document(d, filesUrl);
         }
       }
 
       return (
         <div>
           {pix}
-          {d ? (
-            <div className="evol-remove" onClick={removeFile}>
-              <button className="btn btn-default">
-                <Icon
-                  className="ddd"
-                  name="remove"
-                  size="medium"
-                  theme="none"
-                />
-                {i18n_actions[`remove_${f.type}`]}
-              </button>
+          {d && (
+            <div className="field-remove" onClick={removeFile}>
+              <Button
+                type="default"
+                icon="remove"
+                label={i18n_actions[`remove_${f.type}`]}
+              />
             </div>
-          ) : null}
+          )}
           <Dropzone onDrop={onDropFile}>
             {({ getRootProps, getInputProps, isDragActive }) => (
               <div
@@ -322,7 +329,7 @@ const Field = ({
     if (f.type === ft.image && d) {
       fw = image(filesUrl + d);
     } else if (f.type === ft.doc) {
-      fw = doc(d, filesUrl);
+      fw = document(d, filesUrl);
       // {f.country_icon && d.country_icon ? <img src={d.country_icon}/> : null}
     } else if (f.type === ft.lov) {
       if (f.object) {
@@ -357,7 +364,7 @@ const Field = ({
     }
     return <div className="disabled evo-rdonly">{fw}</div>;
   };
-  const f = fieldDef || { type: "text" };
+  const f = fieldDef || { type: ft.text };
   const fReadOnly = readOnly || f.readOnly;
   const cbs = callbacks || {};
   const fLabel = label || f.label;
@@ -381,22 +388,29 @@ const Field = ({
 export default Field;
 
 Field.propTypes = {
-  fieldDef: PropTypes.object.isRequired, // field definition (field model)
+  /** Field metadata */
+  fieldDef: PropTypes.object.isRequired,
+  /** Callback functions for field events */
   callbacks: PropTypes.shape({
     change: PropTypes.func,
     dropFile: PropTypes.func,
   }),
-  data: PropTypes.any, // object or atomic values depending on field type
+  /** Field value (object or scalar values depending on field type) */
   value: PropTypes.any,
+  // data: PropTypes.any,
   valueId: PropTypes.any,
-  label: PropTypes.string, // override label in model
-  readOnly: PropTypes.bool, // override readOnly in model
+  /** Field label (override label in fieldDef) */
+  label: PropTypes.string,
+  /** Field readOnly (override readOnly in fieldDef) */
+  readOnly: PropTypes.bool,
+  /** Field icon (only for lov fields) */
   icon: PropTypes.string,
+  /** Validation error message */
   message: PropTypes.string,
 };
 
 Field.defaultProps = {
-  data: null,
+  // data: null,
   value: null,
   valueId: null,
   label: null,

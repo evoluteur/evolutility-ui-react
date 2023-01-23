@@ -1,24 +1,27 @@
-import React, { useState } from "react";
-import { Route, Link } from "react-router-dom";
+import React from "react";
+import classnames from "classnames";
+import { Link, NavLink, useParams } from "react-router-dom";
 import Icon from "react-crud-icons";
 import { i18n_nav } from "../../i18n/i18n";
 import appMenus from "../../appMenus";
-import url from "../../utils/url";
-import models from "../../utils/moMa";
+import { getUrlMap } from "../../utils/url";
+import { models, modelIds } from "../../utils/moMa";
 
 import "./SideBar.scss";
 
+// TODO: need rewrite
+
 // #region ------- Helpers ---------
 const item2Group_Map = {};
-const sections = {};
-const setup = () =>
-  appMenus.forEach((menuGroup) => {
-    const groupId = menuGroup.id;
-    sections[groupId] = menuGroup;
-    menuGroup.menus.forEach((menuItem) => {
-      item2Group_Map[menuItem.id] = groupId;
-    });
+const sections = { doc: [] };
+
+appMenus.forEach((menuGroup) => {
+  const groupId = menuGroup.id;
+  sections[groupId] = menuGroup;
+  menuGroup.menus.forEach((menuItem) => {
+    item2Group_Map[menuItem.id] = groupId;
   });
+});
 
 const vwIcons = (m) => {
   const mm = [
@@ -29,184 +32,115 @@ const vwIcons = (m) => {
 };
 
 const iconViews = (mid, f) => (
-  <div className="mIcons">
-    {vwIcons(models[mid] || []).map((menu) =>
-      f.url ? null : (
-        <Link to={`/${mid}${menu.id}`} key={menu.id}>
-          <Icon name={menu.icon} size="small" theme="none" />
-        </Link>
-      )
+  <div className="x-icons">
+    {vwIcons(models[mid] || []).map(
+      (menu) =>
+        !f.url && (
+          <Link to={`/${mid}${menu.id}`} key={menu.id}>
+            <Icon name={menu.icon} size="small" theme="none" />
+          </Link>
+        )
     )}
   </div>
 );
 
-const MenuLink = ({ menu }) => (
-  <Route
-    path={"/" + menu.id}
-    exact={false}
-    children={({ match }) => (
-      <li className={match ? "active" : ""}>
-        <Link
-          to={`/${menu.id}/${
-            menu.defaultViewMany ? menu.defaultViewMany : "list"
-          }`}
-        >
-          <img className="evol-many-icon" src={"/pix/" + menu.icon} alt="" />
-          {menu.text}
-        </Link>
-        {iconViews(menu.id, menu)}
-      </li>
-    )}
-  />
+const sLink = (label, url, icon) => (
+  <Link to={url}>
+    <img alt="" src={`/svg/${icon}.svg`} />
+    <span>{label}</span>
+  </Link>
 );
 
-const MenuLinkSimple = ({ menu }) => (
-  <Route
-    path={"/" + menu.id}
-    exact={false}
-    children={({ match }) => (
-      <li className={match ? "active" : ""}>
-        <Link
-          to={
-            "/" +
-            menu.id +
-            "/" +
-            (menu.defaultViewMany ? menu.defaultViewMany : "list")
-          }
-        >
-          <img className="evol-many-icon" src={"/pix/" + menu.icon} alt="" />
-        </Link>
-      </li>
-    )}
-  />
+const MenuLink = ({ menu, activeEntity }) => (
+  <li className={classnames({ active: menu.id === activeEntity })}>
+    <Link
+      to={`/${menu.id}/${menu.defaultViewMany ? menu.defaultViewMany : "list"}`}
+    >
+      <img className="e-icon" src={"/pix/" + menu.icon} alt="" />
+      <span>{menu.text}</span>
+    </Link>
+    {iconViews(menu.id, menu)}
+  </li>
 );
 
+const MenuLinkDoc = ({ menu, activeEntity }) => (
+  <li className={classnames({ active: menu.id === activeEntity })}>
+    <Link to={`/${menu.id}`}>
+      <img className="e-icon" src={"/pix/" + menu.icon} alt="" />
+      <span>{menu.text}</span>
+    </Link>
+  </li>
+);
 //#endregion
 
-const SideBar = ({ match }) => {
-  const [navOpened, setNavOpened] = useState(true);
+const SideBar = ({ onClickToggle }) => {
+  const params = useParams(); // Keep for forcing render
+  const { entity } = getUrlMap();
+  console.log(params, entity);
 
-  const toggleNav = () => {
-    const opened = !navOpened;
-    const nav = document.getElementsByClassName("Nav")[0];
-    const c = document.getElementsByClassName("pageContent")[0];
-
-    if (opened) {
-      nav.style.width = "180px";
-      c.style.marginLeft = "180px";
-    } else {
-      nav.style.width = "50px";
-      c.style.marginLeft = "50px";
-    }
-    setNavOpened(opened);
-  };
-
-  setup();
-  const urlw = match ? match.url : "";
-  const w = url.getUrlMap(urlw);
-  const g = item2Group_Map[w.entity];
+  const g = item2Group_Map[entity];
   let links = [];
-
   let menus = [];
-  if (g === "designer" || w.entity === "designer") {
-    menus = [sections.designer, sections.demo];
-    links = <Link to="/">Home</Link>;
-  } else if (w.entity === "demo" || g === "organizer") {
-    //  || g === "music"
-    menus = [sections.organizer];
-    //menus = [sections.organizer, sections.music, sections.test]
-    //links = <Link to="/world/list">Designer</Link>
-    links = (
-      <>
-        <Link to="/doc">
-          <img alt="Doc" src="/svg/book.svg" /> Doc
-        </Link>
-        <br />
-        <br />
-        <Link to="/designer">
-          <img alt="Designer" src="/svg/cogs.svg" /> Designer
-        </Link>
-        <br />
-      </>
-    );
+
+  if (entity === "demos" || modelIds.includes(entity)) {
+    menus = [sections.demos]; // [sections.organizer, sections.music, sections.test]
+    links = sLink("Documentation", "/docs", "book");
+  } else if (entity === "docs") {
+    menus = [sections.docs];
+    links = sLink("Demos", "/demos", "eye");
   } else {
-    // if (w.entity === "test") {
-    //   menus = []; //[sections.test]
-    // } else {
-    //   menus = [];
-    // }
     links = (
       <>
-        <Link to="/demo">
-          <img alt="Demos" src="/svg/eye.svg" />
-          Demo
-        </Link>
-        <br />
-        <br />
-        <Link to="/doc">
-          <img alt="Doc" src="/svg/book.svg" />
-          Doc
-        </Link>
-        <br />
-        <br />
-        <Link to="/designer">
-          <img alt="Designer" src="/svg/cogs.svg" />
-          Designer
-        </Link>
-        <br />
+        {sLink("Demos", "/demos", "eye")}
+        {sLink("Documentation", "/docs", "book")}
       </>
     );
   }
 
-  const link = navOpened
-    ? (menu) => <MenuLink menu={menu} key={menu.id} />
-    : (menu) => <MenuLinkSimple menu={menu} key={menu.id} />;
-  const MenuLinks = ({ menus }) => menus.map((menu) => link(menu));
+  const link = (menu) => (
+    <MenuLink menu={menu} key={menu.id} activeEntity={entity} />
+  );
+
+  const MenuLinks = ({ menus }) => menus.map(link);
+  const MenuLinksDoc = ({ menus }) =>
+    menus.map((m) => <MenuLinkDoc menu={m} key={m.id} />);
 
   const Section = (section) =>
-    section ? (
+    section && (
       <li className={section.id === g ? "active-li" : ""} key={section.id}>
-        {navOpened && section.title ? (
+        {section.title && (
           <div>
-            <br />
-            <Link to={"/" + section?.id}>
-              <img
-                alt={section.title}
-                src={`/svg/${section.icon}.svg`}
-                className="cpnSvg"
-              />
-              {section.title}
-            </Link>
+            <NavLink to={"/" + section?.id}>
+              <img alt={section.title} src={`/svg/${section.icon}.svg`} />
+              <span>{section.title}</span>
+            </NavLink>
           </div>
-        ) : null}
-        <ul className="nav-l2">
-          <MenuLinks menus={section.menus} />
+        )}
+        <ul
+          className={classnames("nav-l2", { "nav-doc": section.id === "docs" })}
+        >
+          {section.id === "docs" ? (
+            <MenuLinksDoc menus={section.menus} activeEntity={entity} />
+          ) : (
+            <MenuLinks menus={section.menus} activeEntity={entity} />
+          )}
         </ul>
       </li>
-    ) : null;
+    );
 
   return (
-    <nav className="evo-sidebar">
+    <nav className="evo-sidebar" role="navigation">
       <a className="skipNav" href="#afterNav">
         {i18n_nav.skip}
       </a>
-      <div className="navTop">
-        <Icon id="navToggle" name="list" theme="light" onClick={toggleNav} />
-        <span className="embossed">Evolutility</span>
-      </div>
+      <span className="nav-toggle">
+        <Icon name="chevron-down" theme="none" onClick={onClickToggle} />
+      </span>
       <ul>{menus.map(Section)}</ul>
-      <div className="side-links">{links}</div>
+      <div className="sections-links">{links}</div>
       <div id="afterNav" />
     </nav>
   );
-  /*
-
-          <div>
-            <img alt="Doc" src={`/svg/book.svg`} className="cpnSvg" />
-            {"Doc"}
-          </div>
-
-          */
 };
 
 export default SideBar;
