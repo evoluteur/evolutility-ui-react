@@ -7,7 +7,7 @@ import "./Timestamps.scss";
 const showTimestamp = config.withTimestamp;
 
 const Timestamps = ({ data }) => {
-  if (!(showTimestamp && data)) {
+  if (!(showTimestamp && data && data?.id)) {
     return null;
   }
   return (

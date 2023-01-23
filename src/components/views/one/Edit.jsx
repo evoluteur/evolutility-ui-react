@@ -13,7 +13,6 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // import moment from 'moment'
-// import {withTimestamp} from "../../../config"
 import { i18n_actions, i18n_validation } from "../../../i18n/i18n";
 import { fieldId2Field, fieldTypes as ft } from "../../../utils/dico";
 import { validate, validateField } from "../../../utils/validation";
