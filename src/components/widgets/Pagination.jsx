@@ -28,10 +28,15 @@ const Pagination = ({ count, fullCount, onClick }) => {
       const wNext = nbPages > pIdx + 1;
       const pId = pIdx + 1;
       const bPage = function (id) {
+        // TODO: tabIndex={id}
         paginationBody.push(
-          <li key={id} className={pId === id ? "active" : ""} onClick={onClick}>
-            <span className="fakeLink">{id}</span>
-          </li>
+          <div
+            key={id}
+            className={pId === id ? "active" : ""}
+            onClick={onClick}
+          >
+            <span>{id}</span>
+          </div>
         );
       };
       const bPageRange = (pStart, pEnd) => {
@@ -41,20 +46,20 @@ const Pagination = ({ count, fullCount, onClick }) => {
       };
       const bGap = (idx) => {
         paginationBody.push(
-          <li key={"gap" + idx} className="disabled">
-            <span className="fakeLink">...</span>
-          </li>
+          <div key={"gap" + idx} className="disabled">
+            <span>...</span>
+          </div>
         );
       };
 
       paginationBody.push(
-        <li
+        <div
           key="prev"
-          className={wPrev ? "" : "disabled"}
+          className={wPrev ? "" : "disabled w-border"}
           onClick={wPrev ? onClick : null}
         >
-          <span className="fakeLink">&laquo;</span>
-        </li>
+          <span>&lt;</span>
+        </div>
       );
       bPage(1);
 
@@ -78,22 +83,18 @@ const Pagination = ({ count, fullCount, onClick }) => {
       }
 
       paginationBody.push(
-        <li
+        <div
           key="next"
-          className={wNext ? "" : "disabled"}
+          className={wNext ? "" : "disabled w-border"}
           onClick={wNext ? onClick : null}
         >
-          <span className="fakeLink">&raquo;</span>
-        </li>
+          <span>&gt;</span>
+        </div>
       );
     }
 
     return (
-      fullCount > pageSize && (
-        <nav className="pagination-center">
-          <ul className="pagination">{paginationBody}</ul>
-        </nav>
-      )
+      fullCount > pageSize && <nav className="pagination">{paginationBody}</nav>
     );
   }
   return null;
