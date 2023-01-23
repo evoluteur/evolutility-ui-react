@@ -43,7 +43,7 @@ const Doc = () => {
         <ol style={{ listStyleType: "decimal" }}>
           {docMenus.map((m) => (
             <li>
-              <Link to={m.id.replace("docs/", "")}>{m.text}</Link>
+              <Link to={m.id}>{m.text}</Link>
             </li>
           ))}
         </ol>

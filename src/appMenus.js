@@ -1,19 +1,19 @@
 import { modelsArray } from "./utils/moMa";
 
 export const docMenus = [
-  { id: "docs/install", text: "Installation", icon: "designer/cog.png" },
-  { id: "docs/config", text: "Configuration", icon: "designer/cog.png" },
+  { id: "install", text: "Installation", icon: "designer/cog.png" },
+  { id: "config", text: "Configuration", icon: "designer/cog.png" },
   {
-    id: "docs/metamodel",
+    id: "metamodel",
     text: "Metamodel",
     icon: "designer/metadata.png",
   },
   {
-    id: "docs/models",
+    id: "models",
     text: "Sample Models",
     icon: "designer/metadata.png",
   },
-  { id: "docs/views", text: "Views", icon: "designer/object.png" },
+  { id: "views", text: "Views", icon: "designer/object.png" },
 ];
 
 const appMenus = [

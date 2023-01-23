@@ -62,26 +62,28 @@ const MenuLink = ({ menu, activeEntity }) => (
     {iconViews(menu.id, menu)}
   </li>
 );
-
-const MenuLinkDoc = ({ menu, activeEntity }) => (
-  <li className={classnames({ active: menu.id === activeEntity })}>
-    <Link to={`/${menu.id}`}>
-      <img className="e-icon" src={"/pix/" + menu.icon} alt="" />
-      <span>{menu.text}</span>
-    </Link>
-  </li>
-);
 //#endregion
 
 const SideBar = ({ onClickToggle }) => {
   const params = useParams(); // Keep for forcing render
-  const { entity } = getUrlMap();
-  console.log(params, entity);
+  const { entity, view } = getUrlMap();
+  console.log(params, entity, view);
 
   const g = item2Group_Map[entity];
   let links = [];
   let menus = [];
 
+  const MenuLinkDoc = ({ menu }) => {
+    debugger;
+    return (
+      <li className={classnames({ active: menu.id === view })}>
+        <Link to={`docs/${menu.id}`}>
+          <img className="e-icon" src={"/pix/" + menu.icon} alt="" />
+          <span>{menu.text}</span>
+        </Link>
+      </li>
+    );
+  };
   if (entity === "demos" || modelIds.includes(entity)) {
     menus = [sections.demos]; // [sections.organizer, sections.music, sections.test]
     links = sLink("Documentation", "/docs", "book");
