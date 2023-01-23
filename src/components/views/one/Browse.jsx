@@ -106,7 +106,7 @@ export default Browse;
 
 Browse.propTypes = {
   entity: PropTypes.string.isRequired,
-  model: modelPropType,
+  model: modelPropType.isRequired,
   data: PropTypes.shape({
     id: PropTypes.number.isRequired,
   }),

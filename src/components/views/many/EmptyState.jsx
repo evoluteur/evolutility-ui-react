@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import modelPropTypes from "../modelPropTypes";
 
 import Alert from "../../widgets/Alert";
 import Button from "../../widgets/Button";
@@ -32,11 +33,7 @@ const EmptyState = ({ model, inSearch }) => {
 export default EmptyState;
 
 EmptyState.propTypes = {
-  model: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    namePlural: PropTypes.string.isRequired,
-  }).isRequired,
+  model: modelPropTypes.isRequired,
   /** Does the user have search or filter crierias? */
   inSearch: PropTypes.bool,
 };

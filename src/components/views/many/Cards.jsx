@@ -54,7 +54,7 @@ export default Cards;
 
 Cards.propTypes = {
   entity: PropTypes.string.isRequired,
-  model: modelPropTypes,
+  model: modelPropTypes.isRequired,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

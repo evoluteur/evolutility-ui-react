@@ -214,7 +214,7 @@ export default List;
 
 List.propTypes = {
   entity: PropTypes.string.isRequired,
-  model: modelPropType,
+  model: modelPropType.isRequired,
   /** Indicates that the list instance is nested in a form (as a collection). */
   isNested: PropTypes.bool,
   data: PropTypes.oneOfType([

@@ -171,7 +171,7 @@ export default Edit;
 
 Edit.propTypes = {
   entity: PropTypes.string.isRequired,
-  model: modelPropType,
+  model: modelPropType.isRequired,
   data: PropTypes.shape({
     id: PropTypes.number,
   }),

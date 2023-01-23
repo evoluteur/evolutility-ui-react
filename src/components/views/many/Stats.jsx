@@ -12,7 +12,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
-import config from "../../../config";
+// import config from "../../../config";
 import { getModel } from "../../../utils/moMa";
 import { i18n_stats, i18n_comments } from "../../../i18n/i18n";
 import {
