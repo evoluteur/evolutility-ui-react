@@ -73,17 +73,15 @@ const SideBar = ({ onClickToggle }) => {
   let links = [];
   let menus = [];
 
-  const MenuLinkDoc = ({ menu }) => {
-    debugger;
-    return (
-      <li className={classnames({ active: menu.id === view })}>
-        <Link to={`docs/${menu.id}`}>
-          <img className="e-icon" src={"/pix/" + menu.icon} alt="" />
-          <span>{menu.text}</span>
-        </Link>
-      </li>
-    );
-  };
+  const MenuLinkDoc = ({ menu }) => (
+    <li className={classnames({ active: menu.id === view })}>
+      <Link to={`docs/${menu.id}`}>
+        <img className="e-icon" src={"/pix/" + menu.icon} alt="" />
+        <span>{menu.text}</span>
+      </Link>
+    </li>
+  );
+
   if (entity === "demos" || modelIds.includes(entity)) {
     menus = [sections.demos]; // [sections.organizer, sections.music, sections.test]
     links = sLink("Documentation", "/docs", "book");

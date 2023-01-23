@@ -1,9 +1,13 @@
 const configOptions = [
   {
     name: "apiPath",
-    description:
-      "Path to GraphQL API (can use &quot;proxy&quot; from package.json).",
-    example: "https://localhost:2000/v1/graphql",
+    description: "Path to GraphQL API.",
+    example: '"https://myapp.hasura.app/v1/graphql"',
+  },
+  {
+    name: "adminSecret",
+    description: "Hasura admin secret.",
+    example: "",
   },
   {
     name: "pageSize",
@@ -13,12 +17,12 @@ const configOptions = [
   {
     name: "filesUrl",
     description: "Path to upload files to (not implemented yet).",
-    example: "http://localhost:3000/pix/",
+    example: '"/pix/"',
   },
   {
     name: "withActivity",
     description:
-      "Tracks and shows records activity (last visited and most visited).",
+      "Tracks and shows records activity (last visited and most visited). Currently implemented w/ the browser's localStorage, it will be moved to the server later.",
     example: "true",
   },
   {

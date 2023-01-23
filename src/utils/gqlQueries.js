@@ -23,14 +23,15 @@ import { dateTZ } from "./format";
 
 const ft = fieldTypes;
 
+const timestampFields = config.withTimestamp ? " u_date c_date " : " ";
+
 const reqHeader = {
   "Content-Type": "application/json",
   Accept: "application/json",
 };
-if (config.token) {
-  reqHeader["X-Hasura-Admin-Secret"] = config.token;
+if (config.adminSecret) {
+  reqHeader["X-Hasura-Admin-Secret"] = config.adminSecret;
 }
-
 export const gqlOptions = (query, variables) => ({
   method: "POST",
   headers: reqHeader,
@@ -78,7 +79,7 @@ const prepData = (entity, data) => {
 export const fullCount = (m) =>
   " _full_count: " + m.qid + "_aggregate { aggregate { count }}";
 
-export const qField = (f) =>
+export const qFieldCol = (f) =>
   f.type === ft.lov
     ? f.id +
       " {id " +
@@ -87,7 +88,8 @@ export const qField = (f) =>
       "} "
     : f.id;
 
-export const qFields = (m) => "id " + m.fields?.map(qField).join(" ");
+export const qFields = (m) =>
+  "id" + timestampFields + m.fields?.map(qFieldCol).join(" ");
 
 // const qOrderBy = (m, sortField, sortDirection = "asc") => {
 //   const mft = m.fieldsH[sortField];
@@ -281,8 +283,7 @@ export const qOne = (entity, id, nextOrPrevious) => {
       q += `_by_pk(id:${id})`;
     }
     // }
-    const timestampFields = config.withTimestamp ? " u_date c_date " : "";
-    q += " { " + qFields(m) + timestampFields + qCollecs(m) + " }}";
+    q += " { " + qFields(m) + qCollecs(m) + " }}";
     return q;
   } else {
     console.error("Model not found " + entity);

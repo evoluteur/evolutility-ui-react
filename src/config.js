@@ -3,7 +3,7 @@
 const config = {
   // - Path to GraphQL API
   apiPath: "https://bds.hasura.app/v1/graphql",
-  token: "ENTER-SECRET-HERE",
+  adminSecret: "ENTER-SECRET-HERE",
 
   // - Path to uploaded files
   filesUrl: "/pix/",
