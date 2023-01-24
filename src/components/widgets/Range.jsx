@@ -13,7 +13,7 @@ const Range = ({ min, max, avg }) => {
       Math.round(max === min ? 0 : ((avg - min) / (max - min)) * 100) +
       "% + 4px)",
   };
-  const avgTxt = avg;
+  const avgTxt = avg.toFixed(2);
   return (
     <div className="evo-range">
       <div className="range-line">

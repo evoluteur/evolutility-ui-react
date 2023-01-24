@@ -62,6 +62,11 @@ const prepData = (data, fields) => {
     fields.forEach((f) => {
       const d = data[f.id];
       if (d) {
+        d.num = {
+          min: d.min,
+          max: d.max,
+          avg: d.avg,
+        };
         // - stats in  range
         if (!nullOrUndefined(d.min)) {
           d.min = fieldValue(f, d.min);
@@ -106,7 +111,7 @@ const statsField = (d, f) =>
         {d.avg && d.min !== d.max && (
           <div className="field-range">
             <div>{formattedValue(d.min, f)}</div>
-            <Range min={d.min} max={d.max} avg={d.avg} />
+            <Range min={d.num.min} max={d.num.max} avg={d.num.avg} />
             <div>{formattedValue(d.max, f)}</div>
           </div>
         )}
