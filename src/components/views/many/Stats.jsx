@@ -29,7 +29,7 @@ import {
   moneyString,
   nullOrUndefined,
 } from "../../../utils/format";
-import Header from "../../shell/PageTitle";
+import PageTitle from "../../shell/PageTitle";
 import Spinner from "../../widgets/Spinner";
 import Alert from "../../widgets/Alert";
 import Range from "../../widgets/Range";
@@ -252,7 +252,7 @@ const Stats = () => {
   }
   return (
     <>
-      <Header
+      <PageTitle
         entity={entity}
         title={title}
         model={model}

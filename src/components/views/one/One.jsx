@@ -9,7 +9,7 @@ import { logActivity } from "../../../utils/activity";
 import Edit from "./Edit";
 import Browse from "./Browse";
 
-import Header from "../../shell/PageTitle";
+import PageTitle from "../../shell/PageTitle";
 import Alert from "../../widgets/Alert";
 import Spinner from "../../widgets/Spinner";
 import { i18n_actions, i18n_msg, i18n_errors } from "../../../i18n/i18n";
@@ -151,25 +151,28 @@ const One = () => {
             : addOne(entity, userData);
           upsertPromise.then((response) => {
             let toastMsg;
+            const newId = response?.data?.id;
             if (response.errors) {
               // TODO:
               toast.error(
                 "Server error while inserting or updating the record."
               );
             } else {
-              const newId = response?.data?.id;
               if (newId) {
                 toastMsg = i18n_actions.updated.replace(
                   "{0}",
                   capitalize(model.name)
                 );
-                navigate("/" + entity + "/edit/" + newId);
               } else {
                 toastMsg = i18n_actions.added.replace("{0}", model.name);
               }
             }
             toast.success(toastMsg);
             setData(response.data);
+            setUserData(response.data);
+            if (newId) {
+              navigate("/" + entity + "/edit/" + newId);
+            }
           });
         } else {
           toast.info(i18n_msg.noUpdate);
@@ -189,7 +192,7 @@ const One = () => {
 
   return (
     <div className={"evol-one model_" + entity}>
-      <Header
+      <PageTitle
         id={id}
         entity={entity}
         title={title}

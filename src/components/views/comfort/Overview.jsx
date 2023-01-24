@@ -9,7 +9,7 @@ import { viewsMany } from "../../../utils/dicoViews";
 import { capitalize } from "../../../utils/format";
 import { lcWrite, lcRead } from "../../../utils/localStorage";
 import { i18n_activity } from "../../../i18n/i18n";
-import Header from "../../shell/PageTitle";
+import PageTitle from "../../shell/PageTitle";
 import Chart from "../charts/Chart";
 import ModelLinks from "../comfort/ModelLinks";
 
@@ -139,7 +139,7 @@ const Overview = () => {
 
     return (
       <div className="evol-overview">
-        <Header
+        <PageTitle
           entity={entity}
           model={m}
           title={capitalize(m.namePlural) + " Overview"}

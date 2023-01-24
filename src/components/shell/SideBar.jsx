@@ -65,6 +65,7 @@ const MenuLink = ({ menu, activeEntity }) => (
 //#endregion
 
 const SideBar = ({ onClickToggle }) => {
+  // TODO: clean this
   const params = useParams(); // Keep for forcing render
   const { entity, view } = getUrlMap();
   console.log(params, entity, view);

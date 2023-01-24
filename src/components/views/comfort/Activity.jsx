@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { getActivity, clearActivity } from "../../../utils/activity";
-import Header from "../../shell/PageTitle";
+import PageTitle from "../../shell/PageTitle";
 import { getModel } from "../../../utils/moMa";
 import { i18n_activity } from "../../../i18n/i18n";
 import { capitalize } from "../../../utils/format";
@@ -56,7 +56,7 @@ const Activity = () => {
 
   return (
     <div className="evol-activity">
-      <Header
+      <PageTitle
         entity={entity}
         model={m}
         title={capitalize(m.namePlural) + " Activity"}

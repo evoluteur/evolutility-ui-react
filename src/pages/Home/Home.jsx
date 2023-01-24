@@ -97,17 +97,17 @@ const Home = () => {
 
       <div className="text-center tech-logos">
         <a href="https://reactjs.org/" target="react" rel="noopener noreferrer">
-          <img src="pix/react.png" alt="React" />
+          <img src="pix/logos/react.png" alt="React" />
         </a>
         <a
           href="https://graphql.org/"
           target="graphql"
           rel="noopener noreferrer"
         >
-          <img src="pix/graphql.png" alt="GraphQL" />
+          <img src="pix/logos/graphql.png" alt="GraphQL" />
         </a>
         <a href="https://hasura.io" target="hasura" rel="noopener noreferrer">
-          <img src="pix/hasura.png" alt="Hasura" className="hasura" />
+          <img src="pix/logos/hasura.png" alt="Hasura" className="hasura" />
         </a>
       </div>
       <section>

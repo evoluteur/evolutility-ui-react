@@ -15,7 +15,7 @@ import { getModel } from "../../../utils/moMa";
 import { fieldInCharts } from "../../../utils/dico";
 import { lcRead } from "../../../utils/localStorage";
 import { capitalize } from "../../../utils/format";
-import Header from "../../shell/PageTitle";
+import PageTitle from "../../shell/PageTitle";
 import Alert from "../../widgets/Alert";
 import Chart from "./Chart";
 
@@ -100,7 +100,7 @@ const Charts = () => {
 
     return (
       <div className="">
-        <Header
+        <PageTitle
           entity={entity}
           model={m}
           title={title}
