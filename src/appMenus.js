@@ -2,7 +2,7 @@ import { modelsArray } from "./utils/moMa";
 
 export const docMenus = [
   { id: "install", text: "Installation", icon: "designer/cog.png" },
-  { id: "config", text: "Configuration", icon: "designer/cog.png" },
+  { id: "config", text: "Configuration", icon: "designer/wrench.png" },
   {
     id: "metamodel",
     text: "Metamodel",
