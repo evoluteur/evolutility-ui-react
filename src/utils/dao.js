@@ -20,11 +20,6 @@ import config from "../config.js";
 const { apiPath } = config;
 
 //#region Helpers ----------------------------
-
-// TODO: error handling
-const notImplementedYet = () => console.log("Not implemented yet.");
-//alert("Not implemented for GraphQL yet (but working with REST).");
-
 const toJSON = (r) => r.json();
 
 const cleanLOV = (f, data) => {
@@ -222,7 +217,7 @@ export const updateOne = (entity, id, data) => {
 
 // upload a data item (doc or image)
 // response value has filename
-export const uploadOne = (entity, id, field, data) => notImplementedYet();
+// export const uploadOne = (entity, id, field, data) => notImplementedYet();
 
 // get list of values for field
 export const getLov = (entity, fieldId) => {
@@ -269,7 +264,7 @@ const daoGraphQL = {
   getOne,
   deleteOne,
   updateOne,
-  uploadOne,
+  // uploadOne,
   getLov,
 
   getMany,

@@ -154,13 +154,13 @@ const model = {
       id: "url_bdfugue",
       type: "url",
       label: "BDFugue",
-      width: 62,
+      width: 100,
     },
     {
       id: "url_amazon",
       type: "url",
       label: "Amazon",
-      width: 38,
+      width: 100,
     },
     {
       id: "pix",

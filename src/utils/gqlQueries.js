@@ -32,6 +32,7 @@ const reqHeader = {
 if (config.adminSecret) {
   reqHeader["X-Hasura-Admin-Secret"] = config.adminSecret;
 }
+
 export const gqlOptions = (query, variables) => ({
   method: "POST",
   headers: reqHeader,
@@ -303,7 +304,7 @@ export const qUpdateOne = (entity, mqid, id, data) => {
     updated: ${"update_" + mqid} (
         where: {id: {_eq: ${id}}}
         _set: ${prepData(entity, data)}
-        ) {returning {id ${qFields(m)} }}
+        ) {returning {${qFields(m)}}}
   }`;
 };
 // ) {returning ${ qOne(entity, id) }  }
@@ -313,7 +314,7 @@ export const qInsertOne = (entity, mqid, data) => {
   return `mutation {
     inserted: ${"insert_" + mqid} (
       objects: [${prepData(entity, data)}]
-    ) {returning {id ${qFields(m)}}}
+    ) {returning {${qFields(m)}}}
   }`;
 };
 
