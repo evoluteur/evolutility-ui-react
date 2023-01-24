@@ -59,7 +59,7 @@ export const image = (d) => {
 //const intFormatter = new Intl.NumberFormat(locale);
 export const integerString = (d) => numFormat(d, "0,0");
 // export const integerString = (d) => numFormat(d, "0");
-export const decimalString = (d) => numFormat(d, d > 1 ? "0.00" : "0.000");
+export const decimalString = (d) => numFormat(d, "0,0.00");
 export const moneyString = (d) => numFormat(d, "$0,0.00");
 const jsonString = (js) => (js ? JSON.stringify(js, null, "\t") : "");
 
