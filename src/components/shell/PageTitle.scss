@@ -34,7 +34,6 @@
     top: 0;
     right: 0;
     display: inline-block;
-    background-color: $background-color;
     > a {
       display: inline-block;
     }
@@ -49,7 +48,7 @@
         border-color: $color-icon-active;
         cursor: default !important;
         > svg {
-          fill: black;
+          fill: $color-text;
         }
       }
       &:hover {

@@ -50,11 +50,13 @@ label {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: $bgcolor-main;
 }
 th {
   text-align: left;
 }
 .table {
+  background-color: $bgcolor-background;
   border-top: $border;
   border-bottom: $border;
   width: 100%;

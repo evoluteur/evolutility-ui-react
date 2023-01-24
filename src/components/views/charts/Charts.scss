@@ -16,7 +16,7 @@
 .chart-card {
   position: relative;
   text-align: center;
-  background-color: white;
+  background-color: $bgcolor-background;
   min-height: 300px;
   &.size-tiny {
     // width: 280px !important;

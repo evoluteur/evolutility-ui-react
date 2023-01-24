@@ -1,7 +1,7 @@
 @import "../../variables";
 
 .panel {
-  background-color: #fff;
+  background-color: $bgcolor-background;
   border: $border;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
