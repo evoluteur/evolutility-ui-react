@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Icon from "react-crud-icons";
+import Badge from "../widgets/Badge";
 
 import { queryUrl, getSearchText } from "../../utils/url";
 
@@ -89,9 +90,9 @@ const PageTitle = ({
     <div className="evo-page-header">
       <h1 className="page-title">
         <span id="itemTitle">{title}</span>
-        {count > 0 && <span className="evo-badge">{count}</span>}
-        {comments > 0 && <span className="evo-badge">{comments}</span>}
-        {search && <span className="evo-badge">Search "{search}"</span>}
+        {count > 0 && <Badge text={count} />}
+        {comments > 0 && <Badge text={comments} />}
+        {search && <Badge text={`Search "${search}"`} />}
         {text && <span className="h-txt">{text}</span>}
       </h1>
       <div>{iconViews(entity, cardinality, id, view, model)}</div>
