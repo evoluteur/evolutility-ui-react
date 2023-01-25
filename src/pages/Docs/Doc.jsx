@@ -52,7 +52,12 @@ const Doc = () => {
         </p>
         <p>
           It's still a work in progress. To suggest a feature or report a bug:{" "}
-          <a href="https://github.com/evoluteur/evolutility-ui-react/issues">
+          <a
+            href="https://github.com/evoluteur/evolutility-ui-react/issues"
+            target="gbr"
+            rel="noopener noreferrer"
+            className="extlink"
+          >
             https://github.com/evoluteur/evolutility-ui-react/issues
           </a>
         </p>
@@ -61,11 +66,24 @@ const Doc = () => {
         </p>
         <p>
           Copyright (c) 2023{" "}
-          <a href="https://evoluteur.github.io/">Olivier Giulieri</a>.
+          <a
+            href="https://evoluteur.github.io/"
+            target="omg"
+            rel="noopener noreferrer"
+            className="extlink"
+          >
+            Olivier Giulieri
+          </a>
+          .
         </p>
         <p>
           Evolutility-UI-React is released under the{" "}
-          <a href="http://github.com/evoluteur/evolutility-ui-react/blob/main/LICENSE">
+          <a
+            href="http://github.com/evoluteur/evolutility-ui-react/blob/main/LICENSE"
+            target="mit"
+            rel="noopener noreferrer"
+            className="extlink"
+          >
             MIT license
           </a>
           .

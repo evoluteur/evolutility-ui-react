@@ -100,6 +100,7 @@ const Metamodel = () => {
           Sample model using collections:{" "}
           <a
             target="wcm"
+            rel="noopener noreferrer"
             href="https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/winecellar.js"
           >
             Wine Cellar

@@ -73,19 +73,6 @@ const Many = () => {
         setData(response.data || response);
         setLoading(false);
       });
-      //     .catch((err) => {
-      //       let msg = "";
-      //       if (err.response && err.response.statusText) {
-      //         msg = err.response.statusText + ".";
-      //       }
-      //       this.setState({
-      //         error: {
-      //           title: "Error",
-      //           message: "Couldn't retrieve data. " + msg,
-      //         },
-      //         loading: false,
-      //       });
-      //     });
     };
     window.scrollTo(0, 0);
     getData(entity);

@@ -13,6 +13,7 @@ const Configuration = () => (
       Configurations options are specified in the file{" "}
       <a
         target="config"
+        rel="noopener noreferrer"
         href="https://github.com/evoluteur/evolutility-ui-react/blob/main/src/config.js"
       >
         /src/config.js

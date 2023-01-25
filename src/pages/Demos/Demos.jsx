@@ -27,6 +27,7 @@ const Demos = () => {
           className="extlink"
           href="https://github.com/evoluteur/evolutility-models#evolutility-models--"
           target="models"
+          rel="noopener noreferrer"
         >
           models
         </a>

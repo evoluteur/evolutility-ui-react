@@ -169,13 +169,13 @@ export const fieldMeta = {
     //   ui: true,
     //   db: false,
     // },
-    {
-      id: "dependentField",
-      description:
-        'ID of an optional dependent field. Used when selecting in one list changes the content of dependant list (among 2 fields of type "lov").records.',
-      ui: true,
-      db: true,
-    },
+    // {
+    //   id: "dependentField",
+    //   description:
+    //     'ID of an optional dependent field. Used when selecting in one list changes the content of dependant list (among 2 fields of type "lov").records.',
+    //   ui: true,
+    //   db: true,
+    // },
     {
       id: "max",
       description: "Maximum value allowed (only applies to numeric fields).",
@@ -280,13 +280,14 @@ export const fieldMeta = {
       id: "lovTable",
       description:
         'Table to join to for field value (only for fields of "lov" type).',
-      ui: true,
+      ui: false,
       db: true,
     },
     {
       id: "lovColumn",
       description:
         'Column name (in the lovTable) for field value (only for fields of "lov" type).',
+      ui: false,
       db: true,
     },
     {

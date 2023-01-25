@@ -75,7 +75,6 @@ const Browse = ({ entity, model, data }) => {
               <List
                 isNested
                 data={collecData(c.id)}
-                match={this.props.match}
                 paramsCollec={c}
                 style={{ width: "100%" }}
                 location={this.props.location}

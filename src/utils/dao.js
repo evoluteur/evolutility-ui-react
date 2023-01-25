@@ -167,13 +167,7 @@ export const getOne = (entity, id, nextOrPrevious) => {
           }
           return data;
         } else {
-          return {
-            errors: [
-              {
-                message: `No data found for ID="${id}"`,
-              },
-            ],
-          };
+          return r;
         }
       });
   } else {
