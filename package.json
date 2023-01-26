@@ -72,6 +72,15 @@
       "react-app/jest"
     ]
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "coverageReporters": [
+      "text",
+      "html"
+    ]
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
