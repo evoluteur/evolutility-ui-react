@@ -41,15 +41,17 @@ const getDefaultData = (model) => {
 
 const recordTitle = (m, data, isNew) => {
   if (m) {
-    let title = "";
+    let title = m.title;
     if (isNew) {
       title = `New ${m.name || "item"}`;
-    } else if (m.titleFunction) {
-      // Note: would this be unsecure?
-      // title = m.titleFunction(data, m);
-      title = m.titleFunction(Object.assign({}, data));
-    } else {
-      title = data[m.titleField];
+    } else if (data?.id) {
+      if (m.titleFunction) {
+        // Note: would this be unsecure?
+        // title = m.titleFunction(data, m);
+        title = m.titleFunction(Object.assign({}, data));
+      } else {
+        title = data[m.titleField];
+      }
     }
     return title;
   }

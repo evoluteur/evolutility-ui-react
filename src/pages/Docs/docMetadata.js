@@ -233,6 +233,13 @@ export const fieldMeta = {
       db: false,
     },
     {
+      id: "format",
+      description:
+        "Field format (using moment for date values and numeral for  numeric values).",
+      ui: true,
+      db: false,
+    },
+    {
       id: "help",
       description: "Optional help on the field.",
       ui: true,

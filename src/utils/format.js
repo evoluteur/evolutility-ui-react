@@ -18,6 +18,10 @@ import { locale } from "../i18n/i18n";
 import config from "../config";
 import { fieldTypes as ft } from "./dico";
 
+const f_decimal = "0,0.00";
+const f_integer = "0,0";
+const f_money = "$0,0.00";
+
 const { filesUrl } = config;
 export const xItemsCount = (count, nameSingular, namePlural) =>
   count === 0
@@ -57,24 +61,23 @@ export const image = (d) => {
   return <img src={d} className="img-thumbnail" alt="" />;
 };
 //const intFormatter = new Intl.NumberFormat(locale);
-export const integerString = (d) => numFormat(d, "0,0");
-// export const integerString = (d) => numFormat(d, "0");
-export const decimalString = (d) => numFormat(d, "0,0.00");
-export const moneyString = (d) => numFormat(d, "$0,0.00");
+export const integerString = (d) => numFormat(d, f_integer);
+export const decimalString = (d) => numFormat(d, f_decimal);
+export const moneyString = (d) => numFormat(d, f_money);
 const jsonString = (js) => (js ? JSON.stringify(js, null, "\t") : "");
 
 export const fieldValue = (f, d, abbr) => {
   if (f.type === ft.bool) {
     return d ? <Icon className="checkbox" name="check" theme="none" /> : "";
   }
-  if (f.type === ft.int && d) {
-    return integerString(d);
+  if (f.type === ft.int) {
+    return numFormat(d, f.format ? f.format : f_integer);
   }
-  if (f.type === ft.dec && d) {
-    return decimalString(d);
+  if (f.type === ft.dec) {
+    return numFormat(d, f.format ? f.format : f_decimal);
   }
-  if (f.type === ft.money && d) {
-    return moneyString(d);
+  if (f.type === ft.money) {
+    return numFormat(d, f.format ? f.format : f_money);
   }
   if (f.type === ft.email && d) {
     return <a href={`mailto:${d}`}>{d}</a>;

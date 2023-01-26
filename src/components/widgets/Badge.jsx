@@ -11,4 +11,6 @@ const Badge = ({ text }) => (
 
 export default Badge;
 
-Badge.propTypes = { text: PropTypes.string.isRequired };
+Badge.propTypes = {
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+};
