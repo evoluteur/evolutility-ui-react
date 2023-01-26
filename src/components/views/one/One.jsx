@@ -89,7 +89,7 @@ const One = () => {
     if (id && !isNew) {
       setLoading(true);
       const m = getModel(entity);
-      getOne(entity, id).then((data) => {
+      getOne(entity, parseInt(id, 10)).then((data) => {
         if (done) {
           return;
         }

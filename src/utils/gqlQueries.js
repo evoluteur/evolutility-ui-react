@@ -180,13 +180,12 @@ export const qMany = (entity, options) => {
     }
 
     const qParam = gOpts.length ? "(" + gOpts.join(", ") + ")" : "";
-    return `
-      query {
-          many: ${m.qid} ${qParam}{
-              ${qFields(m)}
-          }
-          ${count}
-      }`;
+    return `query getMany {
+        many: ${m.qid}${qParam}{
+            ${qFields(m)}
+        }
+        ${count}
+    }`;
   }
   return null;
 };
@@ -198,7 +197,7 @@ export const qChart = (m, fieldId) => {
   }
   // TODO: number fields
   if (f.type === ft.lov) {
-    return `query {chart: ${m.qid}_${fieldId}(limit: 20) {
+    return `query getChart {chart: ${m.qid}_${fieldId}(limit: 20) {
         id
         name
         ${m.qid}_aggregate {
@@ -208,7 +207,7 @@ export const qChart = (m, fieldId) => {
     }`;
   }
   if (f.type === ft.bool) {
-    return `query {
+    return `query getChart {
       true: ${m.qid}_aggregate(where: {${fieldId}: {_eq: true}}) {
         aggregate {count}
       }
@@ -236,7 +235,7 @@ export const qStats = (m) => {
     }
   });
   return (
-    `query {stats: ${m.qid}_aggregate { aggregate {` +
+    `query getStats {stats: ${m.qid}_aggregate { aggregate {` +
     allStats
       .map((p) => (sag[p].length ? p + " {" + sag[p].join(" ") + "}" : ""))
       .join(" ") +
@@ -271,17 +270,17 @@ const nextPrev = {
   },
 };
 
-export const qOne = (entity, id, nextOrPrevious) => {
+export const qOne = (entity, nextOrPrevious) => {
   const m = getModel(entity);
   if (m) {
-    let q = "query { one: " + m.qid;
+    let q = "query getOne($id:Int!) { one: " + m.qid;
     // if (m.collections?.length) {
     //   q += `(where:{id:{_eq:${id}}})`;
     // } else {
     if (nextOrPrevious) {
-      q += `(where: {id: {${nextPrev[nextOrPrevious].op}: ${id}}}, order_by: {id: ${nextPrev[nextOrPrevious].order}}, limit: 1)`;
+      q += `(where: {id: {${nextPrev[nextOrPrevious].op}: $id}}, order_by: {id: ${nextPrev[nextOrPrevious].order}}, limit: 1)`;
     } else {
-      q += `_by_pk(id:${id})`;
+      q += `_by_pk(id:$id)`;
     }
     // }
     q += " { " + qFields(m) + qCollecs(m) + " }}";
@@ -306,8 +305,8 @@ export const qUpdateOne = (entity, mqid, id, data) => {
         _set: ${prepData(entity, data)}
         ) {returning {${qFields(m)}}}
   }`;
+  // TODO: return collections too?
 };
-// ) {returning ${ qOne(entity, id) }  }
 
 export const qInsertOne = (entity, mqid, data) => {
   const m = getModel(entity);

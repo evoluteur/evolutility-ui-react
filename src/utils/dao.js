@@ -145,7 +145,7 @@ export const getStats = (entity) => {
 // get a single item by id
 export const getOne = (entity, id, nextOrPrevious) => {
   if (id) {
-    return fetch(apiPath, gqlOptions(qOne(entity, id, nextOrPrevious)))
+    return fetch(apiPath, gqlOptions(qOne(entity, nextOrPrevious), { id }))
       .then(toJSON)
       .then((r) => {
         if (r.data && r.data.one !== null) {
