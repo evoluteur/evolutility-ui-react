@@ -27,27 +27,25 @@ const Panel = ({
     setOpened(!opened);
   };
 
-  const titleElem = title && (
-    <div className="panel-heading">
-      {collapsible && (
-        <Icon
-          name={opened ? "chevron-up" : "chevron-down"}
-          onClick={clickToggle}
-          size="tiny"
-          theme="none"
-        />
-      )}
-      <h3 className="panel-title">{title}</h3>
-    </div>
-  );
-
   return (
     <div
       className={classnames("evol-pnl", className)}
       style={{ width: width + "%" }}
     >
-      <div className="panel">
-        {titleElem}
+      <div className={classnames("panel", { collapsed: !opened })}>
+        {title && (
+          <div className="panel-heading">
+            {collapsible && (
+              <Icon
+                name={opened ? "chevron-up" : "chevron-down"}
+                onClick={clickToggle}
+                size="tiny"
+                theme="none"
+              />
+            )}
+            <h3 className="panel-title">{title}</h3>
+          </div>
+        )}
         {header && <div className="panel-header">{header}</div>}
         <fieldset style={{ display: opened ? "block" : "none" }}>
           {children}
