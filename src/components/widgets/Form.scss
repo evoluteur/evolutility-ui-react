@@ -8,14 +8,7 @@ input[type="checkbox"] {
   margin: 4px 0 0;
   margin-top: 1px \9;
   line-height: normal;
-}
-input[type="radio"][disabled],
-input[type="radio"].disabled,
-fieldset[disabled] input[type="radio"],
-input[type="checkbox"][disabled],
-input[type="checkbox"].disabled,
-fieldset[disabled] input[type="checkbox"] {
-  cursor: not-allowed;
+  transform: scale(1.3);
 }
 input[type="file"] {
   display: block;
@@ -35,7 +28,6 @@ input[type="checkbox"]:focus {
   width: 100%;
   height: 34px;
   padding: 4px 6px;
-  font-size: 14px;
   line-height: 1.428571429;
   color: #555;
   background-color: #fff;
@@ -60,9 +52,7 @@ input[type="checkbox"]:focus {
   color: #999;
   opacity: 1;
 }
-.form-control:-ms-input-placeholder {
-  color: #999;
-}
+.form-control:-ms-input-placeholder,
 .form-control::-webkit-input-placeholder {
   color: #999;
 }
@@ -133,12 +123,6 @@ fieldset[disabled] .checkbox label {
   font-weight: 400;
   vertical-align: middle;
   cursor: pointer;
-}
-.radio-inline.disabled,
-fieldset[disabled] .radio-inline,
-.checkbox-inline.disabled,
-fieldset[disabled] .checkbox-inline {
-  cursor: not-allowed;
 }
 .radio-inline + .radio-inline,
 .checkbox-inline + .checkbox-inline {

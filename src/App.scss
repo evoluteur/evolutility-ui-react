@@ -33,7 +33,7 @@ img {
 }
 label {
   color: $color-label;
-  font-size: 14px;
+  font-size: $label-font-size;
 }
 
 .cols-2 {
@@ -52,9 +52,6 @@ label {
   flex-direction: column;
   background-color: $bgcolor-main;
 }
-th {
-  text-align: left;
-}
 .table {
   background-color: $bgcolor-background;
   border-top: $border;
@@ -62,28 +59,23 @@ th {
   width: 100%;
   max-width: 100%;
   margin-bottom: 20px;
+  > thead > tr > th,
+  > tbody > tr > td {
+    padding: 8px;
+    line-height: 1.428571429;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+  }
+  > thead > tr > th {
+    text-align: left;
+    background-color: $bgcolor-header;
+    border-bottom: 2px solid #ddd;
+  }
 }
-.table > thead > tr > th,
-.table > thead > tr > td,
-.table > tbody > tr > th,
-.table > tbody > tr > td,
-.table > tfoot > tr > th,
-.table > tfoot > tr > td {
-  padding: 8px;
-  line-height: 1.428571429;
-  vertical-align: top;
-  border-top: 1px solid #ddd;
-}
-.table > thead > tr > th {
-  vertical-align: bottom;
-  border-bottom: 2px solid #ddd;
-}
-// .table-striped > tbody > tr:nth-of-type(odd) {
-//   background-color: #f9f9f9;
-// }
 .table-hover > tbody > tr:hover {
   background-color: #f5f5f5;
 }
+
 @media print {
   a,
   a:visited {
@@ -113,9 +105,9 @@ th {
   }
   .table {
     border-collapse: collapse !important;
-  }
-  .table td,
-  .table th {
-    background-color: #fff !important;
+    td,
+    th {
+      background-color: #fff !important;
+    }
   }
 }

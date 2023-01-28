@@ -5,11 +5,10 @@
   width: 100%;
   margin: 20px 0 0 10px;
   color: $color-label;
+  font-size: $label-font-size;
   > div {
-    margin-bottom: 5px;
     > label {
-      font-size: $text-font-size;
-      margin-right: 10px;
+      margin-right: 5px;
       &:after {
         content: ":";
       }

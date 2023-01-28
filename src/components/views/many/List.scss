@@ -16,13 +16,15 @@
       top: 49px;
       z-index: 2;
       white-space: nowrap;
-      background-color: $bgcolor-header;
       svg {
         position: relative;
         top: 2px;
         fill: gray;
         height: 16px;
         width: 16px;
+      }
+      &:first-child {
+        min-width: 200px;
       }
     }
     td {
@@ -55,6 +57,12 @@
     > svg {
       height: 16px;
       width: 16px;
+    }
+  }
+  .td-url {
+    max-width: 200px;
+    > a {
+      word-wrap: break-word;
     }
   }
 }

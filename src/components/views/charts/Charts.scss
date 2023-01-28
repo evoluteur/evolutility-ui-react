@@ -3,6 +3,8 @@
 */
 @import "../../../variables";
 
+$chart-gap: 5px;
+
 .evol-many-charts {
   width: 100%;
   @include flex-holder();
@@ -75,8 +77,10 @@
     height: 300px;
     min-height: 100px;
   }
-  i[data-id="Resize"] {
-    margin-left: 8px;
+  > .alert {
+    // no data in charts
+    margin: 50px 10px 10px 10px;
+    text-align: left;
   }
 }
 
@@ -85,7 +89,7 @@
   padding: 0 5px 20px;
   .chart-actions-left,
   .chart-actions-right {
-    top: 5px;
+    top: $chart-gap;
   }
 }
 .chart-actions-left,
@@ -108,19 +112,14 @@
   }
 }
 .chart-actions-left {
-  left: 5px;
+  left: $chart-gap;
 }
 .chart-actions-right {
-  right: 5px;
+  right: $chart-gap;
 }
 .charts-stats {
   margin-top: 20px;
   i {
-    margin-right: 5px;
+    margin-right: $chart-gap;
   }
-}
-// no data in charts
-.chart-content > .alert {
-  margin: 50px 10px 10px 10px;
-  text-align: left;
 }

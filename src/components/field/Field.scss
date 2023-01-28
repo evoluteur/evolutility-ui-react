@@ -76,6 +76,7 @@
   > a {
     display: block;
     @include ellipsis();
+    max-width: 300px; // TODO: fix this
   }
 }
 div > .checkbox {

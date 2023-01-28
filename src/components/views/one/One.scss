@@ -35,9 +35,6 @@
 .evol-fset {
   @include flex-holder();
   padding: 16px $field-h-spacing 10px 0;
-  //input[type="checkbox"]{
-  //    height: 30px;
-  //}
 }
 .form-buttons {
   width: 100%;

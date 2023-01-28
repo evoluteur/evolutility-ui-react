@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Datepicker from "react-datepicker";
 import Dropzone from "react-dropzone";
+import classnames from "classnames";
 // import MultiSelect from "@khanacademy/react-multi-select";
 import { fieldTypes as ft } from "../../utils/dico";
 import { fieldValue, image, nullOrUndefined } from "../../utils/format";
@@ -247,9 +248,9 @@ const Field = ({
             {({ getRootProps, getInputProps, isDragActive }) => (
               <div
                 {...getRootProps()}
-                className={`pixdrop dropzone ${
-                  isDragActive ? "dropzone--isActive" : ""
-                }`}
+                className={classnames("pixdrop dropzone", {
+                  "dropzone--isActive": isDragActive,
+                })}
               >
                 <input {...getInputProps()} />
                 {isDragActive ? (
@@ -355,7 +356,7 @@ const Field = ({
 
   return (
     <div
-      className={`evol-fld${invalid ? " has-error" : ""}`}
+      className={classnames("evol-fld", { "has-error": invalid })}
       style={{ width: `${f.width || 100}%` }}
     >
       <FieldLabel label={fLabel} field={f} readOnly={fReadOnly} />

@@ -2,7 +2,7 @@
 
 html {
   height: 100%; // IE
-  font-size: 14px;
+  font-size: 14px; // datepicker
 }
 body {
   margin: 0;
@@ -13,7 +13,7 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 p {
-  font-size: 16px;
+  font-size: $text-font-size;
 }
 h1 {
   margin-bottom: 30px;
