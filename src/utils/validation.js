@@ -150,7 +150,6 @@ export const validateField = (f, v) => {
 };
 
 export const validate = (model, data) => {
-  // TODO: use yup instead of hand-coding it
   const fields = model.fields;
   const messages = [];
   const invalids = {};

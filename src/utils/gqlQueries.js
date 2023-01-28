@@ -252,7 +252,9 @@ export const qCollecs = (m) => {
     return collecs
       .map(
         (c) =>
-          ` ${c.id}(order_by:{${c.order || "id"}: asc}) { ${qFields(c.fields)}}`
+          ` ${c.id}(order_by:{${c.order || "id"}: asc}) { id ${c.fields
+            .map(qFieldCol)
+            .join(" ")}}`
       )
       .join(" ");
   }
@@ -274,15 +276,11 @@ export const qOne = (entity, nextOrPrevious) => {
   const m = getModel(entity);
   if (m) {
     let q = "query getOne($id:Int!) { one: " + m.qid;
-    // if (m.collections?.length) {
-    //   q += `(where:{id:{_eq:${id}}})`;
-    // } else {
     if (nextOrPrevious) {
       q += `(where: {id: {${nextPrev[nextOrPrevious].op}: $id}}, order_by: {id: ${nextPrev[nextOrPrevious].order}}, limit: 1)`;
     } else {
       q += `_by_pk(id:$id)`;
     }
-    // }
     q += " { " + qFields(m) + qCollecs(m) + " }}";
     return q;
   } else {
@@ -303,9 +301,8 @@ export const qUpdateOne = (entity, mqid, id, data) => {
     updated: ${"update_" + mqid} (
         where: {id: {_eq: ${id}}}
         _set: ${prepData(entity, data)}
-        ) {returning {${qFields(m)}}}
+    ) {returning {${qFields(m) + qCollecs(m)}}}
   }`;
-  // TODO: return collections too?
 };
 
 export const qInsertOne = (entity, mqid, data) => {

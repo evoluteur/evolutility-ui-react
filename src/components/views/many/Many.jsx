@@ -10,12 +10,10 @@
 
 // #region ---------------- Imports ----------------
 import React, { useEffect, useState, useMemo } from "react";
-import PropTypes from "prop-types";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 
 import List from "./List";
 import Cards from "./Cards";
-
 import PageTitle from "../../shell/PageTitle";
 import Pagination from "../../widgets/Pagination";
 import Spinner from "../../widgets/Spinner";
@@ -25,7 +23,7 @@ import { i18n_msg, i18n_errors } from "../../../i18n/i18n";
 import config from "../../../config";
 import url from "../../../utils/url";
 import { getModel } from "../../../utils/moMa";
-import dao from "../../../utils/dao";
+import { getMany } from "../../../utils/dao";
 
 import "./Many.scss";
 // #endregion
@@ -62,7 +60,7 @@ const Many = () => {
     const getData = (entity) => {
       const query = url.parseQuery(search);
       setLoading(true);
-      dao.getMany(entity, query).then((response) => {
+      getMany(entity, query).then((response) => {
         if (done) {
           return;
         }
@@ -219,11 +217,3 @@ const Many = () => {
 };
 
 export default Many;
-
-Many.propTypes = {
-  isNested: PropTypes.bool,
-};
-
-Many.defaultProps = {
-  isNested: false,
-};

@@ -20,7 +20,7 @@ import {
   fieldStatsFunctions,
   fieldTypes as ft,
 } from "../../../utils/dico";
-import dao from "../../../utils/dao";
+import { getStats } from "../../../utils/dao";
 import {
   capitalize,
   xItemsCount,
@@ -106,7 +106,7 @@ const statsField = (d, f) =>
         {fieldStatsFunctions(f).map(
           (fn) =>
             d[fn] !== null &&
-            itemAggr(d.id + fn + "dd", i18n_stats[fn], formattedValue(d[fn], f))
+            itemAggr(fn, i18n_stats[fn], formattedValue(d[fn], f))
         )}
         {d.avg && d.min !== d.max && (
           <div className="field-range">
@@ -147,7 +147,7 @@ const Stats = () => {
 
   useEffect(() => {
     let done = false;
-    dao.getStats(entity).then((response) => {
+    getStats(entity).then((response) => {
       if (done) {
         return;
       }
@@ -167,6 +167,8 @@ const Stats = () => {
   let body;
   if (loading) {
     body = <Spinner />;
+  } else if (error) {
+    body = <Alert title="Server Error" message={error.message} />;
   } else if (data?.count === 0) {
     body = (
       <Alert
@@ -175,8 +177,6 @@ const Stats = () => {
         message={i18n_stats.emptyData}
       />
     );
-  } else if (error) {
-    body = <Alert title="Server Error" message={error.message} />;
   } else {
     const recCount =
       i18n_stats.metaCount

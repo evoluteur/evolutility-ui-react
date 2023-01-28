@@ -149,29 +149,16 @@ export const getOne = (entity, id, nextOrPrevious) => {
       .then(toJSON)
       .then((r) => {
         if (r.data && r.data.one !== null) {
-          const m = getModel(entity);
           let data = r.data.one;
           const lovFields = mLOVFields(entity);
           if (lovFields.length) {
             lovFields.forEach((f) => cleanLOV(f, data));
-          }
-          if (m.collections) {
-            m.collections.forEach((c) => {
-              const cid = c.id;
-              const d = data[cid];
-              if (d) {
-                data.collections[cid] = d;
-                delete data[cid];
-              }
-            });
           }
           return data;
         } else {
           return r;
         }
       });
-  } else {
-    return null;
   }
 };
 

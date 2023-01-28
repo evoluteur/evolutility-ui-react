@@ -13,7 +13,7 @@ import classnames from "classnames";
 import Icon from "react-crud-icons";
 import { i18n_charts, i18n_actions, i18n_errors } from "../../../i18n/i18n";
 import Alert from "../../widgets/Alert";
-import dao from "../../../utils/dao";
+import { getChart } from "../../../utils/dao";
 import { lcWrite } from "../../../utils/localStorage";
 import Spinner from "../../widgets/Spinner";
 import ChartTable from "./ChartTable";
@@ -75,7 +75,7 @@ const Chart = ({
       if (fid) {
         // TODO timeout to show spinner
         // setLoading(true); // Loose animation w/ it
-        dao.getChart(entity, fid).then((response) => {
+        getChart(entity, fid).then((response) => {
           if (done) {
             return;
           }

@@ -60,6 +60,7 @@ const recordTitle = (m, data, isNew) => {
 // #endregion
 
 const One = () => {
+  //TODO: fix bug w/ lov fields not updated ontogglebw  edit & browse
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({});
   const [userData, setUserData] = useState({ ...data });
@@ -77,14 +78,13 @@ const One = () => {
   useEffect(() => {
     document.title = title;
   }, [title]);
-  useEffect(() => {
-    setUserData({ ...data });
-  }, [view]);
+  const setAllData = (data) => {
+    setData(data);
+    setUserData(data);
+  };
 
   useEffect(() => {
     let done = false;
-    // setData(null);
-    // setUserData(null);
     setError(null);
     if (id && !isNew) {
       setLoading(true);
@@ -99,8 +99,7 @@ const One = () => {
           if (data.data) {
             data = data.data;
           }
-          setData(data);
-          setUserData(data);
+          setAllData(data);
           if (withActivity) {
             logActivity(entity, id, data[m.titleField], "read");
           }
@@ -109,8 +108,7 @@ const One = () => {
       });
     } else if (isNew) {
       const defaults = getDefaultData(model);
-      setData(defaults);
-      setUserData(defaults);
+      setAllData(defaults);
       // TODO: get LOVs ?
       setLoading(false);
     }
@@ -160,7 +158,7 @@ const One = () => {
                 "Server error while inserting or updating the record."
               );
             } else {
-              if (newId) {
+              if (intId) {
                 toastMsg = i18n_actions.updated.replace(
                   "{0}",
                   capitalize(model.name)
@@ -170,9 +168,8 @@ const One = () => {
               }
             }
             toast.success(toastMsg);
-            setData(response.data);
-            setUserData(response.data);
-            if (newId) {
+            setAllData(response.data);
+            if (!intId) {
               navigate("/" + entity + "/edit/" + newId);
             }
           });

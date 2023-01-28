@@ -14,7 +14,7 @@ const iconH = {
     cards: { id: "cards", icon: "cards", label: "Cards" },
     charts: { id: "charts", icon: "dashboard", label: "Dashboard" },
     stats: { id: "stats", icon: "stats", label: "Stats" },
-    overview: { id: "overview", icon: "stats", label: "Overview" }, // TODO: Home icon
+    overview: { id: "overview", icon: "stats", label: "Overview" },
   },
   1: {
     edit: { id: "edit", icon: "edit", label: "Edit" },
@@ -22,7 +22,7 @@ const iconH = {
     // 'json': {id: 'json',  icon: 'json', label: 'JSON', option: true},
   },
   0: {
-    edit: { id: "activity", icon: "history", label: "Activity" },
+    activity: { id: "activity", icon: "history", label: "Activity" },
   },
 };
 
@@ -114,6 +114,8 @@ PageTitle.propTypes = {
   comments: PropTypes.number,
   /** Extra text beside the title */
   text: PropTypes.string,
+  /** Family of view ("0"=comfort, "1"=one, "n"=many) */
+  cardinality: PropTypes.oneOf(["0", "1", "n"]),
 };
 
 PageTitle.defaultProps = {

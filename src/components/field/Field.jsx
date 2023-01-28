@@ -134,27 +134,22 @@ const Field = ({
       id: f.id,
       key: f.id,
       onChange: cbs.change,
+      className: "form-control",
     };
 
     if (f.type === ft.bool) {
-      return <input {...usualProps} type="checkbox" checked={!!d} />;
+      return (
+        <input {...usualProps} className="" type="checkbox" checked={!!d} />
+      );
     }
     if (f.type === ft.textml) {
-      return (
-        <textarea
-          {...usualProps}
-          rows={f.height || 4}
-          className="form-control"
-          value={d || ""}
-        />
-      );
+      return <textarea {...usualProps} rows={f.height || 4} value={d || ""} />;
     }
     if (f.type === ft.json) {
       return (
         <textarea
           {...usualProps}
           rows={f.height || 4}
-          className="form-control"
           value={isObject(d) ? JSON.stringify(d, null, 2) : d || ""}
         />
       );
@@ -168,7 +163,7 @@ const Field = ({
         ? f.list.map((item) => createOption(item.id, item.text))
         : [createOption(`${f.id}loading`, i18n_msg.loading)];
       return (
-        <select {...usualProps} className="form-control" value={d || ""}>
+        <select {...usualProps} value={d || ""}>
           <option />
           {opts}
         </select>
@@ -193,7 +188,6 @@ const Field = ({
       return (
         <Datepicker
           {...usualProps}
-          className="form-control"
           selected={d ? new Date(d) : null}
           onChange={getDateFieldChange(f.id)}
         />
@@ -213,20 +207,12 @@ const Field = ({
             key={`${usualProps.key}_time`}
             type="time"
             value={d ? `${d}`.substr(11, 8) : ""}
-            className="form-control"
           />
         </>
       );
     }
     if (f.type === ft.time) {
-      return (
-        <input
-          {...usualProps}
-          type="time"
-          value={d || ""}
-          className="form-control"
-        />
-      );
+      return <input {...usualProps} type="time" value={d || ""} />;
     }
     if (f.type === ft.image || f.type === ft.doc) {
       let pix = null;
@@ -287,7 +273,6 @@ const Field = ({
             type="text"
             value={d || ""}
             onChange={cbs.change}
-            className="form-control"
           />
         </div>
       );
@@ -307,7 +292,6 @@ const Field = ({
         type={inputType}
         value={d || ""}
         onChange={cbs.change}
-        className="form-control"
       />
     );
   };

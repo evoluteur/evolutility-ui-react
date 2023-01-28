@@ -52,8 +52,9 @@ const prepModelCollecs = (m, models) => {
     if (!m._preparedCollecs) {
       if (m.collections) {
         m.collections.forEach((c) => {
-          if (c.object) {
-            const collecModel = models[c.object];
+          const cId = c.object || c.id;
+          if (cId) {
+            const collecModel = models[cId];
             if (collecModel) {
               // - if no icon, get it from collec object
               if (!c.icon && collecModel.icon) {
