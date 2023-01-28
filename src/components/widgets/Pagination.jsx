@@ -27,7 +27,7 @@ const Pagination = ({ count, fullCount, onClick }) => {
       const wPrev = pIdx > 0;
       const wNext = nbPages > pIdx + 1;
       const pId = pIdx + 1;
-      const bPage = function (id) {
+      const bPage = (id) => {
         // TODO: tabIndex={id}
         paginationBody.push(
           <div
@@ -111,7 +111,6 @@ Pagination.propTypes = {
   fullCount: PropTypes.number.isRequired,
   /** Callback function for pagination click */
   onClick: PropTypes.func.isRequired,
-  location: PropTypes.object,
 };
 
 Pagination.defaultProps = {

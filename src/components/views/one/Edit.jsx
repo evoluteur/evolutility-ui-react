@@ -12,24 +12,20 @@ import modelPropType from "../modelPropTypes";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-// import moment from 'moment'
 import { i18n_actions, i18n_validation } from "../../../i18n/i18n";
 import { fieldId2Field, fieldTypes as ft } from "../../../utils/dico";
 import { validate, validateField } from "../../../utils/validation";
-import List from "../many/List";
 import Button from "../../widgets/Button";
-import Alert from "../../widgets/Alert";
 import Field from "../../field/Field";
 import Panel from "../../widgets/Panel";
+import Collection from "./Collection";
 import Timestamps from "./Timestamps";
-
 // #endregion
 
 const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
   const [invalids, setInvalids] = useState(null);
   const { id = 0 } = useParams();
   const isNew = id === 0 || id === "0";
-  const error = null; // TODO:
 
   const clickSave = () => {
     const v = validate(model, data);
@@ -63,13 +59,12 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
     onFieldChange(fid, v);
   };
 
-  const ep = "/" + entity + "/";
+  const ep = `/${entity}/`;
   const cbs = {
     change: fieldChange,
     // dropFile: uploadFileOne,
   };
   const linkBrowse = isNew ? ep + "list" : ep + "browse" + (id ? "/" + id : "");
-  const listData = (cid) => (data.collections ? data.collections[cid] : null);
   const fnField = (f) => {
     if (f) {
       if (f.type === ft.lov && !f.list) {
@@ -118,51 +113,40 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
 
   return (
     <div className="evo-one-edit" role="form">
-      {error ? (
-        <Alert title="Error" message={error.message} />
-      ) : (
-        <div className="evol-pnls">
-          {model.groups.map((g, idx) => {
-            const groupFields = fieldId2Field(g.fields, model.fieldsH);
-            return (
+      <div className="evol-pnls">
+        {model.groups.map((g, idx) => {
+          const groupFields = fieldId2Field(g.fields, model.fieldsH);
+          return (
+            <Panel
+              key={g.id || "g" + idx}
+              title={g.label || g.title || ""}
+              header={g.header}
+              footer={g.footer}
+              width={g.width}
+            >
+              <div className="evol-fset">{groupFields?.map(fnField)}</div>
+            </Panel>
+          );
+        })}
+        {!isNew &&
+          model.collections &&
+          model.collections?.map((c) => {
+            const cData = data[c.id];
+            return c.hideIfEmpty && (!cData || cData.length === 0) ? null : (
               <Panel
-                key={g.id || "g" + idx}
-                title={g.label || g.title || ""}
-                header={g.header}
-                footer={g.footer}
-                width={g.width}
+                key={c.id}
+                title={c.title}
+                collapsible
+                header={c.header}
+                footer={c.footer}
               >
-                <div className="evol-fset">{groupFields?.map(fnField)}</div>
+                <Collection collecModel={c} collecData={cData} />
               </Panel>
             );
           })}
-          {model.collections &&
-            !isNew &&
-            model.collections?.map((c, idx) => {
-              const lData = listData(c.id);
-              return c.hideIfEmpty && (!lData || lData.length === 0) ? null : (
-                <Panel
-                  key={"collec-e_" + c.id + idx}
-                  title={c.title}
-                  collapsible
-                  header={c.header}
-                  footer={c.footer}
-                >
-                  <List
-                    isNested
-                    match={this.props.match}
-                    paramsCollec={c}
-                    style={{ width: "100%" }}
-                    data={lData}
-                    location={this.props.location}
-                  />
-                </Panel>
-              );
-            })}
-          {panelActions}
-          <Timestamps data={data} />
-        </div>
-      )}
+        {panelActions}
+        <Timestamps data={data} />
+      </div>
     </div>
   );
 };

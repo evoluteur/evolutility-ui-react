@@ -17,13 +17,12 @@ import { fieldId2Field } from "../../../utils/dico";
 import Button from "../../widgets/Button";
 import Field from "../../field/Field";
 import Panel from "../../widgets/Panel";
-import List from "../many/List";
+import Collection from "./Collection";
 import Timestamps from "./Timestamps";
 // #endregion
 
 const Browse = ({ entity, model, data }) => {
   const { id = 0 } = useParams();
-  const collecData = (cid) => (data.collections ? data.collections[cid] : null);
 
   const fnFieldReadOnly = (f) => {
     if (f) {
@@ -63,25 +62,23 @@ const Browse = ({ entity, model, data }) => {
             </Panel>
           );
         })}
-        {model.collections?.map((c, idx) =>
-          !collecData(c.id) || collecData(c.id).length === 0 ? null : (
-            <Panel
-              title={c.title}
-              key={"collec-b_" + c.id + "-" + idx}
-              collapsible
-              header={c.header}
-              footer={c.footer}
-            >
-              <List
-                isNested
-                data={collecData(c.id)}
-                paramsCollec={c}
-                style={{ width: "100%" }}
-                location={this.props.location}
-              />
-            </Panel>
-          )
-        )}
+        {model.collections?.map((c) => {
+          const cData = data[c.id];
+          return (
+            cData &&
+            cData.length > 0 && (
+              <Panel
+                title={c.title}
+                key={"collec-" + c.id}
+                collapsible
+                header={c.header}
+                footer={c.footer}
+              >
+                <Collection collecModel={c} collecData={cData} />
+              </Panel>
+            )
+          );
+        })}
         <div className="form-buttons noprint">
           <Button
             url={`/${entity}/list`}

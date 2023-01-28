@@ -80,7 +80,7 @@ const Many = () => {
     };
   }, [entity, search]);
 
-  const clickSort = (evt) => {
+  const onClickSort = (evt) => {
     const fid = evt.currentTarget.id,
       query = url.parseQuery(search) || {};
 
@@ -166,7 +166,7 @@ const Many = () => {
     entity,
     model,
     data,
-    onClickSort: clickSort,
+    onClickSort,
     sortField,
     sortDirection,
   };
