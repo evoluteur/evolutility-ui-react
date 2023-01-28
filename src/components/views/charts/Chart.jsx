@@ -70,25 +70,23 @@ const Chart = ({
 
   useEffect(() => {
     let done = false;
-    const getData = () => {
-      const fid = field?.id;
-      if (fid) {
-        // TODO timeout to show spinner
-        // setLoading(true); // Loose animation w/ it
-        getChart(entity, fid).then((response) => {
-          if (done) {
-            return;
-          }
-          if (response.errors) {
-            setError(response.errors[0]);
-          } else {
-            setData(response.data);
-          }
-          setLoading(false);
-        });
-      }
-    };
-    getData();
+    setError(null);
+    const fid = field?.id;
+    if (fid) {
+      // TODO timeout to show spinner
+      // setLoading(true); // Loose animation w/ it
+      getChart(entity, fid).then((response) => {
+        if (done) {
+          return;
+        }
+        if (response.errors) {
+          setError(response.errors[0]);
+        } else {
+          setData(response.data);
+        }
+        setLoading(false);
+      });
+    }
 
     return () => {
       done = true;

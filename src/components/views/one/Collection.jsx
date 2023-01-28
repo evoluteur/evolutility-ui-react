@@ -2,10 +2,20 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import TableBody from "../many/TableBody";
+// import EmptyState from "../many/EmptyState";
 
 import "./Collection.scss";
 
 const Collection = ({ collecModel, collecData }) => {
+  const isEmpty = !(collecData && collecData?.length > 0);
+  if (isEmpty) {
+    return (
+      <div className="evo-collec">
+        <div className="empty-collec">No data yet.</div>
+      </div>
+    );
+    // return <EmptyState model={collecModel} isNested={true} />;
+  }
   const link = "/" + (collecModel.object || collecModel.id) + "/browse/";
   const tableHeader = (
     <thead>
