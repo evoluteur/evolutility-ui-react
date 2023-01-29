@@ -154,6 +154,8 @@ export const i18n_activity = {
   views0: "never viewed",
   views1: "1 view",
   viewsN: `{0} views`,
+  updated: "Last update",
+  created: "Creation date",
 };
 
 export const i18n_errors = {

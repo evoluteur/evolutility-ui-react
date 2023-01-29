@@ -1,6 +1,7 @@
 import React from "react";
 import config from "../../../config";
 import { datetimeString } from "../../../utils/format";
+import { i18n_activity } from "../../../i18n/i18n";
 
 import "./Timestamps.scss";
 
@@ -13,12 +14,12 @@ const Timestamps = ({ data }) => {
   return (
     <div className="timestamps">
       <div>
-        <label>Creation date</label>
-        {datetimeString(data.c_date)}
+        <label>{i18n_activity.updated}</label>
+        {datetimeString(data.u_date)}
       </div>
       <div>
-        <label>Last update</label>
-        {datetimeString(data.u_date)}
+        <label>{i18n_activity.created}</label>
+        {datetimeString(data.c_date)}
       </div>
     </div>
   );
