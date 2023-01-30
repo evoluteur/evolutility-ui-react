@@ -6,20 +6,21 @@
 
 - Rethink metamodel (add transform, more separation b/w backend and front end, new "expression" prop for fieldTypes and FieldGroups, different field type for lov and object, maybe single lov table...
 
+- Live demo
+
 - Make a JIRA style app to track evolutility development (and replace this list) or do it in GitHub.
 
-- WIP: Add Summary view
-- WIP: Upgrqde to react-router-dom v6.4.5
+- add caching
 - Plug UI library? - thinking mantine or @adobe/react-spectrum...
 - search
 - filters
-- Add "comfort" models & views (saved filters, handpicked sets, dashboards...)
+- Add "comfort" models & views (saved filters, handpicked sets, customizable dashboards...)
 - Every field type can also be an array of values of that type
 - replace numeral and moment by Intl
 - evolutility-models generate list of relationships to create in hasura admin
 - Choice of UX pattern: Drawer / navigation / dual pane
 - translate in other languages (/src/i18n/XX.js)
-- Add checkboxes for selection to the List and Cards views
+- Add checkboxes for multi-rows selection to the List and Cards views
 - Add JSON view (w/ react-json-view?)
 - Add "Compare" view for side-by-side comparaison and averages
 - Add "Kanban" view w/ drag & drop

@@ -55,12 +55,12 @@ Configurations options are specified in the file [/src/config.js](https://github
 
 | Option     | Description      | Example             |
 |------------|------------------|---------------------|
-| apiPath | Path to GraphQL API. | "https://localhost:2000/v1/graphql" |
-| filesUrl   | Path to upload files to. | "http://localhost:3000/pix/" |
+| apiPath    | Path to GraphQL API. | "https://myapp.hasura.app/v1/graphql" |
+| filesUrl   | Path to upload files to. | "/pix/" |
 | pageSize   | Page size in pagination.  | 50 |
-| locale     | Date format (no translation yet). | en/fr |
 | queryModels | Get models from JSON files or from the database through the API. |
-| withTimestamp | Add timestamp columns u_date and c_date to track record creation and update times. | true |
+| withTimestamp | Tracks and shows timestamp for creation date and last update for every record. The DB tables need timestamp columns "u_date" and "c_date" for the feature to work. | true |
+| withActivity | Tracks and shows records activity (last visited and most visited). Currently implemented w/ the browser's localStorage, it will be moved to the server later. | true |
 
 
 <a name="Views"></a>
@@ -193,8 +193,8 @@ Objects have fields.
 | labelShort   | Optional shorter version of the labels (used in List and Cards views). |
 | required     | Determines if the field is required for saving.      |
 | readOnly     | If set to true, the field value cannot be changed.   |
-| defaultValue | Default field value for new records.                 |
-| hideIfEmpty  | Hide field when empty in Browse view.                |
+| defaultValue | Default field value for new records.    |
+| format       | Field format (using moment for date values and numeral for  numeric values). |
 | dependantField | ID of an optional dependant field. Used when selecting in one list changes the content of dependant list (among 2 fields of type "lov").records. |
 | max, min     | Maximum/Minimum value allowed (only applies to numeric fields).      |
 | maxLength, minLength | Maximum/Minimum length allowed (only applies to text fields).      |
