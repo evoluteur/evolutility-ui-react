@@ -74,6 +74,14 @@ const cleanChartData = (e, data, fieldType) => {
 const mLOVFields = (entity) =>
   getModel(entity).fields.filter((f) => f.type === ft.lov);
 
+const cleanLOVs = (entity, data) => {
+  const lovFields = mLOVFields(entity);
+  if (lovFields.length) {
+    lovFields.forEach((f) => cleanLOV(f, data));
+  }
+  return data;
+};
+
 //#endregion
 
 //#region Many ----------------------------
@@ -84,8 +92,7 @@ export const getMany = (entity, options) => {
     .then((r) => {
       if (r.data && r.data.many) {
         const data = r.data.many;
-        const m = getModel(entity);
-        const lovFields = m.fields.filter((f) => f.type === ft.lov);
+        const lovFields = mLOVFields(entity);
         if (lovFields.length) {
           data.forEach((d) => lovFields.forEach((f) => cleanLOV(f, d)));
         }
@@ -149,12 +156,7 @@ export const getOne = (entity, id, nextOrPrevious) => {
       .then(toJSON)
       .then((r) => {
         if (r.data && r.data.one !== null) {
-          let data = r.data.one;
-          const lovFields = mLOVFields(entity);
-          if (lovFields.length) {
-            lovFields.forEach((f) => cleanLOV(f, data));
-          }
-          return data;
+          return cleanLOVs(entity, r.data.one);
         } else {
           return r;
         }
@@ -170,13 +172,12 @@ export const deleteOne = (entity, id) => {
 
 // add an item
 export const insertOne = (entity, data) => {
-  const m = getModel(entity);
   return fetch(apiPath, gqlOptions(qInsertOne(entity, data)))
     .then(toJSON)
     .then((data) => {
       data.data =
         data.data.inserted && data.data.inserted.returning.length
-          ? data.data.inserted.returning[0]
+          ? cleanLOVs(entity, data.data.inserted.returning[0])
           : null;
       return data;
     });
@@ -190,7 +191,7 @@ export const updateOne = (entity, id, data) => {
     .then((data) => {
       data.data =
         data.data.updated && data.data.updated.returning.length
-          ? data.data.updated.returning[0]
+          ? cleanLOVs(entity, data.data.updated.returning[0])
           : null;
       return data;
     });

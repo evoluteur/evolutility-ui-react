@@ -57,10 +57,10 @@ const recordTitle = (m, data, isNew) => {
   }
   return "Model not found";
 };
+
 // #endregion
 
 const One = () => {
-  //TODO: fix bug w/ lov fields not updated ontogglebw  edit & browse
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({});
   const [userData, setUserData] = useState({ ...data });
