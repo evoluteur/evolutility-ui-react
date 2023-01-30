@@ -180,7 +180,7 @@ export const qMany = (entity, options) => {
     }
 
     const qParam = gOpts.length ? "(" + gOpts.join(", ") + ")" : "";
-    return `query getMany {
+    return `query getMany_${m.qid} {
         many: ${m.qid}${qParam}{
             ${qFields(m)}
         }
@@ -191,15 +191,15 @@ export const qMany = (entity, options) => {
 };
 
 export const qChart = (m, fieldId) => {
+  const qName = "getChart_" + m.qid + "_" + fieldId;
   const f = m.fieldsH[fieldId];
   if (!f) {
     return "";
   }
   // TODO: number fields
   if (f.type === ft.lov) {
-    return `query getChart {chart: ${m.qid}_${fieldId}(limit: 20) {
-        id
-        name
+    return `query ${qName} { chart: ${m.qid}_${fieldId}(limit: 20) {
+        id name
         ${m.qid}_aggregate {
           aggregate {count}
         }
@@ -207,8 +207,7 @@ export const qChart = (m, fieldId) => {
     }`;
   }
   if (f.type === ft.bool) {
-    return `query getChart {
-      true: ${m.qid}_aggregate(where: {${fieldId}: {_eq: true}}) {
+    return `query ${qName} { true: ${m.qid}_aggregate(where: {${fieldId}: {_eq: true}}) {
         aggregate {count}
       }
       total: ${m.qid}_aggregate {
@@ -222,7 +221,6 @@ export const qChart = (m, fieldId) => {
 export const qStats = (m) => {
   const sag = {};
   allStats.forEach((stat) => (sag[stat] = []));
-
   m.fields.filter(fieldInStats).forEach((f) => {
     if (f.type !== "money" && fieldIsNumber(f)) {
       // if (fieldIsNumber(f)) {
@@ -235,7 +233,7 @@ export const qStats = (m) => {
     }
   });
   return (
-    `query getStats {stats: ${m.qid}_aggregate { aggregate {` +
+    `query getStats_${m.qid} {stats: ${m.qid}_aggregate { aggregate {` +
     allStats
       .map((p) => (sag[p].length ? p + " {" + sag[p].join(" ") + "}" : ""))
       .join(" ") +
@@ -295,20 +293,20 @@ export const qDelete = (mqid) => `mutation($id:Int!) {
   ) {affected_rows}
 }`;
 
-export const qUpdateOne = (entity, mqid, id, data) => {
+export const qUpdateOne = (entity, id, data) => {
   const m = getModel(entity);
   return `mutation {
-    updated: ${"update_" + mqid} (
+    updated: ${"update_" + m.qid} (
         where: {id: {_eq: ${id}}}
         _set: ${prepData(entity, data)}
     ) {returning {${qFields(m) + qCollecs(m)}}}
   }`;
 };
 
-export const qInsertOne = (entity, mqid, data) => {
+export const qInsertOne = (entity, data) => {
   const m = getModel(entity);
   return `mutation {
-    inserted: ${"insert_" + mqid} (
+    inserted: ${"insert_" + m.qid} (
       objects: [${prepData(entity, data)}]
     ) {returning {${qFields(m)}}}
   }`;

@@ -16,7 +16,7 @@ import { i18n_actions, i18n_msg, i18n_errors } from "../../../i18n/i18n";
 import config from "../../../config";
 import { capitalize } from "../../../utils/format";
 import { getModel } from "../../../utils/moMa";
-import { getOne, updateOne, addOne } from "../../../utils/dao";
+import { getOne, updateOne, insertOne } from "../../../utils/dao";
 
 import "./One.scss";
 // #endregion
@@ -72,16 +72,17 @@ const One = () => {
   const isNew = id === "0";
   const title = error ? "Error" : recordTitle(model, data, isNew);
 
+  const setAllData = (data) => {
+    setData(data);
+    setUserData(data);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
   useEffect(() => {
     document.title = title;
   }, [title]);
-  const setAllData = (data) => {
-    setData(data);
-    setUserData(data);
-  };
 
   useEffect(() => {
     let done = false;
@@ -133,7 +134,7 @@ const One = () => {
 
     if (data === null) {
       // TODO: 404
-      return "EMPTY";
+      return "NO DATA - refactor bug to be fixed";
     }
     if (view === "edit") {
       const cbFieldChange = (fid, value) => {
@@ -148,7 +149,7 @@ const One = () => {
           const intId = id ? parseInt(id, 10) : null;
           const upsertPromise = intId
             ? updateOne(entity, intId, delta)
-            : addOne(entity, userData);
+            : insertOne(entity, userData);
           upsertPromise.then((response) => {
             let toastMsg;
             const newId = response?.data?.id;
@@ -196,7 +197,7 @@ const One = () => {
         entity={entity}
         title={title}
         model={model}
-        comments={data.nb_comments}
+        comments={data?.nb_comments}
         cardinality="1"
         view={view}
       />

@@ -169,9 +169,9 @@ export const deleteOne = (entity, id) => {
 };
 
 // add an item
-export const addOne = (entity, data) => {
+export const insertOne = (entity, data) => {
   const m = getModel(entity);
-  return fetch(apiPath, gqlOptions(qInsertOne(entity, m.qid, data)))
+  return fetch(apiPath, gqlOptions(qInsertOne(entity, data)))
     .then(toJSON)
     .then((data) => {
       data.data =
@@ -185,7 +185,7 @@ export const addOne = (entity, data) => {
 // update (replace) an item
 export const updateOne = (entity, id, data) => {
   const m = getModel(entity);
-  return fetch(apiPath, gqlOptions(qUpdateOne(m.id, m.qid, id, data)))
+  return fetch(apiPath, gqlOptions(qUpdateOne(m.id, id, data)))
     .then(toJSON)
     .then((data) => {
       data.data =
