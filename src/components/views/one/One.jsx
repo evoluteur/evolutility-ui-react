@@ -167,11 +167,11 @@ const One = () => {
               } else {
                 toastMsg = i18n_actions.added.replace("{0}", model.name);
               }
-            }
-            toast.success(toastMsg);
-            setAllData(response.data);
-            if (!intId) {
-              navigate("/" + entity + "/edit/" + newId);
+              toast.success(toastMsg);
+              setAllData(response.data);
+              if (!intId) {
+                navigate("/" + entity + "/edit/" + newId);
+              }
             }
           });
         } else {

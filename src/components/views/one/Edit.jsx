@@ -84,7 +84,7 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
         <Field
           key={f.id}
           fieldDef={f}
-          value={data[f.id]}
+          value={data?.[f.id]}
           data={data}
           callbacks={cbs}
           entity={entity}

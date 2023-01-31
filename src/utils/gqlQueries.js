@@ -293,11 +293,11 @@ export const qDelete = (mqid) => `mutation($id:Int!) {
   ) {affected_rows}
 }`;
 
-export const qUpdateOne = (entity, id, data) => {
+export const qUpdateOne = (entity, data) => {
   const m = getModel(entity);
-  return `mutation {
+  return `mutation($id:Int!) {
     updated: ${"update_" + m.qid} (
-        where: {id: {_eq: ${id}}}
+        where: {id: {_eq: $id}}
         _set: ${prepData(entity, data)}
     ) {returning {${qFields(m) + qCollecs(m)}}}
   }`;

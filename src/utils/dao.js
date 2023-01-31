@@ -89,17 +89,17 @@ const cleanLOVs = (entity, data) => {
 export const getMany = (entity, options) => {
   return fetch(apiPath, gqlOptions(qMany(entity, options)))
     .then(toJSON)
-    .then((r) => {
-      if (r.data && r.data.many) {
-        const data = r.data.many;
+    .then((resp) => {
+      if (resp.data && resp.data.many) {
+        const data = resp.data.many;
         const lovFields = mLOVFields(entity);
         if (lovFields.length) {
           data.forEach((d) => lovFields.forEach((f) => cleanLOV(f, d)));
         }
-        data._full_count = r.data._full_count.aggregate.count;
+        data._full_count = resp.data._full_count.aggregate.count;
         return data;
       } else {
-        return r;
+        return resp;
       }
     });
 };
@@ -109,14 +109,14 @@ export const getChart = (entity, field) => {
   const m = getModel(entity);
   return fetch(apiPath, gqlOptions(qChart(m, field)))
     .then(toJSON)
-    .then((r) => {
-      if (r.data) {
+    .then((resp) => {
+      if (resp.data) {
         const fieldType = m.fieldsH[field]?.type;
-        let data = fieldType === "lov" ? r.data.chart : r.data;
+        let data = fieldType === "lov" ? resp.data.chart : resp.data;
         data = cleanChartData(m.id, data, fieldType);
         return data;
       } else {
-        return r;
+        return resp;
       }
     });
 };
@@ -126,9 +126,9 @@ export const getStats = (entity) => {
   const m = getModel(entity);
   return fetch(apiPath, gqlOptions(qStats(m)))
     .then(toJSON)
-    .then((r) => {
-      if (r.data && r.data.stats) {
-        let data = r.data.stats.aggregate;
+    .then((resp) => {
+      if (resp.data && resp.data.stats) {
+        let data = resp.data.stats.aggregate;
         let d = {};
         for (let pMath in data) {
           for (const pField in data[pMath]) {
@@ -141,7 +141,7 @@ export const getStats = (entity) => {
         d.count = data.count;
         return { data: d };
       } else {
-        return r;
+        return resp;
       }
     });
 };
@@ -154,11 +154,11 @@ export const getOne = (entity, id, nextOrPrevious) => {
   if (id) {
     return fetch(apiPath, gqlOptions(qOne(entity, nextOrPrevious), { id }))
       .then(toJSON)
-      .then((r) => {
-        if (r.data && r.data.one !== null) {
-          return cleanLOVs(entity, r.data.one);
+      .then((resp) => {
+        if (resp.data && resp.data.one !== null) {
+          return cleanLOVs(entity, resp.data.one);
         } else {
-          return r;
+          return resp;
         }
       });
   }
@@ -174,26 +174,30 @@ export const deleteOne = (entity, id) => {
 export const insertOne = (entity, data) => {
   return fetch(apiPath, gqlOptions(qInsertOne(entity, data)))
     .then(toJSON)
-    .then((data) => {
-      data.data =
-        data.data.inserted && data.data.inserted.returning.length
-          ? cleanLOVs(entity, data.data.inserted.returning[0])
-          : null;
-      return data;
+    .then((resp) => {
+      if (!resp.errors) {
+        resp.data =
+          resp.data.inserted && resp.data.inserted.returning.length
+            ? cleanLOVs(entity, resp.data.inserted.returning[0])
+            : null;
+      }
+      return resp;
     });
 };
 
 // update (replace) an item
 export const updateOne = (entity, id, data) => {
   const m = getModel(entity);
-  return fetch(apiPath, gqlOptions(qUpdateOne(m.id, id, data)))
+  return fetch(apiPath, gqlOptions(qUpdateOne(m.id, data), { id }))
     .then(toJSON)
-    .then((data) => {
-      data.data =
-        data.data.updated && data.data.updated.returning.length
-          ? cleanLOVs(entity, data.data.updated.returning[0])
-          : null;
-      return data;
+    .then((resp) => {
+      if (!resp.errors) {
+        resp.data =
+          resp.data.updated && resp.data.updated.returning.length
+            ? cleanLOVs(entity, resp.data.updated.returning[0])
+            : null;
+      }
+      return resp;
     });
 };
 
@@ -203,38 +207,7 @@ export const updateOne = (entity, id, data) => {
 
 // get list of values for field
 export const getLov = (entity, fieldId) => {
-  const m = getModel(entity);
-  const f = m?.fieldsH[fieldId];
-  if (f) {
-    return fetch(apiPath, gqlOptions(qLov(entity, fieldId))).then((r) => {
-      if (r.data && r.data.one) {
-        const m = getModel(entity);
-        let data = r.data.one;
-        const lovFields = mLOVFields(entity);
-        if (lovFields.length) {
-          lovFields.forEach((f) => cleanLOV(f, data));
-        }
-        if (!data.collections) {
-          data.collections = {};
-        }
-        if (m.collections) {
-          m.collections.forEach((c) => {
-            const cid = c.id;
-            const d = data[cid];
-            if (d) {
-              data.collections[cid] = d;
-              delete data[cid];
-            }
-          });
-        }
-        return data;
-      } else {
-        return r;
-      }
-    });
-  } else {
-    return null;
-  }
+  console.log(entity, fieldId);
 };
 
 // get a collection of sub-items (details for master)
