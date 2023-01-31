@@ -21,10 +21,10 @@ const Panel = ({
   footer,
   className,
 }) => {
-  const [opened, setOpened] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const clickToggle = () => {
-    setOpened(!opened);
+    setIsCollapsed(!isCollapsed);
   };
 
   return (
@@ -32,12 +32,12 @@ const Panel = ({
       className={classnames("evol-pnl", className)}
       style={{ width: width + "%" }}
     >
-      <div className={classnames("panel", { collapsed: !opened })}>
+      <div className={classnames("panel", { collapsed: isCollapsed })}>
         {title && (
           <div className="panel-heading">
             {collapsible && (
               <Icon
-                name={opened ? "chevron-up" : "chevron-down"}
+                name={isCollapsed ? "chevron-down" : "chevron-up"}
                 onClick={clickToggle}
                 size="tiny"
                 theme="none"
@@ -47,9 +47,7 @@ const Panel = ({
           </div>
         )}
         {header && <div className="panel-header">{header}</div>}
-        <fieldset style={{ display: opened ? "block" : "none" }}>
-          {children}
-        </fieldset>
+        <fieldset>{children}</fieldset>
         {footer && <div className="panel-footer">{footer}</div>}
       </div>
     </div>

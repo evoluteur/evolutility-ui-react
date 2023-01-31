@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Evolutility-UI-React :: /views/charts/Charts.js
 
 // Dashboard style set of charts (bars or pies).
@@ -36,16 +37,15 @@ const Charts = () => {
   useEffect(() => {
     document.title = m?.label + " Charts";
     window.scrollTo(0, 0);
-  });
+  }, [entity]);
 
   if (m) {
     const title = i18n_charts.dash.replace("{0}", capitalize(m.namePlural));
     const chartFields = m.fields.filter(fieldInCharts);
     const nbCharts = chartFields.length;
-    const css = classnames(
-      "evol-many-charts",
-      nbCharts === 1 ? "single-chart" : null
-    );
+    const css = classnames("evol-many-charts", {
+      "single-chart": nbCharts === 1,
+    });
 
     const chartTitle = (f) =>
       i18n_charts.objectByField

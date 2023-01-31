@@ -10,6 +10,9 @@
     .panel-heading {
       border-radius: $radius !important;
     }
+    fieldset {
+      display: none;
+    }
   }
 }
 .panel-heading {
