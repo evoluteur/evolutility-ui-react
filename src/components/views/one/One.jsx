@@ -61,7 +61,7 @@ const recordTitle = (m, data, isNew) => {
 // #endregion
 
 const One = () => {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
   const [userData, setUserData] = useState({ ...data });
   const [error, setError] = useState(null);
@@ -88,7 +88,7 @@ const One = () => {
     let done = false;
     setError(null);
     if (id && !isNew) {
-      setLoading(true);
+      setIsLoading(true);
       const m = getModel(entity);
       getOne(entity, parseInt(id, 10)).then((data) => {
         if (done) {
@@ -105,13 +105,13 @@ const One = () => {
             logActivity(entity, id, data[m.titleField], "read");
           }
         }
-        setLoading(false);
+        setIsLoading(false);
       });
     } else if (isNew) {
       const defaults = getDefaultData(model);
       setAllData(defaults);
       // TODO: get LOVs ?
-      setLoading(false);
+      setIsLoading(false);
     }
 
     return () => {
@@ -120,7 +120,7 @@ const One = () => {
   }, [entity, id]);
 
   const body = () => {
-    if (loading) {
+    if (isLoading) {
       return <Spinner />;
     }
     if (error) {

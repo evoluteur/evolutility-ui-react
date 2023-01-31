@@ -121,10 +121,9 @@ const statsField = (d, f) =>
 // #endregion
 
 const Stats = () => {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
-
   const { entity } = useParams();
   const model = getModel(entity);
   const fields = useMemo(
@@ -157,7 +156,7 @@ const Stats = () => {
         setData(prepData(response.data, fields));
         window.scrollTo(0, 0);
       }
-      setLoading(false);
+      setIsLoading(false);
     });
     return () => {
       done = true;
@@ -165,7 +164,7 @@ const Stats = () => {
   }, [entity]);
 
   let body;
-  if (loading) {
+  if (isLoading) {
     body = <Spinner />;
   } else if (error) {
     body = <Alert title="Server Error" message={error.message} />;

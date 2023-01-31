@@ -37,7 +37,7 @@ const getRange = (pageIdx, pageSize, totalSize) => {
 };
 
 const Many = () => {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [fullCount, setFullCount] = useState(null);
   const [error, setError] = useState(null);
@@ -59,7 +59,7 @@ const Many = () => {
     setError(null);
     const getData = (entity) => {
       const query = url.parseQuery(search);
-      setLoading(true);
+      setIsLoading(true);
       getMany(entity, query).then((response) => {
         if (done) {
           return;
@@ -69,7 +69,7 @@ const Many = () => {
         }
         setFullCount(response._full_count);
         setData(response.data || response);
-        setLoading(false);
+        setIsLoading(false);
       });
     };
     window.scrollTo(0, 0);
@@ -179,7 +179,7 @@ const Many = () => {
         message={i18n_errors.badEntity.replace("{0}", entity)}
       />
     );
-  } else if (loading) {
+  } else if (isLoading) {
     body = <Spinner />;
   } else if (error) {
     body = <Alert title={i18n_errors.serverError} message={error.message} />;

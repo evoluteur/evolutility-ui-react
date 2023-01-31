@@ -62,7 +62,7 @@ const Chart = ({
   hidden,
   className,
 }) => {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [curChartType, setCurChartType] = useState(chartType);
   const [curSortId, setCurSortId] = useState("");
@@ -74,7 +74,7 @@ const Chart = ({
     const fid = field?.id;
     if (fid) {
       // TODO timeout to show spinner
-      // setLoading(true); // Loose animation w/ it
+      // setIsLoading(true); // Loose animation w/ it
       getChart(entity, fid).then((response) => {
         if (done) {
           return;
@@ -84,7 +84,7 @@ const Chart = ({
         } else {
           setData(response.data);
         }
-        setLoading(false);
+        setIsLoading(false);
       });
     }
 
@@ -136,8 +136,7 @@ const Chart = ({
         message={error.message}
       />
     );
-  } else if (loading) {
-    // - loading
+  } else if (isLoading) {
     body = <Spinner />;
   } else if (!data || data.length === 0) {
     // - no data
