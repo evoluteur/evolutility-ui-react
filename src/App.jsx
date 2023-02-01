@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import SideBar from "./components/shell/SideBar";
 import TopBar from "./components/shell/TopBar";
 import Footer from "./components/shell/Footer";
+import ErrorBoundary from "./components/widgets/ErrorBoundary";
 
 import Home from "./pages/Home/Home";
 import Demos from "./pages/Demos/Demos";
@@ -55,7 +56,9 @@ const App = () => {
           />
         </Routes>
         <div className="pageContent" role="main">
-          <AppRoutes />
+          <ErrorBoundary>
+            <AppRoutes />
+          </ErrorBoundary>
         </div>
         <Footer />
       </BrowserRouter>
