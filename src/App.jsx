@@ -19,6 +19,7 @@ import EvolRoutes from "./components/EvolRoutes";
 import PageNotFound from "./pages/PageNotFound";
 
 import "./App.scss";
+import "./App-custom.scss";
 import "react-toastify/scss/main.scss";
 import "react-crud-icons/src/Icon.scss";
 

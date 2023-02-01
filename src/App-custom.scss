@@ -1,0 +1,10 @@
+// CSS exceptions for  specific models thanks to ".model_X" selector
+
+.evol-many {
+  &.model_contact,
+  &.model_winetasting {
+    td:first-child {
+      min-width: 130px;
+    }
+  }
+}
