@@ -14,7 +14,6 @@ a:focus {
   text-decoration: underline;
 }
 table {
-  border-collapse: collapse;
   border-spacing: 0;
 }
 tr,
@@ -54,7 +53,6 @@ label {
 }
 .table {
   background-color: $bgcolor-background;
-  border-top: $border;
   border-bottom: $border;
   width: 100%;
   max-width: 100%;
@@ -69,7 +67,10 @@ label {
   > thead > tr > th {
     text-align: left;
     background-color: $bgcolor-header;
-    border-bottom: 2px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  > tbody > tr:first-child > td {
+    border-top: none;
   }
 }
 .table-hover > tbody > tr:hover {
