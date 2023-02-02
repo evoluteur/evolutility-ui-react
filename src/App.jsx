@@ -63,7 +63,7 @@ const App = () => {
         </div>
         <Footer />
       </BrowserRouter>
-      <ToastContainer autoClose={5000} />
+      <ToastContainer autoClose={2000} />
     </div>
   );
 };
