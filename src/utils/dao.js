@@ -13,7 +13,6 @@ import {
   qUpdateOne,
   qInsertOne,
   qMany,
-  qLov,
 } from "./gqlQueries.js";
 import config from "../config.js";
 

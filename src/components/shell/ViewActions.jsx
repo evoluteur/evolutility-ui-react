@@ -105,80 +105,81 @@ const Toolbar = ({ entity, id, view }) => {
     actions.push(buttonLink(menuItems.del, confirmDelete));
   }
 
-  if (entity) {
-    const m = getModel(entity);
-    if (m) {
-      const item = document.getElementById("itemTitle");
-      const itemName = item ? item.innerHTML : "";
-      const delModal = deleteConfirmation && (
-        <Modal
-          className="modal-dialog"
-          ariaHideApp={false}
-          isOpen={deleteConfirmation}
-          onRequestClose={closeModal}
-          style={{
-            content: {
-              position: "absolute",
-              top: "20%",
-              left: "calc(50% - 150px)",
-              width: "360px",
-            },
-          }}
-        >
-          <div>
-            <div className="modal-content">
-              <div className="modal-header">
-                <button
-                  onClick={closeModal}
-                  className="close"
-                  data-dismiss="modal"
-                  aria-hidden="true"
-                >
-                  ×
-                </button>
-                <h4 className="modal-title">
-                  {i18n_msg.delete.replace("{0}", m.name)}
-                </h4>
-              </div>
-              <div className="modal-body">
-                {i18n_msg.deleteConfirmation
-                  .replace("{0}", m.name)
-                  .replace("{1}", itemName)}
-              </div>
-              <div className="modal-footer">
-                <Button
-                  onClick={closeModal}
-                  type="default"
-                  label={i18n_actions.cancel}
-                />
-                <Button
-                  onClick={deleteOne}
-                  type="primary"
-                  label={i18n_actions.ok}
-                />
-              </div>
+  const m = getModel(entity);
+  if (m) {
+    const item = document.getElementById("itemTitle");
+    const itemName = item ? item.innerHTML : "";
+    const delModal = deleteConfirmation && (
+      <Modal
+        className="modal-dialog"
+        ariaHideApp={false}
+        isOpen={deleteConfirmation}
+        onRequestClose={closeModal}
+        style={{
+          content: {
+            position: "absolute",
+            top: "20%",
+            left: "calc(50% - 150px)",
+            width: "360px",
+          },
+        }}
+      >
+        <div>
+          <div className="modal-content">
+            <div className="modal-header">
+              <button
+                onClick={closeModal}
+                className="close"
+                data-dismiss="modal"
+                aria-hidden="true"
+              >
+                ×
+              </button>
+              <h4 className="modal-title">
+                {i18n_msg.delete.replace("{0}", m.name)}
+              </h4>
+            </div>
+            <div className="modal-body">
+              {i18n_msg.deleteConfirmation
+                .replace("{0}", m.name)
+                .replace("{1}", itemName)}
+            </div>
+            <div className="modal-footer">
+              <Button
+                onClick={closeModal}
+                type="default"
+                label={i18n_actions.cancel}
+              />
+              <Button
+                onClick={deleteOne}
+                type="primary"
+                label={i18n_actions.ok}
+              />
             </div>
           </div>
-        </Modal>
-      );
-
-      return (
-        <div className="evo-toolbar" role="toolbar">
-          <div className="evo-nav-pills">{actions}</div>
-          <div className="clearfix" />
-          {delModal}
         </div>
-      );
-    }
+      </Modal>
+    );
+
+    return (
+      <div className="evo-toolbar" role="toolbar">
+        <div className="evo-nav-pills">{actions}</div>
+        <div className="clearfix" />
+        {delModal}
+      </div>
+    );
   }
+
   return null;
 };
 
 Toolbar.propTypes = {
+  /** Active model */
   entity: PropTypes.string.isRequired,
-  view: PropTypes.string.isRequired,
+  /** Active view */
+  view: PropTypes.string,
+  /** Active record ID */
   id: PropTypes.string,
-  isNew: PropTypes.bool,
 };
 
 export default Toolbar;

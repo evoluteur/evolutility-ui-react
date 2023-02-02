@@ -27,16 +27,12 @@
     td {
       position: relative;
     }
-    .t-row-sel,
-    .t-row-selector {
-      max-width: 20px;
-    }
     img {
       max-height: 60px;
       padding: 0;
     }
   }
-  .main {
+  .sortable {
     th {
       cursor: pointer;
       &:hover {
@@ -62,7 +58,4 @@
       word-wrap: break-word;
     }
   }
-}
-.nodata {
-  padding: 20px;
 }
