@@ -87,7 +87,7 @@ const prepModelCollecs = (m, models) => {
   return null;
 };
 
-export const prepModels = (models) => {
+const prepModels = (models) => {
   const ms = Object.keys(models);
   // need 2 passes for field map to be populated first, then collecs
   ms.forEach((m) => {

@@ -11,9 +11,9 @@
     text-align: left;
     th {
       cursor: pointer;
-    }
-    th:nth-child(2) {
-      width: 90px;
+      &:nth-child(2) {
+        width: 90px;
+      }
     }
   }
   .footer,

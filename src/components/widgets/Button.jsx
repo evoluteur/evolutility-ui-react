@@ -19,7 +19,7 @@ const Button = ({ label, type, icon, url, onClick, className }) => {
       {content}
     </button>
   ) : (
-    <Link to={url} className={css}>
+    <Link to={url} className={css} role="button">
       {content}
     </Link>
   );

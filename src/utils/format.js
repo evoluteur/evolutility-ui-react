@@ -18,6 +18,11 @@ import { locale } from "../i18n/i18n";
 import config from "../config";
 import { fieldTypes as ft } from "./dico";
 
+// Set the locale from the browser -- which may need to be configured
+moment.locale(
+  locale || window.navigator.userLanguage || window.navigator.language
+);
+
 const f_decimal = "0,0.00";
 const f_integer = "0,0";
 const f_money = "$0,0.00";
@@ -111,7 +116,7 @@ export const fieldValue = (f, d, abbr) => {
           style={{ backgroundColor: d }}
           title={d}
         >
-          {!abbr && d ? <span>{d}</span> : null}
+          {!abbr && d && <span>{d}</span>}
         </div>
       </div>
     );
@@ -128,11 +133,6 @@ export const fieldValue = (f, d, abbr) => {
   }
   return d;
 };
-
-// Set the locale from the browser -- which may need to be configured
-moment.locale(
-  locale || window.navigator.userLanguage || window.navigator.language
-);
 
 export const capitalize = (word) => {
   // TODO: maybe use _.string.capitalize(word);

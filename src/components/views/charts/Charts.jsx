@@ -53,13 +53,10 @@ const Charts = () => {
         .replace("{1}", f.labelCharts || f.label);
     let charts;
 
-    const cssChart = (f) => {
-      let css = "panel";
-      if (expandedChart && expandedChart !== f.id) {
-        css += " hidden-chart";
-      }
-      return css;
-    };
+    const cssChart = (f) =>
+      classnames("panel", {
+        "hidden-chart": expandedChart && expandedChart !== f.id,
+      });
 
     if (nbCharts === 0) {
       charts = (
@@ -72,7 +69,6 @@ const Charts = () => {
         field: f,
         title: chartTitle(f),
         chartType: lcRead(`${m.id}-charts-${f.id}`) || f.chartType,
-        className: cssChart(f),
       });
       if (nbCharts === 1) {
         const f = chartFields[0];
@@ -99,7 +95,7 @@ const Charts = () => {
     }
 
     return (
-      <div className="">
+      <div className={"evol-charts model_" + entity}>
         <PageTitle
           entity={entity}
           model={m}
@@ -118,5 +114,3 @@ const Charts = () => {
 };
 
 export default Charts;
-
-// Charts.propTypes = {};

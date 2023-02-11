@@ -37,10 +37,6 @@ $nav-trans-time: 0.1s;
     padding: 7px;
     font-weight: bold;
     font-size: 16px;
-    > i {
-      position: relative;
-      top: 2px;
-    }
   }
   ul {
     list-style-type: none;
@@ -116,7 +112,7 @@ $nav-trans-time: 0.1s;
   }
 }
 
-.pageContent {
+.page-content {
   position: relative;
   flex: 1 0 auto;
   margin-left: $nav-width;
@@ -186,7 +182,7 @@ $nav-trans-time: 0.1s;
       display: none;
     }
   }
-  > .pageContent {
+  > .page-content {
     margin-left: 50px;
   }
 }
