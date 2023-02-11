@@ -96,8 +96,11 @@ export const validateField = (f, v) => {
         }
       }
 
-      // Check min & max
+      // Check min & max & number type
       if (isNumberField) {
+        if (isNaN(v)) {
+          return i18n_validation.invalid;
+        }
         if (v !== "") {
           if (f.max && parseFloat(v) > f.max) {
             return formatMsg(fieldLabel(f), i18n_validation.max, f.max);
