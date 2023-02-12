@@ -58,6 +58,7 @@
     "start": "node ascii-art.js && react-scripts start",
     "build": "node ascii-art.js && react-scripts build",
     "test": "react-scripts test",
+    "coverage": "react-scripts test --coverage .",
     "lint": "eslint src; exit 0",
     "eject": "react-scripts eject"
   },

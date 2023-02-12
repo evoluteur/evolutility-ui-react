@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 
 import App from "./App";
 
-it("shows app", () => {
+test("shows app", () => {
   window.scrollTo = jest.fn();
   render(<App />);
   expect(screen.getByTestId("app")).toBeInTheDocument();

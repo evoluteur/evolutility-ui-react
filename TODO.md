@@ -21,6 +21,7 @@
 - Choice of UX pattern: Drawer / navigation / dual pane
 - translate in other languages (/src/i18n/XX.js)
 - Add checkboxes for multi-rows selection to the List and Cards views
+- Dark & light themes
 - Add JSON view (w/ react-json-view?)
 - Add "Compare" view for side-by-side comparaison and averages
 - Add "Kanban" view w/ drag & drop

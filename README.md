@@ -367,14 +367,6 @@ More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-rea
 [Wine cellar](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/winecellar.js).
 
 
-<a name="Backend"></a>
-## Evolutility backend
-
-Evolutility-UI-React uses GraphQL with [Hasura](https://hasura.io).
-
-Notes: Use the scrits from [evolutility-models](https://github.com/evoluteur/evolutility-models) to generate SQL scripts to create the database with tables and columns according to the models.
-
-
 <a name="License"></a>
 ## License
 

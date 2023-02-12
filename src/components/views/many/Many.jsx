@@ -171,22 +171,25 @@ const Many = () => {
     sortDirection,
   };
 
-  let body;
-  if (!model) {
-    body = (
-      <Alert
-        title={i18n_errors.error}
-        message={i18n_errors.badEntity.replace("{0}", entity)}
-      />
-    );
-  } else if (isLoading) {
-    body = <Spinner />;
-  } else if (error) {
-    body = <Alert title={i18n_errors.serverError} message={error.message} />;
-  } else if (data.length === 0) {
-    body = <EmptyState model={model} />;
-  } else {
-    body = (
+  const body = () => {
+    if (!model) {
+      return (
+        <Alert
+          title={i18n_errors.error}
+          message={i18n_errors.badEntity.replace("{0}", entity)}
+        />
+      );
+    }
+    if (isLoading) {
+      return <Spinner />;
+    }
+    if (error) {
+      return <Alert title={i18n_errors.serverError} message={error.message} />;
+    }
+    if (data.length === 0) {
+      return <EmptyState model={model} />;
+    }
+    return (
       <>
         {view === "list" ? <List {...viewProps} /> : <Cards {...viewProps} />}
         {fullCount > 0 && (
@@ -198,7 +201,7 @@ const Many = () => {
         )}
       </>
     );
-  }
+  };
 
   return (
     <div className={"evol-many model_" + entity}>
@@ -211,7 +214,7 @@ const Many = () => {
         view={view}
         text={pageSummary}
       />
-      {body}
+      {body()}
     </div>
   );
 };

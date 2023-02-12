@@ -1,17 +1,25 @@
 @import "./variables";
 
+.app {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $bgcolor-main;
+}
+
 img {
   border: 0;
   max-width: 100%;
 }
 a {
   text-decoration: none;
-  color: #337ab7;
-}
-a:hover,
-a:focus {
-  color: #23527c;
-  text-decoration: underline;
+  color: $color-link;
+  &:hover,
+  &:focus {
+    color: $color-link-hover;
+    text-decoration: underline;
+  }
 }
 table {
   border-spacing: 0;
@@ -44,13 +52,6 @@ label {
   }
 }
 
-.app {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: $bgcolor-main;
-}
 .table {
   background-color: $bgcolor-background;
   border-bottom: $border;
@@ -62,12 +63,12 @@ label {
     padding: 8px;
     line-height: 1.428571429;
     vertical-align: top;
-    border-top: 1px solid #ddd;
+    border-top: $border;
   }
   > thead > tr > th {
     text-align: left;
     background-color: $bgcolor-header;
-    border-bottom: 1px solid #ddd;
+    border-bottom: $border;
   }
   > tbody > tr:first-child > td {
     border-top: none;
@@ -111,11 +112,20 @@ label {
       background-color: #fff !important;
     }
   }
+  .evo-toolbar,
+  .noprint {
+    display: none !important;
+  }
 }
+
 .Toastify__toast {
   margin-bottom: 4px !important;
   min-height: 42px !important;
 }
 .Toastify__toast-container {
   width: 260px !important;
+}
+
+.ReactModal__Overlay {
+  z-index: 110;
 }

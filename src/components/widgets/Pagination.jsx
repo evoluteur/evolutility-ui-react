@@ -11,16 +11,10 @@ const { pageSize } = config;
 const Pagination = ({ count, fullCount, onClick }) => {
   const { search } = useLocation();
   if (fullCount > pageSize) {
-    let pIdx;
     const query = search ? queryString.parse(search) : null;
-
-    if (query) {
-      pIdx = parseInt(query.page || "0", 10);
-    } else {
-      pIdx = 0;
-    }
-    const paginationBody = [];
+    let pIdx = query ? parseInt(query.page || "0", 10) : 0;
     let gapIdx = 0;
+    const paginationBody = [];
 
     if (fullCount > count && !(pIdx === 0 && count < pageSize)) {
       const nbPages = Math.ceil(fullCount / pageSize);
@@ -28,7 +22,6 @@ const Pagination = ({ count, fullCount, onClick }) => {
       const wNext = nbPages > pIdx + 1;
       const pId = pIdx + 1;
       const bPage = (id) => {
-        // TODO: tabIndex={id}
         paginationBody.push(
           <div
             key={id}
@@ -94,7 +87,9 @@ const Pagination = ({ count, fullCount, onClick }) => {
     }
 
     return (
-      fullCount > pageSize && <nav className="pagination">{paginationBody}</nav>
+      fullCount > pageSize && (
+        <nav className="evo-pagination">{paginationBody}</nav>
+      )
     );
   }
   return null;

@@ -56,7 +56,7 @@ const App = () => {
             }
           />
         </Routes>
-        <div className="pageContent" role="main">
+        <div className="page-content" role="main">
           <ErrorBoundary>
             <AppRoutes />
           </ErrorBoundary>
