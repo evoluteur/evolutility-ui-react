@@ -3,7 +3,7 @@ const filterOnlyUI = (p) => p.ui;
 
 export const objectMeta = {
   id: 1,
-  icon: "/designer/object.png",
+  icon: "/doc/object.png",
   name: "object",
   namePlural: "objects",
   title: "Object",
@@ -112,7 +112,7 @@ export const objectMeta = {
 
 export const fieldMeta = {
   id: 2,
-  icon: "/designer/field.png",
+  icon: "/doc/field.png",
   name: "field",
   namePlural: "fields",
   title: "Field",
@@ -329,7 +329,7 @@ export const fieldMeta = {
 
 export const collecMeta = {
   id: 3,
-  icon: "/designer/collection.png",
+  icon: "/doc/collection.png",
   name: "collection",
   namePlural: "collections",
   title: "Collection",
@@ -407,7 +407,7 @@ export const collecMeta = {
 
 export const fieldGroupMeta = {
   id: 4,
-  icon: "designer/fieldgroup.png",
+  icon: "/doc/fieldgroup.png",
   name: "field group",
   namePlural: "field groups",
   title: "Field Group",

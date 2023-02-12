@@ -68,6 +68,17 @@ const Metamodel = () => {
         &quot;noStats&quot; to be excluded from the Charts or Stats views.
       </p>
 
+      <p>
+        <a href="#Object">Object</a>
+        {" - "}
+        <a href="#Field">Field</a>
+        {" - "}
+        <a href="#Field_Group">Field Group</a>
+        {" - "}
+        <a href="#Collection">Collection</a>
+        <br /> <br />
+      </p>
+
       {section(metadoc.objectMeta)}
 
       {section(
