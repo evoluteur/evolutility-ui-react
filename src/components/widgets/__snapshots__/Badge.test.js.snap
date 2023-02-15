@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge widget tests component renders correctly 1`] = `
+<div
+  className="evo-badge"
+  data-testid="badge-test"
+  role="badge"
+>
+  <span>
+    Your Badge
+  </span>
+</div>
+`;

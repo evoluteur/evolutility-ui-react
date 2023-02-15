@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "./Badge.scss";
 
 const Badge = ({ text }) => (
-  <div className="evo-badge">
+  <div className="evo-badge" role="badge" data-testid="badge-test">
     <span>{text}</span>
   </div>
 );
