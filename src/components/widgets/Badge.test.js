@@ -23,10 +23,10 @@ describe('Badge widget tests', () => {
     const badge = screen.getByTestId("badge-test");
     expect(badge).toHaveTextContent("Ça va? #@$%");
     }); 
-    it('badge does not show boolean values',()=>{
+    it('negative case: badge text cannot have boolean values',()=>{
     render(<Badge text={true} />);
     const badge = screen.getByTestId("badge-test");
-    expect(badge).toHaveTextContent(true);
+    expect(badge).not.toHaveTextContent(true);
     }); 
 
 }) 
