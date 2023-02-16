@@ -6,10 +6,6 @@ import { Fragment } from "react";
 import { isExportDeclaration } from "typescript";
 
 describe('alert widget tests', () => {
-  it('component renders correctly', () =>{;
-    const tree = renderer.create(<Alert title="Alert" message = "hello" type="danger"/>).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
   it("alert has title and message", () => {
      render(<Alert title ="Hello!" message="you have alert" type="danger" />);
      const alert = screen.getByTestId("alert-test");

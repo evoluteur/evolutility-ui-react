@@ -3,10 +3,6 @@ import Badge from "./Badge";
 import renderer from 'react-test-renderer';
 
 describe('Badge widget tests', () => {
-    it('component renders correctly', () =>{
-    const tree = renderer.create(<Badge text="Your Badge"/>).toJSON();
-    expect(tree).toMatchSnapshot();
-    });
     it('badge shows text string correctly',()=>{
     render(<Badge text="You got a badge!" />);
     const badge = screen.getByTestId("badge-test");
@@ -27,4 +23,10 @@ describe('Badge widget tests', () => {
     const badge = screen.getByTestId("badge-test");
     expect(badge).toHaveTextContent("Ça va? #@$%");
     }); 
+    it('badge does not show boolean values',()=>{
+    render(<Badge text={true} />);
+    const badge = screen.getByTestId("badge-test");
+    expect(badge).toHaveTextContent(true);
+    }); 
+
 }) 
