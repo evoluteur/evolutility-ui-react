@@ -69,7 +69,7 @@ const prepModelCollecs = (m, models) => {
               const fsh = collecModel.fieldsH;
               c.fields.forEach((f, idx) => {
                 if (typeof f === "string") {
-                  c.fields[idx] = JSON.parse(JSON.stringify(fsh[f] || {}));
+                  c.fields[idx] = structuredClone(fsh[f] || {});
                 }
               });
             } else {
