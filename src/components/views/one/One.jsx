@@ -138,7 +138,7 @@ const One = () => {
     }
     if (view === "edit") {
       const cbFieldChange = (fid, value) => {
-        const newData = structuredClone(userData || {});
+        const newData = JSON.parse(JSON.stringify(userData || {}));
         newData[fid] = value;
         setUserData(newData);
       };

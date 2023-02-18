@@ -107,7 +107,7 @@ const Chart = ({
     // - client-side sort (we have all the data no need to re-query)
     const sortId = evt.currentTarget.id || "count";
     if (data?.length > 1) {
-      let data2 = structuredClone(data);
+      let data2 = JSON.parse(JSON.stringify(data));
       if (curSortId === sortId) {
         data2 = data2.reverse();
       } else {
