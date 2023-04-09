@@ -7,7 +7,7 @@ import "./Spinner.scss";
 // Credits: HTML & CSS from http://tobiasahlin.com/spinkit/
 
 const Spinner = ({ message }) => (
-  <div className="evol-loading" role="spinner" data-testid="spinner-test">
+  <div className="evol-loading" role="alert" data-testid="spinner-test">
     <div className="loading_txt">{message}</div>
     <div className="spinner">
       <div className="bounce1" />
