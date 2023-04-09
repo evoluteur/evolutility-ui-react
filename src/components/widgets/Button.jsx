@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, Router } from "react-router-dom";
 import Icon, { keys } from "react-crud-icons";
 import classnames from "classnames";
 
@@ -15,11 +15,11 @@ const Button = ({ label, type, icon, url, onClick, className }) => {
     </>
   );
   return onClick ? (
-    <button className={css} onClick={onClick}>
+    <button className={css} onClick={onClick} role="button" data-testid="button-test">
       {content}
     </button>
   ) : (
-    <Link to={url} className={css} role="button">
+    <Link to={url} className={css} data-testid="link-test">
       {content}
     </Link>
   );

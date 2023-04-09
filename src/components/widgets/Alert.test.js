@@ -1,36 +1,58 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { getAllByTitle, getByTitle, getByText, render, screen, TestRenderer } from "@testing-library/react";
+import { getAllByTitle, getByTitle, getByText, render, screen, TestRenderer, cleanup } from "@testing-library/react";
 import Alert from "./Alert";
 import renderer from 'react-test-renderer';
 import { Fragment } from "react";
 import { isExportDeclaration } from "typescript";
 
-describe('alert widget tests', () => {
-  it("alert has title and message", () => {
+afterEach(cleanup);
+
+describe('alert props test', ()=>{
+    let alertToTest;
+    const props ={
+    title: 'Alert!',
+    message: 'You got alert!',
+    type: 'success'
+    }
+    beforeEach( async () =>{
+    const testInstance = await renderer.create(<Alert {...props} />);
+    alertToTest = testInstance.root;
+    });
+    it('should render title in strong',()=>{
+    const strongRender = alertToTest.findByType('strong');
+    expect(strongRender.children).toEqual([props.title]);
+    });
+    it('should render message in p',()=>{
+    const pRender = alertToTest.findByType('p');
+    expect(pRender.children).toEqual([props.message]);
+    });
+  });
+describe('alert widget tests',  () => {
+    it("alert has title and message", async () => {
      render(<Alert title ="Hello!" message="you have alert" type="danger" />);
-     const alert = screen.getByTestId("alert-test");
+     const alert = await screen.getByTestId("alert-test");
      expect(alert).toHaveTextContent("Hello!");
      expect(alert).toHaveTextContent("you have alert");
-   });
-   it("alert has null title and message", () => {
+    });
+    it("alert has null title and message", async () => {
     render(<Alert title ="" message="you have alert" type="danger" />);
-    const alert = screen.getByTestId("alert-test");
+    const alert = await screen.getByTestId("alert-test");
     expect(alert).toHaveTextContent("you have alert");
-  });
-  it("test type: info", () => {
+    });
+    it("test type: info", async () => {
     render(<Alert title ="" message="info alert" type="info" />);
-    const alert = screen.getByTestId("alert-test");
+    const alert = await screen.getByTestId("alert-test");
     expect(alert).toHaveTextContent("info alert");
-  });
-  it("test type: success", () => {
+    });
+    it("test type: success", async () => {
     render(<Alert title ="" message="success alert" type="success" />);
-    const alert = screen.getByTestId("alert-test");
+    const alert = await screen.getByTestId("alert-test");
     expect(alert).toHaveTextContent("success alert");
-  });
-  it("test type: warning", () => {
+    });
+    it("test type: warning", async () => {
     render(<Alert title ="" message="warning alert" type="warning" />);
-    const alert = screen.getByTestId("alert-test");
+    const alert = await screen.getByTestId("alert-test");
     expect(alert).toHaveTextContent("warning alert");
-  });
-})
+    });
+  })
 
