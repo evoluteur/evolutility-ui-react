@@ -31,7 +31,7 @@ const Panel = ({
     <div
       className={classnames("evol-pnl", className)}
       style={{ width: width + "%" }}
-      role="panel"
+      role="group"
       data-testid="panel-test"
     >
       <div className={classnames("panel", { collapsed: isCollapsed })}>
