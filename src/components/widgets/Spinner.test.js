@@ -7,6 +7,5 @@ describe('Spinner widget tests', () => {
     render(<Spinner message={"I am Spinner"} />);
     const spinner = screen.getByTestId("spinner-test");
     expect(spinner).toHaveTextContent("I am Spinner");
-
     });
 });
