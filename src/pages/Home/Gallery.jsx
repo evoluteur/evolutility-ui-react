@@ -34,6 +34,7 @@ const Gallery = () => {
       autoPlay={true}
       autoPlayStrategy="all"
       disableButtonsControls={true}
+      animationDuration={1600}
     />
   );
 };
