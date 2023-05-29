@@ -26,15 +26,11 @@ const Browse = ({ entity, model, data }) => {
 
   const fnFieldReadOnly = (f) => {
     if (f) {
-      const isLOV = f.type === "lov";
-      const attr = isLOV ? f.id + "_txt" : f.id;
       return (
         <Field
           key={f.id}
           fieldDef={f}
-          value={data[attr]}
-          valueId={isLOV ? data[f.id] : null}
-          icon={isLOV ? data[f.id + "_icon"] : null}
+          value={data?.[f.id]}
           readOnly
           entity={entity}
         />

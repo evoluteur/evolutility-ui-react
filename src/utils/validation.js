@@ -33,7 +33,7 @@ export const validateField = (f, v) => {
         v === "" ||
         isUndefined(v) ||
         (isNumberField && isNaN(v)) ||
-        (f.type === ft.lov && v === "0") ||
+        (f.type === ft.lov && !v.id) ||
         (f.type === ft.list && v && !v.length)) //||
       //(f.type===ft.color && v==='#000000')
     ) {

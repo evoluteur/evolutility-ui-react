@@ -38,14 +38,15 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
     }
   };
 
-  const fieldChange = (evt) => {
-    const fid = evt.target.id;
-    let v = evt.target.value;
-    if (evt.target.type === "checkbox") {
+  const fieldChange = (evt, obj) => {
+    // exception for Select
+    const fid = evt.target ? evt.target.id : obj.name;
+    const f = model.fieldsH[fid];
+    let v = evt.target ? evt.target.value : { id: evt.value, name: evt.label };
+    if (f.type === ft.bool) {
       v = evt.target.checked;
     }
     if (invalids && invalids[fid]) {
-      const f = model.fieldsH[fid];
       const fValidation = validateField(f, data[fid]);
       if (!fValidation) {
         let newInvalids = { ...invalids };
@@ -67,18 +68,18 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
   const linkBrowse = isNew ? ep + "list" : ep + "browse" + (id ? "/" + id : "");
   const fnField = (f) => {
     if (f) {
-      if (f.type === ft.lov && !f.list) {
-        // - fetch list values
-        // TODO: dynamically get the LOV
-        // this.getLOV(f.id);
-        const dId = data[f.id];
-        const dLabel = data[f.id + "_txt"];
-        // TODO: too hacky, really modify model?
-        f.list = [
-          { id: dId, text: dLabel },
-          { id: 0, text: " - Dynamic LOVs is no implemented yet -" },
-        ];
-      }
+      // if (f.type === ft.lov && !f.list) {
+      //   // - fetch list values
+      //   // TODO: dynamically get the LOV
+      //   // this.getLOV(f.id);
+      //   const dId = data[f.id];
+      //   const dLabel = data[f.id + "_txt"];
+      //   // TODO: too hacky, really modify model?
+      //   f.list = [
+      //     { id: dId, text: dLabel },
+      //     { id: 0, text: " - Dynamic LOVs is no implemented yet -" },
+      //   ];
+      // }
       const invalidMsg = invalids ? invalids[f.id] : null;
       return (
         <Field

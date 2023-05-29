@@ -46,10 +46,9 @@ const prepData = (entity, data) => {
     const v = data[f.id];
     if (v !== undefined) {
       if (f.type === ft.lov) {
-        const vv = parseInt(v, 10);
-        if (vv) {
-          //const s = f.list.find(d => d.id === vv)
-          d += f.id + "_id: " + vv + " ";
+        const fv = v.id;
+        if (fv) {
+          d += f.id + "_id: " + fv + " ";
         }
       } else if (f.type === ft.date) {
         d += f.id + ':"' + dateTZ(v) + '" ';
@@ -312,5 +311,16 @@ export const qInsertOne = (entity, data) => {
   }`;
 };
 
-export const qLov = (entity, fieldId) => {};
+export const qLov = (entity, fieldId) => {
+  const m = getModel(entity);
+  const f = m.fieldsH[fieldId];
+  let q = "";
+  if (f.object) {
+    const m1 = getModel(f.object);
+    q += m1.qid + "(limit:100) {id " + m1.titleField + "}";
+  } else {
+    // f.lovIcon
+  }
+  return q;
+};
 //#endregion

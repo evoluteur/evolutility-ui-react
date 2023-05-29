@@ -21,17 +21,6 @@ const { apiPath } = config;
 //#region Helpers ----------------------------
 const toJSON = (r) => r.json();
 
-const cleanLOV = (f, data) => {
-  const df = data[f.id];
-  if (df !== undefined && df !== null) {
-    data[f.id + "_txt"] = df.name;
-    if (df.icon) {
-      data[f.id + "_icon"] = df.icon;
-    }
-    data[f.id] = df.id;
-  }
-};
-
 const cleanChartData = (e, data, fieldType) => {
   const m = getModel(e);
   const mid = m.qid;
@@ -70,17 +59,6 @@ const cleanChartData = (e, data, fieldType) => {
   return { data: d2 };
 };
 
-const mLOVFields = (entity) =>
-  getModel(entity).fields.filter((f) => f.type === ft.lov);
-
-const cleanLOVs = (entity, data) => {
-  const lovFields = mLOVFields(entity);
-  if (lovFields.length) {
-    lovFields.forEach((f) => cleanLOV(f, data));
-  }
-  return data;
-};
-
 //#endregion
 
 //#region Many ----------------------------
@@ -91,10 +69,6 @@ export const getMany = (entity, options) => {
     .then((resp) => {
       if (resp.data && resp.data.many) {
         const data = resp.data.many;
-        const lovFields = mLOVFields(entity);
-        if (lovFields.length) {
-          data.forEach((d) => lovFields.forEach((f) => cleanLOV(f, d)));
-        }
         data._full_count = resp.data._full_count.aggregate.count;
         return data;
       } else {
@@ -126,15 +100,16 @@ export const getStats = (entity) => {
   return fetch(apiPath, gqlOptions(qStats(m)))
     .then(toJSON)
     .then((resp) => {
-      if (resp.data && resp.data.stats) {
+      if (resp?.data?.stats) {
         let data = resp.data.stats.aggregate;
         let d = {};
         for (let pMath in data) {
-          for (const pField in data[pMath]) {
+          const dataMath = data[pMath];
+          for (const pField in dataMath) {
             if (!d[pField]) {
               d[pField] = {};
             }
-            d[pField][pMath] = data[pMath][pField];
+            d[pField][pMath] = dataMath[pField];
           }
         }
         d.count = data.count;
@@ -155,7 +130,7 @@ export const getOne = (entity, id, nextOrPrevious) => {
       .then(toJSON)
       .then((resp) => {
         if (resp.data && resp.data.one !== null) {
-          return cleanLOVs(entity, resp.data.one);
+          return resp.data.one;
         } else {
           return resp;
         }
@@ -177,7 +152,7 @@ export const insertOne = (entity, data) => {
       if (!resp.errors) {
         resp.data =
           resp.data.inserted && resp.data.inserted.returning.length
-            ? cleanLOVs(entity, resp.data.inserted.returning[0])
+            ? resp.data.inserted.returning[0]
             : null;
       }
       return resp;
@@ -193,7 +168,7 @@ export const updateOne = (entity, id, data) => {
       if (!resp.errors) {
         resp.data =
           resp.data.updated && resp.data.updated.returning.length
-            ? cleanLOVs(entity, resp.data.updated.returning[0])
+            ? resp.data.updated.returning[0]
             : null;
       }
       return resp;

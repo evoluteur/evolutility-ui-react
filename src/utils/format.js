@@ -92,10 +92,12 @@ export const fieldValue = (f, d, abbr) => {
   }
   if (f.type === ft.lov) {
     return (
-      <>
-        {f.lovIcon && <img src={d?.icon} alt=""></img>}
-        {d}
-      </>
+      <span className="lov-wicon">
+        {f.lovIcon && d?.icon && (
+          <img id={d?.icon} src={"/pix/" + d?.icon} alt=""></img>
+        )}
+        {d?.name || d?.text}
+      </span>
     );
   }
   if (f.type === ft.date) {

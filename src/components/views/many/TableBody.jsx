@@ -8,8 +8,8 @@ const TableBody = ({ fields, data, iconPath, link }) => {
   ) : null;
 
   const tableCell = (d, f, idx) => {
-    const lovField = f.type === ft.lov;
-    const value = d[lovField ? f.id + "_txt" : f.id];
+    const isLov = f.type === ft.lov;
+    const value = d[f.id];
     if (idx === 0) {
       // - First column is a link
       return (
@@ -41,36 +41,37 @@ const TableBody = ({ fields, data, iconPath, link }) => {
         </td>
       );
     }
-    if (lovField) {
-      if (f.lovIcon) {
-        const icon = d[`${f.id}_icon`];
-        if (icon) {
-          return (
-            <td key={f.id}>
-              <div className="nobr">
-                <img src={`/pix/${icon}`} className="lov-icon" alt="" />
-                {fieldValue(f, value, true)}
-              </div>
-            </td>
-          );
-        } else {
-          const fv = d[f.id];
-          return (
-            <td key={f.id}>
-              <div className="nobr">
-                {fv && fv?.icon && <img src={"/pix/" + fv?.icon} alt="" />}
-                {fv?.name}
-              </div>
-            </td>
-          );
-        }
-      } else {
-        return (
-          <td key={f.id}>
-            <div className="nobr">{fieldValue(f, value, true)}</div>
-          </td>
-        );
-      }
+    if (isLov) {
+      // if (f.lovIcon) {
+      //   const icon = value?.icon;
+      //   if (icon) {
+      //     return (
+      //       <td key={f.id}>
+      //         <div className="nobr">
+      //           <img src={`/pix/${icon}`} className="lov-icon" alt="" />
+      //           {fieldValue(f, value, true)}
+      //         </div>
+      //       </td>
+      //     );
+      //   } else {
+      //     const fv = d[f.id];
+      //     return (
+      //       <td key={f.id}>
+      //         <div className="nobr">
+      //           {fv && fv?.icon && <img src={"/pix/" + fv?.icon} alt="" />}
+      //           {fv?.name}
+      //         </div>
+      //       </td>
+      //     );
+      //   }
+      //   return fieldValue(f, value, true);
+      // } else {
+      return (
+        <td key={f.id}>
+          <div className="nobr">{fieldValue(f, value, true)}</div>
+        </td>
+      );
+      // }
       // } else if (f.type === ft.list) {
       //   const lovMap = getLovMap(f);
       //   return (

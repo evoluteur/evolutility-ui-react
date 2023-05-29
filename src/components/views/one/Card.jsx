@@ -24,8 +24,7 @@ const Card = ({ entity, data, fields = [] }) => {
   return (
     <div className="panel">
       {fields.map((f, idx) => {
-        const attr = f.type === ft.lov ? `${f.id}_txt` : f.id;
-        const fv = fieldValue(f, d[attr]);
+        const fv = fieldValue(f, d[f.id]);
 
         if (idx === 0) {
           return (

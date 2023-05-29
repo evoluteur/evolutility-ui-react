@@ -139,7 +139,15 @@ const One = () => {
     if (view === "edit") {
       const cbFieldChange = (fid, value) => {
         const newData = structuredClone(userData || {});
-        newData[fid] = value;
+        if (value?.name && value.name.type === "span") {
+          newData[fid] = {
+            id: value.id,
+            name: value.name.props.children[1],
+            icon: value.name.props.children[0]?.props?.id,
+          };
+        } else {
+          newData[fid] = value;
+        }
         setUserData(newData);
       };
 
