@@ -1,4 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import "core-js/modules/web.structured-clone";
 import { render, screen } from "@testing-library/react";
 
 import App from "./App";

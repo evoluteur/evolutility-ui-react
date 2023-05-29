@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Icon from "react-crud-icons";
+import config from "../../../config";
 import { getModel } from "../../../utils/moMa";
 import { getActivity } from "../../../utils/activity";
 import { fieldInCharts } from "../../../utils/dico";
@@ -15,6 +16,8 @@ import ModelLinks from "../comfort/ModelLinks";
 
 import "./Overview.scss";
 // #endregion
+
+const { withActivity } = config;
 
 const Overview = () => {
   const { entity } = useParams();
@@ -79,8 +82,8 @@ const Overview = () => {
           {viewLink(viewsMany.cards)}
         </div>
         <div>
-          {viewLink(viewsMany.charts)}
-          {viewLink(viewsMany.stats)}
+          {!m.noCharts && viewLink(viewsMany.charts)}
+          {!m.noStats && viewLink(viewsMany.stats)}
         </div>
 
         <div>
@@ -98,23 +101,24 @@ const Overview = () => {
         <div className="ovw-text"></div>
         <br />
         <div className="cols-2">
-          <div className="ovw-hist panel">
-            <h4>{viewLink(viewsMany.activity)}</h4>
-            <span>
-              {i18n_activity.mostViewed.replace("{0}", m.namePlural)}:
-            </span>
-
-            <div className="ovw-hist-list">
-              {data?.mostViewed?.map(activityLink)}
+          {withActivity && (
+            <div className="ovw-hist panel">
+              <h4>{viewLink(viewsMany.activity)}</h4>
+              <span>
+                {i18n_activity.mostViewed.replace("{0}", m.namePlural)}:
+              </span>
+              <div className="ovw-hist-list">
+                {data?.mostViewed?.map(activityLink)}
+              </div>
+              <br />
+              <span>
+                {i18n_activity.lastViewed.replace("{0}", m.namePlural)}:
+              </span>
+              <div className="ovw-hist-list">
+                {data?.lastViewed?.slice(0, 10).map(activityLink)}
+              </div>
             </div>
-            <br />
-            <span>
-              {i18n_activity.lastViewed.replace("{0}", m.namePlural)}:
-            </span>
-            <div className="ovw-hist-list">
-              {data?.lastViewed?.map(activityLink)}
-            </div>
-          </div>
+          )}
           <div className="ovw-chart">
             <Chart
               entity={entity}

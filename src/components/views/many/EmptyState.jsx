@@ -34,8 +34,9 @@ export default EmptyState;
 
 EmptyState.propTypes = {
   model: modelPropTypes.isRequired,
-  /** Does the user have search or filter crierias? */
+  isNested: PropTypes.bool,
+  /** Does the user have search or filter criterias? */
   inSearch: PropTypes.bool,
 };
 
-EmptyState.defaultProps = { inSearch: false };
+EmptyState.defaultProps = { isNested: false, inSearch: false };
