@@ -156,15 +156,18 @@ const Field = ({
       );
     }
     if (f.type === ft.lov) {
-      if (isObject(d)) {
-        // for GraphQL
-        d = d.id;
-      }
+      // if (isObject(d)) {
+      //   // for GraphQL
+      //   d = d.id;
+      // }
       const opts = f.list
         ? f.list.map((item) => createOption(item.id, item.text))
-        : [createOption(`${f.id}loading`, i18n_msg.loading)];
+        : [
+            createOption(`${f.id}-loading`, i18n_msg.loading),
+            createOption(d?.id, d?.name),
+          ];
       return (
-        <select {...usualProps} value={d || ""}>
+        <select {...usualProps} value={d.id || ""}>
           <option />
           {opts}
         </select>

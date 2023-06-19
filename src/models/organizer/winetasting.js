@@ -16,9 +16,7 @@ const model = {
   position: 55,
   defaultViewMany: "list",
   titleField: "drink_date",
-  titleFunction: (d) => {
-    return d ? d.wine_txt + " " + d.drink_date : "";
-  },
+  titleFunction: (d) => d?.wine?.name + " " + d?.drink_date,
   fields: [
     {
       id: "drink_date",

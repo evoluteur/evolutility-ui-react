@@ -31,6 +31,7 @@ export const prepModel = (m) => {
     }
 
     // - Model
+    m.qid = m.qid || m.id;
     m.defaultViewOne = m.defaultViewOne || "browse";
     m.defaultViewMany = m.defaultViewMany || "list";
     if (!m.label) {
