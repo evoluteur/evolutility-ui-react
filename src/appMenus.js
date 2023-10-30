@@ -22,10 +22,10 @@ const appMenus = [
     title: "Demos",
     icon: "eye",
     world: "demos",
-    menus: modelsArray.map((m) => ({
-      id: m.id,
-      text: m.label,
-      icon: m.icon,
+    menus: modelsArray.map(({ id, label: text, icon }) => ({
+      id,
+      text,
+      icon,
     })),
   },
   {

@@ -54,11 +54,11 @@ const Metamodel = () => {
 
       <p>
         The metamodel (model of models) is the language to describe application
-        models.
+        models. It's the structure of the models.
       </p>
       <p>
-        Each model describe an object and its list of fields with enough UI
-        metadata to render all views of that object.
+        Unlike traditional Model-driven Architecture (MDA), Evolutility uses one
+        model for all views instead of one model per view.
       </p>
       <p>
         For any object, all UI views (Browse, Edit, List, Cards, Charts...)

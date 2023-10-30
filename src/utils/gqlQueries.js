@@ -294,7 +294,7 @@ export const qOne = (entity, nextOrPrevious) => {
     } else {
       q += `_by_pk(id:$id)`;
     }
-    q += " { " + qFields(m) + qCollecs(m) + " }}";
+    q += `{ ${qFields(m)} ${qCollecs(m)} }}`;
     return q;
   } else {
     console.error("Model not found " + entity);
@@ -303,7 +303,7 @@ export const qOne = (entity, nextOrPrevious) => {
 };
 
 export const qDelete = (mqid) => `mutation($id:Int!) {
-  deleted: ${"delete_" + mqid} (
+  deleted: delete_${mqid} (
     where: {id: {_eq: $id}}
   ) {affected_rows}
 }`;
@@ -311,7 +311,7 @@ export const qDelete = (mqid) => `mutation($id:Int!) {
 export const qUpdateOne = (entity, data) => {
   const m = getModel(entity);
   return `mutation($id:Int!) {
-    updated: ${"update_" + m.qid} (
+    updated: update_${m.qid} (
         where: {id: {_eq: $id}}
         _set: ${prepData(entity, data)}
     ) {returning {${qFields(m) + qCollecs(m)}}}
@@ -321,7 +321,7 @@ export const qUpdateOne = (entity, data) => {
 export const qInsertOne = (entity, data) => {
   const m = getModel(entity);
   return `mutation {
-    inserted: ${"insert_" + m.qid} (
+    inserted: insert_${m.qid} (
       objects: [${prepData(entity, data)}]
     ) {returning {${qFields(m)}}}
   }`;
@@ -333,10 +333,10 @@ export const qLov = (entity, fieldId) => {
   let q = "";
   if (f.object) {
     const m1 = getModel(f.object);
-    q += m1.qid + "(limit:100) {id " + m1.titleField + "}";
-  } else {
-    // f.lovIcon
-  }
+    q += `${m1.qid}(limit:100) {id ${m1.titleField}} `;
+  } // else {
+  // f.lovIcon
+  // }
   return q;
 };
 //#endregion
