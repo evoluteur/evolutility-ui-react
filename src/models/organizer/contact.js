@@ -208,7 +208,6 @@ const model = {
     },
   ],
   collections: [],
-  noStats: true,
 };
 
 export default model;

@@ -36,6 +36,8 @@ export const xItemsCount = (count, nameSingular, namePlural) =>
     : count + " " + namePlural;
 
 // const isFunction = (x) => typeof x === "function";
+export const numString = (d) =>
+  Number.isInteger(d) ? integerString(d) : decimalString(d);
 
 export const nullOrUndefined = (v) => v === null || v === undefined;
 const mFormat = (d, format) =>

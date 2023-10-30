@@ -133,7 +133,6 @@ const model = {
       fields: ["description"],
     },
   ],
-  noStats: true,
 };
 
 export default model;

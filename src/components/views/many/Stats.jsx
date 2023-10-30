@@ -9,31 +9,19 @@
 // (c) 2023 Olivier Giulieri
 
 // #region ---------------- Imports ----------------
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 // import config from "../../../config";
 import { getModel } from "../../../utils/moMa";
 import { i18n_stats, i18n_comments } from "../../../i18n/i18n";
-import {
-  fieldInStats,
-  fieldStatsFunctions,
-  fieldTypes as ft,
-} from "../../../utils/dico";
+import { fieldTypes as ft } from "../../../utils/dico";
 import { getStats } from "../../../utils/dao";
-import {
-  capitalize,
-  xItemsCount,
-  fieldValue,
-  decimalString,
-  moneyString,
-  nullOrUndefined,
-} from "../../../utils/format";
+import { xItemsCount, numString } from "../../../utils/format";
 import PageTitle from "../../shell/PageTitle";
 import Spinner from "../../widgets/Spinner";
 import Alert from "../../widgets/Alert";
-import Range from "../../widgets/Range";
-import Chart from "../charts/Chart";
+import StatsNullsBar from "./StatsNullsBar";
 
 import "./Stats.scss";
 // #endregion
@@ -43,50 +31,6 @@ import "./Stats.scss";
 // const { withTimestamp, withComments } = config;
 const withTimestamp = false; // not implemented yet
 const withComments = false; // not implemented yet
-
-const formattedValue = (value, field) => {
-  if (field.type === ft.money) {
-    return moneyString(value);
-  }
-  return value;
-};
-
-const itemAggr = (id, label, value) => (
-  <div key={id}>
-    <label className="stat-fn">{label}</label> {value}
-  </div>
-);
-
-const prepData = (data, fields) => {
-  if (data) {
-    fields.forEach((f) => {
-      const d = data[f.id];
-      if (d) {
-        d.num = {
-          min: d.min,
-          max: d.max,
-          avg: d.avg,
-        };
-        // - stats in  range
-        if (!nullOrUndefined(d.min)) {
-          d.min = fieldValue(f, d.min);
-          d.max = fieldValue(f, d.max);
-        }
-        if (!nullOrUndefined(d.avg)) {
-          d.avg = decimalString(d.avg);
-        }
-        // - other stats (no range)
-        if (!nullOrUndefined(d.stddev)) {
-          d.stddev = decimalString(d.stddev);
-        }
-        if (!nullOrUndefined(d.variance)) {
-          d.variance = decimalString(d.variance);
-        }
-      }
-    });
-  }
-  return data;
-};
 
 const fieldTitle = (f) => (
   <>
@@ -98,26 +42,24 @@ const fieldTitle = (f) => (
   </>
 );
 
-const statsField = (d, f) =>
-  d.min !== null && (
+const statsField = (d, f, total) => {
+  const pc = (100 * d.nulls) / total;
+  return (
     <div key={f.id} className="f-stats panel">
       {fieldTitle(f)}
+      <StatsNullsBar percent={pc} />
       <div className="stat-values">
-        {fieldStatsFunctions(f).map(
-          (fn) =>
-            d[fn] !== null &&
-            itemAggr(fn, i18n_stats[fn], formattedValue(d[fn], f))
-        )}
-        {d.avg && d.min !== d.max && (
-          <div className="field-range">
-            <div>{formattedValue(d.min, f)}</div>
-            <Range min={d.num.min} max={d.num.max} avg={d.num.avg} />
-            <div>{formattedValue(d.max, f)}</div>
+        {Object.keys(d).map((stat) => (
+          <div key={stat}>
+            <label>{i18n_stats[stat]}</label> {d[stat]}
+            {stat === "nulls" && <span>{"(" + numString(pc) + "%)"}</span>}
           </div>
-        )}
+        ))}
+        {f.type === ft.lov && f.list && <div>{f.list?.length} list items </div>}
       </div>
     </div>
   );
+};
 // #endregion
 
 const Stats = () => {
@@ -126,15 +68,6 @@ const Stats = () => {
   const [error, setError] = useState(null);
   const { entity } = useParams();
   const model = getModel(entity);
-  const fields = useMemo(
-    () =>
-      model?.fields.filter(
-        (f) =>
-          fieldInStats(f) || (f.type === ft.lov && f.list) || f.type === ft.bool
-      ),
-    [entity]
-  );
-
   const title = i18n_stats.statsTitle.replace(
     "{0}",
     model.label || model.title
@@ -146,6 +79,7 @@ const Stats = () => {
 
   useEffect(() => {
     let done = false;
+    setIsLoading(true);
     getStats(entity).then((response) => {
       if (done) {
         return;
@@ -153,7 +87,7 @@ const Stats = () => {
       if (response.errors) {
         setError(response.errors[0]);
       } else {
-        setData(prepData(response.data, fields));
+        setData(response.data);
         window.scrollTo(0, 0);
       }
       setIsLoading(false);
@@ -177,21 +111,15 @@ const Stats = () => {
       />
     );
   } else {
-    const recCount =
-      i18n_stats.metaCount
-        .replace("{0}", data.count)
-        .replace("{1}", model.fields.length) +
-      //.replace("{2}", model?.collections.length || 0) +
-      ", " +
-      fields.length +
-      " Stats";
+    const recCount = i18n_stats.metaCount
+      .replace("{0}", data.count)
+      .replace("{1}", model.fields.length);
+    //.replace("{2}", model?.collections.length || 0)
     const commentsCount = xItemsCount(
       data.nb_comments,
       i18n_comments.comment,
       i18n_comments.comments
     );
-    const chartsOK = !model.noCharts;
-    const defaultChartType = "bars";
     body = (
       <div className="evol-stats">
         <div className="cols-2">
@@ -221,32 +149,9 @@ const Stats = () => {
             )}
         </div>
         <div className="stats-fields">
-          {fields?.map((f) => {
-            if (f.type === ft.bool || (f.type === ft.lov && f.list)) {
-              return (
-                <div key={f.id} className="f-stats panel">
-                  {fieldTitle(f)}
-                  <div className="stat-values">
-                    {f.type === ft.lov && f.list && (
-                      <div>{f.list?.length} list items </div>
-                    )}
-                    {chartsOK && !f.noCharts && (
-                      <div className="stat-chart-holder">
-                        <Chart
-                          entity={entity}
-                          field={f}
-                          title={capitalize(model.namePlural) + " / " + f.label}
-                          type={defaultChartType}
-                          size="tiny"
-                        />
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            }
+          {model.fields?.map((f) => {
             if (data[f.id] !== undefined) {
-              return statsField(data[f.id], f);
+              return statsField(data[f.id], f, data.count);
             }
             return f.id;
           })}

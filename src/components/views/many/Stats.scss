@@ -1,33 +1,22 @@
 @import "../../../variables";
 
-$chart-width: 300px;
 $label-width: 270px;
 $label2-width: 100px;
 
 .evol-stats {
-  .chart-card {
-    display: block;
-    margin-top: 10px;
-    min-width: 200px;
-    border: none;
-  }
   .evo-label {
     margin-bottom: 7px;
   }
   .label-count {
     margin-bottom: 10px;
   }
-  .field-range {
-    width: 100%;
-    display: flex;
-    gap: 5px;
-    align-content: center;
-    margin: 20px 0 0;
-  }
 }
 .stat-field-title {
   margin-bottom: 15px;
   color: $color-text;
+  > span {
+    font-weight: 300;
+  }
 }
 .stat-field-id {
   color: grey;
@@ -47,12 +36,13 @@ $label2-width: 100px;
     padding: 10px 20px;
     .stat-values > div {
       margin-bottom: 10px;
+      > span {
+        margin-left: 10px;
+        color: grey;
+      }
+      > label:after {
+        content: ":";
+      }
     }
   }
-}
-.stat-chart-holder {
-  border-top: $border;
-}
-.stat-fn {
-  display: block;
 }

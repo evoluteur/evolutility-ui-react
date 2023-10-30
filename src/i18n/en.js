@@ -135,6 +135,7 @@ export const i18n_stats = {
   firstInsert: "First insert",
   totalComments: "Number of comments",
   total: "Total",
+  nulls: "Nulls",
   avg: "Average",
   stddev: "Std. deviation",
   variance: "Variance",

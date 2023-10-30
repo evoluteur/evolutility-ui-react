@@ -219,25 +219,41 @@ export const qChart = (m, fieldId) => {
 
 export const qStats = (m) => {
   const sag = {};
+  const nulls = [];
   allStats.forEach((stat) => (sag[stat] = []));
-  m.fields.filter(fieldInStats).forEach((f) => {
-    if (f.type !== "money" && fieldIsNumber(f)) {
-      // if (fieldIsNumber(f)) {
-      // TODO: use decimal rather than money type to make it work for money fields
-      fieldStatsFunctions(f)?.forEach((p) => sag[p].push(f.id));
+  m.fields.forEach((f) => {
+    let fid = f.id;
+    if (fieldInStats(f)) {
+      if (f.type !== "money" && fieldIsNumber(f)) {
+        // if (fieldIsNumber(f)) {
+        // TODO: use decimal rather than money type to make it work for money fields
+        fieldStatsFunctions(f)?.forEach((p) => sag[p].push(fid));
+      }
+      if (fieldIsDateOrTime(f)) {
+        sag.min.push(fid);
+        sag.max.push(fid);
+      }
     }
-    if (fieldIsDateOrTime(f)) {
-      sag.min.push(f.id);
-      sag.max.push(f.id);
+    if (f.type === "lov" || f.type === "list") {
+      fid = fid + "_id";
     }
+    let qNulls = ` nulls_${f.id}: ${m.qid}_aggregate(where:`;
+    if (fieldIsText(f)) {
+      qNulls += ` {_or: [{${fid}: {_is_null: true}}, {${fid}: { _eq: ""}}]}`;
+    } else {
+      qNulls += ` {${fid}: {_is_null: true}}`;
+    }
+    qNulls += "){aggregate {count}}";
+    nulls.push(qNulls);
   });
-  return (
-    `query getStats_${m.qid} {stats: ${m.qid}_aggregate { aggregate {` +
-    allStats
-      .map((p) => (sag[p].length ? p + " {" + sag[p].join(" ") + "}" : ""))
-      .join(" ") +
-    " count}}}"
-  );
+
+  return `query getStats_${m.qid} {
+      stats: ${m.qid}_aggregate { aggregate {
+        ${allStats
+          .map((p) => (sag[p].length ? p + " {" + sag[p].join(" ") + "}" : ""))
+          .join(" ")}
+     count}}
+    ${nulls.join("")}}`;
 };
 //#endregion
 

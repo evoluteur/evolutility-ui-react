@@ -14,6 +14,7 @@ import {
   qInsertOne,
   qMany,
 } from "./gqlQueries.js";
+import { decimalString } from "./format.js";
 import config from "../config.js";
 
 const { apiPath } = config;
@@ -58,7 +59,6 @@ const cleanChartData = (e, data, fieldType) => {
 
   return { data: d2 };
 };
-
 //#endregion
 
 //#region Many ----------------------------
@@ -100,20 +100,37 @@ export const getStats = (entity) => {
   return fetch(apiPath, gqlOptions(qStats(m)))
     .then(toJSON)
     .then((resp) => {
-      if (resp?.data?.stats) {
-        let data = resp.data.stats.aggregate;
-        let d = {};
-        for (let pMath in data) {
-          const dataMath = data[pMath];
-          for (const pField in dataMath) {
-            if (!d[pField]) {
-              d[pField] = {};
-            }
-            d[pField][pMath] = dataMath[pField];
+      const data = resp?.data;
+      if (data?.stats) {
+        const cleanData = {};
+        const oStats = data?.stats?.aggregate || {};
+        m.fields.forEach((f) => {
+          const fid = f.id;
+          const df = { nulls: resp.data["nulls_" + fid]?.aggregate?.count };
+          let v = oStats.min?.[fid];
+          if (v) {
+            df.min = v;
           }
-        }
-        d.count = data.count;
-        return { data: d };
+          v = oStats.max?.[fid];
+          if (v) {
+            df.max = v;
+          }
+          v = oStats.avg?.[fid];
+          if (v) {
+            df.avg = decimalString(v);
+          }
+          v = oStats.stddev?.[fid];
+          if (v) {
+            df.stddev = decimalString(v);
+          }
+          v = oStats.variance?.[fid];
+          if (v) {
+            df.variance = decimalString(v);
+          }
+          cleanData[fid] = df;
+        });
+        cleanData.count = oStats.count;
+        return { data: cleanData };
       } else {
         return resp;
       }

@@ -1,0 +1,16 @@
+@import "../../../variables";
+
+.stats-line {
+  position: relative;
+  height: 7px;
+  width: 100%;
+  background-color: rgb(30, 142, 62);
+  margin-bottom: 10px;
+  .sl-red {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 7px;
+    background-color: rgb(217, 48, 37);
+  }
+}
