@@ -17,7 +17,7 @@ import { getModel } from "../../../utils/moMa";
 import { i18n_stats, i18n_comments } from "../../../i18n/i18n";
 import { fieldTypes as ft } from "../../../utils/dico";
 import { getStats } from "../../../utils/dao";
-import { xItemsCount, numString } from "../../../utils/format";
+import { xItemsCount, numString, fieldValue } from "../../../utils/format";
 import PageTitle from "../../shell/PageTitle";
 import Spinner from "../../widgets/Spinner";
 import Alert from "../../widgets/Alert";
@@ -42,6 +42,20 @@ const fieldTitle = (f) => (
   </>
 );
 
+const statValue = (field, stat, value, pc) => {
+  if (stat === "nulls") {
+    return (
+      <>
+        {value}
+        <span>{"(" + numString(pc) + "%)"}</span>
+      </>
+    );
+  } else if (stat === "min" || stat === "max") {
+    return fieldValue(field, value, null);
+  }
+  return value;
+};
+
 const statsField = (d, f, total) => {
   const pc = (100 * d.nulls) / total;
   return (
@@ -51,8 +65,8 @@ const statsField = (d, f, total) => {
       <div className="stat-values">
         {Object.keys(d).map((stat) => (
           <div key={stat}>
-            <label>{i18n_stats[stat]}</label> {d[stat]}
-            {stat === "nulls" && <span>{"(" + numString(pc) + "%)"}</span>}
+            <label>{i18n_stats[stat]}</label>
+            {statValue(f, stat, d[stat], pc)}
           </div>
         ))}
         {f.type === ft.lov && f.list && <div>{f.list?.length} list items </div>}

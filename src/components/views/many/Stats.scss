@@ -40,8 +40,11 @@ $label2-width: 100px;
         margin-left: 10px;
         color: grey;
       }
-      > label:after {
-        content: ":";
+      > label {
+        margin-right: $gap;
+        &:after {
+          content: ":";
+        }
       }
     }
   }
