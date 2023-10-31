@@ -13,7 +13,7 @@ import Activity from "./views/comfort/Activity";
 import "./widgets/Misc.scss";
 import "./widgets/Form.scss";
 import "./widgets/Modal.scss";
-import "./widgets/rc-tooltip.css";
+import 'rc-tooltip/assets/bootstrap_white.css'
 
 const EvolRoutes = () => (
   <Routes>
