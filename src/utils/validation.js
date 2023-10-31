@@ -153,11 +153,10 @@ export const validateField = (f, v) => {
 };
 
 export const validate = (model, data) => {
-  const fields = model.fields;
   const messages = [];
   const invalids = {};
   let cMsg;
-  fields?.forEach((f) => {
+  model.fields?.forEach((f) => {
     cMsg = validateField(f, data[f.id]);
     if (cMsg) {
       messages.push(cMsg);

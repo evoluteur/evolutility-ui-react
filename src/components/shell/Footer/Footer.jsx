@@ -7,7 +7,7 @@ const { version } = packageInfo;
 const currentYear = new Date().getFullYear();
 
 const Footer = () => (
-  <div className="evo-footer" role="contentinfo">
+  <div className="evo-footer" role="contentinfo" data-testid="footer">
     <div>
       <a
         className="copyright"

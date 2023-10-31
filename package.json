@@ -79,6 +79,9 @@
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
     ],
+    "coveragePathIgnorePatterns": [
+      "src/models/"
+    ],
     "coverageReporters": [
       "text",
       "html"

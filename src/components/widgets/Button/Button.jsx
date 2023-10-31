@@ -15,7 +15,7 @@ const Button = ({ label, type, icon, url, onClick, className }) => {
     </>
   );
   return onClick ? (
-    <button className={css} onClick={onClick} data-testid="button-test">
+    <button className={css} onClick={onClick} data-testid="button">
       {content}
     </button>
   ) : (
