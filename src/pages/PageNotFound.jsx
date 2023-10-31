@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../components/widgets/Button";
+import Button from "../components/widgets/Button/Button";
 
 import "./PageNotFound.scss";
 

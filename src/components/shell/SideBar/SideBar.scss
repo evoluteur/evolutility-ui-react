@@ -1,4 +1,4 @@
-@import "../../variables";
+@import "../../../variables";
 
 $bgcolor-menu-hover: #1e88e5;
 $nav-width: 190px;
@@ -17,7 +17,7 @@ $nav-trans-time: 0.1s;
   transition: width $nav-trans-time ease;
   color: white;
   border-right: 1px solid #e0e0e0;
-  background-color: #1976d2;
+  background: #1976d2 url("./spirals.png");
   user-select: none;
   -moz-user-select: none;
   &:hover {

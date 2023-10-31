@@ -12,10 +12,10 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import Icon from "react-crud-icons";
 import { i18n_charts, i18n_actions, i18n_errors } from "../../../i18n/i18n";
-import Alert from "../../widgets/Alert";
+import Alert from "../../widgets/Alert/Alert";
 import { getChart } from "../../../utils/dao";
 import { lcWrite } from "../../../utils/localStorage";
-import Spinner from "../../widgets/Spinner";
+import Spinner from "../../widgets/Spinner/Spinner";
 import ChartTable from "./ChartTable";
 import { chartSizes, chartTypes } from "./chartProps";
 

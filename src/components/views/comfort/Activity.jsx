@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { getActivity, clearActivity } from "../../../utils/activity";
-import PageTitle from "../../shell/PageTitle";
+import PageTitle from "../../shell/PageTitle/PageTitle";
 import { getModel } from "../../../utils/moMa";
 import { i18n_activity } from "../../../i18n/i18n";
 import { capitalize } from "../../../utils/format";
-import Button from "../../widgets/Button";
+import Button from "../../widgets/Button/Button";
 
 import "./Activity.scss";
 

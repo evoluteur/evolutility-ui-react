@@ -14,9 +14,9 @@ import modelPropType from "../modelPropTypes";
 import { i18n_actions } from "../../../i18n/i18n";
 import { fieldId2Field } from "../../../utils/dico";
 
-import Button from "../../widgets/Button";
+import Button from "../../widgets/Button/Button";
 import Field from "../../field/Field";
-import Panel from "../../widgets/Panel";
+import Panel from "../../widgets/Panel/Panel";
 import Collection from "./Collection";
 import Timestamps from "./Timestamps";
 // #endregion

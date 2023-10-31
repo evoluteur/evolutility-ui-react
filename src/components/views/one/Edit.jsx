@@ -15,9 +15,9 @@ import { toast } from "react-toastify";
 import { i18n_actions, i18n_validation } from "../../../i18n/i18n";
 import { fieldId2Field, fieldTypes as ft } from "../../../utils/dico";
 import { validate, validateField } from "../../../utils/validation";
-import Button from "../../widgets/Button";
+import Button from "../../widgets/Button/Button";
 import Field from "../../field/Field";
-import Panel from "../../widgets/Panel";
+import Panel from "../../widgets/Panel/Panel";
 import Collection from "./Collection";
 import Timestamps from "./Timestamps";
 // #endregion

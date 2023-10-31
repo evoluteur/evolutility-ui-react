@@ -1,11 +1,12 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import classnames from "classnames";
 import { Link, NavLink, useParams } from "react-router-dom";
 import Icon from "react-crud-icons";
-import { i18n_nav } from "../../i18n/i18n";
-import appMenus from "../../appMenus";
-import { getUrlMap } from "../../utils/url";
-import { models, modelIds } from "../../utils/moMa";
+import { i18n_nav } from "../../../i18n/i18n";
+import appMenus from "../../../appMenus";
+import { getUrlMap } from "../../../utils/url";
+import { models, modelIds } from "../../../utils/moMa";
 
 import "./SideBar.scss";
 
@@ -46,7 +47,7 @@ const iconViews = (mid, f) => (
 
 const sLink = (label, url, icon) => (
   <Link to={url}>
-    <img alt="" src={`/svg/${icon}.svg`} />
+    <img alt="" src={`./svg/${icon}.svg`} />
     <span>{label}</span>
   </Link>
 );
@@ -68,7 +69,7 @@ const SideBar = ({ onClickToggle }) => {
   // TODO: clean this
   const params = useParams(); // Keep for forcing render
   const { entity, view } = getUrlMap();
-  console.log(params, entity, view);
+  // console.log(params, entity, view);
 
   const g = item2Group_Map[entity];
   let links = [];

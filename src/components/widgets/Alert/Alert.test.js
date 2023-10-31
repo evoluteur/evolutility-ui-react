@@ -1,9 +1,10 @@
+/* eslint-disable testing-library/no-await-sync-query */
+/* eslint-disable testing-library/no-node-access */
+/* eslint-disable testing-library/await-async-query */
 /* eslint-disable import/no-extraneous-dependencies */
-import { getAllByTitle, getByTitle, getByText, render, screen, TestRenderer, cleanup } from "@testing-library/react";
+import {   render, screen,  cleanup } from "@testing-library/react";
 import Alert from "./Alert";
 import renderer from 'react-test-renderer';
-import { Fragment } from "react";
-import { isExportDeclaration } from "typescript";
 
 afterEach(cleanup);
 

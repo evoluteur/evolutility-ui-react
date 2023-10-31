@@ -1,5 +1,5 @@
 import React from "react";
-import Alert from "./Alert";
+import Alert from "./Alert/Alert";
 
 export default class ErrorBoundary extends React.Component {
   constructor(props) {

@@ -1,5 +1,5 @@
 import React from "react";
-import packageInfo from "../../../package.json";
+import packageInfo from "../../../../package.json";
 
 import "./Footer.scss";
 

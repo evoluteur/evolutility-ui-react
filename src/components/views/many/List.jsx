@@ -10,7 +10,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import modelPropType from "../modelPropTypes";
 import Icon from "react-crud-icons";
-import Alert from "../../widgets/Alert";
+import Alert from "../../widgets/Alert/Alert";
 import TableBody from "./TableBody";
 
 import "./List.scss";

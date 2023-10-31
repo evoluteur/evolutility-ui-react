@@ -3,11 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 
 import Icon from "react-crud-icons";
 import logoEvol from "./evologo.gif";
-import { i18n_actions } from "../../i18n/i18n";
-import { views, modelViewsMany } from "../../utils/dicoViews";
-import { getModel } from "../../utils/moMa";
+import { i18n_actions } from "../../../i18n/i18n";
+import { views, modelViewsMany } from "../../../utils/dicoViews";
+import { getModel } from "../../../utils/moMa";
 import ViewActions from "./ViewActions";
-import GitHubLink from "./GitHubLink";
+import GitHubLink from "../GitHubLink";
 
 import "./TopBar.scss";
 

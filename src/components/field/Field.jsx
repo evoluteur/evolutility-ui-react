@@ -18,7 +18,7 @@ import { fieldValue, image, nullOrUndefined } from "../../utils/format";
 import { i18n_actions, i18n_msg } from "../../i18n/i18n";
 import config from "../../config";
 import FieldLabel from "./FieldLabel";
-import Button from "../widgets/Button";
+import Button from "../widgets/Button/Button";
 
 import "./Field.scss";
 import "react-datepicker/dist/react-datepicker.css";

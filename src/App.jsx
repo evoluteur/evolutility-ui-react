@@ -7,9 +7,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import classnames from "classnames";
 import { ToastContainer } from "react-toastify";
 
-import SideBar from "./components/shell/SideBar";
-import TopBar from "./components/shell/TopBar";
-import Footer from "./components/shell/Footer";
+import SideBar from "./components/shell/SideBar/SideBar";
+import TopBar from "./components/shell/TopBar/TopBar";
+import Footer from "./components/shell/Footer/Footer";
 import ErrorBoundary from "./components/widgets/ErrorBoundary";
 
 import Home from "./pages/Home/Home";

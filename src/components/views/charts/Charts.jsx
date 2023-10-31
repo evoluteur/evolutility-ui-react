@@ -16,8 +16,8 @@ import { getModel } from "../../../utils/moMa";
 import { fieldInCharts } from "../../../utils/dico";
 import { lcRead } from "../../../utils/localStorage";
 import { capitalize } from "../../../utils/format";
-import PageTitle from "../../shell/PageTitle";
-import Alert from "../../widgets/Alert";
+import PageTitle from "../../shell/PageTitle/PageTitle";
+import Alert from "../../widgets/Alert/Alert";
 import Chart from "./Chart";
 
 import "./Charts.scss";

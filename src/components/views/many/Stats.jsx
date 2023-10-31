@@ -18,9 +18,9 @@ import { i18n_stats, i18n_comments } from "../../../i18n/i18n";
 import { fieldTypes as ft } from "../../../utils/dico";
 import { getStats } from "../../../utils/dao";
 import { xItemsCount, numString, fieldValue } from "../../../utils/format";
-import PageTitle from "../../shell/PageTitle";
-import Spinner from "../../widgets/Spinner";
-import Alert from "../../widgets/Alert";
+import PageTitle from "../../shell/PageTitle/PageTitle";
+import Spinner from "../../widgets/Spinner/Spinner";
+import Alert from "../../widgets/Alert/Alert";
 import StatsNullsBar from "./StatsNullsBar";
 
 import "./Stats.scss";

@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Icon from "react-crud-icons";
-import Badge from "../widgets/Badge";
+import Badge from "../../widgets/Badge/Badge";
 
-import { queryUrl, getSearchText } from "../../utils/url";
+import { queryUrl, getSearchText } from "../../../utils/url";
 
 import "./PageTitle.scss";
 

@@ -9,9 +9,9 @@ import { logActivity } from "../../../utils/activity";
 import Edit from "./Edit";
 import Browse from "./Browse";
 
-import PageTitle from "../../shell/PageTitle";
-import Alert from "../../widgets/Alert";
-import Spinner from "../../widgets/Spinner";
+import PageTitle from "../../shell/PageTitle/PageTitle";
+import Alert from "../../widgets/Alert/Alert";
+import Spinner from "../../widgets/Spinner/Spinner";
 import { i18n_actions, i18n_msg, i18n_errors } from "../../../i18n/i18n";
 import config from "../../../config";
 import { capitalize } from "../../../utils/format";

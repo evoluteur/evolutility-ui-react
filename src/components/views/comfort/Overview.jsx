@@ -10,7 +10,7 @@ import { viewsMany } from "../../../utils/dicoViews";
 import { capitalize } from "../../../utils/format";
 import { lcWrite, lcRead } from "../../../utils/localStorage";
 import { i18n_activity } from "../../../i18n/i18n";
-import PageTitle from "../../shell/PageTitle";
+import PageTitle from "../../shell/PageTitle/PageTitle";
 import Chart from "../charts/Chart";
 import ModelLinks from "../comfort/ModelLinks";
 

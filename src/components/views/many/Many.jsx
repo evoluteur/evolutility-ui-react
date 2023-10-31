@@ -14,10 +14,10 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 
 import List from "./List";
 import Cards from "./Cards";
-import PageTitle from "../../shell/PageTitle";
-import Pagination from "../../widgets/Pagination";
-import Spinner from "../../widgets/Spinner";
-import Alert from "../../widgets/Alert";
+import PageTitle from "../../shell/PageTitle/PageTitle";
+import Pagination from "../../widgets/Pagination/Pagination";
+import Spinner from "../../widgets/Spinner/Spinner";
+import Alert from "../../widgets/Alert/Alert";
 import EmptyState from "./EmptyState";
 import { i18n_msg, i18n_errors } from "../../../i18n/i18n";
 import config from "../../../config";

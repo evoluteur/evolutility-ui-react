@@ -12,7 +12,7 @@ import modelPropTypes from "../modelPropTypes";
 
 import { i18n_errors } from "../../../i18n/i18n";
 import Card from "../one/Card";
-import Alert from "../../widgets/Alert";
+import Alert from "../../widgets/Alert/Alert";
 import EmptyState from "./EmptyState";
 
 import "./Cards.scss";
