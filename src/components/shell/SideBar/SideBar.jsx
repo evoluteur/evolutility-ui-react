@@ -44,7 +44,7 @@ const iconViews = (mid, f) => (
 );
 
 const sLink = (label, url, icon) => (
-  <Link to={url}>
+  <Link to={url} key={url}>
     <img alt="" src={`./svg/${icon}.svg`} />
     <span>{label}</span>
   </Link>
@@ -74,7 +74,7 @@ const SideBar = ({ onClickToggle }) => {
   let menus = [];
 
   const MenuLinkDoc = ({ menu }) => (
-    <li className={classnames({ active: menu.id === view })}>
+    <li className={classnames({ active: menu.id === view })} key={menu.id}>
       <Link to={`docs/${menu.id}`}>
         <img className="e-icon" src={"/pix/" + menu.icon} alt="" />
         <span>{menu.text}</span>

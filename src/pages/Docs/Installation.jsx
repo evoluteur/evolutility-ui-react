@@ -41,7 +41,8 @@ const Installation = () => (
       <a href="http://localhost:3000/">http://localhost:3000/</a>.
     </p>
     <h2>Backend setup</h2>
-    <p>Setup Hasura, create DB...</p>
+    <p>Setup Hasura, create DB, add relationships...</p>
+    <p>Change the "adminSecret" in the config.js file.</p>
   </div>
 );
 

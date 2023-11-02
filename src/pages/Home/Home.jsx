@@ -56,6 +56,7 @@ const Home = () => {
           Toolkit to build CRUD UIs with models rather than code
         </h2>
       </section>
+      TEST: <Link to="/mapper">Mapper</Link>
       <section>
         <div>
           Evolutility provides a{" "}
@@ -73,19 +74,19 @@ const Home = () => {
         <Gallery />
 
         <div>
-          With it, you can build UIs like these React SPA using GraphQL:
+          With it, you can build a React SPA for GraphQL like these examples:
         </div>
         <div className="home-demos">
           <ModelsLinks />
         </div>
         <div>
-          ... simply by making models like{" "}
-          <Link to="docs/models">these JSON files</Link>.
+          ... simply by making models like these{" "}
+          <Link to="docs/models">sample models</Link>.
         </div>
         <div>
           <br />
           For each application, all views, form validation, and API calls are
-          defined in a single model. No hand-coding necessary!
+          generated at run-time from a single model. No hand-coding necessary!
         </div>
         <div>
           <br />

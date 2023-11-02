@@ -3,7 +3,7 @@
 
 Evolutility-UI-React is a set of **model-driven views** to [Browse](#Browse), [Edit](#Edit), [List](#List), [Cards](#Cards), [Charts](#Charts), and [Stats](#Stats).
 
-With it you can easily build CRUD applications by writing models rather than code. It use GraphQL with [Hasura](https://hasura.io). No hand-coding is necessary.
+With it you can easily build CRUD applications by writing models rather than code. It uses [Hasura](https://hasura.io) GraphQL backend. No hand-coding is necessary!
 
 ![Edit](public/screenshots/one-edit.png)
 
@@ -56,6 +56,7 @@ Configurations options are specified in the file [/src/config.js](https://github
 | Option     | Description      | Example             |
 |------------|------------------|---------------------|
 | apiPath    | Path to GraphQL API. | "https://myapp.hasura.app/v1/graphql" |
+| adminSecret | Token for Hasura. | |
 | filesUrl   | Path to upload files to. | "/pix/" |
 | pageSize   | Page size in pagination.  | 50 |
 | queryModels | Get models from JSON files or from the database through the API. |

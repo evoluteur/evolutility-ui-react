@@ -10,7 +10,7 @@ const handleDragStart = (e) => e.preventDefault();
 
 const allViewsInfo = [...viewDoc.one, ...viewDoc.many, ...viewDoc.comfort];
 const items = allViewsInfo.map((v) => (
-  <div className="item">
+  <div className="item" key={v.id}>
     {v.name}
     <div>
       <img

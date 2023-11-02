@@ -42,7 +42,7 @@ const Doc = () => {
         <h3 id="table-of-contents">Table of Contents</h3>
         <ol style={{ listStyleType: "decimal" }}>
           {docMenus.map((m) => (
-            <li>
+            <li key={m.id}>
               <Link to={m.id}>{m.text}</Link>
             </li>
           ))}
@@ -60,21 +60,6 @@ const Doc = () => {
           >
             https://github.com/evoluteur/evolutility-ui-react/issues
           </a>
-        </p>
-        <p>
-          <br />
-        </p>
-        <p>
-          Copyright (c) 2023{" "}
-          <a
-            href="https://evoluteur.github.io/"
-            target="omg"
-            rel="noopener noreferrer"
-            className="extlink"
-          >
-            Olivier Giulieri
-          </a>
-          .
         </p>
         <p>
           Evolutility-UI-React is released under the{" "}
