@@ -12,7 +12,7 @@ import Modal from "react-modal";
 import { toast } from "react-toastify";
 import Icon from "react-crud-icons";
 import { capitalize } from "../../../utils/format";
-import dao from "../../../utils/dao";
+import dao from "../../../dao/dao";
 import { i18n_msg, i18n_actions } from "../../../i18n/i18n";
 import { getModel } from "../../../utils/moMa";
 import Button from "../../widgets/Button/Button";

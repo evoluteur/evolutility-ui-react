@@ -16,7 +16,7 @@ import { i18n_actions, i18n_msg, i18n_errors } from "../../../i18n/i18n";
 import config from "../../../config";
 import { capitalize } from "../../../utils/format";
 import { getModel } from "../../../utils/moMa";
-import { getOne, updateOne, insertOne } from "../../../utils/dao";
+import { getOne, updateOne, insertOne } from "../../../dao/dao";
 
 import "./One.scss";
 // #endregion

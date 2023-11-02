@@ -23,7 +23,7 @@ import { i18n_msg, i18n_errors } from "../../../i18n/i18n";
 import config from "../../../config";
 import url from "../../../utils/url";
 import { getModel } from "../../../utils/moMa";
-import { getMany } from "../../../utils/dao";
+import { getMany } from "../../../dao/dao";
 
 import "./Many.scss";
 // #endregion

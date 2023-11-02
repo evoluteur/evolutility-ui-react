@@ -2,8 +2,8 @@
 // access to data via GraphQL API (using Hasura)
 // (c) 2023 Olivier Giulieri
 
-import { getModel } from "./moMa";
-import { fieldTypes as ft } from "./dico.js";
+import { getModel } from "../utils/moMa";
+import { fieldTypes as ft } from "../utils/dico.js";
 import {
   gqlOptions,
   qOne,
@@ -15,7 +15,7 @@ import {
   qMany,
   qObjectSearch,
 } from "./gqlQueries.js";
-import { decimalString } from "./format.js";
+import { decimalString } from "../utils/format.js";
 import config from "../config.js";
 
 const { apiPath } = config;

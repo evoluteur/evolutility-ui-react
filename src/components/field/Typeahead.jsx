@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
-import { getObjectSearch } from "../../utils/dao";
+import { getObjectSearch } from "../../dao/dao";
 import { i18n_actions } from "../../i18n/i18n";
 
 import "./Typeahead.scss";

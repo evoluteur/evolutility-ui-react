@@ -15,11 +15,11 @@ import {
   fieldIsDateOrTime,
   fieldStatsFunctions,
   allStats,
-} from "./dico";
+} from "../utils/dico";
 
 import config from "../config";
-import { getModel } from "./moMa";
-import { dateTZ } from "./format";
+import { getModel } from "../utils/moMa";
+import { dateTZ } from "../utils/format";
 
 const ft = fieldTypes;
 

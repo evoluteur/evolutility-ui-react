@@ -16,7 +16,7 @@ import { useParams } from "react-router-dom";
 import { getModel } from "../../../utils/moMa";
 import { i18n_stats, i18n_comments } from "../../../i18n/i18n";
 import { fieldTypes as ft } from "../../../utils/dico";
-import { getStats } from "../../../utils/dao";
+import { getStats } from "../../../dao/dao";
 import { xItemsCount, numString, fieldValue } from "../../../utils/format";
 import PageTitle from "../../shell/PageTitle/PageTitle";
 import Spinner from "../../widgets/Spinner/Spinner";
