@@ -29,6 +29,7 @@
       }
       > label {
         width: $golden-ratio-small;
+        max-width: 120px;
         @include ellipsis();
         vertical-align: top;
         font-weight: 300;

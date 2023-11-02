@@ -62,7 +62,7 @@ const Home = () => {
           <strong>
             <Link to="docs/metamodel">metamodel</Link>
           </strong>{" "}
-          (model structure) to define your models and{" "}
+          (model structure) to define UI models and{" "}
           <strong>
             a set of <Link to="docs/views">model-driven Views</Link>
           </strong>{" "}
@@ -72,58 +72,23 @@ const Home = () => {
 
         <Gallery />
 
-        <div>With it, you can build UIs like these:</div>
+        <div>
+          With it, you can build UIs like these React SPA using GraphQL:
+        </div>
         <div className="home-demos">
           <ModelsLinks />
         </div>
         <div>
           ... simply by making models like{" "}
-          <a
-            href="https://github.com/evoluteur/evolutility-ui-react/tree/main/src/models/organizer"
-            target="jsm"
-            rel="noopener noreferrer"
-            className="extlink"
-          >
-            these JSON files
-          </a>
-          .
+          <Link to="docs/models">these JSON files</Link>.
         </div>
         <div>
           <br />
-          No hand-coding necessary. For each application, all views, form
-          validation, and API calls are defined in a single model.
-        </div>
-      </section>
-
-      <div className="text-center tech-logos">
-        <a href="https://reactjs.org/" target="react" rel="noopener noreferrer">
-          <img src="pix/logos/react.png" alt="React" />
-        </a>
-        <a
-          href="https://graphql.org/"
-          target="graphql"
-          rel="noopener noreferrer"
-        >
-          <img src="pix/logos/graphql.png" alt="GraphQL" />
-        </a>
-        <a href="https://hasura.io" target="hasura" rel="noopener noreferrer">
-          <img src="pix/logos/hasura.png" alt="Hasura" className="hasura" />
-        </a>
-      </div>
-      <section>
-        <div>
-          Evolutility is a React SPA using GraphQL on{" "}
-          <a
-            href="https://hasura.io"
-            target="h"
-            rel="noopener noreferrer"
-            className="extlink"
-          >
-            Hasura
-          </a>
-          .
+          For each application, all views, form validation, and API calls are
+          defined in a single model. No hand-coding necessary!
         </div>
         <div>
+          <br />
           Evolutility-UI-React is Open source. The code and documentation are
           available at{" "}
           <a
@@ -146,6 +111,21 @@ const Home = () => {
           .
         </div>
       </section>
+      <div className="text-center tech-logos">
+        <a href="https://reactjs.org/" target="react" rel="noopener noreferrer">
+          <img src="pix/logos/react.png" alt="React" />
+        </a>
+        <a
+          href="https://graphql.org/"
+          target="graphql"
+          rel="noopener noreferrer"
+        >
+          <img src="pix/logos/graphql.png" alt="GraphQL" />
+        </a>
+        <a href="https://hasura.io" target="hasura" rel="noopener noreferrer">
+          <img src="pix/logos/hasura.png" alt="Hasura" className="hasura" />
+        </a>
+      </div>
     </div>
   );
 };

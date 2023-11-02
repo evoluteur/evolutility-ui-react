@@ -22,7 +22,7 @@ const config = {
   // - "WhoIs" columns u_uid and c_uid w/ userid of creator and last modifier
   withWhoIs: false,
   // - Track last viewed record names in localstorage
-  withActivity: true,
+  withActivity: false,
   // max number of activity records tracked
   activityListSize: 50,
 

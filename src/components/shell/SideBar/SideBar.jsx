@@ -10,8 +10,6 @@ import { models, modelIds } from "../../../utils/moMa";
 
 import "./SideBar.scss";
 
-// TODO: need rewrite
-
 // #region ------- Helpers ---------
 const item2Group_Map = {};
 const sections = { doc: [] };
@@ -72,7 +70,7 @@ const SideBar = ({ onClickToggle }) => {
   // console.log(params, entity, view);
 
   const g = item2Group_Map[entity];
-  let links = [];
+  let links = null;
   let menus = [];
 
   const MenuLinkDoc = ({ menu }) => (
@@ -91,12 +89,10 @@ const SideBar = ({ onClickToggle }) => {
     menus = [sections.docs];
     links = sLink("Demos", "/demos", "eye");
   } else {
-    links = (
-      <>
-        {sLink("Demos", "/demos", "eye")}
-        {sLink("Documentation", "/docs", "book")}
-      </>
-    );
+    links = [
+      sLink("Demos", "/demos", "eye"),
+      sLink("Documentation", "/docs", "book"),
+    ];
   }
 
   const link = (menu) => (

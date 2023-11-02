@@ -7,7 +7,7 @@ import { views } from "../../../utils/dicoViews";
 
 const ViewsNavIcons = ({ id, view, entity }) => {
   let iconViews = [];
-  if (view === "overview") {
+  if (view === "overview" || view === "activity") {
     return null;
   }
   if (view === "edit" || view === "browse") {
@@ -16,11 +16,10 @@ const ViewsNavIcons = ({ id, view, entity }) => {
     } else {
       iconViews = [views.edit, views.browse];
     }
-  }
-  if (view === "stats" || view === "charts") {
+  } else if (view === "stats" || view === "charts") {
     iconViews = [views.charts, views.stats];
-  }
-  if (view === "list" || view === "cards") {
+    // } else if (view === "list" || view === "cards") {
+  } else {
     iconViews = [views.list, views.cards];
   }
 
