@@ -53,7 +53,7 @@ const List = ({
       />
     );
   } else if (data?.length) {
-    const link = "/" + entity + "/" + model?.defaultViewOne + "/";
+    const link = `/${entity}/${model?.defaultViewOne}/`;
     body = (
       <table className="table table-hover sortable">
         {tableHeader(fields, onClickSort, sortField, sortDirection)}

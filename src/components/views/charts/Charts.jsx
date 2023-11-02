@@ -95,7 +95,7 @@ const Charts = () => {
     }
 
     return (
-      <div className={"evol-charts model_" + entity}>
+      <div className={`evol-charts model_${entity}`}>
         <PageTitle
           entity={entity}
           model={m}

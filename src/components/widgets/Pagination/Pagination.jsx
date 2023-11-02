@@ -86,11 +86,7 @@ const Pagination = ({ count, fullCount, onClick }) => {
       );
     }
 
-    return (
-      fullCount > pageSize && (
-        <nav className="evo-pagination">{paginationBody}</nav>
-      )
-    );
+    return <nav className="evo-pagination">{paginationBody}</nav>;
   }
   return null;
 };

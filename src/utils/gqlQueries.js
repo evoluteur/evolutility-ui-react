@@ -48,10 +48,10 @@ const prepData = (entity, data) => {
       if (f.type === ft.lov) {
         const fv = v.id;
         if (fv) {
-          d += f.id + "_id: " + fv + " ";
+          d += `${f.id}_id: ${fv} `;
         }
       } else if (f.type === ft.date) {
-        d += f.id + ':"' + dateTZ(v) + '" ';
+        d += `${f.id}:"${dateTZ(v)}" `;
       } else {
         d += `${f.id}:"${v}" `;
       }
@@ -190,7 +190,7 @@ export const qMany = (entity, options) => {
 };
 
 export const qChart = (m, fieldId) => {
-  const qName = "getChart_" + m.qid + "_" + fieldId;
+  const qName = `getChart_${m.qid}_${fieldId}`;
   const f = m.fieldsH[fieldId];
   if (!f) {
     return "";
@@ -327,16 +327,13 @@ export const qInsertOne = (entity, data) => {
   }`;
 };
 
-export const qLov = (entity, fieldId) => {
+export const qObjectSearch = (entity, search) => {
   const m = getModel(entity);
-  const f = m.fieldsH[fieldId];
-  let q = "";
-  if (f.object) {
-    const m1 = getModel(f.object);
-    q += `${m1.qid}(limit:100) {id ${m1.titleField}} `;
-  } // else {
-  // f.lovIcon
-  // }
-  return q;
+  const qSearch = search ? `where: {name: {_ilike: "%${search}%"}}` : "";
+  let textColumn = "name";
+  if (m.titleField !== textColumn) {
+    textColumn += ":" + m.titleField;
+  }
+  return `query { lov: ${m.qid}(${qSearch}, limit:100) {id ${textColumn}} }`;
 };
 //#endregion

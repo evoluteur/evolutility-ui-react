@@ -14,7 +14,7 @@ const percent = (value, total) =>
   `${parseInt((10000 * value) / total, 10) / 100}%`;
 
 const ChartTable = ({ entity, field, sortTable, data, showTotal }) => {
-  const sLink = "../../" + entity + "/list?" + field.id + "_id=";
+  const sLink = `../../${entity}/list?${field.id}_id=`;
   const makeLink = (d) => {
     let param = "" + (d.id || d.label);
     param = param === "null" ? "null" : "eq." + param;

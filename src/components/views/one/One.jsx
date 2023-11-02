@@ -110,7 +110,6 @@ const One = () => {
     } else if (isNew) {
       const defaults = getDefaultData(model);
       setAllData(defaults);
-      // TODO: get LOVs ?
       setIsLoading(false);
     }
 
@@ -178,7 +177,7 @@ const One = () => {
               toast.success(toastMsg);
               setAllData(response.data);
               if (!intId) {
-                navigate("/" + entity + "/edit/" + newId);
+                navigate(`/${entity}/edit/${newId}`);
               }
             }
           });
@@ -199,7 +198,7 @@ const One = () => {
   };
 
   return (
-    <div className={"evol-one model_" + entity}>
+    <div className={`evol-one model_${entity}`}>
       <PageTitle
         id={id}
         entity={entity}

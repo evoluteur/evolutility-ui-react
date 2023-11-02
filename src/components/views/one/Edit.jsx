@@ -60,12 +60,11 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
     onFieldChange(fid, v);
   };
 
-  const ep = `/${entity}/`;
   const cbs = {
     change: fieldChange,
     // dropFile: uploadFileOne,
   };
-  const linkBrowse = isNew ? ep + "list" : ep + "browse" + (id ? "/" + id : "");
+  const linkBrowse = `/${entity}/${isNew ? "list" : "browse/" + id}`;
   const fnField = (f) => {
     if (f) {
       // if (f.type === ft.lov && !f.list) {
@@ -97,7 +96,7 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
     return null;
   };
 
-  const panelActions = (
+  const panelActionButtons = (
     <div className="form-buttons noprint">
       <Button type="default" label={i18n_actions.cancel} url={linkBrowse} />
       <Button
@@ -145,7 +144,7 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
               </Panel>
             );
           })}
-        {panelActions}
+        {panelActionButtons}
         <Timestamps data={data} />
       </div>
     </div>

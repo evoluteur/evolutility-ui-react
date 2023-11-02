@@ -61,7 +61,7 @@ const Overview = () => {
 
     const mIcon = m.icon;
     const iconPath = "/pix/" + mIcon;
-    const urlBegin = "../" + entity + "/";
+    const urlBegin = `../${entity}/`;
     const viewLink = (v) => (
       <Link key={v.id} to={urlBegin + v.id}>
         <Icon name={v.icon} theme="light" />
@@ -69,7 +69,7 @@ const Overview = () => {
       </Link>
     );
     const activityLink = ({ id, title }) => (
-      <Link key={id} to={urlBegin + "browse/" + id}>
+      <Link key={id} to={`${urlBegin}browse/${id}`}>
         <img src={iconPath} alt="" />
         {title}
       </Link>
