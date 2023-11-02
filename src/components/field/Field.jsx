@@ -7,18 +7,19 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import Datepicker from "react-datepicker";
 import Dropzone from "react-dropzone";
 import classnames from "classnames";
+import { isObject } from "underscore";
 // import MultiSelect from "@khanacademy/react-multi-select";
 import { fieldTypes as ft } from "../../utils/dico";
-import { fieldValue, image, nullOrUndefined } from "../../utils/format";
+import { nullOrUndefined } from "../../utils/format";
 import { i18n_actions } from "../../i18n/i18n";
 import config from "../../config";
 import FieldLabel from "./FieldLabel";
 import Button from "../widgets/Button/Button";
 import Typeahead from "./Typeahead";
+import fieldElemReadOnly from "./fieldElemReadOnly";
 
 import "./Field.scss";
 import "react-datepicker/dist/react-datepicker.css";
@@ -26,35 +27,11 @@ import "react-datepicker/dist/react-datepicker.css";
 // #region ---------------- Helpers ----------------
 const { filesUrl } = config;
 
-const isObject = (obj) => typeof obj === "object" && obj !== null;
-
-const emHeight = (f) => {
-  let fh = parseInt(f.height || 2, 10);
-  if (fh < 2) {
-    fh = 2;
-  }
-  return Math.trunc(fh * 1.6);
-};
-
-const createMarkup = (d) => ({
-  __html: d
-    ? d.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br/>")
-    : "",
-});
-
 const createOption = (id, text) => (
   <option key={id} value={`${id}`}>
     {text}
   </option>
 );
-
-const itemInList = (id, list) => {
-  const tag = list.find((item) => item.id === id);
-  if (tag) {
-    return tag.text;
-  }
-  return "N/A";
-};
 
 const document = (d, path) => {
   if (nullOrUndefined(d)) {
@@ -71,12 +48,10 @@ const document = (d, path) => {
 const Field = ({
   fieldDef,
   callbacks,
-  // data,
   label,
   readOnly,
   icon,
   value,
-  valueId,
   invalid,
   message,
 }) => {
@@ -299,59 +274,6 @@ const Field = ({
     );
   };
 
-  const fieldElemReadOnly = (f, d, d_id) => {
-    // - return the formatted field value
-    let fw;
-
-    if (f.type === ft.textml) {
-      const height = `${emHeight(f)}em`;
-      return (
-        <div
-          className="disabled evo-rdonly scroll-y"
-          style={{ height }}
-          dangerouslySetInnerHTML={createMarkup(d)}
-        />
-      );
-    }
-    if (f.type === ft.image && d) {
-      fw = image(filesUrl + d);
-    } else if (f.type === ft.doc) {
-      fw = document(d, filesUrl);
-    } else if (f.type === ft.lov) {
-      if (f.object) {
-        fw = (
-          <Link to={`/${f.object}/browse/${d?.id}`}>{fieldValue(f, d)}</Link>
-        );
-      } else if (f.lovIcon && icon) {
-        fw = (
-          <span>
-            <img src={`/pix/${icon}`} className="lov-icon" alt="" />
-            {fieldValue(f, d)}
-            {d?.name}
-          </span>
-        );
-      } else {
-        fw = fieldValue(f, d);
-      }
-    } else if (f.type === ft.list) {
-      if (f.list) {
-        fw = (
-          <div key={`${f.id}_list`} className="list-tags">
-            {(d || []).map((itemid) => (
-              <div key={itemid}>{itemInList(itemid, f.list)}</div>
-            ))}
-          </div>
-        );
-      } else {
-        fw = fieldValue(f, d);
-      }
-    } else if (f.type === ft.json) {
-      fw = <pre>{isObject(d) ? JSON.stringify(d, null, 2) : d || ""}</pre>;
-    } else {
-      fw = fieldValue(f, d);
-    }
-    return <div className="disabled evo-rdonly">{fw}</div>;
-  };
   const f = fieldDef || { type: ft.text };
   const fReadOnly = readOnly || f.readOnly;
   const cbs = callbacks || {};
@@ -363,11 +285,7 @@ const Field = ({
       style={{ width: `${f.width || 100}%` }}
     >
       <FieldLabel label={fLabel} field={f} readOnly={fReadOnly} />
-
-      {fReadOnly
-        ? fieldElemReadOnly(f, value, valueId || value?.id)
-        : fieldElem(f, value, cbs)}
-
+      {fReadOnly ? fieldElemReadOnly(f, value, icon) : fieldElem(f, value, cbs)}
       {invalid && message && <div className="evo-fld-invalid">{message}</div>}
     </div>
   );
@@ -385,8 +303,6 @@ Field.propTypes = {
   }),
   /** Field value (object or scalar values depending on field type) */
   value: PropTypes.any,
-  // data: PropTypes.any,
-  valueId: PropTypes.any,
   /** Field label (override label in fieldDef) */
   label: PropTypes.string,
   /** Field readOnly (override readOnly in fieldDef) */
@@ -398,9 +314,7 @@ Field.propTypes = {
 };
 
 Field.defaultProps = {
-  // data: null,
   value: null,
-  valueId: null,
   label: null,
   readOnly: null,
   icon: null,
