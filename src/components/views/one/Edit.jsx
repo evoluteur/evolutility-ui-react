@@ -39,15 +39,22 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
   };
 
   const fieldChange = (evt, obj) => {
-    // exception for Select
     const fid = evt.target ? evt.target.id : obj.name;
     const f = model.fieldsH[fid];
-    let v = evt.target ? evt.target.value : { id: evt.value, name: evt.label };
+    let v;
     if (f.type === ft.bool) {
       v = evt.target.checked;
+    } else if (f.type === ft.lov) {
+      if (f.object) {
+        v = { id: evt.value, name: evt.label };
+      } else {
+        v = { id: evt.target.value };
+      }
+    } else {
+      v = evt.target.value;
     }
     if (invalids && invalids[fid]) {
-      const fValidation = validateField(f, data[fid]);
+      const fValidation = validateField(f, v);
       if (!fValidation) {
         let newInvalids = { ...invalids };
         delete newInvalids[fid];
@@ -67,18 +74,6 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
   const linkBrowse = `/${entity}/${isNew ? "list" : "browse/" + id}`;
   const fnField = (f) => {
     if (f) {
-      // if (f.type === ft.lov && !f.list) {
-      //   // - fetch list values
-      //   // TODO: dynamically get the LOV
-      //   // this.getLOV(f.id);
-      //   const dId = data[f.id];
-      //   const dLabel = data[f.id + "_txt"];
-      //   // TODO: too hacky, really modify model?
-      //   f.list = [
-      //     { id: dId, text: dLabel },
-      //     { id: 0, text: " - Dynamic LOVs is no implemented yet -" },
-      //   ];
-      // }
       const invalidMsg = invalids ? invalids[f.id] : null;
       return (
         <Field

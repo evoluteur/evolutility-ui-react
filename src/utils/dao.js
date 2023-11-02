@@ -13,6 +13,7 @@ import {
   qUpdateOne,
   qInsertOne,
   qMany,
+  qObjectSearch,
 } from "./gqlQueries.js";
 import { decimalString } from "./format.js";
 import config from "../config.js";
@@ -197,8 +198,15 @@ export const updateOne = (entity, id, data) => {
 // export const uploadOne = (entity, id, field, data) => notImplementedYet();
 
 // get list of values for field
-export const getLov = (entity, fieldId) => {
-  console.log(entity, fieldId);
+export const getObjectSearch = (entity, fieldId, search) => {
+  return fetch(apiPath, gqlOptions(qObjectSearch(entity, fieldId, search)))
+    .then(toJSON)
+    .then((resp) => {
+      if (resp.errors) {
+        return [{ id: -1, name: "Error in search" }];
+      }
+      return resp.data.lov;
+    });
 };
 
 // get a collection of sub-items (details for master)
@@ -211,7 +219,7 @@ const daoGraphQL = {
   deleteOne,
   updateOne,
   // uploadOne,
-  getLov,
+  getObjectSearch,
 
   getMany,
   getStats,

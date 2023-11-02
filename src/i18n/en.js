@@ -44,6 +44,7 @@ export const i18n_actions = {
   // saveAdd: 'Save and Add Another',
   ok: "OK",
   cancel: "Cancel",
+  search: "Search...",
 
   // --- navigation/pagination ---
   prev: "Previous",

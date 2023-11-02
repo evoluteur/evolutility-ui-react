@@ -5,7 +5,6 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2023 Olivier Giulieri
 
-// import React, { useState } from "react";
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -15,10 +14,11 @@ import classnames from "classnames";
 // import MultiSelect from "@khanacademy/react-multi-select";
 import { fieldTypes as ft } from "../../utils/dico";
 import { fieldValue, image, nullOrUndefined } from "../../utils/format";
-import { i18n_actions, i18n_msg } from "../../i18n/i18n";
+import { i18n_actions } from "../../i18n/i18n";
 import config from "../../config";
 import FieldLabel from "./FieldLabel";
 import Button from "../widgets/Button/Button";
+import Typeahead from "./Typeahead";
 
 import "./Field.scss";
 import "react-datepicker/dist/react-datepicker.css";
@@ -156,18 +156,17 @@ const Field = ({
       );
     }
     if (f.type === ft.lov) {
-      // if (isObject(d)) {
-      //   // for GraphQL
-      //   d = d.id;
-      // }
+      if (f.object) {
+        return <Typeahead entity={f.object} props={usualProps} value={d} />;
+      }
       const opts = f.list
         ? f.list.map((item) => createOption(item.id, item.text))
         : [
-            createOption(`${f.id}-loading`, i18n_msg.loading),
             createOption(d?.id, d?.name),
+            createOption(-1, "Error: list not found"),
           ];
       return (
-        <select {...usualProps} value={d.id || ""}>
+        <select {...usualProps} value={d?.id || ""}>
           <option />
           {opts}
         </select>
@@ -318,10 +317,11 @@ const Field = ({
       fw = image(filesUrl + d);
     } else if (f.type === ft.doc) {
       fw = document(d, filesUrl);
-      // {f.country_icon && d.country_icon ? <img src={d.country_icon}/> : null}
     } else if (f.type === ft.lov) {
       if (f.object) {
-        fw = <Link to={`/${f.object}/browse/${d_id}`}>{fieldValue(f, d)}</Link>;
+        fw = (
+          <Link to={`/${f.object}/browse/${d?.id}`}>{fieldValue(f, d)}</Link>
+        );
       } else if (f.lovIcon && icon) {
         fw = (
           <span>
@@ -365,7 +365,7 @@ const Field = ({
       <FieldLabel label={fLabel} field={f} readOnly={fReadOnly} />
 
       {fReadOnly
-        ? fieldElemReadOnly(f, value, valueId)
+        ? fieldElemReadOnly(f, value, valueId || value?.id)
         : fieldElem(f, value, cbs)}
 
       {invalid && message && <div className="evo-fld-invalid">{message}</div>}
