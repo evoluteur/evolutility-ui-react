@@ -175,13 +175,7 @@ const Stats = () => {
   }
   return (
     <>
-      <PageTitle
-        entity={entity}
-        title={title}
-        model={model}
-        cardinality="n"
-        view="stats"
-      />
+      <PageTitle entity={entity} title={title} view="stats" />
       {body}
     </>
   );

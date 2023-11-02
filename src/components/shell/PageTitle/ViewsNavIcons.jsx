@@ -1,64 +1,57 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Icon from "react-crud-icons";
 import { queryUrl } from "../../../utils/url";
+import { views } from "../../../utils/dicoViews";
 
-const iconH = {
-  n: {
-    list: { id: "list", icon: "list", label: "List" },
-    cards: { id: "cards", icon: "cards", label: "Cards" },
-    charts: { id: "charts", icon: "dashboard", label: "Dashboard" },
-    stats: { id: "stats", icon: "stats", label: "Stats" },
-    overview: { id: "overview", icon: "stats", label: "Overview" },
-  },
-  1: {
-    edit: { id: "edit", icon: "edit", label: "Edit" },
-    browse: { id: "browse", icon: "browse", label: "Browse" },
-    // 'json': {id: 'json',  icon: 'json', label: 'JSON', option: true},
-  },
-  0: {
-    activity: { id: "activity", icon: "history", label: "Activity" },
-  },
-};
-
-const getIcons = (cardinality, model) => {
-  const iconsMap = iconH[cardinality];
-  if (cardinality === "1") {
-    return [iconsMap.edit, iconsMap.browse];
-  }
-  const cardiIcons = [iconsMap.list, iconsMap.cards];
-  if (model) {
-    if (!model.noCharts) {
-      cardiIcons.push(iconsMap.charts);
-    }
-    if (!model.noStats) {
-      cardiIcons.push(iconsMap.stats);
-    }
-  }
-  return cardiIcons;
-};
-
-const ViewsNavIcons = (mid, cardinality, id, view, model) => {
-  if (cardinality === "0") {
+const ViewsNavIcons = ({ id, view, entity }) => {
+  let iconViews = [];
+  if (view === "overview") {
     return null;
   }
-  if (cardinality === "1" && (!id || id === "0")) {
-    return null;
+  if (view === "edit" || view === "browse") {
+    if (!id || id === "0") {
+      return null;
+    } else {
+      iconViews = [views.edit, views.browse];
+    }
   }
+  if (view === "stats" || view === "charts") {
+    iconViews = [views.charts, views.stats];
+  }
+  if (view === "list" || view === "cards") {
+    iconViews = [views.list, views.cards];
+  }
+
   const urlFrag = (id ? "/" + id : "") + queryUrl();
   const iconLink = (ico) => (
     <Link
       key={ico.id}
-      to={`/${mid}/${ico.id}${urlFrag}`}
+      to={`/${entity}/${ico.id}${urlFrag}`}
       className={view === ico.id ? "active" : ico.id}
     >
-      <Icon name={ico.icon} tooltip={ico.label} theme="light" />
+      <Icon name={ico.icon || ico.id} tooltip={ico.label} theme="light" />
     </Link>
   );
 
-  return (
-    <div className="hIcons">{getIcons(cardinality, model)?.map(iconLink)}</div>
-  );
+  return <div className="title-icons">{iconViews?.map(iconLink)}</div>;
+};
+
+ViewsNavIcons.propTypes = {
+  /** Model id */
+  entity: PropTypes.string.isRequired,
+  /** Record id */
+  id: PropTypes.string,
+  /** Active view */
+  view: PropTypes.string,
+};
+
+ViewsNavIcons.defaultProps = {
+  view: null,
+  count: null,
+  comments: null,
+  text: null,
 };
 
 export default ViewsNavIcons;

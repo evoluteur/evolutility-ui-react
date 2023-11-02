@@ -8,14 +8,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
-
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import Icon from "react-crud-icons";
-
 import { capitalize } from "../../../utils/format";
 import dao from "../../../utils/dao";
-import views from "../../../utils/dicoViews";
 import { i18n_msg, i18n_actions } from "../../../i18n/i18n";
 import { getModel } from "../../../utils/moMa";
 import Button from "../../widgets/Button/Button";
@@ -31,26 +28,26 @@ const menuItems = {
     n: "1",
     readonly: false,
   },
-  export: { id: "export", label: i18n_actions.export1, icon: "export", n: "x" },
-  save: {
-    id: "save",
-    label: i18n_actions.save,
-    icon: "save",
-    n: "1",
-    readonly: false,
-  },
-  views,
+  // export: { id: "export", label: i18n_actions.export1, icon: "export", n: "x" },
+  // save: {
+  //   id: "save",
+  //   label: i18n_actions.save,
+  //   icon: "save",
+  //   n: "1",
+  //   readonly: false,
+  // },
+  // views,
 };
 
+const newEntity = (m) => i18n_actions.newEntity.replace("{0}", m.name);
 const isFunction = (x) => typeof x === "function";
 
-const Toolbar = ({ entity, id, view }) => {
+const Toolbar = ({ entity, id }) => {
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
 
+  const m = getModel(entity);
   const navigate = useNavigate();
-  const ep = `/${entity}/`;
   const isNew = id === "0" || id === 0;
-  const actions = [];
 
   const confirmDelete = () => {
     setDeleteConfirmation(true);
@@ -61,9 +58,7 @@ const Toolbar = ({ entity, id, view }) => {
   };
 
   const deleteOne = () => {
-    const m = getModel(entity);
-
-    if (entity && id && m) {
+    if (id && m) {
       dao
         .deleteOne(entity, parseInt(id, 10)) // TODO: move parseInt higher
         .then((response) => {
@@ -74,17 +69,12 @@ const Toolbar = ({ entity, id, view }) => {
             toast.success(
               i18n_actions.deleted.replace("{0}", capitalize(m.name))
             );
-            navigate("/" + entity + "/list");
+            navigate(`/${entity}/list`);
           }
         })
         .catch(() => {
           const errorMsg = "Couldn't delete record.";
           toast.error(errorMsg);
-          // this.setState({
-          //   error: {
-          //     message: errorMsg,
-          //   },
-          // });
         });
     }
     closeModal();
@@ -96,16 +86,23 @@ const Toolbar = ({ entity, id, view }) => {
         <Icon name={menu.icon} tooltip={menu.label} theme="dark" />{" "}
       </span>
     ) : (
-      <Link key={menu.icon} to={ep + menu.id + "/" + idOrFun + urlQuery}>
+      <Link key={menu.icon} to={`/${entity}/${menu.id}/${idOrFun}${urlQuery}`}>
         <Icon name={menu.icon} tooltip={menu.label} theme="dark" />{" "}
       </Link>
     );
 
+  const actionIcons = [];
+  if (!m.readOnly) {
+    actionIcons.push(
+      <Link to={`/${entity}/edit/0`} key="new">
+        <Icon name="add" tooltip={newEntity(m)} theme="dark" />
+      </Link>
+    );
+  }
   if (id && !isNew) {
-    actions.push(buttonLink(menuItems.del, confirmDelete));
+    actionIcons.push(buttonLink(menuItems.del, confirmDelete));
   }
 
-  const m = getModel(entity);
   if (m) {
     const item = document.getElementById("itemTitle");
     const itemName = item ? item.innerHTML : "";
@@ -162,11 +159,13 @@ const Toolbar = ({ entity, id, view }) => {
     );
 
     return (
-      <div className="evo-toolbar" role="toolbar">
-        <div className="evo-nav-pills">{actions}</div>
-        <div className="clearfix" />
-        {delModal}
-      </div>
+      actionIcons.length && (
+        <div className="evo-toolbar" role="toolbar">
+          <div className="evo-nav-pills">{actionIcons}</div>
+          <div className="clearfix" />
+          {delModal}
+        </div>
+      )
     );
   }
 

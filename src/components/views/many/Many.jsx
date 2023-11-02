@@ -208,9 +208,7 @@ const Many = () => {
       <PageTitle
         entity={entity}
         title={title}
-        model={model}
         count={fullCount}
-        cardinality="n"
         view={view}
         text={pageSummary}
       />

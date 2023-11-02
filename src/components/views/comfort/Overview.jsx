@@ -6,7 +6,7 @@ import config from "../../../config";
 import { getModel } from "../../../utils/moMa";
 import { getActivity } from "../../../utils/activity";
 import { fieldInCharts } from "../../../utils/dico";
-import { viewsMany } from "../../../utils/dicoViews";
+import { views } from "../../../utils/dicoViews";
 import { capitalize } from "../../../utils/format";
 import { lcWrite, lcRead } from "../../../utils/localStorage";
 import { i18n_activity } from "../../../i18n/i18n";
@@ -78,12 +78,12 @@ const Overview = () => {
     const actions = (
       <div className="ovw-actions">
         <div>
-          {viewLink(viewsMany.list)}
-          {viewLink(viewsMany.cards)}
+          {viewLink(views.list)}
+          {viewLink(views.cards)}
         </div>
         <div>
-          {!m.noCharts && viewLink(viewsMany.charts)}
-          {!m.noStats && viewLink(viewsMany.stats)}
+          {!m.noCharts && viewLink(views.charts)}
+          {!m.noStats && viewLink(views.stats)}
         </div>
 
         <div>
@@ -103,7 +103,7 @@ const Overview = () => {
         <div className="cols-2">
           {withActivity && (
             <div className="ovw-hist panel">
-              <h4>{viewLink(viewsMany.activity)}</h4>
+              <h4>{viewLink(views.activity)}</h4>
               <span>
                 {i18n_activity.mostViewed.replace("{0}", m.namePlural)}:
               </span>
@@ -145,11 +145,8 @@ const Overview = () => {
       <div className="evol-overview">
         <PageTitle
           entity={entity}
-          model={m}
           title={capitalize(m.namePlural) + " Overview"}
-          count={null}
-          cardinality="n"
-          view="summary"
+          view="overview"
         />
         {body}
       </div>

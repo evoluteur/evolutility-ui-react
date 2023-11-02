@@ -19,7 +19,7 @@
       font-weight: normal;
     }
   }
-  .hIcons {
+  .title-icons {
     position: absolute;
     top: 0;
     right: 0;
@@ -51,7 +51,7 @@
   }
 
   @media (max-width: $media-small) {
-    .hIcons {
+    .title-icons {
       display: none !important;
     }
     .page-title {

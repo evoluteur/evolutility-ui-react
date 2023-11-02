@@ -2,7 +2,7 @@ import config from "../config";
 import { i18n_actions } from "../i18n/i18n";
 
 const { withActivity } = config;
-export const viewsOne = {
+export const views = {
   browse: {
     id: "browse",
     label: i18n_actions.browse,
@@ -15,9 +15,6 @@ export const viewsOne = {
     icon: "edit",
     n: "1",
   },
-};
-
-export const viewsMany = {
   list: { id: "list", label: i18n_actions.list, icon: "list", n: "n" },
   cards: { id: "cards", label: i18n_actions.cards, icon: "cards", n: "n" },
   charts: {
@@ -34,23 +31,21 @@ export const viewsMany = {
     icon: "history",
     n: "n",
   },
+  // overview: { id: "overview", label: "Overview", icon: "home-circle", n: "n" },
 };
 
-export const views = { ...viewsOne, ...viewsMany };
-
-export const modelViewsMany = (model) => {
-  const vs = {
-    list: views.list,
-    cards: views.cards,
-  };
-  if (!model.noCharts) {
-    vs.charts = views.charts;
-  }
-  if (!model.noStats) {
-    vs.stats = views.stats;
-  }
-  if (withActivity && !model.noActivity) {
-    vs.activity = views.activity;
+export const modelViewsMany = (model, all) => {
+  const vs = [views.list, views.cards];
+  if (all) {
+    if (!model.noCharts) {
+      vs.push(views.charts);
+    }
+    if (!model.noStats) {
+      vs.push(views.stats);
+    }
+    if (withActivity && !model.noActivity) {
+      vs.push(views.activity);
+    }
   }
   return vs;
 };

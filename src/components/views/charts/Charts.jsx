@@ -96,14 +96,7 @@ const Charts = () => {
 
     return (
       <div className={`evol-charts model_${entity}`}>
-        <PageTitle
-          entity={entity}
-          model={m}
-          title={title}
-          count={null}
-          cardinality="n"
-          view="charts"
-        />
+        <PageTitle entity={entity} title={title} view="charts" />
         <div className={css}>{charts}</div>
       </div>
     );

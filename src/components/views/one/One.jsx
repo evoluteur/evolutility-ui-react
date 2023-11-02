@@ -203,9 +203,7 @@ const One = () => {
         id={id}
         entity={entity}
         title={title}
-        model={model}
         comments={data?.nb_comments}
-        cardinality="1"
         view={view}
       />
       {body()}

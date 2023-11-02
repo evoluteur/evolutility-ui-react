@@ -6,19 +6,8 @@ import { getSearchText } from "../../../utils/url";
 
 import "./PageTitle.scss";
 
-const PageTitle = ({
-  id,
-  view,
-  model,
-  title,
-  count,
-  comments,
-  entity,
-  cardinality,
-  text,
-}) => {
+const PageTitle = ({ entity, title, id, view, count, comments, text }) => {
   // TODO: make charts work w/ search & filters (and switch comment below)
-
   const search = view !== "charts" ? getSearchText() : null;
 
   if (comments) {
@@ -34,7 +23,9 @@ const PageTitle = ({
         {search && <Badge text={`Search "${search}"`} />}
         {text && <span className="h-txt">{text}</span>}
       </h1>
-      <div>{ViewsNavIcons(entity, cardinality, id, view, model)}</div>
+      <div>
+        <ViewsNavIcons id={id} view={view} entity={entity} />
+      </div>
     </div>
   );
 };
@@ -42,9 +33,12 @@ const PageTitle = ({
 export default PageTitle;
 
 PageTitle.propTypes = {
+  /** Model id */
+  entity: PropTypes.string.isRequired,
   /** Page title */
   title: PropTypes.string, //.isRequired,
-  model: PropTypes.object.isRequired,
+  /** Record id */
+  id: PropTypes.string,
   /** Active view */
   view: PropTypes.string,
   /** Number of records (for views "many") */
@@ -53,8 +47,6 @@ PageTitle.propTypes = {
   comments: PropTypes.number,
   /** Extra text beside the title */
   text: PropTypes.string,
-  /** Family of view ("0"=comfort, "1"=one, "n"=many) */
-  cardinality: PropTypes.oneOf(["0", "1", "n"]),
 };
 
 PageTitle.defaultProps = {

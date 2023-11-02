@@ -58,10 +58,7 @@ const Activity = () => {
     <div className="evol-activity">
       <PageTitle
         entity={entity}
-        model={m}
         title={capitalize(m.namePlural) + " Activity"}
-        count={null}
-        cardinality="0"
         view="activity"
       />
       {act?.lastViewed?.length > 0 && (
