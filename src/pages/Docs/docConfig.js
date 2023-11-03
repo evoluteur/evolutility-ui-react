@@ -10,6 +10,16 @@ const configOptions = [
     example: "",
   },
   {
+    name: "useCache",
+    description: "Enable/disable data caching.",
+    example: "true",
+  },
+  {
+    name: "cacheDuration",
+    description: "Cache duration in seconds.",
+    example: "120 (for 2 minutes)",
+  },
+  {
     name: "pageSize",
     description: "Page size in pagination.",
     example: "50",

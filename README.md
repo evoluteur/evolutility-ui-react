@@ -57,11 +57,13 @@ Configurations options are specified in the file [/src/config.js](https://github
 |------------|------------------|---------------------|
 | apiPath    | Path to GraphQL API. | "https://myapp.hasura.app/v1/graphql" |
 | adminSecret | Token for Hasura. | |
+| useCache   | Enable/disable data caching. | true |
+| cacheDuration | Cache duration in seconds. | 120 (for 2 minutes) |
 | filesUrl   | Path to upload files to. | "/pix/" |
 | pageSize   | Page size in pagination.  | 50 |
-| queryModels | Get models from JSON files or from the database through the API. |
-| withTimestamp | Tracks and shows timestamp for creation date and last update for every record. The DB tables need timestamp columns "u_date" and "c_date" for the feature to work. | true |
 | withActivity | Tracks and shows records activity (last visited and most visited). Currently implemented w/ the browser's localStorage, it will be moved to the server later. | true |
+| queryModels | Get models from JSON files or from the database through the API. (not implemented yet) |
+| withTimestamp | Tracks and shows timestamp for creation date and last update for every record. The DB tables need timestamp columns "u_date" and "c_date" for the feature to work. (partial implementation) | true |
 
 
 <a name="Views"></a>

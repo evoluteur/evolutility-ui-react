@@ -15,6 +15,7 @@ import {
   qMany,
   qObjectSearch,
 } from "./gqlQueries.js";
+import { setCache, getCache, clearCache } from "./cache";
 import { decimalString } from "../utils/format.js";
 import config from "../config.js";
 
@@ -22,6 +23,12 @@ const { apiPath } = config;
 
 //#region Helpers ----------------------------
 const toJSON = (r) => r.json();
+
+const makePromise = (response) => {
+  return new Promise((resolve) => {
+    resolve(response);
+  });
+};
 
 const cleanChartData = (e, data, fieldType) => {
   const m = getModel(e);
@@ -65,6 +72,11 @@ const cleanChartData = (e, data, fieldType) => {
 //#region Many ----------------------------
 
 export const getMany = (entity, options) => {
+  const cacheKey = entity + JSON.stringify(options);
+  const cacheData = getCache(cacheKey);
+  if (cacheData) {
+    return makePromise(cacheData);
+  }
   return fetch(apiPath, gqlOptions(qMany(entity, options)))
     .then(toJSON)
     .then((resp) => {
@@ -72,6 +84,7 @@ export const getMany = (entity, options) => {
         const data = resp.data.many;
         data._full_count = resp.data._full_count.aggregate.count;
         data._entity = entity;
+        setCache(cacheKey, data);
         return data;
       } else {
         return resp;
@@ -81,6 +94,11 @@ export const getMany = (entity, options) => {
 
 // get list of chartable values for field
 export const getChart = (entity, field) => {
+  const cacheKey = entity + "-chart-" + field;
+  const cacheData = getCache(cacheKey);
+  if (cacheData) {
+    return makePromise(cacheData);
+  }
   const m = getModel(entity);
   return fetch(apiPath, gqlOptions(qChart(m, field)))
     .then(toJSON)
@@ -89,6 +107,7 @@ export const getChart = (entity, field) => {
         const fieldType = m.fieldsH[field]?.type;
         let data = fieldType === "lov" ? resp.data.chart : resp.data;
         data = cleanChartData(m.id, data, fieldType);
+        setCache(cacheKey, data);
         return data;
       } else {
         return resp;
@@ -98,6 +117,11 @@ export const getChart = (entity, field) => {
 
 // get entity statistics
 export const getStats = (entity) => {
+  const cacheKey = entity + "-stats";
+  const cacheData = getCache(cacheKey);
+  if (cacheData) {
+    return makePromise(cacheData);
+  }
   const m = getModel(entity);
   return fetch(apiPath, gqlOptions(qStats(m)))
     .then(toJSON)
@@ -132,7 +156,9 @@ export const getStats = (entity) => {
           cleanData[fid] = df;
         });
         cleanData.count = oStats.count;
-        return { data: cleanData };
+        const statsData = { data: cleanData };
+        setCache(cacheKey, statsData);
+        return statsData;
       } else {
         return resp;
       }
@@ -160,7 +186,12 @@ export const getOne = (entity, id, nextOrPrevious) => {
 // delete an item
 export const deleteOne = (entity, id) => {
   const m = getModel(entity);
-  return fetch(apiPath, gqlOptions(qDelete(m.qid), { id })).then(toJSON);
+  return fetch(apiPath, gqlOptions(qDelete(m.qid), { id }))
+    .then(toJSON)
+    .then((resp) => {
+      clearCache(entity);
+      return resp;
+    });
 };
 
 // add an item
@@ -173,6 +204,7 @@ export const insertOne = (entity, data) => {
           resp.data.inserted && resp.data.inserted.returning.length
             ? resp.data.inserted.returning[0]
             : null;
+        clearCache(entity);
       }
       return resp;
     });
@@ -189,6 +221,7 @@ export const updateOne = (entity, id, data) => {
           resp.data.updated && resp.data.updated.returning.length
             ? resp.data.updated.returning[0]
             : null;
+        clearCache(entity);
       }
       return resp;
     });
