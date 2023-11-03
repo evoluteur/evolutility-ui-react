@@ -84,7 +84,7 @@ export const qFieldCol = (f) => {
     let displayFieldName;
     if (f.object) {
       const m1 = getModel(f.object);
-      displayFieldName = m1.fieldTitle || "name";
+      displayFieldName = m1.titleField || "name";
     } else {
       displayFieldName = f.lovColumn || "name";
     }
