@@ -12,13 +12,13 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 
-import List from "./List";
-import Cards from "./Cards";
-import PageTitle from "../../shell/PageTitle/PageTitle";
+import List from "./List/List";
+import Cards from "./Cards/Cards";
+import ViewHeader from "../ViewHeader/ViewHeader";
 import Pagination from "../../widgets/Pagination/Pagination";
 import Spinner from "../../widgets/Spinner/Spinner";
 import Alert from "../../widgets/Alert/Alert";
-import EmptyState from "./EmptyState";
+import EmptyState from "./shared/EmptyState";
 import { i18n_msg, i18n_errors } from "../../../i18n/i18n";
 import config from "../../../config";
 import url from "../../../utils/url";
@@ -201,7 +201,7 @@ const Many = () => {
 
   return (
     <div className={"evol-many model_" + entity}>
-      <PageTitle
+      <ViewHeader
         entity={entity}
         title={title}
         count={fullCount}

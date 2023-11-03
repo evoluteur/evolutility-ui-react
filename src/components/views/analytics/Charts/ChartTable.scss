@@ -1,0 +1,29 @@
+@import "../../../../variables";
+
+.chartTable {
+  padding: 0 10px;
+  height: 100%;
+  overflow-y: scroll;
+  .align-right {
+    text-align: right;
+  }
+  .table {
+    text-align: left;
+    th {
+      cursor: pointer;
+      &:nth-child(2) {
+        width: 90px;
+      }
+    }
+  }
+  .footer,
+  .footer:hover {
+    background-color: $bgcolor-header;
+  }
+}
+.chart-card.size-tiny .chartTable {
+  font-size: 0.8em;
+  padding: 5px 8px;
+  height: 230px;
+  overflow-y: scroll;
+}

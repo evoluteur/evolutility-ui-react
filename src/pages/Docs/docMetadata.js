@@ -507,7 +507,7 @@ export const viewDoc = {
       img: "many-charts.png",
       description:
         "Draws charts about the collection. Currently bars and pie charts are implemented, a list with count and percentages is also available. Only fields of type boolean, lov, integer, and decimal are presented.",
-      code: "/src/components/views/charts/Charts.jsx",
+      code: "/src/components/views/Charts/Charts.jsx",
       route: "/{entity}/charts",
     },
     {

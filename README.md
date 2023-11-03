@@ -92,7 +92,7 @@ Shows all fields for viewing (read only). Fields are grouped in panels.
 
 ![Browse](public/screenshots/one-browse.png)
 
-Code: [/src/components/views/one/Browse.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/one/Browse.jsx)
+Code: [/src/components/views/one/Browse/Browse.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/one/Browse/Browse.jsx)
 
 Route: "/{entity}/browse/{id}"
 
@@ -104,7 +104,7 @@ Fields are grouped in panels and tabs.
 
 ![Edit](public/screenshots/one-edit.png)
 
-Code: [/src/components/views/one/Edit.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/one/Edit.jsx)
+Code: [/src/components/views/one/Edit/Edit.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/one/Edit/Edit.jsx)
 
 Route: "/{entity}/edit/{id}"
 
@@ -120,7 +120,7 @@ Gives a tabular view of a collection.
 
 ![List](public/screenshots/many-list.png)
 
-Code: [/src/components/views/many/List.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/List.jsx)
+Code: [/src/components/views/many/List/List.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/List/List.jsx)
 
 Route: "/{entity}/list"
 
@@ -130,7 +130,7 @@ Shows records side by side as cards.
 
 ![Cards](public/screenshots/many-cards.png)
 
-Code: [/src/components/views/many/Cards.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/Cards.jsx)
+Code: [/src/components/views/many/Cards/Cards.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/Cards/Cards.jsx)
 
 Route: "/{entity}/cards"
 
@@ -140,7 +140,7 @@ Draws charts about the collection. Currently bars and pie charts are implemented
 
 ![Charts](public/screenshots/many-charts.png)
 
-Code: [/src/components/views/charts/Charts.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/charts/Charts.jsx)
+Code: [/src/components/views/analytics/Charts/Charts.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/analytics/Charts/Charts.jsx)
 
 Route: "/{entity}/charts"
 
@@ -152,7 +152,7 @@ Display last update, number of updates in the last week, and for numeric fields 
 
 ![Stats](public/screenshots/many-stats.png)
 
-Code: [/src/components/views/many/Stats.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/Stats.jsx)
+Code: [/src/components/views/analytics/Stats/Stats.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/analytics/Stats/Stats.jsx)
 
 Route: "/{entity}/stats"
 

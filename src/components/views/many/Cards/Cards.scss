@@ -1,0 +1,78 @@
+@import "../../../../variables";
+
+.evol-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: 100%;
+  > .panel {
+    flex-grow: 1;
+    position: relative;
+    width: 240px;
+    min-width: 240px;
+    padding: 10px 20px;
+    overflow: auto;
+    &:hover {
+      border-color: $color-border-hover;
+      .card-actions {
+        right: 0;
+      }
+    }
+    > div {
+      padding: 3px 0;
+      min-height: 30px;
+      > h4 {
+        margin: 0;
+        @include ellipsis();
+        min-height: 1.2em;
+        font-weight: bold;
+      }
+      > label {
+        width: $golden-ratio-small;
+        max-width: 120px;
+        @include ellipsis();
+        vertical-align: top;
+        font-weight: 300;
+      }
+      > div:not(.card-actions) {
+        display: inline-block;
+        padding-right: 5px;
+        width: $golden-ratio-big;
+        vertical-align: top;
+        > a {
+          display: inline-block;
+          @include ellipsis();
+          width: 100%;
+        }
+      }
+      > img {
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+.card-title {
+  margin-bottom: 20px;
+  .card-actions {
+    z-index: 50;
+    position: absolute;
+    top: 0;
+    right: -50px;
+    padding: 0 4px 4px 4px;
+    background-color: $bgcolor-background;
+    border: 1px solid $bgcolor-background;
+    border-left-color: $color-border;
+    border-bottom-color: $color-border;
+    border-bottom-left-radius: $radius;
+    transition: right $ease-time ease $delay-time;
+    @include icons-actions();
+    i {
+      margin: 5px 0 0 0;
+    }
+  }
+}
+.card-fld-center {
+  margin-top: 5px;
+  text-align: center;
+}

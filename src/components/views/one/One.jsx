@@ -6,10 +6,10 @@ import { toast } from "react-toastify";
 import { diffData } from "../../../utils/validation";
 import { logActivity } from "../../../utils/activity";
 
-import Edit from "./Edit";
-import Browse from "./Browse";
+import Edit from "./Edit/Edit";
+import Browse from "./Browse/Browse";
 
-import PageTitle from "../../shell/PageTitle/PageTitle";
+import ViewHeader from "../ViewHeader/ViewHeader";
 import Alert from "../../widgets/Alert/Alert";
 import Spinner from "../../widgets/Spinner/Spinner";
 import { i18n_actions, i18n_msg, i18n_errors } from "../../../i18n/i18n";
@@ -199,7 +199,7 @@ const One = () => {
 
   return (
     <div className={`evol-one model_${entity}`}>
-      <PageTitle
+      <ViewHeader
         id={id}
         entity={entity}
         title={title}

@@ -1,0 +1,26 @@
+@import "../../../../variables";
+
+.evol-activity {
+  > section > div {
+    display: flex;
+    > a {
+      min-width: 120px;
+      width: 220px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    > div {
+      display: inline-block;
+      margin-left: 20px;
+      color: silver;
+      &.visits {
+        color: grey;
+        min-width: 70px;
+      }
+    }
+  }
+  button {
+    margin: 10px 20px;
+  }
+}
