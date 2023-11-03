@@ -180,7 +180,7 @@ const Many = () => {
         />
       );
     }
-    if (isLoading) {
+    if (isLoading || data?._entity !== entity) {
       return <Spinner />;
     }
     if (error) {

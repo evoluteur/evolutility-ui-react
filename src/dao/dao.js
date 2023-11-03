@@ -71,6 +71,7 @@ export const getMany = (entity, options) => {
       if (resp.data && resp.data.many) {
         const data = resp.data.many;
         data._full_count = resp.data._full_count.aggregate.count;
+        data._entity = entity;
         return data;
       } else {
         return resp;
