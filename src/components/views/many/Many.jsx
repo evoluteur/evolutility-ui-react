@@ -57,24 +57,20 @@ const Many = () => {
   useEffect(() => {
     let done = false;
     setError(null);
-    const getData = (entity) => {
-      const query = url.parseQuery(search);
-      setIsLoading(true);
-      getMany(entity, query).then((response) => {
-        if (done) {
-          return;
-        }
-        if (response.errors) {
-          setError(response.errors[0]);
-        }
-        setFullCount(response._full_count);
-        setData(response.data || response);
-        setIsLoading(false);
-      });
-    };
+    setData(null);
+    setIsLoading(true);
     window.scrollTo(0, 0);
-    getData(entity);
-
+    getMany(entity, url.parseQuery(search)).then((response) => {
+      if (done) {
+        return;
+      }
+      if (response.errors) {
+        setError(response.errors[0]);
+      }
+      setFullCount(response._full_count);
+      setData(response);
+      setIsLoading(false);
+    });
     return () => {
       done = true;
     };
@@ -180,11 +176,11 @@ const Many = () => {
         />
       );
     }
-    if (isLoading || data?._entity !== entity) {
-      return <Spinner />;
-    }
     if (error) {
       return <Alert title={i18n_errors.serverError} message={error.message} />;
+    }
+    if (isLoading || data?._entity !== entity) {
+      return <Spinner />;
     }
     if (data.length === 0) {
       return <EmptyState model={model} />;
