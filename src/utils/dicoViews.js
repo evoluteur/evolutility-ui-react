@@ -34,14 +34,23 @@ export const views = {
   // overview: { id: "overview", label: "Overview", icon: "home-circle", n: "n" },
 };
 
+export const modelViewsAnalytics = (model) => {
+  const vs = [];
+  if (!model.noCharts) {
+    vs.push(views.charts);
+  }
+  if (!model.noStats) {
+    vs.push(views.stats);
+  }
+  return vs;
+};
+
 export const modelViewsMany = (model, all) => {
   const vs = [views.list, views.cards];
   if (all) {
-    if (!model.noCharts) {
-      vs.push(views.charts);
-    }
-    if (!model.noStats) {
-      vs.push(views.stats);
+    const va = modelViewsAnalytics(model);
+    if (va.length) {
+      vs.push(...va);
     }
     if (withActivity && !model.noActivity) {
       vs.push(views.activity);

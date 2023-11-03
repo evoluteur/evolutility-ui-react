@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Icon from "react-crud-icons";
 import { queryUrl } from "../../../utils/url";
-import { views } from "../../../utils/dicoViews";
+import { getModel } from "utils/moMa";
+import { views, modelViewsAnalytics } from "../../../utils/dicoViews";
 
 const ViewsNavIcons = ({ id, view, entity }) => {
   let iconViews = [];
@@ -17,7 +18,8 @@ const ViewsNavIcons = ({ id, view, entity }) => {
       iconViews = [views.edit, views.browse];
     }
   } else if (view === "stats" || view === "charts") {
-    iconViews = [views.charts, views.stats];
+    const model = getModel(entity);
+    iconViews = modelViewsAnalytics(model);
     // } else if (view === "list" || view === "cards") {
   } else {
     iconViews = [views.list, views.cards];
