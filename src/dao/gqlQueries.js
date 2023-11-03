@@ -79,14 +79,19 @@ const prepData = (entity, data) => {
 export const fullCount = (m) =>
   " _full_count: " + m.qid + "_aggregate { aggregate { count }}";
 
-export const qFieldCol = (f) =>
-  f.type === ft.lov
-    ? f.id +
-      " {id " +
-      (f.lovColumn || "name") +
-      (f.lovIcon ? " icon" : "") +
-      "} "
-    : f.id;
+export const qFieldCol = (f) => {
+  if (f.type === ft.lov) {
+    let displayFieldName;
+    if (f.object) {
+      const m1 = getModel(f.object);
+      displayFieldName = m1.fieldTitle || "name";
+    } else {
+      displayFieldName = f.lovColumn || "name";
+    }
+    return `${f.id} { id name:${displayFieldName} ${f.lovIcon ? "icon" : ""}}`;
+  }
+  return f.id;
+};
 
 export const qFields = (m) =>
   "id" + timestampFields + m.fields?.map(qFieldCol).join(" ");
@@ -329,11 +334,10 @@ export const qInsertOne = (entity, data) => {
 
 export const qObjectSearch = (entity, search) => {
   const m = getModel(entity);
-  const qSearch = search ? `where: {name: {_ilike: "%${search}%"}}` : "";
-  let textColumn = "name";
-  if (m.titleField !== textColumn) {
-    textColumn += ":" + m.titleField;
-  }
-  return `query { lov: ${m.qid}(${qSearch}, limit:100) {id ${textColumn}} }`;
+  const lookupField = m.titleField || "name";
+  const qSearch = search
+    ? `where: {${lookupField}: {_ilike: "%${search}%"}}`
+    : "";
+  return `query { lov: ${m.qid}(${qSearch}, limit:100) {id name:${lookupField}} }`;
 };
 //#endregion

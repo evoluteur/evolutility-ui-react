@@ -98,7 +98,7 @@ export const fieldValue = (f, d, abbr) => {
         {f.lovIcon && d?.icon && (
           <img id={d?.icon} src={"/pix/" + d?.icon} alt=""></img>
         )}
-        {d?.name || d?.text}
+        {d?.name}
       </span>
     );
   }
