@@ -1,5 +1,7 @@
 @import "../../../variables";
 
+$topbar-height: 50px;
+
 .TopBar {
   z-index: 101;
   position: fixed;
@@ -7,7 +9,7 @@
   top: 0;
   width: 100%;
   background-color: $almostblack-color;
-  height: 50px;
+  height: $topbar-height;
   padding: 20px;
   color: $almostwhite-color;
 

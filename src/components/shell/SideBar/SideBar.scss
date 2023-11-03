@@ -4,15 +4,16 @@ $bgcolor-menu-hover: #1e88e5;
 $nav-width: 190px;
 $nav-width-collapsed: 50px;
 $nav-trans-time: 0.1s;
+$topbar-height: 50px;
 
 .evo-sidebar {
   position: fixed;
   left: 0;
-  top: 0;
-  height: 100%;
+  top: $topbar-height;
+  height: calc(100% - $topbar-height);
   width: $nav-width;
   z-index: 5;
-  padding: 60px 0 5px 0;
+  padding: 10px 0 0;
   overflow: hidden;
   transition: width $nav-trans-time ease;
   color: white;
@@ -88,7 +89,6 @@ $nav-trans-time: 0.1s;
   }
 
   .sections-links {
-    margin-top: 30px;
     a {
       overflow: hidden;
       white-space: nowrap;
@@ -117,7 +117,7 @@ $nav-trans-time: 0.1s;
   flex: 1 0 auto;
   margin-left: $nav-width;
   padding: 10px 30px;
-  margin-top: 50px;
+  margin-top: $topbar-height;
   min-height: 90%;
   transition: margin-left $nav-trans-time ease;
 }
@@ -150,7 +150,7 @@ $nav-trans-time: 0.1s;
 
 .nav-toggle {
   position: absolute;
-  top: 50px;
+  top: 0;
   right: -2px;
   padding: 0;
   z-index: 10;
@@ -183,7 +183,7 @@ $nav-trans-time: 0.1s;
     }
   }
   > .page-content {
-    margin-left: 50px;
+    margin-left: $nav-width-collapsed;
   }
 }
 
