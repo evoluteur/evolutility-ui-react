@@ -223,13 +223,14 @@ export const qChart = (m, fieldId) => {
 };
 
 export const qStats = (m) => {
+  // This query is expensiv so it has the @cached directive
   const sag = {};
   const nulls = [];
   allStats.forEach((stat) => (sag[stat] = []));
   m.fields.forEach((f) => {
     let fid = f.id;
     if (fieldInStats(f)) {
-      if (f.type !== "money" && fieldIsNumber(f)) {
+      if (fieldIsNumber(f)) {
         // if (fieldIsNumber(f)) {
         // TODO: use decimal rather than money type to make it work for money fields
         fieldStatsFunctions(f)?.forEach((p) => sag[p].push(fid));
@@ -252,7 +253,7 @@ export const qStats = (m) => {
     nulls.push(qNulls);
   });
 
-  return `query getStats_${m.qid} {
+  return `query getStats_${m.qid} @cached {
       stats: ${m.qid}_aggregate { aggregate {
         ${allStats
           .map((p) => (sag[p].length ? p + " {" + sag[p].join(" ") + "}" : ""))

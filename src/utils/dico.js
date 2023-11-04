@@ -58,8 +58,7 @@ export const fieldIsText = (f) =>
 export const fieldId2Field = (fieldIds, fieldsH) =>
   fieldIds ? fieldIds.map((id) => fieldsH[id] || null) : null;
 
-export const fieldInStats = (f) =>
-  fieldIsNumeric(f) && !f.noStats && f.type !== ft.money;
+export const fieldInStats = (f) => fieldIsNumeric(f) && !f.noStats;
 
 export const allStats = ["avg", "stddev", "variance", "min", "max"];
 export const fieldStatsFunctions = (f) => {

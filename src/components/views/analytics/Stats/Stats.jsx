@@ -50,7 +50,11 @@ const statValue = (field, stat, value, pc) => {
         <span>{"(" + numString(pc) + "%)"}</span>
       </>
     );
-  } else if (stat === "min" || stat === "max") {
+  } else if (
+    stat === "min" ||
+    stat === "max" ||
+    (stat === "avg" && field.type === ft.money)
+  ) {
     return fieldValue(field, value, null);
   }
   return value;
@@ -69,7 +73,12 @@ const statsField = (d, f, total) => {
             {statValue(f, stat, d[stat], pc)}
           </div>
         ))}
-        {f.type === ft.lov && f.list && <div>{f.list?.length} list items </div>}
+        {f.type === ft.lov && f.list && (
+          <div>
+            <label>{i18n_stats.cardinality}</label>
+            {f.list?.length}
+          </div>
+        )}
       </div>
     </div>
   );
