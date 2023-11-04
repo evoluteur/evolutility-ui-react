@@ -37,6 +37,7 @@ export const i18n_actions = {
   filter: "Filter",
   // bScatter:'Scatter',
   charts: "Dashboard", // 'Charts',
+  overview: "Overview",
   // print: 'Print',
   stats: "Stats",
   activity: "Activity",

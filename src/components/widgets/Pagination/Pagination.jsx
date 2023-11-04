@@ -1,26 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import queryString from "query-string";
-import { useLocation } from "react-router-dom";
 import config from "../../../config";
 
 import "./Pagination.scss";
 
 const { pageSize } = config;
 
-const Pagination = ({ count, fullCount, onClick }) => {
-  const { search } = useLocation();
+const Pagination = ({ count, fullCount, pageIndex, onClick }) => {
   if (fullCount > pageSize) {
-    const query = search ? queryString.parse(search) : null;
-    let pIdx = query ? parseInt(query.page || "0", 10) : 0;
     let gapIdx = 0;
     const paginationBody = [];
 
-    if (fullCount > count && !(pIdx === 0 && count < pageSize)) {
+    if (fullCount > count && !(pageIndex === 0 && count < pageSize)) {
       const nbPages = Math.ceil(fullCount / pageSize);
-      const wPrev = pIdx > 0;
-      const wNext = nbPages > pIdx + 1;
-      const pId = pIdx + 1;
+      const wPrev = pageIndex > 0;
+      const wNext = nbPages > pageIndex + 1;
+      const pId = pageIndex + 1;
       const bPage = (id) => {
         paginationBody.push(
           <div
@@ -86,7 +81,11 @@ const Pagination = ({ count, fullCount, onClick }) => {
       );
     }
 
-    return <nav className="evo-pagination">{paginationBody}</nav>;
+    return (
+      <nav className="evo-pagination" data-testid="pagination">
+        {paginationBody}
+      </nav>
+    );
   }
   return null;
 };
@@ -95,7 +94,7 @@ export default Pagination;
 
 Pagination.propTypes = {
   /** Page index (default 0) */
-  pageIdx: PropTypes.number,
+  pageIndex: PropTypes.number,
   /** Number of records in the page */
   count: PropTypes.number.isRequired,
   /** Total number of records */
@@ -105,5 +104,5 @@ Pagination.propTypes = {
 };
 
 Pagination.defaultProps = {
-  pageIdx: 0,
+  pageIndex: 0,
 };

@@ -53,9 +53,9 @@ const statValue = (field, stat, value, pc) => {
   } else if (
     stat === "min" ||
     stat === "max" ||
-    (stat === "avg" && field.type === ft.money)
+    (field.type === ft.money && stat === "avg")
   ) {
-    return fieldValue(field, value, null);
+    return fieldValue(field, value);
   }
   return value;
 };

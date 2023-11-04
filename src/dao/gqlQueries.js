@@ -51,9 +51,9 @@ const prepData = (entity, data) => {
           d += `${f.id}_id: ${fv} `;
         }
       } else if (f.type === ft.date) {
-        d += `${f.id}:"${dateTZ(v)}" `;
+        d += `${f.id}: "${dateTZ(v)}" `;
       } else {
-        d += `${f.id}:"${v}" `;
+        d += `${f.id}: "${v}" `;
       }
     }
   });

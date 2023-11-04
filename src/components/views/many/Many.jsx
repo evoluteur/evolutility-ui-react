@@ -50,6 +50,12 @@ const Many = () => {
   const model = getModel(entity);
   const title = model?.title;
 
+  let pageIndex = 0;
+  if (fullCount > pageSize) {
+    const query = url.parseQuery(search);
+    pageIndex = parseInt(query?.page, 10) || 0;
+  }
+
   useEffect(() => {
     document.title = title;
   }, [title]);
@@ -79,7 +85,6 @@ const Many = () => {
   const onClickSort = (evt) => {
     const fid = evt.currentTarget.id,
       query = url.parseQuery(search) || {};
-
     let direc;
     if (sortField === fid) {
       direc = sortDirection === "asc" ? "desc" : "asc";
@@ -103,7 +108,7 @@ const Many = () => {
     let pageIdx;
 
     if (id === ">" || id === "<") {
-      pageIdx = query.page || 0;
+      pageIdx = parseInt(query.page, 10) || 0;
       if (id === "<") {
         pageIdx--;
       } else {
@@ -135,8 +140,7 @@ const Many = () => {
       } else {
         const query = url.parseQuery(search);
         if (query) {
-          const pageIdx = query.page || 0;
-          if (!pageIdx && pageSize > size) {
+          if (!pageIndex && pageSize > size) {
             return (
               i18n_msg.aToBOfC // - '{0} to {1} {2}' w/ 0=mSize, 1=totalSize, 2=namePlural'
                 .replace("{0}", size)
@@ -145,7 +149,7 @@ const Many = () => {
                 .replace("{2}", "")
             );
           }
-          const { start, end } = getRange(pageIdx, pageSize, totalSize);
+          const { start, end } = getRange(pageIndex, pageSize, totalSize);
           return i18n_msg.range // - '{0} to {1} of {2} {3}' w/ 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'
             .replace("{0}", start)
             .replace("{1}", end)
@@ -188,11 +192,12 @@ const Many = () => {
     return (
       <>
         {view === "list" ? <List {...viewProps} /> : <Cards {...viewProps} />}
-        {fullCount > 0 && (
+        {fullCount > pageSize && (
           <Pagination
             count={data.length}
             fullCount={fullCount || 0}
             onClick={clickPagination}
+            pageIndex={pageIndex}
           />
         )}
       </>

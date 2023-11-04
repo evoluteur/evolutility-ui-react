@@ -10,14 +10,12 @@
 
 - Make a JIRA style app to track evolutility development (and replace this list) or do it in GitHub.
 
-- add caching
 - Plug UI library? - thinking mantine or @adobe/react-spectrum...
 - search
 - filters
 - Add "comfort" models & views (saved filters, handpicked sets, customizable dashboards...)
 - Every field type can also be an array of values of that type
 - replace numeral and moment by Intl
-- evolutility-models generate list of relationships to create in hasura admin
 - Choice of UX pattern: Drawer / navigation / dual pane
 - translate in other languages (/src/i18n/XX.js)
 - Add checkboxes for multi-rows selection to the List and Cards views
@@ -45,7 +43,6 @@
 - pluggins for views ( w/ single-spa?) + make Stats & Charts pluggins
 - pluggins for FieldTypes
 - Add Kaggle style table view
-- routes overriding mechanism for custom build views
 - Use Yup for validation (maybe validation rules in json or keep the main ones in separate columns like now)
 - Adding tests
 - CI/CD pipelines on GitHub

@@ -1,15 +1,15 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-
 import Icon from "react-crud-icons";
 import logoEvol from "./evologo.gif";
-import { modelViewsMany } from "../../../utils/dicoViews";
+import { views, modelViewsMany } from "../../../utils/dicoViews";
 import { getModel } from "../../../utils/moMa";
 import ViewActions from "./ViewActions";
 import GitHubLink from "../GitHubLink";
 
 import "./TopBar.scss";
 
+const ovw = views.overview;
 const TopBar = () => {
   const loc = useLocation();
   const path = loc.pathname?.split("/");
@@ -30,7 +30,7 @@ const TopBar = () => {
         <div className="evo-toolbar views">
           <ul className="navlinks evo-nav-pills pull-left">
             <Link to={entityLink}>
-              <Icon name="home-circle" tooltip="Overview" theme="dark" />
+              <Icon name={ovw.icon} tooltip={ovw.label} theme="dark" />
             </Link>
             {modelViewsMany(model, true).map((v) => (
               <Link to={entityLink + v.id} key={v.id}>

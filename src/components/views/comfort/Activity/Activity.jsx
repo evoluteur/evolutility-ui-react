@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { getActivity, clearActivity } from "../../../../utils/activity";
 import ViewHeader from "../../ViewHeader/ViewHeader";
 import { getModel } from "../../../../utils/moMa";
-import { i18n_activity } from "../../../../i18n/i18n";
+import { i18n_activity as i18n } from "../../../../i18n/i18n";
 import { capitalize } from "../../../../utils/format";
 import Button from "../../../widgets/Button/Button";
 
@@ -12,13 +12,13 @@ import "./Activity.scss";
 
 const visitsCount = (n) => {
   if (n === 1) {
-    return i18n_activity.views1;
+    return i18n.views1;
   }
   if (n === 0) {
     // should never happen
-    return i18n_activity.views1;
+    return i18n.views1;
   }
-  return i18n_activity.viewsN?.replace("{0}", n);
+  return i18n.viewsN?.replace("{0}", n);
 };
 
 const Activity = () => {
@@ -63,7 +63,7 @@ const Activity = () => {
       />
       {act?.lastViewed?.length > 0 && (
         <section>
-          {i18n_activity.activitySince
+          {i18n.activitySince
             ?.replace("{0}", m.namePlural)
             .replace("{1}", act.firstActivityDate)}
           <Button
@@ -74,11 +74,11 @@ const Activity = () => {
         </section>
       )}
       {act?.mostViewed.length > 0 &&
-        activityList(i18n_activity.mostViewed, act?.mostViewed)}
+        activityList(i18n.mostViewed, act?.mostViewed)}
       {act?.lastViewed.length ? (
-        activityList(i18n_activity.lastViewed, act?.lastViewed)
+        activityList(i18n.lastViewed, act?.lastViewed)
       ) : (
-        <div>{i18n_activity.noActivity}</div>
+        <div>{i18n.noActivity}</div>
       )}
     </div>
   );

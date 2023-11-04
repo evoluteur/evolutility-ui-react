@@ -9,7 +9,7 @@ import { fieldInCharts } from "../../../../utils/dico";
 import { views } from "../../../../utils/dicoViews";
 import { capitalize } from "../../../../utils/format";
 import { lcWrite, lcRead } from "../../../../utils/localStorage";
-import { i18n_activity } from "../../../../i18n/i18n";
+import { i18n_activity, i18n_actions } from "../../../../i18n/i18n";
 import ViewHeader from "../../ViewHeader/ViewHeader";
 import Chart from "../../analytics/Charts/Chart";
 import ModelLinks from "../ModelLinks";
@@ -26,11 +26,10 @@ const Overview = () => {
   }, [entity]);
 
   const m = getModel(entity);
-  const data = getActivity(entity);
+  const chartFields = m?.fields.filter(fieldInCharts);
 
   const lcKey = `${entity}-overview-chart`;
   const lcChartField = lcRead(lcKey);
-  const chartFields = m?.fields.filter(fieldInCharts);
 
   const [chartField, setChartField] = useState(
     !!m && lcChartField
@@ -40,6 +39,7 @@ const Overview = () => {
       : ""
   );
 
+  const activityData = getActivity(entity);
   const msg = `Sorry but "${entity}" is not a valid object type.`;
   if (m === null) {
     return (
@@ -54,13 +54,12 @@ const Overview = () => {
     const chartFieldChanged = (evt) => {
       const e = evt.currentTarget;
       const fid = e.children[e.selectedIndex]?.id;
-
       lcWrite(lcKey, fid);
       setChartField(m.fieldsH[fid]);
     };
 
     const mIcon = m.icon;
-    const iconPath = "/pix/" + mIcon;
+    const iconPath = `/pix/${mIcon}`;
     const urlBegin = `../${entity}/`;
     const viewLink = (v) => (
       <Link key={v.id} to={urlBegin + v.id}>
@@ -108,14 +107,14 @@ const Overview = () => {
                 {i18n_activity.mostViewed.replace("{0}", m.namePlural)}:
               </span>
               <div className="ovw-hist-list">
-                {data?.mostViewed?.map(activityLink)}
+                {activityData?.mostViewed?.map(activityLink)}
               </div>
               <br />
               <span>
                 {i18n_activity.lastViewed.replace("{0}", m.namePlural)}:
               </span>
               <div className="ovw-hist-list">
-                {data?.lastViewed?.slice(0, 10).map(activityLink)}
+                {activityData?.lastViewed?.slice(0, 10).map(activityLink)}
               </div>
             </div>
           )}
@@ -147,7 +146,7 @@ const Overview = () => {
       <div className="evol-overview">
         <ViewHeader
           entity={entity}
-          title={capitalize(m.namePlural) + " Overview"}
+          title={capitalize(m.namePlural) + " " + i18n_actions.overview}
           view="overview"
         />
         {body}
