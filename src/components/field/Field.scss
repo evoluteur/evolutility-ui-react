@@ -159,6 +159,8 @@ div > .checkbox {
   right: 1em;
 }
 
+.rc-tooltip,
 .rc-tooltip-inner {
   max-width: 180px;
+  border-radius: 10px !important;
 }

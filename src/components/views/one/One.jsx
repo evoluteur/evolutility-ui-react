@@ -70,7 +70,9 @@ const One = () => {
   const { entity, view, id } = useParams();
   const model = getModel(entity);
   const isNew = id === "0";
-  const title = error ? "Error" : recordTitle(model, data, isNew);
+  const title = error
+    ? capitalize(model?.name)
+    : recordTitle(model, data, isNew);
 
   const setAllData = (data) => {
     setData(data);
@@ -131,10 +133,6 @@ const One = () => {
       data: view === "edit" ? userData : data,
     };
 
-    if (data === null) {
-      // TODO: 404
-      return "NO DATA - refactor bug to be fixed";
-    }
     if (view === "edit") {
       const cbFieldChange = (fid, value) => {
         const newData = structuredClone(userData || {});

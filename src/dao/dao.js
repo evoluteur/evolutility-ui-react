@@ -174,11 +174,14 @@ export const getOne = (entity, id, nextOrPrevious) => {
     return fetch(apiPath, gqlOptions(qOne(entity, nextOrPrevious), { id }))
       .then(toJSON)
       .then((resp) => {
-        if (resp.data && resp.data.one !== null) {
-          return resp.data.one;
-        } else {
+        if (resp.error) {
           return resp;
+        } else if (resp.data?.one === null) {
+          return {
+            errors: [{ message: "No record found for id=" + id + "." }],
+          };
         }
+        return resp.data?.one;
       });
   }
 };

@@ -260,7 +260,6 @@ const Field = ({
       inputType = "number";
       usualProps.step = f.type === ft.int ? "1" : "0.1";
     } else {
-      // if(f.type==='email'){
       inputType = "text";
     }
 
@@ -276,16 +275,16 @@ const Field = ({
 
   const f = fieldDef || { type: ft.text };
   const fReadOnly = readOnly || f.readOnly;
-  const cbs = callbacks || {};
-  const fLabel = label || f.label;
 
   return (
     <div
       className={classnames("evol-fld", { "has-error": invalid })}
       style={{ width: `${f.width || 100}%` }}
     >
-      <FieldLabel label={fLabel} field={f} readOnly={fReadOnly} />
-      {fReadOnly ? fieldElemReadOnly(f, value, icon) : fieldElem(f, value, cbs)}
+      <FieldLabel label={label || f.label} field={f} readOnly={fReadOnly} />
+      {fReadOnly
+        ? fieldElemReadOnly(f, value, icon)
+        : fieldElem(f, value, callbacks)}
       {invalid && message && <div className="evo-fld-invalid">{message}</div>}
     </div>
   );

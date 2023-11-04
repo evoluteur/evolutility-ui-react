@@ -131,7 +131,11 @@ const Overview = () => {
               />
               <select onChange={chartFieldChanged} className="form-control">
                 {chartFields?.map((f) => (
-                  <option key={f.id} id={f.id}>
+                  <option
+                    key={f.id}
+                    id={f.id}
+                    selected={f.id === chartField?.id}
+                  >
                     {f.label}
                   </option>
                 ))}
