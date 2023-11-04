@@ -119,24 +119,26 @@ const Overview = () => {
               </div>
             </div>
           )}
-          <div className="ovw-chart">
-            <Chart
-              entity={entity}
-              field={chartField}
-              title=""
-              chartType="pie"
-              size="small"
-              canExpand={false}
-              className="panel"
-            />
-            <select onChange={chartFieldChanged} className="form-control">
-              {chartFields?.map((f) => (
-                <option key={f.id} id={f.id}>
-                  {f.label}
-                </option>
-              ))}
-            </select>
-          </div>
+          {!m.noCharts && (
+            <div className="ovw-chart">
+              <Chart
+                entity={entity}
+                field={chartField}
+                title=""
+                chartType="pie"
+                size="small"
+                canExpand={false}
+                className="panel"
+              />
+              <select onChange={chartFieldChanged} className="form-control">
+                {chartFields?.map((f) => (
+                  <option key={f.id} id={f.id}>
+                    {f.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
         </div>
       </div>
     );
