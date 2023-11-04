@@ -40,10 +40,6 @@
       }
     }
   }
-  .nobr {
-    max-width: 500px;
-    @include ellipsis();
-  }
   .td-check {
     padding-top: 0;
     padding-bottom: 0;

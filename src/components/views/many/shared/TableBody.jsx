@@ -8,7 +8,6 @@ const TableBody = ({ fields, data, iconPath, link }) => {
   ) : null;
 
   const tableCell = (d, f, idx) => {
-    const isLov = f.type === ft.lov;
     const value = d[f.id];
     if (idx === 0) {
       // - First column is a link
@@ -41,49 +40,18 @@ const TableBody = ({ fields, data, iconPath, link }) => {
         </td>
       );
     }
-    if (isLov) {
-      // if (f.lovIcon) {
-      //   const icon = value?.icon;
-      //   if (icon) {
-      //     return (
-      //       <td key={f.id}>
-      //         <div className="nobr">
-      //           <img src={`/pix/${icon}`} className="lov-icon" alt="" />
-      //           {fieldValue(f, value, true)}
-      //         </div>
-      //       </td>
-      //     );
-      //   } else {
-      //     const fv = d[f.id];
-      //     return (
-      //       <td key={f.id}>
-      //         <div className="nobr">
-      //           {fv && fv?.icon && <img src={"/pix/" + fv?.icon} alt="" />}
-      //           {fv?.name}
-      //         </div>
-      //       </td>
-      //     );
-      //   }
-      //   return fieldValue(f, value, true);
-      // } else {
-      return (
-        <td key={f.id}>
-          <div className="nobr">{fieldValue(f, value, true)}</div>
-        </td>
-      );
-      // }
-      // } else if (f.type === ft.list) {
-      //   const lovMap = getLovMap(f);
-      //   return (
-      //     <td key={f.id}>
-      //       <div className="list-tags">
-      //         {(value || []).map((v) => (
-      //           <div key={v}>{lovMap[v] || "N/A"}</div>
-      //         ))}
-      //       </div>
-      //     </td>
-      //   );
-    }
+    // } else if (f.type === ft.list) {
+    //   const lovMap = getLovMap(f);
+    //   return (
+    //     <td key={f.id}>
+    //       <div className="list-tags">
+    //         {(value || []).map((v) => (
+    //           <div key={v}>{lovMap[v] || "N/A"}</div>
+    //         ))}
+    //       </div>
+    //     </td>
+    //   );
+    // }
     let css;
     if (fieldIsNumber(f)) {
       css = "align-right";
