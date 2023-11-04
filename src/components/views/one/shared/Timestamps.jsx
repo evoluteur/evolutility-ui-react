@@ -15,11 +15,11 @@ const Timestamps = ({ data }) => {
     <div className="timestamps">
       <div>
         <label>{i18n_activity.updated}</label>
-        {datetimeString(data.u_date)}
+        {datetimeString(data.updated_at)}
       </div>
       <div>
         <label>{i18n_activity.created}</label>
-        {datetimeString(data.c_date)}
+        {datetimeString(data.created_at)}
       </div>
     </div>
   );

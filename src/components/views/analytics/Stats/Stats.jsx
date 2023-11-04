@@ -144,20 +144,21 @@ const Stats = () => {
             )}
             {withTimestamp && (
               <label className="evo-label">
-                {data.u_date_week_count || "No"} {i18n_stats.weekUpdates}
+                {data.updated_at_week_count || "No"} {i18n_stats.weekUpdates}
               </label>
             )}
           </div>
           {withTimestamp &&
-            (data.u_date_max !== "N/A" || data.c_date_min !== "N/A") && (
+            (data.updated_at_max !== "N/A" ||
+              data.created_at_min !== "N/A") && (
               <div>
                 <div className="stat-field">
                   <span>{i18n_stats.lastUpdate}:</span>
-                  {data.u_date_max}
+                  {data.updated_at_max}
                 </div>
                 <div className="stat-field">
                   <span>{i18n_stats.firstInsert}:</span>
-                  {data.c_date_min}
+                  {data.created_at_min}
                 </div>
               </div>
             )}

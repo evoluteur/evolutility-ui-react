@@ -23,7 +23,7 @@ import { dateTZ } from "../utils/format";
 
 const ft = fieldTypes;
 
-const timestampFields = config.withTimestamp ? " u_date c_date " : " ";
+const timestampFields = config.withTimestamp ? " updated_at created_at " : " ";
 
 const reqHeader = {
   "Content-Type": "application/json",

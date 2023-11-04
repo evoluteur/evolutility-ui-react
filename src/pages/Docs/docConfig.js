@@ -38,7 +38,7 @@ const configOptions = [
   {
     name: "withTimestamp",
     description:
-      'Tracks and shows timestamp for creation date and last update for every record. The DB tables need timestamp columns "u_date" and "c_date" for the feature to work.',
+      'Tracks and shows timestamp for creation date and last update for every record. The DB tables need timestamp columns "updated_at" and "created_at" for the feature to work.',
     example: "true",
   },
 ];

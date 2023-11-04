@@ -21,9 +21,9 @@ const config = {
   useCache: true,
   cacheDuration: 180, // time in seconds
 
-  // - Timestamp columns u_date and c_date w/ date of record creation and last update
+  // - Timestamp columns updated_at and created_at w/ date of record creation and last update
   withTimestamp: true,
-  // - "WhoIs" columns u_uid and c_uid w/ userid of creator and last modifier
+  // - "WhoIs" columns updated_by and created_by w/ userid of creator and last modifier
   withWhoIs: false,
   // - Track last viewed record names in localstorage
   withActivity: false,

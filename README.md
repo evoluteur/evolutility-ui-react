@@ -63,7 +63,7 @@ Configurations options are specified in the file [/src/config.js](https://github
 | pageSize   | Page size in pagination.  | 50 |
 | withActivity | Tracks and shows records activity (last visited and most visited). Currently implemented w/ the browser's localStorage, it will be moved to the server later. | true |
 | queryModels | Get models from JSON files or from the database through the API. (not implemented yet) |
-| withTimestamp | Tracks and shows timestamp for creation date and last update for every record. The DB tables need timestamp columns "u_date" and "c_date" for the feature to work. (partial implementation) | true |
+| withTimestamp | Tracks and shows timestamp for creation date and last update for every record. The DB tables need timestamp columns "updated_at" and "created_at" for the feature to work. (partial implementation) | true |
 
 
 <a name="Views"></a>
