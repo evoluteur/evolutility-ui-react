@@ -1,5 +1,4 @@
 const sortById = (a, b) => a.id.localeCompare(b.id);
-const filterOnlyUI = (p) => p.ui;
 
 export const objectMeta = {
   id: 1,
@@ -21,12 +20,12 @@ export const objectMeta = {
       ui: true,
       db: false,
     },
-    // {
-    //   id: "world",
-    //   description: 'Application the object belongs to (e.g. "organizer").',
-    //   ui: true,
-    //   db: true,
-    // },
+    {
+      id: "world",
+      description: 'Application the object belongs to (e.g. "organizer").',
+      ui: true,
+      db: true,
+    },
     {
       id: "name",
       description: 'Object name (singular) (e.g.: "contact").',
@@ -79,12 +78,12 @@ export const objectMeta = {
       ui: true,
       db: true,
     },
-    {
-      id: "table",
-      description:
-        'Driving database table name (there are secondary tables for fields of type "lov").',
-      db: true,
-    },
+    // {
+    //   id: "table",
+    //   description:
+    //     'Driving database table name (there are secondary tables for fields of type "lov").',
+    //   db: true,
+    // },
     // {
     //   id: "pKey",
     //   description:
@@ -105,9 +104,7 @@ export const objectMeta = {
       ui: true,
       db: false,
     },
-  ]
-    .filter(filterOnlyUI)
-    .sort(sortById),
+  ].sort(sortById),
 };
 
 export const fieldMeta = {
@@ -216,6 +213,7 @@ export const fieldMeta = {
     {
       id: "inSearch",
       description: "Determine if the field is used in text searches.",
+      ui: true,
       db: true,
     },
     {
@@ -272,43 +270,43 @@ export const fieldMeta = {
       ui: true,
       db: true,
     },
-    {
-      id: "column",
-      description: "Database column name for the field.",
-      db: true,
-    },
+    // {
+    //   id: "column",
+    //   description: "Database column name for the field.",
+    //   db: true,
+    // },
     {
       id: "pii",
       description: "Flag for personally identifiable information.",
       ui: true,
       db: true,
     },
-    {
-      id: "lovTable",
-      description:
-        'Table to join to for field value (only for fields of "lov" type).',
-      ui: false,
-      db: true,
-    },
-    {
-      id: "lovColumn",
-      description:
-        'Column name (in the lovTable) for field value (only for fields of "lov" type).',
-      ui: false,
-      db: true,
-    },
+    // {
+    //   id: "lovTable",
+    //   description:
+    //     'Table to join to for field value (only for fields of "lov" type).',
+    //   ui: false,
+    //   db: true,
+    // },
+    // {
+    //   id: "lovColumn",
+    //   description:
+    //     'Column name (in the lovTable) for field value (only for fields of "lov" type).',
+    //   ui: false,
+    //   db: true,
+    // },
     {
       id: "lovIcon",
       description: 'LOV items have icons (only for fields of "lov" type).',
       ui: true,
       db: true,
     },
-    {
-      id: "deleteTrigger",
-      description:
-        "Deleting records in the lovTable will trigger a cascade delete (this property is only used for creating the database).",
-      db: true,
-    },
+    // {
+    //   id: "deleteTrigger",
+    //   description:
+    //     "Deleting records in the lovTable will trigger a cascade delete (this property is only used for creating the database).",
+    //   db: true,
+    // },
     {
       id: "object",
       description:
@@ -317,14 +315,22 @@ export const fieldMeta = {
       db: true,
     },
     {
+      id: "chartObject",
+      description:
+        'Optional overide for object name in charts (only for "lov" fields).',
+    },
+    {
+      id: "aggregate",
+      description:
+        'Optional overide for aggregation name in charts (only for "lov" fields).',
+    },
+    {
       id: "unique",
       description: "Requires value to be unique (not implemented yet).",
       ui: true,
       db: true,
     },
-  ]
-    .filter(filterOnlyUI)
-    .sort(sortById),
+  ].sort(sortById),
 };
 
 export const collecMeta = {
@@ -336,7 +342,8 @@ export const collecMeta = {
   props: [
     {
       id: "id",
-      description: "Unique key for the collection.",
+      description:
+        "Unique key for the collection, it is the name of the Array relationahip to the sub-collection in Hasura.",
       ui: true,
       db: true,
     },
@@ -346,20 +353,19 @@ export const collecMeta = {
       ui: true,
       db: false,
     },
-    {
-      id: "table",
-      description: "Table to query for the details list.",
-      db: true,
-    },
-    {
-      id: "column",
-      description: "Column in the details table to match against object's id. ",
-      db: true,
-    },
+    // {
+    //   id: "table",
+    //   description: "Table to query for the details list.",
+    //   db: true,
+    // },
+    // {
+    //   id: "column",
+    //   description: "Column in the details table to match against object's id. ",
+    //   db: true,
+    // },
     {
       id: "object",
-      description:
-        'Model id for the object to link to. When specified, "column" and "table" can be omitted.',
+      description: "Model id for the object in the sub-collection.",
       ui: true,
       db: true,
     },
@@ -377,7 +383,8 @@ export const collecMeta = {
     },
     {
       id: "orderBy",
-      description: 'SQL where clause, e.g. { orderBy="id" }.',
+      description: "id of the field to order by.",
+      ui: true,
       db: true,
     },
     {
@@ -400,9 +407,7 @@ export const collecMeta = {
       ui: true,
       db: false,
     },
-  ]
-    .filter(filterOnlyUI)
-    .sort(sortById),
+  ].sort(sortById),
 };
 
 export const fieldGroupMeta = {
@@ -456,9 +461,7 @@ export const fieldGroupMeta = {
       ui: true,
       db: false,
     },
-  ]
-    .filter(filterOnlyUI)
-    .sort(sortById),
+  ].sort(sortById),
 };
 
 export const viewDoc = {

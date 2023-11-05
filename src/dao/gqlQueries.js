@@ -160,7 +160,7 @@ export const qMany = (entity, options) => {
     }
 
     const qParam = gOpts.length ? "(" + gOpts.join(", ") + ")" : "";
-    return `query getMany_${m.qid} {
+    return `query getMany_${m.id} {
         many: ${m.qid}${qParam}{
             ${qFields(m)}
         }
@@ -170,17 +170,38 @@ export const qMany = (entity, options) => {
   return null;
 };
 
+const aggregateName = (qid, f) => {
+  if (f.aggregate) {
+    return f.aggregate;
+  } else {
+    // rely on convention w/ array relationship names (using plural) given in Hasura
+    const r = qid.endsWith("s") ? qid : qid + "s";
+    return r + "_aggregate";
+  }
+};
+
 export const qChart = (m, fieldId) => {
-  const qName = `getChart_${m.qid}_${fieldId}`;
+  // TODO: charts for number fields (buckets)
   const f = m.fieldsH[fieldId];
   if (!f) {
     return "";
   }
-  // TODO: number fields
+  const qName = `getChart_${m.id}_${fieldId}`;
   if (f.type === ft.lov) {
-    return `query ${qName} { chart: ${m.qid}_${fieldId}(limit: 20) {
-        id name
-        ${m.qid}_aggregate {
+    let relatedObject;
+    let displayFieldId = "name";
+    if (f.chartObject) {
+      relatedObject = f.chartObject;
+    } else if (f.object) {
+      const mro = getModel(f.object);
+      relatedObject = mro.qid;
+      displayFieldId = mro.titleField || "name";
+    } else {
+      relatedObject = `${m.qid}_${fieldId}`;
+    }
+    return `query ${qName} { chart: ${relatedObject}(limit: 20) {
+        id name:${displayFieldId}
+        aggregate: ${aggregateName(m.qid, f)} {
           aggregate {count}
         }
       }
@@ -217,7 +238,7 @@ export const qStats = (m) => {
       }
     }
     if (f.type === "lov" || f.type === "list") {
-      fid = fid + "_id";
+      fid += "_id";
     }
     let qNulls = ` nulls_${f.id}: ${m.qid}_aggregate(where:`;
     if (fieldIsText(f)) {
@@ -229,7 +250,7 @@ export const qStats = (m) => {
     nulls.push(qNulls);
   });
 
-  return `query getStats_${m.qid} @cached {
+  return `query getStats_${m.id} @cached {
       stats: ${m.qid}_aggregate { aggregate {
         ${allStats
           .map((p) => (sag[p].length ? p + " {" + sag[p].join(" ") + "}" : ""))
@@ -270,7 +291,7 @@ const nextPrev = {
 export const qOne = (entity, nextOrPrevious) => {
   const m = getModel(entity);
   if (m) {
-    let q = "query getOne($id:Int!) { one: " + m.qid;
+    let q = `query getOne_${m.id}($id:Int!) { one: ` + m.qid;
     if (nextOrPrevious) {
       q += `(where: {id: {${nextPrev[nextOrPrevious].op}: $id}}, order_by: {id: ${nextPrev[nextOrPrevious].order}}, limit: 1)`;
     } else {
@@ -303,7 +324,7 @@ export const qUpdateOne = (entity, data) => {
 export const qInsertOne = (entity, data) => {
   const m = getModel(entity);
   return `mutation {
-    inserted: insert_${m.qid} (
+    inserted: insert_${m.qid}(
       objects: [${prepData(entity, data)}]
     ) {returning {${qFields(m)}}}
   }`;
@@ -315,6 +336,6 @@ export const qObjectSearch = (entity, search) => {
   const qSearch = search
     ? `where: {${lookupField}: {_ilike: "%${search}%"}}`
     : "";
-  return `query { lov: ${m.qid}(${qSearch}, limit:100) {id name:${lookupField}} }`;
+  return `query lookup_${entity}_${lookupField}{ lov: ${m.qid}(${qSearch}, limit:100) {id name:${lookupField}} }`;
 };
 //#endregion

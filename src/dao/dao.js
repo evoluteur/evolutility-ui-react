@@ -30,14 +30,11 @@ const makePromise = (response) => {
   });
 };
 
-const cleanChartData = (e, data, fieldType) => {
-  const m = getModel(e);
-  const mid = m.qid;
+const cleanChartData = (data, fieldType) => {
   const d2 = [];
-
   if (fieldType === ft.lov) {
     data?.forEach((row) => {
-      const c = row[mid + "_aggregate"]?.aggregate?.count;
+      const c = row.aggregate?.aggregate?.count;
       if (c > 0) {
         if (row.name !== "_name") {
           d2.push({
@@ -106,7 +103,7 @@ export const getChart = (entity, field) => {
       if (resp.data) {
         const fieldType = m.fieldsH[field]?.type;
         let data = fieldType === "lov" ? resp.data.chart : resp.data;
-        data = cleanChartData(m.id, data, fieldType);
+        data = cleanChartData(data, fieldType);
         setCache(cacheKey, data);
         return data;
       } else {

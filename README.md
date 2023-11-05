@@ -204,6 +204,8 @@ Objects have fields.
 | regExp       | Regular expression used to validate the field value.     |
 | lovIcon      | Set to True to include icon with LOV items.    |
 | object       | Model id for the object to link to (only for fields of "lov" type).     |
+| chartObject | Optional overide for object name in charts (only for "lov" fields). |
+| aggregate | Optional overide for aggregation name in charts (only for "lov" fields). |
 | inMany       | Determines if the field is present (by default) in lists of records. |
 | inSearch     | Determine if the field is used in text searches.  |
 | height       | For fields of type "textmultiline", number of lines used in the field (in Browse and Edit views). |
