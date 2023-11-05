@@ -121,15 +121,6 @@ const Field = ({
     if (f.type === ft.textml) {
       return <textarea {...usualProps} rows={f.height || 4} value={d || ""} />;
     }
-    if (f.type === ft.json) {
-      return (
-        <textarea
-          {...usualProps}
-          rows={f.height || 4}
-          value={isObject(d) ? JSON.stringify(d, null, 2) : d || ""}
-        />
-      );
-    }
     if (f.type === ft.lov) {
       if (f.object) {
         return <Typeahead entity={f.object} props={usualProps} value={d} />;
@@ -192,6 +183,15 @@ const Field = ({
     if (f.type === ft.time) {
       return <input {...usualProps} type="time" value={d || ""} />;
     }
+    if (f.type === ft.json) {
+      return (
+        <textarea
+          {...usualProps}
+          rows={f.height || 4}
+          value={isObject(d) ? JSON.stringify(d, null, 2) : d || ""}
+        />
+      );
+    }
     if (f.type === ft.image || f.type === ft.doc) {
       let pix = null;
       if (d) {
@@ -243,24 +243,23 @@ const Field = ({
     }
     if (f.type === ft.email || f.type === ft.money) {
       const symbol = f.type === ft.email ? "@" : "$";
+      const fType = f.type === ft.money ? "number" : "text";
       return (
         <div className="input-group">
           <span className="input-group-addon">{symbol}</span>
           <input
             {...usualProps}
-            type="text"
+            type={fType}
             value={d || ""}
             onChange={cbs.change}
           />
         </div>
       );
     }
-    let inputType;
+    let inputType = "text";
     if (f.type === ft.int || f.type === ft.dec) {
       inputType = "number";
       usualProps.step = f.type === ft.int ? "1" : "0.1";
-    } else {
-      inputType = "text";
     }
 
     return (

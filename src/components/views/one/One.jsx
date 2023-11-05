@@ -50,7 +50,7 @@ const recordTitle = (m, data, isNew) => {
         // title = m.titleFunction(data, m);
         title = m.titleFunction(Object.assign({}, data));
       } else {
-        title = data[m.titleField];
+        title = data[m.titleField] || "N/A";
       }
     }
     return title;
@@ -70,9 +70,10 @@ const One = () => {
   const { entity, view, id } = useParams();
   const model = getModel(entity);
   const isNew = id === "0";
-  const title = error
-    ? capitalize(model?.name)
-    : recordTitle(model, data, isNew);
+  const title =
+    error || isLoading
+      ? capitalize(model?.name)
+      : recordTitle(model, data, isNew);
 
   const setAllData = (data) => {
     setData(data);
