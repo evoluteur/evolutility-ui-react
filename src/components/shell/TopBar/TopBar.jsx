@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import Icon from "react-crud-icons";
-import logoEvol from "./evologo.gif";
+import logoEvol from "./evologo.png";
 import { views, modelViewsMany } from "../../../utils/dicoViews";
 import { getModel } from "../../../utils/moMa";
 import ViewActions from "./ViewActions";
