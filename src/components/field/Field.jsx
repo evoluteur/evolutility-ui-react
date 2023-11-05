@@ -123,7 +123,7 @@ const Field = ({
     }
     if (f.type === ft.lov) {
       if (f.object) {
-        return <Typeahead entity={f.object} props={usualProps} value={d} />;
+        return <Typeahead {...usualProps} entity={f.object} value={d} />;
       }
       const opts = f.list
         ? f.list.map((item) => createOption(item.id, item.text))

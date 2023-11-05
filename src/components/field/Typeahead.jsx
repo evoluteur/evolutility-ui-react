@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
 import { getObjectSearch } from "../../dao/dao";
 import { i18n_actions } from "../../i18n/i18n";
@@ -7,13 +8,13 @@ import "./Typeahead.scss";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
 
-const Typeahead = ({ entity, props, value }) => {
+const Typeahead = ({ entity, id, value, placeHolder, onChange }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState(value ? [value] : []);
 
   useEffect(() => {
     setOptions(value ? [value] : []);
-  }, [value, props]);
+  }, [value]);
 
   const handleSearch = (search) => {
     setIsLoading(true);
@@ -27,7 +28,7 @@ const Typeahead = ({ entity, props, value }) => {
   const handleChange = (values) => {
     const v = values?.[0];
     if (v) {
-      props.onChange({ value: v.id, label: v.name }, { name: props.id });
+      onChange({ value: v.id, label: v.name }, { name: id });
     }
   };
 
@@ -36,13 +37,13 @@ const Typeahead = ({ entity, props, value }) => {
   return (
     <AsyncTypeahead
       filterBy={filterBy}
-      id={props.id}
+      id={id}
       isLoading={isLoading}
       labelKey="name"
       minLength={2}
       onSearch={handleSearch}
       options={options}
-      placeholder={i18n_actions.search}
+      placeholder={placeHolder}
       renderMenuItemChildren={(option) => option.name}
       onChange={handleChange}
       selected={value ? [value] : []}
@@ -51,3 +52,25 @@ const Typeahead = ({ entity, props, value }) => {
 };
 
 export default Typeahead;
+
+Typeahead.propTypes = {
+  /** Model id */
+  entity: PropTypes.string.isRequired,
+  /** Element id */
+  id: PropTypes.string,
+  /** Callback functions  */
+  onChange: PropTypes.func.isRequired,
+  /** Field value (object w/ id and name props) */
+  value: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
+  /** Placeholder text */
+  placeHolder: PropTypes.string,
+};
+
+Typeahead.defaultProps = {
+  id: "tphd",
+  value: null,
+  placeHolder: i18n_actions.search,
+};
