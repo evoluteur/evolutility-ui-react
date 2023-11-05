@@ -61,21 +61,6 @@ const prepData = (entity, data) => {
   return d;
 };
 
-// export const runQuery = (q, cb, cbError) => {
-//   return fetch(config.apiPath, gqlOptions(q))
-//     .then((r) => r.json())
-//     .then((data) => {
-//       if (data.errors) {
-//         console.error(data.errors);
-//         if (cbError) {
-//           cbError(data.errors);
-//         }
-//       } else {
-//         cb(data);
-//       }
-//     });
-// };
-
 export const fullCount = (m) =>
   " _full_count: " + m.qid + "_aggregate { aggregate { count }}";
 
@@ -96,16 +81,6 @@ export const qFieldCol = (f) => {
 export const qFields = (m) =>
   "id" + timestampFields + m.fields?.map(qFieldCol).join(" ");
 
-// const qOrderBy = (m, sortField, sortDirection = "asc") => {
-//   const mft = m.fieldsH[sortField];
-//   let orderBy = ", order_by:{" + sortField + ":";
-//   if (mft && mft.type === ft.lov) {
-//     orderBy += "{name:" + sortDirection + "}}";
-//   } else {
-//     orderBy += sortDirection + "}";
-//   }
-//   return orderBy;
-// };
 //#endregion
 
 //#region Many ----------------------------
@@ -154,7 +129,10 @@ export const qMany = (entity, options) => {
           }
         }
       });
-      if (gOptsSearch.length) {
+      const nbConds = gOptsSearch.length;
+      if (nbConds === 1) {
+        gOpts.push("where:{" + gOptsSearch[0] + "}");
+      } else if (nbConds > 1) {
         gOpts.push("where:{_or:[" + gOptsSearch.join(",") + "]}");
       }
     }
@@ -176,8 +154,6 @@ export const qMany = (entity, options) => {
       oDirection = oDirection ? oDirection : "asc";
       if (f.type === ft.lov) {
         gOpts.push(`order_by:{${f.id}:{name:${oDirection}}}`);
-        // TODO:
-        // gOpts.push(`order_by:{${f.id}:{{f.lovColumn || 'name'}:${oDirection}}}`);
       } else {
         gOpts.push(`order_by:{${f.id}:${oDirection}}`);
       }
