@@ -507,19 +507,19 @@ export const viewDoc = {
       id: "charts",
       icon: "dashboard",
       name: "Dashboard",
-      img: "many-charts.png",
+      img: "analytics-charts.png",
       description:
         "Draws charts about the collection. Currently bars and pie charts are implemented, a list with count and percentages is also available. Only fields of type boolean, lov, integer, and decimal are presented.",
-      code: "/src/components/views/Charts/Charts.jsx",
+      code: "/src/components/views/analytics/Charts/Charts.jsx",
       route: "/{entity}/charts",
     },
     {
       id: "stats",
       name: "Stats",
-      img: "many-stats.png",
+      img: "analytics-stats.png",
       description:
         'Display average, standard deviation, variance, min, max for numeric fields (similar to Kaggle.com); charts for "lov" and "boolean" fields.', //   If auditing, it will also show the last update, and the number of updates in the last week.
-      code: "/src/components/views/many/Stats.jsx",
+      code: "/src/components/views/analytics/Stats/Stats.jsx",
       route: "/{entity}/stats",
     },
   ],

@@ -138,7 +138,7 @@ Route: "/{entity}/cards"
 ### Charts
 Draws charts about the collection. Currently bars and pie charts are implemented, a list with count and percentages is also available. Only provided for fields of types like boolean, lov, integer, decimal, date... (not text or textmultilines).
 
-![Charts](public/screenshots/many-charts.png)
+![Charts](public/screenshots/analytics-charts.png)
 
 Code: [/src/components/views/analytics/Charts/Charts.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/analytics/Charts/Charts.jsx)
 
@@ -150,7 +150,7 @@ Note: The "Charts" view is currently only implemented for REST, not available wi
 ### Stats
 Display last update, number of updates in the last week, and for numeric fields the min, max, count, average.
 
-![Stats](public/screenshots/many-stats.png)
+![Stats](public/screenshots/analytics-stats.png)
 
 Code: [/src/components/views/analytics/Stats/Stats.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/analytics/Stats/Stats.jsx)
 
