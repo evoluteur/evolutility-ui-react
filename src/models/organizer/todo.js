@@ -6,7 +6,6 @@
 const model = {
   id: "todo",
   qid: "task",
-  oid: 1,
   title: "To-Do List",
   world: "demos",
   name: "task",

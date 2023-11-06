@@ -8,23 +8,47 @@ import todo from "./organizer/todo";
 import contact from "./organizer/contact";
 import comics from "./organizer/comics";
 import restaurant from "./organizer/restaurant";
-// import winecellar from "./organizer/winecellar";
-// import winetasting from "./organizer/winetasting";
+import winecellar from "./organizer/winecellar";
+import winetasting from "./organizer/winetasting";
 
-// - Tests
-//import test from './tests/test'
+// - Music
+import artist from "./music/artist";
+import album from "./music/album";
+import track from "./music/track";
+
+// // - Designer
+// import field from "./designer/field";
+// import object from "./designer/object";
+// import group from "./designer/group";
+// import collection from "./designer/collection";
+// import world from "./designer/world";
+
+// // - Tests
+// import test from "./tests/test";
 
 let models = {
   // - Organizer
-  todo: todo,
-  contact: contact,
-  comics: comics,
-  restaurant: restaurant,
-  // winecellar: winecellar,
-  // winetasting: winetasting,
+  todo,
+  contact,
+  comics,
+  restaurant,
+  winecellar,
+  winetasting,
+
+  // - Music
+  artist: artist,
+  album: album,
+  track: track,
+
+  // // - Designer
+  // world,
+  // object,
+  // field,
+  // group,
+  // collection,
 
   // - Tests
-  //test: test,
+  // test: test,
 };
 
 export default models;

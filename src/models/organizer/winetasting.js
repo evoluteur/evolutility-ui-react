@@ -6,15 +6,11 @@
 const model = {
   qid: "wine_tasting",
   id: "winetasting",
-  oid: 6,
   title: "Wine tastings",
   world: "demos",
   name: "wine tasting",
   namePlural: "wine tastings",
   icon: "wine.gif",
-  active: true,
-  position: 55,
-  defaultViewMany: "list",
   titleField: "drink_date",
   titleFunction: (d) => d?.wine?.name + " " + d?.drink_date,
   fields: [

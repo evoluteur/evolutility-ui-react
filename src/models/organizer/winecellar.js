@@ -6,14 +6,11 @@
 const model = {
   id: "winecellar",
   qid: "wine",
-  oid: 5,
   title: "Wine cellar",
   world: "demos",
   name: "wine",
   namePlural: "wines",
   icon: "wine-bottle.png",
-  active: true,
-  position: 50,
   defaultViewMany: "cards",
   titleField: "name",
   fields: [
@@ -58,16 +55,16 @@ const model = {
       label: "Bottle Size",
       list: [
         {
-          id: 1,
-          text: "750 ml",
+          id: 3,
+          text: "375 cl",
         },
         {
           id: 2,
           text: "500 ml",
         },
         {
-          id: 3,
-          text: "375 cl",
+          id: 1,
+          text: "750 ml",
         },
         {
           id: 4,
@@ -90,7 +87,7 @@ const model = {
       width: 38,
     },
     {
-      id: "wgrape",
+      id: "grape",
       type: "lov",
       label: "Grape",
       list: [
@@ -411,7 +408,7 @@ const model = {
       width: 62,
     },
     {
-      id: "wtype",
+      id: "type",
       type: "lov",
       label: "Type",
       list: [
@@ -453,7 +450,7 @@ const model = {
       help: "An appellation is a legally defined and protected geographical indication used to identify where the grapes for a wine were grown.",
     },
     {
-      id: "wcountry",
+      id: "country",
       type: "lov",
       label: "Country",
       list: [
@@ -548,7 +545,7 @@ const model = {
           text: "United States",
         },
       ],
-      lovIcon: false,
+      lovIcon: true,
       width: 32,
     },
     {
@@ -667,9 +664,9 @@ const model = {
       height: 2,
     },
     {
-      id: "wscore",
+      id: "score",
       type: "lov",
-      label: "My Score",
+      label: "Score",
       list: [
         {
           id: 1,
@@ -692,7 +689,7 @@ const model = {
           text: "*****",
         },
       ],
-      labelShort: "Score",
+      width: 100,
     },
     {
       id: "score_parker",
@@ -731,10 +728,10 @@ const model = {
         "vintage",
         "winery",
         "bsize",
-        "wgrape",
-        "wtype",
+        "grape",
+        "type",
         "appellation",
-        "wcountry",
+        "country",
         "region",
         "area",
       ],
@@ -779,7 +776,7 @@ const model = {
   ],
   collections: [
     {
-      id: "winetastings",
+      id: "wine_tastings",
       title: "Degustations",
       object: "winetasting",
       fields: ["drink_date", "robe", "nose", "taste", "notes"],

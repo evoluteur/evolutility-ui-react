@@ -5,15 +5,11 @@
 
 const model = {
   id: "comics",
-  oid: 3,
-  qid: "comics",
   title: "Graphic Novels",
   world: "demos",
   name: "serie",
   namePlural: "series",
   icon: "comics.png",
-  active: true,
-  position: 40,
   defaultViewMany: "cards",
   titleField: "title",
   fields: [

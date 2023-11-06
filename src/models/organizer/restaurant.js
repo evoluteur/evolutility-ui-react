@@ -5,15 +5,11 @@
 
 const model = {
   id: "restaurant",
-  qid: "restaurant",
-  oid: 4,
   title: "Restaurants",
   world: "demos",
   name: "restaurant",
   namePlural: "restaurants",
   icon: "resto.gif",
-  active: true,
-  position: 30,
   titleField: "name",
   fields: [
     {

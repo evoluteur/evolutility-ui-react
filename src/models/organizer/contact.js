@@ -5,15 +5,11 @@
 
 const model = {
   id: "contact",
-  qid: "contact",
-  oid: 2,
   title: "Address book",
   world: "demos",
   name: "contact",
   namePlural: "contacts",
   icon: "contact.gif",
-  active: true,
-  position: 10,
   titleField: "firstname",
   titleFunction: (d) => d.firstname + " " + d?.lastname,
   fields: [
