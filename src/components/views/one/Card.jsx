@@ -18,7 +18,7 @@ import { fieldTypes as ft } from "../../../utils/dico";
 const Card = ({ entity, data, fields = [] }) => {
   const d = data || {};
   const m = getModel(entity);
-  const link = `/${entity}/${m.defaultViewOne}/`;
+  const link = `/${entity}/${m.defaultViewOne || "browse"}/`;
   const linkEdit = `/${entity}/edit/`;
 
   return (

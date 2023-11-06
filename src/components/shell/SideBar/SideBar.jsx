@@ -52,9 +52,7 @@ const sLink = (label, url, icon) => (
 
 const MenuLink = ({ menu, activeEntity }) => (
   <li className={classnames({ active: menu.id === activeEntity })}>
-    <Link
-      to={`/${menu.id}/${menu.defaultViewMany ? menu.defaultViewMany : "list"}`}
-    >
+    <Link to={`/${menu.id}/${menu.defaultViewMany || "list"}`}>
       <img className="e-icon" src={"/pix/" + menu.icon} alt="" />
       <span>{menu.text}</span>
     </Link>

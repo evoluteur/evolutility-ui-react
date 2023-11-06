@@ -11,24 +11,20 @@ import PrettyJSON from "./PrettyJSON";
 import { modelIds, getModel } from "../../../utils/moMa";
 
 const calculatedProps = [
-  "qid",
-  "oid",
   "titleFunction",
-  "defaultViewMany",
-  "defaultViewOne",
   "fieldsH",
   "_prepared",
   "_preparedCollecs",
-  "active",
-  "position",
 ];
 
 const unPrepModel = (m) => {
   const m2 = { ...m };
   calculatedProps.forEach((prop) => delete m2[prop]);
-
   if (!m2.collections?.length) {
     delete m2.collections;
+  }
+  if (m2.qid === m2.id) {
+    delete m2.qid;
   }
   return m2;
 };

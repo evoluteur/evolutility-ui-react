@@ -22,7 +22,6 @@ modelIds.forEach((mid) => {
     if (m.world === "organizer" || m.world === "music") {
       const menuItem = {
         id: m.id,
-        oid: m.oid,
         world: m.world,
         icon: `pix/${m.icon}`,
         label: m.title || m.label,
