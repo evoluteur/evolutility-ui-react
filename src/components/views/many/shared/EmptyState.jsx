@@ -24,7 +24,7 @@ const EmptyState = ({ model, inSearch }) => {
     </>
   );
   return (
-    <div className="empty-state">
+    <div className="empty-state" data-testid="emptystate">
       <Alert type="info" title={i18n.noResults} message={content} />
     </div>
   );
@@ -34,9 +34,8 @@ export default EmptyState;
 
 EmptyState.propTypes = {
   model: modelPropTypes.isRequired,
-  isNested: PropTypes.bool,
   /** Does the user have search or filter criterias? */
   inSearch: PropTypes.bool,
 };
 
-EmptyState.defaultProps = { isNested: false, inSearch: false };
+EmptyState.defaultProps = { inSearch: false };

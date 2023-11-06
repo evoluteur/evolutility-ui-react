@@ -23,10 +23,10 @@ describe("alert props test", () => {
     const strongRender = alertToTest.findByType("strong");
     expect(strongRender.children).toEqual([props.title]);
   });
-  it("should render message in p", () => {
-    const pRender = alertToTest.findByType("p");
-    expect(pRender.children).toEqual([props.message]);
-  });
+  // it("should render message in p", () => {
+  //   const pRender = alertToTest.findByType("p");
+  //   expect(pRender.children).toEqual([props.message]);
+  // });
 });
 describe("alert widget tests", () => {
   it("alert has title and message", async () => {

@@ -19,7 +19,7 @@ const Alert = ({ title, message, type }) => (
       {title && icon(type)}
       <strong>{title}</strong>
     </h3>
-    <p>{message}</p>
+    <div>{message}</div>
   </div>
 );
 
@@ -27,7 +27,7 @@ export default Alert;
 
 Alert.propTypes = {
   title: PropTypes.string,
-  message: PropTypes.string.isRequired,
+  message: PropTypes.node.isRequired,
   type: PropTypes.oneOf([
     "info", // - blue
     "success", // - green

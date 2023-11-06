@@ -23,15 +23,12 @@
   .alert-link {
     font-weight: bold;
   }
-  > p,
+  > div,
   > ul {
     margin-bottom: 0;
     &:first-letter {
       text-transform: uppercase;
     }
-  }
-  > p + p {
-    margin-top: 5px;
   }
 }
 
