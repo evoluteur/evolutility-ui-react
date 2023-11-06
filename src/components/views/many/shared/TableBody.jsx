@@ -15,7 +15,7 @@ const TableBody = ({ fields, data, iconPath, link }) => {
         <td key={f.id}>
           <Link to={link + d.id}>
             {icon}
-            {value ? fieldValue(f, value, true) : "( " + d.id + " )"}
+            {value ? fieldValue(f, value, true) : `(${d.id})`}
           </Link>
           {d.nb_comments && " " + d.nb_comments + " comments"}
         </td>
@@ -68,7 +68,7 @@ const TableBody = ({ fields, data, iconPath, link }) => {
   };
 
   return (
-    <tbody>
+    <tbody data-testid="tbody">
       {data?.map((d) => (
         <tr key={d.id}>{fields.map((f, idx) => tableCell(d, f, idx))}</tr>
       ))}
