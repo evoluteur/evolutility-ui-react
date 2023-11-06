@@ -44,8 +44,8 @@ export const i18n_actions = {
   // --- navigation/pagination ---
   prev: "Previous",
   next: "Next",
-
   dropFile: "Drop the file here, or click to select the file to upload.",
+  dropFileActive: "Drop the file here...",
   remove_image: "Remove image",
   remove_document: "Remove document",
 

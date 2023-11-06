@@ -111,6 +111,7 @@ const Field = ({
       key: f.id,
       onChange: cbs.change,
       className: "form-control",
+      "data-testid": "field-" + f.type,
     };
 
     if (f.type === ft.bool) {
@@ -128,7 +129,7 @@ const Field = ({
       const opts = f.list
         ? f.list.map((item) => createOption(item.id, item.text))
         : [
-            createOption(d?.id, d?.name),
+            createOption(d?.id || "na", d?.name),
             createOption(-1, "Error: list not found"),
           ];
       return (
@@ -210,7 +211,7 @@ const Field = ({
       }
 
       return (
-        <div>
+        <div data-testid={"field-" + f.type}>
           {pix}
           {d && (
             <div className="field-remove" onClick={removeFile}>
@@ -230,11 +231,9 @@ const Field = ({
                 })}
               >
                 <input {...getInputProps()} />
-                {isDragActive ? (
-                  <p>Drop files here...</p>
-                ) : (
-                  <p>{i18n_actions.dropFile}</p>
-                )}
+                <p>
+                  {i18n_actions[isDragActive ? "dropFileActive" : "dropFile"]}
+                </p>
               </div>
             )}
           </Dropzone>

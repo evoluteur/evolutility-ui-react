@@ -20,7 +20,7 @@ const ft = {
   lov: "lov",
   list: "list", // many values for one field (behave like tags - return an array of strings)
   html: "html",
-  formula: "formula", // soon to be a field attribute rather than a field type
+  // formula: "formula", // soon to be a field attribute rather than a field type
   email: "email",
   image: "image",
   doc: "document",

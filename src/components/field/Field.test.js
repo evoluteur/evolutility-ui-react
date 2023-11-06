@@ -1,17 +1,38 @@
+/* eslint-disable jest/no-conditional-expect */
 import { render, screen } from "@testing-library/react";
 import Field from "./Field";
 
-describe("field tests", () => {
-  it("Field text shows", async () => {
+const noOp = () => {};
+const callbacks = { change: noOp };
+
+const simpleTest = (fType, value) =>
+  it(`Field ${fType} shows`, async () => {
+    const meta = { id: fType, type: fType, label: "Field " + fType };
     render(
-      <Field
-        fieldDef={{ id: "name", type: "text", label: "Firstname" }}
-        value="Olivier"
-        callbacks={{ change: () => {} }}
-      />
+      <Field fieldDef={meta} callbacks={callbacks} value={value || null} />
     );
-    expect(screen.getByDisplayValue("Olivier")).toBeInTheDocument();
-    const fLabel = screen.getByTestId("fieldlabel");
-    expect(fLabel).toHaveTextContent("Firstname");
+    const f = screen.getByTestId("field-" + fType);
+    expect(f).toBeInTheDocument();
+    if (value) {
+      expect(screen.getByDisplayValue(value)).toBeInTheDocument();
+    }
+    const label = screen.getByTestId("fieldlabel");
+    expect(label).toHaveTextContent("Field " + fType);
   });
+
+describe("Editable field tests", () => {
+  // TODO: all field types w/ more complex use-cases
+  simpleTest("text", "abc");
+  simpleTest("textmultiline", "abc");
+  simpleTest("lov");
+  simpleTest("boolean");
+  simpleTest("email", "olivier@evolutility.com");
+  simpleTest("url", "http://evolutility.com");
+  simpleTest("integer", 1212);
+  simpleTest("decimal", 12.12);
+  simpleTest("money", 119.99);
+  simpleTest("image");
+  simpleTest("time");
+  simpleTest("document");
+  simpleTest("json");
 });
