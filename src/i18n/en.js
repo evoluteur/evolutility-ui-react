@@ -19,12 +19,7 @@ export const i18n_actions = {
   edit: "Edit",
   new: "New",
   newEntity: "New {0}", // 'New Item',
-  // search: 'Search',
-  // newSearch: 'New Search',
-  // searchRes: 'Search Result',
-  // selection: 'Selection',
-  // selections: 'Selections',
-  export1: "Export",
+  // export1: "Export",
   // import: 'Import',
   // massUpdate: 'Mass Update',
   expend: "Expend",
@@ -42,7 +37,6 @@ export const i18n_actions = {
   stats: "Stats",
   activity: "Activity",
   save: "Save",
-  // saveAdd: 'Save and Add Another',
   ok: "OK",
   cancel: "Cancel",
   search: "Search...",
@@ -72,8 +66,6 @@ export const i18n_msg = {
   confirmLeave: "Your work is not saved! Are you sure you want to leave?",
   range: "{0} to {1} of {2} {3}", // 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'
   aToBOfC: "{0} of {1} {2}", // 0=mSize, 1=totSize, 2=entities'
-  // sgn_money: '$', // indicator for money
-  // sgn_email: '@', // indicator for email
   added: 'New {0} "{1}" added.',
   updated: '{0} "{1}" updated.',
   deleted: '{0} "{1}" deleted.',

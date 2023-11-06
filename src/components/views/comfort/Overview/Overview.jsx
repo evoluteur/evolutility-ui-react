@@ -12,7 +12,7 @@ import { lcWrite, lcRead } from "../../../../utils/localStorage";
 import { i18n_activity, i18n_actions } from "../../../../i18n/i18n";
 import ViewHeader from "../../ViewHeader/ViewHeader";
 import Chart from "../../analytics/Charts/Chart";
-import ModelLinks from "../ModelLinks";
+import InvalidRoute from "./InvalidRoute";
 
 import "./Overview.scss";
 // #endregion
@@ -40,16 +40,8 @@ const Overview = () => {
   );
 
   const activityData = getActivity(entity);
-  const msg = `Sorry but "${entity}" is not a valid object type.`;
   if (m === null) {
-    return (
-      <div>
-        <div>{msg}</div>
-        INVALID MODEL
-        <ModelLinks />
-      </div>
-    );
-    //  <div>Possible objects: {ModelLinks()}</div>
+    return <InvalidRoute entity={entity} />;
   } else {
     const chartFieldChanged = (evt) => {
       const e = evt.currentTarget;

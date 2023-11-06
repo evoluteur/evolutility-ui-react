@@ -254,7 +254,6 @@ const daoGraphQL = {
   updateOne,
   // uploadOne,
   getObjectSearch,
-
   getMany,
   getStats,
   getChart,

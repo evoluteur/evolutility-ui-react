@@ -4,7 +4,7 @@ import classnames from "classnames";
 import { Link, NavLink, useParams } from "react-router-dom";
 import Icon from "react-crud-icons";
 import { i18n_nav } from "../../../i18n/i18n";
-import appMenus from "../../../appMenus";
+import appMenus from "./appMenus";
 import { getUrlMap } from "../../../utils/url";
 import { models, modelIds } from "../../../utils/moMa";
 

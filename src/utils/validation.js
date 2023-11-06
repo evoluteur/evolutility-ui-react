@@ -5,7 +5,7 @@
 
 // TODO: use Yup instead of this code
 import { isUndefined, isObject, isArray, isDate, isString } from "underscore";
-import { fieldTypes, fieldIsNumber } from "./dico";
+import { fieldTypes as ft, fieldIsNumber } from "./dico";
 import { locale, i18n_validation } from "../i18n/i18n";
 
 const valRegExp = {
@@ -18,8 +18,6 @@ const valRegExp = {
 
 export const validateField = (f, v) => {
   var isNumberField = fieldIsNumber(f);
-  var ft = fieldTypes;
-
   const formatMsg = (fLabel, msg, r2, r3) =>
     msg.replace("{0}", fLabel).replace("{1}", r2).replace("{2}", r3);
 

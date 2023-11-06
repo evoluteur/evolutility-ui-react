@@ -8,7 +8,7 @@
 //#region Helpers functions for GraphQL
 
 import {
-  fieldTypes,
+  fieldTypes as ft,
   fieldIsNumber,
   fieldIsText,
   fieldInStats,
@@ -20,8 +20,6 @@ import {
 import config from "../config";
 import { getModel } from "../utils/moMa";
 import { dateTZ } from "../utils/format";
-
-const ft = fieldTypes;
 
 const timestampFields = config.withTimestamp ? " updated_at created_at " : " ";
 
