@@ -11,7 +11,7 @@ With it you can easily build CRUD applications by writing models rather than cod
 ### Table of Contents
 1. [Installation](#Installation)
 2. [Configuration](#Configuration)
-3. [Views](#Views) for [One](#ViewsOne), [Many](#ViewsMany) records, and for [Comfort](#Views Comfort)
+3. [Views](#Views) for [One](#ViewsOne), [Many](#ViewsMany) records, and for [Comfort](#ViewsComfort)
 4. [Models](#Models)
 5. [Backend](#Backend)
 6. [License](#License)
@@ -163,15 +163,13 @@ Display a summary of the object and the latest activity on it.
 
 <a name="Overview"></a>
 ### Overview
-
+Display a summary of the object and the latest activity on it.
 
 ![Overview](public/screenshots/comfort-overview.png)
 
-Code: [/src/components/views/comfort/Overview.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/comfort/Overview.jsx)
+Code: [/src/components/views/comfort/Overview/Overview.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/comfort/Overview/Overview.jsx)
 
 Route: "/{entity}/"
-
-
 
 <a name="Activity"></a>
 ### Activity
@@ -179,7 +177,7 @@ Show list of "last visited" and "most visited" records for the object (stored in
 
 ![Activity](public/screenshots/comfort-activity.png)
 
-Code: [/src/components/views/comfort/Activity.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/comfort/Activity.jsx)
+Code: [/src/components/views/comfort/Activity/Activity.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/comfort/Activity/Activity.jsx)
 
 Route: "/{entity}/activity"
 
