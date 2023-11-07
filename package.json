@@ -9,7 +9,7 @@
   "homepage": ".",
   "copyright": "(c) 2023 Olivier Giulieri",
   "author": "Olivier Giulieri (https://evoluteur.github.io/)",
-  "license": "MIT",
+  "license": "AGPL-3.0",
   "engines": {
     "node": "v20.9.0",
     "npm": "10.1.0"

@@ -65,11 +65,11 @@ const Doc = () => {
           Evolutility-UI-React is released under the{" "}
           <a
             href="http://github.com/evoluteur/evolutility-ui-react/blob/main/LICENSE"
-            target="mit"
+            target="agpl"
             rel="noopener noreferrer"
             className="extlink"
           >
-            MIT license
+            AGPL license
           </a>
           .
         </p>

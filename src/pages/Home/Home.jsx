@@ -98,15 +98,6 @@ const Home = () => {
             className="extlink"
           >
             GitHub
-          </a>{" "}
-          with{" "}
-          <a
-            href="https://github.com/evoluteur/evolutility-ui-react/blob/main/LICENSE"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="extlink"
-          >
-            MIT license
           </a>
           .
         </div>

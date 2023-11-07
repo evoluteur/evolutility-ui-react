@@ -1,5 +1,5 @@
 const Badges = () => (
-  <div id="evolutility-ui-react-github-license-npm-version" className="mit-npm">
+  <div id="evolutility-ui-react-github-license-npm-version" className="lic-npm">
     <a href="https://github.com/evoluteur/evolutility-ui-react/blob/main/LICENSE">
       <img
         src="https://img.shields.io/github/license/evoluteur/evolutility-ui-react"

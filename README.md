@@ -410,7 +410,7 @@ You will need to setup the GraphQL backend on [Hasura](https://hasura.io/) with 
 
 Copyright (c) 2023 [Olivier Giulieri](https://evoluteur.github.io/).
 
-Evolutility-UI-React is released under the [MIT license](http://github.com/evoluteur/evolutility-ui-react/blob/main/LICENSE).
+Evolutility-UI-React is released under the [AGPL-3.0 license](http://github.com/evoluteur/evolutility-ui-react/blob/main/LICENSE).
 
 To suggest a feature or report a bug: [https://github.com/evoluteur/evolutility-ui-react/issues](https://github.com/evoluteur/evolutility-ui-react/issues)
 
