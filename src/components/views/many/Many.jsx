@@ -9,7 +9,7 @@
 */
 
 // #region ---------------- Imports ----------------
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 
 import List from "./List/List";
@@ -82,25 +82,28 @@ const Many = () => {
     };
   }, [entity, search]);
 
-  const onClickSort = (evt) => {
-    const fid = evt.currentTarget.id,
-      query = url.parseQuery(search) || {};
-    let direc;
-    if (sortField === fid) {
-      direc = sortDirection === "asc" ? "desc" : "asc";
-    } else {
-      direc = "asc";
-      setSortField(fid);
-    }
-    setSortDirection(direc);
-    query.order = fid + "." + direc;
-    query.page = 0;
-    let link = `/${entity}/${view}`;
-    if (query) {
-      link += "?" + url.querySearch(query);
-    }
-    navigate(link);
-  };
+  const onClickSort = useCallback(
+    (evt) => {
+      const fid = evt.currentTarget.id,
+        query = url.parseQuery(search) || {};
+      let direc;
+      if (sortField === fid) {
+        direc = sortDirection === "asc" ? "desc" : "asc";
+      } else {
+        direc = "asc";
+        setSortField(fid);
+      }
+      setSortDirection(direc);
+      query.order = fid + "." + direc;
+      query.page = 0;
+      let link = `/${entity}/${view}`;
+      if (query) {
+        link += "?" + url.querySearch(query);
+      }
+      navigate(link);
+    },
+    [entity, sortField, sortDirection]
+  );
 
   const clickPagination = (evt) => {
     const id = evt.currentTarget.textContent;
@@ -160,7 +163,7 @@ const Many = () => {
       }
     }
     return "";
-  }, [data, search]);
+  }, [entity, data, search]);
 
   const viewProps = {
     entity,

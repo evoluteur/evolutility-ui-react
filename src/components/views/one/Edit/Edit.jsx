@@ -6,7 +6,7 @@
 // (c) 2023 Olivier Giulieri
 
 // #region ---------------- Imports ----------------
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import modelPropType from "../../modelPropTypes";
 import { useParams } from "react-router-dom";
@@ -29,7 +29,7 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
   const { id = 0 } = useParams();
   const isNew = id === 0 || id === "0";
 
-  const clickSave = () => {
+  const clickSave = useCallback(() => {
     const v = validate(model, data);
     if (v.isValid) {
       setInvalids(null);
@@ -38,36 +38,39 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
       setInvalids(v.invalids);
       toast.error(i18n_validation.incomplete + " " + v.messages.join(" "));
     }
-  };
+  }, [model, data, onSave]);
 
-  const fieldChange = (evt, obj) => {
-    const fid = evt.target ? evt.target.id : obj.name;
-    const f = model.fieldsH[fid];
-    let v;
-    if (f.type === ft.bool) {
-      v = evt.target.checked;
-    } else if (f.type === ft.lov) {
-      if (f.object) {
-        v = { id: evt.value, name: evt.label };
-      } else {
-        v = { id: evt.target.value };
-      }
-    } else {
-      v = evt.target.value;
-    }
-    if (invalids && invalids[fid]) {
-      const fValidation = validateField(f, v);
-      if (!fValidation) {
-        let newInvalids = { ...invalids };
-        delete newInvalids[fid];
-        if (Object.keys(newInvalids).length === 0) {
-          newInvalids = null;
+  const fieldChange = useCallback(
+    (evt, obj) => {
+      const fid = evt.target ? evt.target.id : obj.name;
+      const f = model.fieldsH[fid];
+      let v;
+      if (f.type === ft.bool) {
+        v = evt.target.checked;
+      } else if (f.type === ft.lov) {
+        if (f.object) {
+          v = { id: evt.value, name: evt.label };
+        } else {
+          v = { id: evt.target.value };
         }
-        setInvalids(newInvalids);
+      } else {
+        v = evt.target.value;
       }
-    }
-    onFieldChange(fid, v);
-  };
+      if (invalids && invalids[fid]) {
+        const fValidation = validateField(f, v);
+        if (!fValidation) {
+          let newInvalids = { ...invalids };
+          delete newInvalids[fid];
+          if (Object.keys(newInvalids).length === 0) {
+            newInvalids = null;
+          }
+          setInvalids(newInvalids);
+        }
+      }
+      onFieldChange(fid, v);
+    },
+    [model, invalids, onFieldChange]
+  );
 
   const cbs = {
     change: fieldChange,
@@ -142,7 +145,7 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
             );
           })}
         {panelActionButtons}
-        <Timestamps data={data} />
+        <Timestamps created={data.created_at} updated={data.updated_at} />
       </div>
     </div>
   );

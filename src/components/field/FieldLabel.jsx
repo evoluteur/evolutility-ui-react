@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 import { fieldPropTypes } from "../views/modelPropTypes";
 import Tooltip from "rc-tooltip";
@@ -6,7 +6,7 @@ import Icon from "react-crud-icons";
 
 import "./FieldLabel.scss";
 
-const FieldLabel = ({ field, label, required, readOnly }) => {
+const FieldLabel = memo(({ field, label, required, readOnly }) => {
   const isRequired =
     (field.required || required) && !(field.readOnly || readOnly);
 
@@ -33,7 +33,7 @@ const FieldLabel = ({ field, label, required, readOnly }) => {
       </label>
     </div>
   );
-};
+});
 
 export default FieldLabel;
 

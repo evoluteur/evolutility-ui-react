@@ -90,7 +90,7 @@ const Browse = ({ entity, model, data }) => {
             label={i18n_actions.edit}
           />
         </div>
-        <Timestamps data={data} />
+        <Timestamps created={data.created_at} updated={data.updated_at} />
       </div>
     </div>
   );
