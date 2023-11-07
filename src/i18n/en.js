@@ -40,6 +40,7 @@ export const i18n_actions = {
   ok: "OK",
   cancel: "Cancel",
   search: "Search...",
+  searchX: "Search {0}...",
 
   // --- navigation/pagination ---
   prev: "Previous",

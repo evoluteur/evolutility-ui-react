@@ -2,22 +2,20 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Icon from "react-crud-icons";
-import config from "../../../../config";
 import { getModel } from "../../../../utils/moMa";
-import { getActivity } from "../../../../utils/activity";
 import { fieldInCharts } from "../../../../utils/dico";
 import { views } from "../../../../utils/dicoViews";
 import { capitalize } from "../../../../utils/format";
 import { lcWrite, lcRead } from "../../../../utils/localStorage";
-import { i18n_activity, i18n_actions } from "../../../../i18n/i18n";
+import { i18n_actions } from "../../../../i18n/i18n";
 import ViewHeader from "../../ViewHeader/ViewHeader";
 import Chart from "../../analytics/Charts/Chart";
+import SearchBox from "./SearchBox";
+import Activity from "./Activity";
 import InvalidRoute from "./InvalidRoute";
 
 import "./Overview.scss";
 // #endregion
-
-const { withActivity } = config;
 
 const Overview = () => {
   const { entity } = useParams();
@@ -39,7 +37,6 @@ const Overview = () => {
       : ""
   );
 
-  const activityData = getActivity(entity);
   if (m === null) {
     return <InvalidRoute entity={entity} />;
   } else {
@@ -50,19 +47,11 @@ const Overview = () => {
       setChartField(m.fieldsH[fid]);
     };
 
-    const mIcon = m.icon;
-    const iconPath = `/pix/${mIcon}`;
     const urlBegin = `../${entity}/`;
     const viewLink = (v) => (
       <Link key={v.id} to={urlBegin + v.id}>
         <Icon name={v.icon} theme="light" />
         <span>{v.label}</span>
-      </Link>
-    );
-    const activityLink = ({ id, title }) => (
-      <Link key={id} to={`${urlBegin}browse/${id}`}>
-        <img src={iconPath} alt="" />
-        {title}
       </Link>
     );
 
@@ -86,30 +75,14 @@ const Overview = () => {
       </div>
     );
 
+    const placeHolder = i18n_actions.searchX.replace("{0}", m.namePlural);
     const body = (
       <div className="ovw-body">
         {actions}
+        <SearchBox entity={entity} placeHolder={placeHolder} />
         <div className="ovw-text"></div>
-        <br />
         <div className="cols-2">
-          {withActivity && (
-            <div className="ovw-hist panel">
-              <h4>{viewLink(views.activity)}</h4>
-              <span>
-                {i18n_activity.mostViewed.replace("{0}", m.namePlural)}:
-              </span>
-              <div className="ovw-hist-list">
-                {activityData?.mostViewed?.map(activityLink)}
-              </div>
-              <br />
-              <span>
-                {i18n_activity.lastViewed.replace("{0}", m.namePlural)}:
-              </span>
-              <div className="ovw-hist-list">
-                {activityData?.lastViewed?.slice(0, 10).map(activityLink)}
-              </div>
-            </div>
-          )}
+          <Activity entity={entity} />
           {!m.noCharts && (
             <div className="ovw-chart">
               <Chart

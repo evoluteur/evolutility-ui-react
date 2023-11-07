@@ -1,10 +1,15 @@
 @import "../../../../variables";
 
 .evol-overview {
+  .evo-search-box {
+    margin: 20px 10px 20px 0;
+    width: 200px;
+  }
   .panel {
     margin-bottom: 10px;
   }
   .ovw-actions {
+    margin-bottom: 20px;
     width: 100%;
     @include flex-holder();
     gap: $gap;
@@ -30,35 +35,6 @@
       top: 10px;
       left: 15px;
       width: auto;
-    }
-  }
-  .ovw-hist {
-    position: relative;
-    padding: 0 20px 20px;
-    h4 {
-      position: relative;
-      left: -10px;
-      top: -5px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      > a > i {
-        position: relative;
-        top: 5px;
-      }
-    }
-    > span {
-      display: block;
-      margin-bottom: 10px;
-    }
-  }
-  .ovw-hist-list > a {
-    display: inline-block;
-    min-width: 140px;
-    width: 40%;
-    margin-right: 20px;
-    @include ellipsis();
-    > img {
-      margin-right: 6px;
     }
   }
 }

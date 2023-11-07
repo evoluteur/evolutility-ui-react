@@ -168,6 +168,10 @@ export const qMany = (entity, options) => {
   return null;
 };
 
+//#endregion
+
+//#region Analytics ----------------------------
+
 const aggregateName = (qid, f) => {
   if (f.aggregate) {
     return f.aggregate;
@@ -327,6 +331,9 @@ export const qInsertOne = (entity, data) => {
     ) {returning {${qFields(m)}}}
   }`;
 };
+//#endregion
+
+//#region LOV and Lookup ----------------------------
 
 export const qObjectSearch = (entity, search) => {
   const m = getModel(entity);
@@ -335,5 +342,12 @@ export const qObjectSearch = (entity, search) => {
     ? `where: {${lookupField}: {_ilike: "%${search}%"}}`
     : "";
   return `query lookup_${entity}_${lookupField}{ lov: ${m.qid}(${qSearch}, limit:100) {id name:${lookupField}} }`;
+};
+
+export const qLOV = (model, fid) => {
+  const f = model.fieldsH[fid];
+  const lovId = `${model.qid}_${fid}`;
+  const icon = f.lovIcon ? "icon" : "";
+  return `lov_${fid}: ${lovId}(limit:200) {id text:name ${icon}}`;
 };
 //#endregion
