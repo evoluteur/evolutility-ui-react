@@ -13,7 +13,7 @@ import classnames from "classnames";
 import { isObject } from "underscore";
 // import MultiSelect from "@khanacademy/react-multi-select";
 import { fieldTypes as ft } from "../../utils/dico";
-import { nullOrUndefined } from "../../utils/format";
+import { nullOrUndefined, trueDate } from "../../utils/format";
 import { i18n_actions } from "../../i18n/i18n";
 import config from "../../config";
 import FieldLabel from "./FieldLabel";
@@ -158,7 +158,7 @@ const Field = ({
       return (
         <Datepicker
           {...usualProps}
-          selected={d ? new Date(d) : null}
+          selected={trueDate(d)}
           onChange={getDateFieldChange(f.id)}
         />
       );
@@ -169,7 +169,7 @@ const Field = ({
           <Datepicker
             {...usualProps}
             className="form-control inline"
-            selected={d ? new Date(d) : null}
+            selected={trueDate(d)}
             onChange={getDateFieldChange(f.id)}
           />
           <input

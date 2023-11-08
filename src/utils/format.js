@@ -46,6 +46,13 @@ const numFormat = (d, format) =>
   nullOrUndefined(d) ? "" : numeral(d).format(format);
 
 // --- date formats ---
+export const trueDate = (d) => {
+  if (!d) {
+    return null;
+  }
+  const d1 = new Date(d);
+  return new Date(d1.getTime() + Math.abs(d1.getTimezoneOffset() * 60000));
+};
 export const dateTZ = (d) => (d !== null ? d.toISOString() : null);
 export const dateString = (d) => mFormat(d, "L");
 // const timeString = d => mFormat(moment(d, 'HH:mm:ss'), 'LTS')
