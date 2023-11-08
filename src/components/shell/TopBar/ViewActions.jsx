@@ -42,7 +42,7 @@ const menuItems = {
 const newEntity = (m) => i18n_actions.newEntity.replace("{0}", m.name);
 const isFunction = (x) => typeof x === "function";
 
-const Toolbar = ({ entity, id }) => {
+const ViewActions = ({ entity, id }) => {
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
 
   const m = getModel(entity);
@@ -172,7 +172,7 @@ const Toolbar = ({ entity, id }) => {
   return null;
 };
 
-Toolbar.propTypes = {
+ViewActions.propTypes = {
   /** Active model */
   entity: PropTypes.string.isRequired,
   /** Active view */
@@ -181,4 +181,4 @@ Toolbar.propTypes = {
   id: PropTypes.string,
 };
 
-export default Toolbar;
+export default ViewActions;

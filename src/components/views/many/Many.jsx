@@ -102,31 +102,34 @@ const Many = () => {
       }
       navigate(link);
     },
-    [entity, sortField, sortDirection]
+    [navigate, entity, search, view, sortField, sortDirection]
   );
 
-  const clickPagination = (evt) => {
-    const id = evt.currentTarget.textContent;
-    const query = url.parseQuery(search) || {};
-    let pageIdx;
+  const clickPagination = useCallback(
+    (evt) => {
+      const id = evt.currentTarget.textContent;
+      const query = url.parseQuery(search) || {};
+      let pageIdx;
 
-    if (id === ">" || id === "<") {
-      pageIdx = parseInt(query.page, 10) || 0;
-      if (id === "<") {
-        pageIdx--;
+      if (id === ">" || id === "<") {
+        pageIdx = parseInt(query.page, 10) || 0;
+        if (id === "<") {
+          pageIdx--;
+        } else {
+          pageIdx++;
+        }
       } else {
-        pageIdx++;
+        pageIdx = parseInt(id, 10) - 1;
       }
-    } else {
-      pageIdx = parseInt(id, 10) - 1;
-    }
-    if (query && query.page && !pageIdx) {
-      delete query.page;
-    } else {
-      query.page = pageIdx;
-    }
-    navigate(`/${entity}/${view}?` + url.querySearch(query));
-  };
+      if (query && query.page && !pageIdx) {
+        delete query.page;
+      } else {
+        query.page = pageIdx;
+      }
+      navigate(`/${entity}/${view}?` + url.querySearch(query));
+    },
+    [navigate, entity, search, view]
+  );
 
   const pageSummary = useMemo(() => {
     const namePlural = model?.namePlural;
@@ -163,7 +166,7 @@ const Many = () => {
       }
     }
     return "";
-  }, [entity, data, search]);
+  }, [entity, data, search, pageIndex]);
 
   const viewProps = {
     entity,

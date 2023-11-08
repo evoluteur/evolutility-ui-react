@@ -13,7 +13,7 @@ const Timestamps = memo(({ updated, created }) => {
     return null;
   }
   return (
-    <div className="timestamps">
+    <div className="timestamps" data-testid="timestamps">
       <div>
         <label>{i18n_activity.updated}</label>
         {datetimeString(updated)}
