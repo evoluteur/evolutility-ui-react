@@ -549,38 +549,38 @@ INSERT INTO "contact"("firstname","lastname","company","address","city","state",
 
 INSERT INTO "comics"("title","genre_id","authors","complete","finished","have","have_nb","serie_nb","language_id","notes","pix","url_amazon","url_bdfugue") VALUES
 ('Do Androids Dream Of Electric Sheep?',11,'Philip K Dick, Tony Parker',true,true,'1-6',6,6,1,NULL,'comics/androidssheep.jpg','https://smile.amazon.com/Androids-Dream-Electric-Sheep-Vol-ebook/dp/B01E0IR7G2','https://www.bdfugue.com/do-androids-dream-of-electric-sheep'),
-('Saga',11,'Brian K. Vaughan and Fiona Staples',false,false,'1-5',5,6,1,NULL,'comics/saga1.jpeg','https://smile.amazon.com/Saga-Book-One-Brian-Vaughan/dp/1632150786','https://www.bdfugue.com/saga-tome-1');
+('Saga',11,'Brian K. Vaughan and Fiona Staples',false,false,'1-5',5,6,1,NULL,'comics/saga1.jpg','https://smile.amazon.com/Saga-Book-One-Brian-Vaughan/dp/1632150786','https://www.bdfugue.com/saga-tome-1');
 INSERT INTO "comics"("title","genre_id","authors","complete","finished","have","have_nb","serie_nb","language_id","notes","pix","url_bdfugue") VALUES
 ('Alim le Tanneur',5,'Wilfrid Lupano, Virginie Augustin',true,true,'1-4',4,4,2,NULL,'comics/alim1.jpg','https://www.bdfugue.com/alim-le-tanneur-t-1-le-secret-des-eaux');
 INSERT INTO "comics"("title","genre_id","authors","complete","finished","have","have_nb","serie_nb","language_id","notes","pix") VALUES
-('La Caste des Meta-Barons',11,'Alexandro Jodorowsky et Juan Gimenez',false,true,'1-5',5,8,2,NULL,'comics/metabaron1.jpeg');
+('La Caste des Meta-Barons',11,'Alexandro Jodorowsky et Juan Gimenez',false,true,'1-5',5,8,2,NULL,'comics/metabaron1.jpg');
 INSERT INTO "comics"("title","genre_id","have","have_nb","serie_nb","language_id","authors","complete","finished","notes","pix") VALUES
-('Garulfo',7,'1-6',6,6,2,'Alain Ayroles et Bruno Maïorana',true,true,NULL,'comics/garulfo1.jpeg');
+('Garulfo',7,'1-6',6,6,2,'Alain Ayroles et Bruno Maïorana',true,true,NULL,'comics/garulfo1.jpg');
 INSERT INTO "comics"("title","genre_id","authors","complete","finished","have","have_nb","serie_nb","language_id","notes","pix") VALUES
-('Lanfeust de Troy',5,'Didier Tarquin, Christophe Arleston',true,true,'1-8',8,8,2,NULL,'comics/lanfeust1.jpeg'),
-('Salammbo',4,'Philippe Druillet et Gustave Flaubert',true,true,'1-3',3,3,2,NULL,'comics/salammbo1.jpeg');
+('Lanfeust de Troy',5,'Didier Tarquin, Christophe Arleston',true,true,'1-8',8,8,2,NULL,'comics/lanfeust1.jpg'),
+('Salammbo',4,'Philippe Druillet et Gustave Flaubert',true,true,'1-3',3,3,2,NULL,'comics/salammbo1.jpg');
 INSERT INTO "comics"("title","genre_id","authors","complete","finished","have","have_nb","serie_nb","language_id","notes","pix","url_amazon","url_bdfugue") VALUES
-('Carmen McCallum',11,'Fred Duval et Gess',false,false,'1-5',5,12,2,NULL,'comics/carmenmc1.jpeg',NULL,'https://www.bdfugue.com/carmen-mc-callum-t-1-jukurpa');
+('Carmen McCallum',11,'Fred Duval et Gess',false,false,'1-5',5,12,2,NULL,'comics/carmenmc1.jpg',NULL,'https://www.bdfugue.com/carmen-mc-callum-t-1-jukurpa');
 INSERT INTO "comics"("title","genre_id","authors","complete","finished","have","have_nb","serie_nb","language_id","notes","pix") VALUES
-('Code McCallum',11,'Fred Duval et Didier Cassegrain',true,true,'5',5,5,2,NULL,'comics/codemc1.jpeg');
+('Code McCallum',11,'Fred Duval et Didier Cassegrain',true,true,'5',5,5,2,NULL,'comics/codemc1.jpg');
 INSERT INTO "comics"("title","genre_id","authors","complete","finished","have","have_nb","serie_nb","language_id","notes","pix","url_bdfugue") VALUES
-('La Nef des Fous',8,'Turf',true,true,'1-7',7,7,2,NULL,'comics/neffous1.jpeg','https://www.bdfugue.com/la-nef-des-fous-t-1-eauxfolles');
+('La Nef des Fous',8,'Turf',true,true,'1-7',7,7,2,NULL,'comics/neffous1.jpg','https://www.bdfugue.com/la-nef-des-fous-t-1-eauxfolles');
 INSERT INTO "comics"("title","genre_id","authors","complete","finished","have","have_nb","serie_nb","language_id","notes","pix","url_amazon","url_bdfugue") VALUES
-('La Quete de l''Oiseau du Temps',5,'Serge Le Tendre et Régis Loisel',true,true,'1-4',4,4,2,NULL,'comics/quete1.jpeg',NULL,NULL);
+('La Quete de l''Oiseau du Temps',5,'Serge Le Tendre et Régis Loisel',true,true,'1-4',4,4,2,NULL,'comics/quete1.jpg',NULL,NULL);
 INSERT INTO "comics"("title","genre_id","authors","complete","finished","have","have_nb","serie_nb","language_id","notes","pix") VALUES
-('Le Lama Blanc',1,'Alejandro Jodorowsky et Georges Bess',true,true,'1-6',6,6,2,NULL,'comics/lama1.jpeg'),
-('Le Surfer d''Argent',12,'Moebius, Stan Lee',true,true,'1',1,1,2,NULL,'comics/surfer.jpeg');
+('Le Lama Blanc',1,'Alejandro Jodorowsky et Georges Bess',true,true,'1-6',6,6,2,NULL,'comics/lama1.jpg'),
+('Le Surfer d''Argent',12,'Moebius, Stan Lee',true,true,'1',1,1,2,NULL,'comics/surfer.jpg');
 INSERT INTO "comics"("title","genre_id","authors","complete","finished","have","have_nb","serie_nb","language_id","notes","pix","url_amazon","url_bdfugue") VALUES
-('L''Incal',11,'Moebius et Alexandro Jodorowsky',true,true,'1-6',6,6,2,NULL,'comics/incal1.jpeg','https://smile.amazon.com/Incal-Vol-Black-ebook/dp/B00SVE70MI/','https://www.bdfugue.com/l-incal-t-1-l-incal-noir-29999');
+('L''Incal',11,'Moebius et Alexandro Jodorowsky',true,true,'1-6',6,6,2,NULL,'comics/incal1.jpg','https://smile.amazon.com/Incal-Vol-Black-ebook/dp/B00SVE70MI/','https://www.bdfugue.com/l-incal-t-1-l-incal-noir-29999');
 INSERT INTO "comics"("title","genre_id","authors","complete","finished","have","have_nb","serie_nb","language_id","notes","pix") VALUES
-('Sky Doll',4,'Alessandro Barbucci et Barbara Canepa',true,true,'1-3',3,3,2,NULL,'comics/skydoll1.jpeg');
+('Sky Doll',4,'Alessandro Barbucci et Barbara Canepa',true,true,'1-3',3,3,2,NULL,'comics/skydoll1.jpg');
 INSERT INTO "comics"("title","genre_id","authors","complete","finished","have","have_nb","serie_nb","language_id","notes","pix","url_amazon") VALUES
-('Ronin',11,'Franck Miller',true,true,'1',1,1,1,NULL,'comics/ronin.jpeg','https://smile.amazon.com/Ronin-Deluxe-Frank-Miller-ebook/dp/B00MV1NZ94');
+('Ronin',11,'Franck Miller',true,true,'1',1,1,1,NULL,'comics/ronin.jpg','https://smile.amazon.com/Ronin-Deluxe-Frank-Miller-ebook/dp/B00MV1NZ94');
 INSERT INTO "comics"("title","genre_id","authors","complete","finished","have","have_nb","serie_nb","language_id","notes","pix","url_bdfugue") VALUES
-('Le Fleau des Dieux',11,'Valérie Mangin et Aleksa Gajic',true,true,'1-6',6,6,2,NULL,'comics/fleaudieux1.jpeg','https://www.bdfugue.com/le-fleau-des-dieux-t-1-morituri-te-saluant-82834');
+('Le Fleau des Dieux',11,'Valérie Mangin et Aleksa Gajic',true,true,'1-6',6,6,2,NULL,'comics/fleaudieux1.jpg','https://www.bdfugue.com/le-fleau-des-dieux-t-1-morituri-te-saluant-82834');
 INSERT INTO "comics"("title","genre_id","authors","complete","finished","have","have_nb","serie_nb","language_id","notes","pix") VALUES
-('Tales of an Imperfect Future',11,'Alfonso Font',true,true,'1',1,1,1,NULL,'comics/imperfect-future.jpeg'),
-('Ghost in the Shell',11,'Masamune Shirow',false,true,'1',1,2,1,NULL,'comics/ghost-in-the-shell.jpeg');
+('Tales of an Imperfect Future',11,'Alfonso Font',true,true,'1',1,1,1,NULL,'comics/imperfect-future.jpg'),
+('Ghost in the Shell',11,'Masamune Shirow',false,true,'1',1,2,1,NULL,'comics/ghost-in-the-shell.jpg');
 
 INSERT INTO "restaurant"(id,"name","cuisine_id","price_id","web","yelp","notes","favorite","phone","address","city","state","zip") VALUES
 (1,'Atelier Crenn',1,4,'https://www.ateliercrenn.com','https://www.yelp.com/biz/atelier-crenn-san-francisco',NULL,NULL,'(415) 440-0460','3127 Fillmore St','San Francisco','CA',94123),

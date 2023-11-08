@@ -12,7 +12,7 @@ import { fieldPropTypes } from "../modelPropTypes";
 import Icon from "react-crud-icons";
 import { Link } from "react-router-dom";
 import { getModel } from "../../../utils/moMa";
-import { fieldValue } from "../../../utils/format";
+import { fieldValue, pixPath } from "../../../utils/format";
 import { fieldTypes as ft } from "../../../utils/dico";
 
 const Card = ({ entity, data, fields = [] }) => {
@@ -32,7 +32,7 @@ const Card = ({ entity, data, fields = [] }) => {
               <h4>
                 <Link to={link + d.id}>
                   {m.icon && (
-                    <img className="e-icon" src={`/pix/${m.icon}`} alt="" />
+                    <img className="e-icon" src={pixPath + m.icon} alt="" />
                   )}
                   {fv || `( ${d.id} )`}
                 </Link>
@@ -57,7 +57,7 @@ const Card = ({ entity, data, fields = [] }) => {
           <div key={f.id}>
             <label>{f.labelShort || f.label}: </label>
             <div>
-              {icon && <img src={`/pix/${icon}`} className="lov-icon" alt="" />}
+              {icon && <img src={pixPath + icon} className="lov-icon" alt="" />}
               {fv}
             </div>
           </div>

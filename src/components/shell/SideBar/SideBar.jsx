@@ -1,27 +1,18 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 import classnames from "classnames";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Icon from "react-crud-icons";
 import { i18n_nav } from "../../../i18n/i18n";
-import appMenus from "./appMenus";
+import { demosMenu, docMenus } from "./appMenus";
+import { pixPath } from "../../../utils/format";
 import { getUrlMap } from "../../../utils/url";
-import { modelIds } from "../../../utils/moMa";
+
+import demoSVG from "./svg/eye.svg";
+import docSVG from "./svg/book.svg";
 
 import "./SideBar.scss";
 
 // #region ------- Helpers ---------
-const item2Group_Map = {};
-const sections = { doc: [] };
-
-appMenus.forEach((menuGroup) => {
-  const groupId = menuGroup.id;
-  sections[groupId] = menuGroup;
-  menuGroup.menus.forEach((menuItem) => {
-    item2Group_Map[menuItem.id] = groupId;
-  });
-});
-
 const iconViews = (mid) => (
   <div className="x-icons">
     <Link to={`/${mid}/edit/0`}>
@@ -39,80 +30,50 @@ const sLink = (label, url, icon, css) => (
     <span>{label}</span>
   </Link>
 );
-const hDemos = sLink("Demos", "/demos", "./svg/eye.svg");
-const hDocs = sLink("Documentation", "/docs", "./svg/book.svg");
-
-const MenuLink = ({ menu, active }) => (
-  <li className={classnames({ active })}>
-    {sLink(
-      menu.text,
-      `/${menu.id}/${menu.defaultViewMany || "list"}`,
-      "/pix/" + menu.icon,
-      "e-icon"
-    )}
-    {iconViews(menu.id, menu)}
-  </li>
-);
-
-const MenuLinkDoc = ({ menu, active }) => (
-  <li className={classnames({ active })} key={menu.id}>
-    <Link to={`docs/${menu.id}`}>
-      <img className="e-icon" src={"/pix/" + menu.icon} alt="" />
-      <span>{menu.text}</span>
-    </Link>
-  </li>
-);
+const hDemos = sLink("Demos", "/demos", demoSVG);
+const hDocs = sLink("Documentation", "/docs", docSVG);
 //#endregion
 
 const SideBar = ({ onClickToggle }) => {
-  const params = useParams(); // Keep for forcing render
-  const { entity, view } = getUrlMap();
-  // console.log(params, entity, view);
+  const { pathname } = useLocation();
+  const { entity, view } = getUrlMap(pathname);
 
-  const g = item2Group_Map[entity];
+  const menuLink = (menu) => (
+    <li className={classnames({ active: menu.id === entity })}>
+      {sLink(
+        menu.text,
+        `/${menu.id}/${menu.defaultViewMany || "list"}`,
+        pixPath + menu.icon,
+        "e-icon"
+      )}
+      {iconViews(menu.id, menu)}
+    </li>
+  );
+
+  const menuLinkDoc = (menu) => (
+    <li className={classnames({ active: menu.id === view })} key={menu.id}>
+      <Link to={`docs/${menu.id}`}>
+        <img className="e-icon" src={pixPath + menu.icon} alt="" />
+        <span>{menu.text}</span>
+      </Link>
+    </li>
+  );
+
+  let title = null;
   let links = null;
   let menus = [];
 
-  if (entity === "demos" || modelIds.includes(entity)) {
-    menus = [sections.demos];
-    links = hDocs;
+  if (entity === "") {
+    links = [hDemos, hDocs];
   } else if (entity === "docs") {
-    menus = [sections.docs];
+    title = hDocs;
+    menus = docMenus.map(menuLinkDoc);
     links = hDemos;
   } else {
-    links = [hDemos, hDocs];
+    title = hDemos;
+    menus = demosMenu.map(menuLink);
+    links = hDocs;
   }
-
-  const MenuLinks = ({ menus }) =>
-    menus.map((m) => <MenuLink menu={m} key={m.id} active={m.id === entity} />);
-
-  const MenuLinksDoc = ({ menus }) =>
-    menus.map((m) => (
-      <MenuLinkDoc menu={m} key={m.id} active={m.id === view} />
-    ));
-
-  const Section = (section) =>
-    section && (
-      <li className={section.id === g ? "active-li" : ""} key={section.id}>
-        {section.title && (
-          <div>
-            <NavLink to={"/" + section?.id}>
-              <img alt={section.title} src={`/svg/${section.icon}.svg`} />
-              <span>{section.title}</span>
-            </NavLink>
-          </div>
-        )}
-        <ul
-          className={classnames("nav-l2", { "nav-doc": section.id === "docs" })}
-        >
-          {section.id === "docs" ? (
-            <MenuLinksDoc menus={section.menus} activeEntity={entity} />
-          ) : (
-            <MenuLinks menus={section.menus} activeEntity={entity} />
-          )}
-        </ul>
-      </li>
-    );
 
   return (
     <nav className="evo-sidebar" role="navigation">
@@ -122,7 +83,9 @@ const SideBar = ({ onClickToggle }) => {
       <span className="nav-toggle">
         <Icon name="chevron-down" theme="none" onClick={onClickToggle} />
       </span>
-      <ul>{menus.map(Section)}</ul>
+      <div className="sections-links">{title}</div>
+      <ul>{menus}</ul>
+      <br />
       <div className="sections-links">{links}</div>
       <div id="afterNav" />
     </nav>

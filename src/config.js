@@ -5,6 +5,9 @@ const config = {
   apiPath: "https://bds.hasura.app/v1/graphql",
   adminSecret: "ENTER-SECRET-HERE",
 
+  // - prefix in app url
+  appPath: "",
+
   // - Path to uploaded files
   filesUrl: "/pix/",
 

@@ -18,6 +18,12 @@ import { locale } from "../i18n/i18n";
 import config from "../config";
 import { fieldTypes as ft } from "./dico";
 
+export let { filesUrl, appPath = "" } = config;
+if (!appPath.endsWith("/")) {
+  appPath += "/";
+}
+export const pixPath = appPath + "pix/";
+
 // Set the locale from the browser -- which may need to be configured
 moment.locale(
   locale || window.navigator.userLanguage || window.navigator.language
@@ -27,7 +33,6 @@ const f_decimal = "0,0.00";
 const f_integer = "0,0";
 const f_money = "$0,0.00";
 
-const { filesUrl } = config;
 export const xItemsCount = (count, nameSingular, namePlural) =>
   count === 0
     ? "No " + namePlural
@@ -103,7 +108,7 @@ export const fieldValue = (f, d, abbr) => {
     return (
       <span className="lov-wicon">
         {f.lovIcon && d?.icon && (
-          <img id={d?.icon} src={"/pix/" + d?.icon} alt=""></img>
+          <img id={d.icon} src={pixPath + d.icon} alt=""></img>
         )}
         {d?.name}
       </span>

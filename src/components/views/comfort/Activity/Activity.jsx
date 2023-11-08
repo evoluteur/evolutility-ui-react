@@ -5,7 +5,7 @@ import { getActivity, clearActivity } from "../../../../utils/activity";
 import ViewHeader from "../../ViewHeader/ViewHeader";
 import { getModel } from "../../../../utils/moMa";
 import { i18n_activity as i18n } from "../../../../i18n/i18n";
-import { capitalize } from "../../../../utils/format";
+import { capitalize, pixPath } from "../../../../utils/format";
 import Button from "../../../widgets/Button/Button";
 
 import "./Activity.scss";
@@ -31,7 +31,7 @@ const Activity = () => {
       act && (
         <div key={act.id}>
           <Link to={`../${entity}/browse/${act.id}`}>
-            <img className="e-icon" src={`/pix/${m.icon}`} alt="" />
+            <img className="e-icon" src={pixPath + m.icon} alt="" />
             {act.title}
           </Link>
           <div className="visits">{visitsCount(act.visits)}</div>

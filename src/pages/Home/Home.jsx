@@ -7,12 +7,14 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import pkg from "../../../package.json";
+import { pixPath } from "../../utils/format";
 import Gallery from "./Gallery";
 import { modelIds, getModel } from "../../utils/moMa";
 import ModelsLinks from "../../components/views/comfort/ModelLinks";
 
 import "./Home.scss";
 
+const logoPath = pixPath + "logos/";
 const orgIcons = [];
 const musicIcons = [];
 
@@ -23,7 +25,7 @@ modelIds.forEach((mid) => {
       const menuItem = {
         id: m.id,
         world: m.world,
-        icon: `pix/${m.icon}`,
+        icon: pixPath + m.icon,
         label: m.title || m.label,
       };
       if (m.world === "organizer") {
@@ -104,17 +106,17 @@ const Home = () => {
       </section>
       <div className="text-center tech-logos">
         <a href="https://reactjs.org/" target="react" rel="noopener noreferrer">
-          <img src="pix/logos/react.png" alt="React" />
+          <img src={logoPath + "react.png"} alt="React" />
         </a>
         <a
           href="https://graphql.org/"
           target="graphql"
           rel="noopener noreferrer"
         >
-          <img src="pix/logos/graphql.png" alt="GraphQL" />
+          <img src={logoPath + "graphql.png"} alt="GraphQL" />
         </a>
         <a href="https://hasura.io" target="hasura" rel="noopener noreferrer">
-          <img src="pix/logos/hasura.png" alt="Hasura" className="hasura" />
+          <img src={logoPath + "hasura.png"} alt="Hasura" className="hasura" />
         </a>
       </div>
     </div>

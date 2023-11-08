@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { isObject } from "underscore";
 import { fieldTypes as ft } from "../../utils/dico";
-import { fieldValue, image } from "../../utils/format";
+import { fieldValue, image, pixPath } from "../../utils/format";
 import config from "../../config";
 
 const { filesUrl } = config;
@@ -53,7 +53,7 @@ const fieldElemReadOnly = (f, d, icon) => {
     } else if (f.lovIcon && icon) {
       fw = (
         <span>
-          <img src={`/pix/${icon}`} className="lov-icon" alt="" />
+          <img src={pixPath + icon} className="lov-icon" alt="" />
           {fieldValue(f, d)}
           {d?.name}
         </span>

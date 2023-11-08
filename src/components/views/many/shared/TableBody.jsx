@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { fieldIsNumber, fieldTypes as ft } from "../../../../utils/dico";
-import { fieldValue } from "../../../../utils/format";
+import { fieldValue, pixPath } from "../../../../utils/format";
 
 const TableBody = ({ fields, data, iconPath, link }) => {
   const icon = iconPath ? (
-    <img className="e-icon" src={"/pix/" + iconPath} alt="" />
+    <img className="e-icon" src={pixPath + iconPath} alt="" />
   ) : null;
 
   const tableCell = (d, f, idx) => {

@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Icon from "react-crud-icons";
+import { pixPath } from "../../../../utils/format";
 import config from "../../../../config";
 import { getModel } from "../../../../utils/moMa";
 import { getActivity } from "../../../../utils/activity";
@@ -19,7 +20,7 @@ const Overview = ({ entity }) => {
   }
   const m = getModel(entity);
   const activityData = getActivity(entity);
-  const iconPath = `/pix/${m.icon}`;
+  const iconPath = pixPath + m.icon;
   const urlBegin = `../${entity}/`;
   const viewLink = (v) => (
     <Link key={v.id} to={urlBegin + v.id}>

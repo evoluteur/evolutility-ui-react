@@ -16,28 +16,11 @@ export const docMenus = [
   { id: "views", text: "Views", icon: "doc/object.png" },
 ];
 
-const appMenus = [
-  {
-    id: "demos",
-    title: "Demos",
-    icon: "eye",
-    world: "demos",
-    menus: modelsArray.map(
-      ({ id, label: text, icon, defaultViewMany = "list" }) => ({
-        id,
-        text,
-        icon,
-        defaultViewMany,
-      })
-    ),
-  },
-  {
-    id: "docs",
-    title: "Documentation",
-    icon: "book",
-    world: "docs",
-    menus: docMenus,
-  },
-];
-
-export default appMenus;
+export const demosMenu = modelsArray.map(
+  ({ id, label: text, icon, defaultViewMany = "list" }) => ({
+    id,
+    text,
+    icon,
+    defaultViewMany,
+  })
+);

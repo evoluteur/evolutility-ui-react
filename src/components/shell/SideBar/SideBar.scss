@@ -1,6 +1,6 @@
 @import "../../../variables";
 
-$bgcolor-menu-hover: #1e88e5;
+$bgcolor-menu-hover: #1a75c4; // #1e88e5;
 $nav-width: 190px;
 $nav-width-collapsed: 50px;
 $nav-trans-time: 0.1s;
@@ -33,41 +33,54 @@ $topbar-height: 50px;
       text-decoration: none;
     }
   }
-  div {
+  > div {
     line-height: 22px;
     padding: 7px;
     font-weight: bold;
     font-size: 16px;
   }
-  ul {
+  > ul {
     list-style-type: none;
-    margin-top: 10px;
     padding: 0;
     > li {
       position: relative;
-      font-weight: normal;
       font-size: 14px;
-      margin: 0 0 4px 0;
-    }
-  }
-  > ul {
-    padding: 0 4px !important;
-    > li {
-      > div > a > img {
-        position: relative;
-        top: -2px;
-        margin-right: 12px;
+      margin: 0 0 4px 10px;
+      border-radius: 10px;
+      transition: padding-left $nav-trans-time ease;
+      > a {
+        padding: 5px;
+        @include ellipsis();
+        img {
+          min-width: 16px;
+          min-height: 16px;
+        }
+        > span {
+          transition: display 0 $nav-trans-time;
+        }
+      }
+      transition: background-color 0.2s;
+      &:hover,
+      &.active {
+        background-color: $bgcolor-menu-hover;
+        color: white;
+        > .x-icons {
+          display: inline-block;
+          width: 65px;
+          margin-right: 10px;
+          transition: width $ease-time ease $delay-time2;
+        }
       }
     }
   }
   .x-icons {
+    position: absolute;
+    top: 7px;
+    right: -5px;
     text-align: right;
     width: 0;
     overflow: hidden;
     transition: width $ease-time ease 0s;
-    position: absolute;
-    top: 7px;
-    right: -5px;
     height: 20px;
     font-size: 12px;
     padding: 0;
@@ -89,15 +102,12 @@ $topbar-height: 50px;
   }
 
   .sections-links {
-    a {
+    > a {
       overflow: hidden;
       white-space: nowrap;
       > img {
         margin-right: 10px;
       }
-    }
-    > a {
-      font-weight: 600;
       min-width: 40px;
       margin-bottom: 20px;
       padding: 5px;
@@ -120,32 +130,6 @@ $topbar-height: 50px;
   margin-top: $topbar-height;
   min-height: 90%;
   transition: margin-left $nav-trans-time ease;
-}
-
-.nav-l2 {
-  > li {
-    border-radius: 10px;
-    padding-left: 5px;
-    > a {
-      padding: 5px;
-      img {
-        min-width: 16px;
-        min-height: 16px;
-      }
-    }
-    transition: background-color 0.2s;
-    &:hover,
-    &.active {
-      background-color: $bgcolor-menu-hover;
-      color: white;
-      > .x-icons {
-        display: inline-block;
-        width: 65px;
-        margin-right: 10px;
-        transition: width $ease-time ease $delay-time2;
-      }
-    }
-  }
 }
 
 .nav-toggle {
@@ -175,11 +159,13 @@ $topbar-height: 50px;
         transform: rotate(-90deg);
       }
     }
+    > ul > li {
+      > a > span {
+        display: none;
+      }
+    }
     .x-icons {
       display: none !important;
-    }
-    a > span {
-      display: none;
     }
   }
   > .page-content {
