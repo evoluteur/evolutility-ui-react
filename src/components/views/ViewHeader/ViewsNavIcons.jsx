@@ -2,11 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Icon from "react-crud-icons";
-import { queryUrl } from "../../../utils/url";
 import { getModel } from "utils/moMa";
 import { views, modelViewsAnalytics } from "../../../utils/dicoViews";
 
-const ViewsNavIcons = ({ id, view, entity }) => {
+const ViewsNavIcons = ({ id, view, entity, params }) => {
   let iconViews = [];
   if (view === "overview" || view === "activity") {
     return null;
@@ -25,7 +24,7 @@ const ViewsNavIcons = ({ id, view, entity }) => {
     iconViews = [views.list, views.cards];
   }
 
-  const urlFrag = (id ? "/" + id : "") + queryUrl();
+  const urlFrag = (id ? "/" + id : "") + params;
   const iconLink = (ico) => (
     <Link
       key={ico.id}
@@ -42,17 +41,18 @@ const ViewsNavIcons = ({ id, view, entity }) => {
 ViewsNavIcons.propTypes = {
   /** Model id */
   entity: PropTypes.string.isRequired,
-  /** Record id */
-  id: PropTypes.string,
   /** Active view */
   view: PropTypes.string,
+  /** Record id */
+  id: PropTypes.string,
+  // Extra parameters (url search)
+  params: PropTypes.string,
 };
 
 ViewsNavIcons.defaultProps = {
   view: null,
-  count: null,
-  comments: null,
-  text: null,
+  id: null,
+  params: "",
 };
 
 export default ViewsNavIcons;

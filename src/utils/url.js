@@ -1,7 +1,5 @@
 import queryString from "query-string";
 
-export const queryUrl = () => window.location.search || "";
-
 export function querySearch(query) {
   // - make uri params string from query object
   // - example: {a:1, b: 'bbb'} => "a=1&b=bbb"
@@ -24,26 +22,9 @@ export function parseQuery(qString) {
   return null;
 }
 
-export function getSearchText() {
-  const search = parseQuery(window.location.search);
-  return search && search.search ? search.search : null;
-}
-
-export function getUrlMap(url) {
-  const ws = (url ? url + "" : window.location.pathname).split("/");
-  return {
-    entity: ws.length > 0 ? ws[1] : null,
-    view: ws.length > 1 ? ws[2] : null,
-    id: ws.length > 2 ? ws[3] : null,
-  };
-}
-
 const urlModule = {
-  queryUrl,
   querySearch,
   parseQuery,
-  getSearchText,
-  getUrlMap,
 };
 
 export default urlModule;

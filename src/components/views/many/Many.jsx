@@ -219,6 +219,7 @@ const Many = () => {
         count={fullCount}
         view={view}
         text={pageSummary}
+        params={search}
       />
       {body()}
     </div>

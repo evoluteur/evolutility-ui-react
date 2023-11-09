@@ -44,7 +44,6 @@ const isFunction = (x) => typeof x === "function";
 
 const ViewActions = ({ entity, id }) => {
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
-
   const m = getModel(entity);
   const navigate = useNavigate();
   const isNew = id === "0" || id === 0;
