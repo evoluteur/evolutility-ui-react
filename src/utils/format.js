@@ -18,11 +18,11 @@ import { locale } from "../i18n/i18n";
 import config from "../config";
 import { fieldTypes as ft } from "./dico";
 
-export let { filesUrl, appPath = "" } = config;
-if (!appPath.endsWith("/")) {
-  appPath += "/";
+export let { filesUrl, baseName = "/" } = config;
+if (!baseName.endsWith("/")) {
+  baseName += "/";
 }
-export const pixPath = appPath + "pix/";
+export const pixPath = baseName + "pix/";
 
 // Set the locale from the browser -- which may need to be configured
 moment.locale(

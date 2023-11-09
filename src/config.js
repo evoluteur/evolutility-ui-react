@@ -5,8 +5,8 @@ const config = {
   apiPath: "https://bds.hasura.app/v1/graphql",
   adminSecret: "ENTER-SECRET-HERE",
 
-  // - prefix in app url
-  appPath: "",
+  // - prefix run app in sub-directory (also define as "homepage" in package.json)
+  // baseName: "/evodemo/",
 
   // - Path to uploaded files
   filesUrl: "/pix/",

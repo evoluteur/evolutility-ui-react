@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import classnames from "classnames";
 import { ToastContainer } from "react-toastify";
+import config from "./config";
 
 import SideBar from "./components/shell/SideBar/SideBar";
 import TopBar from "./components/shell/TopBar/TopBar";
@@ -22,6 +23,8 @@ import "./App.scss";
 import "./App-custom.scss";
 import "react-toastify/scss/main.scss";
 import "react-crud-icons/src/Icon.scss";
+
+const baseName = config.baseName || "/";
 
 const AppRoutes = () => (
   <Routes>
@@ -44,7 +47,7 @@ const App = () => {
 
   return (
     <div className={css} data-testid="app">
-      <BrowserRouter>
+      <BrowserRouter basename={baseName}>
         <Routes>
           <Route
             path="*"
