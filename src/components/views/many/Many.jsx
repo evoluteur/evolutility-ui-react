@@ -62,9 +62,10 @@ const Many = () => {
 
   useEffect(() => {
     let done = false;
+    setIsLoading(true);
     setError(null);
     setData(null);
-    setIsLoading(true);
+    setFullCount(null);
     window.scrollTo(0, 0);
     getMany(entity, url.parseQuery(search)).then((response) => {
       if (done) {
@@ -102,7 +103,7 @@ const Many = () => {
       }
       navigate(link);
     },
-    [navigate, entity, search, view, sortField, sortDirection]
+    [entity, search, view, sortField, sortDirection]
   );
 
   const clickPagination = useCallback(
@@ -128,7 +129,7 @@ const Many = () => {
       }
       navigate(`/${entity}/${view}?` + url.querySearch(query));
     },
-    [navigate, entity, search, view]
+    [entity, search, view]
   );
 
   const pageSummary = useMemo(() => {

@@ -18,9 +18,9 @@ const TopBar = () => {
       path.splice(0, 1);
     }
   }
-  const [e, vw, id] = path;
-  const model = getModel(e);
-  const entityLink = `/${e}/`;
+  const [entity, view, id] = path; // no access to useParams here
+  const model = getModel(entity);
+  const entityLink = `/${entity}/`;
   return (
     <nav className="TopBar" role="banner">
       <Link to="/">
@@ -38,7 +38,7 @@ const TopBar = () => {
               </Link>
             ))}
           </ul>
-          <ViewActions id={id} entity={e} view={vw} />
+          <ViewActions entity={entity} view={view} id={id} />
         </div>
       )}
       <GitHubLink />

@@ -62,8 +62,8 @@ const recordTitle = (m, data, isNew) => {
 
 const One = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState({});
-  const [userData, setUserData] = useState({ ...data });
+  const [data, setData] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -115,7 +115,6 @@ const One = () => {
       setAllData(defaults);
       setIsLoading(false);
     }
-
     return () => {
       done = true;
     };

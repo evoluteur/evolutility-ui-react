@@ -1,11 +1,10 @@
 import React from "react";
 import classnames from "classnames";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Icon from "react-crud-icons";
 import { i18n_nav } from "../../../i18n/i18n";
 import { demosMenu, docMenus } from "./appMenus";
 import { pixPath } from "../../../utils/format";
-import { getUrlMap } from "../../../utils/url";
 
 import demoSVG from "./svg/eye.svg";
 import docSVG from "./svg/book.svg";
@@ -30,16 +29,15 @@ const sLink = (label, url, icon, css) => (
     <span>{label}</span>
   </Link>
 );
-const hDemos = sLink("Demos", "/demos", demoSVG);
-const hDocs = sLink("Documentation", "/docs", docSVG);
+const hDemos = sLink("Demos", "demos", demoSVG);
+const hDocs = sLink("Documentation", "docs", docSVG);
 //#endregion
 
 const SideBar = ({ onClickToggle }) => {
-  const { pathname } = useLocation();
-  const { entity, view } = getUrlMap(pathname);
+  const { entity, view } = useParams();
 
   const menuLink = (menu) => (
-    <li className={classnames({ active: menu.id === entity })}>
+    <li className={classnames({ active: menu.id === entity })} key={menu.id}>
       {sLink(
         menu.text,
         `/${menu.id}/${menu.defaultViewMany || "list"}`,

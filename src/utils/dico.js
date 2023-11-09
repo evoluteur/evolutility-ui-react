@@ -47,7 +47,6 @@ export const fieldIsNumeric = (f) => fieldIsNumber(f) || fieldIsDateOrTime(f);
 export const fieldChartable = (f) =>
   //TODO: more charts
   f.type === ft.lov || f.type === ft.bool;
-// TODO: implement queries for other field types
 // f.type === ft.lov || f.type === ft.bool || fieldIsNumber(f);
 
 export const fieldInCharts = (f) => fieldChartable(f) && !f.noCharts;

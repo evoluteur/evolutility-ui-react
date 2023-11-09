@@ -2,8 +2,8 @@
 
 const config = {
   // - Path to GraphQL API
-  apiPath: "https://bds.hasura.app/v1/graphql",
-  adminSecret: "ENTER-SECRET-HERE",
+  apiPath: "TODO: ENTER GRAPHQL API PATH HERE",
+  adminSecret: "TODO: ENTER ADMIN SECRET HERE",
 
   // - prefix run app in sub-directory (also define as "homepage" in package.json)
   // baseName: "/evodemo/",

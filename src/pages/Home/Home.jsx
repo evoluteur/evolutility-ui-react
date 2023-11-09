@@ -57,7 +57,6 @@ const Home = () => {
           Toolkit to build CRUD UIs with models rather than code
         </h2>
       </section>
-      TEST: <Link to="/mapper">Mapper</Link>
       <section>
         <div>
           Evolutility provides a{" "}

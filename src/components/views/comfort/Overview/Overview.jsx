@@ -47,7 +47,7 @@ const Overview = () => {
       setChartField(m.fieldsH[fid]);
     };
 
-    const urlBegin = `../${entity}/`;
+    const urlBegin = `/${entity}/`;
     const viewLink = (v) => (
       <Link key={v.id} to={urlBegin + v.id}>
         <Icon name={v.icon} theme="light" />
