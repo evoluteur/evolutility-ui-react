@@ -296,6 +296,13 @@ export const fieldMeta = {
     //   db: true,
     // },
     {
+      id: "list",
+      description:
+        'List of  items in the dropdown as an array  of id-text objects (only for fields of "lov" type). If ommited, the list will be  retrieved in the first query by id on that object.',
+      ui: true,
+      db: true,
+    },
+    {
       id: "lovIcon",
       description: 'LOV items have icons (only for fields of "lov" type).',
       ui: true,

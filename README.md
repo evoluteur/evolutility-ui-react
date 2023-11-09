@@ -229,7 +229,8 @@ Objects have fields.
 | max, min     | Maximum/Minimum value allowed (only applies to numeric fields).      |
 | maxLength, minLength | Maximum/Minimum length allowed (only applies to text fields).      |
 | regExp       | Regular expression used to validate the field value.     |
-| lovIcon      | Set to True to include icon with LOV items.    |
+| list         | List of  items in the dropdown as an array  of id-text objects (only for fields of "lov" type). If ommited, the list will be  retrieved in the first query by id on that object.   |
+| lovIcon      | Set to True to include icon with LOV items(only for fields of "lov" type).    |
 | object       | Model id for the object to link to (only for fields of "lov" type).     |
 | chartObject | Optional overide for object name in charts (only for "lov" fields). |
 | aggregate | Optional overide for aggregation name in charts (only for "lov" fields). |

@@ -178,7 +178,15 @@ export const getOne = (entity, id, nextOrPrevious) => {
             errors: [{ message: "No record found for id=" + id + "." }],
           };
         }
-        return resp.data?.one;
+        const data = resp.data?.one;
+        const m = getModel(entity);
+        if (data && m._lovNoList) {
+          data._lovs = {};
+          m._lovNoList.forEach((fid) => {
+            data._lovs[fid] = resp.data["lov_" + fid];
+          });
+        }
+        return data;
       });
   }
 };

@@ -13,6 +13,7 @@ import { modelIds, getModel } from "../../../utils/moMa";
 const calculatedProps = [
   "titleFunction",
   "fieldsH",
+  "_lovNoList",
   "_prepared",
   "_preparedCollecs",
 ];

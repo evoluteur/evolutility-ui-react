@@ -92,7 +92,6 @@ const One = () => {
     setError(null);
     if (id && !isNew) {
       setIsLoading(true);
-      const m = getModel(entity);
       getOne(entity, parseInt(id, 10)).then((data) => {
         if (done) {
           return;
@@ -100,12 +99,18 @@ const One = () => {
         if (data.errors) {
           setError(data.errors[0]);
         } else {
-          if (data.data) {
-            data = data.data;
+          if (model._lovNoList?.length) {
+            // Add lov field lists if provided
+            model._lovNoList.forEach((fid) => {
+              const f = model.fieldsH[fid];
+              f.list = data._lovs[fid];
+            });
+            delete data._lovs;
+            delete model._lovNoList;
           }
           setAllData(data);
           if (withActivity) {
-            logActivity(entity, id, data[m.titleField], "read");
+            logActivity(entity, id, data[model.titleField], "read");
           }
         }
         setIsLoading(false);

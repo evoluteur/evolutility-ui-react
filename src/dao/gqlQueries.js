@@ -299,7 +299,11 @@ export const qOne = (entity, nextOrPrevious) => {
     } else {
       q += `_by_pk(id:$id)`;
     }
-    q += `{ ${qFields(m)} ${qCollecs(m)} }}`;
+    q += `{ ${qFields(m)} ${qCollecs(m)} }`;
+    if (m._lovNoList?.length > 0) {
+      q += m._lovNoList.map((fid) => qLOV(m, fid)).join(" ");
+    }
+    q += "}";
     return q;
   } else {
     console.error("Model not found " + entity);

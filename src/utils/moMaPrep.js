@@ -1,21 +1,22 @@
 import { fieldInCharts } from "./dico";
 import { capitalize } from "./format";
 
-const makeMapById = (arr) => {
-  const objH = {};
-  if (arr) {
-    arr.forEach((o) => {
-      objH[o.id] = o;
-    });
-  }
-  return objH;
-};
-
 export const prepModel = (m) => {
   if (!m._prepared) {
     // - Fields
-    if (!m.fieldsH) {
-      m.fieldsH = makeMapById(m.fields);
+    if (!m.fieldsH && m.fields) {
+      const fsH = {};
+      const lovNoList = [];
+      m.fields.forEach((f) => {
+        fsH[f.id] = f;
+        if (f.type === "lov" && !(f.object || f.list)) {
+          lovNoList.push(f.id);
+        }
+      });
+      m.fieldsH = fsH;
+      if (lovNoList.length > 0) {
+        m._lovNoList = lovNoList;
+      }
     }
     // - Groups
     if (!m.groups || m?.groups.length === 0) {
