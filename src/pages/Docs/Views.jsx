@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React, { useEffect } from "react";
+import { pixPath } from "utils/format";
 import { viewDoc } from "./docMetadata";
 import Icon from "react-crud-icons";
 
@@ -21,7 +22,11 @@ const view = (v) => (
       <div>Route: "{v.route}"</div>
       <br />
       <div className="figure">
-        <img src={`/screenshots/${v.img}`} alt={v.name} className="shadowpix" />
+        <img
+          src={`${pixPath}screenshots/${v.img}`}
+          alt={v.name}
+          className="shadowpix"
+        />
       </div>
     </div>
   </div>

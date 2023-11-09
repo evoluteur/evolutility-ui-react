@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from "react";
+import { pixPath } from "utils/format";
 import AliceCarousel from "react-alice-carousel";
 import { viewDoc } from "../Docs/docMetadata";
 
@@ -14,7 +15,7 @@ const items = allViewsInfo.map((v) => (
     {v.name}
     <div>
       <img
-        src={"./screenshots/" + v.img}
+        src={`${pixPath}screenshots/${v.img}`}
         onDragStart={handleDragStart}
         role="presentation"
       />

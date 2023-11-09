@@ -5,7 +5,7 @@ Evolutility-UI-React is a set of **model-driven views** to [Browse](#Browse), [E
 
 With it you can easily build CRUD applications by writing models rather than code. It uses [Hasura](https://hasura.io) GraphQL backend. No hand-coding is necessary!
 
-![Edit](public/screenshots/one-edit.png)
+![Edit](public/pix/screenshots/one-edit.png)
 
 
 ### Table of Contents
@@ -90,7 +90,7 @@ Notes: Views for actions (search, filter, export) will come later.
 ### Browse
 Shows all fields for viewing (read only). Fields are grouped in panels.
 
-![Browse](public/screenshots/one-browse.png)
+![Browse](public/pix/screenshots/one-browse.png)
 
 Code: [/src/components/views/one/Browse/Browse.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/one/Browse/Browse.jsx)
 
@@ -102,7 +102,7 @@ This view shows all fields for edition to create or update records.
 It automatically performs validation based on the model.
 Fields are grouped in panels and tabs.
 
-![Edit](public/screenshots/one-edit.png)
+![Edit](public/pix/screenshots/one-edit.png)
 
 Code: [/src/components/views/one/Edit/Edit.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/one/Edit/Edit.jsx)
 
@@ -118,7 +118,7 @@ Route: "/{entity}/edit/{id}"
 ### List
 Gives a tabular view of a collection.
 
-![List](public/screenshots/many-list.png)
+![List](public/pix/screenshots/many-list.png)
 
 Code: [/src/components/views/many/List/List.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/List/List.jsx)
 
@@ -128,7 +128,7 @@ Route: "/{entity}/list"
 ### Cards
 Shows records side by side as cards.
 
-![Cards](public/screenshots/many-cards.png)
+![Cards](public/pix/screenshots/many-cards.png)
 
 Code: [/src/components/views/many/Cards/Cards.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/Cards/Cards.jsx)
 
@@ -138,7 +138,7 @@ Route: "/{entity}/cards"
 ### Charts
 Draws charts about the collection. Currently bars and pie charts are implemented, a list with count and percentages is also available. Only provided for fields of types like boolean, lov, integer, decimal, date... (not text or textmultilines).
 
-![Charts](public/screenshots/analytics-charts.png)
+![Charts](public/pix/screenshots/analytics-charts.png)
 
 Code: [/src/components/views/analytics/Charts/Charts.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/analytics/Charts/Charts.jsx)
 
@@ -150,7 +150,7 @@ Note: The "Charts" view is currently only implemented for REST, not available wi
 ### Stats
 Display last update, number of updates in the last week, and for numeric fields the min, max, count, average.
 
-![Stats](public/screenshots/analytics-stats.png)
+![Stats](public/pix/screenshots/analytics-stats.png)
 
 Code: [/src/components/views/analytics/Stats/Stats.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/analytics/Stats/Stats.jsx)
 
@@ -165,7 +165,7 @@ Display a summary of the object and the latest activity on it.
 ### Overview
 Display a summary of the object and the latest activity on it.
 
-![Overview](public/screenshots/comfort-overview.png)
+![Overview](public/pix/screenshots/comfort-overview.png)
 
 Code: [/src/components/views/comfort/Overview/Overview.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/comfort/Overview/Overview.jsx)
 
@@ -175,7 +175,7 @@ Route: "/{entity}/"
 ### Activity
 Show list of "last visited" and "most visited" records for the object (stored in the browser's localStorage).
 
-![Activity](public/screenshots/comfort-activity.png)
+![Activity](public/pix/screenshots/comfort-activity.png)
 
 Code: [/src/components/views/comfort/Activity/Activity.jsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/comfort/Activity/Activity.jsx)
 
