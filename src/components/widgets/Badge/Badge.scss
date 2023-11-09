@@ -4,11 +4,16 @@
   display: inline-block;
   height: 28px;
   min-width: 28px;
-  background-color: $bgcolor-badge;
   padding: 5px;
   border-radius: 14px;
   font-size: 14px;
   font-weight: 400;
   margin: 0 20px 0 10px;
   text-align: center;
+}
+
+.alert-default {
+  color: black;
+  background-color: $bgcolor-badge;
+  border: silver 1px solid;
 }
