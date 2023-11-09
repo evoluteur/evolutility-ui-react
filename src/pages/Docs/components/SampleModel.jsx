@@ -11,7 +11,7 @@ import PrettyJSON from "./PrettyJSON";
 import { modelIds, getModel } from "../../../utils/moMa";
 
 const calculatedProps = [
-  "titleFunction",
+  "titleFunction", // Do not display functions
   "fieldsH",
   "_lovNoList",
   "_prepared",

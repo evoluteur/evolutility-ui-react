@@ -142,10 +142,11 @@ const One = () => {
       const cbFieldChange = (fid, value) => {
         const newData = structuredClone(userData || {});
         if (value?.name && value.name.type === "span") {
+          const children = value.name.props.children;
           newData[fid] = {
             id: value.id,
-            name: value.name.props.children[1],
-            icon: value.name.props.children[0]?.props?.id,
+            name: children[1],
+            icon: children[0]?.props?.id,
           };
         } else {
           newData[fid] = value;
@@ -165,9 +166,7 @@ const One = () => {
             const newId = response?.data?.id;
             if (response.errors) {
               // TODO:
-              toast.error(
-                "Server error while inserting or updating the record."
-              );
+              toast.error("Server error: " + response.errors[0].message);
             } else {
               if (intId) {
                 toastMsg = i18n_actions.updated.replace(

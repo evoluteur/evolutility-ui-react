@@ -67,8 +67,8 @@ const Home = () => {
           <strong>
             a set of <Link to="docs/views">model-driven Views</Link>
           </strong>{" "}
-          (Browse, Edit, List, Cards, Dashboards...) to give them life without
-          writing code.
+          (Browse, Edit, List, Cards, Dashboards...) to build UIs for GraphhQL
+          with models rather than code.
         </div>
 
         <Gallery />

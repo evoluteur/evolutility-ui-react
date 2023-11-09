@@ -17,6 +17,7 @@ import {
 } from "./gqlQueries.js";
 import { setCache, getCache, clearCache } from "./cache";
 import { decimalString } from "../utils/format.js";
+import { i18n_errors } from "i18n/i18n";
 import config from "../config.js";
 
 const { apiPath } = config;
@@ -175,7 +176,7 @@ export const getOne = (entity, id, nextOrPrevious) => {
           return resp;
         } else if (resp.data?.one === null) {
           return {
-            errors: [{ message: "No record found for id=" + id + "." }],
+            errors: [{ message: i18n_errors.badId.replace("{0}", id) }],
           };
         }
         const data = resp.data?.one;

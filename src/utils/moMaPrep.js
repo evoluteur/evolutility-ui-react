@@ -4,10 +4,10 @@ import { capitalize } from "./format";
 export const prepModel = (m) => {
   if (!m._prepared) {
     // - Fields
-    if (!m.fieldsH && m.fields) {
+    if (!m.fieldsH) {
       const fsH = {};
       const lovNoList = [];
-      m.fields.forEach((f) => {
+      m.fields?.forEach((f) => {
         fsH[f.id] = f;
         if (f.type === "lov" && !(f.object || f.list)) {
           lovNoList.push(f.id);
@@ -63,7 +63,7 @@ const prepModelCollecs = (m, models) => {
               // - if no fields, get it from collec object (fields in list but not the object)
               if (!c.fields) {
                 c.fields = collecModel.fields.filter(
-                  (f) => f.inMany && !f.object === c.object
+                  (f) => f.inMany && !f.object === cId
                 );
               }
               const fsh = collecModel.fieldsH;
@@ -88,12 +88,12 @@ const prepModelCollecs = (m, models) => {
 };
 
 const prepModels = (models) => {
-  const ms = Object.keys(models);
+  const modelIds = Object.keys(models);
   // need 2 passes for field map to be populated first, then collecs
-  ms.forEach((m) => {
+  modelIds.forEach((m) => {
     models[m] = prepModel(models[m]);
   });
-  ms.forEach((m) => {
+  modelIds.forEach((m) => {
     models[m] = prepModelCollecs(models[m], models);
   });
   return models;
