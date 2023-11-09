@@ -39,8 +39,8 @@ const getRange = (pageIdx, pageSize, totalSize) => {
 const Many = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [fullCount, setFullCount] = useState(null);
   const [error, setError] = useState(null);
+  const [fullCount, setFullCount] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
   const [sortField, setSortField] = useState(null);
 
@@ -73,9 +73,10 @@ const Many = () => {
       }
       if (response.errors) {
         setError(response.errors[0]);
+      } else {
+        setFullCount(response._full_count);
+        setData(response);
       }
-      setFullCount(response._full_count);
-      setData(response);
       setIsLoading(false);
     });
     return () => {
@@ -219,7 +220,6 @@ const Many = () => {
         count={fullCount}
         view={view}
         text={pageSummary}
-        params={search}
       />
       {body()}
     </div>
