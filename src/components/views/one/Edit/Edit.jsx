@@ -145,7 +145,9 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
             );
           })}
         {panelActionButtons}
-        <Timestamps created={data.created_at} updated={data.updated_at} />
+        {!isNew && (
+          <Timestamps created={data.created_at} updated={data.updated_at} />
+        )}
       </div>
     </div>
   );

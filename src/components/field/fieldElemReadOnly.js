@@ -29,6 +29,17 @@ const itemInList = (id, list) => {
   return "N/A";
 };
 
+const doc = (d, path) => {
+  if (!d) {
+    return null;
+  }
+  return (
+    <a href={encodeURI(path + d)} target="_blank" rel="noopener noreferrer">
+      {d}
+    </a>
+  );
+};
+
 const fieldElemReadOnly = (f, d, icon) => {
   // - return the formatted field value
   let fw;
@@ -46,7 +57,7 @@ const fieldElemReadOnly = (f, d, icon) => {
   if (f.type === ft.image && d) {
     fw = image(filesUrl + d);
   } else if (f.type === ft.doc) {
-    fw = document(d, filesUrl);
+    fw = doc(d, filesUrl);
   } else if (f.type === ft.lov) {
     if (f.object) {
       fw = <Link to={`/${f.object}/browse/${d?.id}`}>{fieldValue(f, d)}</Link>;

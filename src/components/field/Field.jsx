@@ -33,7 +33,7 @@ const createOption = (id, text) => (
   </option>
 );
 
-const document = (d, path) => {
+const doc = (d, path) => {
   if (nullOrUndefined(d)) {
     return null;
   }
@@ -206,7 +206,7 @@ const Field = ({
             />
           );
         } else {
-          pix = document(d, filesUrl);
+          pix = doc(d, filesUrl);
         }
       }
 
