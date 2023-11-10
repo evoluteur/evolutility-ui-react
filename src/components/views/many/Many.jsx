@@ -18,6 +18,7 @@ import ViewHeader from "../ViewHeader/ViewHeader";
 import Pagination from "../../widgets/Pagination/Pagination";
 import Spinner from "../../widgets/Spinner/Spinner";
 import Alert from "../../widgets/Alert/Alert";
+import InvalidRoute from "../comfort/Overview/InvalidRoute";
 import EmptyState from "./shared/EmptyState";
 import { i18n_msg, i18n_errors } from "../../../i18n/i18n";
 import config from "../../../config";
@@ -181,12 +182,7 @@ const Many = () => {
 
   const body = () => {
     if (!model) {
-      return (
-        <Alert
-          title={i18n_errors.error}
-          message={i18n_errors.badEntity.replace("{0}", entity)}
-        />
-      );
+      return <InvalidRoute entity={entity} />;
     }
     if (error) {
       return <Alert title={i18n_errors.serverError} message={error.message} />;
@@ -214,14 +210,16 @@ const Many = () => {
 
   return (
     <div className={"evol-many model_" + entity}>
-      <ViewHeader
-        entity={entity}
-        title={title}
-        count={fullCount}
-        view={view}
-        text={pageSummary}
-        params={search}
-      />
+      {model && (
+        <ViewHeader
+          entity={entity}
+          title={title}
+          count={fullCount}
+          view={view}
+          text={pageSummary}
+          params={search}
+        />
+      )}
       {body()}
     </div>
   );

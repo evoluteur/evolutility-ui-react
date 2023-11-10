@@ -76,7 +76,7 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
     change: fieldChange,
     // dropFile: uploadFileOne,
   };
-  const linkBrowse = `/${entity}/${isNew ? "list" : "browse/" + id}`;
+  const linkCancel = `/${entity}/${isNew ? "list" : "browse/" + id}`;
   const fnField = (f) => {
     if (f) {
       const invalidMsg = invalids ? invalids[f.id] : null;
@@ -98,7 +98,7 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
 
   const panelActionButtons = (
     <div className="form-buttons noprint">
-      <Button type="default" label={i18n_actions.cancel} url={linkBrowse} />
+      <Button type="default" label={i18n_actions.cancel} url={linkCancel} />
       <Button
         type="primary"
         onClick={clickSave}

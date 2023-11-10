@@ -19,10 +19,10 @@ const SearchLabel = memo(({ params }) => {
   const filters = [];
   ps.forEach((p) => {
     const [field, cond] = p.split("=");
-    if (field !== "order" && field !== "page") {
+    if (!["order", "page", "pageSize"].includes(field)) {
       const idx = cond.indexOf(".");
       if (idx > 0) {
-        const op = operators[cond.substring(0, idx)];
+        const op = operators[cond.substring(0, idx)] || " ";
         const v = cond.substring(idx + 1);
         // TODO: use model to get correct field label
         filters.push(field + op + v);

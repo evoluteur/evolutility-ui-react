@@ -36,8 +36,8 @@ const Doc = () => {
           <strong>
             a set of <Link to="./views">model-driven Views</Link>
           </strong>{" "}
-          (Browse, Edit, List, Cards, Dashboards...) to give them life without
-          writing code.
+          (Overview, List, Cards, Browse, Edit, Dashboard...) to give them life
+          without writing code.
         </p>
         <h3 id="table-of-contents">Table of Contents</h3>
         <ol style={{ listStyleType: "decimal" }}>
