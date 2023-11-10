@@ -57,11 +57,8 @@ const SideBar = ({ onClickToggle }) => {
     </li>
   );
 
-  let title = null;
-  let links = null;
-  let menus = [];
-
-  if (entity === "") {
+  let title, links, menus;
+  if (!entity) {
     links = [hDemos, hDocs];
   } else if (entity === "docs") {
     title = hDocs;
@@ -81,9 +78,13 @@ const SideBar = ({ onClickToggle }) => {
       <span className="nav-toggle">
         <Icon name="chevron-down" theme="none" onClick={onClickToggle} />
       </span>
-      <div className="sections-links">{title}</div>
-      <ul>{menus}</ul>
-      <br />
+      {title && (
+        <>
+          <div className="sections-links">{title}</div>
+          <ul>{menus}</ul>
+          <br />
+        </>
+      )}
       <div className="sections-links">{links}</div>
       <div id="afterNav" />
     </nav>
