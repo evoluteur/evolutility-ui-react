@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 import Icon from "react-crud-icons";
 
@@ -13,7 +13,7 @@ const icons = {
 
 const icon = (name) => <Icon name={icons[name]} size="medium" theme="none" />;
 
-const Alert = ({ title, message, type }) => (
+const Alert = memo(({ title, message, type }) => (
   <div className={"alert alert-" + type} role="alert" data-testid="alert">
     <h3 className="alert-title">
       {title && icon(type)}
@@ -21,7 +21,7 @@ const Alert = ({ title, message, type }) => (
     </h3>
     <div>{message}</div>
   </div>
-);
+));
 
 export default Alert;
 

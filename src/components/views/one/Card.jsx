@@ -5,7 +5,7 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2023 Olivier Giulieri
 
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 import { fieldPropTypes } from "../modelPropTypes";
 
@@ -15,22 +15,21 @@ import { getModel } from "../../../utils/moMa";
 import { fieldValue, pixPath } from "../../../utils/format";
 import { fieldTypes as ft } from "../../../utils/dico";
 
-const Card = ({ entity, data, fields = [] }) => {
+const Card = memo(({ entity, data, fields = [] }) => {
   const d = data || {};
   const m = getModel(entity);
-  const link = `/${entity}/${m.defaultViewOne || "browse"}/`;
+  const linkBrowse = `/${entity}/${m.defaultViewOne || "browse"}/`;
   const linkEdit = `/${entity}/edit/`;
 
   return (
     <div className="panel">
       {fields.map((f, idx) => {
         const fv = fieldValue(f, d[f.id]);
-
         if (idx === 0) {
           return (
             <div key={f.id} className="card-title">
               <h4>
-                <Link to={link + d.id}>
+                <Link to={linkBrowse + d.id}>
                   {m.icon && (
                     <img className="e-icon" src={pixPath + m.icon} alt="" />
                   )}
@@ -48,7 +47,7 @@ const Card = ({ entity, data, fields = [] }) => {
         if (f.type === ft.image) {
           return (
             <div key={f.id} className="card-fld-center">
-              <Link to={link + d.id}>{fv}</Link>
+              <Link to={linkBrowse + d.id}>{fv}</Link>
             </div>
           );
         }
@@ -65,7 +64,7 @@ const Card = ({ entity, data, fields = [] }) => {
       })}
     </div>
   );
-};
+});
 
 export default Card;
 

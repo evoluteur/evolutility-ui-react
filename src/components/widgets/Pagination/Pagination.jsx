@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 import config from "../../../config";
 
@@ -6,7 +6,7 @@ import "./Pagination.scss";
 
 const { pageSize } = config;
 
-const Pagination = ({ count, fullCount, pageIndex, onClick }) => {
+const Pagination = memo(({ count, fullCount, pageIndex, onClick }) => {
   if (fullCount > pageSize) {
     let gapIdx = 0;
     const paginationBody = [];
@@ -88,7 +88,7 @@ const Pagination = ({ count, fullCount, pageIndex, onClick }) => {
     );
   }
   return null;
-};
+});
 
 export default Pagination;
 
