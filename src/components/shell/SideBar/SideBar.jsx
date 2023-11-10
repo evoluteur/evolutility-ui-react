@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Icon from "react-crud-icons";
 import { i18n_nav } from "../../../i18n/i18n";
 import { demosMenu, docMenus } from "./appMenus";
@@ -34,8 +34,8 @@ const hDocs = sLink("Documentation", "docs", docSVG);
 //#endregion
 
 const SideBar = ({ onClickToggle }) => {
-  const { entity, view } = useParams();
-
+  // const { entity, view } = useParams(); // not  outside of evolutility routes
+  const [entity, view] = useLocation().pathname.slice(1).split("/");
   const menuLink = (menu) => (
     <li className={classnames({ active: menu.id === entity })} key={menu.id}>
       {sLink(
