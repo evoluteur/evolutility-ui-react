@@ -15,20 +15,26 @@ const SearchLabel = memo(({ params }) => {
   if (!params) {
     return null;
   }
-  // TODO: use model to get it right
   const ps = params.slice(1).split("&");
-  const filters = ps.map((p) => {
+  const filters = [];
+  ps.forEach((p) => {
     const [field, cond] = p.split("=");
-    const idx = cond.indexOf(".");
-    if (idx > 0) {
-      const op = operators[cond.substring(0, idx)];
-      const v = cond.substring(idx + 1);
-      return field + op + v;
+    if (field !== "order" && field !== "page") {
+      const idx = cond.indexOf(".");
+      if (idx > 0) {
+        const op = operators[cond.substring(0, idx)];
+        const v = cond.substring(idx + 1);
+        // TODO: use model to get correct field label
+        filters.push(field + op + v);
+      }
+      filters.push(`${field}="${cond}"`);
     }
-    return `${field}="${cond}"`;
   });
-  const fs = filters.join(" and ");
-  return <Badge text={`Filter: ${fs}`} type="info" />;
+  if (filters.length > 0) {
+    const fs = filters.join(" and ");
+    return <Badge text={`Filter: ${fs}`} type="info" />;
+  }
+  return null;
 });
 
 // TODO: make charts work w/ search & filters (and switch comment below)

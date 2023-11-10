@@ -151,7 +151,12 @@ export const qMany = (entity, options) => {
     if (f) {
       oDirection = oDirection ? oDirection : "asc";
       if (f.type === ft.lov) {
-        gOpts.push(`order_by:{${f.id}:{name:${oDirection}}}`);
+        let displayFieldId = "name";
+        if (f.object) {
+          const m2 = getModel(f.object);
+          displayFieldId = m2.titleField || "name";
+        }
+        gOpts.push(`order_by:{${f.id}:{${displayFieldId}:${oDirection}}}`);
       } else {
         gOpts.push(`order_by:{${f.id}:${oDirection}}`);
       }
