@@ -94,19 +94,8 @@ export const qMany = (entity, options) => {
       Object.keys(options).forEach((opt) => {
         if (opt === "page") {
           gOpts.push("offset:" + options.page * pSize);
-        } else if (opt === "pageSize") {
-          // do nothing
-        } else if (opt === "order") {
-          // const orderParams = options.order.split(".");
-          // const [oField, oDirection] = orderParams;
-          // const f = m.fieldsH[oField];
-          // if (f) {
-          //   if (f.type === ft.lov) {
-          //     gOpts.push(`order_by:{${oField}:{name:${oDirection}}}`);
-          //   } else {
-          //     gOpts.push(`order_by:{${oField}:${oDirection}}`);
-          //   }
-          // }
+        } else if (opt === "page" || opt === "pageSize" || opt === "order") {
+          // do nothing, treated later
         } else if (opt === "search") {
           const { search } = options;
           const searchFields = m.fields.filter(

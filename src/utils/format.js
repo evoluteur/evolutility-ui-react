@@ -33,6 +33,9 @@ const f_decimal = "0,0.00";
 const f_integer = "0,0";
 const f_money = "$0,0.00";
 
+const offSet = new Date().getTimezoneOffset();
+const offSetx60000 = offSet * 60000;
+
 export const xItemsCount = (count, nameSingular, namePlural) =>
   count === 0
     ? "No " + namePlural
@@ -56,7 +59,7 @@ export const trueDate = (d) => {
     return null;
   }
   const d1 = new Date(d);
-  return new Date(d1.getTime() + Math.abs(d1.getTimezoneOffset() * 60000));
+  return new Date(d1.getTime() + offSetx60000);
 };
 export const dateTZ = (d) => (d !== null ? d.toISOString() : null);
 export const dateString = (d) => mFormat(d, "L");

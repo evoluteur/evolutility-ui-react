@@ -1,12 +1,10 @@
-# Evolutility-UI-React &middot; [![GitHub license](https://img.shields.io/github/license/evoluteur/evolutility-ui-react)](https://github.com/evoluteur/evolutility-ui-react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/evolutility-ui-react)](https://www.npmjs.com/package/evolutility-ui-react)
+# Evolutility-UI-React
 
 # Roadmap
 
-- Write Vision/Manifesto + Plan
+- Live demo
 
 - Rethink metamodel (add transform, more separation b/w backend and front end, new "expression" prop for fieldTypes and FieldGroups, different field type for lov and object, maybe single lov table...
-
-- Live demo
 
 - Make a JIRA style app to track evolutility development (and replace this list) or do it in GitHub.
 
@@ -25,23 +23,20 @@
 - Add "Kanban" view w/ drag & drop
 - Dependent fields
 - Integrate Designer inside each views
-- plug RTKQuery or TanStack Query (=> caching)
+- plug SWR or RTKQuery or TanStack Query 
 - Add checkboxes for selection to the List and Cards views
 - Add filtering for List and Card views (and later for Groups)
 - Add "Clone" action
 - CSS for print
 - Theme Dark/Light, Comfortable/Compact
-- Better 404 page
-- Option for Drawer rather than navigation
+- Better 404 page 
 - Drawer for editing metadata
 - Add User settings & preferences (move most of config.js there)
 - a pluggin system for new Field Types or Views
-- upgrade components to use functions rather than classes
 - Add sorting for Cards
 - Tooltip style Confirmation on delete.
 - Warning when leaving page w/ unsaved changes.
 - pluggins for views ( w/ single-spa?) + make Stats & Charts pluggins
-- pluggins for FieldTypes
 - Add Kaggle style table view
 - Use Yup for validation (maybe validation rules in json or keep the main ones in separate columns like now)
 - Adding tests

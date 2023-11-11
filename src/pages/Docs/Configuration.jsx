@@ -30,7 +30,7 @@ const Configuration = () => (
       </thead>
       <tbody>
         {configOptions.map((c) => (
-          <tr>
+          <tr key={c.name}>
             <td>{c.name}</td>
             <td>{c.description}</td>
             <td>{c.example}</td>
