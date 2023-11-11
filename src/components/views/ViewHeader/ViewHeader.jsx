@@ -27,7 +27,6 @@ const SearchLabel = memo(({ params }) => {
         // TODO: use model to get correct field label
         filters.push(field + op + v);
       }
-      filters.push(`${field}="${cond}"`);
     }
   });
   if (filters.length > 0) {
