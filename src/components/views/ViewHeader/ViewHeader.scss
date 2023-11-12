@@ -10,13 +10,18 @@
     width: calc(100% - 90px);
     min-height: 40px;
     @include ellipsis();
+    > .title-txt {
+      margin-right: 5px;
+    }
     .evo-badge {
       position: relative;
       top: -4px;
     }
     .h-txt {
+      margin-left: 5px;
       font-size: $text-font-size;
       font-weight: normal;
+      color: grey;
     }
   }
   .title-icons {
