@@ -15,7 +15,6 @@ const ft = {
   dec: "decimal",
   money: "money",
   date: "date",
-  datetime: "datetime",
   time: "time",
   lov: "lov",
   // list: "list", // many values for one field (behave like tags - return an array of strings)
@@ -40,7 +39,7 @@ export const fieldIsNumber = (f) =>
   f.type === ft.int || f.type === ft.dec || f.type === ft.money;
 
 export const fieldIsDateOrTime = (f) =>
-  f.type === ft.date || f.type === ft.datetime || f.type === ft.time;
+  f.type === ft.date || f.type === ft.time;
 
 export const fieldIsNumeric = (f) => fieldIsNumber(f) || fieldIsDateOrTime(f);
 

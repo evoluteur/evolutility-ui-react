@@ -56,7 +56,6 @@ export const validateField = (f, v) => {
               }
               break;
             case ft.date:
-            case ft.datetime:
             case ft.time:
               if (v !== "" && !isDate(new Date(v))) {
                 return formatMsg(fieldLabel(f), i18n_validation[f.type]);

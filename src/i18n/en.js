@@ -88,8 +88,6 @@ export const i18n_validation = {
   decimal: '"{0}" must be a valid decimal numbers.',
   money: '"{0}" must be a valid number.',
   date: '"{0}" must be a valid date, format must be "MM/DD/YYYY" like "12/24/2017".',
-  datetime:
-    '"{0}" must be a valid date/time, format must be "MM/DD/YYYY hh:mm AM/PM" like "12/24/2017 10:30 AM".',
   time: '"{0}" must be a valid date/time, format must be "hh:mm AM/PM" like "10:30 AM".',
   json: '"{0}" must be a valid JSON expression like "{"a": 1}".',
   max: '"{0}" must be smaller or equal to {1}.',

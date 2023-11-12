@@ -70,9 +70,6 @@ const dateOpt = (d, type) => {
   if (type === ft.time) {
     return timeString(d);
   }
-  // if (type === ft.datetime) {
-  //   return dateString(d);
-  // }
   return dateString(d);
 };
 
@@ -123,9 +120,6 @@ export const fieldValue = (f, d, abbr) => {
   if (f.type === ft.time) {
     return timeString(d);
   }
-  if (f.type === ft.datetime) {
-    return datetimeString(d);
-  }
   if (f.type === ft.color) {
     return (
       <div>
@@ -164,11 +158,8 @@ export const capitalize = (word) => {
 const formatLib = {
   // config to override browser
   locale: moment.locale(),
-
   now: () => moment(),
-
   fieldValue,
-
   dateOpt,
   dateString,
   timeString,
