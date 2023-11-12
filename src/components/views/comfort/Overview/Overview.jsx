@@ -41,8 +41,8 @@ const Overview = () => {
     return <InvalidRoute entity={entity} />;
   } else {
     const chartFieldChanged = (evt) => {
-      const e = evt.currentTarget;
-      const fid = e.children[e.selectedIndex]?.id;
+      const target = evt.currentTarget;
+      const fid = target.selectedOptions[0].value;
       lcWrite(lcKey, fid);
       setChartField(m.fieldsH[fid]);
     };
@@ -94,13 +94,13 @@ const Overview = () => {
                 canExpand={false}
                 className="panel"
               />
-              <select onChange={chartFieldChanged} className="form-control">
+              <select
+                value={chartField?.id}
+                onChange={chartFieldChanged}
+                className="form-control"
+              >
                 {chartFields?.map((f) => (
-                  <option
-                    key={f.id}
-                    id={f.id}
-                    selected={f.id === chartField?.id}
-                  >
+                  <option key={f.id} value={f.id}>
                     {f.label}
                   </option>
                 ))}

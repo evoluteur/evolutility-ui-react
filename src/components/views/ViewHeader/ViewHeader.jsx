@@ -2,51 +2,21 @@ import React, { memo } from "react";
 import PropTypes from "prop-types";
 import Badge from "../../widgets/Badge/Badge";
 import ViewsNavIcons from "./ViewsNavIcons";
+import FilterTags from "./FilterTags";
 
 import "./ViewHeader.scss";
-
-const operators = {
-  eq: "=",
-  gt: ">",
-  lt: "<",
-};
-
-const SearchLabel = memo(({ params }) => {
-  if (!params) {
-    return null;
-  }
-  const ps = params.slice(1).split("&");
-  const filters = [];
-  ps.forEach((p) => {
-    const [field, cond] = p.split("=");
-    if (!["order", "page", "pageSize"].includes(field)) {
-      const idx = cond.indexOf(".");
-      if (idx > 0) {
-        const op = operators[cond.substring(0, idx)] || " ";
-        const v = cond.substring(idx + 1);
-        // TODO: use model to get correct field label
-        filters.push(field + op + v);
-      }
-    }
-  });
-  if (filters.length > 0) {
-    const fs = filters.join(" and ");
-    return <Badge text={`Filter: ${fs}`} type="info" />;
-  }
-  return null;
-});
 
 // TODO: make charts work w/ search & filters (and switch comment below)
 const ViewHeader = memo(
   ({ entity, title, id, view, count, comments, text, params }) => {
     const search = (view === "list" || view === "cards") && (
-      <SearchLabel params={params} />
+      <FilterTags params={params} />
     );
     return (
       <div className="evo-page-header">
         <h1 className="page-title">
-          <span id="itemTitle">{title}</span>
-          {count > 0 && <Badge text={count} />}
+          <span className="title-txt">{title}</span>
+          {count !== null && <Badge text={count} />}
           {comments > 0 && (
             <Badge
               text={comments + comments === 1 ? " comment" : " comments"}
@@ -75,7 +45,7 @@ ViewHeader.propTypes = {
   /** Active view */
   view: PropTypes.string,
   /** Number of records (for views "many") */
-  count: PropTypes.number,
+  count: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /** Number of comments (for views "one") */
   comments: PropTypes.number,
   /** Extra text beside the title */

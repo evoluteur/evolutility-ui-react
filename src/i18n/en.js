@@ -62,7 +62,7 @@ export const i18n_msg = {
   empty: "You do not have any {0}.", // 0=entities
   noData: "No {0} found.", // 0=entities
   addTheFirst: "Create the first {0}",
-  newCriteria: "Please check  spelling or different criteria.",
+  newCriteria: "Please check  spelling or use different filter criteria.",
   loading: "Loading data...",
   confirmLeave: "Your work is not saved! Are you sure you want to leave?",
   range: "{0} to {1} of {2} {3}", // 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'

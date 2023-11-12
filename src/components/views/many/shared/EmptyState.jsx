@@ -8,19 +8,23 @@ import { i18n_msg as i18n } from "../../../../i18n/i18n";
 
 import "./EmptyState.scss";
 
-const EmptyState = ({ model, inSearch }) => {
-  let msg = inSearch ? i18n.noData : i18n.empty;
+const EmptyState = ({ model, hasFilters }) => {
+  let msg = hasFilters ? i18n.noData : i18n.empty;
   msg = msg.replaceAll("{0}", model.namePlural);
   const content = (
     <>
       <div>{msg}</div>
-      {inSearch && <div>{i18n.newCriteria}</div>}
-      <Button
-        url={"../" + model.id + "/edit/0"}
-        icon="add"
-        type="primary"
-        label={i18n.addTheFirst.replaceAll("{0}", model.name)}
-      />
+
+      {hasFilters && <div className="too-much">{i18n.newCriteria}</div>}
+
+      {!hasFilters && (
+        <Button
+          url={"../" + model.id + "/edit/0"}
+          icon="add"
+          type="primary"
+          label={i18n.addTheFirst.replaceAll("{0}", model.name)}
+        />
+      )}
     </>
   );
   return (

@@ -26,16 +26,14 @@ const { withActivity } = config;
 
 const getDefaultData = (model) => {
   const defaultData = {};
-  if (model) {
-    model.fields.forEach((f) => {
-      if (f.defaultValue != null) {
-        defaultData[f.id] = f.defaultValue;
-      }
-      if (f.type === "lov" && defaultData[f.id] == null) {
-        defaultData[f.id] = "";
-      }
-    });
-  }
+  model?.fields.forEach((f) => {
+    if (f.defaultValue != null) {
+      defaultData[f.id] = f.defaultValue;
+    }
+    if (f.type === "lov" && defaultData[f.id] == null) {
+      defaultData[f.id] = "";
+    }
+  });
   return defaultData;
 };
 
@@ -46,8 +44,6 @@ const recordTitle = (m, data, isNew) => {
       title = `New ${m.name || "item"}`;
     } else if (data?.id) {
       if (m.titleFunction) {
-        // Note: would this be unsecure?
-        // title = m.titleFunction(data, m);
         title = m.titleFunction(Object.assign({}, data));
       } else {
         title = data[m.titleField] || "N/A";
@@ -66,14 +62,14 @@ const One = () => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
   const { entity, view, id } = useParams();
   const model = getModel(entity);
   const isNew = id === "0";
+  const viewData = view === "edit" ? userData : data;
   const title =
     error || isLoading
       ? capitalize(model?.name)
-      : recordTitle(model, data, isNew);
+      : recordTitle(model, viewData, isNew);
 
   const setAllData = (data) => {
     setData(data);
@@ -83,6 +79,7 @@ const One = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
+
   useEffect(() => {
     document.title = title;
   }, [title]);
@@ -135,7 +132,7 @@ const One = () => {
     const viewProps = {
       entity,
       model,
-      data: view === "edit" ? userData : data,
+      data: viewData,
     };
 
     if (view === "edit") {
@@ -162,12 +159,10 @@ const One = () => {
             ? updateOne(entity, intId, delta)
             : insertOne(entity, userData);
           upsertPromise.then((response) => {
-            let toastMsg;
-            const newId = response?.data?.id;
             if (response.errors) {
-              // TODO:
               toast.error("Server error: " + response.errors[0].message);
             } else {
+              let toastMsg;
               if (intId) {
                 toastMsg = i18n_actions.updated.replace(
                   "{0}",
@@ -179,7 +174,7 @@ const One = () => {
               toast.success(toastMsg);
               setAllData(response.data);
               if (!intId) {
-                navigate(`/${entity}/edit/${newId}`);
+                navigate(`/${entity}/edit/${response.data?.id}`);
               }
             }
           });
