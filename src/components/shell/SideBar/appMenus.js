@@ -3,17 +3,17 @@ import { modelsArray } from "../../../utils/moMa";
 export const docMenus = [
   { id: "install", text: "Installation", icon: "doc/cog.png" },
   { id: "config", text: "Configuration", icon: "doc/wrench.png" },
+  { id: "views", text: "Views", icon: "doc/object.png" },
   {
     id: "metamodel",
     text: "Metamodel",
-    icon: "doc/metadata.png",
+    icon: "doc/tag_pink.png",
   },
   {
     id: "models",
     text: "Sample Models",
-    icon: "doc/metadata.png",
+    icon: "doc/model.png",
   },
-  { id: "views", text: "Views", icon: "doc/object.png" },
 ];
 
 export const demosMenu = modelsArray.map(

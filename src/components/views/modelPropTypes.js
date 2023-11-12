@@ -1,11 +1,9 @@
 import PropTypes from "prop-types";
-import { fieldTypes } from "../../utils/dico";
-
-const fieldTypesArray = Object.values(fieldTypes);
+import { fieldTypeStrings } from "../../utils/dico";
 
 export const fieldPropTypes = PropTypes.shape({
   id: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(fieldTypesArray).isRequired,
+  type: PropTypes.oneOf(fieldTypeStrings).isRequired,
   label: PropTypes.string.isRequired,
   required: PropTypes.bool,
   height: PropTypes.number,

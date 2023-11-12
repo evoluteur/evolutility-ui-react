@@ -275,12 +275,12 @@ export const fieldMeta = {
     //   description: "Database column name for the field.",
     //   db: true,
     // },
-    {
-      id: "pii",
-      description: "Flag for personally identifiable information.",
-      ui: true,
-      db: true,
-    },
+    // {
+    //   id: "pii",
+    //   description: "Flag for personally identifiable information.",
+    //   ui: true,
+    //   db: true,
+    // },
     // {
     //   id: "lovTable",
     //   description:
@@ -331,12 +331,12 @@ export const fieldMeta = {
       description:
         'Optional overide for aggregation name in charts (only for "lov" fields).',
     },
-    {
-      id: "unique",
-      description: "Requires value to be unique (not implemented yet).",
-      ui: true,
-      db: true,
-    },
+    // {
+    //   id: "unique",
+    //   description: "Requires value to be unique (not implemented yet).",
+    //   ui: true,
+    //   db: true,
+    // },
   ].sort(sortById),
 };
 

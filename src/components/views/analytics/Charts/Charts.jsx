@@ -6,7 +6,7 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2023 Olivier Giulieri
 
-//#region Imports ----------------------------
+//#region  ----- Imports ----------------------------
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 

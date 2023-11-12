@@ -15,7 +15,7 @@ import "./Doc.scss";
 
 const Doc = () => {
   useEffect(() => {
-    document.title = "Evolutility Documentation";
+    document.title = "Documentation";
     window.scrollTo(0, 0);
   });
 

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Evolutility-UI-React :: /views/many/List.js
 
 // List view to display a collection as a list (table w/ sorting and paging).
@@ -6,7 +7,7 @@
 // (c) 2023 Olivier Giulieri
 
 // #region ---------------- Imports ----------------
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import modelPropType from "../../modelPropTypes";
 import Icon from "react-crud-icons";
@@ -44,7 +45,7 @@ const List = ({
   onClickSort,
 }) => {
   let body;
-  const fields = model.fields.filter((f) => f.inMany);
+  const fields = useMemo(() => model?.fields.filter((f) => f.inMany), [entity]);
   if (!fields.length) {
     body = (
       <Alert

@@ -69,7 +69,7 @@ const Card = memo(({ entity, data, fields = [] }) => {
 export default Card;
 
 Card.propTypes = {
-  /** Object Unique key. */
+  /** Model id (Object unique key). */
   entity: PropTypes.string.isRequired,
   /** List of fields metadata. */
   fields: PropTypes.arrayOf(fieldPropTypes),

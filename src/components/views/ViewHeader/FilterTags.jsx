@@ -20,23 +20,20 @@ const FilterTags = memo(({ params }) => {
     const [field, cond] = p.split("=");
     if (!["order", "page", "pageSize"].includes(field)) {
       if (field === "search") {
-        filters.push(field + "=" + cond);
+        filters.unshift(
+          <Badge key={field} text={"search=" + cond} type="success" />
+        );
       }
       const idx = cond.indexOf(".");
       if (idx > 0) {
         const op = operators[cond.substring(0, idx)] || " ";
         const v = cond.substring(idx + 1);
         // TODO: use model to get correct field label
-        filters.push(field + op + v);
+        filters.push(<Badge key={field} text={field + op + v} type="info" />);
       }
     }
   });
-  if (filters.length > 0) {
-    return filters.map((filter) => (
-      <Badge key={filter} text={`${filter}`} type="info" />
-    ));
-  }
-  return null;
+  return filters.length ? filters : null;
 });
 
 export default FilterTags;

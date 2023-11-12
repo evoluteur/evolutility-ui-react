@@ -80,7 +80,7 @@ const Installation = () => {
           </a>
           ).
         </li>
-        <li>Create a Postgres database</li>
+        <li>Add a Postgres database to your Hasura setup.</li>
         <li>
           Add the demo tables by running the SQL script{" "}
           <a

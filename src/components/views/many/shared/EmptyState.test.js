@@ -7,7 +7,7 @@ import EmptyState from "./EmptyState";
 
 describe("EmptyState tests", () => {
   const model = { id: "test", name: "test", namePlural: "tests", fields: [] };
-  it("EmptyState shows message w/ no search", async () => {
+  it("EmptyState shows message w/ no filters", async () => {
     render(
       <Router>
         <EmptyState model={model} />
@@ -18,10 +18,10 @@ describe("EmptyState tests", () => {
     const msg = i18n.empty.replaceAll("{0}", model.namePlural);
     expect(component).toHaveTextContent(msg);
   });
-  it("EmptyState shows message w/ search", async () => {
+  it("EmptyState shows message w/ filters", async () => {
     render(
       <Router>
-        <EmptyState model={model} inSearch={true} />
+        <EmptyState model={model} hasFilters={true} />
       </Router>
     );
     const component = screen.queryByTestId("emptystate");

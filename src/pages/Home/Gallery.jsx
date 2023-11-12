@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import { pixPath } from "utils/format";
 import AliceCarousel from "react-alice-carousel";
@@ -18,6 +17,7 @@ const items = allViewsInfo.map((v) => (
         src={`${pixPath}screenshots/${v.img}`}
         onDragStart={handleDragStart}
         role="presentation"
+        alt=""
       />
     </div>
   </div>

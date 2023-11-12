@@ -26,7 +26,7 @@ import Pie from "./Pie";
 import "./Charts.scss";
 // #endregion
 
-//#region  ---------------- Helpers ----------------
+//#region   ----- Helpers ----------------
 const cTypes = {
   bars: "bars",
   pie: "pie",

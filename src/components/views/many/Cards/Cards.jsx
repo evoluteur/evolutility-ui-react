@@ -13,32 +13,19 @@ import modelPropTypes from "../../modelPropTypes";
 import { i18n_errors } from "../../../../i18n/i18n";
 import Card from "../../one/Card";
 import Alert from "../../../widgets/Alert/Alert";
-import EmptyState from "../shared/EmptyState";
 
 import "./Cards.scss";
 
 const Cards = ({ entity, model, data }) => {
-  const fieldCols = useMemo(
-    () => model?.fields.filter((f) => f.inMany),
-    [entity]
-  );
-
-  if (model) {
-    let body;
-    if (data?.length) {
-      body = (
-        <div className="evol-cards">
-          {data?.map((d, idx) => (
-            <Card key={idx} data={d} fields={fieldCols} entity={entity} />
-          ))}
-        </div>
-      );
-    } else {
-      body = <EmptyState model={model} />;
-    }
+  const fields = useMemo(() => model?.fields.filter((f) => f.inMany), [entity]);
+  if (model && data?.length) {
     return (
       <div data-entity={entity} className="evol-many-cards">
-        {body}
+        <div className="evol-cards">
+          {data?.map((d) => (
+            <Card key={d.id} data={d} fields={fields} entity={entity} />
+          ))}
+        </div>
       </div>
     );
   }

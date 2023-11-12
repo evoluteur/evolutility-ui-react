@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // #region ---------------- Imports ----------------
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { diffData } from "../../../utils/validation";
@@ -39,19 +39,27 @@ const getDefaultData = (model) => {
 
 const recordTitle = (m, data, isNew) => {
   if (m) {
-    let title = m.title;
     if (isNew) {
-      title = `New ${m.name || "item"}`;
-    } else if (data?.id) {
-      if (m.titleFunction) {
-        title = m.titleFunction(Object.assign({}, data));
-      } else {
-        title = data[m.titleField] || "N/A";
-      }
+      return `New ${m.name || "item"}`;
     }
-    return title;
+    if (data?.id) {
+      if (m.titleFunction) {
+        return m.titleFunction(Object.assign({}, data));
+      }
+      return data[m.titleField] || capitalize(m.name);
+    }
+    return m.title;
   }
   return "Model not found";
+};
+
+const addModelLOVs = (model, data) => {
+  // - Add missing lov field lists to model
+  model._lovNoList.forEach((fid) => {
+    const f = model.fieldsH[fid];
+    f.list = data[fid];
+  });
+  delete model._lovNoList;
 };
 
 // #endregion
@@ -67,7 +75,7 @@ const One = () => {
   const isNew = id === "0";
   const viewData = view === "edit" ? userData : data;
   const title =
-    error || isLoading
+    (error || isLoading) && !isNew
       ? capitalize(model?.name)
       : recordTitle(model, viewData, isNew);
 
@@ -122,6 +130,56 @@ const One = () => {
     };
   }, [entity, id]);
 
+  const onFieldChange = useCallback(
+    (fid, value) => {
+      const newData = structuredClone(userData || {});
+      if (value?.name && value.name.type === "span") {
+        const children = value.name.props.children;
+        newData[fid] = {
+          id: value.id,
+          name: children[1],
+          icon: children[0]?.props?.id,
+        };
+      } else {
+        newData[fid] = value;
+      }
+      setUserData(newData);
+    },
+    [userData]
+  );
+
+  const onSave = useCallback(() => {
+    const delta = diffData(model, data, userData);
+    if (delta) {
+      const intId = id ? parseInt(id, 10) : null;
+      const upsertPromise = intId
+        ? updateOne(entity, intId, delta)
+        : insertOne(entity, userData);
+      upsertPromise.then((response) => {
+        if (response.errors) {
+          toast.error("Server error: " + response.errors[0].message);
+        } else {
+          let toastMsg;
+          if (intId) {
+            toastMsg = i18n_actions.updated.replace(
+              "{0}",
+              capitalize(model.name)
+            );
+          } else {
+            toastMsg = i18n_actions.added.replace("{0}", model.name);
+          }
+          toast.success(toastMsg);
+          setAllData(response.data);
+          if (!intId) {
+            navigate(`/${entity}/edit/${response.data?.id}`);
+          }
+        }
+      });
+    } else {
+      toast.info(i18n_msg.noUpdate);
+    }
+  }, [entity, id, navigate, data, userData]);
+
   const body = () => {
     if (isLoading) {
       return <Spinner />;
@@ -134,60 +192,11 @@ const One = () => {
       model,
       data: viewData,
     };
-
-    if (view === "edit") {
-      const onFieldChange = (fid, value) => {
-        const newData = structuredClone(userData || {});
-        if (value?.name && value.name.type === "span") {
-          const children = value.name.props.children;
-          newData[fid] = {
-            id: value.id,
-            name: children[1],
-            icon: children[0]?.props?.id,
-          };
-        } else {
-          newData[fid] = value;
-        }
-        setUserData(newData);
-      };
-
-      const onSave = () => {
-        const delta = diffData(model, data, userData);
-        if (delta) {
-          const intId = id ? parseInt(id, 10) : null;
-          const upsertPromise = intId
-            ? updateOne(entity, intId, delta)
-            : insertOne(entity, userData);
-          upsertPromise.then((response) => {
-            if (response.errors) {
-              toast.error("Server error: " + response.errors[0].message);
-            } else {
-              let toastMsg;
-              if (intId) {
-                toastMsg = i18n_actions.updated.replace(
-                  "{0}",
-                  capitalize(model.name)
-                );
-              } else {
-                toastMsg = i18n_actions.added.replace("{0}", model.name);
-              }
-              toast.success(toastMsg);
-              setAllData(response.data);
-              if (!intId) {
-                navigate(`/${entity}/edit/${response.data?.id}`);
-              }
-            }
-          });
-        } else {
-          toast.info(i18n_msg.noUpdate);
-        }
-      };
-
-      return (
-        <Edit {...viewProps} onFieldChange={onFieldChange} onSave={onSave} />
-      );
-    }
-    return <Browse {...viewProps} />;
+    return view === "edit" ? (
+      <Edit {...viewProps} onFieldChange={onFieldChange} onSave={onSave} />
+    ) : (
+      <Browse {...viewProps} />
+    );
   };
 
   return (
