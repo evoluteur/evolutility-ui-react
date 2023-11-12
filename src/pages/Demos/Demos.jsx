@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import DemosList from "../../components/views/comfort/ModelLinks";
+import ModelLinks from "../../components/views/comfort/ModelLinks";
 
 import "./Demos.scss";
 
@@ -15,7 +15,7 @@ const Demos = () => {
 
       <p>These are a few sample apps built with Evolutility.</p>
 
-      <DemosList />
+      <ModelLinks />
 
       <p>
         <br />

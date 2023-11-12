@@ -10,7 +10,7 @@ import pkg from "../../../package.json";
 import { pixPath } from "../../utils/format";
 import Gallery from "./Gallery";
 import { modelIds, getModel } from "../../utils/moMa";
-import ModelsLinks from "../../components/views/comfort/ModelLinks";
+import ModelLinks from "../../components/views/comfort/ModelLinks";
 
 import "./Home.scss";
 
@@ -77,7 +77,7 @@ const Home = () => {
           With it, you can build a React SPA for GraphQL like these examples:
         </div>
         <div className="home-demos">
-          <ModelsLinks />
+          <ModelLinks />
         </div>
         <div>
           ... simply by making models like these{" "}

@@ -136,7 +136,7 @@ const One = () => {
     };
 
     if (view === "edit") {
-      const cbFieldChange = (fid, value) => {
+      const onFieldChange = (fid, value) => {
         const newData = structuredClone(userData || {});
         if (value?.name && value.name.type === "span") {
           const children = value.name.props.children;
@@ -151,7 +151,7 @@ const One = () => {
         setUserData(newData);
       };
 
-      const cbUpsertOne = () => {
+      const onSave = () => {
         const delta = diffData(model, data, userData);
         if (delta) {
           const intId = id ? parseInt(id, 10) : null;
@@ -184,11 +184,7 @@ const One = () => {
       };
 
       return (
-        <Edit
-          {...viewProps}
-          onFieldChange={cbFieldChange}
-          onSave={cbUpsertOne}
-        />
+        <Edit {...viewProps} onFieldChange={onFieldChange} onSave={onSave} />
       );
     }
     return <Browse {...viewProps} />;
