@@ -1,9 +1,12 @@
-import { fieldInCharts } from "./dico";
+import { fieldInCharts, fieldInSearch, fieldIsText } from "./dico";
 import { capitalize } from "./format";
 
 export const prepModel = (m) => {
   if (!m._prepared) {
-    // - Fields
+    // - Fields ---------------------------
+    let fsMany = 0,
+      fsSearch = 0,
+      fsCharts = 0;
     if (!m.fieldsH) {
       const fsH = {};
       const lovNoList = [];
@@ -12,13 +15,35 @@ export const prepModel = (m) => {
         if (f.type === "lov" && !(f.object || f.list)) {
           lovNoList.push(f.id);
         }
+        if (f.inMany) {
+          fsMany++;
+        }
+        if (fieldInSearch(f)) {
+          fsSearch++;
+        }
+        if (fieldInCharts(f)) {
+          fsCharts++;
+        }
       });
       m.fieldsH = fsH;
       if (lovNoList.length > 0) {
         m._lovNoList = lovNoList;
       }
     }
-    // - Groups
+    if (!fsMany) {
+      console.error('No field w/ "inMany" in model "' + m.id + '".');
+      // - default to first 5 fields
+      m.fields?.slice(0, 5)?.forEach((f) => (f.inMany = true));
+    }
+    if (!fsSearch) {
+      console.error('No field w/ "inSearch" in model "' + m.id + '".');
+      // - default to first 3 text fields
+      m.fields
+        ?.filter(fieldIsText)
+        .slice(0, 3)
+        ?.forEach((f) => (f.inSearch = true));
+    }
+    // - Groups ---------------------------
     if (!m.groups || m?.groups.length === 0) {
       m.groups = [
         {
@@ -30,16 +55,15 @@ export const prepModel = (m) => {
         },
       ];
     }
-
-    // - Model
+    // - Model ---------------------------
     m.qid = m.qid || m.id;
-    if (!m.label) {
-      m.label = m.title || m.namePlural || m.name;
+    if (!m.title) {
+      m.title = capitalize(m.namePlural || m.name);
     }
     if (!m.titleField) {
       m.titleField = m.fields[0];
     }
-    if (m.fields.filter(fieldInCharts).length < 1) {
+    if (!fsCharts) {
       m.noCharts = true;
     }
     m._prepared = true;
@@ -73,8 +97,8 @@ const prepModelCollecs = (m, models) => {
                 }
               });
             } else {
-              console.log(
-                'Model "' + c.object + '" not found in model "' + m.id + '".'
+              console.error(
+                `Model "${c.object}" not found in model "${m.id}" collection.`
               );
             }
           }

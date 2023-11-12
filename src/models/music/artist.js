@@ -20,6 +20,7 @@ const modelArtist = {
       label: "Name",
       required: true,
       inMany: true,
+      inSearch: true,
     },
     {
       id: "url",
@@ -45,6 +46,7 @@ const modelArtist = {
       type: "textmultiline",
       label: "Description",
       height: 9,
+      inSearch: true,
     },
   ],
   groups: [

@@ -18,8 +18,8 @@ const ft = {
   datetime: "datetime",
   time: "time",
   lov: "lov",
-  list: "list", // many values for one field (behave like tags - return an array of strings)
-  html: "html",
+  // list: "list", // many values for one field (behave like tags - return an array of strings)
+  // html: "html",
   // formula: "formula", // soon to be a field attribute rather than a field type
   email: "email",
   image: "image",
@@ -27,7 +27,7 @@ const ft = {
   // geoloc: 'geolocation',
   url: "url",
   color: "color",
-  hidden: "hidden",
+  // hidden: "hidden",
   json: "json",
   // rating: 'rating',
   // widget: 'widget'
@@ -45,11 +45,13 @@ export const fieldIsDateOrTime = (f) =>
 export const fieldIsNumeric = (f) => fieldIsNumber(f) || fieldIsDateOrTime(f);
 
 export const fieldChartable = (f) =>
-  //TODO: more charts
+  //TODO: charts for  number fields
   f.type === ft.lov || f.type === ft.bool;
-// f.type === ft.lov || f.type === ft.bool || fieldIsNumber(f);
 
 export const fieldInCharts = (f) => fieldChartable(f) && !f.noCharts;
+export const fieldInStats = (f) => fieldIsNumeric(f) && !f.noStats;
+export const fieldInSearch = (f) => f.inSearch;
+// export const fieldInSearch = (f) => f.inSearch || (f.inMany && fieldIsText(f));
 
 export const fieldIsText = (f) =>
   [ft.text, ft.textml, ft.url, ft.html, ft.email].indexOf(f.type) > -1;
@@ -57,11 +59,8 @@ export const fieldIsText = (f) =>
 export const fieldId2Field = (fieldIds, fieldsH) =>
   fieldIds ? fieldIds.map((id) => fieldsH[id] || null) : null;
 
-export const fieldInStats = (f) => fieldIsNumeric(f) && !f.noStats;
-
 export const allStats = ["avg", "stddev", "variance", "min", "max"];
 export const fieldStatsFunctions = (f) => {
-  // TODO: more field types
   if (fieldIsDateOrTime(f)) {
     return ["avg", "stddev", "min", "max"];
   }

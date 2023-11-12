@@ -20,6 +20,7 @@ const model = {
       required: true,
       maxLength: 50,
       inMany: true,
+      inSearch: true,
       width: 62,
     },
     {
@@ -29,6 +30,7 @@ const model = {
       required: true,
       maxLength: 50,
       inMany: true,
+      inSearch: true,
       width: 38,
     },
     {
@@ -44,6 +46,7 @@ const model = {
       label: "Company",
       maxLength: 50,
       inMany: true,
+      inSearch: true,
       width: 38,
     },
     {
@@ -52,6 +55,7 @@ const model = {
       label: "email",
       maxLength: 100,
       inMany: true,
+      inSearch: true,
       width: 100,
     },
     {
@@ -112,6 +116,7 @@ const model = {
       label: "Work Phone",
       maxLength: 20,
       width: 100,
+      inSearch: true,
     },
     {
       id: "phonecell",
@@ -119,6 +124,7 @@ const model = {
       label: "Mobile",
       maxLength: 20,
       width: 100,
+      inSearch: true,
     },
     {
       id: "phonehome",
@@ -126,6 +132,7 @@ const model = {
       label: "Home Phone",
       maxLength: 20,
       width: 100,
+      inSearch: true,
     },
     {
       id: "fax",
@@ -147,6 +154,7 @@ const model = {
       label: "City",
       maxLength: 100,
       width: 62,
+      inSearch: true,
     },
     {
       id: "state",

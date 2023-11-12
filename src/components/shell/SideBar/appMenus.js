@@ -17,7 +17,7 @@ export const docMenus = [
 ];
 
 export const demosMenu = modelsArray.map(
-  ({ id, label: text, icon, defaultViewMany = "list" }) => ({
+  ({ id, title: text, icon, defaultViewMany = "list" }) => ({
     id,
     text,
     icon,

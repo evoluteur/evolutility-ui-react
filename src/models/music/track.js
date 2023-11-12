@@ -19,6 +19,7 @@ const modelTrack = {
       label: "Name",
       required: true,
       inMany: true,
+      inSearch: true,
       width: 100,
       height: 3,
     },
@@ -91,6 +92,7 @@ const modelTrack = {
       type: "textmultiline",
       label: "Description",
       height: 3,
+      inSearch: true,
     },
   ],
 };

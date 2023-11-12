@@ -20,6 +20,7 @@ const modelAlbum = {
       label: "Title",
       required: true,
       inMany: true,
+      inSearch: true,
       width: 62,
     },
     {
@@ -51,6 +52,7 @@ const modelAlbum = {
       label: "Description",
       maxLength: 1000,
       inMany: false,
+      inSearch: true,
       width: 100,
       height: 8,
     },

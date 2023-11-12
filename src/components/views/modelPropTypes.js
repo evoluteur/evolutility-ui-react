@@ -31,6 +31,7 @@ export const collectionPropTypes = PropTypes.shape({
 
 const modelPropTypes = PropTypes.shape({
   id: PropTypes.string.isRequired,
+  title: PropTypes.string,
   icon: PropTypes.string,
   name: PropTypes.string.isRequired,
   namePlural: PropTypes.string.isRequired,
