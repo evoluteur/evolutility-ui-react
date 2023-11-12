@@ -13,7 +13,7 @@ import "./Doc.scss";
 
 const SampleModels = () => {
   useEffect(() => {
-    document.title = "Metamodel";
+    document.title = "Doc > Sample Models";
     window.scrollTo(0, 0);
   }, []);
 

@@ -44,7 +44,7 @@ const section = (info, intro, footer) => (
 
 const Metamodel = () => {
   useEffect(() => {
-    document.title = "Metamodel";
+    document.title = "Doc > Metamodel";
     window.scrollTo(0, 0);
   }, []);
 

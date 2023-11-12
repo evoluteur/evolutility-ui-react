@@ -39,7 +39,7 @@ const viewsSet = (fam) => {
 
 const Views = () => {
   useEffect(() => {
-    document.title = "Views";
+    document.title = "Doc > Views";
     window.scrollTo(0, 0);
   }, []);
 
