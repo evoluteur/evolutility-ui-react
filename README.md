@@ -5,6 +5,8 @@ Evolutility-UI-React is a set of **model-driven views** to [Browse](#Browse), [E
 
 With it you can easily build CRUD applications by writing models rather than code. It uses [Hasura](https://hasura.io) GraphQL backend. No hand-coding is necessary!
 
+Check out the [live demos](https://evoluteur.github.io/evodemo/#/demos).
+
 ![Edit](public/pix/screenshots/one-edit.png)
 
 
