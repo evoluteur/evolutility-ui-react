@@ -1,8 +1,8 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
-import config from "../../../../config";
-import { datetimeString } from "../../../../utils/format";
-import { i18n_activity } from "../../../../i18n/i18n";
+import config from "../../../../../config";
+import { datetimeString } from "../../../../../utils/format";
+import { i18n_activity } from "../../../../../i18n/i18n";
 
 import "./Timestamps.scss";
 

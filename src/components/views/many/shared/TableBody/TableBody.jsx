@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { fieldIsNumber, fieldTypes as ft } from "../../../../utils/dico";
-import { fieldValue, pixPath } from "../../../../utils/format";
+import { fieldIsNumber, fieldTypes as ft } from "../../../../../utils/dico";
+import { fieldValue, pixPath } from "../../../../../utils/format";
 
 const TableBody = ({ fields, data, iconPath, link }) => {
   const icon = iconPath ? (

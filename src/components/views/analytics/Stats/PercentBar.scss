@@ -1,12 +1,12 @@
 @import "../../../../variables";
 
-.stats-line {
+.pc-bar {
   position: relative;
   height: 7px;
   width: 100%;
   background-color: rgb(30, 142, 62);
   margin-bottom: 10px;
-  .sl-red {
+  .pcb-red {
     position: absolute;
     top: 0;
     right: 0;

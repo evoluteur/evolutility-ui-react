@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter as Router } from "react-router-dom";
 
-import { i18n_msg as i18n } from "../../../../i18n/i18n";
+import { i18n_msg as i18n } from "../../../../../i18n/i18n";
 
 import EmptyState from "./EmptyState";
 

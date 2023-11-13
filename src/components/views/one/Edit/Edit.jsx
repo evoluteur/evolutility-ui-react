@@ -18,8 +18,8 @@ import { validate, validateField } from "../../../../utils/validation";
 import Button from "../../../widgets/Button/Button";
 import Field from "../../../field/Field";
 import Panel from "../../../widgets/Panel/Panel";
-import Collection from "../shared/Collection";
-import Timestamps from "../shared/Timestamps";
+import Collection from "../shared/Collection/Collection";
+import Timestamps from "../shared/Timestamps/Timestamps";
 // #endregion
 
 import "../shared/Form.scss";

@@ -17,7 +17,7 @@ import Home from "./pages/Home/Home";
 import Demos from "./pages/Demos/Demos";
 import DocsRoutes from "./pages/Docs/DocsRoutes";
 import EvolRoutes from "./components/EvolRoutes";
-import PageNotFound from "./pages/PageNotFound";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 import "./App.scss";
 import "./App-custom.scss";

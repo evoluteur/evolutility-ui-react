@@ -21,7 +21,7 @@ import { xItemsCount, numString, fieldValue } from "../../../../utils/format";
 import ViewHeader from "../../ViewHeader/ViewHeader";
 import Spinner from "../../../widgets/Spinner/Spinner";
 import Alert from "../../../widgets/Alert/Alert";
-import StatsNullsBar from "./StatsNullsBar";
+import PercentBar from "./PercentBar";
 
 import "./Stats.scss";
 // #endregion
@@ -65,7 +65,7 @@ const statsField = (d, f, total) => {
   return (
     <div key={f.id} className="f-stats panel">
       {fieldTitle(f)}
-      <StatsNullsBar percent={pc} />
+      <PercentBar percent={pc} />
       <div className="stat-values">
         {Object.keys(d).map((stat) => (
           <div key={stat}>

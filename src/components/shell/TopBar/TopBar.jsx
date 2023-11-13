@@ -5,7 +5,7 @@ import logoEvol from "./evologo.png";
 import { views, modelViewsMany } from "../../../utils/dicoViews";
 import { getModel } from "../../../utils/moMa";
 import ViewActions from "./ViewActions";
-import GitHubLink from "../GitHubLink";
+import GitHubLink from "./GitHubLink";
 
 import "./TopBar.scss";
 

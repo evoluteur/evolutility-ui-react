@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import TableBody from "../../many/shared/TableBody";
+import TableBody from "../../../many/shared/TableBody/TableBody";
 // import EmptyState from "../many/EmptyState";
 
 import "./Collection.scss";

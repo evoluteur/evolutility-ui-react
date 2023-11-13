@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 import modelPropType from "../../modelPropTypes";
 import Icon from "react-crud-icons";
 import Alert from "../../../widgets/Alert/Alert";
-import TableBody from "../shared/TableBody";
+import TableBody from "../shared/TableBody/TableBody";
 
 import "./List.scss";
 // #endregion

@@ -19,7 +19,7 @@ import Pagination from "../../widgets/Pagination/Pagination";
 import Spinner from "../../widgets/Spinner/Spinner";
 import Alert from "../../widgets/Alert/Alert";
 import InvalidRoute from "../comfort/Overview/InvalidRoute";
-import EmptyState from "./shared/EmptyState";
+import EmptyState from "./shared/EmptyState/EmptyState";
 import { i18n_msg, i18n_errors } from "../../../i18n/i18n";
 import config from "../../../config";
 import url from "../../../utils/url";
