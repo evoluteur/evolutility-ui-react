@@ -324,7 +324,7 @@ export const qOne = (entity, nextOrPrevious) => {
     }
     q += `{ ${qFields(m)} ${sqCollecs(m)} }`;
     if (m._lovNoList?.length > 0) {
-      q += m._lovNoList.map((fid) => qLOV(m, fid)).join(" ");
+      q += m._lovNoList.map((fid) => sqLOV(m, fid)).join(" ");
     }
     q += "}";
     return q;
@@ -371,10 +371,15 @@ export const qObjectSearch = (entity, search) => {
   return `query lookup_${entity}_${lookupField}{ lov: ${m.qid}(${qSearch}, limit: 100) {id name:${lookupField}} }`;
 };
 
-export const qLOV = (model, fid) => {
+const sqLOV = (model, fid) => {
   const f = model.fieldsH[fid];
   const lovId = `${model.qid}_${fid}`;
   const icon = f.lovIcon ? "icon" : "";
-  return `lov_${fid}: ${lovId}(limit:200) {id text:name ${icon}}`;
+  return `lov_${fid}: ${lovId}(limit: 200) {id text:name ${icon}}`;
+};
+
+export const qLOVs = (model) => {
+  const qs = model._lovNoList.map((fid) => sqLOV(model, fid));
+  return `query lovs_${model.id}{${qs.join(" ")}}`;
 };
 //#endregion

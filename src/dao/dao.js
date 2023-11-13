@@ -12,6 +12,7 @@ import {
   qUpdateOne,
   qInsertOne,
   qMany,
+  qLOVs,
   qObjectSearch,
 } from "./gqlQueries.js";
 import { setCache, getCache, clearCache } from "./cache";
@@ -209,6 +210,21 @@ export const getOne = (entity, id, nextOrPrevious) => {
         return data;
       });
   }
+};
+
+// get LOVs (necessary to create new  record)
+export const getLOVs = (entity) => {
+  const m = getModel(entity);
+  return fetch(apiPath, gqlOptions(qLOVs(m)))
+    .then(toJSON)
+    .then((resp) => {
+      if (resp.error) {
+        return resp;
+      }
+      const data = {};
+      m?._lovNoList.forEach((fid) => (data[fid] = resp.data["lov_" + fid]));
+      return data;
+    });
 };
 
 // delete an item

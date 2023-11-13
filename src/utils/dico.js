@@ -53,10 +53,10 @@ export const fieldInSearch = (f) => f.inSearch;
 // export const fieldInSearch = (f) => f.inSearch || (f.inMany && fieldIsText(f));
 
 export const fieldIsText = (f) =>
-  [ft.text, ft.textml, ft.url, ft.html, ft.email].indexOf(f.type) > -1;
+  [ft.text, ft.textml, ft.url, ft.email].includes(f.type);
 
 export const fieldId2Field = (fieldIds, fieldsH) =>
-  fieldIds ? fieldIds.map((id) => fieldsH[id] || null) : null;
+  fieldIds?.map((id) => fieldsH[id]) || null;
 
 export const allStats = ["avg", "stddev", "variance", "min", "max"];
 export const fieldStatsFunctions = (f) => {

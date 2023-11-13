@@ -16,7 +16,7 @@ import { i18n_actions, i18n_msg, i18n_errors } from "../../../i18n/i18n";
 import config from "../../../config";
 import { capitalize } from "../../../utils/format";
 import { getModel } from "../../../utils/moMa";
-import { getOne, updateOne, insertOne } from "../../../dao/dao";
+import { getOne, updateOne, insertOne, getLOVs } from "../../../dao/dao";
 
 import "./One.scss";
 // #endregion
@@ -95,8 +95,30 @@ const One = () => {
   useEffect(() => {
     let done = false;
     setError(null);
+    setIsLoading(true);
+    if (isNew) {
+      const setDefaultData = () => {
+        const defaults = getDefaultData(model);
+        setAllData(defaults);
+        setIsLoading(false);
+      };
+      if (model._lovNoList) {
+        getLOVs(entity).then((data) => {
+          if (done) {
+            return;
+          }
+          if (data.errors) {
+            setError(data.errors[0]);
+          } else {
+            addModelLOVs(model, data);
+          }
+          setDefaultData();
+        });
+      } else {
+        setDefaultData();
+      }
+    }
     if (id && !isNew) {
-      setIsLoading(true);
       getOne(entity, parseInt(id, 10)).then((data) => {
         if (done) {
           return;
@@ -105,13 +127,8 @@ const One = () => {
           setError(data.errors[0]);
         } else {
           if (model._lovNoList?.length) {
-            // Add lov field lists if provided
-            model._lovNoList.forEach((fid) => {
-              const f = model.fieldsH[fid];
-              f.list = data._lovs[fid];
-            });
+            addModelLOVs(model, data._lovs);
             delete data._lovs;
-            delete model._lovNoList;
           }
           setAllData(data);
           if (withActivity) {
@@ -120,10 +137,6 @@ const One = () => {
         }
         setIsLoading(false);
       });
-    } else if (isNew) {
-      const defaults = getDefaultData(model);
-      setAllData(defaults);
-      setIsLoading(false);
     }
     return () => {
       done = true;
