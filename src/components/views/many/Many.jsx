@@ -39,9 +39,10 @@ const getRange = (pageIdx, pageSize, totalSize) => {
 
 const Many = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [fullCount, setFullCount] = useState(null);
+  const [filteredCount, setFilteredCount] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
   const [sortField, setSortField] = useState(null);
 
@@ -50,6 +51,7 @@ const Many = () => {
   const navigate = useNavigate();
   const model = getModel(entity);
   const title = model?.title;
+  const paginationCount = filteredCount ? filteredCount : fullCount;
 
   let pageIndex = 0;
   if (fullCount > pageSize) {
@@ -67,6 +69,7 @@ const Many = () => {
     setError(null);
     setData(null);
     setFullCount(null);
+    setFilteredCount(null);
     window.scrollTo(0, 0);
     getMany(entity, url.parseQuery(search)).then((response) => {
       if (done) {
@@ -76,6 +79,9 @@ const Many = () => {
         setError(response.errors[0]);
       } else {
         setFullCount(response._full_count);
+        if (response._filtered_count) {
+          setFilteredCount(response._filtered_count);
+        }
         setData(response);
       }
       setIsLoading(false);
@@ -138,13 +144,13 @@ const Many = () => {
     const namePlural = model?.namePlural;
     const size = data ? data.length : 0;
     if (size) {
-      const totalSize = data._full_count;
-      if (totalSize === size) {
+      if (paginationCount === size) {
         return null;
       }
       if (size === 1) {
         return (
-          `${size} ${model.name}` + (totalSize > size ? " in " + totalSize : "")
+          `${size} ${model.name}` +
+          (paginationCount > size ? " in " + paginationCount : "")
         );
       } else {
         const query = url.parseQuery(search);
@@ -153,23 +159,23 @@ const Many = () => {
             return (
               i18n_msg.aToBOfC // - '{0} to {1} {2}' w/ 0=mSize, 1=totalSize, 2=namePlural'
                 .replace("{0}", size)
-                .replace("{1}", totalSize)
+                .replace("{1}", paginationCount)
                 // .replace("{2}", namePlural);
                 .replace("{2}", "")
             );
           }
-          const { start, end } = getRange(pageIndex, pageSize, totalSize);
+          const { start, end } = getRange(pageIndex, pageSize, paginationCount);
           return i18n_msg.range // - '{0} to {1} of {2} {3}' w/ 0=rangeBegin, 1=rangeEnd, 2=mSize, 3=entities'
             .replace("{0}", start)
             .replace("{1}", end)
-            .replace("{2}", totalSize)
+            .replace("{2}", paginationCount)
             .replace("{3}", namePlural);
         }
         return ""; //`${totalSize} ${namePlural}`;
       }
     }
     return "";
-  }, [entity, data, search, pageIndex]);
+  }, [entity, data, search, paginationCount, pageIndex]);
 
   const viewProps = {
     entity,
@@ -179,6 +185,8 @@ const Many = () => {
     sortField,
     sortDirection,
   };
+
+  const hasFilters = data?.length === 0 ? url.hasFilters(search) : false;
 
   const body = () => {
     if (!model) {
@@ -191,15 +199,15 @@ const Many = () => {
       return <Spinner />;
     }
     if (data.length === 0) {
-      return <EmptyState model={model} />;
+      return <EmptyState model={model} hasFilters={hasFilters} />;
     }
     return (
       <>
         {view === "list" ? <List {...viewProps} /> : <Cards {...viewProps} />}
-        {fullCount > pageSize && (
+        {paginationCount > pageSize && (
           <Pagination
             count={data.length}
-            fullCount={fullCount || 0}
+            fullCount={paginationCount || 0}
             onClick={clickPagination}
             pageIndex={pageIndex}
           />
@@ -207,14 +215,16 @@ const Many = () => {
       </>
     );
   };
-
+  const displayCount = filteredCount
+    ? filteredCount + "/" + fullCount
+    : fullCount;
   return (
     <div className={"evol-many model_" + entity}>
       {model && (
         <ViewHeader
           entity={entity}
           title={title}
-          count={fullCount}
+          count={displayCount}
           view={view}
           text={pageSummary}
           params={search}

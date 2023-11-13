@@ -94,6 +94,10 @@ export const getMany = (entity, options) => {
       if (resp.data && resp.data.many) {
         const data = resp.data.many;
         data._full_count = resp.data._full_count.aggregate.count;
+        const filteredCount = resp.data._filtered_count?.aggregate.count;
+        if (filteredCount) {
+          data._filtered_count = filteredCount;
+        }
         data._entity = entity;
         setCache(cacheKey, data);
         return data;

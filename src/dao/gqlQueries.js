@@ -5,13 +5,14 @@
     (c) 2023 Olivier Giulieri
 */
 
-//#region Helpers functions for GraphQL
+//#region  ----- Helpers functions for GraphQL
 
 import {
   fieldTypes as ft,
   fieldIsNumber,
   fieldIsText,
   fieldInStats,
+  fieldInSearch,
   fieldIsDateOrTime,
   fieldStatsFunctions,
   allStats,
@@ -58,10 +59,12 @@ const prepData = (entity, data) => {
   return d;
 };
 
-export const fullCount = (m) =>
-  " _full_count: " + m.qid + "_aggregate { aggregate { count }}";
+const aggregateCount = "{aggregate{count}}";
+const fullCount = (qid) => `_full_count: ${qid}_aggregate ${aggregateCount}`;
+const filteredCount = (qid, filters) =>
+  `_filtered_count: ${qid}_aggregate(${filters}) ${aggregateCount}`;
 
-export const qFieldCol = (f) => {
+const sqFieldCol = (f) => {
   if (f.type === ft.lov) {
     let displayFieldName;
     if (f.object) {
@@ -76,50 +79,78 @@ export const qFieldCol = (f) => {
 };
 
 export const qFields = (m) =>
-  "id" + timestampFields + m.fields?.map(qFieldCol).join(" ");
+  "id" + timestampFields + m.fields?.map(sqFieldCol).join(" ");
 
+const conjunct = (join, conditions) => `{_${join}: [${conditions.join(", ")}]}`;
 //#endregion
 
-//#region Many ----------------------------
+//#region  ----- Many ----------------------------
+
+const searchClause = (m, searchValue) => {
+  if (!searchValue) {
+    return null;
+  }
+  const searchStr = `%${searchValue}%`;
+  const gOptsSearch = [];
+  m.fields.filter(fieldInSearch)?.forEach((f) => {
+    gOptsSearch.push(`{ ${f.id}: { _ilike: "${searchStr}" } }`);
+  });
+  if (gOptsSearch.length) {
+    if (gOptsSearch.length === 1) {
+      return `{${gOptsSearch[0]}}`;
+    }
+    return conjunct("or", gOptsSearch);
+  }
+  return null;
+};
 
 export const qMany = (entity, options) => {
   const m = getModel(entity);
   if (m) {
-    const count = fullCount(m);
     const pSize = options?.pageSize || config.pageSize || 20;
-    const gOpts = ["limit:" + pSize];
-    const gOptsSearch = [];
+    const gOpts = ["limit: " + pSize];
+    if (options?.page) {
+      gOpts.push("offset:" + options.page * pSize);
+    }
+
+    const gOptsFilter = [];
+    let allFilters = "";
+    let hasFilters = false;
+    let searchQuery = "";
     if (options) {
       Object.keys(options).forEach((opt) => {
-        if (opt === "page") {
-          gOpts.push("offset:" + options.page * pSize);
-        } else if (opt === "page" || opt === "pageSize" || opt === "order") {
-          // do nothing, treated later
+        if (opt === "page" || opt === "pageSize" || opt === "order") {
+          // do nothing
         } else if (opt === "search") {
-          const { search } = options;
-          const searchFields = m.fields.filter(
-            (f) => f.inSearch || (f.inMany && fieldIsText(f))
-          );
-          const searchStr = `%${search}%`;
-          searchFields.forEach((f) => {
-            gOptsSearch.push(`{ ${f.id}: { _ilike: "${searchStr}" } }`);
-          });
+          searchQuery = searchClause(m, options.search);
         } else {
           const f = m.fieldsH[opt];
           if (f) {
             const fid = f.type === ft.lov ? opt + "_id" : opt;
             const params = options[opt].split(".");
-            gOptsSearch.push(fid + ":{_" + params[0] + ":" + params[1] + "}");
+            gOptsFilter.push(`${fid}: {_${params[0]}:${params[1]}}`);
           } else {
             console.error('Unexpected param "' + opt + '".');
           }
         }
       });
-      const nbConds = gOptsSearch.length;
+      const nbConds = gOptsFilter.length;
+      hasFilters = nbConds > 0;
       if (nbConds === 1) {
-        gOpts.push("where:{" + gOptsSearch[0] + "}");
+        allFilters = "{" + gOptsFilter[0] + "}";
       } else if (nbConds > 1) {
-        gOpts.push("where:{_or:[" + gOptsSearch.join(",") + "]}");
+        allFilters = conjunct("and", gOptsFilter);
+      }
+      if (searchQuery) {
+        if (allFilters) {
+          allFilters = `where: ` + conjunct("and", [searchQuery, allFilters]);
+        } else {
+          allFilters = "where: " + searchQuery;
+        }
+      } else {
+        if (allFilters) {
+          allFilters = "where: " + allFilters;
+        }
       }
     }
 
@@ -150,20 +181,20 @@ export const qMany = (entity, options) => {
       }
     }
 
-    const qParam = gOpts.length ? "(" + gOpts.join(", ") + ")" : "";
+    const qParam = gOpts.length ? `(${gOpts.join(", ")} ${allFilters})` : "";
     return `query getMany_${m.id} {
         many: ${m.qid}${qParam}{
             ${qFields(m)}
         }
-        ${count}
+        ${fullCount(m.qid)}
+        ${hasFilters ? filteredCount(m.qid, allFilters) : ""}
     }`;
   }
   return null;
 };
-
 //#endregion
 
-//#region Analytics ----------------------------
+//#region  ----- Analytics ----------------------------
 
 const aggregateName = (qid, f) => {
   if (f.aggregate) {
@@ -179,6 +210,7 @@ export const qChart = (m, fieldId) => {
   // TODO: charts for number fields (buckets)
   const f = m.fieldsH[fieldId];
   if (!f) {
+    console.error(`Invalid Chart ${m.id} ${fieldId}.`);
     return "";
   }
   const qName = `getChart_${m.id}_${fieldId}`;
@@ -235,14 +267,17 @@ export const qStats = (m) => {
     if (f.type === "lov") {
       fid += "_id";
     }
-    let qNulls = ` nulls_${f.id}: ${m.qid}_aggregate(where:`;
+    let sqNulls = ` nulls_${f.id}: ${m.qid}_aggregate(where:`;
     if (fieldIsText(f)) {
-      qNulls += ` {_or: [{${fid}: {_is_null: true}}, {${fid}: { _eq: ""}}]}`;
+      sqNulls += conjunct("or", [
+        `{${fid}: {_is_null: true}}`,
+        `{${fid}: {_eq: ""}}`,
+      ]);
     } else {
-      qNulls += ` {${fid}: {_is_null: true}}`;
+      sqNulls += ` {${fid}: {_is_null: true}}`;
     }
-    qNulls += "){aggregate {count}}";
-    nulls.push(qNulls);
+    sqNulls += "){aggregate {count}}";
+    nulls.push(sqNulls);
   });
 
   return `query getStats_${m.id} @cached {
@@ -255,22 +290,17 @@ export const qStats = (m) => {
 };
 //#endregion
 
-//#region One ----------------------------
+//#region  ----- One ----------------------------
 
-export const qCollecs = (m) => {
-  const collecs = m?.collections;
-  if (collecs) {
-    return collecs
-      .map(
-        (c) =>
-          ` ${c.id}(order_by:{${c.order || "id"}: asc}) { id ${c.fields
-            .map(qFieldCol)
-            .join(" ")}}`
-      )
-      .join(" ");
-  }
-  return "";
-};
+export const sqCollecs = (m) =>
+  m.collections
+    ?.map(
+      (c) =>
+        ` ${c.id}(order_by:{${c.order || "id"}: asc}) { id ${c.fields
+          .map(sqFieldCol)
+          .join(" ")}}`
+    )
+    .join(" ") || "";
 
 const nextPrev = {
   next: {
@@ -292,7 +322,7 @@ export const qOne = (entity, nextOrPrevious) => {
     } else {
       q += `_by_pk(id:$id)`;
     }
-    q += `{ ${qFields(m)} ${qCollecs(m)} }`;
+    q += `{ ${qFields(m)} ${sqCollecs(m)} }`;
     if (m._lovNoList?.length > 0) {
       q += m._lovNoList.map((fid) => qLOV(m, fid)).join(" ");
     }
@@ -316,7 +346,7 @@ export const qUpdateOne = (entity, data) => {
     updated: update_${m.qid} (
         where: {id: {_eq: $id}}
         _set: ${prepData(entity, data)}
-    ) {returning {${qFields(m) + qCollecs(m)}}}
+    ) {returning {${qFields(m) + sqCollecs(m)}}}
   }`;
 };
 
@@ -330,7 +360,7 @@ export const qInsertOne = (entity, data) => {
 };
 //#endregion
 
-//#region LOV and Lookup ----------------------------
+//#region  ----- LOV and Lookup ----------------------------
 
 export const qObjectSearch = (entity, search) => {
   const m = getModel(entity);
@@ -338,7 +368,7 @@ export const qObjectSearch = (entity, search) => {
   const qSearch = search
     ? `where: {${lookupField}: {_ilike: "%${search}%"}}`
     : "";
-  return `query lookup_${entity}_${lookupField}{ lov: ${m.qid}(${qSearch}, limit:100) {id name:${lookupField}} }`;
+  return `query lookup_${entity}_${lookupField}{ lov: ${m.qid}(${qSearch}, limit: 100) {id name:${lookupField}} }`;
 };
 
 export const qLOV = (model, fid) => {

@@ -12,19 +12,31 @@ export function querySearch(query) {
   return urlParams.join("&");
 }
 
-export function parseQuery(qString) {
-  if (qString) {
-    const idx = qString.indexOf("?");
-    return qString
-      ? queryString.parse(idx ? qString.slice(idx) : qString)
-      : null;
+export const parseQuery = (qString) => {
+  return qString ? queryString.parse(qString) : null;
+};
+
+export const hasFilters = (qString) => {
+  if (!qString) {
+    return false;
   }
-  return null;
-}
+  let res = false;
+  qString
+    .slice(1)
+    .split("&")
+    .forEach((p) => {
+      if (p !== "order" && p !== "page" && p !== "pageSize") {
+        res = true;
+        return;
+      }
+    });
+  return res;
+};
 
 const urlModule = {
   querySearch,
   parseQuery,
+  hasFilters,
 };
 
 export default urlModule;
