@@ -36,6 +36,18 @@ const f_money = "$0,0.00";
 const offSet = new Date().getTimezoneOffset();
 const offSetx60000 = offSet * 60000;
 
+const offsetTime = (() => {
+  const num2Digits = (n) => ("0" + n).slice(-2);
+  const os60 = Math.abs(offSet / 60);
+  const os60int = parseInt(os60, 10);
+  return (
+    (offSet > 0 ? "+" : "-") +
+    num2Digits(os60int) +
+    ":" +
+    num2Digits(os60 - os60int)
+  );
+})();
+
 export const xItemsCount = (count, nameSingular, namePlural) =>
   count === 0
     ? "No " + namePlural
@@ -61,10 +73,19 @@ export const trueDate = (d) => {
   const d1 = new Date(d);
   return new Date(d1.getTime() + offSetx60000);
 };
-export const dateTZ = (d) => (d !== null ? d.toISOString() : null);
+
+export const dateTZ = (d) => (d !== null ? `"${d.toISOString()}"` : "null");
+export const timeTZ = (timeString) => {
+  if (!timeString) {
+    return "null";
+  }
+  return `"${timeString}${offsetTime}"`;
+};
+
 export const dateString = (d) => mFormat(d, "L");
 // const timeString = d => mFormat(moment(d, 'HH:mm:ss'), 'LTS')
-export const timeString = (d) => mFormat(moment(d, "HH:mm:ss"), "hh:mm A");
+export const timeString = (d) =>
+  d ? mFormat(moment(d, "HH:mm:ss"), "hh:mm A") : null;
 export const datetimeString = (d) => mFormat(d, "L hh:mm A");
 const dateOpt = (d, type) => {
   if (type === ft.time) {

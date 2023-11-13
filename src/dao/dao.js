@@ -5,7 +5,6 @@
 import { getModel } from "../utils/moMa";
 import { fieldTypes as ft } from "../utils/dico.js";
 import {
-  gqlOptions,
   qOne,
   qStats,
   qChart,
@@ -22,7 +21,21 @@ import config from "../config.js";
 
 const { apiPath } = config;
 
-//#region Helpers ----------------------------
+//#region  ----- Helpers ----------------------------
+const reqHeader = {
+  "Content-Type": "application/json",
+  Accept: "application/json",
+};
+if (config.adminSecret) {
+  reqHeader["X-Hasura-Admin-Secret"] = config.adminSecret;
+}
+
+const gqlOptions = (query, variables) => ({
+  method: "POST",
+  headers: reqHeader,
+  body: JSON.stringify({ query, variables }),
+});
+
 const toJSON = (r) => r.json();
 
 const makePromise = (response) => {
@@ -67,7 +80,7 @@ const cleanChartData = (data, fieldType) => {
 };
 //#endregion
 
-//#region Many ----------------------------
+//#region  ----- Many ----------------------------
 
 export const getMany = (entity, options) => {
   const cacheKey = entity + JSON.stringify(options);
@@ -89,7 +102,9 @@ export const getMany = (entity, options) => {
       }
     });
 };
+//#endregion
 
+//#region  ----- Analytics ----------------------------
 // get list of chartable values for field
 export const getChart = (entity, field) => {
   const cacheKey = entity + "-chart-" + field;
@@ -164,7 +179,7 @@ export const getStats = (entity) => {
 };
 //#endregion
 
-//#region One ----------------------------
+//#region  ----- One ----------------------------
 
 // get a single item by id
 export const getOne = (entity, id, nextOrPrevious) => {

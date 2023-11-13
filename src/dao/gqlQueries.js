@@ -1,5 +1,5 @@
 /*
-    Evolutility-UI-React
+    Evolutility-UI-React GraphQL query generation
 
     https://github.com/evoluteur/evolutility-ui-react
     (c) 2023 Olivier Giulieri
@@ -19,39 +19,38 @@ import {
 
 import config from "../config";
 import { getModel } from "../utils/moMa";
-import { dateTZ } from "../utils/format";
+import { dateTZ, timeTZ } from "../utils/format";
+import { isObject } from "underscore";
 
 const timestampFields = config.withTimestamp ? " updated_at created_at " : " ";
-
-const reqHeader = {
-  "Content-Type": "application/json",
-  Accept: "application/json",
-};
-if (config.adminSecret) {
-  reqHeader["X-Hasura-Admin-Secret"] = config.adminSecret;
-}
-
-export const gqlOptions = (query, variables) => ({
-  method: "POST",
-  headers: reqHeader,
-  body: JSON.stringify({ query, variables }),
-});
 
 const prepData = (entity, data) => {
   const m = getModel(entity);
   let d = "{";
   m.fields.forEach((f) => {
-    const v = data[f.id];
+    let v = data[f.id];
     if (v !== undefined) {
-      if (f.type === ft.lov) {
-        const fv = v.id;
-        if (fv) {
-          d += `${f.id}_id: ${fv} `;
+      const fType = f.type;
+      const fId = f.id;
+      if (fType === ft.lov) {
+        d += `${fId}_id: ${v?.id || "null"} `;
+      } else if (fType === ft.date) {
+        d += `${fId}: ${dateTZ(v)} `;
+      } else if (fType === ft.time) {
+        d += `${fId}: ${timeTZ(v)} `;
+      } else if (fType === ft.json) {
+        if (v === null || v === "") {
+          d += `${fId}: null `;
+        } else {
+          if (isObject(v)) {
+            v = JSON.stringify(v);
+          }
+          v = v.replace(/"([^"]+)":/g, "$1:");
+          // TODO: fix bug w/ spaces in attribute names
+          d += `${fId}: ${v} `;
         }
-      } else if (f.type === ft.date) {
-        d += `${f.id}: "${dateTZ(v)}" `;
       } else {
-        d += `${f.id}: "${v}" `;
+        d += `${fId}: "${v}" `;
       }
     }
   });
@@ -233,7 +232,7 @@ export const qStats = (m) => {
         sag.max.push(fid);
       }
     }
-    if (f.type === "lov" || f.type === "list") {
+    if (f.type === "lov") {
       fid += "_id";
     }
     let qNulls = ` nulls_${f.id}: ${m.qid}_aggregate(where:`;
@@ -249,7 +248,7 @@ export const qStats = (m) => {
   return `query getStats_${m.id} @cached {
       stats: ${m.qid}_aggregate { aggregate {
         ${allStats
-          .map((p) => (sag[p].length ? p + " {" + sag[p].join(" ") + "}" : ""))
+          .map((p) => (sag[p].length ? `${p}{${sag[p].join(" ")}}` : ""))
           .join(" ")}
      count}}
     ${nulls.join("")}}`;
