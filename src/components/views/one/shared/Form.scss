@@ -188,10 +188,10 @@ fieldset[disabled] .checkbox label {
   vertical-align: middle;
 }
 .input-group-addon {
-  padding: 6px 12px;
-  font-size: 14px;
+  padding: 3px 7px;
   font-weight: 400;
   line-height: 1;
+  min-width: 31px;
   color: #555;
   text-align: center;
   background-color: #eee;
