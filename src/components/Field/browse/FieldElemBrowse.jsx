@@ -1,8 +1,7 @@
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
-import { isObject } from "underscore";
 import { fieldTypes as ft } from "../../../utils/dico";
-import { image, pixPath } from "../../../utils/format";
+import { image, pixPath, jsonString } from "../../../utils/format";
 import FieldValue from "./FieldValue";
 import config from "../../../config";
 
@@ -90,11 +89,7 @@ const FieldElemBrowse = memo(({ fieldDef, value, icon }) => {
       fw = <FieldValue fieldDef={f} value={value} />;
     }
   } else if (fType === ft.json) {
-    fw = (
-      <pre>
-        {isObject(value) ? JSON.stringify(value, null, 2) : value || ""}
-      </pre>
-    );
+    fw = <pre>{jsonString(value)}</pre>;
   } else {
     fw = <FieldValue fieldDef={f} value={value} />;
   }

@@ -103,7 +103,7 @@ $chart-gap: 5px;
       cursor: default !important;
       border-color: $color-icon-active;
       > svg {
-        fill: black !important;
+        fill: $almostblack-color !important;
       }
     }
     > svg {

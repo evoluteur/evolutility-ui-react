@@ -61,7 +61,7 @@ const model = {
     {
       id: "web",
       type: "url",
-      label: "web",
+      label: "Web",
       maxLength: 255,
       width: 100,
     },

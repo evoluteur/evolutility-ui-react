@@ -8,6 +8,7 @@
 import React from "react";
 import numeral from "numeral";
 import moment from "moment";
+import { isObject } from "underscore";
 
 import { locale } from "../i18n/i18n";
 // include locale support for other languages
@@ -115,7 +116,8 @@ export const image = (d) => {
 export const integerString = (d) => numFormat(d, integerFormat);
 export const decimalString = (d) => numFormat(d, decimalFormat);
 export const moneyString = (d) => numFormat(d, moneyFormat);
-export const jsonString = (js) => (js ? JSON.stringify(js, null, "\t") : "");
+export const jsonString = (value) =>
+  isObject(value) ? JSON.stringify(value, null, 2) : value || "";
 
 export const numFieldValue = (f, value) =>
   numFormat(value, f.format ? f.format : typeFormats[f.type] || null);

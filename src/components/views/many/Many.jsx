@@ -15,7 +15,7 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import List from "./List/List";
 import Cards from "./Cards/Cards";
 import ViewHeader from "../ViewHeader/ViewHeader";
-import Pagination from "../../widgets/Pagination/Pagination";
+import Pagination from "./shared/Pagination/Pagination";
 import Spinner from "../../widgets/Spinner/Spinner";
 import Alert from "../../widgets/Alert/Alert";
 import InvalidRoute from "../comfort/Overview/InvalidRoute";
@@ -186,8 +186,6 @@ const Many = () => {
     sortDirection,
   };
 
-  const hasFilters = data?.length === 0 ? url.hasFilters(search) : false;
-
   const body = () => {
     if (!model) {
       return <InvalidRoute entity={entity} />;
@@ -199,7 +197,7 @@ const Many = () => {
       return <Spinner />;
     }
     if (data.length === 0) {
-      return <EmptyState model={model} hasFilters={hasFilters} />;
+      return <EmptyState model={model} hasFilters={fullCount > 0} />;
     }
     return (
       <>

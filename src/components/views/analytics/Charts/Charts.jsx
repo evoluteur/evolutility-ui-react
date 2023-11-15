@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // Evolutility-UI-React :: /views/Charts/Charts.js
 
 // Dashboard style set of charts (bars or pies).
@@ -7,9 +6,8 @@
 // (c) 2023 Olivier Giulieri
 
 //#region  ----- Imports ----------------------------
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
-
 import classnames from "classnames";
 import { i18n_charts } from "../../../../i18n/i18n";
 import { getModel } from "../../../../utils/moMa";
@@ -25,22 +23,28 @@ import "./Charts.scss";
 
 const Charts = () => {
   const [expandedChart, setExpandedChart] = useState(null);
-  const toggleExpandedChart = (fid, expanded) => {
-    if (fid === expandedChart) {
-      setExpandedChart(expanded ? fid : null);
-    } else {
-      setExpandedChart(fid);
-    }
-  };
+  const toggleExpandedChart = useCallback(
+    (fid, expanded) => {
+      if (fid === expandedChart) {
+        setExpandedChart(expanded ? fid : null);
+      } else {
+        setExpandedChart(fid);
+      }
+    },
+    [expandedChart]
+  );
   const { entity } = useParams();
   const m = getModel(entity);
+  const title = i18n_charts.dash.replace(
+    "{0}",
+    capitalize(m?.namePlural || "")
+  );
   useEffect(() => {
-    document.title = m?.label + " Charts";
+    document.title = title;
     window.scrollTo(0, 0);
-  }, [entity]);
+  }, [title]);
 
   if (m) {
-    const title = i18n_charts.dash.replace("{0}", capitalize(m.namePlural));
     const chartFields = m.fields.filter(fieldInCharts);
     const nbCharts = chartFields.length;
     const css = classnames("evol-many-charts", {

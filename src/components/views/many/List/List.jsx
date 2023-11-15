@@ -35,7 +35,6 @@ const tableHeader = (fields, onClickSort, sortField, sortDirection) => (
   </thead>
 );
 
-// TODO: search w/ pagination
 const List = ({
   entity,
   model,

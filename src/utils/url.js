@@ -16,27 +16,33 @@ export const parseQuery = (qString) => {
   return qString ? queryString.parse(qString) : null;
 };
 
-export const hasFilters = (qString) => {
-  if (!qString) {
-    return false;
-  }
-  let res = false;
-  qString
-    .slice(1)
-    .split("&")
-    .forEach((p) => {
-      if (p !== "order" && p !== "page" && p !== "pageSize") {
-        res = true;
-        return;
-      }
-    });
-  return res;
-};
+// export const hasFilters = (qString) => {
+//   if (!qString) {
+//     return false;
+//   }
+//   let res = false;
+//   qString
+//     .slice(1)
+//     .split("&")
+//     .forEach((p) => {
+//       if (
+//         !(
+//           p.startsWith("order=") ||
+//           p.startsWith("page=") ||
+//           p.startsWith("pageSize=")
+//         )
+//       ) {
+//         res = true;
+//         return;
+//       }
+//     });
+//   return res;
+// };
 
 const urlModule = {
   querySearch,
   parseQuery,
-  hasFilters,
+  // hasFilters,
 };
 
 export default urlModule;

@@ -8,9 +8,8 @@ import { colors, labelColor } from "./chartOptions";
 const Pie = ({ data, showLegend = true }) => {
   if (data) {
     const dh = {};
-    let label;
     data = data.map((d) => {
-      label = d.label;
+      let label = d.label;
       if (dh[label]) {
         dh[label] += 1;
         label += ` (${dh[label]})`;

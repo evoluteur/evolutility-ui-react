@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Icon from "react-crud-icons";
 import {
   pixPath,
@@ -13,7 +13,7 @@ import { fieldTypes as ft } from "../../../utils/dico";
 
 import "../Field.scss";
 
-const FieldValue = ({ fieldDef, value, compact }) => {
+const FieldValue = memo(({ fieldDef, value, compact }) => {
   const f = fieldDef;
   const fType = f.type;
 
@@ -70,6 +70,6 @@ const FieldValue = ({ fieldDef, value, compact }) => {
     );
   }
   return value;
-};
+});
 
 export default FieldValue;

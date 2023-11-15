@@ -27,27 +27,20 @@ import "./Charts.scss";
 // #endregion
 
 //#region   ----- Helpers ----------------
-const cTypes = {
-  bars: "bars",
-  pie: "pie",
-  table: "table",
-};
-
 const sortByLabel = (a, b) => (a.label || "").localeCompare(b.label || "");
 const sortByCount = (a, b) => a.value - b.value;
 
-const chartIcon = (chartType, props) => {
-  return (
-    <Icon
-      id={chartType}
-      key={chartType}
-      {...props}
-      name={chartType === "table" ? "list" : chartType}
-      tooltip={i18n_charts[chartType]}
-      className={chartType === props.chartType ? "active" : ""}
-    />
-  );
-};
+const ChartIcon = ({ chartType, props }) => (
+  <Icon
+    id={chartType}
+    {...props}
+    name={chartType === "table" ? "list" : chartType}
+    tooltip={i18n_charts[chartType]}
+    className={chartType === props.chartType ? "active" : ""}
+    size="small"
+    theme="light"
+  />
+);
 const isFunction = (x) => typeof x === "function";
 //#endregion
 
@@ -87,7 +80,6 @@ const Chart = ({
         setIsLoading(false);
       });
     }
-
     return () => {
       done = true;
     };
@@ -147,10 +139,10 @@ const Chart = ({
         message={i18n_charts.emptyData}
       />
     );
-  } else if (curChartType === cTypes.pie) {
+  } else if (curChartType === "pie") {
     // - Pie charts
     body = <Pie {...params} showLegend={size === "large"} />;
-  } else if (curChartType === cTypes.table) {
+  } else if (curChartType === "table") {
     // - Table view
     body = <ChartTable {...params} field={field} />;
   } else {
@@ -159,8 +151,6 @@ const Chart = ({
   }
 
   const iconProps = {
-    size: "small",
-    theme: "light",
     onClick: clickView,
     chartType: curChartType,
   };
@@ -178,11 +168,9 @@ const Chart = ({
         </div>
       )}
       <div className="chart-actions-right">
-        {[
-          chartIcon("pie", iconProps),
-          chartIcon("bars", iconProps),
-          chartIcon("table", iconProps),
-        ]}
+        <ChartIcon chartType="pie" props={iconProps} />
+        <ChartIcon chartType="bars" props={iconProps} />
+        <ChartIcon chartType="table" props={iconProps} />
       </div>
     </>
   );
@@ -221,7 +209,7 @@ Chart.propTypes = {
 };
 
 Chart.defaultProps = {
-  chartType: cTypes.bars,
+  chartType: "bars",
   size: "small",
   setExpanded: null,
   expanded: false,

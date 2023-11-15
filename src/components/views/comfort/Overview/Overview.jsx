@@ -32,9 +32,9 @@ const Overview = () => {
   const [chartField, setChartField] = useState(
     !!m && lcChartField
       ? m.fieldsH[lcChartField]
-      : chartFields && chartFields?.length
-      ? chartFields[0]
-      : ""
+      : chartFields?.length
+        ? chartFields[0]
+        : ""
   );
 
   if (m === null) {

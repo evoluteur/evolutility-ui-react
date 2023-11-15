@@ -44,6 +44,37 @@ const makePromise = (response) => {
     resolve(response);
   });
 };
+//#endregion
+
+//#region  ----- Many ----------------------------
+
+export const getMany = (entity, options) => {
+  const cacheKey = entity + JSON.stringify(options);
+  const cacheData = getCache(cacheKey);
+  if (cacheData) {
+    return makePromise(cacheData);
+  }
+  return fetch(apiPath, gqlOptions(qMany(entity, options)))
+    .then(toJSON)
+    .then((resp) => {
+      if (resp.data?.many) {
+        const data = resp.data.many;
+        data._full_count = resp.data._full_count.aggregate.count;
+        const filteredCount = resp.data._filtered_count?.aggregate.count;
+        if (filteredCount) {
+          data._filtered_count = filteredCount;
+        }
+        data._entity = entity;
+        setCache(cacheKey, data);
+        return data;
+      } else {
+        return resp;
+      }
+    });
+};
+//#endregion
+
+//#region  ----- Analytics ----------------------------
 
 const cleanChartData = (data, fieldType) => {
   const d2 = [];
@@ -76,53 +107,21 @@ const cleanChartData = (data, fieldType) => {
       }
     );
   }
-
   return { data: d2 };
 };
-//#endregion
 
-//#region  ----- Many ----------------------------
-
-export const getMany = (entity, options) => {
-  const cacheKey = entity + JSON.stringify(options);
-  const cacheData = getCache(cacheKey);
-  if (cacheData) {
-    return makePromise(cacheData);
-  }
-  return fetch(apiPath, gqlOptions(qMany(entity, options)))
-    .then(toJSON)
-    .then((resp) => {
-      if (resp.data && resp.data.many) {
-        const data = resp.data.many;
-        data._full_count = resp.data._full_count.aggregate.count;
-        const filteredCount = resp.data._filtered_count?.aggregate.count;
-        if (filteredCount) {
-          data._filtered_count = filteredCount;
-        }
-        data._entity = entity;
-        setCache(cacheKey, data);
-        return data;
-      } else {
-        return resp;
-      }
-    });
-};
-//#endregion
-
-//#region  ----- Analytics ----------------------------
-// get list of chartable values for field
-export const getChart = (entity, field) => {
-  const cacheKey = entity + "-chart-" + field;
+export const getChart = (entity, fieldId) => {
+  const cacheKey = entity + "-chart-" + fieldId;
   const cacheData = getCache(cacheKey);
   if (cacheData) {
     return makePromise(cacheData);
   }
   const m = getModel(entity);
-  return fetch(apiPath, gqlOptions(qChart(m, field)))
+  return fetch(apiPath, gqlOptions(qChart(m, fieldId)))
     .then(toJSON)
     .then((resp) => {
       if (resp.data) {
-        const fieldType = m.fieldsH[field]?.type;
+        const fieldType = m.fieldsH[fieldId]?.type;
         let data = fieldType === "lov" ? resp.data.chart : resp.data;
         data = cleanChartData(data, fieldType);
         setCache(cacheKey, data);
@@ -150,7 +149,7 @@ export const getStats = (entity) => {
         const oStats = data?.stats?.aggregate || {};
         m.fields.forEach((f) => {
           const fid = f.id;
-          const df = { nulls: resp.data["nulls_" + fid]?.aggregate?.count };
+          const df = { nulls: data["nulls_" + fid]?.aggregate?.count };
           let v = oStats.min?.[fid];
           if (v) {
             df.min = v;
@@ -244,10 +243,9 @@ export const insertOne = (entity, data) => {
     .then(toJSON)
     .then((resp) => {
       if (!resp.errors) {
-        resp.data =
-          resp.data.inserted && resp.data.inserted.returning.length
-            ? resp.data.inserted.returning[0]
-            : null;
+        resp.data = resp.data?.inserted.returning.length
+          ? resp.data.inserted.returning[0]
+          : null;
         clearCache(entity);
       }
       return resp;
@@ -261,10 +259,9 @@ export const updateOne = (entity, id, data) => {
     .then(toJSON)
     .then((resp) => {
       if (!resp.errors) {
-        resp.data =
-          resp.data.updated && resp.data.updated.returning.length
-            ? resp.data.updated.returning[0]
-            : null;
+        resp.data = resp.data?.updated.returning.length
+          ? resp.data.updated.returning[0]
+          : null;
         clearCache(entity);
       }
       return resp;

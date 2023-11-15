@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
-import config from "../../../config";
+import config from "../../../../../config";
 
 import "./Pagination.scss";
 

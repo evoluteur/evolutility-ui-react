@@ -7,10 +7,10 @@
 
 import React, { memo } from "react";
 import PropTypes from "prop-types";
-import { isObject } from "underscore";
 
 import FieldDate from "./FieldDate";
 import FieldUpload from "./FieldUpload";
+import { jsonString } from "../../../utils/format";
 import { fieldTypes as ft } from "../../../utils/dico";
 import Typeahead from "./FieldObject";
 
@@ -103,7 +103,7 @@ const FieldElemEdit = memo(({ fieldDef, onChange, value }) => {
       <textarea
         {...sharedFieldProps}
         rows={f.height || 4}
-        value={isObject(value) ? JSON.stringify(value, null, 2) : value || ""}
+        value={jsonString(value)}
       />
     );
   }
