@@ -49,7 +49,7 @@ const Panel = ({
           </div>
         )}
         {header && <div className="panel-header">{header}</div>}
-        <fieldset>{children}</fieldset>
+        {children}
         {footer && <div className="panel-footer">{footer}</div>}
       </div>
     </div>
