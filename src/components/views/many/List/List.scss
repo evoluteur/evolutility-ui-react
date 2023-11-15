@@ -16,6 +16,7 @@
       top: 49px;
       z-index: 2;
       white-space: nowrap;
+      transition: border-color $ease-time;
       svg {
         position: relative;
         top: 2px;
@@ -37,6 +38,7 @@
       cursor: pointer;
       &:hover {
         color: $color-icon-hover;
+        border-bottom-color: $color-icon-hover;
       }
     }
   }

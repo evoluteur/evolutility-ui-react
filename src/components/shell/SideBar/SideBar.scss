@@ -58,8 +58,11 @@ $topbar-height: 50px;
         > span {
           transition: display 0 $nav-trans-time;
         }
+        &:focus {
+          background-color: $bgcolor-menu-hover;
+        }
       }
-      transition: background-color 0.2s;
+      transition: background-color $ease-time;
       &:hover,
       &.active {
         background-color: $bgcolor-menu-hover;
@@ -67,6 +70,7 @@ $topbar-height: 50px;
         > .x-icons {
           display: inline-block;
           width: 65px;
+          visibility: visible;
           margin-right: 10px;
           transition: width $ease-time ease $delay-time2;
         }
@@ -79,6 +83,7 @@ $topbar-height: 50px;
     right: -5px;
     text-align: right;
     width: 0;
+    visibility: hidden;
     overflow: hidden;
     transition: width $ease-time ease 0s;
     height: 20px;

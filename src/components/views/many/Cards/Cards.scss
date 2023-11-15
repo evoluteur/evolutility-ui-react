@@ -16,6 +16,7 @@
       border-color: $color-border-hover;
       .card-actions {
         right: 0;
+        visibility: visible;
       }
     }
     > div {
@@ -59,13 +60,16 @@
     position: absolute;
     top: 0;
     right: -50px;
+    visibility: hidden;
     padding: 0 4px 4px 4px;
     background-color: $bgcolor-background;
     border: 1px solid $bgcolor-background;
     border-left-color: $color-border;
     border-bottom-color: $color-border;
     border-bottom-left-radius: $radius;
-    transition: right $ease-time ease $delay-time;
+    transition:
+      visibility $ease-time ease $delay-time,
+      right $ease-time ease $delay-time;
     @include icons-actions();
     i {
       margin: 5px 0 0 0;

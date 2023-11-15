@@ -13,7 +13,7 @@
       width: 14px;
       margin-right: 0;
       fill: $color-help-icon;
-      transition: fill 0.2s ease 0.2s;
+      transition: fill $ease-time ease $delay-time;
     }
     &:hover {
       svg {

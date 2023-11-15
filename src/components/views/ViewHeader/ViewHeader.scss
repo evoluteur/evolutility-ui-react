@@ -32,12 +32,14 @@
     background-color: $bgcolor-background;
     > a {
       display: inline-block;
-    }
-    a {
+      border-radius: 50%;
       > .crud-icon {
         border: solid 1px transparent;
         > svg {
           fill: $color-icon;
+        }
+        > div {
+          display: none;
         }
       }
       &.active > .crud-icon {
@@ -48,8 +50,13 @@
         }
       }
       &:hover {
-        .crud-icon > svg {
-          fill: $color-icon-hover;
+        .crud-icon {
+          > svg {
+            fill: $color-icon-hover;
+          }
+          > div {
+            display: block;
+          }
         }
       }
     }
