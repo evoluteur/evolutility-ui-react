@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Evolutility-UI-React :: /views/one/Edit.js
 
 // View to add or update one record at a time.
@@ -16,7 +17,7 @@ import { i18n_actions, i18n_validation } from "../../../../i18n/i18n";
 import { fieldId2Field, fieldTypes as ft } from "../../../../utils/dico";
 import { validate, validateField } from "../../../../utils/validation";
 import Button from "../../../widgets/Button/Button";
-import Field from "../../../field/Field";
+import Field from "../../../Field/Field";
 import Panel from "../../../widgets/Panel/Panel";
 import Collection from "../shared/Collection/Collection";
 import Timestamps from "../shared/Timestamps/Timestamps";
@@ -38,7 +39,7 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
       setInvalids(v.invalids);
       toast.error(i18n_validation.incomplete + " " + v.messages.join(" "));
     }
-  }, [model, data, onSave]);
+  }, [entity, data, onSave]);
 
   const fieldChange = useCallback(
     (evt, obj) => {
@@ -69,13 +70,9 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
       }
       onFieldChange(fid, v);
     },
-    [model, invalids, onFieldChange]
+    [entity, invalids, onFieldChange]
   );
 
-  const cbs = {
-    change: fieldChange,
-    // dropFile: uploadFileOne,
-  };
   const linkCancel = `/${entity}/${isNew ? "list" : "browse/" + id}`;
   const fnField = (f) => {
     if (f) {
@@ -86,7 +83,7 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
           fieldDef={f}
           value={data?.[f.id]}
           data={data}
-          callbacks={cbs}
+          onChange={fieldChange}
           entity={entity}
           message={invalidMsg}
           invalid={!!invalidMsg}

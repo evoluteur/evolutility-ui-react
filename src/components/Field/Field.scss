@@ -17,6 +17,13 @@
   select {
     font-size: $text-font-size;
   }
+  .filename {
+    margin: 10px 0;
+    > span {
+      color: grey;
+      white-space: nowrap;
+    }
+  }
   .evo-rdonly {
     > img {
       position: relative;
@@ -80,8 +87,8 @@ div > .checkbox {
 .lov-icon {
   margin-right: 5px;
 }
-.field-remove {
-  margin-top: 5px;
+.btn-remove {
+  margin: 5px 5px 0 0;
   svg {
     position: relative;
     top: 2px;
@@ -103,7 +110,7 @@ div > .checkbox {
     margin-right: 5px;
   }
 }
-.pixdrop {
+.doc-drop {
   margin-top: 7px;
   width: 100%;
   min-height: 100px;

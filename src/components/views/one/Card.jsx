@@ -12,8 +12,9 @@ import { fieldPropTypes } from "../modelPropTypes";
 import Icon from "react-crud-icons";
 import { Link } from "react-router-dom";
 import { getModel } from "../../../utils/moMa";
-import { fieldValue, pixPath } from "../../../utils/format";
+import { pixPath } from "../../../utils/format";
 import { fieldTypes as ft } from "../../../utils/dico";
+import FieldValue from "../../Field/browse/FieldValue";
 
 const Card = memo(({ entity, data, fields = [] }) => {
   const d = data || {};
@@ -24,7 +25,7 @@ const Card = memo(({ entity, data, fields = [] }) => {
   return (
     <div className="panel">
       {fields.map((f, idx) => {
-        const fv = fieldValue(f, d[f.id]);
+        const fv = <FieldValue fieldDef={f} value={d[f.id]} />;
         if (idx === 0) {
           return (
             <div key={f.id} className="card-title">

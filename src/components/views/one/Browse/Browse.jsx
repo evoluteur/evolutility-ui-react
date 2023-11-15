@@ -15,7 +15,7 @@ import { i18n_actions } from "../../../../i18n/i18n";
 import { fieldId2Field } from "../../../../utils/dico";
 
 import Button from "../../../widgets/Button/Button";
-import Field from "../../../field/Field";
+import Field from "../../../Field/Field";
 import Panel from "../../../widgets/Panel/Panel";
 import Collection from "../shared/Collection/Collection";
 import Timestamps from "../shared/Timestamps/Timestamps";

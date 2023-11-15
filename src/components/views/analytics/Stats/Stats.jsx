@@ -17,11 +17,12 @@ import { getModel } from "../../../../utils/moMa";
 import { i18n_stats, i18n_comments } from "../../../../i18n/i18n";
 import { fieldTypes as ft } from "../../../../utils/dico";
 import { getStats } from "../../../../dao/dao";
-import { xItemsCount, numString, fieldValue } from "../../../../utils/format";
+import { xItemsCount, numString } from "../../../../utils/format";
 import ViewHeader from "../../ViewHeader/ViewHeader";
 import Spinner from "../../../widgets/Spinner/Spinner";
 import Alert from "../../../widgets/Alert/Alert";
 import PercentBar from "./PercentBar";
+import FieldValue from "../../../Field/browse/FieldValue";
 
 import "./Stats.scss";
 // #endregion
@@ -55,7 +56,7 @@ const statValue = (field, stat, value, pc) => {
     stat === "max" ||
     (field.type === ft.money && stat === "avg")
   ) {
-    return fieldValue(field, value);
+    return <FieldValue fieldDef={field} value={value} />;
   }
   return value;
 };

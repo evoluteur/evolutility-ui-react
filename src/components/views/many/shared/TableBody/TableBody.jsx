@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { fieldIsNumber, fieldTypes as ft } from "../../../../../utils/dico";
-import { fieldValue, pixPath } from "../../../../../utils/format";
+import { pixPath } from "../../../../../utils/format";
+import FieldValue from "../../../../Field/browse/FieldValue";
 
 const TableBody = ({ fields, data, iconPath, link }) => {
   const icon = iconPath ? (
@@ -15,7 +16,11 @@ const TableBody = ({ fields, data, iconPath, link }) => {
         <td key={f.id}>
           <Link to={link + d.id}>
             {icon}
-            {value ? fieldValue(f, value, true) : `(${d.id})`}
+            {value ? (
+              <FieldValue fieldDef={f} value={value} abbr={true} />
+            ) : (
+              `(${d.id})`
+            )}
           </Link>
           {d.nb_comments && " " + d.nb_comments + " comments"}
         </td>
@@ -24,7 +29,11 @@ const TableBody = ({ fields, data, iconPath, link }) => {
     if (f.type === ft.image) {
       return (
         <td key={f.id}>
-          {value && <Link to={link + d.id}>{fieldValue(f, value, true)}</Link>}
+          {value && (
+            <Link to={link + d.id}>
+              <FieldValue fieldDef={f} value={value} compact={true} />
+            </Link>
+          )}
         </td>
       );
     }
@@ -62,7 +71,7 @@ const TableBody = ({ fields, data, iconPath, link }) => {
     }
     return (
       <td className={css} key={f.id}>
-        {fieldValue(f, value, true)}
+        <FieldValue fieldDef={f} value={value} compact={true} />
       </td>
     );
   };

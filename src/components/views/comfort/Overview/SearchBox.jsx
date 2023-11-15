@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import Typeahead from "components/field/Typeahead";
+import Typeahead from "../../../Field/edit/FieldObject";
 
 const SearchBox = ({ entity, placeHolder }) => {
   const navigate = useNavigate();

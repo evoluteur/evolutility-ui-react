@@ -3,14 +3,11 @@ import { render, screen } from "@testing-library/react";
 import Field from "./Field";
 
 const noOp = () => {};
-const callbacks = { change: noOp };
 
 const simpleTest = (fType, value) =>
   it(`Field ${fType} shows`, async () => {
     const meta = { id: fType, type: fType, label: "Field " + fType };
-    render(
-      <Field fieldDef={meta} callbacks={callbacks} value={value || null} />
-    );
+    render(<Field fieldDef={meta} onChange={noOp} value={value || null} />);
     const f = screen.getByTestId("field-" + fType);
     expect(f).toBeInTheDocument();
     if (value) {

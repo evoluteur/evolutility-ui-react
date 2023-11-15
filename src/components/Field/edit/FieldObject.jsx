@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
-import { getObjectSearch } from "../../dao/dao";
-import { i18n_actions } from "../../i18n/i18n";
+import { getObjectSearch } from "../../../dao/dao";
+import { i18n_actions } from "../../../i18n/i18n";
 
-import "./Typeahead.scss";
+import "./FieldObject.scss";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
 
-const Typeahead = ({ entity, id, value, placeHolder, onChange }) => {
+const FieldObject = ({ entity, id, value, placeHolder, onChange }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState(value ? [value] : []);
 
@@ -16,21 +16,27 @@ const Typeahead = ({ entity, id, value, placeHolder, onChange }) => {
     setOptions(value ? [value] : []);
   }, [value]);
 
-  const handleSearch = (search) => {
-    setIsLoading(true);
-    const dataPromise = getObjectSearch(entity, search);
-    dataPromise.then((d) => {
-      setOptions(d);
-      setIsLoading(false);
-    });
-  };
+  const handleSearch = useCallback(
+    (search) => {
+      setIsLoading(true);
+      const dataPromise = getObjectSearch(entity, search);
+      dataPromise.then((d) => {
+        setOptions(d);
+        setIsLoading(false);
+      });
+    },
+    [entity]
+  );
 
-  const handleChange = (values) => {
-    const v = values?.[0];
-    if (v) {
-      onChange({ value: v.id, label: v.name }, { name: id });
-    }
-  };
+  const handleChange = useCallback(
+    (values) => {
+      const v = values?.[0];
+      if (v) {
+        onChange({ value: v.id, label: v.name }, { name: id });
+      }
+    },
+    [id, onChange]
+  );
 
   const filterBy = () => true;
 
@@ -51,9 +57,9 @@ const Typeahead = ({ entity, id, value, placeHolder, onChange }) => {
   );
 };
 
-export default Typeahead;
+export default FieldObject;
 
-Typeahead.propTypes = {
+FieldObject.propTypes = {
   /** Model id */
   entity: PropTypes.string.isRequired,
   /** Element id */
@@ -69,7 +75,7 @@ Typeahead.propTypes = {
   placeHolder: PropTypes.string,
 };
 
-Typeahead.defaultProps = {
+FieldObject.defaultProps = {
   id: "tphd",
   value: null,
   placeHolder: i18n_actions.search,

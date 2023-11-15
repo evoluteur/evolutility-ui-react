@@ -6,7 +6,6 @@
 // (c) 2023 Olivier Giulieri
 
 import React from "react";
-import Icon from "react-crud-icons";
 import numeral from "numeral";
 import moment from "moment";
 
@@ -22,16 +21,27 @@ export let { filesUrl, baseName = "/" } = config;
 if (!baseName.endsWith("/")) {
   baseName += "/";
 }
-export const pixPath = baseName + "pix/";
+export const pixPath =
+  "https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/main/public/pix/";
 
+// export const pixPath = baseName + "pix/";
+
+filesUrl =
+  "https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/main/public/pix/";
 // Set the locale from the browser -- which may need to be configured
 moment.locale(
   locale || window.navigator.userLanguage || window.navigator.language
 );
 
-const f_decimal = "0,0.00";
-const f_integer = "0,0";
-const f_money = "$0,0.00";
+const decimalFormat = "0,0.00";
+const integerFormat = "0,0";
+const moneyFormat = "$0,0.00";
+
+const typeFormats = {
+  decimal: decimalFormat,
+  integer: integerFormat,
+  money: moneyFormat,
+};
 
 const offSet = new Date().getTimezoneOffset();
 const offSetx60000 = offSet * 60000;
@@ -52,8 +62,8 @@ export const xItemsCount = (count, nameSingular, namePlural) =>
   count === 0
     ? "No " + namePlural
     : count === 1
-    ? "1 " + nameSingular
-    : count + " " + namePlural;
+      ? "1 " + nameSingular
+      : count + " " + namePlural;
 
 // const isFunction = (x) => typeof x === "function";
 export const numString = (d) =>
@@ -62,7 +72,7 @@ export const numString = (d) =>
 export const nullOrUndefined = (v) => v === null || v === undefined;
 const mFormat = (d, format) =>
   nullOrUndefined(d) ? "" : moment(d).format(format);
-const numFormat = (d, format) =>
+export const numFormat = (d, format) =>
   nullOrUndefined(d) ? "" : numeral(d).format(format);
 
 // --- date formats ---
@@ -100,73 +110,15 @@ export const image = (d) => {
   }
   return <img src={d} className="img-thumbnail" alt="" />;
 };
-//const intFormatter = new Intl.NumberFormat(locale);
-export const integerString = (d) => numFormat(d, f_integer);
-export const decimalString = (d) => numFormat(d, f_decimal);
-export const moneyString = (d) => numFormat(d, f_money);
-const jsonString = (js) => (js ? JSON.stringify(js, null, "\t") : "");
 
-export const fieldValue = (f, d, abbr) => {
-  if (f.type === ft.bool) {
-    return d ? <Icon className="checkbox" name="check" theme="none" /> : "";
-  }
-  if (f.type === ft.int) {
-    return numFormat(d, f.format ? f.format : f_integer);
-  }
-  if (f.type === ft.dec) {
-    return numFormat(d, f.format ? f.format : f_decimal);
-  }
-  if (f.type === ft.money) {
-    return numFormat(d, f.format ? f.format : f_money);
-  }
-  if (f.type === ft.email && d) {
-    return <a href={`mailto:${d}`}>{d}</a>;
-  }
-  if (f.type === ft.json && d) {
-    return jsonString(d);
-  }
-  if (f.type === ft.lov) {
-    return (
-      <span className="lov-wicon">
-        {f.lovIcon && d?.icon && (
-          <img id={d.icon} src={pixPath + d.icon} alt=""></img>
-        )}
-        {d?.name}
-      </span>
-    );
-  }
-  if (f.type === ft.date) {
-    return dateString(d);
-  }
-  if (f.type === ft.time) {
-    return timeString(d);
-  }
-  if (f.type === ft.color) {
-    return (
-      <div>
-        <div
-          className="evo-color-box"
-          id={f.id}
-          style={{ backgroundColor: d }}
-          title={d}
-        >
-          {!abbr && d && <span>{d}</span>}
-        </div>
-      </div>
-    );
-  }
-  if (f.type === ft.image && d) {
-    return image(filesUrl + d);
-  }
-  if (f.type === ft.url && d) {
-    return (
-      <a href={d} target="_blank" rel="noopener noreferrer">
-        {d}
-      </a>
-    );
-  }
-  return d;
-};
+//const intFormatter = new Intl.NumberFormat(locale);
+export const integerString = (d) => numFormat(d, integerFormat);
+export const decimalString = (d) => numFormat(d, decimalFormat);
+export const moneyString = (d) => numFormat(d, moneyFormat);
+export const jsonString = (js) => (js ? JSON.stringify(js, null, "\t") : "");
+
+export const numFieldValue = (f, value) =>
+  numFormat(value, f.format ? f.format : typeFormats[f.type] || null);
 
 export const capitalize = (word) => {
   // TODO: maybe use _.string.capitalize(word);
@@ -179,8 +131,6 @@ export const capitalize = (word) => {
 const formatLib = {
   // config to override browser
   locale: moment.locale(),
-  now: () => moment(),
-  fieldValue,
   dateOpt,
   dateString,
   timeString,
@@ -188,6 +138,7 @@ const formatLib = {
   decimalString,
   moneyString,
   jsonString,
+  numFieldValue,
 };
 
 export default formatLib;
