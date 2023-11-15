@@ -85,9 +85,9 @@ const FieldElemBrowse = memo(({ fieldDef, value, icon }) => {
       //       ))}
       //     </div>
       //   );
-      // } else {
-      //   fw = <FieldValue fieldDef={f}  value={value}/>
       // }
+    } else {
+      fw = <FieldValue fieldDef={f} value={value} />;
     }
   } else if (fType === ft.json) {
     fw = (
