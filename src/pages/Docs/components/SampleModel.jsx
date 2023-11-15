@@ -8,7 +8,7 @@
 
 import React, { useState } from "react";
 import PrettyJSON from "./PrettyJSON";
-import { modelIds, getModel } from "../../../utils/moMa";
+import { modelsArray, getModel } from "../../../utils/moMa";
 
 const calculatedProps = [
   "titleFunction", // Do not display functions
@@ -41,9 +41,9 @@ const SampleModel = () => {
     <div className="samples">
       <label>Model:</label>
       <select onChange={onSelectModel}>
-        {modelIds.map((mid) => (
-          <option key={mid} value={mid}>
-            {mid}
+        {modelsArray.map((m) => (
+          <option key={m.id} value={m.id}>
+            {m.title}
           </option>
         ))}
       </select>

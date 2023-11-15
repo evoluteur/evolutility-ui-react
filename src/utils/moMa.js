@@ -13,13 +13,6 @@ prepModels(all_models);
 
 export const modelsArray = Object.values(all_models);
 
-export const modelIds = modelsArray
-  //.filter((m) => m?.active)
-  .sort(
-    (a, b) => (all_models[a]?.position || 0) - (all_models[b]?.position || 0)
-  )
-  .map((m) => m.id);
-
 export const models = all_models;
 
 export const getModel = (mId) => all_models[mId] || null;
@@ -27,7 +20,7 @@ export const getModel = (mId) => all_models[mId] || null;
 const moma = {
   getModel,
   models,
-  modelIds,
+  modelsArray,
 };
 
 export default moma;

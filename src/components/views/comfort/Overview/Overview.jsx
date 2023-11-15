@@ -7,7 +7,7 @@ import { fieldInCharts } from "../../../../utils/dico";
 import { views } from "../../../../utils/dicoViews";
 import { capitalize } from "../../../../utils/format";
 import { lcWrite, lcRead } from "../../../../utils/localStorage";
-import { i18n_actions } from "../../../../i18n/i18n";
+import { i18n_actions as i18n } from "../../../../i18n/i18n";
 import ViewHeader from "../../ViewHeader/ViewHeader";
 import Chart from "../../analytics/Charts/Chart";
 import SearchBox from "./SearchBox";
@@ -30,11 +30,7 @@ const Overview = () => {
   const lcChartField = lcRead(lcKey);
 
   const [chartField, setChartField] = useState(
-    !!m && lcChartField
-      ? m.fieldsH[lcChartField]
-      : chartFields?.length
-        ? chartFields[0]
-        : ""
+    !!m && lcChartField ? m.fieldsH[lcChartField] : chartFields?.[0] || ""
   );
 
   if (m === null) {
@@ -48,37 +44,33 @@ const Overview = () => {
     };
 
     const urlBegin = `/${entity}/`;
-    const viewLink = (v) => (
-      <Link key={v.id} to={urlBegin + v.id}>
-        <Icon name={v.icon} theme="light" />
-        <span>{v.label}</span>
+    const ViewLink = ({ id, label, icon }) => (
+      <Link to={urlBegin + id}>
+        <Icon name={icon} theme="light" />
+        <span>{label}</span>
       </Link>
     );
 
-    const actions = (
+    const Actions = () => (
       <div className="ovw-actions">
         <div>
-          {viewLink(views.list)}
-          {viewLink(views.cards)}
+          <ViewLink {...views.list} />
+          <ViewLink {...views.cards} />
         </div>
         <div>
-          {!m.noCharts && viewLink(views.charts)}
-          {!m.noStats && viewLink(views.stats)}
+          {!m.noCharts && <ViewLink {...views.charts} />}
+          {!m.noStats && <ViewLink {...views.stats} />}
         </div>
-
         <div>
-          <Link to={urlBegin + "edit/0"}>
-            <Icon name="add" theme="light" />
-            <span>{"New " + m.name} </span>
-          </Link>
+          <ViewLink id="edit/0" label={"New " + m.name} icon="add" />
         </div>
       </div>
     );
 
-    const placeHolder = i18n_actions.searchX.replace("{0}", m.namePlural);
+    const placeHolder = i18n.searchX.replace("{0}", m.namePlural);
     const body = (
       <div className="ovw-body">
-        {actions}
+        <Actions />
         <SearchBox entity={entity} placeHolder={placeHolder} />
         <div className="ovw-text"></div>
         <div className="cols-2">
@@ -115,7 +107,7 @@ const Overview = () => {
       <div className="evol-overview">
         <ViewHeader
           entity={entity}
-          title={capitalize(m.namePlural) + " " + i18n_actions.overview}
+          title={capitalize(m.namePlural) + " " + i18n.overview}
           view="overview"
         />
         {body}

@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import pkg from "../../../package.json";
 import { pixPath } from "../../utils/format";
 import Gallery from "./Gallery";
-import { modelIds, getModel } from "../../utils/moMa";
+import { modelsArray } from "../../utils/moMa";
 import ModelLinks from "../../components/views/comfort/ModelLinks";
 
 import "./Home.scss";
@@ -18,8 +18,7 @@ const logoPath = pixPath + "logos/";
 const orgIcons = [];
 const musicIcons = [];
 
-modelIds.forEach((mid) => {
-  const m = getModel(mid);
+modelsArray.forEach((m) => {
   if (m && m.active) {
     if (m.world === "organizer" || m.world === "music") {
       const menuItem = {
