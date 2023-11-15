@@ -9,6 +9,14 @@
       }
     }
   },
+  "parserOptions": {
+    "babelOptions": {
+      "presets": [
+        ["babel-preset-react-app", false],
+        "babel-preset-react-app/prod"
+      ]
+    }
+  },
   "rules": {
     "react/jsx-props-no-spreading": "off",
     "camelcase": 0,
