@@ -51,6 +51,7 @@ $topbar-height: 50px;
       > a {
         padding: 5px;
         @include ellipsis();
+        border-radius: 10px;
         img {
           min-width: 16px;
           min-height: 16px;
@@ -92,6 +93,8 @@ $topbar-height: 50px;
     z-index: 100;
     > a {
       display: inline-block;
+      outline: none;
+      &:focus,
       &:hover {
         > svg {
           fill: orange;
