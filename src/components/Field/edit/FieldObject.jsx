@@ -8,7 +8,17 @@ import "./FieldObject.scss";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
 
-const FieldObject = ({ entity, id, value, placeHolder, onChange }) => {
+const noOp = () => {};
+const filterBy = () => true;
+
+const FieldObject = ({
+  entity,
+  id,
+  value,
+  placeHolder,
+  onChange,
+  onInputChange,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState(value ? [value] : []);
 
@@ -38,8 +48,6 @@ const FieldObject = ({ entity, id, value, placeHolder, onChange }) => {
     [id, onChange]
   );
 
-  const filterBy = () => true;
-
   return (
     <AsyncTypeahead
       filterBy={filterBy}
@@ -52,6 +60,8 @@ const FieldObject = ({ entity, id, value, placeHolder, onChange }) => {
       placeholder={placeHolder}
       renderMenuItemChildren={(option) => option.name}
       onChange={handleChange}
+      onInputChange={onInputChange || noOp}
+      selectHint={noOp}
       selected={value ? [value] : []}
     />
   );
@@ -64,8 +74,10 @@ FieldObject.propTypes = {
   entity: PropTypes.string.isRequired,
   /** Element id */
   id: PropTypes.string,
-  /** Callback functions  */
+  /** Callback function triggered on selection  */
   onChange: PropTypes.func.isRequired,
+  /** Callback function triggered on value change  */
+  onInputChange: PropTypes.func,
   /** Field value (object w/ id and name props) */
   value: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -79,4 +91,5 @@ FieldObject.defaultProps = {
   id: "tphd",
   value: null,
   placeHolder: i18n_actions.search,
+  onInputChange: null,
 };

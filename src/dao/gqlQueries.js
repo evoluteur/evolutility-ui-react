@@ -187,7 +187,7 @@ export const qMany = (entity, options) => {
             ${qFields(m)}
         }
         ${fullCount(m.qid)}
-        ${hasFilters ? filteredCount(m.qid, allFilters) : ""}
+        ${hasFilters || searchQuery ? filteredCount(m.qid, allFilters) : ""}
     }`;
   }
   return null;

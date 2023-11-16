@@ -28,7 +28,7 @@ const TopBar = () => {
       </Link>
       {model && (
         <div className="evo-toolbar views">
-          <ul className="navlinks evo-nav-pills pull-left">
+          <ul className="nav-links ">
             <Link to={entityLink}>
               <Icon name={ovw.icon} tooltip={ovw.label} theme="dark" />
             </Link>
