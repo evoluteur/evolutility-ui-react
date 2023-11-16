@@ -46,35 +46,35 @@ const Home = () => {
     <div className="evo-home">
       <section className="co-splash">
         <h1 className="siteTitle text-center">
-          <span>Evol</span>
-          <span className="utility">utility</span>-UI-
+          <span className="evol">Evol</span>
+          <span className="utility">utility</span>
+          <span className="rest">-UI-</span>
           <span className="ns">
-            React <span className="version">v{pkg.version}</span>
+            <span className="rest">React</span>{" "}
+            <span className="version">v{pkg.version}</span>
           </span>
         </h1>
-        <h2 className="tBlue">
-          Toolkit to build CRUD UIs with models rather than code
+        <h2 className="tBlue text-center">
+          Toolkit to build modern UIs with models rather than code
         </h2>
       </section>
       <section>
         <div>
-          Evolutility provides a{" "}
-          <strong>
-            <Link to="docs/metamodel">metamodel</Link>
-          </strong>{" "}
-          (model structure) to define UI models and{" "}
+          Evolutility provides{" "}
           <strong>
             a set of <Link to="docs/views">model-driven Views</Link>
           </strong>{" "}
-          (Overview, List, Cards, Browse, Edit, Dashboard...) to build UIs for
-          GraphQL with models rather than code.
+          (Overview, List, Cards, Browse, Edit, Dashboard...) and a minimalist{" "}
+          <strong>
+            <Link to="docs/metamodel">metamodel</Link>
+          </strong>{" "}
+          (model structure) to define UI models. With it you can easily build
+          modern CRUD UIs for GraphQL without writing any code.
         </div>
 
         <Gallery />
 
-        <div>
-          With it, you can build a React SPA for GraphQL like these examples:
-        </div>
+        <div>With Evolutility, you get React UIs like these examples:</div>
         <div className="home-demos">
           <ModelLinks />
         </div>
@@ -84,22 +84,9 @@ const Home = () => {
         </div>
         <div>
           <br />
-          For each application, all views, form validation, and API calls are
-          generated at run-time from a single model. No hand-coding necessary!
-        </div>
-        <div>
-          <br />
-          Evolutility-UI-React is Open source. The code and documentation are
-          available at{" "}
-          <a
-            href="https://github.com/evoluteur/evolutility-ui-react"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="extlink"
-          >
-            GitHub
-          </a>
-          .
+          For each application, all views, form validation, and GraphQL queries
+          are generated at run-time from a single model. No hand-coding
+          necessary!
         </div>
       </section>
       <div className="text-center tech-logos">
@@ -116,6 +103,20 @@ const Home = () => {
         <a href="https://hasura.io" target="hasura" rel="noopener noreferrer">
           <img src={logoPath + "hasura.png"} alt="Hasura" className="hasura" />
         </a>
+      </div>
+      <div>
+        <br />
+        Evolutility-UI-React is Open source. The code and documentation are
+        available at{" "}
+        <a
+          href="https://github.com/evoluteur/evolutility-ui-react"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="extlink"
+        >
+          GitHub
+        </a>
+        .
       </div>
     </div>
   );

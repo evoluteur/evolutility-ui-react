@@ -28,16 +28,8 @@ const Doc = () => {
 
       <section>
         <p>
-          Evolutility provides a{" "}
-          <strong>
-            <Link to="./metamodel">metamodel</Link>
-          </strong>{" "}
-          (model structure) to define your models and{" "}
-          <strong>
-            a set of <Link to="./views">model-driven Views</Link>
-          </strong>{" "}
-          (Overview, List, Cards, Browse, Edit, Dashboard...) to give them life
-          without writing code.
+          Evolutility is a model-driven UI for GraphQL. With it you can easily
+          build modern SPAs by writing models rather than code.
         </p>
         <h3 id="table-of-contents">Table of Contents</h3>
         <ol style={{ listStyleType: "decimal" }}>

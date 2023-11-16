@@ -35,14 +35,14 @@ const Demos = () => {
       </p>
 
       <p>
-        These demos uses the{" "}
+        These demos use a{" "}
         <a
           href="https://graphql.org/"
           target="gql"
           rel="noopener noreferrer"
           className="extlink"
         >
-          GraphQL APIs
+          GraphQL API
         </a>
         {" of "}
         <a
@@ -52,15 +52,6 @@ const Demos = () => {
           className="extlink"
         >
           Hasura
-        </a>{" "}
-        on{" "}
-        <a
-          href="https://heroku.com/"
-          target="he"
-          rel="noopener noreferrer"
-          className="extlink"
-        >
-          Heroku
         </a>
         .
       </p>

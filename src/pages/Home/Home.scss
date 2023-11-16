@@ -1,3 +1,5 @@
+@import "../../variables";
+
 .evo-home {
   h1 {
     margin: 30px 0 40px !important;
@@ -37,8 +39,19 @@
     font-size: 70px;
     padding: 2px 0;
     margin: 0 10px 20px 0;
+    .evol {
+      color: orange;
+    }
     .utility {
-      color: grey;
+      color: #2e9ec9;
+    }
+    .rest {
+      color: silver;
+    }
+    .evol,
+    .utility,
+    .rest {
+      text-shadow: 2px 2px 4px grey;
     }
     .ns {
       white-space: nowrap;
@@ -52,10 +65,13 @@
   }
   .tech-logos {
     margin-top: 20px;
+    > a {
+      display: inline-block;
+    }
     img {
       margin: 10px 20px;
     }
-    .hazura {
+    .hasura {
       max-width: 230px;
       margin-top: 20px;
     }
