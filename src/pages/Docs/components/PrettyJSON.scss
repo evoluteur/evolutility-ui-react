@@ -1,3 +1,5 @@
+@import "../../../variables";
+
 $color-hover: blue;
 
 .pretty-json {
@@ -45,8 +47,7 @@ $color-hover: blue;
       height: 16px;
       border: 1px solid silver;
       border-radius: 2px;
-      background-color: white;
-      // transition: transform 0.2s;
+      background-color: $color-almostwhite;
       &:hover {
         fill: $color-hover;
         border-color: $color-hover;

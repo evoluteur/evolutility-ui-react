@@ -18,9 +18,9 @@
     cursor: pointer;
     &:hover,
     &:focus {
-      color: #23527c;
+      color: $color-link-hover;
       background-color: #eee;
-      border-color: #ddd;
+      border-color: $color-border-hover;
     }
     &.active,
     &.active :hover,

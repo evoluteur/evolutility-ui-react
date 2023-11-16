@@ -15,7 +15,7 @@
       margin-left: 20px;
       color: silver;
       &.visits {
-        color: grey;
+        color: $color-text-secondary;
         min-width: 70px;
       }
     }

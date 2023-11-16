@@ -11,7 +11,7 @@ body {
   height: 100%; // IE
   font-size: $text-font-size;
   font-family: "Open Sans", sans-serif;
-  color: $almostblack-color;
+  color: $color-almostblack;
 }
 p {
   font-size: $text-font-size;
@@ -30,7 +30,7 @@ h3 {
 /* TODO: for now here */
 
 .black {
-  color: $almostblack-color !important;
+  color: $color-almostblack !important;
 }
 .grey {
   color: silver;

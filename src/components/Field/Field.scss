@@ -20,7 +20,7 @@
   .filename {
     margin: 10px 0;
     > span {
-      color: grey;
+      color: $color-text-secondary;
       white-space: nowrap;
     }
   }
@@ -113,7 +113,7 @@ div > .checkbox {
   margin-top: 7px;
   width: 100%;
   min-height: 100px;
-  border: 2px dashed $grey-color;
+  border: 2px dashed $color-border;
   border-radius: 5px;
   padding: 10px;
   > p {
@@ -121,6 +121,7 @@ div > .checkbox {
     font-size: 0.9em;
   }
 }
+
 .react-datepicker__navigation {
   top: 3px !important;
   border: none !important;

@@ -19,7 +19,7 @@ $label2-width: 100px;
   }
 }
 .stat-field-id {
-  color: grey;
+  color: $color-text-secondary;
   position: absolute;
   top: 18px;
   right: 20px;
@@ -38,7 +38,7 @@ $label2-width: 100px;
       margin-bottom: 10px;
       > span {
         margin-left: 10px;
-        color: grey;
+        color: $color-text-secondary;
       }
       > label {
         margin-right: $gap;

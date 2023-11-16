@@ -16,7 +16,7 @@ $topbar-height: 50px;
   padding: 10px 0 0;
   overflow: hidden;
   transition: width $nav-trans-time ease;
-  color: white;
+  color: $color-almostwhite;
   border-right: 1px solid #e0e0e0;
   background: #1976d2 url("./spirals.png");
   user-select: none;
@@ -26,7 +26,7 @@ $topbar-height: 50px;
   }
   a {
     display: block;
-    color: white !important;
+    color: $color-almostwhite !important;
     text-decoration: none !important;
     &:hover,
     &.active {
@@ -68,7 +68,7 @@ $topbar-height: 50px;
       &:hover,
       &.active {
         background-color: $bgcolor-menu-hover;
-        color: white;
+        color: $color-almostwhite;
         > .x-icons {
           display: inline-block;
           width: 65px;
@@ -95,7 +95,7 @@ $topbar-height: 50px;
     > a {
       @include link-focus-hover;
       > svg {
-        fill: white;
+        fill: $color-almostwhite;
         height: 16px;
         width: 16px;
         margin: 0 2px;

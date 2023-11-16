@@ -22,16 +22,18 @@
     > div {
       padding: 3px 0;
       min-height: 30px;
+      > h4,
+      > label {
+        @include ellipsis();
+      }
       > h4 {
         margin: 0;
-        @include ellipsis();
         min-height: 1.2em;
         font-weight: bold;
       }
       > label {
         width: $golden-ratio-small;
         max-width: 120px;
-        @include ellipsis();
         vertical-align: top;
         font-weight: 300;
       }

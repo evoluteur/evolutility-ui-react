@@ -8,10 +8,10 @@ $topbar-height: 50px;
   display: block;
   top: 0;
   width: 100%;
-  background-color: $almostblack-color;
+  background-color: $color-almostblack;
   height: $topbar-height;
   padding: 20px;
-  color: $almostwhite-color;
+  color: $color-almostwhite;
 
   .github {
     position: absolute;

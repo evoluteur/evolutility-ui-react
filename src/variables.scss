@@ -1,13 +1,13 @@
-$almostwhite-color: #fcfcfc;
-$almostblack-color: #0d0d0d;
+$color-almostwhite: #fcfcfc;
+$color-almostblack: #0d0d0d;
 
-$bgcolor-main: $almostwhite-color;
+$bgcolor-main: $color-almostwhite;
 $bgcolor-background: white;
-$grey-color: silver;
 $bgcolor-header: #fbfbfb;
 $bgcolor-badge: #ebebeb;
 
-$color-text: $almostblack-color;
+$color-text: $color-almostblack;
+$color-text-secondary: grey;
 $color-label: grey;
 $color-border: #ddd;
 $color-border-hover: silver;
@@ -57,7 +57,6 @@ $field-h-spacing: 16px;
 $radius: 12px;
 $media-small: 600px;
 
-// mixins
 @mixin flex-holder() {
   display: flex;
   flex-wrap: wrap;
