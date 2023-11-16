@@ -17,13 +17,13 @@ import TableBody from "../shared/TableBody/TableBody";
 import "./List.scss";
 // #endregion
 
-const tableHeader = (fields, onClickSort, sortField, sortDirection) => (
+const tableHeader = (fields, onClickSort, sortFieldId, sortDirection) => (
   <thead>
     <tr>
       {fields.map((f) => (
         <th id={f.id} key={f.id} onClick={onClickSort}>
           {f.labelShort || f.label}
-          {f.id === sortField && (
+          {f.id === sortFieldId && (
             <Icon
               theme="none"
               name={sortDirection === "desc" ? "down" : "up"}

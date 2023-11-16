@@ -16,7 +16,7 @@ import { pixPath } from "../../../utils/format";
 import { fieldTypes as ft } from "../../../utils/dico";
 import FieldValue from "../../Field/browse/FieldValue";
 
-const Card = memo(({ entity, data, fields = [] }) => {
+const Card = memo(({ entity, data, fields }) => {
   const d = data || {};
   const m = getModel(entity);
   const linkBrowse = `/${entity}/${m.defaultViewOne || "browse"}/`;
@@ -24,7 +24,7 @@ const Card = memo(({ entity, data, fields = [] }) => {
 
   return (
     <div className="panel">
-      {fields.map((f, idx) => {
+      {fields?.map((f, idx) => {
         const fv = <FieldValue fieldDef={f} value={d[f.id]} />;
         if (idx === 0) {
           return (
@@ -73,7 +73,7 @@ Card.propTypes = {
   /** Model id (Object unique key). */
   entity: PropTypes.string.isRequired,
   /** List of fields metadata. */
-  fields: PropTypes.arrayOf(fieldPropTypes),
+  fields: PropTypes.arrayOf(fieldPropTypes).isRequired,
   /** Data (1 single record/Object). */
   data: PropTypes.shape({
     id: PropTypes.number.isRequired,

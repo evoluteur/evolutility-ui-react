@@ -1,12 +1,15 @@
+import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { fieldIsNumber, fieldTypes as ft } from "../../../../../utils/dico";
 import { pixPath } from "../../../../../utils/format";
 import FieldValue from "../../../../Field/browse/FieldValue";
+import { fieldPropTypes } from "../../../modelPropTypes";
 
 const TableBody = ({ fields, data, iconPath, link }) => {
-  const icon = iconPath ? (
+  const icon = iconPath && (
     <img className="e-icon" src={pixPath + iconPath} alt="" />
-  ) : null;
+  );
 
   const tableCell = (d, f, idx) => {
     const value = d[f.id];
@@ -86,3 +89,18 @@ const TableBody = ({ fields, data, iconPath, link }) => {
 };
 
 export default TableBody;
+
+TableBody.propTypes = {
+  /** Array of field definitions */
+  fields: PropTypes.arrayOf(fieldPropTypes).isRequired,
+  /** Table data */
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+  /** Link for first column (rowid added at the end of it)  */
+  link: PropTypes.string.isRequired,
+  /** Path to images (image value added at the end of it) */
+  iconPath: PropTypes.string.isRequired,
+};
