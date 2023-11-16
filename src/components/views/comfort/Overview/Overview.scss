@@ -19,6 +19,7 @@
       display: inline-block;
       margin-right: 20px;
       > a {
+        @include link-focus;
         display: block;
         > i {
           position: relative;

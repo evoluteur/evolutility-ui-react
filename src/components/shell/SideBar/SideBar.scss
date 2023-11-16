@@ -52,6 +52,7 @@ $topbar-height: 50px;
         padding: 5px;
         @include ellipsis();
         border-radius: 10px;
+        outline: none;
         img {
           min-width: 16px;
           min-height: 16px;
@@ -92,14 +93,7 @@ $topbar-height: 50px;
     padding: 0;
     z-index: 100;
     > a {
-      display: inline-block;
-      outline: none;
-      &:focus,
-      &:hover {
-        > svg {
-          fill: orange;
-        }
-      }
+      @include link-focus-hover;
       > svg {
         fill: white;
         height: 16px;
@@ -113,6 +107,7 @@ $topbar-height: 50px;
     > a {
       overflow-x: hidden;
       white-space: nowrap;
+      outline: none;
       > img {
         margin-right: 10px;
       }
@@ -123,6 +118,7 @@ $topbar-height: 50px;
       &:last-child {
         margin-bottom: 5px;
       }
+      &:focus,
       &:hover {
         background-color: $bgcolor-menu-hover;
       }
@@ -154,7 +150,7 @@ $topbar-height: 50px;
   }
   &:hover {
     > svg {
-      fill: orange;
+      fill: $color-svg-hover;
     }
   }
 }

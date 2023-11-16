@@ -46,6 +46,8 @@ $color-help-icon: silver;
 $color-link: #337ab7;
 $color-link-hover: #23527c;
 
+$color-svg-hover: orange;
+
 $ease-time: 0.2s;
 $delay-time: 0.2s;
 $delay-time2: 0.6s;
@@ -69,6 +71,27 @@ $media-small: 600px;
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
+}
+
+@mixin link-focus {
+  display: inline-block;
+  outline: none;
+  &:focus {
+    svg {
+      fill: $color-svg-hover;
+    }
+  }
+}
+
+@mixin link-focus-hover {
+  display: inline-block;
+  outline: none;
+  &:hover,
+  &:focus {
+    svg {
+      fill: $color-svg-hover;
+    }
+  }
 }
 
 @mixin icons-actions {

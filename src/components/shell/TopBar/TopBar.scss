@@ -20,11 +20,7 @@ $topbar-height: 50px;
     > svg {
       fill: $bgcolor-background;
     }
-    &:hover {
-      > svg {
-        fill: orange;
-      }
-    }
+    @include link-focus-hover;
     @media (max-width: 600px) {
       display: none;
     }
@@ -41,8 +37,12 @@ $topbar-height: 50px;
       display: none;
     }
   }
-  .navlinks {
+  .nav-links {
     min-width: 280px;
+  }
+  .nav-links > a,
+  .evo-nav-pills > a {
+    @include link-focus;
   }
 }
 
