@@ -5,10 +5,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { diffData } from "../../../utils/validation";
 import { logActivity } from "../../../utils/activity";
-
 import Edit from "./Edit/Edit";
 import Browse from "./Browse/Browse";
-
 import ViewHeader from "../ViewHeader/ViewHeader";
 import Alert from "../../widgets/Alert/Alert";
 import Spinner from "../../widgets/Spinner/Spinner";
@@ -170,7 +168,7 @@ const One = () => {
         : insertOne(entity, userData);
       upsertPromise.then((response) => {
         if (response.errors) {
-          toast.error("Server error: " + response.errors[0].message);
+          toast.error(response.errors[0].message);
         } else {
           let toastMsg;
           if (intId) {

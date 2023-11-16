@@ -191,7 +191,7 @@ const Many = () => {
       return <InvalidRoute entity={entity} />;
     }
     if (error) {
-      return <Alert title={i18n_errors.serverError} message={error.message} />;
+      return <Alert title={i18n_errors.error} message={error.message} />;
     }
     if (isLoading || data?._entity !== entity) {
       return <Spinner />;

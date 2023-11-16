@@ -150,26 +150,18 @@ export const getStats = (entity) => {
         m.fields.forEach((f) => {
           const fid = f.id;
           const df = { nulls: data["nulls_" + fid]?.aggregate?.count };
-          let v = oStats.min?.[fid];
-          if (v) {
-            df.min = v;
-          }
-          v = oStats.max?.[fid];
-          if (v) {
-            df.max = v;
-          }
-          v = oStats.avg?.[fid];
-          if (v) {
-            df.avg = decimalString(v);
-          }
-          v = oStats.stddev?.[fid];
-          if (v) {
-            df.stddev = decimalString(v);
-          }
-          v = oStats.variance?.[fid];
-          if (v) {
-            df.variance = decimalString(v);
-          }
+          ["min", "max"].forEach((fn) => {
+            const v = oStats[fn]?.[fid];
+            if (v) {
+              df[fn] = v;
+            }
+          });
+          ["avg", "stddev", "variance"].forEach((fn) => {
+            const v = oStats[fn]?.[fid];
+            if (v) {
+              df[fn] = decimalString(v);
+            }
+          });
           cleanData[fid] = df;
         });
         cleanData.count = oStats.count;
