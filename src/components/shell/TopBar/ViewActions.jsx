@@ -12,7 +12,7 @@ import Modal from "react-modal";
 import { toast } from "react-toastify";
 import Icon from "react-crud-icons";
 import { capitalize } from "../../../utils/format";
-import dao from "../../../dao/dao";
+import { deleteOne } from "../../../dao/dao";
 import { i18n_msg, i18n_actions } from "../../../i18n/i18n";
 import { getModel } from "../../../utils/moMa";
 import Button from "../../widgets/Button/Button";
@@ -56,10 +56,9 @@ const ViewActions = ({ entity, id }) => {
     setDeleteConfirmation(false);
   };
 
-  const deleteOne = () => {
+  const onDelete = () => {
     if (id && m) {
-      dao
-        .deleteOne(entity, parseInt(id, 10)) // TODO: move parseInt higher
+      deleteOne(entity, parseInt(id, 10)) // TODO: move parseInt higher
         .then((response) => {
           if (response.errors) {
             const errorMsg = "Couldn't delete record.";
@@ -147,7 +146,7 @@ const ViewActions = ({ entity, id }) => {
                 label={i18n_actions.cancel}
               />
               <Button
-                onClick={deleteOne}
+                onClick={onDelete}
                 type="primary"
                 label={i18n_actions.ok}
               />

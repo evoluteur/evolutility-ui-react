@@ -17,9 +17,9 @@ const ft = {
   date: "date",
   time: "time",
   lov: "lov",
-  // list: "list", // many values for one field (behave like tags - return an array of strings)
+  // list: "list", // many values for one field (behave like tags - an array of strings or id?)
   // html: "html",
-  // formula: "formula", // soon to be a field attribute rather than a field type
+  // formula: "formula", // maybe a field attribute rather than a field type
   email: "email",
   image: "image",
   doc: "document",

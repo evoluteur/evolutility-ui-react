@@ -28,7 +28,7 @@ const TopBar = () => {
       </Link>
       {model && (
         <div className="evo-toolbar views">
-          <ul className="nav-links ">
+          <div className="nav-links">
             <Link to={entityLink}>
               <Icon name={ovw.icon} tooltip={ovw.label} theme="dark" />
             </Link>
@@ -37,7 +37,7 @@ const TopBar = () => {
                 <Icon name={v.icon} tooltip={v.label} theme="dark" />
               </Link>
             ))}
-          </ul>
+          </div>
           <ViewActions entity={entity} view={view} id={id} />
         </div>
       )}

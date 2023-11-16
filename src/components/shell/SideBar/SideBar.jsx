@@ -12,12 +12,12 @@ import docSVG from "./svg/book.svg";
 import "./SideBar.scss";
 
 // #region ------- Helpers ---------
-const iconViews = (mid) => (
+const ShortCuts = ({ entity }) => (
   <div className="x-icons">
-    <Link to={`/${mid}/edit/0`}>
+    <Link to={`/${entity}/edit/0`}>
       <Icon name="add2" size="small" theme="none" />
     </Link>
-    <Link to={`/${mid}/list`}>
+    <Link to={`/${entity}/list`}>
       <Icon name="list" size="small" theme="none" />
     </Link>
   </div>
@@ -44,7 +44,7 @@ const SideBar = ({ onClickToggle }) => {
         pixPath + menu.icon,
         "e-icon"
       )}
-      {iconViews(menu.id, menu)}
+      <ShortCuts entity={menu.id} />
     </li>
   );
 
