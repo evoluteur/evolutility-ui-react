@@ -3,7 +3,7 @@
 // (c) 2023 Olivier Giulieri
 
 import { getModel } from "../utils/moMa";
-import { fieldTypes as ft } from "../utils/dico.js";
+import { fieldIsText, fieldTypes as ft } from "../utils/dico.js";
 import {
   qOne,
   qStats,
@@ -163,18 +163,20 @@ export async function getStats(entity) {
           m.fields.forEach((f) => {
             const fid = f.id;
             const df = { nulls: data["nulls_" + fid]?.aggregate?.count };
-            ["min", "max"].forEach((fn) => {
-              const v = oStats[fn]?.[fid];
-              if (v) {
-                df[fn] = v;
-              }
-            });
-            ["avg", "stddev", "variance"].forEach((fn) => {
-              const v = oStats[fn]?.[fid];
-              if (v) {
-                df[fn] = decimalString(v);
-              }
-            });
+            if (!fieldIsText(f) || f.type === ft.time) {
+              ["min", "max"].forEach((aggreg) => {
+                const v = oStats[aggreg]?.[fid];
+                if (v !== undefined) {
+                  df[aggreg] = v;
+                }
+              });
+              ["avg", "stddev", "variance"].forEach((aggreg) => {
+                const v = oStats[aggreg]?.[fid];
+                if (v !== undefined) {
+                  df[aggreg] = v === 0 ? v : decimalString(v);
+                }
+              });
+            }
             cleanData[fid] = df;
           });
           cleanData.count = oStats.count;

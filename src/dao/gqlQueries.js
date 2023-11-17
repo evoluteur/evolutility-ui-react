@@ -264,7 +264,7 @@ export const qStats = (m) => {
         // TODO: use decimal rather than money type to make it work for money fields
         fieldStatsFunctions(f)?.forEach((p) => sag[p].push(fid));
       }
-      if (fieldIsDateOrTime(f)) {
+      if (f.type === ft.date) {
         sag.min.push(fid);
         sag.max.push(fid);
       }
