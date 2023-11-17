@@ -11,7 +11,7 @@
     width: 240px;
     min-width: 240px;
     padding: 10px 20px;
-    overflow: auto;
+    overflow-x: hidden;
     &:hover {
       border-color: $color-border-hover;
       .card-actions {
