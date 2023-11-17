@@ -66,7 +66,6 @@ export const xItemsCount = (count, nameSingular, namePlural) =>
       ? "1 " + nameSingular
       : count + " " + namePlural;
 
-// const isFunction = (x) => typeof x === "function";
 export const numString = (d) =>
   Number.isInteger(d) ? integerString(d) : decimalString(d);
 

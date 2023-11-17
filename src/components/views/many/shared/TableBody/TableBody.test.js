@@ -5,12 +5,12 @@ import TableBody from "./TableBody";
 
 describe("TableBody tests", () => {
   const fields = [
-    { id: "name", type: "text" },
-    { id: "num", type: "integer" },
-    { id: "bool", type: "boolean" },
-    { id: "img", type: "image" },
-    { id: "color", type: "color" },
-    { id: "url", type: "url" },
+    { id: "name", type: "text", label: "text" },
+    { id: "num", type: "integer", label: "integer" },
+    { id: "bool", type: "boolean", label: "boolean" },
+    { id: "img", type: "image", label: "image" },
+    { id: "color", type: "color", label: "color" },
+    { id: "url", type: "url", label: "url" },
   ];
   const data = [
     {
@@ -29,7 +29,12 @@ describe("TableBody tests", () => {
     render(
       <Router>
         <table>
-          <TableBody fields={fields} data={data} />
+          <TableBody
+            fields={fields}
+            data={data}
+            link="/somewhere/"
+            iconPath="/"
+          />
         </table>
       </Router>
     );

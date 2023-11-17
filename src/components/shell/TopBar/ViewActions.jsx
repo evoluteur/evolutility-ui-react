@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import Icon from "react-crud-icons";
+import { isFunction } from "underscore";
 import { capitalize } from "../../../utils/format";
 import { deleteOne } from "../../../dao/dao";
 import { i18n_msg, i18n_actions } from "../../../i18n/i18n";
@@ -38,7 +39,6 @@ const menuItems = {
 };
 
 const newEntity = (m) => i18n_actions.newEntity.replace("{0}", m.name);
-const isFunction = (x) => typeof x === "function";
 
 const ViewActions = ({ entity, id }) => {
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);

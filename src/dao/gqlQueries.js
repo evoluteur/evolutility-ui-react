@@ -172,14 +172,12 @@ export const qMany = (entity, options) => {
       }
       if (searchQuery) {
         if (allFilters) {
-          allFilters = `where: ` + conjunct("and", [searchQuery, allFilters]);
+          allFilters = "where: " + conjunct("and", [searchQuery, allFilters]);
         } else {
           allFilters = "where: " + searchQuery;
         }
-      } else {
-        if (allFilters) {
-          allFilters = "where: " + allFilters;
-        }
+      } else if (allFilters) {
+        allFilters = "where: " + allFilters;
       }
     }
 

@@ -88,7 +88,7 @@ const statsField = (d, f, total) => {
 
 const Stats = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const { entity } = useParams();
   const model = getModel(entity);
@@ -178,7 +178,7 @@ const Stats = () => {
             if (data[f.id] !== undefined) {
               return statsField(data[f.id], f, data.count);
             }
-            return f.id;
+            return null;
           })}
         </div>
       </div>

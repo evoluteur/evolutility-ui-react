@@ -11,7 +11,7 @@ import config from "./config";
 import SideBar from "./components/shell/SideBar/SideBar";
 import TopBar from "./components/shell/TopBar/TopBar";
 import Footer from "./components/shell/Footer/Footer";
-import ErrorBoundary from "./components/widgets/ErrorBoundary";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 import Home from "./pages/Home/Home";
 import Demos from "./pages/Demos/Demos";

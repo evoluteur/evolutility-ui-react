@@ -8,8 +8,8 @@
 // #region ---------------- Imports ----------------
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-
 import classnames from "classnames";
+import { isFunction } from "underscore";
 import Icon from "react-crud-icons";
 import { i18n_charts, i18n_actions, i18n_errors } from "../../../../i18n/i18n";
 import Alert from "../../../widgets/Alert/Alert";
@@ -41,7 +41,6 @@ const ChartIcon = ({ chartType, props }) => (
     theme="light"
   />
 );
-const isFunction = (x) => typeof x === "function";
 //#endregion
 
 const Chart = ({

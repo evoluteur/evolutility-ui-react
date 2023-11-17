@@ -17,7 +17,7 @@ const valRegExp = {
 };
 
 export const validateField = (f, v) => {
-  var isNumberField = fieldIsNumber(f);
+  const isNumberField = fieldIsNumber(f);
   const formatMsg = (fLabel, msg, r2, r3) =>
     msg.replace("{0}", fLabel).replace("{1}", r2).replace("{2}", r3);
 
@@ -49,7 +49,7 @@ export const validateField = (f, v) => {
               break;
             case ft.dec:
             case ft.money:
-              var regex =
+              const regex =
                 valRegExp["decimal_" + locale] || valRegExp.decimal_en;
               if (!regex.test(v)) {
                 return formatMsg(fieldLabel(f), i18n_validation[f.type]);
@@ -62,16 +62,16 @@ export const validateField = (f, v) => {
               }
               break;
             case ft.json:
-              var obj;
+              let obj;
               if (isObject(v)) {
                 obj = v;
               } else {
                 try {
                   obj = JSON.parse(v);
                 } catch (err) {}
-                if (isUndefined(obj)) {
-                  return formatMsg(fieldLabel(f), i18n_validation[f.type]);
-                }
+              }
+              if (isUndefined(obj)) {
+                return formatMsg(fieldLabel(f), i18n_validation[f.type]);
               }
               break;
             default:
@@ -83,7 +83,7 @@ export const validateField = (f, v) => {
 
       // Check regexp
       if (f.regExp !== null && !isUndefined(f.regExp)) {
-        var rg = new RegExp(f.regExp);
+        const rg = new RegExp(f.regExp);
         if (!v.match(rg)) {
           return formatMsg(
             fieldLabel(f),
@@ -111,7 +111,7 @@ export const validateField = (f, v) => {
 
     // Check custom validation
     if (f.fnValidate) {
-      var fValid = f.fnValidate(f, v);
+      const fValid = f.fnValidate(f, v);
       if (fValid !== "") {
         return formatMsg(fieldLabel(f), fValid);
       }
@@ -119,7 +119,7 @@ export const validateField = (f, v) => {
 
     // Check minLength and maxLength
     if (isString(v) && !isNumberField) {
-      var len = v.length,
+      const len = v.length,
         badMax = f.maxLength ? len > f.maxLength : false,
         badMin = f.minLength ? len < f.minLength : false;
       if (badMax || badMin) {
@@ -175,8 +175,7 @@ export const diffData = (model, data, userData) => {
       diffs[fid] = userData[fid];
     }
   });
-  const diffsCount = Object.keys(diffs).length;
-  if (diffsCount) {
+  if (Object.keys(diffs).length) {
     return diffs;
   }
   return null;
