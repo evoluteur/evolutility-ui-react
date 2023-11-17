@@ -44,34 +44,42 @@ const makePromise = (response) => {
     resolve(response);
   });
 };
+
+const fakeError = (message) => ({
+  errors: [{ message }],
+});
 //#endregion
 
 //#region  ----- Many ----------------------------
 
-export const getMany = (entity, options) => {
+export async function getMany(entity, options) {
   const cacheKey = entity + JSON.stringify(options);
   const cacheData = getCache(cacheKey);
   if (cacheData) {
     return makePromise(cacheData);
   }
-  return fetch(apiPath, gqlOptions(qMany(entity, options)))
-    .then(toJSON)
-    .then((resp) => {
-      if (resp.data?.many) {
-        const data = resp.data.many;
-        data._full_count = resp.data._full_count.aggregate.count;
-        const filteredCount = resp.data._filtered_count?.aggregate.count;
-        if (filteredCount) {
-          data._filtered_count = filteredCount;
+  try {
+    return await fetch(apiPath, gqlOptions(qMany(entity, options)))
+      .then(toJSON)
+      .then((resp) => {
+        if (resp.data?.many) {
+          const data = resp.data.many;
+          data._full_count = resp.data._full_count.aggregate.count;
+          const filteredCount = resp.data._filtered_count?.aggregate.count;
+          if (filteredCount) {
+            data._filtered_count = filteredCount;
+          }
+          data._entity = entity;
+          setCache(cacheKey, data);
+          return data;
+        } else {
+          return resp;
         }
-        data._entity = entity;
-        setCache(cacheKey, data);
-        return data;
-      } else {
-        return resp;
-      }
-    });
-};
+      });
+  } catch (err) {
+    return fakeError(err.message + ".");
+  }
+}
 //#endregion
 
 //#region  ----- Analytics ----------------------------
@@ -110,85 +118,94 @@ const cleanChartData = (data, fieldType) => {
   return { data: d2 };
 };
 
-export const getChart = (entity, fieldId) => {
+export async function getChart(entity, fieldId) {
   const cacheKey = entity + "-chart-" + fieldId;
   const cacheData = getCache(cacheKey);
   if (cacheData) {
     return makePromise(cacheData);
   }
   const m = getModel(entity);
-  return fetch(apiPath, gqlOptions(qChart(m, fieldId)))
-    .then(toJSON)
-    .then((resp) => {
-      if (resp.data) {
-        const fieldType = m.fieldsH[fieldId]?.type;
-        let data = fieldType === "lov" ? resp.data.chart : resp.data;
-        data = cleanChartData(data, fieldType);
-        setCache(cacheKey, data);
-        return data;
-      } else {
-        return resp;
-      }
-    });
-};
+  try {
+    return await fetch(apiPath, gqlOptions(qChart(m, fieldId)))
+      .then(toJSON)
+      .then((resp) => {
+        if (resp.data) {
+          const fieldType = m.fieldsH[fieldId]?.type;
+          let data = fieldType === "lov" ? resp.data.chart : resp.data;
+          data = cleanChartData(data, fieldType);
+          setCache(cacheKey, data);
+          return data;
+        } else {
+          return resp;
+        }
+      });
+  } catch (err) {
+    return fakeError(err.message + ".");
+  }
+}
 
 // get entity statistics
-export const getStats = (entity) => {
+export async function getStats(entity) {
   const cacheKey = entity + "-stats";
   const cacheData = getCache(cacheKey);
   if (cacheData) {
     return makePromise(cacheData);
   }
   const m = getModel(entity);
-  return fetch(apiPath, gqlOptions(qStats(m)))
-    .then(toJSON)
-    .then((resp) => {
-      const data = resp?.data;
-      if (data?.stats) {
-        const cleanData = {};
-        const oStats = data?.stats?.aggregate || {};
-        m.fields.forEach((f) => {
-          const fid = f.id;
-          const df = { nulls: data["nulls_" + fid]?.aggregate?.count };
-          ["min", "max"].forEach((fn) => {
-            const v = oStats[fn]?.[fid];
-            if (v) {
-              df[fn] = v;
-            }
+  try {
+    return await fetch(apiPath, gqlOptions(qStats(m)))
+      .then(toJSON)
+      .then((resp) => {
+        const data = resp?.data;
+        if (data?.stats) {
+          const cleanData = {};
+          const oStats = data?.stats?.aggregate || {};
+          m.fields.forEach((f) => {
+            const fid = f.id;
+            const df = { nulls: data["nulls_" + fid]?.aggregate?.count };
+            ["min", "max"].forEach((fn) => {
+              const v = oStats[fn]?.[fid];
+              if (v) {
+                df[fn] = v;
+              }
+            });
+            ["avg", "stddev", "variance"].forEach((fn) => {
+              const v = oStats[fn]?.[fid];
+              if (v) {
+                df[fn] = decimalString(v);
+              }
+            });
+            cleanData[fid] = df;
           });
-          ["avg", "stddev", "variance"].forEach((fn) => {
-            const v = oStats[fn]?.[fid];
-            if (v) {
-              df[fn] = decimalString(v);
-            }
-          });
-          cleanData[fid] = df;
-        });
-        cleanData.count = oStats.count;
-        const statsData = { data: cleanData };
-        setCache(cacheKey, statsData);
-        return statsData;
-      } else {
-        return resp;
-      }
-    });
-};
+          cleanData.count = oStats.count;
+          const statsData = { data: cleanData };
+          setCache(cacheKey, statsData);
+          return statsData;
+        } else {
+          return resp;
+        }
+      });
+  } catch (err) {
+    return fakeError(err.message + ".");
+  }
+}
 //#endregion
 
 //#region  ----- One ----------------------------
 
 // get a single item by id
-export const getOne = (entity, id, nextOrPrevious) => {
-  if (id) {
-    return fetch(apiPath, gqlOptions(qOne(entity, nextOrPrevious), { id }))
+export async function getOne(entity, id, nextOrPrevious) {
+  try {
+    return await fetch(
+      apiPath,
+      gqlOptions(qOne(entity, nextOrPrevious), { id })
+    )
       .then(toJSON)
       .then((resp) => {
         if (resp.error) {
           return resp;
         } else if (resp.data?.one === null) {
-          return {
-            errors: [{ message: i18n_errors.badId.replace("{0}", id) }],
-          };
+          return fakeError(i18n_errors.badId.replace("{0}", id));
         }
         const data = resp.data?.one;
         const m = getModel(entity);
@@ -200,81 +217,105 @@ export const getOne = (entity, id, nextOrPrevious) => {
         }
         return data;
       });
+  } catch (err) {
+    return fakeError(err.message + ".");
   }
-};
+}
 
 // get LOVs (necessary to create new  record)
-export const getLOVs = (entity) => {
+export async function getLOVs(entity) {
   const m = getModel(entity);
-  return fetch(apiPath, gqlOptions(qLOVs(m)))
-    .then(toJSON)
-    .then((resp) => {
-      if (resp.error) {
-        return resp;
-      }
-      const data = {};
-      m?._lovNoList.forEach((fid) => (data[fid] = resp.data["lov_" + fid]));
-      return data;
-    });
-};
+  try {
+    return await fetch(apiPath, gqlOptions(qLOVs(m)))
+      .then(toJSON)
+      .then((resp) => {
+        if (resp.error) {
+          return resp;
+        }
+        const data = {};
+        m?._lovNoList.forEach((fid) => (data[fid] = resp.data["lov_" + fid]));
+        return data;
+      });
+  } catch (err) {
+    return fakeError(err.message + ".");
+  }
+}
 
 // delete an item
-export const deleteOne = (entity, id) => {
-  const m = getModel(entity);
-  return fetch(apiPath, gqlOptions(qDelete(entity), { id }))
-    .then(toJSON)
-    .then((resp) => {
-      clearCache(entity);
-      return resp;
-    });
-};
+export async function deleteOne(entity, id) {
+  try {
+    return await fetch(apiPath, gqlOptions(qDelete(entity), { id }))
+      .then(toJSON)
+      .then((resp) => {
+        clearCache(entity);
+        return resp;
+      });
+  } catch (err) {
+    return fakeError(err.message + ".");
+  }
+}
 
 // add an item
-export const insertOne = (entity, data) => {
-  return fetch(apiPath, gqlOptions(qInsertOne(entity, data)))
-    .then(toJSON)
-    .then((resp) => {
-      if (!resp.errors) {
-        resp.data = resp.data?.inserted.returning.length
-          ? resp.data.inserted.returning[0]
-          : null;
-        clearCache(entity);
-      }
-      return resp;
-    });
-};
+export async function insertOne(entity, data) {
+  try {
+    return await fetch(apiPath, gqlOptions(qInsertOne(entity, data)))
+      .then(toJSON)
+      .then((resp) => {
+        if (!resp.errors) {
+          resp.data = resp.data?.inserted.returning.length
+            ? resp.data.inserted.returning[0]
+            : null;
+          clearCache(entity);
+        }
+        return resp;
+      });
+  } catch (err) {
+    return fakeError(err.message + ".");
+  }
+}
 
 // update (replace) an item
-export const updateOne = (entity, id, data) => {
+export async function updateOne(entity, id, data) {
   const m = getModel(entity);
-  return fetch(apiPath, gqlOptions(qUpdateOne(m.id, data), { id }))
-    .then(toJSON)
-    .then((resp) => {
-      if (!resp.errors) {
-        resp.data = resp.data?.updated.returning.length
-          ? resp.data.updated.returning[0]
-          : null;
-        clearCache(entity);
-      }
-      return resp;
-    });
-};
+  try {
+    return await fetch(apiPath, gqlOptions(qUpdateOne(m.id, data), { id }))
+      .then(toJSON)
+      .then((resp) => {
+        if (!resp.errors) {
+          resp.data = resp.data?.updated.returning.length
+            ? resp.data.updated.returning[0]
+            : null;
+          clearCache(entity);
+        }
+        return resp;
+      });
+  } catch (err) {
+    return fakeError(err.message + ".");
+  }
+}
 
 // upload a data item (doc or image)
 // response value has filename
 // export const uploadOne = (entity, id, field, data) => notImplementedYet();
 
 // get list of values for field
-export const getObjectSearch = (entity, fieldId, search) => {
-  return fetch(apiPath, gqlOptions(qObjectSearch(entity, fieldId, search)))
-    .then(toJSON)
-    .then((resp) => {
-      if (resp.errors) {
-        return [{ id: -1, name: "Error in search" }];
-      }
-      return resp.data.lov;
-    });
-};
+export async function getObjectSearch(entity, fieldId, search) {
+  try {
+    return await fetch(
+      apiPath,
+      gqlOptions(qObjectSearch(entity, fieldId, search))
+    )
+      .then(toJSON)
+      .then((resp) => {
+        if (resp.errors) {
+          return [{ id: -1, name: "Error in search" }];
+        }
+        return resp.data.lov;
+      });
+  } catch (err) {
+    return fakeError(err.message + ".");
+  }
+}
 
 // get a collection of sub-items (details for master)
 // getCollec: (entity, collid, id) => axios.get(apiPath + entity + '/collec/'+ collid + '?id=' + id + '&pageSize=' + pageSize),
