@@ -2,52 +2,72 @@
 
 $topbar-height: 50px;
 
-.TopBar {
-  z-index: 101;
+.evo-topbar {
   position: fixed;
-  display: block;
   top: 0;
-  width: 100%;
-  background-color: $color-almostblack;
+  left: 0;
   height: $topbar-height;
-  padding: 20px;
+  width: 100%;
+  display: block;
+  z-index: 101;
+  background-color: $color-almostblack;
   color: $color-almostwhite;
-
-  .github {
+  .evo-logo {
+    position: absolute;
+    top: 8px;
+    left: 14px;
+    > img {
+      width: 160px;
+      height: 40px;
+    }
+  }
+  > .github {
     position: absolute;
     right: 10px;
     top: 10px;
     > svg {
-      fill: $bgcolor-background;
+      fill: $color-almostwhite;
     }
-    @include link-focus-hover;
+    &:hover {
+      > svg {
+        fill: $color-blue1;
+      }
+    }
     @media (max-width: 600px) {
       display: none;
     }
   }
-  > .views {
-    top: 2px;
-    left: 190px;
-  }
-  .pos-right {
-    position: absolute;
-    top: 4px;
-    right: 5px;
-    @media only screen and (max-width: 650px) {
-      display: none;
+}
+.icons-always,
+.icons-context {
+  height: $topbar-height;
+  > a {
+    display: inline-block;
+    &:focus {
+      > .crud-icon > div {
+        display: none;
+      }
     }
   }
-  .nav-links {
-    min-width: 280px;
+}
+.topbar-icons {
+  position: absolute;
+  top: 2px;
+  left: 190px;
+  z-index: 110;
+  > .icons-context {
+    position: absolute;
+    top: 0;
+    left: 260px;
+    min-width: 160px;
   }
-  .nav-links > a,
-  .evo-nav-pills > a {
-    @include link-focus;
+  .crud-icon > div {
+    white-space: nowrap;
   }
 }
 
-.evo-logo {
-  position: absolute;
-  left: 14px;
-  top: 7px;
+@media print {
+  .topbar-icons {
+    display: none;
+  }
 }

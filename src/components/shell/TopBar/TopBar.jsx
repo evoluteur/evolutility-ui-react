@@ -22,18 +22,18 @@ const TopBar = () => {
   const model = getModel(entity);
   const entityLink = `/${entity}/`;
   return (
-    <nav className="TopBar" role="banner">
-      <Link to="/">
-        <img src={logoEvol} className="evo-logo" alt="" />
+    <nav className="evo-topbar">
+      <Link to="/" className="evo-logo" aria-label="Home">
+        <img src={logoEvol} alt="" />
       </Link>
       {model && (
-        <div className="evo-toolbar views">
-          <div className="nav-links">
-            <Link to={entityLink}>
+        <div className="topbar-icons">
+          <div className="icons-always">
+            <Link to={entityLink} aria-label={ovw.label}>
               <Icon name={ovw.icon} tooltip={ovw.label} theme="dark" />
             </Link>
             {modelViewsMany(model, true).map((v) => (
-              <Link to={entityLink + v.id} key={v.id}>
+              <Link to={entityLink + v.id} key={v.id} aria-label={v.label}>
                 <Icon name={v.icon} tooltip={v.label} theme="dark" />
               </Link>
             ))}

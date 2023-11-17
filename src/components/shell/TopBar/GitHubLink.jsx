@@ -4,6 +4,7 @@ const GitHubLink = () => (
     href="https://github.com/evoluteur/evolutility-ui-react"
     target="gh"
     rel="noopener noreferrer"
+    aria-label="GitHub"
   >
     <svg
       height="32"

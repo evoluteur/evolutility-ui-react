@@ -48,14 +48,15 @@ $topbar-height: 50px;
       margin: 0 0 4px 10px;
       border-radius: 10px;
       transition: padding-left $nav-trans-time ease;
+      height: 28px;
       > a {
         padding: 5px;
         @include ellipsis();
         border-radius: 10px;
         outline: none;
         img {
-          min-width: 16px;
-          min-height: 16px;
+          width: $icon-size;
+          height: $icon-size;
         }
         > span {
           transition: display 0 $nav-trans-time;
@@ -81,7 +82,7 @@ $topbar-height: 50px;
   }
   .x-icons {
     position: absolute;
-    top: 7px;
+    top: 6px;
     right: -5px;
     text-align: right;
     width: 0;
@@ -93,11 +94,18 @@ $topbar-height: 50px;
     padding: 0;
     z-index: 100;
     > a {
-      @include link-focus-hover;
+      display: inline-block;
+      outline: none;
+      &:hover,
+      &:focus {
+        svg {
+          fill: orange;
+        }
+      }
       > svg {
         fill: $color-almostwhite;
-        height: 16px;
-        width: 16px;
+        height: $icon-size;
+        width: $icon-size;
         margin: 0 2px;
       }
     }
@@ -109,7 +117,11 @@ $topbar-height: 50px;
       white-space: nowrap;
       outline: none;
       > img {
+        position: relative;
+        top: -1px;
         margin-right: 10px;
+        width: 24px;
+        height: 24px;
       }
       min-width: 40px;
       margin-bottom: 20px;

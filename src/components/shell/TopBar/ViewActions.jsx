@@ -17,8 +17,6 @@ import { i18n_msg, i18n_actions } from "../../../i18n/i18n";
 import { getModel } from "../../../utils/moMa";
 import Button from "../../widgets/Button/Button";
 
-import "./ViewActions.scss";
-
 const menuItems = {
   // new: {id: 'edit/0', label: i18n_actions.new, icon:'add', n:'x', readonly:false},
   del: {
@@ -77,19 +75,24 @@ const ViewActions = ({ entity, id }) => {
   const buttonLink = (menu, idOrFun, urlQuery = "") =>
     isFunction(idOrFun) ? (
       <span key={menu.icon} onClick={idOrFun}>
-        <Icon name={menu.icon} tooltip={menu.label} theme="dark" />{" "}
+        <Icon name={menu.icon} tooltip={menu.label} theme="dark" />
       </span>
     ) : (
-      <Link key={menu.icon} to={`/${entity}/${menu.id}/${idOrFun}${urlQuery}`}>
-        <Icon name={menu.icon} tooltip={menu.label} theme="dark" />{" "}
+      <Link
+        key={menu.icon}
+        to={`/${entity}/${menu.id}/${idOrFun}${urlQuery}`}
+        aria-label={menu.label}
+      >
+        <Icon name={menu.icon} tooltip={menu.label} theme="dark" />
       </Link>
     );
 
   const actionIcons = [];
   if (!m.readOnly) {
+    const label = newEntity(m);
     actionIcons.push(
-      <Link to={`/${entity}/edit/0`} key="new">
-        <Icon name="add" tooltip={newEntity(m)} theme="dark" />
+      <Link to={`/${entity}/edit/0`} key="new" aria-label={label}>
+        <Icon name="add" tooltip={label} theme="dark" />
       </Link>
     );
   }
@@ -150,9 +153,8 @@ const ViewActions = ({ entity, id }) => {
 
     return (
       actionIcons.length && (
-        <div className="evo-toolbar" role="toolbar">
-          <div className="evo-nav-pills">{actionIcons}</div>
-          <div className="clearfix" />
+        <div className="icons-context">
+          {actionIcons}
           {delModal}
         </div>
       )

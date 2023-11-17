@@ -14,10 +14,10 @@ import "./SideBar.scss";
 // #region ------- Helpers ---------
 const ShortCuts = ({ entity }) => (
   <div className="x-icons">
-    <Link to={`/${entity}/edit/0`}>
+    <Link to={`/${entity}/edit/0`} aria-label="Add">
       <Icon name="add2" size="small" theme="none" />
     </Link>
-    <Link to={`/${entity}/list`}>
+    <Link to={`/${entity}/list`} aria-label="List">
       <Icon name="list" size="small" theme="none" />
     </Link>
   </div>
@@ -71,7 +71,7 @@ const SideBar = ({ onClickToggle }) => {
   }
 
   return (
-    <nav className="evo-sidebar" role="navigation">
+    <nav className="evo-sidebar" role="navigation" data-testid="sidebar">
       <a className="skipNav" href="#afterNav">
         {i18n_nav.skip}
       </a>

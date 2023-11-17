@@ -40,11 +40,11 @@ $color-hover: blue;
     position: absolute;
     top: 3px;
     left: -20px;
-    height: 16px;
+    height: $icon-size;
     cursor: pointer;
     svg {
-      width: 16px;
-      height: 16px;
+      width: $icon-size;
+      height: $icon-size;
       border: 1px solid silver;
       border-radius: 2px;
       background-color: $color-almostwhite;

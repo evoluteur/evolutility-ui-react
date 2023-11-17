@@ -24,8 +24,8 @@
         position: relative;
         top: 2px;
         fill: gray;
-        height: 16px;
-        width: 16px;
+        height: $icon-size;
+        width: $icon-size;
       }
     }
     td {
@@ -49,8 +49,8 @@
     padding-top: 0;
     padding-bottom: 0;
     > svg {
-      height: 16px;
-      width: 16px;
+      height: $icon-size;
+      width: $icon-size;
     }
   }
   .td-url {

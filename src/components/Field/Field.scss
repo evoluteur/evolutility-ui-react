@@ -80,8 +80,8 @@
 div > .checkbox {
   position: relative;
   top: -7px;
-  height: 16px;
-  width: 16px;
+  height: $icon-size;
+  width: $icon-size;
 }
 .lov-icon {
   margin-right: 5px;
@@ -91,7 +91,7 @@ div > .checkbox {
   svg {
     position: relative;
     top: 2px;
-    height: 16px;
+    height: $icon-size;
     margin-right: 5px;
   }
 }

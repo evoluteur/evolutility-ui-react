@@ -10,7 +10,7 @@ const model = {
   world: "demos",
   name: "wine tasting",
   namePlural: "wine tastings",
-  icon: "wine.gif",
+  icon: "wine-glass.gif",
   titleField: "drink_date",
   titleFunction: (d) => d?.wine?.name + " " + d?.drink_date,
   fields: [

@@ -46,7 +46,7 @@ $color-help-icon: silver;
 $color-link: #337ab7;
 $color-link-hover: #23527c;
 
-$color-svg-hover: orange;
+$color-svg-hover: $color-blue1;
 
 $ease-time: 0.2s;
 $delay-time: 0.2s;
@@ -56,6 +56,8 @@ $field-h-spacing: 16px;
 
 $radius: 12px;
 $media-small: 600px;
+
+$icon-size: 16px;
 
 @mixin flex-holder() {
   display: flex;
@@ -82,17 +84,6 @@ $media-small: 600px;
   }
 }
 
-@mixin link-focus-hover {
-  display: inline-block;
-  outline: none;
-  &:hover,
-  &:focus {
-    svg {
-      fill: $color-svg-hover;
-    }
-  }
-}
-
 @mixin icons-actions {
   svg {
     fill: $color-icon;
@@ -101,7 +92,7 @@ $media-small: 600px;
       fill: $color-icon-hover;
     }
     &.active {
-      fill: black;
+      fill: $color-almostblack;
       cursor: default;
     }
   }
