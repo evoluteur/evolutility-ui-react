@@ -25,8 +25,7 @@ import { isObject } from "underscore";
 
 const timestampFields = config.withTimestamp ? " updated_at created_at " : " ";
 
-const prepData = (entity, data) => {
-  const m = getModel(entity);
+const prepData = (m, data) => {
   let d = "{";
   m.fields.forEach((f) => {
     let v = data[f.id];
@@ -104,6 +103,36 @@ const searchClause = (m, searchValue) => {
   return null;
 };
 
+const orderClause = (m, orderParam) => {
+  const orderParams = orderParam?.split(".");
+  let oField, oDirection;
+
+  if (orderParams) {
+    [oField, oDirection] = orderParams;
+  }
+  let f = null;
+  if (oField) {
+    f = m.fieldsH[oField];
+  }
+  if (!f) {
+    f = m?.fields[0];
+  }
+  if (f) {
+    oDirection = oDirection ? oDirection : "asc";
+    if (f.type === ft.lov) {
+      let displayFieldId = "name";
+      if (f.object) {
+        const m2 = getModel(f.object);
+        displayFieldId = m2.titleField || "name";
+      }
+      return `{${f.id}:{${displayFieldId}:${oDirection}}}`;
+    } else {
+      return `{${f.id}:${oDirection}}`;
+    }
+  }
+  return null;
+};
+
 export const qMany = (entity, options) => {
   const m = getModel(entity);
   if (m) {
@@ -154,36 +183,14 @@ export const qMany = (entity, options) => {
       }
     }
 
-    const orderParams = options?.order?.split(".");
-    let oField, oDirection;
-
-    if (orderParams) {
-      [oField, oDirection] = orderParams;
-    }
-    let f = null;
-    if (oField) {
-      f = m.fieldsH[oField];
-    }
-    if (!f) {
-      f = m?.fields[0];
-    }
-    if (f) {
-      oDirection = oDirection ? oDirection : "asc";
-      if (f.type === ft.lov) {
-        let displayFieldId = "name";
-        if (f.object) {
-          const m2 = getModel(f.object);
-          displayFieldId = m2.titleField || "name";
-        }
-        gOpts.push(`order_by:{${f.id}:{${displayFieldId}:${oDirection}}}`);
-      } else {
-        gOpts.push(`order_by:{${f.id}:${oDirection}}`);
-      }
+    const orderBy = orderClause(m, options?.order);
+    if (orderBy) {
+      gOpts.push(`order_by: ${orderBy}`);
     }
 
-    const qParam = gOpts.length ? `(${gOpts.join(", ")} ${allFilters})` : "";
+    const qParameters = `(${gOpts.join(", ")} ${allFilters})`;
     return `query getMany_${m.id} {
-        many: ${m.qid}${qParam}{
+        many: ${m.qid}${qParameters}{
             ${qFields(m)}
         }
         ${fullCount(m.qid)}
@@ -334,18 +341,21 @@ export const qOne = (entity, nextOrPrevious) => {
   }
 };
 
-export const qDelete = (mqid) => `mutation($id:Int!) {
-  deleted: delete_${mqid} (
-    where: {id: {_eq: $id}}
-  ) {affected_rows}
-}`;
+export const qDelete = (entity) => {
+  const m = getModel(entity);
+  return `mutation($id:Int!) {
+    deleted: delete_${m.qid} (
+      where: {id: {_eq: $id}}
+    ) {affected_rows}
+  }`;
+};
 
 export const qUpdateOne = (entity, data) => {
   const m = getModel(entity);
   return `mutation($id:Int!) {
     updated: update_${m.qid} (
         where: {id: {_eq: $id}}
-        _set: ${prepData(entity, data)}
+        _set: ${prepData(m, data)}
     ) {returning {${qFields(m) + sqCollecs(m)}}}
   }`;
 };
@@ -354,7 +364,7 @@ export const qInsertOne = (entity, data) => {
   const m = getModel(entity);
   return `mutation {
     inserted: insert_${m.qid}(
-      objects: [${prepData(entity, data)}]
+      objects: [${prepData(m, data)}]
     ) {returning {${qFields(m)}}}
   }`;
 };

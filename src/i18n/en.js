@@ -73,7 +73,7 @@ export const i18n_msg = {
   deleted: '{0} "{1}" deleted.',
   noUpdate: "No update necessary.",
   // deleteSelectionConfirmation: 'Do you really want to delete the selected {0}?',
-  deleteConfirmation: 'Do you really want to delete the {0} "{1}"?',
+  deleteConfirmation: "Do you really want to delete this {0}?",
   delete: "Delete {0}?",
 };
 

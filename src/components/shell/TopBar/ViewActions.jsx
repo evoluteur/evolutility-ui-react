@@ -69,10 +69,6 @@ const ViewActions = ({ entity, id }) => {
             );
             navigate(`/${entity}/list`);
           }
-        })
-        .catch(() => {
-          const errorMsg = "Couldn't delete record.";
-          toast.error(errorMsg);
         });
     }
     closeModal();
@@ -102,8 +98,6 @@ const ViewActions = ({ entity, id }) => {
   }
 
   if (m) {
-    const item = document.getElementById("itemTitle");
-    const itemName = item ? item.innerHTML : "";
     const delModal = deleteConfirmation && (
       <Modal
         className="modal-dialog"
@@ -135,9 +129,7 @@ const ViewActions = ({ entity, id }) => {
               </h4>
             </div>
             <div className="modal-body">
-              {i18n_msg.deleteConfirmation
-                .replace("{0}", m.name)
-                .replace("{1}", itemName)}
+              {i18n_msg.deleteConfirmation.replace("{0}", m.name)}
             </div>
             <div className="modal-footer">
               <Button

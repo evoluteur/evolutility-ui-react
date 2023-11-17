@@ -221,7 +221,7 @@ export const getLOVs = (entity) => {
 // delete an item
 export const deleteOne = (entity, id) => {
   const m = getModel(entity);
-  return fetch(apiPath, gqlOptions(qDelete(m.qid), { id }))
+  return fetch(apiPath, gqlOptions(qDelete(entity), { id }))
     .then(toJSON)
     .then((resp) => {
       clearCache(entity);
