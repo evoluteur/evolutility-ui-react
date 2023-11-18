@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import Dropzone from "react-dropzone";
+import { toast } from "react-toastify";
 import classnames from "classnames";
-import { i18n_actions as i18n } from "../../../i18n/i18n";
+import { i18n_upload as i18n } from "../../../i18n/i18n";
 import config from "../../../config";
 import Button from "../../widgets/Button/Button";
 
-import "../Field.scss";
+import "./FieldUpload.scss";
 
 // TODO: finish partial implementation
 // TODO: save file on server
 
 // #region ---------------- Helpers ----------------
+const DOC = "document";
+const IMG = "image";
+
+const imageTypes = [".png", ".jpg", ".jpeg", ".gif", ".webp"];
+
 const { filesUrl } = config;
 
-const doc = (d, path) => (
+const docLink = (d, path) => (
   <a
     key="doclink"
     href={encodeURI(path + d)}
@@ -34,22 +40,37 @@ export const convertFileToBase64 = (file) =>
   });
 // #endregion
 
-const FieldUpload = ({ fieldDef, value, onChange }) => {
+const FieldUpload = ({ id, docType, value, onChange }) => {
   // - covers "image" and  "document" field types
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
-  const f = fieldDef;
 
-  const onDropFile = (files) => {
-    if (files.length) {
-      // const formData = new FormData();
-      // formData.append("filename", file);
-      setFile(files[0]);
-      convertFileToBase64(files[0]).then((base64File) =>
-        setPreview(base64File)
-      );
-    }
-  };
+  const maxSize = docType === IMG ? 200000 : 2000000;
+  const maxSizeTxt = docType === IMG ? "200KB" : "2MB";
+
+  const onDropFile = useCallback(
+    (files, invalids) => {
+      if (files?.length) {
+        // const formData = new FormData();
+        // formData.append("filename", file);
+        setFile(files[0]);
+        convertFileToBase64(files[0]).then((base64File) =>
+          setPreview(base64File)
+        );
+      }
+      if (invalids?.length) {
+        const errorCode = invalids[0].errors[0].code;
+        let msg = i18n[errorCode] || "Upload error.";
+        if (errorCode === "file-invalid-type") {
+          msg = msg.replace("{0}", imageTypes.join(", "));
+        } else if (errorCode === "file-too-large") {
+          msg = msg.replace("{0}", maxSizeTxt);
+        }
+        toast.error(msg);
+      }
+    },
+    [maxSizeTxt]
+  );
 
   const removeFile = () => {
     setFile(null);
@@ -57,7 +78,7 @@ const FieldUpload = ({ fieldDef, value, onChange }) => {
     if (value) {
       onChange({
         target: {
-          id: f.id,
+          id,
           value: "",
         },
       });
@@ -76,7 +97,7 @@ const FieldUpload = ({ fieldDef, value, onChange }) => {
         onClick={removeFile}
       />
     );
-    if (f.type === "image") {
+    if (docType === IMG) {
       pix.push(
         <img
           key="pix"
@@ -90,14 +111,14 @@ const FieldUpload = ({ fieldDef, value, onChange }) => {
     if (file) {
       pix.push(
         <div key="fname" className="filename">
-          {file.name + " "}
-          <span>{Math.round(file.size / 1000)} KB</span>
+          <span className="file-name">{file.name}</span>
+          <span className="file-size">({Math.round(file.size / 1000)} KB)</span>
         </div>
       );
     } else {
-      pix.push(doc(value, filesUrl));
+      pix.push(docLink(value, filesUrl));
     }
-    if (f.type === "document") {
+    if (docType === DOC) {
       pix.push(removeButton);
     }
   }
@@ -106,14 +127,16 @@ const FieldUpload = ({ fieldDef, value, onChange }) => {
     onDrop: onDropFile,
     noKeyboard: true,
     multiple: false,
-    maxSize: 200000, // 200KB
+    maxSize,
   };
-  if (f.type === "image") {
-    dropzoneProps.accept = { "image/png": [".png", ".jpg", ".jpeg", ".webp"] };
+  if (docType === IMG) {
+    dropzoneProps.accept = {
+      "image/png": imageTypes,
+    };
   }
 
   return (
-    <div data-testid={"field-" + f.type}>
+    <div data-testid={"field-" + docType}>
       {pix}
       <Dropzone {...dropzoneProps}>
         {({ getRootProps, getInputProps, isDragActive }) => (
@@ -123,7 +146,7 @@ const FieldUpload = ({ fieldDef, value, onChange }) => {
               "dropzone--isActive": isDragActive,
             })}
           >
-            <input {...getInputProps()} />
+            <input {...getInputProps()} id={id} />
             <p>{i18n[isDragActive ? "dropFileActive" : "dropFile"]}</p>
           </div>
         )}
@@ -135,8 +158,10 @@ const FieldUpload = ({ fieldDef, value, onChange }) => {
 export default FieldUpload;
 
 FieldUpload.propTypes = {
-  /** Field metadata */
-  fieldDef: PropTypes.object.isRequired,
+  /** Field id */
+  id: PropTypes.string.isRequired,
+  /** Field Type ("image" or  "document") */
+  docType: PropTypes.oneOf([IMG, DOC]).isRequired,
   /** Callback functions for changed field value */
   onChange: PropTypes.func.isRequired,
   /** Field value (image/document file path) */

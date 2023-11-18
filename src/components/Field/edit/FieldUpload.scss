@@ -1,0 +1,45 @@
+@import "../../../variables";
+
+.evol-fld {
+  .filename {
+    margin: 10px 0;
+    > .file-name {
+      margin-right: $gap;
+    }
+    > .file-size {
+      color: $color-text-secondary;
+      white-space: nowrap;
+    }
+  }
+}
+
+.doc-drop {
+  margin-top: 7px;
+  width: 100%;
+  min-height: 100px;
+  border: 2px dashed $color-border;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    border-color: grey;
+  }
+  &.dropzone--isActive {
+    border-color: $color-blue1;
+    background-color: #fcf4dc;
+  }
+  > p {
+    font-style: italic;
+    font-size: 0.9em;
+  }
+}
+
+.btn-remove {
+  margin: 5px 5px 0 $gap;
+  svg {
+    position: relative;
+    top: 2px;
+    height: $icon-size;
+    margin-right: 5px;
+  }
+}

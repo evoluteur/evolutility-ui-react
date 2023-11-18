@@ -45,12 +45,8 @@ export const i18n_actions = {
   // --- navigation/pagination ---
   prev: "Previous",
   next: "Next",
-  dropFile: "Drop the file here, or click to select the file to upload.",
-  dropFileActive: "Drop the file here...",
-  remove: "Remove",
-  // remove_image: "Remove image",
-  // remove_document: "Remove document",
 
+  // --- upsert feedback ---
   deleted: "{0} deleted.",
   updated: "{0} updated.",
   added: "New {0} added.",
@@ -97,6 +93,18 @@ export const i18n_validation = {
   minLength: '"{0}" must be at least {1} characters long.',
   minMaxLength: '"{0}" must be between {1} and {2} characters long.',
   regExp: '"{0}" is not of the expected format.',
+};
+
+// --- upload ---
+export const i18n_upload = {
+  "too-many-files": "Not possible to import multiple files.",
+  "file-invalid-type": "File type must be {0}.",
+  "file-too-large": "Maximum file size is {0}.",
+  remove: "Remove",
+  // remove_image: "Remove image",
+  // remove_document: "Remove document",
+  dropFile: "Drop the file here, or click to select the file to upload.",
+  dropFileActive: "Drop the file here...",
 };
 
 // --- charts ---
@@ -183,6 +191,7 @@ const allStrings = {
   i18n_stats,
   i18n_activity,
   i18n_errors,
+  i18n_upload,
   // i18n_login,
 };
 

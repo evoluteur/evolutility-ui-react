@@ -108,7 +108,14 @@ const FieldElemEdit = memo(({ fieldDef, onChange, value }) => {
     );
   }
   if (fType === ft.image || fType === ft.doc) {
-    return <FieldUpload fieldDef={f} onChange={onChange} value={value} />;
+    return (
+      <FieldUpload
+        id={f.id}
+        docType={fType}
+        onChange={onChange}
+        value={value}
+      />
+    );
   }
   if (fType === ft.email || fType === ft.money || fType === ft.url) {
     const inputType = fType === ft.money ? "number" : "text";
