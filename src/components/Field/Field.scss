@@ -116,6 +116,10 @@ div > .checkbox {
   border: 2px dashed $color-border;
   border-radius: 5px;
   padding: 10px;
+  &.dropzone--isActive {
+    border-color: $color-blue1;
+    background-color: #f7f5e9;
+  }
   > p {
     font-style: italic;
     font-size: 0.9em;
