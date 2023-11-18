@@ -51,6 +51,8 @@
   border-bottom: $border;
 }
 .panel-footer {
+  position: relative;
+  top: -10px;
   border-top: $border;
   border-radius: 0 0 $radius $radius;
 }

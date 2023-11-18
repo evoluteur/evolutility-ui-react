@@ -18,7 +18,7 @@ import "./Cards.scss";
 
 const Cards = ({ entity, model, data }) => {
   const fields = useMemo(() => model?.fields.filter((f) => f.inMany), [entity]);
-  if (model && data?.length) {
+  if (model) {
     return (
       <div data-entity={entity} className="evol-many-cards">
         <div className="evol-cards">

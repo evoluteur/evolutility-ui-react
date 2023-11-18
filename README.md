@@ -227,7 +227,6 @@ Objects have fields.
 | readOnly     | If set to true, the field value cannot be changed.   |
 | defaultValue | Default field value for new records.    |
 | format       | Field format (using moment for date values and numeral for  numeric values). |
-| dependantField | ID of an optional dependant field. Used when selecting in one list changes the content of dependant list (among 2 fields of type "lov").records. |
 | max, min     | Maximum/Minimum value allowed (only applies to numeric fields).      |
 | maxLength, minLength | Maximum/Minimum length allowed (only applies to text fields).      |
 | regExp       | Regular expression used to validate the field value.     |

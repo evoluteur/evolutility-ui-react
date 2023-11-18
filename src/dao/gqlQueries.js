@@ -13,7 +13,6 @@ import {
   fieldIsText,
   fieldInStats,
   fieldInSearch,
-  fieldIsDateOrTime,
   fieldStatsFunctions,
   allStats,
 } from "../utils/dico";
