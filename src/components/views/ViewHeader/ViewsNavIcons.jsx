@@ -29,6 +29,7 @@ const ViewsNavIcons = ({ id, view, entity, params }) => {
     <Link
       key={ico.id}
       to={`/${entity}/${ico.id}${urlFrag}`}
+      aria-label={ico.label}
       className={view === ico.id ? "active" : ico.id}
     >
       <Icon name={ico.icon || ico.id} tooltip={ico.label} theme="light" />

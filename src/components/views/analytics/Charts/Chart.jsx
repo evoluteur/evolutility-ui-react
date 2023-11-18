@@ -21,7 +21,6 @@ import { chartSizes, chartTypes } from "./chartProps";
 
 import Bars from "./Bars";
 import Pie from "./Pie";
-// import TreeMap from './TreeMap'
 
 import "./Charts.scss";
 // #endregion
@@ -181,7 +180,7 @@ const Chart = ({
       })}
     >
       <div className="chart-content">
-        <h3 className="panel-title">{title}</h3>
+        <h2 className="panel-title">{title}</h2>
         {body}
       </div>
       {actionsIcons}

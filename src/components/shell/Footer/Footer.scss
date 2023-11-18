@@ -7,6 +7,9 @@
   color: $color-text-footer;
   text-align: center;
   font-size: 0.8em;
+  > div > a {
+    color: black;
+  }
   > .copyright {
     display: block;
     margin-top: 10px;

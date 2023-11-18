@@ -12,8 +12,9 @@ $label2-width: 100px;
   }
 }
 .stat-field-title {
-  margin-bottom: 15px;
+  margin: 10px 0 15px;
   color: $color-text;
+  font-size: 20px;
   > span {
     font-weight: 300;
   }

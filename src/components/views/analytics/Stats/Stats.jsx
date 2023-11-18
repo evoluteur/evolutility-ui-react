@@ -35,7 +35,7 @@ const withComments = false; // not implemented yet
 
 const fieldTitle = (f) => (
   <>
-    <h4 className="stat-field-title">{f.label}</h4>
+    <h2 className="stat-field-title">{f.label}</h2>
     <div className="stat-field-id">
       {f.type}
       {f.required && <span className="field-required">*</span>}

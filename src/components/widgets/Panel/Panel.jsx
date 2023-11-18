@@ -45,7 +45,7 @@ const Panel = ({
                 theme="none"
               />
             )}
-            <h3 className="panel-title">{title}</h3>
+            <h2 className="panel-title">{title}</h2>
           </div>
         )}
         {header && <div className="panel-header">{header}</div>}

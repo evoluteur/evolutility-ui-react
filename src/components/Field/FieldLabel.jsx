@@ -12,7 +12,7 @@ const FieldLabel = memo(({ field, label, required, readOnly }) => {
 
   return (
     <div className="evol-field-label" data-testid="fieldlabel">
-      <label className="control-label">
+      <label className="control-label" htmlFor={field.id}>
         {label || field.label}
         {isRequired && (
           <span className="field-required" data-testid="fl-required">

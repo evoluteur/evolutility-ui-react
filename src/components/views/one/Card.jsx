@@ -29,14 +29,14 @@ const Card = memo(({ entity, data, fields }) => {
         if (idx === 0) {
           return (
             <div key={f.id} className="card-title">
-              <h4>
+              <h2>
                 <Link to={linkBrowse + d.id}>
                   {m.icon && (
                     <img className="e-icon" src={pixPath + m.icon} alt="" />
                   )}
                   {fv || `( ${d.id} )`}
                 </Link>
-              </h4>
+              </h2>
               <div className="card-actions noprint">
                 <Link to={linkEdit + d.id}>
                   <Icon name="edit" size="small" />
@@ -48,15 +48,18 @@ const Card = memo(({ entity, data, fields }) => {
         if (f.type === ft.image) {
           return (
             <div key={f.id} className="card-fld-center">
-              <Link to={linkBrowse + d.id}>{fv}</Link>
+              <Link to={linkBrowse + d.id} aria-label="Browse">
+                {fv}
+              </Link>
             </div>
           );
         }
         const icon = f.type === ft.lov && f.lovIcon ? d[`${f.id}_icon`] : "";
+        const rfid = f.id + d.id;
         return (
           <div key={f.id}>
-            <label>{f.labelShort || f.label}: </label>
-            <div>
+            <label htmlFor={rfid}>{f.labelShort || f.label}: </label>
+            <div id={rfid}>
               {icon && <img src={pixPath + icon} className="lov-icon" alt="" />}
               {fv}
             </div>

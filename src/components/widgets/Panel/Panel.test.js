@@ -19,8 +19,8 @@ describe("panel props test", () => {
     const testInstance = renderer.create(<Panel {...props} />);
     panelToTest = testInstance.root;
   });
-  it("should render title in h3", () => {
-    const strongRender = panelToTest.findByType("h3");
+  it("should render title in h2", () => {
+    const strongRender = panelToTest.findByType("h2");
     expect(strongRender.children).toEqual([props.title]);
   });
 });

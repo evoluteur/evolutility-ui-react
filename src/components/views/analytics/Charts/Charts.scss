@@ -23,7 +23,7 @@ $chart-gap: 5px;
   &.size-tiny {
     // width: 280px !important;
     height: 300px;
-    .chart-content > h3 {
+    .chart-content > h2 {
       font-size: 1em;
       padding-left: 0;
     }
@@ -59,7 +59,7 @@ $chart-gap: 5px;
   overflow: hidden;
   min-height: 100%;
   border-radius: $radius;
-  > h3 {
+  > h2 {
     display: block;
     font-weight: 400;
     font-size: 1.2em;
