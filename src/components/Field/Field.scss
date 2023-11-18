@@ -45,10 +45,8 @@
     max-width: 100%;
     resize: vertical;
   }
-  .react-datepicker-wrapper {
-    display: inline;
-  }
 }
+
 .evo-fld-invalid {
   display: inline-block;
   border-radius: 2px;
@@ -92,47 +90,4 @@ div > .checkbox {
   > img {
     margin-right: 5px;
   }
-}
-
-.react-datepicker__navigation {
-  top: 3px !important;
-  border: none !important;
-}
-/* https://github.com/Hacker0x01/react-datepicker/issues/624 */
-.react-datepicker {
-  font-size: 0.8em;
-}
-.react-datepicker__header {
-  padding-top: 0.8em;
-}
-.react-datepicker__month {
-  margin: 0.4em;
-}
-.react-datepicker__day-name,
-.react-datepicker__day {
-  width: 1.9em;
-  line-height: 1.9em;
-  margin: 0.166em;
-}
-.react-datepicker__current-month {
-  font-size: 1em;
-}
-.react-datepicker__navigation {
-  top: 1em;
-  line-height: 1.7em;
-  border: 0.45em solid transparent;
-}
-.react-datepicker__navigation--previous {
-  border-right-color: #ccc;
-  left: 1em;
-}
-.react-datepicker__navigation--next {
-  border-left-color: #ccc;
-  right: 1em;
-}
-
-.rc-tooltip,
-.rc-tooltip-inner {
-  max-width: 180px;
-  border-radius: 10px !important;
 }

@@ -28,8 +28,9 @@ describe("Editable field tests", () => {
   simpleTest("integer", 1212);
   simpleTest("decimal", 12.12);
   simpleTest("money", 119.99);
-  simpleTest("image");
+  // simpleTest("date");
   simpleTest("time");
+  simpleTest("image");
   simpleTest("document");
   simpleTest("json");
 });
