@@ -13,7 +13,7 @@ const ViewHeader = memo(
       <FilterTags params={params} />
     );
     return (
-      <div className="evo-page-header">
+      <div className="evo-page-header" data-testid="viewheader">
         <h1 className="page-title">
           <span className="title-txt">{title}</span>
           {count !== null && <Badge text={count} />}

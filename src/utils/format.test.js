@@ -3,6 +3,7 @@ import {
   decimalString,
   moneyString,
   capitalize,
+  xItemsCount,
 } from "./format";
 
 test("check Integer formatting", () => {
@@ -50,4 +51,10 @@ test("check capitalize", () => {
   expect(capitalize("aaa")).toEqual("Aaa");
   expect(capitalize("aaa bb")).toEqual("Aaa bb");
   expect(capitalize("Aaa")).toEqual("Aaa");
+});
+
+test("check xItemsCount", () => {
+  expect(xItemsCount(0, "a", "as")).toEqual("No as");
+  expect(xItemsCount(1, "a", "as")).toEqual("1 a");
+  expect(xItemsCount(2, "a", "as")).toEqual("2 as");
 });
