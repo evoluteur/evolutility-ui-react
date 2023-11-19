@@ -3,7 +3,9 @@
 .evol-overview {
   .evo-search-box {
     margin: 20px 10px 20px 0;
-    width: 200px;
+    input {
+      width: 220px;
+    }
   }
   .panel {
     margin-bottom: 10px;

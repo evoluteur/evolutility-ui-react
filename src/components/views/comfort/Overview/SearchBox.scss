@@ -1,0 +1,21 @@
+@import "../../../../variables";
+
+.evo-search-box {
+  > div {
+    display: flex;
+    width: 140px;
+    > button {
+      position: relative;
+      height: 38px;
+      width: 44px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      padding: 0 5px;
+      border-left: none;
+      > svg {
+        height: 30px;
+        width: 30px;
+      }
+    }
+  }
+}
