@@ -6,7 +6,6 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2023 Olivier Giulieri
 
-// #region ---------------- Imports ----------------
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import modelPropType from "../../modelPropTypes";
@@ -15,7 +14,6 @@ import Alert from "../../../widgets/Alert/Alert";
 import TableBody from "../shared/TableBody/TableBody";
 
 import "./List.scss";
-// #endregion
 
 const tableHeader = (fields, onClickSort, sortFieldId, sortDirection) => (
   <thead>

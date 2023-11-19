@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import modelPropTypes from "../../../modelPropTypes";
-
 import Alert from "../../../../widgets/Alert/Alert";
 import Button from "../../../../widgets/Button/Button";
 import { i18n_msg as i18n } from "../../../../../i18n/i18n";

@@ -77,7 +77,7 @@ const sqFieldCol = (f) => {
 };
 
 export const qFields = (m) =>
-  "id" + timestampFields + m.fields?.map(sqFieldCol).join(" ");
+  "id " + m.fields?.map(sqFieldCol).join(" ") + timestampFields;
 
 const conjunct = (join, conditions) => `{_${join}: [${conditions.join(", ")}]}`;
 //#endregion

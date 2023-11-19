@@ -13,9 +13,9 @@ import Chart from "../../analytics/Charts/Chart";
 import SearchBox from "./SearchBox";
 import Activity from "./Activity";
 import InvalidRoute from "./InvalidRoute";
+// #endregion
 
 import "./Overview.scss";
-// #endregion
 
 const Overview = () => {
   const { entity } = useParams();

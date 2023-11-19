@@ -18,12 +18,11 @@ import { lcWrite } from "../../../../utils/localStorage";
 import Spinner from "../../../widgets/Spinner/Spinner";
 import ChartTable from "./ChartTable";
 import { chartSizes, chartTypes } from "./chartProps";
-
 import Bars from "./Bars";
 import Pie from "./Pie";
+// #endregion
 
 import "./Charts.scss";
-// #endregion
 
 //#region   ----- Helpers ----------------
 const sortByLabel = (a, b) => (a.label || "").localeCompare(b.label || "");

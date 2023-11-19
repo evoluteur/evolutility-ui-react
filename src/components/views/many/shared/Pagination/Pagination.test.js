@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import Pagination from "./Pagination";
 import config from "../../../../../config";
 
-const { pageSize } = config;
+const { pageSize = 50 } = config;
 const noOp = () => {};
 
 describe("Pagination tests", () => {

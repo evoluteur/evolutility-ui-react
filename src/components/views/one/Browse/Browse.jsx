@@ -66,8 +66,8 @@ const Browse = ({ entity, model, data }) => {
             cData &&
             cData.length > 0 && (
               <Panel
+                key={c.id || c.object}
                 title={c.title}
-                key={"collec-" + c.id}
                 collapsible
                 header={c.header}
                 footer={c.footer}

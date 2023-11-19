@@ -12,7 +12,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
-// import config from "../../../config";
 import { getModel } from "../../../../utils/moMa";
 import { i18n_stats, i18n_comments } from "../../../../i18n/i18n";
 import { fieldTypes as ft } from "../../../../utils/dico";
@@ -23,9 +22,9 @@ import Spinner from "../../../widgets/Spinner/Spinner";
 import Alert from "../../../widgets/Alert/Alert";
 import PercentBar from "./PercentBar";
 import FieldValue from "../../../Field/browse/FieldValue";
+// #endregion
 
 import "./Stats.scss";
-// #endregion
 
 // #region ---------------- Helpers ----------------
 // TODO:

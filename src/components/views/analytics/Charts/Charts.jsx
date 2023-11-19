@@ -17,9 +17,9 @@ import { capitalize } from "../../../../utils/format";
 import ViewHeader from "../../ViewHeader/ViewHeader";
 import Alert from "../../../widgets/Alert/Alert";
 import Chart from "./Chart";
+//#endregion
 
 import "./Charts.scss";
-//#endregion
 
 const Charts = () => {
   const [expandedChart, setExpandedChart] = useState(null);

@@ -4,7 +4,7 @@ import config from "../../../../../config";
 
 import "./Pagination.scss";
 
-const { pageSize } = config;
+const { pageSize = 50 } = config;
 
 const Pagination = memo(({ count, fullCount, pageIndex, onClick }) => {
   if (fullCount > pageSize) {

@@ -38,7 +38,7 @@ const FieldLabel = memo(({ field, label, required, readOnly }) => {
 export default FieldLabel;
 
 FieldLabel.propTypes = {
-  /**  Field metadata w/ label, rquired, readOnly, help props */
+  /**  Field metadata w/ label, required, readOnly, help props */
   field: fieldPropTypes.isRequired,
   /**  Override for field.label */
   label: PropTypes.string,

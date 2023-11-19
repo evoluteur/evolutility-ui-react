@@ -34,19 +34,19 @@ const model = {
       width: 38,
     },
     {
-      id: "jobtitle",
-      type: "text",
-      label: "Title",
-      maxLength: 50,
-      width: 62,
-    },
-    {
       id: "company",
       type: "text",
       label: "Company",
       maxLength: 50,
       inMany: true,
       inSearch: true,
+      width: 62,
+    },
+    {
+      id: "jobtitle",
+      type: "text",
+      label: "Title",
+      maxLength: 50,
       width: 38,
     },
     {
@@ -190,7 +190,7 @@ const model = {
       type: "panel",
       label: "Identity",
       width: 62,
-      fields: ["lastname", "firstname", "jobtitle", "company", "email", "web"],
+      fields: ["lastname", "firstname", "company", "jobtitle", "email", "web"],
     },
     {
       type: "panel",

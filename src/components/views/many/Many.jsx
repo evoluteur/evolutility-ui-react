@@ -23,13 +23,14 @@ import EmptyState from "./shared/EmptyState/EmptyState";
 import { i18n_msg, i18n_errors } from "../../../i18n/i18n";
 import config from "../../../config";
 import url from "../../../utils/url";
+import { capitalize } from "../../../utils/format";
 import { getModel } from "../../../utils/moMa";
 import { getMany } from "../../../dao/dao";
-
-import "./Many.scss";
 // #endregion
 
-const { pageSize } = config;
+import "./Many.scss";
+
+const { pageSize = 50 } = config;
 
 const getRange = (pageIdx, pageSize, totalSize) => {
   const start = pageIdx * pageSize + 1;
@@ -43,25 +44,31 @@ const Many = () => {
   const [error, setError] = useState(null);
   const [fullCount, setFullCount] = useState(null);
   const [filteredCount, setFilteredCount] = useState(null);
-  const [sortDirection, setSortDirection] = useState("asc");
-  const [sortField, setSortField] = useState(null);
-
   const { entity, view } = useParams();
   const { search } = useLocation();
   const navigate = useNavigate();
   const model = getModel(entity);
-  const title = model?.title;
+  const [sortDirection, setSortDirection] = useState("asc");
+  const [sortField, setSortField] = useState(model.fields?.[0].id);
+  const title = model?.title || capitalize(model?.namePlural);
   const paginationCount = filteredCount ? filteredCount : fullCount;
 
+  const query = url.parseQuery(search) || {};
   let pageIndex = 0;
-  if (fullCount > pageSize) {
-    const query = url.parseQuery(search);
+  if (data && fullCount > pageSize) {
     pageIndex = parseInt(query?.page, 10) || 0;
   }
 
   useEffect(() => {
     document.title = title;
   }, [title]);
+
+  useEffect(() => {
+    if (!query.order) {
+      setSortDirection("asc");
+      setSortField(model.fields?.[0].id);
+    }
+  }, [entity, search]);
 
   useEffect(() => {
     let done = false;
@@ -93,8 +100,7 @@ const Many = () => {
 
   const onClickSort = useCallback(
     (evt) => {
-      const fid = evt.currentTarget.id,
-        query = url.parseQuery(search) || {};
+      const fid = evt.currentTarget.id;
       let direc;
       if (sortField === fid) {
         direc = sortDirection === "asc" ? "desc" : "asc";
@@ -106,9 +112,7 @@ const Many = () => {
       query.order = fid + "." + direc;
       query.page = 0;
       let link = `/${entity}/${view}`;
-      if (query) {
-        link += "?" + url.querySearch(query);
-      }
+      link += "?" + url.querySearch(query);
       navigate(link);
     },
     [entity, search, view, sortField, sortDirection]
@@ -117,9 +121,7 @@ const Many = () => {
   const clickPagination = useCallback(
     (evt) => {
       const id = evt.currentTarget.textContent;
-      const query = url.parseQuery(search) || {};
       let pageIdx;
-
       if (id === ">" || id === "<") {
         pageIdx = parseInt(query.page, 10) || 0;
         if (id === "<") {
@@ -153,7 +155,6 @@ const Many = () => {
           (paginationCount > size ? " in " + paginationCount : "")
         );
       } else {
-        const query = url.parseQuery(search);
         if (query) {
           if (!pageIndex && pageSize > size) {
             return (

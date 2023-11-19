@@ -8,7 +8,7 @@ export const locale = "en-US";
 export const language = "English";
 
 export const i18n_nav = {
-  fetchingModels: "Fetching models...",
+  // fetchingModels: "Fetching models...",
   loading: "Fetching data...",
   skip: "Skip navigation",
 };

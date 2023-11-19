@@ -140,7 +140,7 @@ FieldElemEdit.propTypes = {
   /** Field metadata */
   fieldDef: PropTypes.object.isRequired,
   /** Callback functions for changed field value */
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   /** Field value (object or scalar values depending on field type) */
   value: PropTypes.any,
   /** Field label (override label in fieldDef) */

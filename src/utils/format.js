@@ -16,7 +16,6 @@ import { locale } from "../i18n/i18n";
 // import 'moment/locale/es'
 
 import config from "../config";
-import { fieldTypes as ft } from "./dico";
 
 export let { filesUrl, baseName = "/" } = config;
 if (!baseName.endsWith("/")) {
@@ -70,6 +69,7 @@ export const numString = (d) =>
   Number.isInteger(d) ? integerString(d) : decimalString(d);
 
 export const nullOrUndefined = (v) => v === null || v === undefined;
+
 const mFormat = (d, format) =>
   nullOrUndefined(d) ? "" : moment(d).format(format);
 export const numFormat = (d, format) =>
@@ -93,23 +93,12 @@ export const timeTZ = (timeString) => {
 };
 
 export const dateString = (d) => mFormat(d, "L");
-// const timeString = d => mFormat(moment(d, 'HH:mm:ss'), 'LTS')
 export const timeString = (d) =>
   d ? mFormat(moment(d, "HH:mm:ss"), "hh:mm A") : null;
 export const datetimeString = (d) => mFormat(d, "L hh:mm A");
-const dateOpt = (d, type) => {
-  if (type === ft.time) {
-    return timeString(d);
-  }
-  return dateString(d);
-};
 
-export const image = (d) => {
-  if (d === null) {
-    return null;
-  }
-  return <img src={d} className="img-thumbnail" alt="" />;
-};
+export const image = (d) =>
+  d === null ? null : <img src={d} className="img-thumbnail" alt="" />;
 
 //const intFormatter = new Intl.NumberFormat(locale);
 export const integerString = (d) => numFormat(d, integerFormat);
@@ -123,7 +112,7 @@ export const numFieldValue = (f, value) =>
 
 export const capitalize = (word) => {
   // TODO: maybe use _.string.capitalize(word);
-  if (word && word.length > 0) {
+  if (word?.length > 0) {
     return word.substring(0, 1).toUpperCase() + word.substring(1); // .toLowerCase();
   }
   return "";
@@ -132,7 +121,6 @@ export const capitalize = (word) => {
 const formatLib = {
   // config to override browser
   locale: moment.locale(),
-  dateOpt,
   dateString,
   timeString,
   datetimeString,

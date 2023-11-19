@@ -6,7 +6,7 @@ https://github.com/evoluteur/evolutility-ui-react
 
 // Helpers for models
 
-// - Field Types
+// - Supported field types
 const ft = {
   text: "text",
   textml: "textmultiline",
@@ -67,7 +67,7 @@ export const fieldStatsFunctions = (f) => {
 };
 
 const dico = {
-  fieldTypes: ft,
+  fieldTypes,
   fieldTypeStrings,
   fieldIsText,
   fieldIsNumber,

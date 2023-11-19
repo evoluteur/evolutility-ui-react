@@ -1,6 +1,6 @@
 import React from "react";
-import classnames from "classnames";
 import { Link, useLocation } from "react-router-dom";
+import classnames from "classnames";
 import Icon from "react-crud-icons";
 import { i18n_nav } from "../../../i18n/i18n";
 import { demosMenu, docMenus } from "./appMenus";

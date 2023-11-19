@@ -8,9 +8,9 @@ import { getModel } from "../../../../utils/moMa";
 import { getActivity } from "../../../../utils/activity";
 import { views } from "../../../../utils/dicoViews";
 import { i18n_activity } from "../../../../i18n/i18n";
+// #endregion
 
 import "./Activity.scss";
-// #endregion
 
 const { withActivity } = config;
 

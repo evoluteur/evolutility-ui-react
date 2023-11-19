@@ -116,7 +116,7 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
           return (
             <Panel
               key={g.id || "g" + idx}
-              title={g.label || g.title || ""}
+              title={g.label || g.title}
               header={g.header}
               footer={g.footer}
               width={g.width}
@@ -131,7 +131,7 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
             const cData = data[c.id];
             return c.hideIfEmpty && (!cData || cData.length === 0) ? null : (
               <Panel
-                key={c.id}
+                key={c.id || c.object}
                 title={c.title}
                 collapsible
                 header={c.header}

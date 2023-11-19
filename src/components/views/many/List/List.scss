@@ -23,7 +23,7 @@
       svg {
         position: relative;
         top: 2px;
-        fill: gray;
+        fill: $color-almostblack;
         height: $icon-size;
         width: $icon-size;
       }
@@ -41,7 +41,7 @@
       cursor: pointer;
       &:hover {
         color: $color-icon-hover;
-        border-bottom-color: $color-icon-hover;
+        border-bottom-color: grey;
       }
     }
   }
