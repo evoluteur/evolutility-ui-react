@@ -101,7 +101,7 @@ const Home = () => {
           <img src={logoPath + "graphql.png"} alt="GraphQL" />
         </a>
         <a href="https://hasura.io" target="hasura" rel="noopener noreferrer">
-          <img src={logoPath + "hasura.png"} alt="Hasura" className="hasura" />
+          <img src={logoPath + "hasura.png"} alt="Hasura" />
         </a>
       </div>
       <div>
