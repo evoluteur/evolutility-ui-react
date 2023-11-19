@@ -21,14 +21,9 @@ export let { filesUrl, baseName = "/" } = config;
 if (!baseName.endsWith("/")) {
   baseName += "/";
 }
-export const pixPath =
-  "https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/main/public/pix/";
 
-// export const pixPath = baseName + "pix/";
+export const pixPath = baseName + "pix/";
 
-filesUrl =
-  "https://raw.githubusercontent.com/evoluteur/evolutility-ui-react/main/public/pix/";
-// Set the locale from the browser -- which may need to be configured
 moment.locale(
   locale || window.navigator.userLanguage || window.navigator.language
 );
