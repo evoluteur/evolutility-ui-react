@@ -204,7 +204,7 @@ export async function getOne(entity, id, nextOrPrevious) {
     )
       .then(toJSON)
       .then((resp) => {
-        if (resp.error) {
+        if (resp.errors) {
           return resp;
         } else if (resp.data?.one === null) {
           return fakeError(i18n_errors.badId.replace("{0}", id));
@@ -231,7 +231,7 @@ export async function getLOVs(entity) {
     return await fetch(apiPath, gqlOptions(qLOVs(m)))
       .then(toJSON)
       .then((resp) => {
-        if (resp.error) {
+        if (resp.errors) {
           return resp;
         }
         const data = {};
