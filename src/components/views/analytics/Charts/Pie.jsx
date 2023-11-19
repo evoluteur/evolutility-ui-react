@@ -6,28 +6,15 @@ import chartPropTypes from "./chartProps";
 import { colors, labelColor } from "./chartOptions";
 
 const Pie = ({ data, showLegend = true }) => {
-  if (data) {
-    const dh = {};
-    data = data.map((d) => {
-      let label = d.label;
-      if (dh[label]) {
-        dh[label] += 1;
-        label += ` (${dh[label]})`;
-      } else {
-        dh[label] = 1;
-      }
-      return {
-        id: label,
-        label,
-        value: d.value,
-      };
-    });
-  }
-
+  const pData = data?.map((d) => ({
+    id: d.label,
+    _id: d.id,
+    value: d.value,
+  }));
   return (
-    <div className="i-chart" role="contentinfo">
+    <div className="i-chart chart-pie" role="contentinfo">
       <ResponsivePie
-        data={data}
+        data={pData}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
         padAngle={0.7}
         cornerRadius={3}
@@ -47,26 +34,6 @@ const Pie = ({ data, showLegend = true }) => {
         animate
         motionStiffness={90}
         motionDamping={15}
-        defs={[
-          {
-            id: "dots",
-            type: "patternDots",
-            background: "inherit",
-            color: "rgba(255, 255, 255, 0.3)",
-            size: 4,
-            padding: 1,
-            stagger: true,
-          },
-          {
-            id: "lines",
-            type: "patternLines",
-            background: "inherit",
-            color: "rgba(255, 255, 255, 0.3)",
-            rotation: -45,
-            lineWidth: 6,
-            spacing: 10,
-          },
-        ]}
         legends={
           showLegend && [
             {
@@ -89,6 +56,8 @@ const Pie = ({ data, showLegend = true }) => {
             },
           ]
         }
+        role="application"
+        ariaLabel="Pie chart"
       />
     </div>
   );

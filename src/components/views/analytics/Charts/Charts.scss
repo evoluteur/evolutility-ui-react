@@ -123,3 +123,13 @@ $chart-gap: 5px;
     margin-right: $chart-gap;
   }
 }
+
+// hack: white block to hide group label
+.label-patch {
+  position: absolute;
+  bottom: 40px;
+  right: 22px;
+  background-color: white;
+  height: 30px;
+  width: 100px;
+}
