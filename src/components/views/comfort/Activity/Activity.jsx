@@ -30,7 +30,7 @@ const Activity = () => {
     return (
       act && (
         <div key={act.id}>
-          <Link to={`/${entity}/browse/${act.id}`}>
+          <Link to={`../${entity}/browse/${act.id}`}>
             <img className="e-icon" src={pixPath + m.icon} alt="" />
             {act.title}
           </Link>

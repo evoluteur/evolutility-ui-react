@@ -12,7 +12,7 @@ import Modal from "react-modal";
 import { toast } from "react-toastify";
 import Icon from "react-crud-icons";
 import { isFunction } from "underscore";
-import { capitalize } from "../../../utils/format";
+import { evoPath, capitalize } from "../../../utils/format";
 import { deleteOne } from "../../../dao/dao";
 import { i18n_msg, i18n_actions } from "../../../i18n/i18n";
 import { getModel } from "../../../utils/moMa";
@@ -65,7 +65,7 @@ const ViewActions = ({ entity, id }) => {
             toast.success(
               i18n_actions.deleted.replace("{0}", capitalize(m.name))
             );
-            navigate(`/${entity}/list`);
+            navigate(`/${evoPath}/${entity}/list`);
           }
         });
     }
@@ -80,7 +80,7 @@ const ViewActions = ({ entity, id }) => {
     ) : (
       <Link
         key={menu.icon}
-        to={`/${entity}/${menu.id}/${idOrFun}${urlQuery}`}
+        to={`/${evoPath}/${entity}/${menu.id}/${idOrFun}${urlQuery}`}
         aria-label={menu.label}
       >
         <Icon name={menu.icon} tooltip={menu.label} theme="dark" />
@@ -91,7 +91,7 @@ const ViewActions = ({ entity, id }) => {
   if (!m.readOnly) {
     const label = newEntity(m);
     actionIcons.push(
-      <Link to={`/${entity}/edit/0`} key="new" aria-label={label}>
+      <Link to={`/${evoPath}/${entity}/edit/0`} key="new" aria-label={label}>
         <Icon name="add" tooltip={label} theme="dark" />
       </Link>
     );

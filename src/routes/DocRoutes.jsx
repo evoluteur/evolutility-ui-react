@@ -2,14 +2,14 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Doc from "./Doc";
-import Metamodel from "./Metamodel";
-import Views from "./Views";
-import Installation from "./Installation";
-import Configuration from "./Configuration";
-import SampleModels from "./SampleModels";
+import Doc from "../pages/Docs/Doc";
+import Metamodel from "../pages/Docs/Metamodel";
+import Views from "../pages/Docs/Views";
+import Installation from "../pages/Docs/Installation";
+import Configuration from "../pages/Docs/Configuration";
+import SampleModels from "../pages/Docs/SampleModels";
 
-const DocsRoutes = () => (
+const DocRoutes = () => (
   <Routes>
     <Route exact path="/metamodel" element={<Metamodel />} />
     <Route exact path="/views" element={<Views />} />
@@ -20,4 +20,4 @@ const DocsRoutes = () => (
   </Routes>
 );
 
-export default DocsRoutes;
+export default DocRoutes;

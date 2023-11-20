@@ -13,7 +13,7 @@ const SearchBox = ({ entity, placeHolder }) => {
     (valueObj) => {
       const id = valueObj?.value;
       if (id) {
-        navigate(`/${entity}/browse/${id}`);
+        navigate(`../${entity}/browse/${id}`);
       }
     },
     [entity, navigate]
@@ -21,7 +21,7 @@ const SearchBox = ({ entity, placeHolder }) => {
   const onInputChange = useCallback((value) => setValue(value), []);
   const onClick = useCallback(() => {
     if (value) {
-      navigate(`/${entity}/list/?search=${value}`);
+      navigate(`../${entity}/list/?search=${value}`);
     }
   }, [entity, value, navigate]);
 

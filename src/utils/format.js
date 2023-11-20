@@ -24,6 +24,8 @@ if (!baseName.endsWith("/")) {
 
 export const pixPath = baseName + "pix/";
 
+export const evoPath = "demos";
+
 moment.locale(
   locale || window.navigator.userLanguage || window.navigator.language
 );

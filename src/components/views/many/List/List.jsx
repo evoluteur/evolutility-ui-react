@@ -51,7 +51,7 @@ const List = ({
       />
     );
   } else if (data?.length) {
-    const link = `/${entity}/${model?.defaultViewOne || "browse"}/`;
+    const link = `../${entity}/${model?.defaultViewOne || "browse"}/`;
     body = (
       <table className="table table-hover sortable">
         {tableHeader(fields, onClickSort, sortField, sortDirection)}

@@ -26,7 +26,7 @@ const Overview = () => {
   const m = getModel(entity);
   const chartFields = m?.fields.filter(fieldInCharts);
 
-  const lcKey = `${entity}-overview-chart`;
+  const lcKey = `../${entity}-overview-chart`;
   const lcChartField = lcRead(lcKey);
 
   const [chartField, setChartField] = useState(
@@ -43,7 +43,7 @@ const Overview = () => {
       setChartField(m.fieldsH[fid]);
     };
 
-    const urlBegin = `/${entity}/`;
+    const urlBegin = `../${entity}/`;
     const ViewLink = ({ id, label, icon }) => (
       <Link to={urlBegin + id}>
         <Icon name={icon} theme="light" />

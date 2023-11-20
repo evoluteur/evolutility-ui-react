@@ -4,7 +4,7 @@ import classnames from "classnames";
 import Icon from "react-crud-icons";
 import { i18n_nav } from "../../../i18n/i18n";
 import { demosMenu, docMenus } from "./appMenus";
-import { pixPath } from "../../../utils/format";
+import { evoPath, pixPath } from "../../../utils/format";
 
 import demoSVG from "./svg/eye.svg";
 import docSVG from "./svg/book.svg";
@@ -14,10 +14,10 @@ import "./SideBar.scss";
 // #region ------- Helpers ---------
 const ShortCuts = ({ entity }) => (
   <div className="x-icons">
-    <Link to={`/${entity}/edit/0`} aria-label="Add">
+    <Link to={`/${evoPath}/${entity}/edit/0`} aria-label="Add">
       <Icon name="add2" size="small" theme="none" />
     </Link>
-    <Link to={`/${entity}/list`} aria-label="List">
+    <Link to={`/${evoPath}/${entity}/list`} aria-label="List">
       <Icon name="list" size="small" theme="none" />
     </Link>
   </div>
@@ -29,18 +29,18 @@ const sLink = (label, url, icon, css) => (
     <span>{label}</span>
   </Link>
 );
-const hDemos = sLink("Demos", "demos", demoSVG);
+const hDemos = sLink("Demos", evoPath, demoSVG);
 const hDocs = sLink("Documentation", "docs", docSVG);
 //#endregion
 
 const SideBar = ({ onClickToggle }) => {
   // const { entity, view } = useParams(); // not  outside of evolutility routes
   const [entity, view] = useLocation().pathname.slice(1).split("/");
-  const menuLink = (menu) => (
+  const menuLinkDemo = (menu) => (
     <li className={classnames({ active: menu.id === entity })} key={menu.id}>
       {sLink(
         menu.text,
-        `/${menu.id}/${menu.defaultViewMany || "list"}`,
+        `/${evoPath}/${menu.id}/${menu.defaultViewMany || "list"}`,
         pixPath + menu.icon,
         "e-icon"
       )}
@@ -66,7 +66,7 @@ const SideBar = ({ onClickToggle }) => {
     links = hDemos;
   } else {
     title = hDemos;
-    menus = demosMenu.map(menuLink);
+    menus = demosMenu.map(menuLinkDemo);
     links = hDocs;
   }
 

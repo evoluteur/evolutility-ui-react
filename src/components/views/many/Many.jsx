@@ -111,7 +111,7 @@ const Many = () => {
       setSortDirection(direc);
       query.order = fid + "." + direc;
       query.page = 0;
-      let link = `/${entity}/${view}`;
+      let link = `../${entity}/${view}`;
       link += "?" + url.querySearch(query);
       navigate(link);
     },
@@ -137,7 +137,7 @@ const Many = () => {
       } else {
         query.page = pageIdx;
       }
-      navigate(`/${entity}/${view}?` + url.querySearch(query));
+      navigate(`../${entity}/${view}?` + url.querySearch(query));
     },
     [entity, search, view]
   );

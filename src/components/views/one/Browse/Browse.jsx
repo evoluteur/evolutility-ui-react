@@ -79,13 +79,13 @@ const Browse = ({ entity, model, data }) => {
         })}
         <div className="form-buttons noprint">
           <Button
-            url={`/${entity}/list`}
+            url={`../${entity}/list`}
             type="default"
             label={i18n_actions.cancel}
           />
           <Button
             icon="edit"
-            url={`/${entity}/edit/${id}`}
+            url={`../${entity}/edit/${id}`}
             type="primary"
             label={i18n_actions.edit}
           />

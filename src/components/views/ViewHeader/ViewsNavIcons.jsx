@@ -28,7 +28,7 @@ const ViewsNavIcons = ({ id, view, entity, params }) => {
   const iconLink = (ico) => (
     <Link
       key={ico.id}
-      to={`/${entity}/${ico.id}${urlFrag}`}
+      to={`../${entity}/${ico.id}${urlFrag}`}
       aria-label={ico.label}
       className={view === ico.id ? "active" : ico.id}
     >

@@ -3,16 +3,12 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import config from "../config";
 
-import One from "./views/one/One";
-import Many from "./views/many/Many";
-import Stats from "./views/analytics/Stats/Stats";
-import Charts from "./views/analytics/Charts/Charts";
-import Overview from "./views/comfort/Overview/Overview";
-import Activity from "./views/comfort/Activity/Activity";
-
-import "./widgets/global.scss";
-import "./widgets/Modal.scss";
-import "rc-tooltip/assets/bootstrap_white.css";
+import One from "../components/views/one/One";
+import Many from "../components/views/many/Many";
+import Stats from "../components/views/analytics/Stats/Stats";
+import Charts from "../components/views/analytics/Charts/Charts";
+import Overview from "../components/views/comfort/Overview/Overview";
+import Activity from "../components/views/comfort/Activity/Activity";
 
 const EvolRoutes = () => (
   <Routes>

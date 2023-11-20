@@ -4,6 +4,7 @@ import Icon from "react-crud-icons";
 import logoEvol from "./evologo.png";
 import { views, modelViewsMany } from "../../../utils/dicoViews";
 import { getModel } from "../../../utils/moMa";
+import { evoPath } from "../../../utils/format";
 import ViewActions from "./ViewActions";
 import GitHubLink from "./GitHubLink";
 
@@ -13,14 +14,9 @@ const ovw = views.overview;
 const TopBar = () => {
   const loc = useLocation();
   const path = loc.pathname?.split("/");
-  if (path.length > 1) {
-    if (path[0] === "") {
-      path.splice(0, 1);
-    }
-  }
-  const [entity, view, id] = path; // no access to useParams here
-  const model = getModel(entity);
-  const entityLink = `/${entity}/`;
+  const [entity, view, id] = path.splice(2); // no access to useParams here
+  const model = path[1] === evoPath ? getModel(entity) : null;
+  const entityLink = `/${evoPath}/${entity}/`;
   return (
     <nav className="evo-topbar">
       <Link to="/" className="evo-logo" aria-label="Home">

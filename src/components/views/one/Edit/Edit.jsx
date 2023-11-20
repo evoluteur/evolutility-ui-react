@@ -73,7 +73,7 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
     [entity, invalids, onFieldChange]
   );
 
-  const linkCancel = `/${entity}/${isNew ? "list" : "browse/" + id}`;
+  const linkCancel = `../${entity}/${isNew ? "list" : "browse/" + id}`;
   const fnField = (f) => {
     if (f) {
       const invalidMsg = invalids ? invalids[f.id] : null;

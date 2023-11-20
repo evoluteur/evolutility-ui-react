@@ -19,8 +19,8 @@ import FieldValue from "../../Field/browse/FieldValue";
 const Card = memo(({ entity, data, fields }) => {
   const d = data || {};
   const m = getModel(entity);
-  const linkBrowse = `/${entity}/${m.defaultViewOne || "browse"}/`;
-  const linkEdit = `/${entity}/edit/`;
+  const linkBrowse = `../${entity}/${m.defaultViewOne || "browse"}/`;
+  const linkEdit = `../${entity}/edit/`;
 
   return (
     <div className="panel">

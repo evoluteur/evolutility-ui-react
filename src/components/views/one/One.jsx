@@ -182,7 +182,7 @@ const One = () => {
           toast.success(toastMsg);
           setAllData(response.data);
           if (!intId) {
-            navigate(`/${entity}/edit/${response.data?.id}`);
+            navigate(`../${entity}/edit/${response.data?.id}`);
           }
         }
       });
