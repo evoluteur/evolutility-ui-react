@@ -3,7 +3,7 @@
 import React from "react";
 import { ResponsivePie } from "@nivo/pie";
 import chartPropTypes from "./chartProps";
-import { colors, labelColor } from "./chartOptions";
+import { colors, labelColor, innerLabelColor } from "./chartOptions";
 
 const Pie = ({ data, showLegend = true }) => {
   const pData = data?.map((d) => ({
@@ -31,6 +31,8 @@ const Pie = ({ data, showLegend = true }) => {
         radialLabelsLinkColor={{ from: "color" }}
         slicesLabelsSkipAngle={10}
         slicesLabelsTextColor={labelColor}
+        arcLinkLabelsTextColor={labelColor}
+        arcLabelsTextColor={innerLabelColor}
         animate
         motionStiffness={90}
         motionDamping={15}
@@ -42,17 +44,9 @@ const Pie = ({ data, showLegend = true }) => {
               translateY: 56,
               itemWidth: 100,
               itemHeight: 18,
-              itemTextColor: "#999",
+              itemTextColor: labelColor,
               symbolSize: 18,
               symbolShape: "square",
-              effects: [
-                {
-                  on: "hover",
-                  style: {
-                    itemTextColor: "#000",
-                  },
-                },
-              ],
             },
           ]
         }

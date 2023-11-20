@@ -3,7 +3,13 @@
 import React, { useMemo } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import chartPropTypes from "./chartProps";
-import { colors, labelColor } from "./chartOptions";
+import { colors, labelColor, innerLabelColor } from "./chartOptions";
+
+const theme = {
+  axis: {
+    ticks: { text: { fill: labelColor } },
+  },
+};
 
 const Bars = ({ data, showLegend = true }) => {
   const { cleanData, keys } = useMemo(() => {
@@ -34,12 +40,13 @@ const Bars = ({ data, showLegend = true }) => {
           legend: "",
           legendPosition: "middle",
           legendOffset: -40,
+          labelTextColor: innerLabelColor,
         }}
         borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
         innerPadding={5}
         labelSkipWidth={12}
         labelSkipHeight={12}
-        labelTextColor={labelColor}
+        labelTextColor={innerLabelColor}
         legends={
           showLegend && [
             {
@@ -55,17 +62,11 @@ const Bars = ({ data, showLegend = true }) => {
               itemDirection: "left-to-right",
               itemOpacity: 0.85,
               symbolSize: 20,
-              effects: [
-                {
-                  on: "hover",
-                  style: {
-                    itemOpacity: 1,
-                  },
-                },
-              ],
+              itemTextColor: labelColor,
             },
           ]
         }
+        theme={theme}
         animate={false}
         motionStiffness={90}
         motionDamping={15}
