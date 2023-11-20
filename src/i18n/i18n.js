@@ -20,5 +20,6 @@ export const i18n_stats = allStrings.i18n_stats;
 export const i18n_activity = allStrings.i18n_activity;
 export const i18n_upload = allStrings.i18n_upload;
 export const i18n_errors = allStrings.i18n_errors;
+export const i18n_404 = allStrings.i18n_404;
 
 // export const i18n_login = allStrings.  ;

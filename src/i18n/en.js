@@ -169,6 +169,12 @@ export const i18n_errors = {
   badEntity: 'Model "{0}" not found.',
   badUpload: "Error uploading file.",
 };
+
+export const i18n_404 = {
+  title: "404 - Page Not Found",
+  badRoute: "Invalid route",
+  msg: "Oops! The page you are looking for isn't here.",
+};
 /*
     i18n_login: {
         title: 'Login',
@@ -190,8 +196,9 @@ const allStrings = {
   i18n_comments,
   i18n_stats,
   i18n_activity,
-  i18n_errors,
   i18n_upload,
+  i18n_errors,
+  i18n_404,
   // i18n_login,
 };
 

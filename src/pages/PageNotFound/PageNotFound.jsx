@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import Button from "../../components/widgets/Button/Button";
+import { i18n_404 as i18n } from "../../i18n/i18n";
 
 import "./PageNotFound.scss";
 
-const PageNotFound = ({ location }) => {
-  const url = location && location.pathname;
+const PageNotFound = () => {
+  const url = window.location.pathname;
 
   useEffect(() => {
     document.title = "Evolutility";
@@ -13,13 +14,15 @@ const PageNotFound = ({ location }) => {
 
   return (
     <div className="err404" style={{ padding: "0 50px 10px" }}>
-      <h1>404 - Page Not Found</h1>
+      <h1>{i18n.title}</h1>
 
       <p>
         <br />
-        Oops! The page you are looking for isn't here.
+        {i18n.msg}
       </p>
-      <p className="">404 error on file "{url}".</p>
+      <p className="bad-route">
+        {i18n.badRoute}: "{url}"
+      </p>
 
       <p>
         <br />
