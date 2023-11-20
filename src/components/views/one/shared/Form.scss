@@ -35,14 +35,7 @@ input[type="checkbox"]:focus {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition:
-    border-color ease-in-out 0.15s,
-    box-shadow ease-in-out 0.15s;
-  -o-transition:
-    border-color ease-in-out 0.15s,
-    box-shadow ease-in-out 0.15s;
   transition:
     border-color ease-in-out 0.15s,
     box-shadow ease-in-out 0.15s;
@@ -50,9 +43,6 @@ input[type="checkbox"]:focus {
 .form-control:focus {
   border-color: #66afe9;
   outline: 0;
-  -webkit-box-shadow:
-    inset 0 1px 1px rgba(0, 0, 0, 0.075),
-    0 0 8px rgba(102, 175, 233, 0.6);
   box-shadow:
     inset 0 1px 1px rgba(0, 0, 0, 0.075),
     0 0 8px rgba(102, 175, 233, 0.6);
@@ -64,10 +54,6 @@ input[type="checkbox"]:focus {
 .form-control:-ms-input-placeholder,
 .form-control::-webkit-input-placeholder {
   color: #999;
-}
-.form-control::-ms-expand {
-  background-color: rgba(0, 0, 0, 0);
-  border: 0;
 }
 // .form-control[disabled],
 // .form-control[readonly],
@@ -152,13 +138,9 @@ fieldset[disabled] .checkbox label {
   }
   .form-control {
     border-color: #a94442;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     &:focus {
       border-color: #843534;
-      -webkit-box-shadow:
-        inset 0 1px 1px rgba(0, 0, 0, 0.075),
-        0 0 6px #ce8483;
       box-shadow:
         inset 0 1px 1px rgba(0, 0, 0, 0.075),
         0 0 6px #ce8483;
