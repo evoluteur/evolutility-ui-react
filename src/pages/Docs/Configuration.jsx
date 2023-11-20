@@ -16,15 +16,17 @@ const Configuration = () => {
       <h1>Configuration</h1>
 
       <p>
-        Configurations options are specified in the file{" "}
+        Configurations options are specified in the{" "}
         <a
+          className="extlink"
           target="config"
           rel="noopener noreferrer"
           href="https://github.com/evoluteur/evolutility-ui-react/blob/main/src/config.js"
         >
           /src/config.js
-        </a>
-        . They apply to all apps (app specific options are specified in models).
+        </a>{" "}
+        file. They apply to all apps (app specific options are specified in
+        models).
       </p>
       <table className="table">
         <thead>

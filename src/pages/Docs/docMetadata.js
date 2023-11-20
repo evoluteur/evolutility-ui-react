@@ -478,7 +478,7 @@ export const viewDoc = {
       name: "Browse",
       img: "one-browse.png",
       description:
-        "Shows all fields for viewing (read only). Fields can be grouped into panels.",
+        "The Browse view shows all fields for viewing (read only). Fields can be grouped into panels.",
       code: "/src/components/views/one/Browse.jsx",
       route: "/{entity}/browse/{id}",
     },
@@ -487,7 +487,7 @@ export const viewDoc = {
       name: "Edit",
       img: "one-edit.png",
       description:
-        "This view shows all fields for edition to create or update records. Fields can be grouped into panels. Form validation is performed automatically based on the field properties (type, min, max, maxLength...) specified in the model. ",
+        "The Edit view shows all fields for edition to create or update records. Fields can be grouped into panels. Form validation is performed automatically based on the field properties (type, min, max, maxLength...) specified in the model. ",
       code: "/src/components/views/one/Edit.jsx",
       route: "/{entity}/edit/{id}",
     },
@@ -498,7 +498,7 @@ export const viewDoc = {
       name: "List",
       img: "many-list.png",
       description:
-        'Gives a tabular view of a collection (with pagination). Only fields flagged as "inMany" are shown.',
+        'The List view gives a tabular view of a collection (with pagination). Only fields flagged as "inMany" or "inList" are shown.',
       code: "/src/components/views/many/List.jsx",
       route: "/{entity}/list",
     },
@@ -506,7 +506,8 @@ export const viewDoc = {
       id: "cards",
       name: "Cards",
       img: "many-cards.png",
-      description: "Shows records side by side as cards (with pagination).",
+      description:
+        'The Cards view shows records side by side as cards (with pagination). Only fields flagged as "inMany" or "inCard" are shown.',
       code: "/src/components/views/many/Cards.jsx",
       route: "/{entity}/cards",
     },
@@ -516,7 +517,7 @@ export const viewDoc = {
       name: "Dashboard",
       img: "analytics-charts.png",
       description:
-        "Draws charts about the collection. Currently bars and pie charts are implemented, a list with count and percentages is also available. Only fields of type boolean, lov, integer, and decimal are presented.",
+        "The Dashboard view draws charts about the collection. It can be  toggled between bars chart, pie chart, or a table with count and percentages. Only fields of type boolean and lov can be charted.",
       code: "/src/components/views/analytics/Charts/Charts.jsx",
       route: "/{entity}/charts",
     },
@@ -525,7 +526,7 @@ export const viewDoc = {
       name: "Stats",
       img: "analytics-stats.png",
       description:
-        'Display average, standard deviation, variance, min, max for numeric fields (similar to Kaggle.com); charts for "lov" and "boolean" fields.', //   If auditing, it will also show the last update, and the number of updates in the last week.
+        "The Stats view displays average, standard deviation, variance, min, max for numeric fields (similar to Kaggle.com), and percent of null values for all fields.",
       code: "/src/components/views/analytics/Stats/Stats.jsx",
       route: "/{entity}/stats",
     },
@@ -537,7 +538,7 @@ export const viewDoc = {
       img: "comfort-overview.png",
       name: "Overview",
       description:
-        "Display a summary of the object and the latest activity on it.",
+        "The Overview view displays a summary of the object. If Activity is enabled it also shows the latest activity on the object.",
       code: "/src/components/views/comfort/Overview.jsx",
       route: "/{entity}/",
     },
@@ -547,7 +548,7 @@ export const viewDoc = {
       img: "comfort-activity.png",
       name: "Activity",
       description:
-        'Show list of "last visited" and "most visited" records for the object (stored in the browser\'s localStorage).',
+        'The Activity view shows a list of "last visited" and "most visited" records for the object (stored in the browser\'s localStorage).',
       code: "/src/components/views/comfort/Activity.jsx",
       route: "/{entity}/activity",
     },

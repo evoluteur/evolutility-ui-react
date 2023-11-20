@@ -46,11 +46,14 @@ const Views = () => {
   return (
     <div className="evo-doc-views">
       <h1>Views</h1>
-      <p>Evolutility-UI-React provides different types of view:</p>
+      <p>
+        Evolutility-UI-React provides different types of model-driven view (as
+        React components).
+      </p>
 
       <p>
-        For any object, a single model defines UI elements across views in a
-        simple declarative way.
+        For each object, all views are defined by a single UI model in a simple
+        declarative way.
       </p>
 
       <section>

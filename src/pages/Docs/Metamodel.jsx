@@ -53,12 +53,12 @@ const Metamodel = () => {
       <h1>Metamodel</h1>
 
       <p>
-        The metamodel (model of models) is the language to describe application
-        models. It's the structure of the models.
+        The metamodel (model of models) is the the structure of the models. It
+        is the language to describe application models.
       </p>
       <p>
-        Unlike traditional Model-driven Architecture (MDA), Evolutility uses one
-        model for all views instead of one model per view.
+        Unlike traditional Model-driven Architecture (MDA), Evolutility uses a
+        single model for all views of an object instead of one model per view.
       </p>
       <p>
         For any object, all UI views (Browse, Edit, List, Cards, Charts...)
@@ -85,14 +85,15 @@ const Metamodel = () => {
         metadoc.fieldMeta,
         <p>
           Objects have fields (or properties). Fields are displayed as form
-          fields in Edit view, text in Browse view, and as columns in List view.
+          fields in Edit view, text in Browse and Cards views, and as columns in
+          List view.
         </p>
       )}
 
       {section(
         metadoc.fieldGroupMeta,
         <p>
-          Groups are used to separate Fields into panels in the Edit and Browse
+          Groups are used to organize Fields into panels in the Edit and Browse
           views.
         </p>,
         <p>
