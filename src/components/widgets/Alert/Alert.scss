@@ -6,7 +6,8 @@
   position: relative;
   padding: 15px;
   margin-bottom: 20px;
-  border: 1px solid rgba(0, 0, 0, 0);
+  border: 1px solid silver;
+  border-left-width: 12px;
   border-radius: $radius;
   > .alert-title {
     position: relative;
@@ -20,8 +21,8 @@
       height: 24px;
     }
   }
-  .alert-link {
-    font-weight: bold;
+  a {
+    text-decoration: underline;
   }
   > div,
   > ul {
@@ -32,48 +33,48 @@
   }
 }
 
-// the following are shared w/ Badge component
+// the following are shared b/w Alert and Badge components
 .alert-success {
   color: #3c763d;
   background-color: #dff0d8;
   border-color: #d6e9c6;
-  .alert-link {
-    color: #2b542c;
+  a {
+    color: #3c763d;
   }
   > .alert-title > svg {
-    fill: #2b542c;
+    fill: #3c763d;
   }
 }
 .alert-info {
   color: #31708f;
   background-color: #d9edf7;
   border-color: #bce8f1;
-  .alert-link {
-    color: #245269;
+  a {
+    color: #31708f;
   }
   > .alert-title > svg {
-    fill: #245269;
+    fill: #31708f;
   }
 }
 .alert-warning {
   color: #8a6d3b;
   background-color: #fcf8e3;
   border-color: #faebcc;
-  .alert-link {
-    color: #66512c;
+  a {
+    color: #8a6d3b;
   }
   > .alert-title > svg {
-    fill: #66512c;
+    fill: #8a6d3b;
   }
 }
 .alert-danger {
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1;
-  .alert-link {
-    color: #843534;
+  a {
+    color: #a94442;
   }
   > .alert-title > svg {
-    fill: #843534;
+    fill: #a94442;
   }
 }

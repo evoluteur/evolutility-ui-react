@@ -11,13 +11,12 @@
   line-height: 1;
   color: #000;
   text-shadow: 0 1px 0 #fff;
-  opacity: 0.2;
+  opacity: 0.6;
   &:hover,
   &:focus {
-    color: #000;
     text-decoration: none;
     cursor: pointer;
-    opacity: 0.5;
+    opacity: 1;
   }
 }
 button.close {
@@ -97,7 +96,7 @@ button.close {
 .modal-header {
   position: relative;
   padding: 15px;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: $border;
   &:before,
   &:after {
     display: table;
@@ -123,7 +122,7 @@ button.close {
 .modal-footer {
   padding: 15px;
   text-align: right;
-  border-top: 1px solid #e5e5e5;
+  border-top: $border;
   &:before,
   &:after {
     display: table;

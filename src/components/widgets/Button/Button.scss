@@ -55,29 +55,13 @@ fieldset[disabled] a.btn {
   > svg {
     fill: #333 !important;
   }
-  &:focus {
+  &:focus,
+  &:hover,
+  &:active {
     color: #333;
     background-color: #e6e6e6;
     border-color: #8c8c8c;
   }
-  &:hover {
-    color: #333;
-    background-color: #e6e6e6;
-    border-color: #adadad;
-  }
-}
-.btn-default:active,
-.open > .btn-default.dropdown-toggle {
-  color: #333;
-  background-color: #e6e6e6;
-  background-image: none;
-  border-color: #adadad;
-}
-.btn-default:active:hover,
-.btn-default:active:focus {
-  color: #333;
-  background-color: #d4d4d4;
-  border-color: #8c8c8c;
 }
 .btn-default.disabled:hover,
 .btn-default.disabled:focus,
@@ -95,26 +79,11 @@ fieldset[disabled] .btn-default:focus {
   > svg {
     fill: #fff;
   }
-  &:focus {
-    color: #fff;
-    background-color: #286090;
-    border-color: #122b40;
-  }
-  &:hover {
-    color: #fff;
-    background-color: #286090;
-    border-color: #204d74;
-  }
+  &:focus,
+  &:hover,
   &:active {
     color: #fff;
     background-color: #286090;
-    background-image: none;
-    border-color: #204d74;
-  }
-  &:active:hover,
-  &:active:focus {
-    color: #fff;
-    background-color: #204d74;
     border-color: #122b40;
   }
 }

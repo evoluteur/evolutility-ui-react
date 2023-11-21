@@ -231,28 +231,28 @@ fieldset[disabled] .checkbox label {
 .input-group .form-control:focus {
   z-index: 3;
 }
-.input-group-btn {
-  position: relative;
-  font-size: 0;
-  white-space: nowrap;
-  > .btn {
-    position: relative;
-  }
-  > .btn + .btn {
-    margin-left: -1px;
-  }
-  > .btn:hover,
-  > .btn:focus,
-  > .btn:active {
-    z-index: 2;
-  }
-  &:first-child > .btn,
-  &:first-child > .btn-group {
-    margin-right: -1px;
-  }
-  &:last-child > .btn,
-  &:last-child > .btn-group {
-    z-index: 2;
-    margin-left: -1px;
-  }
-}
+// .input-group-btn {
+//   position: relative;
+//   font-size: 0;
+//   white-space: nowrap;
+//   > .btn {
+//     position: relative;
+//   }
+//   > .btn + .btn {
+//     margin-left: -1px;
+//   }
+//   > .btn:hover,
+//   > .btn:focus,
+//   > .btn:active {
+//     z-index: 2;
+//   }
+//   &:first-child > .btn,
+//   &:first-child > .btn-group {
+//     margin-right: -1px;
+//   }
+//   &:last-child > .btn,
+//   &:last-child > .btn-group {
+//     z-index: 2;
+//     margin-left: -1px;
+//   }
+// }
