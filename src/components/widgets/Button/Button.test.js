@@ -52,9 +52,7 @@ describe("button widget tests", () => {
     expect(button).toBeInTheDocument();
   });
   it("Button property test add class", async () => {
-    render(
-      <Button className="btn btn-primary" label="Default" onClick={noop} />
-    );
+    render(<Button className="extra" label="Default" onClick={noop} />);
     const button = await screen.findByTestId("button");
     expect(button).toBeInTheDocument();
   });

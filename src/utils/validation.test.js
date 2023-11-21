@@ -138,7 +138,7 @@ describe("diffData tests", () => {
 
   test("check diffData w/ delta", () => {
     const data2 = {
-      name: "John",
+      name: null,
       email: "evoluteur@evolutility.com",
     };
     const data3 = {

@@ -39,10 +39,5 @@ describe("badge text tests", () => {
     render(<Badge text="Ça va? #@$%" />);
     const badge = screen.getByTestId("badge");
     expect(badge).toHaveTextContent("Ça va? #@$%");
-    // it('negative case: badge text cannot have boolean values', async ()=>{
-    // render(<Badge text={true} />);
-    // const badge = await screen.getByTestId("badge-test");
-    // expect(badge).not.toHaveTextContent(true);
-    // });  });
   });
 });
