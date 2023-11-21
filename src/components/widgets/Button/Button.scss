@@ -74,9 +74,7 @@ fieldset[disabled] a.btn {
   border-color: #adadad;
 }
 .btn-default:active:hover,
-.btn-default:active:focus,
-.btn-default.active:hover,
-.btn-default.active:focus {
+.btn-default:active:focus {
   color: #333;
   background-color: #d4d4d4;
   border-color: #8c8c8c;
