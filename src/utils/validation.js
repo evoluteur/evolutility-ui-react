@@ -6,7 +6,7 @@
 // TODO: use Yup instead of this code
 import { isUndefined, isObject, isArray, isDate, isString } from "underscore";
 import { fieldTypes as ft, fieldIsNumber } from "./dico";
-import { locale, i18n_validation } from "../i18n/i18n";
+import { locale, i18n_validation as i18n } from "../i18n/i18n";
 
 const valRegExp = {
   email: /^[\w.-]+@[\w.-]+\.[\w.-]+$/,
@@ -18,10 +18,13 @@ const valRegExp = {
 
 export const validateField = (f, v) => {
   const isNumberField = fieldIsNumber(f);
-  const formatMsg = (fLabel, msg, r2, r3) =>
-    msg.replace("{0}", fLabel).replace("{1}", r2).replace("{2}", r3);
-
   const fieldLabel = (f) => f.label || f.labelShort;
+  const formatMsg = (msg, r2, r3) => {
+    let vMsg = msg.replace("{0}", fieldLabel(f));
+    if (r2) vMsg = vMsg.replace("{1}", r2);
+    if (r3) vMsg = vMsg.replace("{2}", r3);
+    return vMsg;
+  };
 
   if (!f.readOnly) {
     // Check required and empty
@@ -35,7 +38,7 @@ export const validateField = (f, v) => {
         (f.type === ft.list && v && !v.length)) //||
       //(f.type===ft.color && v==='#000000')
     ) {
-      return formatMsg(f.label, i18n_validation.empty);
+      return formatMsg(i18n.empty);
     } else if (!isUndefined(v)) {
       // Check field type
       if (!(isNaN(v) && isNumberField)) {
@@ -44,7 +47,7 @@ export const validateField = (f, v) => {
             case ft.int:
             case ft.email:
               if (!valRegExp[f.type].test(v)) {
-                return formatMsg(fieldLabel(f), i18n_validation[f.type]);
+                return formatMsg(i18n[f.type]);
               }
               break;
             case ft.dec:
@@ -52,13 +55,13 @@ export const validateField = (f, v) => {
               const regex =
                 valRegExp["decimal_" + locale] || valRegExp.decimal_en;
               if (!regex.test(v)) {
-                return formatMsg(fieldLabel(f), i18n_validation[f.type]);
+                return formatMsg(i18n[f.type]);
               }
               break;
             case ft.date:
             case ft.time:
               if (v !== "" && !isDate(new Date(v))) {
-                return formatMsg(fieldLabel(f), i18n_validation[f.type]);
+                return formatMsg(i18n[f.type]);
               }
               break;
             case ft.json:
@@ -71,7 +74,7 @@ export const validateField = (f, v) => {
                 } catch (err) {}
               }
               if (isUndefined(obj)) {
-                return formatMsg(fieldLabel(f), i18n_validation[f.type]);
+                return formatMsg(i18n[f.type]);
               }
               break;
             default:
@@ -85,25 +88,21 @@ export const validateField = (f, v) => {
       if (f.regExp !== null && !isUndefined(f.regExp)) {
         const rg = new RegExp(f.regExp);
         if (!v.match(rg)) {
-          return formatMsg(
-            fieldLabel(f),
-            i18n_validation.regExp,
-            fieldLabel(f)
-          );
+          return formatMsg(i18n.regExp, fieldLabel(f));
         }
       }
 
       // Check min & max & number type
       if (isNumberField) {
         if (isNaN(v)) {
-          return i18n_validation.invalid;
+          return i18n.invalid;
         }
         if (v !== "") {
           if (f.max && parseFloat(v) > f.max) {
-            return formatMsg(fieldLabel(f), i18n_validation.max, f.max);
+            return formatMsg(i18n.max, f.max);
           }
           if (f.min && parseFloat(v) < f.min) {
-            return formatMsg(fieldLabel(f), i18n_validation.min, f.min);
+            return formatMsg(i18n.min, f.min);
           }
         }
       }
@@ -113,7 +112,7 @@ export const validateField = (f, v) => {
     if (f.fnValidate) {
       const fValid = f.fnValidate(f, v);
       if (fValid !== "") {
-        return formatMsg(fieldLabel(f), fValid);
+        return formatMsg(fValid);
       }
     }
 
@@ -124,24 +123,11 @@ export const validateField = (f, v) => {
         badMin = f.minLength ? len < f.minLength : false;
       if (badMax || badMin) {
         if (f.maxLength && f.minLength) {
-          return formatMsg(
-            fieldLabel(f),
-            i18n_validation.minMaxLength,
-            f.minLength,
-            f.maxLength
-          );
+          return formatMsg(i18n.minMaxLength, f.minLength, f.maxLength);
         } else if (f.maxLength) {
-          return formatMsg(
-            fieldLabel(f),
-            i18n_validation.maxLength,
-            f.maxLength
-          );
+          return formatMsg(i18n.maxLength, f.maxLength);
         } else {
-          return formatMsg(
-            fieldLabel(f),
-            i18n_validation.minLength,
-            f.minLength
-          );
+          return formatMsg(i18n.minLength, f.minLength);
         }
       }
     }

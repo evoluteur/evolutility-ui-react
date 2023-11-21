@@ -51,11 +51,11 @@ const recordTitle = (m, data, isNew) => {
   return "Model not found";
 };
 
-const addModelLOVs = (model, data) => {
+const addModelLOVs = (model, lovs) => {
   // - Add missing lov field lists to model
   model._lovNoList.forEach((fid) => {
     const f = model.fieldsH[fid];
-    f.list = data[fid];
+    f.list = lovs[fid];
   });
   delete model._lovNoList;
 };

@@ -2,26 +2,24 @@ import config from "../config";
 import { i18n_actions as i18n } from "../i18n/i18n";
 
 const { withActivity } = config;
+const view = (name) => ({
+  id: name,
+  label: i18n[name],
+  icon: name,
+});
+
 export const views = {
-  browse: {
-    id: "browse",
-    label: i18n.browse,
-    icon: "browse",
-  },
-  edit: {
-    id: "edit",
-    label: i18n.edit,
-    icon: "edit",
-  },
-  list: { id: "list", label: i18n.list, icon: "list" },
-  cards: { id: "cards", label: i18n.cards, icon: "cards" },
+  browse: view("browse"),
+  edit: view("edit"),
+  list: view("list"),
+  cards: view("cards"),
   charts: {
     id: "charts",
     label: i18n.charts,
     icon: "dashboard",
   },
   // scatter: {id:'scatter', label: i18n.bScatter, icon:'certificate'},
-  stats: { id: "stats", label: i18n.stats, icon: "stats" },
+  stats: view("stats"),
   activity: {
     id: "activity",
     label: i18n.activity,
