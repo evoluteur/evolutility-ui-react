@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Icon from "react-crud-icons";
 import { getModel } from "utils/moMa";
-import { views, modelViewsAnalytics } from "../../../utils/dicoViews";
+import { views, modelViewsAnalytics } from "utils/dicoViews";
 
 const ViewsNavIcons = ({ id, view, entity, params }) => {
   let iconViews = [];

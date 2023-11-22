@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback, memo } from "react";
 import PropTypes from "prop-types";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
-import { getObjectSearch } from "../../../dao/dao";
-import { i18n_actions } from "../../../i18n/i18n";
+import { getObjectSearch } from "dao/dao";
+import { i18n_actions } from "i18n/i18n";
 
 import "./FieldObject.scss";
 import "react-bootstrap-typeahead/css/Typeahead.css";

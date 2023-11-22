@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
-import { fieldPropTypes } from "../views/modelPropTypes";
+import { fieldPropTypes } from "components/views/modelPropTypes";
 import Tooltip from "rc-tooltip";
 import Icon from "react-crud-icons";
 

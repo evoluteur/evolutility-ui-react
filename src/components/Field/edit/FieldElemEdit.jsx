@@ -10,8 +10,8 @@ import PropTypes from "prop-types";
 
 import FieldDate from "./FieldDate";
 import FieldUpload from "./FieldUpload";
-import { jsonString } from "../../../utils/format";
-import { fieldTypes as ft } from "../../../utils/dico";
+import { jsonString } from "utils/format";
+import { fieldTypes as ft } from "utils/dico";
 import Typeahead from "./FieldObject";
 
 import "../Field.scss";

@@ -2,12 +2,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Icon from "react-crud-icons";
-import { pixPath } from "../../../../utils/format";
-import config from "../../../../config";
-import { getModel } from "../../../../utils/moMa";
-import { getActivity } from "../../../../utils/activity";
-import { views } from "../../../../utils/dicoViews";
-import { i18n_activity } from "../../../../i18n/i18n";
+import config from "config";
+import { pixPath } from "utils/format";
+import { getModel } from "utils/moMa";
+import { getActivity } from "utils/activity";
+import { views } from "utils/dicoViews";
+import { i18n_activity } from "i18n/i18n";
 // #endregion
 
 import "./Activity.scss";

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import { getActivity, clearActivity } from "../../../../utils/activity";
-import ViewHeader from "../../ViewHeader/ViewHeader";
-import { getModel } from "../../../../utils/moMa";
-import { i18n_activity as i18n } from "../../../../i18n/i18n";
-import { capitalize, pixPath } from "../../../../utils/format";
-import Button from "../../../widgets/Button/Button";
+import { i18n_activity as i18n } from "i18n/i18n";
+import { getActivity, clearActivity } from "utils/activity";
+import { getModel } from "utils/moMa";
+import { capitalize, pixPath } from "utils/format";
+import Button from "components/widgets/Button/Button";
+import ViewHeader from "components/views/ViewHeader/ViewHeader";
 
 import "./Activity.scss";
 

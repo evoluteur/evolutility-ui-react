@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import packageInfo from "../../../../package.json";
+import packageInfo from "package.json";
 import Footer from "./Footer";
 
 const { version } = packageInfo;

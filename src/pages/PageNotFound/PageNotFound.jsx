@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Button from "../../components/widgets/Button/Button";
-import { i18n_404 as i18n } from "../../i18n/i18n";
+import { i18n_404 as i18n } from "i18n/i18n";
+import Button from "components/widgets/Button/Button";
 
 import "./PageNotFound.scss";
 

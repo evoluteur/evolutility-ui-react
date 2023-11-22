@@ -1,5 +1,5 @@
-import config from "../config";
-import { i18n_actions as i18n } from "../i18n/i18n";
+import config from "config";
+import { i18n_actions as i18n } from "i18n/i18n";
 
 const { withActivity } = config;
 const view = (name) => ({

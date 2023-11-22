@@ -9,7 +9,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProjectBadges from "./components/ProjectBadges";
-import { docMenus } from "../../components/shell/SideBar/appMenus";
+import { docMenus } from "components/shell/SideBar/appMenus";
 
 import "./Doc.scss";
 

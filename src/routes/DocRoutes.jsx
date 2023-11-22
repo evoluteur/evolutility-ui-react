@@ -2,12 +2,12 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Doc from "../pages/Docs/Doc";
-import Metamodel from "../pages/Docs/Metamodel";
-import Views from "../pages/Docs/Views";
-import Installation from "../pages/Docs/Installation";
-import Configuration from "../pages/Docs/Configuration";
-import SampleModels from "../pages/Docs/SampleModels";
+import Doc from "pages/Docs/Doc";
+import Metamodel from "pages/Docs/Metamodel";
+import Views from "pages/Docs/Views";
+import Installation from "pages/Docs/Installation";
+import Configuration from "pages/Docs/Configuration";
+import SampleModels from "pages/Docs/SampleModels";
 
 const DocRoutes = () => (
   <Routes>

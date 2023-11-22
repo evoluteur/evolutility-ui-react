@@ -6,7 +6,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { chartDataPropType } from "./chartProps";
-import { i18n_charts } from "../../../../i18n/i18n";
+import { i18n_charts } from "i18n/i18n";
 
 import "./ChartTable.scss";
 

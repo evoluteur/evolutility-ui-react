@@ -15,11 +15,11 @@ import {
   fieldInSearch,
   fieldStatsFunctions,
   allStats,
-} from "../utils/dico";
+} from "utils/dico";
 
-import config from "../config";
-import { getModel } from "../utils/moMa";
-import { dateTZ, timeTZ } from "../utils/format";
+import config from "config";
+import { getModel } from "utils/moMa";
+import { dateTZ, timeTZ } from "utils/format";
 import { isObject } from "underscore";
 
 const timestampFields = config.withTimestamp ? " updated_at created_at " : " ";

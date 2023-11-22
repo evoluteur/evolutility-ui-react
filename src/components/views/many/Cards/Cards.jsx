@@ -8,10 +8,10 @@
 
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import modelPropTypes from "../../modelPropTypes";
-import { i18n_errors } from "../../../../i18n/i18n";
-import Card from "../../one/Card";
-import Alert from "../../../widgets/Alert/Alert";
+import modelPropTypes from "components/views/modelPropTypes";
+import { i18n_errors } from "i18n/i18n";
+import Card from "components/views/one/Card";
+import Alert from "components/widgets/Alert/Alert";
 
 import "./Cards.scss";
 

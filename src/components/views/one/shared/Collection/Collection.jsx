@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import TableBody from "../../../many/shared/TableBody/TableBody";
-// import EmptyState from "../many/EmptyState";
+import TableBody from "components/views/many/shared/TableBody/TableBody";
+// import EmptyState from "components/views/many/EmptyState";
 
 import "./Collection.scss";
 

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, memo } from "react";
 import PropTypes from "prop-types";
 import Datepicker from "react-datepicker";
-import { trueDate } from "../../../utils/format";
+import { trueDate } from "utils/format";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./FieldDate.scss";

@@ -7,8 +7,8 @@
 */
 
 import React, { useState } from "react";
+import { modelsArray, getModel } from "utils/moMa";
 import PrettyJSON from "./PrettyJSON";
-import { modelsArray, getModel } from "../../../utils/moMa";
 
 const calculatedProps = [
   "titleFunction", // Do not display functions

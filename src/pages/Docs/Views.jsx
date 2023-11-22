@@ -2,8 +2,8 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React, { useEffect } from "react";
 import { pixPath } from "utils/format";
-import { viewDoc } from "./docMetadata";
 import Icon from "react-crud-icons";
+import { viewDoc } from "./docMetadata";
 
 import "./Doc.scss";
 import "./Views.scss";

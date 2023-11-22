@@ -6,26 +6,26 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import classnames from "classnames";
 import { ToastContainer } from "react-toastify";
-import config from "./config";
-import { evoPath } from "./utils/format";
+import config from "config";
+import { evoPath } from "utils/format";
 
-import SideBar from "./components/shell/SideBar/SideBar";
-import TopBar from "./components/shell/TopBar/TopBar";
-import Footer from "./components/shell/Footer/Footer";
-import ErrorBoundary from "./components/ErrorBoundary";
+import SideBar from "components/shell/SideBar/SideBar";
+import TopBar from "components/shell/TopBar/TopBar";
+import Footer from "components/shell/Footer/Footer";
+import ErrorBoundary from "components/ErrorBoundary";
 
-import Home from "./pages/Home/Home";
-import PageNotFound from "./pages/PageNotFound/PageNotFound";
-import DocRoutes from "./routes/DocRoutes";
-import DemoRoutes from "./routes/DemoRoutes";
+import Home from "pages/Home/Home";
+import PageNotFound from "pages/PageNotFound/PageNotFound";
+import DocRoutes from "routes/DocRoutes";
+import DemoRoutes from "routes/DemoRoutes";
 
 import "./App.scss";
 import "./App-custom.scss";
 import "react-crud-icons/src/Icon.scss";
 import "react-toastify/scss/main.scss";
 import "rc-tooltip/assets/bootstrap_white.css";
-import "./components/widgets/Modal.scss";
-import "./components/widgets/global.scss";
+import "components/widgets/Modal.scss";
+import "components/widgets/global.scss";
 
 const baseName = config.baseName || "/";
 

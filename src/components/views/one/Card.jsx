@@ -7,14 +7,13 @@
 
 import React, { memo } from "react";
 import PropTypes from "prop-types";
-import { fieldPropTypes } from "../modelPropTypes";
-
 import Icon from "react-crud-icons";
 import { Link } from "react-router-dom";
-import { getModel } from "../../../utils/moMa";
-import { pixPath } from "../../../utils/format";
-import { fieldTypes as ft } from "../../../utils/dico";
-import FieldValue from "../../Field/browse/FieldValue";
+import { getModel } from "utils/moMa";
+import { pixPath } from "utils/format";
+import { fieldTypes as ft } from "utils/dico";
+import { fieldPropTypes } from "components/views/modelPropTypes";
+import FieldValue from "components/Field/browse/FieldValue";
 
 const Card = memo(({ entity, data, fields }) => {
   const d = data || {};

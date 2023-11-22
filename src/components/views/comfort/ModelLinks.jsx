@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
-import { pixPath } from "../../../utils/format";
-import { modelsArray } from "../../../utils/moMa";
+import { pixPath } from "utils/format";
+import { modelsArray } from "utils/moMa";
 
 import "./ModelLinks.scss";
 

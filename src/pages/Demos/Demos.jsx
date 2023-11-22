@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import ModelLinks from "../../components/views/comfort/ModelLinks";
+import ModelLinks from "components/views/comfort/ModelLinks";
 
 import "./Demos.scss";
 

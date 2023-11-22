@@ -5,8 +5,8 @@
 
 // TODO: use Yup instead of this code
 import { isUndefined, isObject, isArray, isDate, isString } from "underscore";
+import { locale, i18n_validation as i18n } from "i18n/i18n";
 import { fieldTypes as ft, fieldIsNumber } from "./dico";
-import { locale, i18n_validation as i18n } from "../i18n/i18n";
 
 const valRegExp = {
   email: /^[\w.-]+@[\w.-]+\.[\w.-]+$/,

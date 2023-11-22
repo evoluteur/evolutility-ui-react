@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import "./Badge.scss";
-import "../Alert/Alert.scss";
+import "components/widgets/Alert/Alert.scss";
 
 const Badge = ({ text, type }) => (
   <div className={`evo-badge alert-${type}`} role="status" data-testid="badge">

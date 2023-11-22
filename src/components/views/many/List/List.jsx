@@ -8,9 +8,9 @@
 
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import modelPropType from "../../modelPropTypes";
+import modelPropType from "components/views/modelPropTypes";
 import Icon from "react-crud-icons";
-import Alert from "../../../widgets/Alert/Alert";
+import Alert from "components/widgets/Alert/Alert";
 import TableBody from "../shared/TableBody/TableBody";
 
 import "./List.scss";

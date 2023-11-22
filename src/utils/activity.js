@@ -1,4 +1,4 @@
-import config from "../config";
+import config from "config";
 import { lcWrite, lcRead, lcRemove } from "./localStorage";
 
 // TODO: do not show deleted records

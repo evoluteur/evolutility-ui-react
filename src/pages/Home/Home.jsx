@@ -7,10 +7,10 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import pkg from "../../../package.json";
-import { pixPath } from "../../utils/format";
+import { pixPath } from "utils/format";
+import { modelsArray } from "utils/moMa";
+import ModelLinks from "components/views/comfort/ModelLinks";
 import Gallery from "./Gallery";
-import { modelsArray } from "../../utils/moMa";
-import ModelLinks from "../../components/views/comfort/ModelLinks";
 
 import "./Home.scss";
 

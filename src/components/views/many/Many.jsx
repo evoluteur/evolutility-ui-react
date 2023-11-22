@@ -12,20 +12,20 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 
+import { i18n_msg, i18n_errors } from "i18n/i18n";
+import config from "config";
+import url from "utils/url";
+import { capitalize } from "utils/format";
+import { getModel } from "utils/moMa";
+import { getMany } from "dao/dao";
+import Spinner from "components/widgets/Spinner/Spinner";
+import Alert from "components/widgets/Alert/Alert";
+import ViewHeader from "components/views/ViewHeader/ViewHeader";
+import InvalidRoute from "components/views/comfort/Overview/InvalidRoute";
 import List from "./List/List";
 import Cards from "./Cards/Cards";
-import ViewHeader from "../ViewHeader/ViewHeader";
 import Pagination from "./shared/Pagination/Pagination";
-import Spinner from "../../widgets/Spinner/Spinner";
-import Alert from "../../widgets/Alert/Alert";
-import InvalidRoute from "../comfort/Overview/InvalidRoute";
 import EmptyState from "./shared/EmptyState/EmptyState";
-import { i18n_msg, i18n_errors } from "../../../i18n/i18n";
-import config from "../../../config";
-import url from "../../../utils/url";
-import { capitalize } from "../../../utils/format";
-import { getModel } from "../../../utils/moMa";
-import { getMany } from "../../../dao/dao";
 // #endregion
 
 import "./Many.scss";

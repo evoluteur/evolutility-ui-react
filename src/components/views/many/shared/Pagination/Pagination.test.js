@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Pagination from "./Pagination";
-import config from "../../../../../config";
+import config from "config";
 
 const { pageSize = 50 } = config;
 const noOp = () => {};

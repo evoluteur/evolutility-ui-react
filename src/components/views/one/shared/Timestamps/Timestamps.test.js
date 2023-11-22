@@ -1,8 +1,8 @@
 /* eslint-disable jest/no-conditional-expect */
 import { render, screen } from "@testing-library/react";
-import config from "../../../../../config";
-import { i18n_activity as i18n } from "../../../../../i18n/i18n";
-import { datetimeString } from "../../../../../utils/format";
+import config from "config";
+import { i18n_activity as i18n } from "i18n/i18n";
+import { datetimeString } from "utils/format";
 
 import Timestamps from "./Timestamps";
 

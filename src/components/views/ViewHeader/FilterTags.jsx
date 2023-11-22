@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
-import Badge from "../../widgets/Badge/Badge";
+import Badge from "components/widgets/Badge/Badge";
 
 import "./ViewHeader.scss";
 

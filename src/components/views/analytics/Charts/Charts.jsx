@@ -9,13 +9,13 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import classnames from "classnames";
-import { i18n_charts } from "../../../../i18n/i18n";
-import { getModel } from "../../../../utils/moMa";
-import { fieldInCharts } from "../../../../utils/dico";
-import { lcRead } from "../../../../utils/localStorage";
-import { capitalize } from "../../../../utils/format";
-import ViewHeader from "../../ViewHeader/ViewHeader";
-import Alert from "../../../widgets/Alert/Alert";
+import { i18n_charts } from "i18n/i18n";
+import { getModel } from "utils/moMa";
+import { fieldInCharts } from "utils/dico";
+import { lcRead } from "utils/localStorage";
+import { capitalize } from "utils/format";
+import ViewHeader from "components/views/ViewHeader/ViewHeader";
+import Alert from "components/widgets/Alert/Alert";
 import Chart from "./Chart";
 //#endregion
 

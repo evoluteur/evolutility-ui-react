@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { fieldTypeStrings } from "../../utils/dico";
+import { fieldTypeStrings } from "utils/dico";
 
 export const fieldPropTypes = PropTypes.shape({
   id: PropTypes.string.isRequired,

@@ -10,12 +10,12 @@ import numeral from "numeral";
 import moment from "moment";
 import { isObject } from "underscore";
 
-import { locale } from "../i18n/i18n";
+import { locale } from "i18n/i18n";
 // include locale support for other languages
 // import 'moment/locale/fr'
 // import 'moment/locale/es'
 
-import config from "../config";
+import config from "config";
 
 export let { filesUrl, baseName = "/" } = config;
 if (!baseName.endsWith("/")) {

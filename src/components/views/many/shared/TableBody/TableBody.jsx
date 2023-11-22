@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { fieldIsNumber, fieldTypes as ft } from "../../../../../utils/dico";
-import { pixPath } from "../../../../../utils/format";
-import FieldValue from "../../../../Field/browse/FieldValue";
-import { fieldPropTypes } from "../../../modelPropTypes";
+import { fieldIsNumber, fieldTypes as ft } from "utils/dico";
+import { pixPath } from "utils/format";
+import FieldValue from "components/Field/browse/FieldValue";
+import { fieldPropTypes } from "components/views/modelPropTypes";
 
 const TableBody = ({ fields, data, iconPath, link }) => {
   const icon = iconPath && (

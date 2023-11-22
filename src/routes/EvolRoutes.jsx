@@ -1,14 +1,14 @@
 // Routes for Evolutility views
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import config from "../config";
+import config from "config";
 
-import One from "../components/views/one/One";
-import Many from "../components/views/many/Many";
-import Stats from "../components/views/analytics/Stats/Stats";
-import Charts from "../components/views/analytics/Charts/Charts";
-import Overview from "../components/views/comfort/Overview/Overview";
-import Activity from "../components/views/comfort/Activity/Activity";
+import One from "components/views/one/One";
+import Many from "components/views/many/Many";
+import Stats from "components/views/analytics/Stats/Stats";
+import Charts from "components/views/analytics/Charts/Charts";
+import Overview from "components/views/comfort/Overview/Overview";
+import Activity from "components/views/comfort/Activity/Activity";
 
 const EvolRoutes = () => (
   <Routes>

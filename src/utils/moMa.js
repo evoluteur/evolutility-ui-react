@@ -6,7 +6,7 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2023 Olivier Giulieri
 
-import all_models from "../models/all_models";
+import all_models from "models/all_models";
 import prepModels from "./moMaPrep";
 
 prepModels(all_models);

@@ -1,4 +1,4 @@
-import { modelsArray } from "../../../utils/moMa";
+import { modelsArray } from "utils/moMa";
 
 export const docMenus = [
   { id: "install", text: "Installation", icon: "doc/cog.png" },

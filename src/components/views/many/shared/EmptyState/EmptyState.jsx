@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import modelPropTypes from "../../../modelPropTypes";
-import Alert from "../../../../widgets/Alert/Alert";
-import Button from "../../../../widgets/Button/Button";
-import { i18n_msg as i18n } from "../../../../../i18n/i18n";
+import modelPropTypes from "components/views/modelPropTypes";
+import Alert from "components/widgets/Alert/Alert";
+import Button from "components/widgets/Button/Button";
+import { i18n_msg as i18n } from "i18n/i18n";
 
 import "./EmptyState.scss";
 

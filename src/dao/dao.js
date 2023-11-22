@@ -2,8 +2,11 @@
 // access to data via GraphQL API (using Hasura)
 // (c) 2023 Olivier Giulieri
 
-import { getModel } from "../utils/moMa";
-import { fieldIsText, fieldTypes as ft } from "../utils/dico.js";
+import config from "config.js";
+import { i18n_errors } from "i18n/i18n";
+import { getModel } from "utils/moMa";
+import { decimalString } from "utils/format.js";
+import { fieldIsText, fieldTypes as ft } from "utils/dico.js";
 import {
   qOne,
   qStats,
@@ -16,9 +19,6 @@ import {
   qObjectSearch,
 } from "./gqlQueries.js";
 import { setCache, getCache, clearCache } from "./cache";
-import { decimalString } from "../utils/format.js";
-import { i18n_errors } from "i18n/i18n";
-import config from "../config.js";
 
 const { apiPath } = config;
 

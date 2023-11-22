@@ -3,18 +3,18 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { diffData } from "../../../utils/validation";
-import { logActivity } from "../../../utils/activity";
+import { i18n_actions, i18n_msg, i18n_errors } from "i18n/i18n";
+import { getOne, updateOne, insertOne, getLOVs } from "dao/dao";
+import config from "config";
+import { capitalize } from "utils/format";
+import { getModel } from "utils/moMa";
+import { logActivity } from "utils/activity";
+import { diffData } from "utils/validation";
 import Edit from "./Edit/Edit";
 import Browse from "./Browse/Browse";
-import ViewHeader from "../ViewHeader/ViewHeader";
-import Alert from "../../widgets/Alert/Alert";
-import Spinner from "../../widgets/Spinner/Spinner";
-import { i18n_actions, i18n_msg, i18n_errors } from "../../../i18n/i18n";
-import config from "../../../config";
-import { capitalize } from "../../../utils/format";
-import { getModel } from "../../../utils/moMa";
-import { getOne, updateOne, insertOne, getLOVs } from "../../../dao/dao";
+import ViewHeader from "components/views/ViewHeader/ViewHeader";
+import Alert from "components/widgets/Alert/Alert";
+import Spinner from "components/widgets/Spinner/Spinner";
 
 import "./One.scss";
 // #endregion

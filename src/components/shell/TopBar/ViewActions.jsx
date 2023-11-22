@@ -12,11 +12,11 @@ import Modal from "react-modal";
 import { toast } from "react-toastify";
 import Icon from "react-crud-icons";
 import { isFunction } from "underscore";
-import { evoPath, capitalize } from "../../../utils/format";
-import { deleteOne } from "../../../dao/dao";
-import { i18n_msg, i18n_actions } from "../../../i18n/i18n";
-import { getModel } from "../../../utils/moMa";
-import Button from "../../widgets/Button/Button";
+import { evoPath, capitalize } from "utils/format";
+import { deleteOne } from "dao/dao";
+import { i18n_msg, i18n_actions } from "i18n/i18n";
+import { getModel } from "utils/moMa";
+import Button from "components/widgets/Button/Button";
 
 const menuItems = {
   // new: {id: 'edit/0', label: i18n_actions.new, icon:'add', n:'x', readonly:false},

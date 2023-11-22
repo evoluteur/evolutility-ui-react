@@ -2,9 +2,9 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import classnames from "classnames";
 import Icon from "react-crud-icons";
-import { i18n_nav } from "../../../i18n/i18n";
+import { i18n_nav } from "i18n/i18n";
 import { demosMenu, docMenus } from "./appMenus";
-import { evoPath, pixPath } from "../../../utils/format";
+import { evoPath, pixPath } from "utils/format";
 
 import demoSVG from "./svg/eye.svg";
 import docSVG from "./svg/book.svg";

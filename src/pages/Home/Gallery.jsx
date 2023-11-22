@@ -1,7 +1,7 @@
 import React from "react";
 import { pixPath } from "utils/format";
 import AliceCarousel from "react-alice-carousel";
-import { viewDoc } from "../Docs/docMetadata";
+import { viewDoc } from "pages/Docs/docMetadata";
 
 import "react-alice-carousel/lib/alice-carousel.css";
 import "./Gallery.scss";

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { fieldPropTypes } from "../views/modelPropTypes";
+import { fieldPropTypes } from "components/views/modelPropTypes";
 import FieldLabel from "./FieldLabel";
 import FieldElemEdit from "./edit/FieldElemEdit";
 import FieldElemBrowse from "./browse/FieldElemBrowse";

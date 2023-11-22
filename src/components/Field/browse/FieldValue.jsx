@@ -9,7 +9,7 @@ import {
   image,
   numFieldValue,
 } from "utils/format";
-import { fieldTypes as ft } from "../../../utils/dico";
+import { fieldTypes as ft } from "utils/dico";
 
 import "../Field.scss";
 

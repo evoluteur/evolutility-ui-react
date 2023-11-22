@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import Icon from "react-crud-icons";
-import FieldObject from "../../../Field/edit/FieldObject";
+import FieldObject from "components/Field/edit/FieldObject";
 
 import "./SearchBox.scss";
 

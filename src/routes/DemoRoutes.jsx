@@ -2,7 +2,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Demos from "../pages/Demos/Demos";
+import Demos from "pages/Demos/Demos";
 import EvolRoutes from "./EvolRoutes";
 
 const DocsRoutes = () => (
