@@ -23,6 +23,18 @@ import "./Charts.scss";
 
 const Charts = () => {
   const [expandedChart, setExpandedChart] = useState(null);
+  const { entity } = useParams();
+  const m = getModel(entity);
+  const title = i18n_charts.dash.replace(
+    "{0}",
+    capitalize(m?.namePlural || "")
+  );
+
+  useEffect(() => {
+    document.title = title;
+    window.scrollTo(0, 0);
+  }, [title]);
+
   const toggleExpandedChart = useCallback(
     (fid, expanded) => {
       if (fid === expandedChart) {
@@ -33,16 +45,6 @@ const Charts = () => {
     },
     [expandedChart]
   );
-  const { entity } = useParams();
-  const m = getModel(entity);
-  const title = i18n_charts.dash.replace(
-    "{0}",
-    capitalize(m?.namePlural || "")
-  );
-  useEffect(() => {
-    document.title = title;
-    window.scrollTo(0, 0);
-  }, [title]);
 
   if (m) {
     const chartFields = m.fields.filter(fieldInCharts);

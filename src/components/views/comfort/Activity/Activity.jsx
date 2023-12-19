@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { i18n_activity as i18n } from "i18n/i18n";
@@ -23,8 +23,14 @@ const visitsCount = (n) => {
 
 const Activity = () => {
   const { entity } = useParams();
-  const m = getModel(entity);
   const [act, setFullActivity] = useState(getActivity(entity));
+  const m = getModel(entity);
+  const title = capitalize(m.namePlural) + " Activity";
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.title = title;
+  }, [title]);
 
   const activityItem = (act) => {
     return (
@@ -56,11 +62,7 @@ const Activity = () => {
 
   return (
     <div className="evol-activity">
-      <ViewHeader
-        entity={entity}
-        title={capitalize(m.namePlural) + " Activity"}
-        view="activity"
-      />
+      <ViewHeader entity={entity} title={title} view="activity" />
       {act?.lastViewed?.length > 0 && (
         <section>
           {i18n.activitySince

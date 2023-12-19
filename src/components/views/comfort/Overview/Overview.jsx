@@ -19,11 +19,14 @@ import "./Overview.scss";
 
 const Overview = () => {
   const { entity } = useParams();
+  const m = getModel(entity);
+  const title = capitalize(m.namePlural) + " " + i18n.overview;
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [entity]);
+    document.title = title;
+  }, [title]);
 
-  const m = getModel(entity);
   const chartFields = m?.fields.filter(fieldInCharts);
 
   const lcKey = `../${entity}-overview-chart`;
@@ -105,11 +108,7 @@ const Overview = () => {
 
     return (
       <div className="evol-overview">
-        <ViewHeader
-          entity={entity}
-          title={capitalize(m.namePlural) + " " + i18n.overview}
-          view="overview"
-        />
+        <ViewHeader entity={entity} title={title} view="overview" />
         {body}
       </div>
     );
