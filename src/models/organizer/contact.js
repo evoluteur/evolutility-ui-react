@@ -9,7 +9,7 @@ const model = {
   world: "demos",
   name: "contact",
   namePlural: "contacts",
-  icon: "contact.gif",
+  icon: "contact.png",
   titleField: "firstname",
   titleFunction: (d) => d.firstname + " " + d?.lastname,
   fields: [

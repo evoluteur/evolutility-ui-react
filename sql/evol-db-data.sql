@@ -599,15 +599,15 @@ Ste 3','San Francisco','CA',94111);
 ALTER SEQUENCE "restaurant_id_seq" RESTART WITH 12;
 
 INSERT INTO "wine"(id,"name","label_img","vintage","winery","bsize_id","type_id","price","grape_id","country_id","region","buying_date","value","purchased","remaining","drink_from","drink_to","peak_from","peak_to") VALUES
-(1,'Macrostie','wine/macrostie.gif',2008,'Mc Williams',1,1,20,1,18,'Sonoma','2022-05-12',24,24,16,2022,2020,2023,2025);
+(1,'Macrostie','wine/macrostie.png',2008,'Mc Williams',1,1,20,1,18,'Sonoma','2022-05-12',24,24,16,2022,2020,2023,2025);
 INSERT INTO "wine"(id,"name","label_img","vintage","winery","bsize_id","type_id","grape_id","buying_date","price","value","drink_from","drink_to","purchased","remaining","country_id","region","area","score_parker","score_winespectator") VALUES
-(2,'Château d''Yquem','wine/yquem.gif',2016,'Lur Saluces',1,2,59,'2021-12-12',399,460,2016,2030,3,1,7,'Bordeaux','Sauternes and Barsac',92,94);
+(2,'Château d''Yquem','wine/yquem.png',2016,'Lur Saluces',1,2,59,'2021-12-12',399,460,2016,2030,3,1,7,'Bordeaux','Sauternes and Barsac',92,94);
 INSERT INTO "wine"(id,"name","label_img","vintage","winery","bsize_id","type_id","price","value","buying_date","purchased","remaining","drink_from","grape_id","country_id","score_parker","score_winespectator") VALUES
-(3,'Château St Jean','wine/stjean.gif',2015,'Ch St Jean',1,1,34,42,'2019-12-12',12,5,2020,2,7,68,72);
+(3,'Château St Jean','wine/stjean.png',2015,'Ch St Jean',1,1,34,42,'2019-12-12',12,5,2020,2,7,68,72);
 INSERT INTO "wine"(id,"name","label_img","vintage","winery","bsize_id","type_id","buying_date","price","value","drink_from","grape_id","country_id","score_parker","score_winespectator") VALUES
-(4,'Vine Cliff','wine/vinecliff.gif',2016,'Vine Cliff',1,1,'2021-12-05',28,28,2018,3,18,67,62);
+(4,'Vine Cliff','wine/vinecliff.png',2016,'Vine Cliff',1,1,'2021-12-05',28,28,2018,3,18,67,62);
 INSERT INTO "wine"(id,"name","label_img","vintage","winery","bsize_id","grape_id","type_id","drink_from","buying_date","region","price","value","purchased","remaining","country_id","score_parker","score_winespectator") VALUES
-(5,'Château Montelena','wine/montelena.gif',2020,'Château Montelena',4,3,1,2022,'2023-10-05','California',62,32,12,8,18,64,64);
+(5,'Château Montelena','wine/montelena.png',2020,'Château Montelena',4,3,1,2022,'2023-10-05','California',62,32,12,8,18,64,64);
 
 ALTER SEQUENCE "wine_id_seq" RESTART WITH 6;
 

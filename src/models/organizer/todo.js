@@ -10,7 +10,7 @@ const model = {
   world: "demos",
   name: "task",
   namePlural: "tasks",
-  icon: "todo.gif",
+  icon: "todo.png",
   active: true,
   position: 1,
   titleField: "title",

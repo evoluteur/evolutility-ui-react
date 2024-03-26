@@ -9,7 +9,7 @@ const model = {
   world: "demos",
   name: "restaurant",
   namePlural: "restaurants",
-  icon: "resto.gif",
+  icon: "resto.png",
   titleField: "name",
   fields: [
     {
