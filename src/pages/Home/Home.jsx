@@ -55,7 +55,7 @@ const Home = () => {
           </span>
         </h1>
         <h2 className="tBlue text-center">
-          Toolkit to build modern UIs with models rather than code
+          Toolkit to build modern CRUD SPAs with models rather than code
         </h2>
       </section>
       <section>

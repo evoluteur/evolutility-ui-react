@@ -9,6 +9,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import classnames from "classnames";
+import ErrorBoundary from "components/ErrorBoundary";
 import { i18n_charts } from "i18n/i18n";
 import { getModel } from "utils/moMa";
 import { fieldInCharts } from "utils/dico";
@@ -89,6 +90,7 @@ const Charts = () => {
       } else {
         charts = chartFields.map((f) => (
           <Chart
+            key={f?.id}
             {...chartFieldProps(f)}
             size={f?.id === expandedChart ? "large" : "small"}
             setExpanded={toggleExpandedChart}
@@ -103,7 +105,9 @@ const Charts = () => {
     return (
       <div className={`evol-charts model_${entity}`}>
         <ViewHeader entity={entity} title={title} view="charts" />
-        <div className={css}>{charts}</div>
+        <ErrorBoundary>
+          <div className={css}>{charts}</div>
+        </ErrorBoundary>
       </div>
     );
   }

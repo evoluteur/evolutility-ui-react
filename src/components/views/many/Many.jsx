@@ -22,6 +22,7 @@ import Spinner from "components/widgets/Spinner/Spinner";
 import Alert from "components/widgets/Alert/Alert";
 import ViewHeader from "components/views/ViewHeader/ViewHeader";
 import InvalidRoute from "components/views/comfort/Overview/InvalidRoute";
+import ErrorBoundary from "components/ErrorBoundary";
 import List from "./List/List";
 import Cards from "./Cards/Cards";
 import Pagination from "./shared/Pagination/Pagination";
@@ -201,7 +202,7 @@ const Many = () => {
       return <EmptyState model={model} hasFilters={fullCount > 0} />;
     }
     return (
-      <>
+      <ErrorBoundary>
         {view === "list" ? <List {...viewProps} /> : <Cards {...viewProps} />}
         {paginationCount > pageSize && (
           <Pagination
@@ -211,7 +212,7 @@ const Many = () => {
             pageIndex={pageIndex}
           />
         )}
-      </>
+      </ErrorBoundary>
     );
   };
   const displayCount = filteredCount

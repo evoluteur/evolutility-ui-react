@@ -7,6 +7,7 @@ import { fieldInCharts } from "utils/dico";
 import { views } from "utils/dicoViews";
 import { capitalize } from "utils/format";
 import { lcWrite, lcRead } from "utils/localStorage";
+import ErrorBoundary from "components/ErrorBoundary";
 import { i18n_actions as i18n } from "i18n/i18n";
 import ViewHeader from "components/views/ViewHeader/ViewHeader";
 import Chart from "components/views/analytics/Charts/Chart";
@@ -79,28 +80,30 @@ const Overview = () => {
         <div className="cols-2">
           <Activity entity={entity} />
           {!m.noCharts && (
-            <div className="ovw-chart">
-              <Chart
-                entity={entity}
-                field={chartField}
-                title=""
-                chartType="pie"
-                size="small"
-                canExpand={false}
-                className="panel"
-              />
-              <select
-                value={chartField?.id}
-                onChange={chartFieldChanged}
-                className="form-control"
-              >
-                {chartFields?.map((f) => (
-                  <option key={f.id} value={f.id}>
-                    {f.label}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <ErrorBoundary>
+              <div className="ovw-chart">
+                <Chart
+                  entity={entity}
+                  field={chartField}
+                  title=""
+                  chartType="pie"
+                  size="small"
+                  canExpand={false}
+                  className="panel"
+                />
+                <select
+                  value={chartField?.id}
+                  onChange={chartFieldChanged}
+                  className="form-control"
+                >
+                  {chartFields?.map((f) => (
+                    <option key={f.id} value={f.id}>
+                      {f.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </ErrorBoundary>
           )}
         </div>
       </div>

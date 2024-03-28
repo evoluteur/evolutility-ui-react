@@ -1,13 +1,13 @@
 {
   "name": "evolutility-ui-react",
   "version": "0.7.0",
-  "description": "No-Code UI for Hasura GraphQL",
+  "description": "Evolutility Low-Code Toolkit",
   "repository": {
     "type": "git",
     "url": "git://github.com/evoluteur/evolutility-ui-react.git"
   },
   "homepage": ".",
-  "copyright": "(c) 2023 Olivier Giulieri",
+  "copyright": "(c) 2024 Olivier Giulieri",
   "author": "Olivier Giulieri (https://evoluteur.github.io/)",
   "license": "AGPL-3.0",
   "engines": {
