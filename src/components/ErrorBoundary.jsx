@@ -1,3 +1,4 @@
+import React from "react";
 import Alert from "components/widgets/Alert/Alert";
 
 export default class ErrorBoundary extends React.Component {

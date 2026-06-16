@@ -28,8 +28,8 @@ const sLink = (label, url, icon, css) => (
     <span>{label}</span>
   </Link>
 );
-const hDemos = sLink("Demos", evoPath, demoSVG);
-const hDocs = sLink("Documentation", "docs", docSVG);
+const hDemos = sLink("Demos", `/${evoPath}`, demoSVG);
+const hDocs = sLink("Documentation", "/docs", docSVG);
 //#endregion
 
 const SideBar = ({ onClickToggle }) => {
@@ -49,7 +49,7 @@ const SideBar = ({ onClickToggle }) => {
 
   const menuLinkDoc = (menu) => (
     <li className={classnames({ active: menu.id === view })} key={menu.id}>
-      <Link to={`docs/${menu.id}`}>
+      <Link to={`/docs/${menu.id}`}>
         <img className="e-icon" src={pixPath + menu.icon} alt="" />
         <span>{menu.text}</span>
       </Link>

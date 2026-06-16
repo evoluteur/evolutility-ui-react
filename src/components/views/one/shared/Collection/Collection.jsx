@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 
 import TableBody from "components/views/many/shared/TableBody/TableBody";
+import { evoPath } from "utils/format";
 // import EmptyState from "components/views/many/EmptyState";
 
 import "./Collection.scss";
@@ -15,7 +16,7 @@ const Collection = ({ collecModel, collecData }) => {
     );
     // return <EmptyState model={collecModel} isNested={true} />;
   }
-  const link = "/" + (collecModel.object || collecModel.id) + "/browse/";
+  const link = `/${evoPath}/${collecModel.object || collecModel.id}/browse/`;
   const tableHeader = (
     <thead>
       <tr>
