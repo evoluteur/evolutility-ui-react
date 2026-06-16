@@ -3,7 +3,7 @@
 // Dashboard style set of charts (bars or pies).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2023 Olivier Giulieri
+// (c) 2026 Olivier Giulieri
 
 //#region  ----- Imports ----------------------------
 import React, { useEffect, useState, useCallback } from "react";

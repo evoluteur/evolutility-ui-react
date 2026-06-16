@@ -4,7 +4,7 @@
 // View to add or update one record at a time.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2023 Olivier Giulieri
+// (c) 2026 Olivier Giulieri
 
 // #region ---------------- Imports ----------------
 import React, { useState, useCallback } from "react";

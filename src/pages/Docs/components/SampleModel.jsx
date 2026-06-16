@@ -3,7 +3,7 @@
 /*
   Evolutility-UI-React
   https://github.com/evoluteur/evolutility-ui-react
-  (c) 2023 Olivier Giulieri
+  (c) 2026 Olivier Giulieri
 */
 
 import React, { useState } from "react";

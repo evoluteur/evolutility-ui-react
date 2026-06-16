@@ -4,7 +4,7 @@
 // models can be stored in JSON files or in the database
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2023 Olivier Giulieri
+// (c) 2026 Olivier Giulieri
 
 import all_models from "models/all_models";
 import prepModels from "./moMaPrep";

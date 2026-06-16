@@ -1,7 +1,7 @@
 // Evolutility-UI-React :: utils/validation.js
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2023 Olivier Giulieri
+// (c) 2026 Olivier Giulieri
 
 // TODO: use Yup instead of this code
 import { isUndefined, isObject, isArray, isDate, isString } from "underscore";

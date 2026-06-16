@@ -4,7 +4,7 @@
 // List view to display a collection as a list (table w/ sorting and paging).
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2023 Olivier Giulieri
+// (c) 2026 Olivier Giulieri
 
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";

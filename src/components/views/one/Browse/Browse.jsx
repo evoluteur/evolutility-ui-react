@@ -3,7 +3,7 @@
 // Read-only view to browse one record.
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2023 Olivier Giulieri
+// (c) 2026 Olivier Giulieri
 
 // #region ---------------- Imports ----------------
 import React from "react";

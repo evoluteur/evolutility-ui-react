@@ -1,6 +1,6 @@
 // Evolutility-UI-React
 // access to data via GraphQL API (using Hasura)
-// (c) 2023 Olivier Giulieri
+// (c) 2026 Olivier Giulieri
 
 import config from "config.js";
 import { i18n_errors } from "i18n/i18n";

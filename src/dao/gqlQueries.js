@@ -2,7 +2,7 @@
     Evolutility-UI-React GraphQL query generation
 
     https://github.com/evoluteur/evolutility-ui-react
-    (c) 2023 Olivier Giulieri
+    (c) 2026 Olivier Giulieri
 */
 
 //#region  ----- Helpers functions for GraphQL

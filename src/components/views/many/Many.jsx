@@ -5,7 +5,7 @@
 	Super-class for most Views for Many (List, Cards but not Charts).
 
 	https://github.com/evoluteur/evolutility-ui-react
-	(c) 2023 Olivier Giulieri
+	(c) 2026 Olivier Giulieri
 */
 
 // #region ---------------- Imports ----------------
