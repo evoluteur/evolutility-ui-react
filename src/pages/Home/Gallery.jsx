@@ -1,4 +1,3 @@
-import React from "react";
 import { pixPath } from "utils/format";
 import AliceCarousel from "react-alice-carousel";
 import { viewDoc } from "pages/Docs/docMetadata";

@@ -1,6 +1,5 @@
 // - Wrapper for @nivo ResponsivePie
 
-import React from "react";
 import { ResponsivePie } from "@nivo/pie";
 import chartPropTypes from "./chartProps";
 import { colors, labelColor, innerLabelColor } from "./chartOptions";

@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 
 import TableBody from "components/views/many/shared/TableBody/TableBody";

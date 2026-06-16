@@ -1,12 +1,10 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/anchor-has-content */
 /*
   Evolutility-UI-React
   https://github.com/evoluteur/evolutility-ui-react
   (c) 2026 Olivier Giulieri
 */
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProjectBadges from "./components/ProjectBadges";
 import { docMenus } from "components/shell/SideBar/appMenus";

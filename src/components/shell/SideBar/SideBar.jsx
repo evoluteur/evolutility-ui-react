@@ -1,7 +1,6 @@
-import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import classnames from "classnames";
-import Icon from "react-crud-icons";
+import Icon from "components/widgets/Icon/Icon";
 import { i18n_nav } from "i18n/i18n";
 import { demosMenu, docMenus } from "./appMenus";
 import { evoPath, pixPath } from "utils/format";
@@ -42,7 +41,7 @@ const SideBar = ({ onClickToggle }) => {
         menu.text,
         `/${evoPath}/${menu.id}/${menu.defaultViewMany || "list"}`,
         pixPath + menu.icon,
-        "e-icon"
+        "e-icon",
       )}
       <ShortCuts entity={menu.id} />
     </li>

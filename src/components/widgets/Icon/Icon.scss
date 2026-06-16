@@ -1,0 +1,195 @@
+/*
+    React-CRUD-Icons
+    https://github.com/evoluteur/react-crud-icons
+    (c) 2026 Olivier Giulieri
+*/
+
+.crud-icon {
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  cursor: pointer;
+  &.disabled {
+    cursor: default;
+  }
+  > svg {
+    position: relative;
+    top: -1px;
+  }
+  > div {
+    z-index: 300;
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    padding: 4px 7px 3px;
+    top: 34px;
+    left: 0;
+    color: white;
+    background-color: grey;
+    border-radius: 3px;
+    font-size: 12px;
+    font-style: normal;
+  }
+  &:hover {
+    transition: background-color 0.2s linear 0.1s;
+    > div {
+      opacity: 1;
+      visibility: visible;
+      transition:
+        opacity 0.3s linear 0.3s,
+        visibility 0s linear 0.3s;
+    }
+  }
+  &.dark {
+    &.disabled {
+      > svg {
+        fill: silver;
+      }
+    }
+    > svg {
+      fill: #fafafa;
+    }
+    &:focus,
+    &:hover:not(.disabled) {
+      background-color: #616161; // #424242;
+    }
+  }
+  &.light {
+    &.disabled {
+      > svg {
+        fill: silver;
+      }
+    }
+    > svg {
+      fill: #424242;
+    }
+    &:focus,
+    &:hover:not(.disabled) {
+      background-color: #eeeeee;
+      > div {
+        visibility: visible;
+      }
+    }
+  }
+  @mixin square($heightAndWidth) {
+    height: $heightAndWidth;
+    width: $heightAndWidth;
+  }
+  &.tiny {
+    @include square(28px);
+    padding: 8px;
+    > svg {
+      @include square(12px);
+      top: -4px;
+    }
+    > div {
+      top: 30px;
+    }
+  }
+  &.small {
+    @include square(38px);
+    > svg {
+      @include square(18px);
+    }
+    > div {
+      top: 40px;
+    }
+  }
+  &.medium {
+    @include square(46px);
+    > svg {
+      @include square(26px);
+    }
+    > div {
+      top: 46px;
+    }
+  }
+  &.large {
+    @include square(62px);
+    > svg {
+      @include square(42px);
+    }
+    > div {
+      top: 60px;
+    }
+  }
+  &.big {
+    @include square(100px);
+    > svg {
+      @include square(80px);
+    }
+    > div {
+      top: 94px;
+    }
+  }
+  &.huge {
+    @include square(140px);
+    > svg {
+      @include square(120px);
+    }
+    > div {
+      top: 138px;
+      left: 10px;
+    }
+  }
+
+  &.red > svg {
+    fill: #f44336;
+  }
+  &.pink > svg {
+    fill: #e91e63;
+  }
+  &.purple > svg {
+    fill: #9c27b0;
+  }
+  &.deeppurple > svg {
+    fill: #673ab7;
+  }
+  &.indigo > svg {
+    fill: #3f51b5;
+  }
+  &.blue > svg {
+    fill: #2196f3;
+  }
+  &.lightblue > svg {
+    fill: #03a9f4;
+  }
+  &.cyan > svg {
+    fill: #00bcd4;
+  }
+  &.teal > svg {
+    fill: #009688;
+  }
+  &.green > svg {
+    fill: #4caf50;
+  }
+  &.lightgreen > svg {
+    fill: #8bc34a;
+  }
+  &.lime > svg {
+    fill: #cddc39;
+  }
+  &.yellow > svg {
+    fill: #ffeb3b;
+  }
+  &.amber > svg {
+    fill: #ffc107;
+  }
+  &.orange > svg {
+    fill: #ff9800;
+  }
+  &.deeporange > svg {
+    fill: #ff5722;
+  }
+  &.brown > svg {
+    fill: #795548;
+  }
+  &.grey > svg {
+    fill: #9e9e9e;
+  }
+  &.bluegrey > svg {
+    fill: #607d8b;
+  }
+}

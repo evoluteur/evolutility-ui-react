@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import Icon from "react-crud-icons";
+import Icon from "components/widgets/Icon/Icon";
 import {
   pixPath,
   filesUrl,

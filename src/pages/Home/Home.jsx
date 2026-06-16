@@ -4,7 +4,7 @@
   (c) 2026 Olivier Giulieri
 */
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import pkg from "../../../package.json";
 import { pixPath } from "utils/format";

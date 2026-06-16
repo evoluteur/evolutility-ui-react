@@ -1,6 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/anchor-has-content */
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import "./Doc.scss";
 

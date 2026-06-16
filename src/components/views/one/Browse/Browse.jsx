@@ -6,7 +6,6 @@
 // (c) 2026 Olivier Giulieri
 
 // #region ---------------- Imports ----------------
-import React from "react";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import modelPropType from "components/views/modelPropTypes";

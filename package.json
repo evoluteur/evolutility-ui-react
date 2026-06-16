@@ -11,8 +11,8 @@
   "author": "Olivier Giulieri (https://evoluteur.github.io/)",
   "license": "AGPL-3.0",
   "engines": {
-    "node": "v20.9.0",
-    "npm": "10.1.0"
+    "node": ">=20.9.0",
+    "npm": ">=10.1.0"
   },
   "dependencies": {
     "@nivo/bar": "^0.99.0",
@@ -26,7 +26,6 @@
     "rc-tooltip": "^6.4.0",
     "react": "^19.2.7",
     "react-alice-carousel": "^2.9.1",
-    "react-crud-icons": "^1.2.3",
     "react-datepicker": "^9.1.0",
     "react-dom": "^19.2.7",
     "react-dropzone": "^15.0.0",
@@ -41,12 +40,14 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
+    "@eslint/js": "^9.39.4",
     "@vitejs/plugin-react": "^6.0.2",
-    "eslint": "^8.57.1",
-    "eslint-config-prettier": "^9.1.2",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.6.0",
     "jsdom": "^29.1.1",
     "prettier": "^3.8.4",
     "sass": "^1.101.0",

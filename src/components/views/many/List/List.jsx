@@ -9,7 +9,7 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import modelPropType from "components/views/modelPropTypes";
-import Icon from "react-crud-icons";
+import Icon from "components/widgets/Icon/Icon";
 import Alert from "components/widgets/Alert/Alert";
 import TableBody from "../shared/TableBody/TableBody";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import modelPropTypes from "components/views/modelPropTypes";
 import Alert from "components/widgets/Alert/Alert";

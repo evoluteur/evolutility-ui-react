@@ -7,7 +7,7 @@
 
 import React, { memo } from "react";
 import PropTypes from "prop-types";
-import Icon from "react-crud-icons";
+import Icon from "components/widgets/Icon/Icon";
 import { Link } from "react-router-dom";
 import { getModel } from "utils/moMa";
 import { pixPath } from "utils/format";

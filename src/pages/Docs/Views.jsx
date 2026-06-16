@@ -1,8 +1,6 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/anchor-has-content */
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { pixPath } from "utils/format";
-import Icon from "react-crud-icons";
+import Icon from "components/widgets/Icon/Icon";
 import { viewDoc } from "./docMetadata";
 
 import "./Doc.scss";

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { i18n_404 as i18n } from "i18n/i18n";
 import Button from "components/widgets/Button/Button";
 

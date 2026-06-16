@@ -1,7 +1,6 @@
 // #region ---------------- Imports ----------------
-import React from "react";
 import { Link } from "react-router-dom";
-import Icon from "react-crud-icons";
+import Icon from "components/widgets/Icon/Icon";
 import config from "config";
 import { pixPath } from "utils/format";
 import { getModel } from "utils/moMa";

@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { i18n_nav } from "i18n/i18n";
 

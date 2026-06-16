@@ -5,12 +5,12 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2026 Olivier Giulieri
 
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
-import Icon from "react-crud-icons";
+import Icon from "components/widgets/Icon/Icon";
 import { isFunction } from "underscore";
 import { evoPath, capitalize } from "utils/format";
 import { deleteOne } from "dao/dao";

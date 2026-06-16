@@ -6,7 +6,7 @@
   (c) 2026 Olivier Giulieri
 */
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import SampleModel from "./components/SampleModel";
 
 import "./Doc.scss";

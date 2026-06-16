@@ -1,5 +1,4 @@
 // Routes for Evolutility views
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Doc from "pages/Docs/Doc";

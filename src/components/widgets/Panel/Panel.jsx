@@ -7,7 +7,7 @@
 
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Icon from "react-crud-icons";
+import Icon from "components/widgets/Icon/Icon";
 import classnames from "classnames";
 
 import "./Panel.scss";

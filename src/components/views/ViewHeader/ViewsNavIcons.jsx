@@ -1,7 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import Icon from "react-crud-icons";
+import Icon from "components/widgets/Icon/Icon";
 import { getModel } from "utils/moMa";
 import { views, modelViewsAnalytics } from "utils/dicoViews";
 

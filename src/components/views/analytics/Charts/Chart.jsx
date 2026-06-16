@@ -10,7 +10,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { isFunction } from "underscore";
-import Icon from "react-crud-icons";
+import Icon from "components/widgets/Icon/Icon";
 import { i18n_charts, i18n_actions, i18n_errors } from "i18n/i18n";
 import Alert from "components/widgets/Alert/Alert";
 import { getChart } from "dao/dao";
