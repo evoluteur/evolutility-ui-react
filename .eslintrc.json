@@ -1,27 +1,34 @@
 {
-  "extends": ["react-app", "react-app/jest", "prettier"],
-  "plugins": ["prettier"],
-  "parser":"@babel/eslint-parser",
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "paths": ["src"]
-      }
+  "env": {
+    "browser": true,
+    "es2020": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "prettier"
+  ],
+  "plugins": ["react", "react-hooks", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
     }
   },
-  "parserOptions": {
-    "babelOptions": {
-      "presets": [
-        ["babel-preset-react-app", false],
-        "babel-preset-react-app/prod"
-      ]
+  "settings": {
+    "react": {
+      "version": "detect"
     }
   },
   "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/display-name": "off",
     "react/jsx-props-no-spreading": "off",
-    "camelcase": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-    "react/no-unescaped-entities": "off"
+    "react/no-unescaped-entities": "off",
+    "camelcase": 0
   }
 }

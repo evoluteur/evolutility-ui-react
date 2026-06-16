@@ -21,8 +21,7 @@ import DemoRoutes from "routes/DemoRoutes";
 
 import "./App.scss";
 import "./App-custom.scss";
-import "react-crud-icons/src/Icon.scss";
-import "react-toastify/scss/main.scss";
+import "react-toastify/ReactToastify.css";
 import "rc-tooltip/assets/bootstrap_white.css";
 import "components/widgets/Modal.scss";
 import "components/widgets/global.scss";

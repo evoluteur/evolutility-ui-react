@@ -2,10 +2,10 @@
 // access to data via GraphQL API (using Hasura)
 // (c) 2026 Olivier Giulieri
 
-import config from "config.js";
+import config from "config";
 import { i18n_errors } from "i18n/i18n";
 import { getModel } from "utils/moMa";
-import { decimalString } from "utils/format.js";
+import { decimalString } from "utils/format";
 import { fieldIsText, fieldTypes as ft } from "utils/dico.js";
 import {
   qOne,

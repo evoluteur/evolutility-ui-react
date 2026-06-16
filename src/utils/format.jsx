@@ -3,7 +3,7 @@
 // Helpers for string, numbers, and date formats
 
 // https://github.com/evoluteur/evolutility-ui-react
-// (c) 2023 Olivier Giulieri
+// (c) 2026 Olivier Giulieri
 
 import React from "react";
 import numeral from "numeral";
@@ -27,7 +27,7 @@ export const pixPath = baseName + "pix/";
 export const evoPath = "demos";
 
 moment.locale(
-  locale || window.navigator.userLanguage || window.navigator.language
+  locale || window.navigator.userLanguage || window.navigator.language,
 );
 
 const decimalFormat = "0,0.00";

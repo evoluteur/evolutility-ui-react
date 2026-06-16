@@ -16,8 +16,8 @@ const ViewHeader = memo(
       <div className="evo-page-header" data-testid="viewheader">
         <h1 className="page-title">
           <span className="title-txt">{title}</span>
-          {count !== null && <Badge text={count} />}
-          {comments > 0 && (
+          {count && <Badge text={count} />}
+          {comments && (
             <Badge
               text={comments + comments === 1 ? " comment" : " comments"}
             />
