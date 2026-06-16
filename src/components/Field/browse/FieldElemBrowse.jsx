@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import { fieldTypes as ft } from "utils/dico";
 import { image, pixPath, jsonString } from "utils/format";

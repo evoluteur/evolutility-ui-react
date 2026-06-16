@@ -6,7 +6,7 @@
   (c) 2026 Olivier Giulieri
 */
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { modelsArray, getModel } from "utils/moMa";
 import PrettyJSON from "./PrettyJSON";
 

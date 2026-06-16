@@ -1,4 +1,4 @@
-import React, { useCallback, memo } from "react";
+import { useCallback, memo } from "react";
 import PropTypes from "prop-types";
 import Datepicker from "react-datepicker";
 import { trueDate } from "utils/format";

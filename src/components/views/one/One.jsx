@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // #region ---------------- Imports ----------------
-import React, { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { i18n_actions, i18n_msg, i18n_errors } from "i18n/i18n";

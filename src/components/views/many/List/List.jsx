@@ -6,7 +6,7 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2026 Olivier Giulieri
 
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import PropTypes from "prop-types";
 import modelPropType from "components/views/modelPropTypes";
 import Icon from "components/widgets/Icon/Icon";

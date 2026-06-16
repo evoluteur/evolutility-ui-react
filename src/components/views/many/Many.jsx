@@ -9,7 +9,7 @@
 */
 
 // #region ---------------- Imports ----------------
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 
 import { i18n_msg, i18n_errors } from "i18n/i18n";

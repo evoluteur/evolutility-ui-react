@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import Dropzone from "react-dropzone";
 import { toast } from "react-toastify";

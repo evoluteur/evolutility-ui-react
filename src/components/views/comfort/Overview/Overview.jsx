@@ -1,5 +1,5 @@
 // #region ---------------- Imports ----------------
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Icon from "components/widgets/Icon/Icon";
 import { getModel } from "utils/moMa";

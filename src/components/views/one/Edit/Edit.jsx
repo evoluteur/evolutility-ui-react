@@ -7,7 +7,7 @@
 // (c) 2026 Olivier Giulieri
 
 // #region ---------------- Imports ----------------
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import modelPropType from "components/views/modelPropTypes";
 import { useParams } from "react-router-dom";

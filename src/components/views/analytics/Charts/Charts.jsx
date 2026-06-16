@@ -6,7 +6,7 @@
 // (c) 2026 Olivier Giulieri
 
 //#region  ----- Imports ----------------------------
-import React, { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import classnames from "classnames";
 import ErrorBoundary from "components/ErrorBoundary";

@@ -5,7 +5,7 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2026 Olivier Giulieri
 
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import Icon from "components/widgets/Icon/Icon";
 import classnames from "classnames";

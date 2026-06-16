@@ -1,6 +1,6 @@
 // - Wrapper for @nivo ResponsiveBar
 
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import chartPropTypes from "./chartProps";
 import { colors, labelColor, innerLabelColor } from "./chartOptions";
