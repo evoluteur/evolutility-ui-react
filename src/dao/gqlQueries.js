@@ -20,7 +20,6 @@ import {
 import config from "config";
 import { getModel } from "utils/moMa";
 import { dateTZ, timeTZ } from "utils/format";
-import { isObject } from "underscore";
 
 const timestampFields = config.withTimestamp ? " updated_at created_at " : " ";
 
@@ -41,7 +40,7 @@ const prepData = (m, data) => {
         if (v === null || v === "") {
           d += `${fId}: null `;
         } else {
-          if (isObject(v)) {
+          if (v !== null && typeof v === "object") {
             v = JSON.stringify(v);
           }
           v = v.replace(/"([^"]+)":/g, "$1:");

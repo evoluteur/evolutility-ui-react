@@ -11,7 +11,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 import Icon from "components/widgets/Icon/Icon";
-import { isFunction } from "underscore";
 import { evoPath, capitalize } from "utils/format";
 import { deleteOne } from "dao/dao";
 import { i18n_msg, i18n_actions } from "i18n/i18n";
@@ -73,7 +72,7 @@ const ViewActions = ({ entity, id }) => {
   };
 
   const buttonLink = (menu, idOrFun, urlQuery = "") =>
-    isFunction(idOrFun) ? (
+    typeof idOrFun === "function" ? (
       <span key={menu.icon} onClick={idOrFun}>
         <Icon name={menu.icon} tooltip={menu.label} theme="dark" />
       </span>

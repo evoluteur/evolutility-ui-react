@@ -4,7 +4,6 @@
 // (c) 2026 Olivier Giulieri
 
 // TODO: use Yup instead of this code
-import { isUndefined, isObject, isArray, isDate, isString } from "underscore";
 import { locale, i18n_validation as i18n } from "i18n/i18n";
 import { fieldTypes as ft, fieldIsNumber } from "./dico";
 
@@ -32,17 +31,17 @@ export const validateField = (f, v) => {
       f.required &&
       (v === null ||
         v === "" ||
-        isUndefined(v) ||
+        v === undefined ||
         (isNumberField && isNaN(v)) ||
         (f.type === ft.lov && !v.id) ||
         (f.type === ft.list && v && !v.length)) //||
       //(f.type===ft.color && v==='#000000')
     ) {
       return formatMsg(i18n.empty);
-    } else if (!isUndefined(v)) {
+    } else if (v !== undefined) {
       // Check field type
       if (!(isNaN(v) && isNumberField)) {
-        if (v !== null && v !== "" && !isArray(v)) {
+        if (v !== null && v !== "" && !Array.isArray(v)) {
           switch (f.type) {
             case ft.int:
             case ft.email:
@@ -60,20 +59,20 @@ export const validateField = (f, v) => {
               break;
             case ft.date:
             case ft.time:
-              if (v !== "" && !isDate(new Date(v))) {
+              if (v !== "" && !(new Date(v) instanceof Date)) {
                 return formatMsg(i18n[f.type]);
               }
               break;
             case ft.json:
               let obj;
-              if (isObject(v)) {
+              if (v !== null && typeof v === "object") {
                 obj = v;
               } else {
                 try {
                   obj = JSON.parse(v);
                 } catch (err) {}
               }
-              if (isUndefined(obj)) {
+              if (obj === undefined) {
                 return formatMsg(i18n[f.type]);
               }
               break;
@@ -85,7 +84,7 @@ export const validateField = (f, v) => {
       }
 
       // Check regexp
-      if (f.regExp !== null && !isUndefined(f.regExp)) {
+      if (f.regExp !== null && f.regExp !== undefined) {
         const rg = new RegExp(f.regExp);
         if (!v.match(rg)) {
           return formatMsg(i18n.regExp, fieldLabel(f));
@@ -117,7 +116,7 @@ export const validateField = (f, v) => {
     }
 
     // Check minLength and maxLength
-    if (isString(v) && !isNumberField) {
+    if (typeof v === "string" && !isNumberField) {
       const len = v.length,
         badMax = f.maxLength ? len > f.maxLength : false,
         badMin = f.minLength ? len < f.minLength : false;
