@@ -233,7 +233,7 @@ export const fieldMeta = {
     {
       id: "format",
       description:
-        "Field format (using moment for date values and numeral for  numeric values).",
+        "Field format (using dayjs for date values and Intl.NumberFormat for numeric values).",
       ui: true,
       db: false,
     },

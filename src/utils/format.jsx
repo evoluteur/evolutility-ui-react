@@ -5,7 +5,6 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2026 Olivier Giulieri
 
-import numeral from "numeral";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -33,14 +32,16 @@ dayjs.locale(
   locale || window.navigator.userLanguage || window.navigator.language,
 );
 
-const decimalFormat = "0,0.00";
-const integerFormat = "0,0";
-const moneyFormat = "$0,0.00";
-
-const typeFormats = {
-  decimal: decimalFormat,
-  integer: integerFormat,
-  money: moneyFormat,
+const _locale = locale || undefined;
+const numFormatters = {
+  integer:   new Intl.NumberFormat(_locale, { maximumFractionDigits: 0 }),
+  decimal:   new Intl.NumberFormat(_locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+  money:     new Intl.NumberFormat(_locale, { style: "currency", currency: "USD" }),
+  // legacy numeral format strings used in field definitions
+  "0,0":     new Intl.NumberFormat(_locale, { maximumFractionDigits: 0 }),
+  "0,0.00":  new Intl.NumberFormat(_locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+  "$0,0.00": new Intl.NumberFormat(_locale, { style: "currency", currency: "USD" }),
+  "0000":    new Intl.NumberFormat(_locale, { minimumIntegerDigits: 4, useGrouping: false, maximumFractionDigits: 0 }),
 };
 
 const offSet = new Date().getTimezoneOffset();
@@ -73,7 +74,7 @@ export const nullOrUndefined = (v) => v === null || v === undefined;
 const mFormat = (d, format) =>
   nullOrUndefined(d) ? "" : dayjs(d).format(format);
 export const numFormat = (d, format) =>
-  nullOrUndefined(d) ? "" : numeral(d).format(format);
+  nullOrUndefined(d) ? "" : (numFormatters[format] ?? numFormatters.integer).format(d);
 
 // --- date formats ---
 export const trueDate = (d) => {
@@ -100,17 +101,16 @@ export const datetimeString = (d) => mFormat(d, "L hh:mm A");
 export const image = (d) =>
   d === null ? null : <img src={d} className="img-thumbnail" alt="" />;
 
-//const intFormatter = new Intl.NumberFormat(locale);
-export const integerString = (d) => numFormat(d, integerFormat);
-export const decimalString = (d) => numFormat(d, decimalFormat);
-export const moneyString = (d) => numFormat(d, moneyFormat);
+export const integerString = (d) => nullOrUndefined(d) ? "" : numFormatters.integer.format(d);
+export const decimalString = (d) => nullOrUndefined(d) ? "" : numFormatters.decimal.format(d);
+export const moneyString = (d) => nullOrUndefined(d) ? "" : numFormatters.money.format(d);
 export const jsonString = (value) =>
   value !== null && typeof value === "object"
     ? JSON.stringify(value, null, 2)
     : value || "";
 
 export const numFieldValue = (f, value) =>
-  numFormat(value, f.format ? f.format : typeFormats[f.type] || null);
+  numFormat(value, f.format || f.type);
 
 export const capitalize = (word) => {
   // TODO: maybe use _.string.capitalize(word);

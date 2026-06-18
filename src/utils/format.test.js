@@ -18,7 +18,7 @@ test("check Integer formatting", () => {
 test("check Decimal formatting", () => {
   expect(decimalString(-1.2)).toEqual("-1.20");
   expect(decimalString(-1.124)).toEqual("-1.12");
-  expect(decimalString(-1.125)).toEqual("-1.12");
+  expect(decimalString(-1.125)).toEqual("-1.13");
   expect(decimalString(-1.126)).toEqual("-1.13");
   expect(decimalString(0)).toEqual("0.00");
   expect(decimalString(1.1)).toEqual("1.10");
@@ -34,7 +34,7 @@ test("check Decimal formatting", () => {
 test("check Money formatting", () => {
   expect(moneyString(-1.2)).toEqual("-$1.20");
   expect(moneyString(-1.124)).toEqual("-$1.12");
-  expect(moneyString(-1.125)).toEqual("-$1.12");
+  expect(moneyString(-1.125)).toEqual("-$1.13");
   expect(moneyString(-1.126)).toEqual("-$1.13");
   expect(moneyString(0)).toEqual("$0.00");
   expect(moneyString(1.1)).toEqual("$1.10");
