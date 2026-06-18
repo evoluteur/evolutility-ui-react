@@ -30,6 +30,7 @@
     "react-datepicker": "^9.1.0",
     "react-dom": "^19.2.7",
     "react-dropzone": "^15.0.0",
+    "react-error-boundary": "^6.1.2",
     "react-modal": "^3.16.3",
     "react-router-dom": "^7.17.0",
     "react-toastify": "^11.1.0",
