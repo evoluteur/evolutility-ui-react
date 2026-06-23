@@ -251,7 +251,7 @@ export const fieldMeta = {
     //   db: false,
     // },
     {
-      id: "noFilter",
+      id: "noFilters",
       description:
         'Exclude field from filters (only applies to fields of type integer, decimal, money, boolean, list of values which are "chartable").',
       ui: true,

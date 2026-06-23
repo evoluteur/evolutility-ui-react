@@ -70,7 +70,7 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
       }
       onFieldChange(fid, v);
     },
-    [entity, invalids, onFieldChange]
+    [entity, invalids, onFieldChange],
   );
 
   const linkCancel = `../${entity}/${isNew ? "list" : "browse/" + id}`;
@@ -81,6 +81,7 @@ const Edit = ({ entity, model, data, onFieldChange, onSave, onCancel }) => {
         <Field
           key={f.id}
           fieldDef={f}
+          label={f.labelEdit || f.label}
           value={data?.[f.id]}
           data={data}
           onChange={fieldChange}
