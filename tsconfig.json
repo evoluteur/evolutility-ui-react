@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "jsx": "react-jsx",
+    "types": ["vitest/globals", "node"],
+
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+
+    "skipLibCheck": true,
+    "allowJs": false,
+    "noEmit": true,
+
+    "paths": {
+      "config": ["./src/config.ts"],
+      "utils/*": ["./src/utils/*"],
+      "components/*": ["./src/components/*"],
+      "pages/*": ["./src/pages/*"],
+      "routes/*": ["./src/routes/*"],
+      "i18n/*": ["./src/i18n/*"],
+      "models/*": ["./src/models/*"],
+      "dao/*": ["./src/dao/*"],
+      "types/*": ["./src/types/*"],
+      "react-crud-icons": ["./src/components/widgets/Icon/Icon.tsx"]
+    }
+  },
+  "include": ["src", "vite.config.ts"],
+  "exclude": ["node_modules", "dist", "coverage"]
+}

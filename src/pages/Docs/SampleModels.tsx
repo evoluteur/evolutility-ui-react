@@ -1,0 +1,31 @@
+/*
+  Evolutility-UI-React
+  https://github.com/evoluteur/evolutility-ui-react
+  (c) 2026 Olivier Giulieri
+*/
+
+import { useEffect } from "react";
+import SampleModel from "./components/SampleModel";
+
+import "./Doc.scss";
+
+const SampleModels = () => {
+  useEffect(() => {
+    document.title = "Doc > Sample Models";
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="evo-doc-metamodel">
+      <h1>Sample Models</h1>
+
+      <section>
+        <p>Here are the models behind the demos on this site.</p>
+
+        <SampleModel />
+      </section>
+    </div>
+  );
+};
+
+export default SampleModels;
