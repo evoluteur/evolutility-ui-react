@@ -1,0 +1,80 @@
+// Evolutility-UI-React :: /widgets/Modal/Modal.scss
+
+@import "variables";
+
+.evo-modal {
+  width: 600px;
+  max-width: calc(100vw - 20px);
+  max-height: calc(100vh - 60px);
+  padding: 0;
+  overflow: hidden auto;
+  background-color: #fff;
+  border: $border;
+  border-radius: $radius;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-content {
+    position: relative;
+  }
+
+  .modal-header {
+    position: relative;
+    padding: 15px;
+    border-bottom: $border;
+  }
+
+  .modal-title {
+    margin: 0;
+    padding-right: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.428571429;
+  }
+
+  .modal-body {
+    padding: 15px;
+  }
+
+  .modal-footer {
+    padding: 15px;
+    text-align: right;
+    border-top: $border;
+
+    .btn + .btn {
+      margin-bottom: 0;
+      margin-left: 5px;
+    }
+  }
+
+  .close {
+    position: absolute;
+    top: 13px;
+    right: 15px;
+    padding: 0;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    appearance: none;
+    opacity: 0.6;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      opacity: 1;
+    }
+  }
+}
+
+// - no scrolling behind an open modal
+body:has(dialog.evo-modal[open]) {
+  overflow: hidden;
+}

@@ -7,7 +7,7 @@
 
 import { useState, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Modal from "react-modal";
+import Modal from "components/widgets/Modal/Modal";
 import { toast } from "react-toastify";
 import Icon from "components/widgets/Icon/Icon";
 import { evoPath, capitalize } from "utils/format";
@@ -121,53 +121,24 @@ const ViewActions = ({ entity, id }: ViewActionsProps) => {
   }
 
   if (m) {
-    const delModal = deleteConfirmation && (
+    const delModal = (
       <Modal
-        className="modal-dialog"
-        ariaHideApp={false}
         isOpen={deleteConfirmation}
-        onRequestClose={closeModal}
-        style={{
-          content: {
-            position: "absolute",
-            top: "20%",
-            left: "calc(50% - 150px)",
-            width: "360px",
-          },
-        }}
+        onClose={closeModal}
+        title={i18n_msg.delete.replace("{0}", m.name)}
+        width={360}
+        footer={
+          <>
+            <Button
+              onClick={closeModal}
+              type="default"
+              label={i18n_actions.cancel}
+            />
+            <Button onClick={onDelete} type="primary" label={i18n_actions.ok} />
+          </>
+        }
       >
-        <div>
-          <div className="modal-content">
-            <div className="modal-header">
-              <button
-                onClick={closeModal}
-                className="close"
-                data-dismiss="modal"
-                aria-hidden="true"
-              >
-                ×
-              </button>
-              <h4 className="modal-title">
-                {i18n_msg.delete.replace("{0}", m.name)}
-              </h4>
-            </div>
-            <div className="modal-body">
-              {i18n_msg.deleteConfirmation.replace("{0}", m.name)}
-            </div>
-            <div className="modal-footer">
-              <Button
-                onClick={closeModal}
-                type="default"
-                label={i18n_actions.cancel}
-              />
-              <Button
-                onClick={onDelete}
-                type="primary"
-                label={i18n_actions.ok}
-              />
-            </div>
-          </div>
-        </div>
+        {i18n_msg.deleteConfirmation.replace("{0}", m.name)}
       </Modal>
     );
 
