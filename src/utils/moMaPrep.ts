@@ -58,7 +58,6 @@ export const prepModel = (m: ModelInput): Model => {
       ];
     }
     // - Model ---------------------------
-    model.qid = model.qid || model.id;
     if (!model.title) {
       model.title = capitalize(model.namePlural || model.name);
     }

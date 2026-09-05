@@ -7,7 +7,6 @@ import type { ModelInput } from "types/model";
 
 const model: ModelInput = {
   id: "winecellar",
-  qid: "wine",
   title: "Wine cellar",
   world: "demos",
   name: "wine",

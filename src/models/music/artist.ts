@@ -7,7 +7,6 @@ import type { ModelInput } from "types/model";
 
 const modelArtist: ModelInput = {
   id: "artist",
-  qid: "music_artist",
   title: "Artists",
   world: "music",
   name: "artist",
@@ -79,6 +78,7 @@ const modelArtist: ModelInput = {
     },
   ],
   noCharts: true,
+  noStats: true,
 };
 
 export default modelArtist;

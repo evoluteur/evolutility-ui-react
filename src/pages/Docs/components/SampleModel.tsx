@@ -23,9 +23,6 @@ const unPrepModel = (m: Model | null): Record<string, unknown> => {
   if (!(m2.collections as unknown[] | undefined)?.length) {
     delete m2.collections;
   }
-  if (m2.qid === m2.id) {
-    delete m2.qid;
-  }
   return m2;
 };
 

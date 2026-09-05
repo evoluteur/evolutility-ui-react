@@ -7,7 +7,6 @@ import type { ModelInput } from "types/model";
 
 const modelTrack: ModelInput = {
   id: "track",
-  qid: "music_track",
   title: "Tracks",
   world: "music",
   name: "track",
@@ -97,6 +96,7 @@ const modelTrack: ModelInput = {
       inSearch: true,
     },
   ],
+  noStats: true,
 };
 
 export default modelTrack;

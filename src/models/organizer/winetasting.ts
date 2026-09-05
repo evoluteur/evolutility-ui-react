@@ -6,7 +6,6 @@
 import type { ModelInput } from "types/model";
 
 const model: ModelInput = {
-  qid: "wine_tasting",
   id: "winetasting",
   title: "Wine tastings",
   world: "demos",
@@ -84,6 +83,7 @@ const model: ModelInput = {
     },
   ],
   collections: [],
+  noStats: true,
 };
 
 export default model;

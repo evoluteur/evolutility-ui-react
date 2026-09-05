@@ -103,7 +103,6 @@ export interface Collection {
 
 export interface Model {
   id: string;
-  qid?: string;
   title?: string;
   world?: string;
   name: string;

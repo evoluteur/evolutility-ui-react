@@ -7,7 +7,6 @@ import type { ModelInput } from "types/model";
 
 const model: ModelInput = {
   id: "todo",
-  qid: "task",
   title: "To-Do List",
   world: "demos",
   name: "task",
@@ -134,6 +133,7 @@ const model: ModelInput = {
       fields: ["description"],
     },
   ],
+  noStats: true,
 };
 
 export default model;

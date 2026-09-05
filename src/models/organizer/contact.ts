@@ -214,6 +214,7 @@ const model: ModelInput = {
     },
   ],
   collections: [],
+  noStats: true,
 };
 
 export default model;

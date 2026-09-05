@@ -7,7 +7,6 @@ import type { ModelInput } from "types/model";
 
 const modelAlbum: ModelInput = {
   id: "album",
-  qid: "music_album",
   title: "Albums",
   world: "music",
   name: "album",
@@ -93,6 +92,7 @@ const modelAlbum: ModelInput = {
       fields: ["name", "genre", "length"],
     },
   ],
+  noStats: true,
 };
 
 export default modelAlbum;
