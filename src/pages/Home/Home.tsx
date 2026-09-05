@@ -67,10 +67,9 @@ const Home = () => {
           generated at run-time from a single model. No hand-coding necessary!
         </div>
       </section>
-      <div className="text-center tech-logos">
-        <a href="https://reactjs.org/" target="react" rel="noopener noreferrer">
-          <img src={logoPath + "react.png"} alt="React" />
-        </a>
+      <div>
+        <br />
+        For the backend, use{" "}
         <a
           href="https://github.com/evoluteur/evolutility-server-node"
           target="evol-server"
@@ -79,6 +78,7 @@ const Home = () => {
         >
           Evolutility REST API
         </a>
+        .
       </div>
       <div>
         <br />
