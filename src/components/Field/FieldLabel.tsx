@@ -1,6 +1,6 @@
 import { memo } from "react";
 import Tooltip from "rc-tooltip";
-import Icon from "components/widgets/Icon/Icon";
+import Icon from "components/ui/Icon/Icon";
 import type { Field } from "types/model";
 
 import "./FieldLabel.scss";

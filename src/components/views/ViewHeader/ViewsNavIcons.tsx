@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Icon from "components/widgets/Icon/Icon";
+import Icon from "components/ui/Icon/Icon";
 import { getModel } from "utils/moMa";
 import { views, modelViewsAnalytics, type ViewInfo } from "utils/dicoViews";
 

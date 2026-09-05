@@ -1,5 +1,5 @@
 import { memo } from "react";
-import Badge from "components/widgets/Badge/Badge";
+import Badge from "components/ui/Badge/Badge";
 import ViewsNavIcons from "./ViewsNavIcons";
 import FilterTags from "./FilterTags";
 

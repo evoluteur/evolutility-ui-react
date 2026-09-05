@@ -9,9 +9,9 @@
 import { useParams } from "react-router-dom";
 import { i18n_actions } from "i18n/i18n";
 import { fieldId2Field } from "utils/dico";
-import Button from "components/widgets/Button/Button";
+import Button from "components/ui/Button/Button";
 import Field from "components/Field/Field";
-import Panel from "components/widgets/Panel/Panel";
+import Panel from "components/ui/Panel/Panel";
 import Collection from "../shared/Collection/Collection";
 import Timestamps from "../shared/Timestamps/Timestamps";
 import type { Field as FieldDef, Model, RecordData } from "types/model";

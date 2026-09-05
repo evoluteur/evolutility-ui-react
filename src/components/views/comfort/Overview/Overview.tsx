@@ -1,7 +1,7 @@
 // #region ---------------- Imports ----------------
 import { useState, useEffect, type ReactNode, type ChangeEvent } from "react";
 import { Link, useParams } from "react-router-dom";
-import Icon from "components/widgets/Icon/Icon";
+import Icon from "components/ui/Icon/Icon";
 import { getModel } from "utils/moMa";
 import { fieldInCharts } from "utils/dico";
 import { views } from "utils/dicoViews";

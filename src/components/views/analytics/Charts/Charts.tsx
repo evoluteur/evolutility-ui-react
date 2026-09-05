@@ -16,7 +16,7 @@ import { fieldInCharts } from "utils/dico";
 import { lcRead } from "utils/localStorage";
 import { capitalize } from "utils/format";
 import ViewHeader from "components/views/ViewHeader/ViewHeader";
-import Alert from "components/widgets/Alert/Alert";
+import Alert from "components/ui/Alert/Alert";
 import Chart from "./Chart";
 import type { ChartType } from "./chartProps";
 import type { Field } from "types/model";

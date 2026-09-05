@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import Icon from "components/widgets/Icon/Icon";
+import Icon from "components/ui/Icon/Icon";
 import logoEvol from "./evologo.png";
 import { views, modelViewsMany } from "utils/dicoViews";
 import { getModel } from "utils/moMa";

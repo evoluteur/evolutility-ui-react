@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import classnames from "classnames";
-import Icon from "components/widgets/Icon/Icon";
+import Icon from "components/ui/Icon/Icon";
 import { i18n_nav } from "i18n/i18n";
 import {
   demosMenu,

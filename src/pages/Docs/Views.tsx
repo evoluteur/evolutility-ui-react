@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { pixPath } from "utils/format";
-import Icon from "components/widgets/Icon/Icon";
+import Icon from "components/ui/Icon/Icon";
 import { viewDoc, type ViewDocItem } from "./docMetadata";
 
 import "./Doc.scss";

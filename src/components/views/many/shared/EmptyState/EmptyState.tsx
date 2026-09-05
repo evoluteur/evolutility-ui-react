@@ -1,5 +1,5 @@
-import Alert from "components/widgets/Alert/Alert";
-import Button from "components/widgets/Button/Button";
+import Alert from "components/ui/Alert/Alert";
+import Button from "components/ui/Button/Button";
 import { i18n_msg as i18n } from "i18n/i18n";
 import type { Model } from "types/model";
 

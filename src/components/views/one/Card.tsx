@@ -6,7 +6,7 @@
 // (c) 2026 Olivier Giulieri
 
 import { memo } from "react";
-import Icon from "components/widgets/Icon/Icon";
+import Icon from "components/ui/Icon/Icon";
 import { Link } from "react-router-dom";
 import { getModel } from "utils/moMa";
 import { pixPath } from "utils/format";

@@ -1,5 +1,5 @@
 import { memo, type ReactNode } from "react";
-import Icon from "components/widgets/Icon/Icon";
+import Icon from "components/ui/Icon/Icon";
 import {
   pixPath,
   filesUrl,

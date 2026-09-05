@@ -7,14 +7,14 @@
 
 import { useState, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Modal from "components/widgets/Modal/Modal";
+import Modal from "components/ui/Modal/Modal";
 import { toast } from "react-toastify";
-import Icon from "components/widgets/Icon/Icon";
+import Icon from "components/ui/Icon/Icon";
 import { evoPath, capitalize } from "utils/format";
 import { useDeleteOne } from "dao/queries";
 import { i18n_msg, i18n_actions } from "i18n/i18n";
 import { getModel } from "utils/moMa";
-import Button from "components/widgets/Button/Button";
+import Button from "components/ui/Button/Button";
 
 interface MenuItem {
   id: string;

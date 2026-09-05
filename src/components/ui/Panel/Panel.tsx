@@ -1,4 +1,4 @@
-// Evolutility-UI-React :: /widget/Panel.tsx
+// Evolutility-UI-React :: /ui/Panel.tsx
 
 // Panel to group fields in views Edit and Browse (styled w/ Bootstrap).
 
@@ -6,7 +6,7 @@
 // (c) 2026 Olivier Giulieri
 
 import { useState, type ReactNode } from "react";
-import Icon from "components/widgets/Icon/Icon";
+import Icon from "components/ui/Icon/Icon";
 import classnames from "classnames";
 
 import "./Panel.scss";

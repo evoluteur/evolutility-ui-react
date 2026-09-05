@@ -19,8 +19,8 @@ import { diffData } from "utils/validation";
 import Edit from "./Edit/Edit";
 import Browse from "./Browse/Browse";
 import ViewHeader from "components/views/ViewHeader/ViewHeader";
-import Alert from "components/widgets/Alert/Alert";
-import Spinner from "components/widgets/Spinner/Spinner";
+import Alert from "components/ui/Alert/Alert";
+import Spinner from "components/ui/Spinner/Spinner";
 import type { Model, RecordData } from "types/model";
 import type { LovsResult } from "types/api";
 

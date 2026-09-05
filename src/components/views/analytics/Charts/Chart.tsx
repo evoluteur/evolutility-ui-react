@@ -8,12 +8,12 @@
 // #region ---------------- Imports ----------------
 import { useState, type MouseEvent } from "react";
 import classnames from "classnames";
-import Icon, { type IconClickHandler } from "components/widgets/Icon/Icon";
+import Icon, { type IconClickHandler } from "components/ui/Icon/Icon";
 import { i18n_charts, i18n_actions, i18n_errors } from "i18n/i18n";
-import Alert from "components/widgets/Alert/Alert";
+import Alert from "components/ui/Alert/Alert";
 import { useChart } from "dao/queries";
 import { lcWrite } from "utils/localStorage";
-import Spinner from "components/widgets/Spinner/Spinner";
+import Spinner from "components/ui/Spinner/Spinner";
 import ChartTable from "./ChartTable";
 import type { ChartSize, ChartType } from "./chartProps";
 import Bars from "./Bars";

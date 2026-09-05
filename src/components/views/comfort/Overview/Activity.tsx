@@ -1,6 +1,6 @@
 // #region ---------------- Imports ----------------
 import { Link } from "react-router-dom";
-import Icon from "components/widgets/Icon/Icon";
+import Icon from "components/ui/Icon/Icon";
 import config from "config";
 import { pixPath } from "utils/format";
 import { getModel } from "utils/moMa";

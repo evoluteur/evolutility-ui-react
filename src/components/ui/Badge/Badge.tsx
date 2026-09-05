@@ -1,5 +1,5 @@
 import "./Badge.scss";
-import "components/widgets/Alert/Alert.scss";
+import "components/ui/Alert/Alert.scss";
 
 export interface BadgeProps {
   /** Badge text */

@@ -7,8 +7,8 @@
 // (c) 2026 Olivier Giulieri
 
 import { useMemo, type MouseEvent } from "react";
-import Icon from "components/widgets/Icon/Icon";
-import Alert from "components/widgets/Alert/Alert";
+import Icon from "components/ui/Icon/Icon";
+import Alert from "components/ui/Alert/Alert";
 import TableBody from "../shared/TableBody/TableBody";
 import type { Field, Model, RecordData } from "types/model";
 

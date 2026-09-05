@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import classnames from "classnames";
 import { i18n_upload as i18n } from "i18n/i18n";
 import config from "config";
-import Button from "components/widgets/Button/Button";
+import Button from "components/ui/Button/Button";
 import type { FieldOnChange } from "types/model";
 
 import "./FieldUpload.scss";

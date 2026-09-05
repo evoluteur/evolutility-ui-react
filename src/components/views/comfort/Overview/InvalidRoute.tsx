@@ -1,6 +1,6 @@
 import { i18n_errors } from "i18n/i18n";
 import ModelLinks from "components/views/comfort/ModelLinks";
-import Alert from "components/widgets/Alert/Alert";
+import Alert from "components/ui/Alert/Alert";
 
 export interface InvalidRouteProps {
   entity?: string;

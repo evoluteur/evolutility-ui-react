@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "react-crud-icons": src("components/widgets/Icon/Icon.tsx"),
+      "react-crud-icons": src("components/ui/Icon/Icon.tsx"),
       "config.js": src("config.ts"),
       config: src("config.ts"),
       utils: src("utils"),

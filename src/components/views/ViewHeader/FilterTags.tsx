@@ -1,5 +1,5 @@
 import { memo, type ReactElement } from "react";
-import Badge from "components/widgets/Badge/Badge";
+import Badge from "components/ui/Badge/Badge";
 
 import "./ViewHeader.scss";
 

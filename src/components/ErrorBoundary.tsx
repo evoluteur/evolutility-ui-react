@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { ErrorBoundary as ReactErrorBoundary } from "react-error-boundary";
-import Alert from "components/widgets/Alert/Alert";
+import Alert from "components/ui/Alert/Alert";
 
 const fallback = (
   <Alert

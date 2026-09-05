@@ -31,7 +31,7 @@
       "models/*": ["./src/models/*"],
       "dao/*": ["./src/dao/*"],
       "types/*": ["./src/types/*"],
-      "react-crud-icons": ["./src/components/widgets/Icon/Icon.tsx"]
+      "react-crud-icons": ["./src/components/ui/Icon/Icon.tsx"]
     }
   },
   "include": ["src", "vite.config.ts"],

@@ -9,7 +9,7 @@ import {
 } from "utils/activity";
 import { getModel } from "utils/moMa";
 import { capitalize, pixPath } from "utils/format";
-import Button from "components/widgets/Button/Button";
+import Button from "components/ui/Button/Button";
 import ViewHeader from "components/views/ViewHeader/ViewHeader";
 
 import "./Activity.scss";

@@ -1,4 +1,4 @@
-// Evolutility-UI-React :: /widgets/Modal/Modal.tsx
+// Evolutility-UI-React :: /ui/Modal/Modal.tsx
 
 // Modal dialog built on the native <dialog> element:
 // the browser provides the top layer (no portal), the backdrop,

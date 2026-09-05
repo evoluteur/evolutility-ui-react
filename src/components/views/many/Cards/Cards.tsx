@@ -9,7 +9,7 @@
 import { useMemo } from "react";
 import { i18n_errors } from "i18n/i18n";
 import Card from "components/views/one/Card";
-import Alert from "components/widgets/Alert/Alert";
+import Alert from "components/ui/Alert/Alert";
 import type { Model, RecordData } from "types/model";
 
 import "./Cards.scss";
