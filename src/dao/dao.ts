@@ -95,8 +95,7 @@ export async function getOne(
   // - the API nests sub-collections in "collections", the views expect them
   //   at the root of the record (one property per collection id)
   const collections = record.collections as
-    | Record<string, RecordData[]>
-    | undefined;
+    Record<string, RecordData[]> | undefined;
   if (collections) {
     delete record.collections;
     model.collections?.forEach((collec: Collection) => {

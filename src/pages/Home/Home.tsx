@@ -7,13 +7,10 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import pkg from "../../../package.json";
-import { pixPath } from "utils/format";
 import ModelLinks from "components/views/comfort/ModelLinks";
 import Gallery from "./Gallery";
 
 import "./Home.scss";
-
-const logoPath = pixPath + "logos/";
 
 const Home = () => {
   useEffect(() => {

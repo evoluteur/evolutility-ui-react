@@ -77,8 +77,7 @@ const Charts = () => {
         field: f,
         title: chartTitle(f),
         chartType: (lcRead(`${m.id}-charts-${f.id}`) || f.chartType) as
-          | ChartType
-          | undefined,
+          ChartType | undefined,
       });
       if (nbCharts === 1) {
         const f = chartFields[0];
