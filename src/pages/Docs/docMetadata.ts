@@ -366,7 +366,7 @@ export const collecMeta: ObjectMeta = {
     {
       id: "id",
       description:
-        "Unique key for the collection, it is the name of the Array relationahip to the sub-collection in Hasura.",
+        "Unique key for the collection, it is the name of the sub-collection returned by the API.",
       ui: true,
       db: true,
     },

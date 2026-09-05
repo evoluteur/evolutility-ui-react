@@ -26,7 +26,7 @@ const Doc = () => {
 
       <section>
         <p>
-          Evolutility is a model-driven UI for GraphQL. With it you can easily
+          Evolutility is a model-driven UI for REST APIs. With it you can easily
           build modern SPAs by writing models rather than code.
         </p>
         <h3 id="table-of-contents">Table of Contents</h3>

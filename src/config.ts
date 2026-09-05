@@ -1,9 +1,8 @@
 /* Evolutility config options */
 
 interface Config {
-  // - Path to GraphQL API
+  // - Path to the REST API
   apiPath: string;
-  adminSecret: string;
 
   // - prefix run app in sub-directory (also define as "homepage" in package.json)
   baseName?: string;
@@ -39,9 +38,8 @@ interface Config {
 }
 
 const config: Config = {
-  // - Path to GraphQL API
-  apiPath: "TODO: ENTER GRAPHQL API PATH HERE",
-  adminSecret: "TODO: ENTER ADMIN SECRET HERE",
+  // - Path to the REST API (evolutility-server-node)
+  apiPath: "http://localhost:2000/api/v1/",
 
   // - prefix run app in sub-directory (also define as "homepage" in package.json)
   // baseName: "/evodemo/",

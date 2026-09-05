@@ -1,34 +1,36 @@
 /*
   Evolutility-UI-React :: types/api.ts
 
-  Types for GraphQL/DAO responses.
+  Types for the REST API and the DAO.
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-import type { RecordData, ChartDatum } from "./model";
+import type { RecordData, ChartDatum, LovListItem } from "./model";
 
-export interface GqlError {
-  message: string;
+// - Query parameters accepted by the REST "list" end-point:
+//   pagination ("page", "pageSize"), sorting ("order" like "title.asc"),
+//   full text search ("search"), and one filter per field ("category=eq.3").
+export interface ManyQueryOptions {
+  page?: number;
+  pageSize?: number;
+  order?: string;
+  search?: string;
+  [fieldId: string]: string | number | undefined;
 }
 
-export interface GqlErrorResult {
-  errors: GqlError[];
-  data?: undefined;
+// - Result of a "list" query (records + total number of records)
+export interface ManyResult {
+  entity: string;
+  rows: RecordData[];
+  // - number of records returned in this page
+  count: number;
+  // - total number of records in the table
+  fullCount: number;
 }
-
-export type ManyResult =
-  | (RecordData[] & {
-      _full_count: number;
-      _filtered_count?: number;
-      _entity: string;
-    })
-  | GqlErrorResult;
 
 export interface ChartResult {
   data: ChartDatum[];
 }
-
-export type ChartResponse = ChartResult | GqlErrorResult;
 
 export type StatsData = Record<string, any>;
 
@@ -36,17 +38,10 @@ export interface StatsResult {
   data: StatsData;
 }
 
-export type StatsResponse = StatsResult | GqlErrorResult;
+// - Lists of values (for dropdowns), keyed by field id
+export type LovsResult = Record<string, LovListItem[]>;
 
-export type OneResult = RecordData | GqlErrorResult;
-
-export type LovsResult = Record<string, LovOption[]> | GqlErrorResult;
-
-// Structural narrowing ("errors" in x) is unreliable against types with an
-// index signature (like the LOVs record), so use an explicit type guard.
-export const isGqlError = (r: unknown): r is GqlErrorResult =>
-  !!r && typeof r === "object" && Array.isArray((r as GqlErrorResult).errors);
-
+// - Single entry of a list of values
 export interface LovOption {
   id: string | number;
   text?: string;
@@ -54,7 +49,4 @@ export interface LovOption {
   icon?: string;
 }
 
-export interface UpsertResult {
-  data?: RecordData | null;
-  errors?: GqlError[];
-}
+export type OneResult = RecordData;

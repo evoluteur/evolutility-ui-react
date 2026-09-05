@@ -1,375 +1,275 @@
-// Evolutility-UI-React
-// access to data via GraphQL API (using Hasura)
-// (c) 2026 Olivier Giulieri
+/*
+  Evolutility-UI-React :: dao/dao.ts
+
+  Access to data via the Evolutility REST API.
+  End-points are described in "src/dao/openapi.json".
+
+  All functions return the data ready for the views, or throw an ApiError.
+  They are consumed through the TanStack Query hooks in "src/dao/queries.ts".
+
+  https://github.com/evoluteur/evolutility-ui-react
+  (c) 2026 Olivier Giulieri
+*/
 
 import config from "config";
 import { i18n_errors } from "i18n/i18n";
 import { getModel } from "utils/moMa";
-import { decimalString } from "utils/format";
-import { fieldIsText, fieldTypes as ft } from "utils/dico";
+import { ApiError, apiUrl, apiGet, apiPost, apiPatch, apiDelete } from "./api";
 import {
-  qOne,
-  qStats,
-  qChart,
-  qDelete,
-  qUpdateOne,
-  qInsertOne,
-  qMany,
-  qLOVs,
-  qObjectSearch,
-  type ManyQueryOptions,
-} from "./gqlQueries";
-import { setCache, getCache, clearCache } from "./cache";
-import type { RecordData, ChartDatum, FieldType } from "types/model";
+  recordToRest,
+  restToChart,
+  restToRecord,
+  restToRecords,
+  restToStats,
+} from "./mapping";
 import type {
-  ChartResponse,
-  GqlErrorResult,
+  ChartDatum,
+  Collection,
+  LovListItem,
+  RecordData,
+} from "types/model";
+import type {
   LovOption,
   LovsResult,
+  ManyQueryOptions,
   ManyResult,
-  OneResult,
-  StatsResponse,
-  UpsertResult,
+  StatsData,
 } from "types/api";
 
-const { apiPath } = config;
+const { pageSize: defaultPageSize } = config;
 
-//#region  ----- Helpers ----------------------------
-const reqHeader: Record<string, string> = {
-  "Content-Type": "application/json",
-  Accept: "application/json",
+const modelOrThrow = (entity: string) => {
+  const model = getModel(entity);
+  if (!model) {
+    throw new ApiError(`Model not found: "${entity}".`, 404);
+  }
+  return model;
 };
-if (config.adminSecret) {
-  reqHeader["X-Hasura-Admin-Secret"] = config.adminSecret;
-}
-
-const gqlOptions = (
-  query: string | null,
-  variables?: Record<string, unknown>,
-): RequestInit => ({
-  method: "POST",
-  headers: reqHeader,
-  body: JSON.stringify({ query, variables }),
-});
-
-const toJSON = (r: Response): Promise<any> => r.json();
-
-const makePromise = <T>(response: T): Promise<T> => {
-  return new Promise((resolve) => {
-    resolve(response);
-  });
-};
-
-const fakeError = (message: string): GqlErrorResult => ({
-  errors: [{ message }],
-});
-//#endregion
 
 //#region  ----- Many ----------------------------
 
+// - get a page of records (filtered, searched, and sorted)
 export async function getMany(
   entity: string,
-  options: ManyQueryOptions | undefined,
+  options?: ManyQueryOptions,
+  signal?: AbortSignal,
 ): Promise<ManyResult> {
-  const cacheKey = entity + JSON.stringify(options);
-  const cacheData = getCache(cacheKey);
-  if (cacheData) {
-    return makePromise(cacheData);
+  const model = modelOrThrow(entity);
+  const rows = await apiGet<RecordData[]>(entity, {
+    params: {
+      ...options,
+      pageSize: options?.pageSize || defaultPageSize,
+    },
+    signal,
+  });
+  return {
+    entity,
+    rows: restToRecords(model.fields, rows),
+    count: rows?.length || 0,
+    // - the API returns the total record count on every row
+    fullCount: rows?.length ? Number(rows[0]._full_count) || rows.length : 0,
+  };
+}
+
+// - url to download all records as a CSV file
+export const getManyCSVUrl = (
+  entity: string,
+  options?: ManyQueryOptions,
+): string => apiUrl(entity, { ...options, format: "csv" });
+//#endregion
+
+//#region  ----- One ----------------------------
+
+// - get a single record by id (w/ its sub-collections)
+export async function getOne(
+  entity: string,
+  id: number,
+  signal?: AbortSignal,
+): Promise<RecordData> {
+  const model = modelOrThrow(entity);
+  const row = await apiGet<RecordData | null>(`${entity}/${id}`, { signal });
+  if (!row) {
+    throw new ApiError(i18n_errors.badId.replace("{0}", String(id)), 404);
   }
-  try {
-    return await fetch(apiPath, gqlOptions(qMany(entity, options)))
-      .then(toJSON)
-      .then((resp) => {
-        if (resp.data?.many) {
-          const data = resp.data.many;
-          data._full_count = resp.data._full_count.aggregate.count;
-          const filteredCount = resp.data._filtered_count?.aggregate.count;
-          if (filteredCount) {
-            data._filtered_count = filteredCount;
-          }
-          data._entity = entity;
-          setCache(cacheKey, data);
-          return data;
-        } else {
-          return resp;
-        }
-      });
-  } catch (err) {
-    return fakeError((err as Error).message + ".");
+  const record = restToRecord(model.fields, row);
+  // - the API nests sub-collections in "collections", the views expect them
+  //   at the root of the record (one property per collection id)
+  const collections = record.collections as
+    | Record<string, RecordData[]>
+    | undefined;
+  if (collections) {
+    delete record.collections;
+    model.collections?.forEach((collec: Collection) => {
+      record[collec.id] = restToRecords(collec.fields, collections[collec.id]);
+    });
   }
+  return record;
+}
+
+// - get one sub-collection of a record (details for master)
+export async function getCollec(
+  entity: string,
+  collecId: string,
+  id: number,
+  signal?: AbortSignal,
+): Promise<RecordData[]> {
+  const model = modelOrThrow(entity);
+  const collec = model.collections?.find((c) => c.id === collecId);
+  const rows = await apiGet<RecordData[]>(`${entity}/collec/${collecId}`, {
+    params: { id },
+    signal,
+  });
+  return restToRecords(collec?.fields, rows);
+}
+
+// - add a record
+export async function insertOne(
+  entity: string,
+  data: RecordData,
+): Promise<RecordData> {
+  const model = modelOrThrow(entity);
+  const row = await apiPost<RecordData>(entity, {
+    body: recordToRest(model, data),
+  });
+  return restToRecord(model.fields, row || {});
+}
+
+// - update a record (only the changed fields are sent)
+// - the API must allow PATCH in its "Access-Control-Allow-Methods" header,
+//   otherwise browsers block the request (PUT hits the same end-point)
+export async function updateOne(
+  entity: string,
+  id: number,
+  data: RecordData,
+): Promise<RecordData> {
+  const model = modelOrThrow(entity);
+  const row = await apiPatch<RecordData>(`${entity}/${id}`, {
+    body: recordToRest(model, data),
+  });
+  return restToRecord(model.fields, row || {});
+}
+
+// - delete a record
+export async function deleteOne(
+  entity: string,
+  id: number,
+): Promise<{ id: number }> {
+  modelOrThrow(entity);
+  return apiDelete<{ id: number }>(`${entity}/${id}`);
+}
+
+// - upload a file (image or document) for a record
+// - the response contains the file name
+export async function uploadOne(
+  entity: string,
+  id: number,
+  field: string,
+  file: File,
+): Promise<{ filename?: string }> {
+  const body = new FormData();
+  body.append(field, file);
+  const response = await fetch(apiUrl(`${entity}/upload/${id}`, { field }), {
+    method: "POST",
+    body,
+  });
+  if (!response.ok) {
+    throw new ApiError(
+      `Upload failed (${response.status} ${response.statusText}).`,
+      response.status,
+    );
+  }
+  return response.json();
+}
+//#endregion
+
+//#region  ----- LOV and Lookup ----------------------------
+
+// - get the list of values of one field
+export async function getLov(
+  entity: string,
+  fieldId: string,
+  search?: string,
+  signal?: AbortSignal,
+): Promise<LovListItem[]> {
+  const rows = await apiGet<LovListItem[]>(`${entity}/lov/${fieldId}`, {
+    params: { search },
+    signal,
+  });
+  return rows || [];
+}
+
+// - get the lists of values of all the "lov" fields without a list in the model
+export async function getLOVs(
+  entity: string,
+  fieldIds: string[],
+  signal?: AbortSignal,
+): Promise<LovsResult> {
+  const lists = await Promise.all(
+    fieldIds.map((fieldId) => getLov(entity, fieldId, undefined, signal)),
+  );
+  const lovs: LovsResult = {};
+  fieldIds.forEach((fieldId, idx) => {
+    lovs[fieldId] = lists[idx];
+  });
+  return lovs;
+}
+
+// - lookup records of an object (for the typeahead of "lov" fields w/ an object)
+export async function getObjectSearch(
+  entity: string,
+  search?: string,
+  signal?: AbortSignal,
+): Promise<LovOption[]> {
+  // - the API uses the model id as field id to search the object itself
+  const rows = await getLov(entity, entity, search, signal);
+  return rows.map((row) => ({
+    id: row.id,
+    name: row.text,
+    icon: row.icon,
+  }));
 }
 //#endregion
 
 //#region  ----- Analytics ----------------------------
 
-const cleanChartData = (
-  data: any,
-  fieldType: FieldType | undefined,
-): { data: ChartDatum[] } => {
-  const d2: ChartDatum[] = [];
-  if (fieldType === ft.lov) {
-    data?.forEach((row: any) => {
-      const c = row.aggregate?.aggregate?.count;
-      if (c > 0) {
-        if (row.name !== "_name") {
-          d2.push({
-            id: row.id,
-            label: row.name,
-            value: c,
-          });
-        }
-      }
-    });
-  }
-  if (fieldType === ft.bool) {
-    const countTrue = data.true.aggregate.count;
-    d2.push(
-      {
-        id: 1,
-        label: "True",
-        value: countTrue,
-      },
-      {
-        id: 0,
-        label: "False",
-        value: data.total.aggregate.count - countTrue,
-      },
-    );
-  }
-  return { data: d2 };
-};
-
+// - get the data of one chart (count of records grouped by field value)
 export async function getChart(
   entity: string,
   fieldId: string,
-): Promise<ChartResponse> {
-  const cacheKey = entity + "-chart-" + fieldId;
-  const cacheData = getCache(cacheKey);
-  if (cacheData) {
-    return makePromise(cacheData);
-  }
-  const m = getModel(entity);
-  try {
-    return await fetch(apiPath, gqlOptions(m && qChart(m, fieldId)))
-      .then(toJSON)
-      .then((resp) => {
-        if (resp.data) {
-          const fieldType = m?.fieldsH[fieldId]?.type;
-          let data = fieldType === "lov" ? resp.data.chart : resp.data;
-          data = cleanChartData(data, fieldType);
-          setCache(cacheKey, data);
-          return data;
-        } else {
-          return resp;
-        }
-      });
-  } catch (err) {
-    return fakeError((err as Error).message + ".");
-  }
+  signal?: AbortSignal,
+): Promise<ChartDatum[]> {
+  modelOrThrow(entity);
+  const rows = await apiGet<RecordData[]>(`${entity}/chart/${fieldId}`, {
+    signal,
+  });
+  return restToChart(rows);
 }
 
-// get entity statistics
-export async function getStats(entity: string): Promise<StatsResponse> {
-  const cacheKey = entity + "-stats";
-  const cacheData = getCache(cacheKey);
-  if (cacheData) {
-    return makePromise(cacheData);
-  }
-  const m = getModel(entity);
-  try {
-    return await fetch(apiPath, gqlOptions(m && qStats(m)))
-      .then(toJSON)
-      .then((resp) => {
-        const data = resp?.data;
-        if (data?.stats && m) {
-          const cleanData: Record<string, any> = {};
-          const oStats = data?.stats?.aggregate || {};
-          m.fields.forEach((f) => {
-            const fid = f.id;
-            const df: Record<string, any> = {
-              nulls: data["nulls_" + fid]?.aggregate?.count,
-            };
-            if (!fieldIsText(f) || f.type === ft.time) {
-              ["min", "max"].forEach((aggreg) => {
-                const v = oStats[aggreg]?.[fid];
-                if (v !== undefined) {
-                  df[aggreg] = v;
-                }
-              });
-              ["avg", "stddev", "variance"].forEach((aggreg) => {
-                const v = oStats[aggreg]?.[fid];
-                if (v !== undefined) {
-                  df[aggreg] = v === 0 ? v : decimalString(v);
-                }
-              });
-            }
-            cleanData[fid] = df;
-          });
-          cleanData.count = oStats.count;
-          const statsData = { data: cleanData };
-          setCache(cacheKey, statsData);
-          return statsData;
-        } else {
-          return resp;
-        }
-      });
-  } catch (err) {
-    return fakeError((err as Error).message + ".");
-  }
+// - get statistics on all the fields of a model
+export async function getStats(
+  entity: string,
+  signal?: AbortSignal,
+): Promise<StatsData> {
+  const model = modelOrThrow(entity);
+  const stats = await apiGet<StatsData>(`${entity}/stats`, { signal });
+  return restToStats(model, stats || {});
 }
 //#endregion
 
-//#region  ----- One ----------------------------
-
-// get a single item by id
-export async function getOne(
-  entity: string,
-  id: number,
-  nextOrPrevious?: "next" | "prev",
-): Promise<OneResult> {
-  try {
-    return await fetch(
-      apiPath,
-      gqlOptions(qOne(entity, nextOrPrevious), { id }),
-    )
-      .then(toJSON)
-      .then((resp) => {
-        if (resp.errors) {
-          return resp;
-        } else if (resp.data?.one === null) {
-          return fakeError(i18n_errors.badId.replace("{0}", String(id)));
-        }
-        const data = resp.data?.one;
-        const m = getModel(entity);
-        if (data && m?._lovNoList) {
-          data._lovs = {};
-          m._lovNoList.forEach((fid) => {
-            data._lovs[fid] = resp.data["lov_" + fid];
-          });
-        }
-        return data;
-      });
-  } catch (err) {
-    return fakeError((err as Error).message + ".");
-  }
-}
-
-// get LOVs (necessary to create new  record)
-export async function getLOVs(entity: string): Promise<LovsResult> {
-  const m = getModel(entity);
-  try {
-    return await fetch(apiPath, gqlOptions(m && qLOVs(m)))
-      .then(toJSON)
-      .then((resp) => {
-        if (resp.errors) {
-          return resp;
-        }
-        const data: Record<string, LovOption[]> = {};
-        m?._lovNoList?.forEach((fid) => (data[fid] = resp.data["lov_" + fid]));
-        return data;
-      });
-  } catch (err) {
-    return fakeError((err as Error).message + ".");
-  }
-}
-
-// delete an item
-export async function deleteOne(entity: string, id: number): Promise<any> {
-  try {
-    return await fetch(apiPath, gqlOptions(qDelete(entity), { id }))
-      .then(toJSON)
-      .then((resp) => {
-        clearCache(entity);
-        return resp;
-      });
-  } catch (err) {
-    return fakeError((err as Error).message + ".");
-  }
-}
-
-// add an item
-export async function insertOne(
-  entity: string,
-  data: RecordData,
-): Promise<UpsertResult> {
-  try {
-    return await fetch(apiPath, gqlOptions(qInsertOne(entity, data)))
-      .then(toJSON)
-      .then((resp) => {
-        if (!resp.errors) {
-          resp.data = resp.data?.inserted.returning.length
-            ? resp.data.inserted.returning[0]
-            : null;
-          clearCache(entity);
-        }
-        return resp;
-      });
-  } catch (err) {
-    return fakeError((err as Error).message + ".");
-  }
-}
-
-// update (replace) an item
-export async function updateOne(
-  entity: string,
-  id: number,
-  data: RecordData,
-): Promise<UpsertResult> {
-  const m = getModel(entity);
-  try {
-    return await fetch(apiPath, gqlOptions(m && qUpdateOne(m.id, data), { id }))
-      .then(toJSON)
-      .then((resp) => {
-        if (!resp.errors) {
-          resp.data = resp.data?.updated.returning.length
-            ? resp.data.updated.returning[0]
-            : null;
-          clearCache(entity);
-        }
-        return resp;
-      });
-  } catch (err) {
-    return fakeError((err as Error).message + ".");
-  }
-}
-
-// upload a data item (doc or image)
-// response value has filename
-// export const uploadOne = (entity, id, field, data) => notImplementedYet();
-
-// get list of values for field
-export async function getObjectSearch(
-  entity: string,
-  search?: string,
-): Promise<LovOption[]> {
-  try {
-    return await fetch(apiPath, gqlOptions(qObjectSearch(entity, search)))
-      .then(toJSON)
-      .then((resp) => {
-        if (resp.errors) {
-          return [{ id: -1, name: "Error in search" }];
-        }
-        return resp.data.lov;
-      });
-  } catch (err) {
-    return [{ id: -1, name: (err as Error).message + "." }];
-  }
-}
-
-// get a collection of sub-items (details for master)
-// getCollec: (entity, collid, id) => axios.get(apiPath + entity + '/collec/'+ collid + '?id=' + id + '&pageSize=' + pageSize),
-
-//#endregion
-
-const daoGraphQL = {
-  getOne,
-  deleteOne,
-  updateOne,
-  // uploadOne,
-  getObjectSearch,
+const dao = {
   getMany,
-  getStats,
+  getManyCSVUrl,
+  getOne,
+  getCollec,
+  insertOne,
+  updateOne,
+  deleteOne,
+  uploadOne,
+  getLov,
+  getLOVs,
+  getObjectSearch,
   getChart,
+  getStats,
 };
 
-export default daoGraphQL;
+export default dao;

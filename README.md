@@ -3,7 +3,7 @@
 
 Evolutility-UI-React is a set of **model-driven views** to [Browse](#Browse), [Edit](#Edit), [List](#List), [Cards](#Cards), [Charts](#Charts), [Stats](#Stats), [Overview](#Overview), and [Activity](#Activity).
 
-With it you can easily build CRUD applications by writing models rather than code. It uses [Hasura](https://hasura.io) GraphQL backend. No hand-coding is necessary!
+With it you can easily build CRUD applications by writing models rather than code. It uses the REST API of [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node). No hand-coding is necessary!
 
 Check out the [live demos](https://evoluteur.github.io/evodemo/#/demos).
 
@@ -47,7 +47,9 @@ npm start
 
 ```
 
-In a web browser, go to the url [http://localhost:3000/ the REST endpoints, you also need to install and run [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) which provides the matching REST endpoints based on the same metadata.
+In a web browser, go to the url [http://localhost:3000/](http://localhost:3000/).
+
+For the REST endpoints, you also need to install and run [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) which provides the matching REST endpoints based on the same metadata.
 
 
 <a name="Configuration"></a>
@@ -57,9 +59,8 @@ Configurations options are specified in the file [/src/config.js](https://github
 
 | Option     | Description      | Example             |
 |------------|------------------|---------------------|
-| apiPath    | Path to GraphQL API. | "https://myapp.hasura.app/v1/graphql" |
-| adminSecret | Token for Hasura. | |
-| useCache   | Enable/disable data caching. | true |
+| apiPath    | Path to the REST API. | "http://localhost:2000/api/v1/" |
+| useCache   | Enable/disable data caching (TanStack Query staleTime). | true |
 | cacheDuration | Cache duration in seconds. | 120 (for 2 minutes) |
 | filesUrl   | Path to upload files to. | "/pix/" |
 | pageSize   | Page size in pagination.  | 50 |
@@ -78,7 +79,7 @@ Evolutility-UI-React provides different types of view:
 * Views for One - a single record: [Browse](#Browse), [Edit](#Edit).
 * Views for Many - a collection of records: [List](#List), [Cards](#Cards), [Charts](#Charts), [Stats](#Stats).
 
-Evolutility uses GraphQL with [Hasura](https://hasura.io).
+Evolutility calls the REST API of [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) with [TanStack Query](https://tanstack.com/query).
 
 Notes: Views for actions (search, filter, export) will come later.
 
@@ -146,8 +147,6 @@ Code: [/src/components/views/analytics/Charts/Charts.jsx](https://github.com/evo
 
 Route: "/{entity}/charts"
 
-Note: The "Charts" view is currently only implemented for REST, not available with GraphQL yet.
-
 <a name="Stats"></a>
 ### Stats
 Display last update, number of updates in the last week, and for numeric fields the min, max, count, average.
@@ -199,7 +198,6 @@ All Fields are present in the Edit and Browse views. Fields can be flagged with 
 | Property     | Meaning                                 |
 |--------------|-----------------------------------------|
 | id           | Unique key to identify the entity (used in route and as API parameter). |
-| qid          | Entity ID used in GraphQL (may be different from id in route). |
 | icon         | Icon file name for the entity (example: "cube.gif"). |
 | name         | Object name (singular).    |
 | namePlural   | Object name (plural).      |
@@ -401,9 +399,25 @@ More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-rea
 <a name="Backend"></a>
 ## Backend
 
-You will need to setup the GraphQL backend on [Hasura](https://hasura.io/) with the Evolutility demo database.
+You will need to setup the REST backend [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) (Node.js, Express, and PostgreSQL) with the Evolutility demo database.
 
-<ol><li>You can signup for a <a href="https://cloud.hasura.io/signup" target="h" rel="noopener noreferrer" class="extlink">free account</a> or host it yourself (<a href="https://hasura.io/docs/latest/hasura-cli/quickstart/" target="h" rel="noopener noreferrer" class="extlink">Quickstart Hasura CLI</a>).</li><li>Add a Postgres database to your Hasura setup.</li><li>Add the demo tables by running the SQL script <a href="https://github.com/evoluteur/evolutility-ui-react/blob/main/sql/evol-db-schema.sql" target="sql-s" rel="noopener noreferrer" class="extlink">evol-db-schema.sql</a>.</li><li>Populate your database with sample data by running <a href="https://github.com/evoluteur/evolutility-ui-react/blob/main/sql/evol-db-data.sql" target="sql-d" rel="noopener noreferrer" class="extlink">evol-db-data.sql</a></li><li>Add relationships in Hasura console.<div class="rels"><div>Relationships on <strong>comics</strong> table:<ul><li>genre (Object): comics / genre_id -&gt; comics_genre / id</li><li>language (Object): comics / language_id -&gt; comics_language / id</li></ul></div><div>Relationships on <strong>comics_genre</strong> table:<ul><li>comics (Array): comics_genre / id =&gt; comics / genre_id</li></ul></div><div>Relationships on <strong>comics_language</strong> table:<ul><li>comics (Array): comics_language / id =&gt; comics / language_id</li></ul></div><div>Relationships on <strong>contact</strong> table:<ul><li>category (Object): contact / category_id -&gt; contact_category / id</li></ul></div><div>Relationships on <strong>contact_category</strong> table:<ul><li>contacts (Array): contact_category / id =&gt; contact / category_id</li></ul></div><div>Relationships on <strong>music_album</strong> table:<ul><li>artist (Object): music_album / artist_id -&gt; music_artist / id</li><li>tracks (Array): music_album / id -&gt; music_track / album_id</li></ul></div><div>Relationships on <strong>music_artist</strong> table:<ul><li>albums (Array): music_artist / id -&gt; music_album / artist_id</li></ul></div><div>Relationships on <strong>music_genre</strong> table:<ul><li>tracks (Array): music_genre / id -&gt; music_track / genre_id</li></ul></div><div>Relationships on <strong>music_track</strong> table:<ul><li>album (Object): music_track / album_id -&gt; music_album / id</li><li>genre (Object): music_track / genre_id -&gt; music_genre / id</li></ul></div><div>Relationships on <strong>restaurant</strong> table:<ul><li>cuisine (Object): restaurant / cuisine_id -&gt; restaurant_cuisine / id</li><li>price (Object): restaurant / price_id -&gt; restaurant_price / id</li></ul></div><div>Relationships on <strong>restaurant_cuisine</strong> table:<ul><li>restaurants (Array): restaurant_cuisine / id =&gt; restaurants / cuisine_id</li></ul></div><div>Relationships on <strong>restaurant_price</strong> table:<ul><li>restaurants (Array): restaurant_price / id =&gt; restaurants / price_id</li></ul></div><div>Relationships on <strong>task</strong> table:<ul><li>category (Object): task / category_id -&gt; task_category / id</li><li>priority (Object): task / priority_id -&gt; task_priority / id</li></ul></div><div>Relationships on <strong>task_category</strong> table:<ul><li>tasks (Array): task_category / id =&gt; task / category_id</li></ul></div><div>Relationships on <strong>task_priority</strong> table:<ul><li>tasks (Array): task_priority / id =&gt; task / priority_id</li></ul></div><div>Relationships on <strong>wine</strong> table:<ul><li>wine_tastings (Array): wine / id -&gt; wine_tasting / wine_id</li><li>bsize (Object): wine / bsize_id -&gt; wine_bsize / id</li><li>country (Object): wine / country_id -&gt; wine_country / id</li><li>grape (Object): wine / grape_id -&gt; wine_grape / id</li><li>score (Object): wine / score_id -&gt; wine_score / id</li><li>type (Object): wine / type_id -&gt; wine_type / id</li></ul></div><div>Relationships on <strong>wine_bsize</strong> table:<ul><li>wines (Array): wine_bsize / id =&gt; wine / bsize_id</li></ul></div><div>Relationships on <strong>wine_country</strong> table:<ul><li>wines (Array): wine_country / id =&gt; wine / country_id</li></ul></div><div>Relationships on <strong>wine_grape</strong> table:<ul><li>wines (Array): wine_grape / id =&gt; wine / grape_id</li></ul></div><div>Relationships on <strong>wine_score</strong> table:<ul><li>wines (Array): wine_score / id =&gt; wine / score_id</li></ul></div><div>Relationships on <strong>wine_tasting</strong> table:<ul><li>wine (Object): wine_tasting / wine_id -&gt; wine / id</li></ul></div><div>Relationships on <strong>wine_type</strong> table:<ul><li>wines (Array): wine_type / id =&gt; wine / type_id</li></ul></div></div></li><li>In Evolutility, change the "apiPath" and "adminSecret" in the ./src/config.js file.</li></ol>
+1. Clone or download [evolutility-server-node](https://github.com/evoluteur/evolutility-server-node).
+2. Create a PostgreSQL database.
+3. In the server's ./config.ts file, set the "connectionString" and the "schema" to access your new database.
+4. From the server directory, run:
+
+```bash
+# Install dependencies
+npm install
+
+# Create the demo tables and populate them w/ sample data
+npm run makedb
+
+# Run the REST API on http://localhost:2000/api/v1/
+npm start
+```
+
+5. In Evolutility-UI-React, set the "apiPath" to the REST API url in the ./src/config.ts file.
 
 <a name="License"></a>
 ## License

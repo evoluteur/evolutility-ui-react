@@ -6,13 +6,12 @@ import type {
   Field,
   RecordData,
 } from "types/model";
-import type { GqlErrorResult } from "types/api";
 
 import "./Collection.scss";
 
 export interface CollectionProps {
   collecModel: CollectionModel;
-  collecData?: RecordData[] | GqlErrorResult | null;
+  collecData?: RecordData[] | null;
 }
 
 const Collection = ({ collecModel, collecData }: CollectionProps) => {

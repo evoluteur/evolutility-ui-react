@@ -11,7 +11,6 @@ import Icon from "components/widgets/Icon/Icon";
 import Alert from "components/widgets/Alert/Alert";
 import TableBody from "../shared/TableBody/TableBody";
 import type { Field, Model, RecordData } from "types/model";
-import type { GqlErrorResult } from "types/api";
 
 import "./List.scss";
 
@@ -41,7 +40,7 @@ const tableHeader = (
 export interface ListProps {
   entity: string;
   model: Model | null;
-  data?: RecordData[] | GqlErrorResult | null;
+  data?: RecordData[] | null;
   sortField?: string;
   sortDirection?: string;
   onClickSort: (evt: MouseEvent<HTMLElement>) => void;

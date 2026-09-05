@@ -6,12 +6,12 @@
 // (c) 2026 Olivier Giulieri
 
 // #region ---------------- Imports ----------------
-import { useState, useEffect, type MouseEvent } from "react";
+import { useState, type MouseEvent } from "react";
 import classnames from "classnames";
 import Icon, { type IconClickHandler } from "components/widgets/Icon/Icon";
 import { i18n_charts, i18n_actions, i18n_errors } from "i18n/i18n";
 import Alert from "components/widgets/Alert/Alert";
-import { getChart } from "dao/dao";
+import { useChart } from "dao/queries";
 import { lcWrite } from "utils/localStorage";
 import Spinner from "components/widgets/Spinner/Spinner";
 import ChartTable from "./ChartTable";
@@ -20,7 +20,6 @@ import Bars from "./Bars";
 import Pie from "./Pie";
 // #endregion
 import type { Field, ChartDatum } from "types/model";
-import type { GqlError } from "types/api";
 
 import "./Charts.scss";
 
@@ -75,35 +74,19 @@ const Chart = ({
   hidden = false,
   className = "panel",
 }: ChartProps) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<ChartDatum[]>([]);
   const [curChartType, setCurChartType] = useState<ChartType>(chartType);
-  const [curSortId, setCurSortId] = useState("");
-  const [error, setError] = useState<GqlError | null>(null);
+  // - data sorted client-side (kept w/ the query data it was sorted from,
+  //   so that it is dropped as soon as the chart data changes)
+  const [sorted, setSorted] = useState<{
+    source: ChartDatum[] | undefined;
+    sortId: string;
+    data: ChartDatum[];
+  } | null>(null);
 
-  useEffect(() => {
-    let done = false;
-    setError(null);
-    const fid = field?.id;
-    if (fid) {
-      // TODO timeout to show spinner
-      // setIsLoading(true); // Loose animation w/ it
-      getChart(entity, fid).then((response) => {
-        if (done) {
-          return;
-        }
-        if ("errors" in response) {
-          setError(response.errors[0]);
-        } else {
-          setData(response.data || []);
-        }
-        setIsLoading(false);
-      });
-    }
-    return () => {
-      done = true;
-    };
-  }, [entity, field]);
+  const { data: chartData, isLoading, error } = useChart(entity, field?.id);
+  const isSorted = !!sorted && sorted.source === chartData;
+  const data = isSorted ? sorted.data : chartData || [];
+  const curSortId = isSorted ? sorted.sortId : "";
 
   const clickView: IconClickHandler = (evt) => {
     const chartsType = (evt.currentTarget as HTMLElement).dataset
@@ -127,8 +110,7 @@ const Chart = ({
         const sortFn = sortId === "label" ? sortByLabel : sortByCount;
         data2 = data2.sort(sortFn);
       }
-      setData(data2);
-      setCurSortId(sortId);
+      setSorted({ source: chartData, sortId, data: data2 });
     }
   };
 

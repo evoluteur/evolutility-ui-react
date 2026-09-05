@@ -11,7 +11,7 @@ import Modal from "react-modal";
 import { toast } from "react-toastify";
 import Icon from "components/widgets/Icon/Icon";
 import { evoPath, capitalize } from "utils/format";
-import { deleteOne } from "dao/dao";
+import { useDeleteOne } from "dao/queries";
 import { i18n_msg, i18n_actions } from "i18n/i18n";
 import { getModel } from "utils/moMa";
 import Button from "components/widgets/Button/Button";
@@ -61,6 +61,7 @@ const ViewActions = ({ entity, id }: ViewActionsProps) => {
   const m = getModel(entity);
   const navigate = useNavigate();
   const isNew = id === "0";
+  const deleteOne = useDeleteOne(entity);
 
   const confirmDelete = () => {
     setDeleteConfirmation(true);
@@ -72,18 +73,17 @@ const ViewActions = ({ entity, id }: ViewActionsProps) => {
 
   const onDelete = () => {
     if (id && m) {
-      deleteOne(entity, parseInt(id, 10)) // TODO: move parseInt higher
-        .then((response) => {
-          if (response.errors) {
-            const errorMsg = "Couldn't delete record.";
-            toast.error(errorMsg);
-          } else {
-            toast.success(
-              i18n_actions.deleted.replace("{0}", capitalize(m.name)),
-            );
-            navigate(`/${evoPath}/${entity}/list`);
-          }
-        });
+      deleteOne.mutate(parseInt(id, 10), {
+        onSuccess: () => {
+          toast.success(
+            i18n_actions.deleted.replace("{0}", capitalize(m.name)),
+          );
+          navigate(`/${evoPath}/${entity}/list`);
+        },
+        onError: () => {
+          toast.error("Couldn't delete record.");
+        },
+      });
     }
     closeModal();
   };

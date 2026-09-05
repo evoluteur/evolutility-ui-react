@@ -7,13 +7,8 @@ export interface ConfigOption {
 const configOptions: ConfigOption[] = [
   {
     name: "apiPath",
-    description: "Path to GraphQL API.",
-    example: '"https://myapp.hasura.app/v1/graphql"',
-  },
-  {
-    name: "adminSecret",
-    description: "Hasura admin secret.",
-    example: "",
+    description: "Path to the REST API.",
+    example: '"http://localhost:2000/api/v1/"',
   },
   {
     name: "useCache",

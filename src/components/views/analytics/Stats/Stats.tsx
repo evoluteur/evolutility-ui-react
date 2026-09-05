@@ -7,12 +7,12 @@
 // (c) 2026 Olivier Giulieri
 
 // #region ---------------- Imports ----------------
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getModel } from "utils/moMa";
 import { i18n_stats, i18n_comments } from "i18n/i18n";
 import { fieldTypes as ft } from "utils/dico";
-import { getStats } from "dao/dao";
+import { useStats } from "dao/queries";
 import { xItemsCount, numString } from "utils/format";
 import ViewHeader from "components/views/ViewHeader/ViewHeader";
 import Spinner from "components/widgets/Spinner/Spinner";
@@ -20,7 +20,6 @@ import Alert from "components/widgets/Alert/Alert";
 import FieldValue from "components/Field/browse/FieldValue";
 import PercentBar from "./PercentBar";
 import type { Field } from "types/model";
-import type { GqlError, StatsData } from "types/api";
 // #endregion
 
 import "./Stats.scss";
@@ -85,36 +84,20 @@ const statsField = (d: any, f: Field, total: number) => {
 // #endregion
 
 const Stats = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<StatsData | null>(null);
-  const [error, setError] = useState<GqlError | null>(null);
   const { entity } = useParams<{ entity: string }>();
   const model = getModel(entity);
   const title = i18n_stats.statsTitle.replace("{0}", model?.title || "");
+  const { data, isLoading, error } = useStats(entity as string);
 
   useEffect(() => {
     document.title = title;
   }, [title]);
 
   useEffect(() => {
-    let done = false;
-    setIsLoading(true);
-    getStats(entity as string).then((response) => {
-      if (done) {
-        return;
-      }
-      if ("errors" in response) {
-        setError(response.errors[0]);
-      } else {
-        setData(response.data);
-        window.scrollTo(0, 0);
-      }
-      setIsLoading(false);
-    });
-    return () => {
-      done = true;
-    };
-  }, [entity]);
+    if (data) {
+      window.scrollTo(0, 0);
+    }
+  }, [data]);
 
   let body;
   if (isLoading) {

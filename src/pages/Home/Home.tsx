@@ -48,7 +48,7 @@ const Home = () => {
             <Link to="docs/metamodel">metamodel</Link>
           </strong>{" "}
           (model structure) to define UI models. With it you can easily build
-          modern CRUD UIs for GraphQL without writing any code.
+          modern CRUD UIs for REST APIs without writing any code.
         </div>
 
         <Gallery />
@@ -63,9 +63,8 @@ const Home = () => {
         </div>
         <div>
           <br />
-          For each application, all views, form validation, and GraphQL queries
-          are generated at run-time from a single model. No hand-coding
-          necessary!
+          For each application, all views, form validation, and API calls are
+          generated at run-time from a single model. No hand-coding necessary!
         </div>
       </section>
       <div className="text-center tech-logos">
@@ -73,14 +72,12 @@ const Home = () => {
           <img src={logoPath + "react.png"} alt="React" />
         </a>
         <a
-          href="https://graphql.org/"
-          target="graphql"
+          href="https://github.com/evoluteur/evolutility-server-node"
+          target="evol-server"
           rel="noopener noreferrer"
+          className="extlink"
         >
-          <img src={logoPath + "graphql.png"} alt="GraphQL" />
-        </a>
-        <a href="https://hasura.io" target="hasura" rel="noopener noreferrer">
-          <img src={logoPath + "hasura.png"} alt="Hasura" />
+          Evolutility REST API
         </a>
       </div>
       <div>

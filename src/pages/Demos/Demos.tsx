@@ -35,23 +35,14 @@ const Demos = () => {
       </p>
 
       <p>
-        These demos use a{" "}
+        These demos use the{" "}
         <a
-          href="https://graphql.org/"
-          target="gql"
+          href="https://github.com/evoluteur/evolutility-server-node"
+          target="evol-server"
           rel="noopener noreferrer"
           className="extlink"
         >
-          GraphQL API
-        </a>
-        {" of "}
-        <a
-          href="https://hasura.io"
-          target="ha"
-          rel="noopener noreferrer"
-          className="extlink"
-        >
-          Hasura
+          Evolutility REST API
         </a>
         .
       </p>

@@ -4,9 +4,11 @@
 
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { QueryClientProvider } from "@tanstack/react-query";
 import classnames from "classnames";
 import { ToastContainer } from "react-toastify";
 import config from "config";
+import queryClient from "dao/queryClient";
 import { evoPath } from "utils/format";
 
 import SideBar from "components/shell/SideBar/SideBar";
@@ -47,28 +49,30 @@ const App = () => {
   const css = classnames("app", { "side-collapsed": isCollapsed });
 
   return (
-    <div className={css} data-testid="app">
-      <BrowserRouter basename={baseName}>
-        <Routes>
-          <Route
-            path="*"
-            element={
-              <>
-                <TopBar />
-                <SideBar onClickToggle={onClickToggle} />
-              </>
-            }
-          />
-        </Routes>
-        <div className="page-content" role="main">
-          <ErrorBoundary>
-            <AppRoutes />
-          </ErrorBoundary>
-        </div>
-        <Footer />
-      </BrowserRouter>
-      <ToastContainer autoClose={2000} />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className={css} data-testid="app">
+        <BrowserRouter basename={baseName}>
+          <Routes>
+            <Route
+              path="*"
+              element={
+                <>
+                  <TopBar />
+                  <SideBar onClickToggle={onClickToggle} />
+                </>
+              }
+            />
+          </Routes>
+          <div className="page-content" role="main">
+            <ErrorBoundary>
+              <AppRoutes />
+            </ErrorBoundary>
+          </div>
+          <Footer />
+        </BrowserRouter>
+        <ToastContainer autoClose={2000} />
+      </div>
+    </QueryClientProvider>
   );
 };
 

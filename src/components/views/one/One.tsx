@@ -1,10 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // #region ---------------- Imports ----------------
-import { useEffect, useState, useCallback, type ReactElement } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+  useCallback,
+  type ReactElement,
+} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { i18n_actions, i18n_msg, i18n_errors } from "i18n/i18n";
-import { getOne, updateOne, insertOne, getLOVs } from "dao/dao";
+import { useOne, useLOVs, useSaveOne } from "dao/queries";
 import config from "config";
 import { capitalize } from "utils/format";
 import { getModel } from "utils/moMa";
@@ -16,7 +22,7 @@ import ViewHeader from "components/views/ViewHeader/ViewHeader";
 import Alert from "components/widgets/Alert/Alert";
 import Spinner from "components/widgets/Spinner/Spinner";
 import type { Model, RecordData } from "types/model";
-import { isGqlError, type GqlError } from "types/api";
+import type { LovsResult } from "types/api";
 
 import "./One.scss";
 // #endregion
@@ -57,11 +63,11 @@ const recordTitle = (
   return "Model not found";
 };
 
-const addModelLOVs = (model: Model, lovs: Record<string, unknown>): void => {
+const addModelLOVs = (model: Model, lovs: LovsResult): void => {
   // - Add missing lov field lists to model
   model._lovNoList?.forEach((fid) => {
     const f = model.fieldsH[fid];
-    f.list = lovs[fid] as any;
+    f.list = lovs[fid];
   });
   delete model._lovNoList;
 };
@@ -69,10 +75,12 @@ const addModelLOVs = (model: Model, lovs: Record<string, unknown>): void => {
 // #endregion
 
 const One = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<RecordData | null>(null);
-  const [userData, setUserData] = useState<RecordData | null>(null);
-  const [error, setError] = useState<GqlError | null>(null);
+  // - record being edited, kept w/ the record it was initialized from,
+  //   so that it is reset as soon as the data changes (load, save, new record)
+  const [edited, setEdited] = useState<{
+    source: RecordData | null;
+    data: RecordData;
+  } | null>(null);
   const navigate = useNavigate();
   const { entity, view, id } = useParams<{
     entity: string;
@@ -81,16 +89,27 @@ const One = () => {
   }>();
   const model = getModel(entity);
   const isNew = id === "0";
+  const recordId = id && !isNew ? parseInt(id, 10) : 0;
+
+  // - lists of values missing from the model (for dropdowns)
+  const lovsQuery = useLOVs(entity as string, model?._lovNoList);
+  const oneQuery = useOne(entity as string, recordId);
+
+  const isLoading = oneQuery.isLoading || lovsQuery.isLoading;
+  const error = oneQuery.error || lovsQuery.error;
+  const defaultData = useMemo(() => getDefaultData(model), [entity, model]);
+  const data = isNew ? defaultData : oneQuery.data || null;
+  const saveOne = useSaveOne(entity as string);
+
+  const userData = edited?.source === data ? edited.data : data;
+  const setUserData = (newData: RecordData) =>
+    setEdited({ source: data, data: newData });
+
   const viewData = view === "edit" ? userData : data;
   const title =
     (error || isLoading) && !isNew
       ? capitalize(model?.name)
       : recordTitle(model, viewData, isNew);
-
-  const setAllData = (data: RecordData | null) => {
-    setData(data);
-    setUserData(data);
-  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -100,56 +119,24 @@ const One = () => {
     document.title = title || "";
   }, [title]);
 
+  // - add the lists of values to the model (once loaded)
   useEffect(() => {
-    let done = false;
-    setError(null);
-    setIsLoading(true);
-    if (isNew) {
-      const setDefaultData = () => {
-        const defaults = getDefaultData(model);
-        setAllData(defaults);
-        setIsLoading(false);
-      };
-      if (model?._lovNoList) {
-        getLOVs(entity as string).then((data) => {
-          if (done) {
-            return;
-          }
-          if (isGqlError(data)) {
-            setError(data.errors[0]);
-          } else {
-            addModelLOVs(model, data);
-          }
-          setDefaultData();
-        });
-      } else {
-        setDefaultData();
-      }
+    if (model && lovsQuery.data) {
+      addModelLOVs(model, lovsQuery.data);
     }
-    if (id && !isNew) {
-      getOne(entity as string, parseInt(id, 10)).then((data) => {
-        if (done) {
-          return;
-        }
-        if ("errors" in data) {
-          setError(data.errors[0]);
-        } else {
-          if (model && model._lovNoList?.length) {
-            addModelLOVs(model, data._lovs as Record<string, unknown>);
-            delete data._lovs;
-          }
-          setAllData(data);
-          if (withActivity && model?.titleField) {
-            logActivity(entity as string, id, data[model.titleField], "read");
-          }
-        }
-        setIsLoading(false);
-      });
+  }, [model, lovsQuery.data]);
+
+  // - track the last viewed records
+  useEffect(() => {
+    if (withActivity && !isNew && data && model?.titleField) {
+      logActivity(
+        entity as string,
+        id as string,
+        data[model.titleField],
+        "read",
+      );
     }
-    return () => {
-      done = true;
-    };
-  }, [entity, id]);
+  }, [entity, id, data]);
 
   const onFieldChange = useCallback(
     (fid: string, value: unknown) => {
@@ -175,35 +162,32 @@ const One = () => {
       return;
     }
     const delta = diffData(model, data, userData);
-    if (delta) {
-      const intId = id ? parseInt(id, 10) : null;
-      const upsertPromise = intId
-        ? updateOne(entity as string, intId, delta)
-        : insertOne(entity as string, userData || {});
-      upsertPromise.then((response) => {
-        if (response.errors) {
-          toast.error(response.errors[0].message);
-        } else {
-          let toastMsg;
-          if (intId) {
-            toastMsg = i18n_actions.updated.replace(
-              "{0}",
-              capitalize(model.name),
-            );
-          } else {
-            toastMsg = i18n_actions.added.replace("{0}", model.name);
-          }
-          toast.success(toastMsg);
-          setAllData(response.data || null);
-          if (!intId) {
-            navigate(`../${entity}/edit/${response.data?.id}`);
-          }
-        }
-      });
-    } else {
+    if (!delta) {
       toast.info(i18n_msg.noUpdate);
+      return;
     }
-  }, [entity, id, navigate, data, userData, model]);
+    saveOne.mutate(
+      {
+        id: recordId || null,
+        data: recordId ? delta : userData || {},
+      },
+      {
+        onSuccess: (savedData) => {
+          toast.success(
+            recordId
+              ? i18n_actions.updated.replace("{0}", capitalize(model.name))
+              : i18n_actions.added.replace("{0}", model.name),
+          );
+          if (!recordId) {
+            navigate(`../${entity}/edit/${savedData?.id}`);
+          }
+        },
+        onError: (err) => {
+          toast.error(err.message);
+        },
+      },
+    );
+  }, [entity, recordId, navigate, data, userData, model, saveOne]);
 
   const body = () => {
     if (isLoading) {

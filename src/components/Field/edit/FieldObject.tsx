@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback, memo } from "react";
+import { useState, useCallback, memo } from "react";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
 import type { Option } from "react-bootstrap-typeahead/types/types";
-import { getObjectSearch } from "dao/dao";
+import { useObjectSearch } from "dao/queries";
 import { i18n_actions } from "i18n/i18n";
 import type { LovValue } from "types/model";
 
@@ -40,24 +40,14 @@ const FieldObject = memo(
     onChange,
     onInputChange = null,
   }: FieldObjectProps) => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [options, setOptions] = useState<LovValue[]>(value ? [value] : []);
+    const [search, setSearch] = useState("");
+    const { data, isFetching } = useObjectSearch(entity, search);
+    const options =
+      (search ? (data as LovValue[]) : null) || (value ? [value] : []);
 
-    useEffect(() => {
-      setOptions(value ? [value] : []);
-    }, [value]);
-
-    const handleSearch = useCallback(
-      (search: string) => {
-        setIsLoading(true);
-        const dataPromise = getObjectSearch(entity, search);
-        dataPromise.then((v) => {
-          setOptions(v as LovValue[]);
-          setIsLoading(false);
-        });
-      },
-      [entity],
-    );
+    const handleSearch = useCallback((searchValue: string) => {
+      setSearch(searchValue);
+    }, []);
 
     const handleChange = useCallback(
       (values: Option[]) => {
@@ -73,7 +63,7 @@ const FieldObject = memo(
       <AsyncTypeahead
         filterBy={filterBy}
         id={id}
-        isLoading={isLoading}
+        isLoading={isFetching}
         labelKey="name"
         minLength={2}
         options={options}

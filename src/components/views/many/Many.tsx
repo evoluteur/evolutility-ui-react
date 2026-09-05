@@ -23,7 +23,7 @@ import config from "config";
 import url from "utils/url";
 import { capitalize } from "utils/format";
 import { getModel } from "utils/moMa";
-import { getMany } from "dao/dao";
+import { useMany } from "dao/queries";
 import Spinner from "components/widgets/Spinner/Spinner";
 import Alert from "components/widgets/Alert/Alert";
 import ViewHeader from "components/views/ViewHeader/ViewHeader";
@@ -33,8 +33,7 @@ import List from "./List/List";
 import Cards from "./Cards/Cards";
 import Pagination from "./shared/Pagination/Pagination";
 import EmptyState from "./shared/EmptyState/EmptyState";
-import type { ManyQueryOptions } from "dao/gqlQueries";
-import type { GqlError, ManyResult } from "types/api";
+import type { ManyQueryOptions } from "types/api";
 // #endregion
 
 import "./Many.scss";
@@ -48,11 +47,6 @@ const getRange = (pageIdx: number, pageSize: number, totalSize: number) => {
 };
 
 const Many = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<ManyResult | null>(null);
-  const [error, setError] = useState<GqlError | null>(null);
-  const [fullCount, setFullCount] = useState<number | null>(null);
-  const [filteredCount, setFilteredCount] = useState<number | null>(null);
   const { entity, view } = useParams<{ entity: string; view: string }>();
   const { search } = useLocation();
   const navigate = useNavigate();
@@ -60,11 +54,19 @@ const Many = () => {
   const [sortDirection, setSortDirection] = useState("asc");
   const [sortField, setSortField] = useState(model?.fields?.[0]?.id);
   const title = model?.title || capitalize(model?.namePlural);
-  const paginationCount = filteredCount ? filteredCount : fullCount;
 
-  const query = (url.parseQuery(search) || {}) as ManyQueryOptions;
+  const query = useMemo(
+    () => (url.parseQuery(search) || {}) as ManyQueryOptions,
+    [search],
+  );
+
+  const { data, isPending, error } = useMany(entity as string, query);
+  const rows = data && data.entity === entity ? data.rows : null;
+  const paginationCount =
+    data && data.entity === entity ? data.fullCount : null;
+
   let pageIndex = 0;
-  if (data && fullCount && fullCount > pageSize) {
+  if (paginationCount && paginationCount > pageSize) {
     pageIndex = parseInt(String(query?.page), 10) || 0;
   }
 
@@ -80,33 +82,7 @@ const Many = () => {
   }, [entity, search]);
 
   useEffect(() => {
-    let done = false;
-    setIsLoading(true);
-    setError(null);
-    setData(null);
-    setFullCount(null);
-    setFilteredCount(null);
     window.scrollTo(0, 0);
-    getMany(entity as string, url.parseQuery(search) as ManyQueryOptions).then(
-      (response) => {
-        if (done) {
-          return;
-        }
-        if ("errors" in response) {
-          setError(response.errors[0]);
-        } else {
-          setFullCount(response._full_count);
-          if (response._filtered_count) {
-            setFilteredCount(response._filtered_count);
-          }
-          setData(response);
-        }
-        setIsLoading(false);
-      },
-    );
-    return () => {
-      done = true;
-    };
   }, [entity, search]);
 
   const onClickSort = useCallback(
@@ -120,13 +96,14 @@ const Many = () => {
         setSortField(fid);
       }
       setSortDirection(direc);
-      query.order = fid + "." + direc;
-      query.page = 0;
-      let link = `../${entity}/${view}`;
-      link += "?" + url.querySearch(query);
-      navigate(link);
+      const newQuery: ManyQueryOptions = {
+        ...query,
+        order: fid + "." + direc,
+        page: 0,
+      };
+      navigate(`../${entity}/${view}?` + url.querySearch(newQuery));
     },
-    [entity, search, view, sortField, sortDirection],
+    [entity, query, view, sortField, sortDirection],
   );
 
   const clickPagination = useCallback(
@@ -143,19 +120,20 @@ const Many = () => {
       } else {
         pageIdx = parseInt(id as string, 10) - 1;
       }
-      if (query && query.page && !pageIdx) {
-        delete query.page;
+      const newQuery: ManyQueryOptions = { ...query };
+      if (pageIdx) {
+        newQuery.page = pageIdx;
       } else {
-        query.page = pageIdx;
+        delete newQuery.page;
       }
-      navigate(`../${entity}/${view}?` + url.querySearch(query));
+      navigate(`../${entity}/${view}?` + url.querySearch(newQuery));
     },
-    [entity, search, view],
+    [entity, query, view],
   );
 
   const pageSummary = useMemo(() => {
     const namePlural = model?.namePlural;
-    const size = Array.isArray(data) ? data.length : 0;
+    const size = rows?.length || 0;
     if (size) {
       if (paginationCount === size) {
         return null;
@@ -193,7 +171,7 @@ const Many = () => {
       }
     }
     return "";
-  }, [entity, data, search, paginationCount, pageIndex]);
+  }, [entity, rows, search, paginationCount, pageIndex]);
 
   const body = () => {
     if (!model) {
@@ -202,16 +180,18 @@ const Many = () => {
     if (error) {
       return <Alert title={i18n_errors.error} message={error.message} />;
     }
-    if (isLoading || !Array.isArray(data) || data._entity !== entity) {
+    if (isPending || !rows) {
       return <Spinner />;
     }
-    if (data.length === 0) {
-      return <EmptyState model={model} hasFilters={(fullCount || 0) > 0} />;
+    if (rows.length === 0) {
+      return (
+        <EmptyState model={model} hasFilters={(paginationCount || 0) > 0} />
+      );
     }
     const viewProps = {
       entity: entity as string,
       model,
-      data,
+      data: rows,
       onClickSort,
       sortField,
       sortDirection,
@@ -221,7 +201,7 @@ const Many = () => {
         {view === "list" ? <List {...viewProps} /> : <Cards {...viewProps} />}
         {!!paginationCount && paginationCount > pageSize && (
           <Pagination
-            count={data.length}
+            count={rows.length}
             fullCount={paginationCount || 0}
             onClick={clickPagination}
             pageIndex={pageIndex}
@@ -230,16 +210,14 @@ const Many = () => {
       </ErrorBoundary>
     );
   };
-  const displayCount = filteredCount
-    ? filteredCount + "/" + fullCount
-    : fullCount;
+
   return (
     <div className={"evol-many model_" + entity}>
       {model && (
         <ViewHeader
           entity={entity as string}
           title={title}
-          count={displayCount}
+          count={paginationCount}
           view={view}
           text={pageSummary}
           params={search}
