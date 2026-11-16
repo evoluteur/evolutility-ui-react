@@ -62,6 +62,54 @@
     }
   }
 
+  // - views toggle (segmented control)
+  .title-icons.view-toggle {
+    display: inline-flex;
+    gap: 2px;
+    padding: 3px;
+    align-items: center;
+    border: $border;
+    border-radius: 24px;
+    > a {
+      border-radius: 20px;
+      > .crud-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 34px;
+        padding: 0;
+        border: none;
+        border-radius: 20px;
+        background-color: transparent;
+        > svg {
+          top: 0;
+          width: 20px;
+          height: 20px;
+        }
+        > div {
+          top: 38px;
+        }
+      }
+      &.active {
+        background-color: $bgcolor-badge;
+        > .crud-icon {
+          border: none;
+          > svg {
+            fill: $color-text;
+          }
+          // - no tooltip on the active option
+          > div {
+            display: none !important;
+          }
+        }
+      }
+      &:not(.active):hover {
+        background-color: $bgcolor-header;
+      }
+    }
+  }
+
   @media (max-width: $media-small) {
     .title-icons {
       display: none !important;

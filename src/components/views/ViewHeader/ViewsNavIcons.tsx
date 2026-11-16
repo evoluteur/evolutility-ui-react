@@ -38,6 +38,8 @@ const ViewsNavIcons = ({
     iconViews = [views.list, views.cards];
   }
 
+  // - views are shown as a toggle (segmented control)
+  const isToggle = iconViews.length > 1;
   const urlFrag = (id ? "/" + id : "") + params;
   const iconLink = (ico: ViewInfo) => (
     <Link
@@ -45,12 +47,20 @@ const ViewsNavIcons = ({
       to={`../${entity}/${ico.id}${urlFrag}`}
       aria-label={ico.label}
       className={view === ico.id ? "active" : ico.id}
+      aria-current={view === ico.id ? "page" : undefined}
     >
       <Icon name={ico.icon || ico.id} tooltip={ico.label} theme="light" />
     </Link>
   );
 
-  return <div className="title-icons">{iconViews?.map(iconLink)}</div>;
+  return (
+    <div
+      className={"title-icons" + (isToggle ? " view-toggle" : "")}
+      role={isToggle ? "group" : undefined}
+    >
+      {iconViews?.map(iconLink)}
+    </div>
+  );
 };
 
 export default ViewsNavIcons;
