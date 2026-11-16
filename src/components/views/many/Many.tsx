@@ -54,7 +54,10 @@ const Many = () => {
   const model = getModel(entity);
   const [sortDirection, setSortDirection] = useState("asc");
   const [sortField, setSortField] = useState(model?.fields?.[0]?.id);
-  const title = model?.title || capitalize(model?.namePlural);
+  const title =
+    view === "cards"
+      ? i18n_msg.cardsTitle.replace("{0}", capitalize(model?.namePlural || ""))
+      : model?.title || capitalize(model?.namePlural);
 
   const query = useMemo(
     () => (url.parseQuery(search) || {}) as ManyQueryOptions,

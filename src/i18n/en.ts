@@ -88,6 +88,7 @@ export const i18n_filters: Record<string, string> = {
 // --- status ---
 export const i18n_msg: Record<string, string> = {
   noResults: "No results",
+  cardsTitle: "{0} Cards", // 0=entities
   empty: "You do not have any {0}.", // 0=entities
   noData: "No {0} found.", // 0=entities
   addTheFirst: "Create the first {0}",
