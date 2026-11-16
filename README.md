@@ -55,11 +55,12 @@ For the REST endpoints, you also need to install and run [Evolutility-Server-Nod
 <a name="Configuration"></a>
 ## Configuration
 
-Configurations options are specified in the file [/src/config.js](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/config.js). They apply to all apps (app specific options are specified in models).
+Configurations options are specified in the file [/src/config.ts](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/config.ts). They apply to all apps (app specific options are specified in models).
 
 | Option     | Description      | Example             |
 |------------|------------------|---------------------|
 | apiPath    | Path to the REST API. | "http://localhost:2000/api/v1/" |
+| entityRoot | View shown at the object root url (ex: "/demos/todo/"): "list" (default) redirects to the List view, "overview" shows the Overview page. The Overview icon in the top bar is only shown with "overview". | "list" |
 | useCache   | Enable/disable data caching (TanStack Query staleTime). | true |
 | cacheDuration | Cache duration in seconds. | 120 (for 2 minutes) |
 | filesUrl   | Path to upload files to. | "/pix/" |
@@ -125,7 +126,7 @@ Gives a tabular view of a collection.
 
 Code: [/src/components/views/many/List/List.tsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/many/List/List.tsx)
 
-Route: "/{entity}/list"
+Route: "/{entity}/list" (and "/{entity}/" which redirects to it by default, see config option "entityRoot")
 
 <a name="Cards"></a>
 ### Cards
@@ -170,7 +171,7 @@ Display a summary of the object and the latest activity on it.
 
 Code: [/src/components/views/comfort/Overview/Overview.tsx](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/components/views/comfort/Overview/Overview.tsx)
 
-Route: "/{entity}/"
+Route: "/{entity}/overview" (and "/{entity}/" when the config option "entityRoot" is "overview")
 
 <a name="Activity"></a>
 ### Activity
