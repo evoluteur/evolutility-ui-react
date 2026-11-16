@@ -10,7 +10,8 @@ import { memo, type ReactNode } from "react";
 import FieldDate from "./FieldDate";
 import FieldUpload from "./FieldUpload";
 import Typeahead from "./FieldObject";
-import { jsonString } from "utils/format";
+import { jsonString, urlHref } from "utils/format";
+import { i18n_actions } from "i18n/i18n";
 import { fieldTypes as ft } from "utils/dico";
 import type { Field, FieldOnChange, LovValue } from "types/model";
 
@@ -143,9 +144,32 @@ const FieldElemEdit = memo(
     }
     if (fType === ft.email || fType === ft.money || fType === ft.url) {
       const inputType = fType === ft.money ? "number" : "text";
+      // - url: the icon opens the url in a new tab
+      // - email: the icon opens the email app (like in view mode)
+      const email = typeof value === "string" ? value.trim() : "";
+      const href =
+        fType === ft.url
+          ? urlHref(value)
+          : fType === ft.email && email
+            ? `mailto:${email}`
+            : null;
+      const isUrl = fType === ft.url;
       return (
         <div className="input-group">
-          <span className="input-group-addon">{fSymbols[fType]}</span>
+          {href ? (
+            <a
+              className="input-group-addon"
+              href={href}
+              target={isUrl ? "_blank" : undefined}
+              rel={isUrl ? "noopener noreferrer" : undefined}
+              title={isUrl ? i18n_actions.openUrl : i18n_actions.sendEmail}
+              aria-label={isUrl ? i18n_actions.openUrl : i18n_actions.sendEmail}
+            >
+              {fSymbols[fType]}
+            </a>
+          ) : (
+            <span className="input-group-addon">{fSymbols[fType]}</span>
+          )}
           <input
             {...sharedFieldProps}
             type={inputType}

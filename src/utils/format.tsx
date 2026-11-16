@@ -137,6 +137,21 @@ export const longDateString = (d: unknown): string => mFormat(d, "ll");
 export const relativeTimeString = (d: unknown): string =>
   d ? dayjs(d as string).fromNow() : "";
 
+// - safe link for a url field value (null for non-http schemes like "javascript:")
+export const urlHref = (v: unknown): string | null => {
+  const s = typeof v === "string" ? v.trim() : "";
+  if (!s) {
+    return null;
+  }
+  if (/^https?:\/\//i.test(s)) {
+    return s;
+  }
+  if (/^[a-z][a-z0-9+.-]*:/i.test(s)) {
+    return null;
+  }
+  return "https://" + s;
+};
+
 export const image = (d: string | null): React.ReactElement | null =>
   d === null ? null : <img src={d} className="img-thumbnail" alt="" />;
 

@@ -8,6 +8,7 @@ import {
   jsonString,
   image,
   numFieldValue,
+  urlHref,
 } from "utils/format";
 import { fieldTypes as ft } from "utils/dico";
 import type { Field, LovValue } from "types/model";
@@ -72,8 +73,12 @@ const FieldValue = memo(({ fieldDef, value, compact }: FieldValueProps) => {
     return image(filesUrl + (value as string));
   }
   if (fType === ft.url && value) {
+    const href = urlHref(value);
+    if (!href) {
+      return value as string;
+    }
     return (
-      <a href={value as string} target="_blank" rel="noopener noreferrer">
+      <a href={href} target="_blank" rel="noopener noreferrer">
         {value as string}
       </a>
     );

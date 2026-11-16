@@ -39,6 +39,8 @@ export const i18n_actions: Record<string, string> = {
   save: "Save",
   ok: "OK",
   cancel: "Cancel",
+  openUrl: "Open link in a new tab",
+  sendEmail: "Send email",
   search: "Search...",
   searchX: "Search {0}...",
 

@@ -256,3 +256,12 @@ fieldset[disabled] .checkbox label {
 //     margin-left: -1px;
 //   }
 // }
+
+// - url and email fields: the icon is a link (new tab or mailto)
+a.input-group-addon {
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    background-color: #e0e0e0;
+  }
+}
