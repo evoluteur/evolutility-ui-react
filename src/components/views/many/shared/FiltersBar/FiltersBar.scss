@@ -36,6 +36,11 @@
     padding-left: 32px;
     padding-right: 28px;
     border-radius: 20px;
+    // - hide the browser's own clear button (we have ours)
+    &::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      appearance: none;
+    }
   }
   > .evo-filters-x {
     position: absolute;

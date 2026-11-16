@@ -138,17 +138,24 @@ export const restToChart = (rows: RecordData[] | null): ChartDatum[] =>
 
 const decimalStats = ["avg", "stddev", "variance"] as const;
 const rawStats = ["min", "max", "sum"] as const;
+const lengthStats = ["minLength", "maxLength"] as const;
 
-// - the stats end-point returns aggregations per field plus a "nulls" map,
-//   the view expects one object per field (starting w/ the nulls count)
+// - the stats end-point returns one object per field (w/ the nulls count),
+//   the view expects one object per field starting w/ the nulls count
 export const restToStats = (model: Model, data: StatsData): StatsData => {
   const stats: StatsData = {};
-  const nulls = data?.nulls || {};
   model.fields.forEach((f) => {
-    const fieldStats: Record<string, unknown> = {
-      nulls: nulls[f.id] ?? 0,
-    };
     const aggregations = data?.[f.id];
+    const fieldStats: Record<string, unknown> = {
+      nulls: aggregations?.nulls ?? 0,
+    };
+    // - string fields: min and max length
+    lengthStats.forEach((stat) => {
+      const value = aggregations?.[stat];
+      if (value !== undefined && value !== null) {
+        fieldStats[stat] = value;
+      }
+    });
     if (aggregations && (!fieldIsText(f) || f.type === ft.time)) {
       rawStats.forEach((stat) => {
         const value = aggregations[stat];

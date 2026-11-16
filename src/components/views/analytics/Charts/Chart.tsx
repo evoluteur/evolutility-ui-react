@@ -19,6 +19,7 @@ import type { ChartSize, ChartType } from "./chartProps";
 import Bars from "./Bars";
 import Pie from "./Pie";
 // #endregion
+import type { ManyQueryOptions } from "types/api";
 import type { Field, ChartDatum } from "types/model";
 
 import "./Charts.scss";
@@ -57,6 +58,8 @@ export interface ChartProps {
   field: Field;
   /** Chart title */
   title: string;
+  /** Filters and search (from the URL) */
+  query?: ManyQueryOptions;
   size?: ChartSize;
   chartType?: ChartType;
   /** Callback function to expend the chart */
@@ -71,6 +74,7 @@ const Chart = ({
   entity,
   field,
   title,
+  query,
   size = "small",
   chartType = "bars",
   setExpanded = null,
@@ -87,7 +91,11 @@ const Chart = ({
     data: ChartDatum[];
   } | null>(null);
 
-  const { data: chartData, isLoading, error } = useChart(entity, field?.id);
+  const {
+    data: chartData,
+    isLoading,
+    error,
+  } = useChart(entity, field?.id, query);
   const isSorted = !!sorted && sorted.source === chartData;
   const data = isSorted ? sorted.data : chartData || [];
   const curSortId = isSorted ? sorted.sortId : "";

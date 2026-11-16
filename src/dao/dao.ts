@@ -235,10 +235,17 @@ export async function getObjectSearch(
 export async function getChart(
   entity: string,
   fieldId: string,
+  options?: ManyQueryOptions,
   signal?: AbortSignal,
 ): Promise<ChartDatum[]> {
   modelOrThrow(entity);
+  // - same filters and search as the list (paging and sorting don't apply)
+  const params: ManyQueryOptions = { ...options };
+  delete params.order;
+  delete params.page;
+  delete params.pageSize;
   const rows = await apiGet<RecordData[]>(`${entity}/chart/${fieldId}`, {
+    params,
     signal,
   });
   return restToChart(rows);

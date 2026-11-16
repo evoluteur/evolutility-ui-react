@@ -6,8 +6,8 @@
 // (c) 2026 Olivier Giulieri
 
 //#region  ----- Imports ----------------------------
-import { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useCallback, useMemo } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import classnames from "classnames";
 import ErrorBoundary from "components/ErrorBoundary";
 import { i18n_charts } from "i18n/i18n";
@@ -15,11 +15,14 @@ import { getModel } from "utils/moMa";
 import { fieldInCharts } from "utils/dico";
 import { lcRead } from "utils/localStorage";
 import { capitalize } from "utils/format";
+import url from "utils/url";
 import ViewHeader from "components/views/ViewHeader/ViewHeader";
 import Alert from "components/ui/Alert/Alert";
+import FiltersBar from "components/views/many/shared/FiltersBar/FiltersBar";
 import Chart from "./Chart";
 import type { ChartType } from "./chartProps";
 import type { Field } from "types/model";
+import type { ManyQueryOptions } from "types/api";
 //#endregion
 
 import "./Charts.scss";
@@ -27,7 +30,13 @@ import "./Charts.scss";
 const Charts = () => {
   const [expandedChart, setExpandedChart] = useState<string | null>(null);
   const { entity } = useParams<{ entity: string }>();
+  const { search } = useLocation();
   const m = getModel(entity);
+  // - filters and search (from the URL), applied to every chart
+  const query = useMemo(
+    () => (url.parseQuery(search) || {}) as ManyQueryOptions,
+    [search],
+  );
   const title = i18n_charts.dash.replace(
     "{0}",
     capitalize(m?.namePlural || ""),
@@ -76,6 +85,7 @@ const Charts = () => {
         entity: entity as string,
         field: f,
         title: chartTitle(f),
+        query,
         chartType: (lcRead(`${m.id}-charts-${f.id}`) || f.chartType) as
           ChartType | undefined,
       });
@@ -107,6 +117,13 @@ const Charts = () => {
     return (
       <div className={`evol-charts model_${entity}`}>
         <ViewHeader entity={entity as string} title={title} view="charts" />
+        <FiltersBar
+          key={entity}
+          entity={entity as string}
+          model={m}
+          view="charts"
+          query={query}
+        />
         <ErrorBoundary>
           <div className={css}>{charts}</div>
         </ErrorBoundary>

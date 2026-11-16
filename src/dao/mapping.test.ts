@@ -111,14 +111,15 @@ describe("restToStats", () => {
   it("groups the aggregations per field", () => {
     const stats = restToStats(model, {
       count: 10,
-      price: { min: 1, max: 5, avg: 2.5, sum: 25 },
-      nulls: { title: 0, price: 2, category: 1 },
+      title: { nulls: 0, minLength: 3, maxLength: 40 },
+      price: { nulls: 2, min: 1, max: 5, avg: 2.5, sum: 25 },
+      category: { nulls: 1 },
       u_date_max: "2026-01-05",
       c_date_min: "2025-01-05",
       u_date_week_count: 3,
     });
     expect(stats.count).toBe(10);
-    expect(stats.title).toEqual({ nulls: 0 });
+    expect(stats.title).toEqual({ nulls: 0, minLength: 3, maxLength: 40 });
     expect(stats.price.nulls).toBe(2);
     expect(stats.price.min).toBe(1);
     expect(stats.price.avg).toBe("2.50");

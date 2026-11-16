@@ -43,8 +43,8 @@ export const queryKeys = {
   lovs: (entity: string) => ["evol", entity, "lovs"] as const,
   lovSearch: (entity: string, search: string) =>
     ["evol", entity, "lov-search", search] as const,
-  chart: (entity: string, fieldId: string) =>
-    ["evol", entity, "chart", fieldId] as const,
+  chart: (entity: string, fieldId: string, options?: ManyQueryOptions) =>
+    ["evol", entity, "chart", fieldId, options || {}] as const,
   stats: (entity: string) => ["evol", entity, "stats"] as const,
 };
 //#endregion
@@ -96,10 +96,16 @@ export const useObjectSearch = (entity: string, search: string) =>
   });
 
 // - data of one chart
-export const useChart = (entity: string, fieldId: string | undefined) =>
+export const useChart = (
+  entity: string,
+  fieldId: string | undefined,
+  options?: ManyQueryOptions,
+) =>
   useQuery({
-    queryKey: queryKeys.chart(entity, fieldId || ""),
-    queryFn: ({ signal }) => getChart(entity, fieldId as string, signal),
+    queryKey: queryKeys.chart(entity, fieldId || "", options),
+    queryFn: ({ signal }) =>
+      getChart(entity, fieldId as string, options, signal),
+    placeholderData: keepPreviousData,
     enabled: !!entity && !!fieldId,
   });
 
