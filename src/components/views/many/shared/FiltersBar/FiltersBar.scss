@@ -1,7 +1,13 @@
 @import "variables";
 
 .evo-filters-bar {
-  margin: -14px 0 20px;
+  // - stays in view while scrolling (below the fixed top bar)
+  position: sticky;
+  top: 50px; // top bar height
+  z-index: 3; // above the List's sticky column headers
+  margin: -20px 0 14px;
+  padding: 6px 0;
+  background-color: $bgcolor-main;
   .form-control {
     width: auto;
     display: inline-block;

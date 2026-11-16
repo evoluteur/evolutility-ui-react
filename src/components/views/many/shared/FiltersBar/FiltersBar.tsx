@@ -6,7 +6,7 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2026 Olivier Giulieri
 
-import { useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { i18n_filters as i18n, i18n_actions } from "i18n/i18n";
 import url from "utils/url";
@@ -41,6 +41,22 @@ export interface FiltersBarProps {
 
 const FiltersBar = ({ entity, model, view, query }: FiltersBarProps) => {
   const navigate = useNavigate();
+  const barRef = useRef<HTMLDivElement>(null);
+
+  // - publish the bar height so other sticky elements (List headers) sit below it
+  useEffect(() => {
+    const el = barRef.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const root = document.documentElement;
+    const ro = new ResizeObserver(() =>
+      root.style.setProperty("--evo-filters-h", el.offsetHeight + "px"),
+    );
+    ro.observe(el);
+    return () => {
+      ro.disconnect();
+      root.style.removeProperty("--evo-filters-h");
+    };
+  }, []);
   const fields = useMemo(() => filterableFields(model.fields), [model]);
   const filters = useMemo(() => parseFilters(query, fields), [query, fields]);
   // - filter being edited (fieldId of the original filter, undefined if new)
@@ -110,7 +126,7 @@ const FiltersBar = ({ entity, model, view, query }: FiltersBarProps) => {
   const hasCriteria = !!filters.length || !!urlSearch;
 
   return (
-    <div className="evo-filters-bar" data-testid="filtersbar">
+    <div className="evo-filters-bar" data-testid="filtersbar" ref={barRef}>
       <div className="evo-filters-row">
         <form className="evo-filters-search" onSubmit={onSearch} role="search">
           <Icon name="search" theme="none" />

@@ -12,7 +12,8 @@
     margin-bottom: 0;
     th {
       position: sticky;
-      top: 49px;
+      // - below the top bar and the sticky filters bar
+      top: calc(49px + var(--evo-filters-h, 0px));
       z-index: 2;
       white-space: nowrap;
       transition: border-color $ease-time;
