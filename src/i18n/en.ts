@@ -53,6 +53,36 @@ export const i18n_actions: Record<string, string> = {
   // downloadingCSV: "Downloading CSV export.",
 };
 
+// --- filters bar (List & Cards views) ---
+export const i18n_filters: Record<string, string> = {
+  addFilter: "Add filter",
+  clearAll: "Clear all",
+  field: "Field",
+  operator: "Condition",
+  value: "Value",
+  apply: "Apply",
+  remove: "Remove",
+  removeFilter: "Remove filter on {0}",
+  clearSearch: "Clear search",
+  noValues: "No values available.",
+  // - operators
+  eq: "=",
+  ne: "≠",
+  gt: ">",
+  gte: "≥",
+  lt: "<",
+  lte: "≤",
+  ct: "contains",
+  nct: "doesn't contain",
+  sw: "starts with",
+  fw: "ends with",
+  in: "is any of",
+  "1": "is true",
+  "0": "is false",
+  null: "is empty",
+  nn: "is not empty",
+};
+
 // --- status ---
 export const i18n_msg: Record<string, string> = {
   noResults: "No results",
@@ -191,6 +221,7 @@ const allStrings = {
   i18n_nav,
   i18n_actions,
   i18n_msg,
+  i18n_filters,
   i18n_validation,
   i18n_charts,
   i18n_comments,

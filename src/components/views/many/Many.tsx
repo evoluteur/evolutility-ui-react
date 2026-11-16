@@ -33,6 +33,7 @@ import List from "./List/List";
 import Cards from "./Cards/Cards";
 import Pagination from "./shared/Pagination/Pagination";
 import EmptyState from "./shared/EmptyState/EmptyState";
+import FiltersBar from "./shared/FiltersBar/FiltersBar";
 import type { ManyQueryOptions } from "types/api";
 // #endregion
 
@@ -221,6 +222,15 @@ const Many = () => {
           view={view}
           text={pageSummary}
           params={search}
+        />
+      )}
+      {model && (
+        <FiltersBar
+          key={entity}
+          entity={entity as string}
+          model={model}
+          view={view as string}
+          query={query}
         />
       )}
       {body()}

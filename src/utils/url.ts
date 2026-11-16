@@ -9,7 +9,7 @@ export function querySearch(
   for (const prop in query) {
     const v = query[prop];
     if (v !== "" && v !== undefined) {
-      urlParams.push(prop + "=" + encodeURI(String(v)));
+      urlParams.push(prop + "=" + encodeURIComponent(String(v)));
     }
   }
   return urlParams.join("&");

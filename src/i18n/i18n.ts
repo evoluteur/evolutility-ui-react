@@ -12,6 +12,7 @@ export const locale = allStrings.locale;
 export const i18n_nav = allStrings.i18n_nav;
 export const i18n_actions = allStrings.i18n_actions;
 export const i18n_msg = allStrings.i18n_msg;
+export const i18n_filters = allStrings.i18n_filters;
 export const i18n_validation = allStrings.i18n_validation;
 export const i18n_charts = allStrings.i18n_charts;
 export const i18n_comments = allStrings.i18n_comments;

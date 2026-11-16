@@ -1,7 +1,6 @@
 import { memo } from "react";
 import Badge from "components/ui/Badge/Badge";
 import ViewsNavIcons from "./ViewsNavIcons";
-import FilterTags from "./FilterTags";
 
 import "./ViewHeader.scss";
 
@@ -36,9 +35,6 @@ const ViewHeader = memo(
     text = null,
     params = "",
   }: ViewHeaderProps) => {
-    const search = (view === "list" || view === "cards") && (
-      <FilterTags params={params} />
-    );
     return (
       <div className="evo-page-header" data-testid="viewheader">
         <h1 className="page-title">
@@ -49,7 +45,6 @@ const ViewHeader = memo(
               text={comments + comments === 1 ? " comment" : " comments"}
             />
           )}
-          {search}
           {text && <span className="h-txt">{text}</span>}
         </h1>
         <div>

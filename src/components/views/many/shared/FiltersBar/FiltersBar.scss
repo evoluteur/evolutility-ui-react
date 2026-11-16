@@ -1,0 +1,146 @@
+@import "variables";
+
+.evo-filters-bar {
+  margin: -14px 0 20px;
+  .form-control {
+    width: auto;
+    display: inline-block;
+  }
+  button {
+    font: inherit;
+    cursor: pointer;
+  }
+}
+
+.evo-filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.evo-filters-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  > svg {
+    position: absolute;
+    left: 10px;
+    height: $icon-size;
+    width: $icon-size;
+    fill: $color-text-secondary;
+    pointer-events: none;
+  }
+  > input {
+    width: 240px;
+    padding-left: 32px;
+    padding-right: 28px;
+    border-radius: 20px;
+  }
+  > .evo-filters-x {
+    position: absolute;
+    right: 6px;
+  }
+}
+
+.evo-filters-x {
+  border: none;
+  background: transparent;
+  color: $color-text-secondary;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 4px;
+  &:hover {
+    color: $color-text;
+  }
+}
+
+.evo-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  border: $border;
+  border-radius: 20px;
+  background-color: $bgcolor-badge;
+  padding: 2px 6px 2px 12px;
+  font-size: $label-font-size;
+  &.active,
+  &:hover {
+    border-color: $color-border-hover;
+  }
+  .evo-filter-chip-txt {
+    border: none;
+    background: transparent;
+    padding: 2px 4px 2px 0;
+    color: $color-text;
+    max-width: 320px;
+    @include ellipsis();
+    > b {
+      font-weight: 600;
+    }
+  }
+}
+
+.evo-filters-add,
+.evo-filters-clear {
+  border: none;
+  background: transparent;
+  color: $color-link;
+  font-size: $label-font-size;
+  padding: 4px 6px;
+  &:hover {
+    color: $color-link-hover;
+    text-decoration: underline;
+  }
+}
+.evo-filters-add > svg {
+  height: $icon-size;
+  width: $icon-size;
+  fill: currentColor;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+.evo-filters-clear {
+  color: $color-text-secondary;
+}
+
+.evo-filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 12px;
+  border: $border;
+  border-radius: $radius;
+  background-color: $bgcolor-header;
+  .evo-filter-lov {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    padding: 6px 0;
+    max-width: 600px;
+    > label {
+      font-weight: normal;
+      cursor: pointer;
+      white-space: nowrap;
+      > input {
+        margin-right: 5px;
+      }
+    }
+  }
+  .evo-filter-form-btns {
+    display: flex;
+    gap: 8px;
+    .btn {
+      padding: 5px 16px;
+    }
+  }
+}
+
+@media (max-width: $media-small) {
+  .evo-filters-search,
+  .evo-filters-search > input {
+    width: 100%;
+  }
+}
