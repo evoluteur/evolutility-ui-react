@@ -8,7 +8,7 @@
 // #region ---------------- Imports ----------------
 import { useState, type MouseEvent } from "react";
 import classnames from "classnames";
-import Icon, { type IconClickHandler } from "components/ui/Icon/Icon";
+import Icon from "components/ui/Icon/Icon";
 import { i18n_charts, i18n_actions, i18n_errors } from "i18n/i18n";
 import Alert from "components/ui/Alert/Alert";
 import { useChart } from "dao/queries";
@@ -28,23 +28,27 @@ const sortByLabel = (a: ChartDatum, b: ChartDatum) =>
   (a.label || "").localeCompare(b.label || "");
 const sortByCount = (a: ChartDatum, b: ChartDatum) => a.value - b.value;
 
-const ChartIcon = ({
-  chartType,
-  props,
-}: {
+// - option of the Pie / Bars / Table toggle
+interface ChartIconProps {
   chartType: ChartType;
-  props: { onClick: IconClickHandler; chartType: ChartType };
-}) => (
-  <Icon
-    id={chartType}
-    {...props}
-    name={chartType === "table" ? "list" : chartType}
-    tooltip={i18n_charts[chartType]}
-    className={chartType === props.chartType ? "active" : ""}
-    size="small"
-    theme="light"
-  />
-);
+  curChartType: ChartType;
+  onClick: (t: ChartType) => void;
+}
+const ChartIcon = ({ chartType, curChartType, onClick }: ChartIconProps) => {
+  const isActive = chartType === curChartType;
+  return (
+    <button
+      type="button"
+      className={isActive ? "active" : undefined}
+      aria-pressed={isActive}
+      aria-label={i18n_charts[chartType]}
+      title={isActive ? undefined : i18n_charts[chartType]}
+      onClick={() => !isActive && onClick(chartType)}
+    >
+      <Icon name={chartType === "table" ? "list" : chartType} theme="none" />
+    </button>
+  );
+};
 //#endregion
 
 export interface ChartProps {
@@ -88,9 +92,7 @@ const Chart = ({
   const data = isSorted ? sorted.data : chartData || [];
   const curSortId = isSorted ? sorted.sortId : "";
 
-  const clickView: IconClickHandler = (evt) => {
-    const chartsType = (evt.currentTarget as HTMLElement).dataset
-      .id as ChartType;
+  const clickView = (chartsType: ChartType) => {
     lcWrite(entity + "-charts-" + field.id, chartsType);
     setCurChartType(chartsType);
   };
@@ -155,7 +157,7 @@ const Chart = ({
 
   const iconProps = {
     onClick: clickView,
-    chartType: curChartType,
+    curChartType,
   };
 
   const actionsIcons = (
@@ -170,10 +172,10 @@ const Chart = ({
           />
         </div>
       )}
-      <div className="chart-actions-right">
-        <ChartIcon chartType="pie" props={iconProps} />
-        <ChartIcon chartType="bars" props={iconProps} />
-        <ChartIcon chartType="table" props={iconProps} />
+      <div className="chart-actions-right chart-toggle" role="group">
+        <ChartIcon chartType="pie" {...iconProps} />
+        <ChartIcon chartType="bars" {...iconProps} />
+        <ChartIcon chartType="table" {...iconProps} />
       </div>
     </>
   );

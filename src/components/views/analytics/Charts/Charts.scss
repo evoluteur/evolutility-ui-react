@@ -114,6 +114,46 @@ $chart-gap: 5px;
 .chart-actions-left {
   left: $chart-gap;
 }
+// - Pie / Bars / Table toggle (segmented control)
+.chart-actions-right.chart-toggle {
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  border: $border;
+  border-radius: 20px;
+  margin-top: 5px;
+  > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 26px;
+    padding: 0;
+    border: none;
+    border-radius: 16px;
+    background-color: transparent;
+    cursor: pointer;
+    > svg {
+      top: 0;
+      width: 16px;
+      height: 16px;
+      fill: $color-icon;
+    }
+    &:hover:not(.active) {
+      background-color: $bgcolor-header;
+      > svg {
+        fill: $color-icon-hover;
+      }
+    }
+    &.active {
+      cursor: default;
+      background-color: $bgcolor-badge;
+      > svg {
+        fill: $color-text;
+      }
+    }
+  }
+}
 .chart-actions-right {
   right: $chart-gap;
 }
