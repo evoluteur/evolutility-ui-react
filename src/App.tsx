@@ -6,7 +6,7 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import classnames from "classnames";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, Slide } from "react-toastify";
 import config from "config";
 import queryClient from "dao/queryClient";
 import { evoPath } from "utils/format";
@@ -69,7 +69,7 @@ const App = () => {
           </div>
           <Footer />
         </BrowserRouter>
-        <ToastContainer autoClose={2000} />
+        <ToastContainer autoClose={2000} transition={Slide} />
       </div>
     </QueryClientProvider>
   );
