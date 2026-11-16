@@ -190,6 +190,8 @@ export const i18n_activity: Record<string, string> = {
   viewsN: `{0} views`,
   updated: "Last update",
   created: "Creation date",
+  updatedX: "Updated {0}",
+  createdX: "Created {0}",
 };
 
 export const i18n_errors: Record<string, string> = {

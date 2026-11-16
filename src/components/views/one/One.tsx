@@ -19,6 +19,7 @@ import { diffData } from "utils/validation";
 import Edit from "./Edit/Edit";
 import Browse from "./Browse/Browse";
 import ViewHeader from "components/views/ViewHeader/ViewHeader";
+import Timestamps from "./shared/Timestamps/Timestamps";
 import Alert from "components/ui/Alert/Alert";
 import Spinner from "components/ui/Spinner/Spinner";
 import type { Model, RecordData } from "types/model";
@@ -221,6 +222,9 @@ const One = () => {
         comments={data?.nb_comments}
         view={view}
       />
+      {!isNew && !isLoading && !error && data && (
+        <Timestamps created={data.created_at} updated={data.updated_at} />
+      )}
       {body()}
     </div>
   );

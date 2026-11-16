@@ -1,17 +1,10 @@
 @import "variables";
 
 .timestamps {
-  display: block;
-  width: 100%;
-  margin: 20px 0 0 10px;
-  color: $color-label;
+  margin: -24px 0 24px;
+  color: $color-text-secondary;
   font-size: $label-font-size;
-  > div {
-    > label {
-      margin-right: 5px;
-      &:after {
-        content: ":";
-      }
-    }
+  > time {
+    cursor: default;
   }
 }

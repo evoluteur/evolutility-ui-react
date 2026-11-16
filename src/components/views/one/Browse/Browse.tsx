@@ -13,7 +13,6 @@ import Button from "components/ui/Button/Button";
 import Field from "components/Field/Field";
 import Panel from "components/ui/Panel/Panel";
 import Collection from "../shared/Collection/Collection";
-import Timestamps from "../shared/Timestamps/Timestamps";
 import type { Field as FieldDef, Model, RecordData } from "types/model";
 // #endregion
 
@@ -84,7 +83,6 @@ const Browse = ({ entity, model, data }: BrowseProps) => {
             label={i18n_actions.edit}
           />
         </div>
-        <Timestamps created={data.created_at} updated={data.updated_at} />
       </div>
     </div>
   );

@@ -8,9 +8,11 @@
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(localizedFormat);
 dayjs.extend(customParseFormat);
+dayjs.extend(relativeTime);
 
 import { locale } from "i18n/i18n";
 // include locale support for other languages
@@ -129,6 +131,11 @@ export const dateString = (d: unknown): string => mFormat(d, "L");
 export const timeString = (d: string | null | undefined): string | null =>
   d ? dayjs(d, "HH:mm:ss").format("hh:mm A") : null;
 export const datetimeString = (d: unknown): string => mFormat(d, "L hh:mm A");
+// - long date (ex: "Sep 6, 2026")
+export const longDateString = (d: unknown): string => mFormat(d, "ll");
+// - relative time (ex: "2 days ago")
+export const relativeTimeString = (d: unknown): string =>
+  d ? dayjs(d as string).fromNow() : "";
 
 export const image = (d: string | null): React.ReactElement | null =>
   d === null ? null : <img src={d} className="img-thumbnail" alt="" />;

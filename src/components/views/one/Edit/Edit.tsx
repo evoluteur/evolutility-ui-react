@@ -18,7 +18,6 @@ import Button from "components/ui/Button/Button";
 import Field from "components/Field/Field";
 import Panel from "components/ui/Panel/Panel";
 import Collection from "../shared/Collection/Collection";
-import Timestamps from "../shared/Timestamps/Timestamps";
 import type {
   Field as FieldDef,
   FieldChangeArg,
@@ -157,9 +156,6 @@ const Edit = ({ entity, model, data, onFieldChange, onSave }: EditProps) => {
             );
           })}
         {panelActionButtons}
-        {!isNew && (
-          <Timestamps created={data.created_at} updated={data.updated_at} />
-        )}
       </div>
     </div>
   );
