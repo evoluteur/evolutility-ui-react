@@ -152,7 +152,7 @@ Route: "/{entity}/charts"
 
 <a name="Stats"></a>
 ### Stats
-Display last update, number of updates in the last week, and for numeric fields the min, max, count, average.
+Display last update, number of updates in the last week, the number of nulls for each field, and for numeric fields the min, max, count, average, or for string fields the min and max length.
 
 ![Stats](public/pix/screenshots/analytics-stats.png)
 

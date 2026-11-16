@@ -176,6 +176,8 @@ export const i18n_stats: Record<string, string> = {
   variance: "Variance",
   min: "Minimum",
   max: "Maximum",
+  minLength: "Min. length",
+  maxLength: "Max. length",
   sum: "Sum", // "Total", ?
   noFit: "The data doesn't have any numeric fields necessary for stats.",
   fields: "Fields",
