@@ -4,12 +4,14 @@ import logoEvol from "./evologo.png";
 import { views, modelViewsMany } from "utils/dicoViews";
 import { getModel } from "utils/moMa";
 import { evoPath } from "utils/format";
+import config from "config";
 import ViewActions from "./ViewActions";
 import GitHubLink from "./GitHubLink";
 
 import "./TopBar.scss";
 
 const ovw = views.overview;
+const withOverview = config.entityRoot === "overview";
 const TopBar = () => {
   const loc = useLocation();
   const path = loc.pathname.split("/");
@@ -24,9 +26,11 @@ const TopBar = () => {
       {model && (
         <div className="topbar-icons">
           <div className="icons-always">
-            <Link to={entityLink} aria-label={ovw.label}>
-              <Icon name={ovw.icon} tooltip={ovw.label} theme="dark" />
-            </Link>
+            {withOverview && (
+              <Link to={entityLink + ovw.id} aria-label={ovw.label}>
+                <Icon name={ovw.icon} tooltip={ovw.label} theme="dark" />
+              </Link>
+            )}
             {modelViewsMany(model, true).map((v) => (
               <Link to={entityLink + v.id} key={v.id} aria-label={v.label}>
                 <Icon name={v.icon} tooltip={v.label} theme="dark" />

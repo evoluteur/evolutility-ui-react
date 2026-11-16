@@ -1,5 +1,5 @@
 // Routes for Evolutility views
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import config from "config";
 
 import One from "components/views/one/One";
@@ -11,7 +11,17 @@ import Activity from "components/views/comfort/Activity/Activity";
 
 const EvolRoutes = () => (
   <Routes>
-    <Route path="/:entity/" element={<Overview />} />
+    <Route
+      path="/:entity/"
+      element={
+        config.entityRoot === "overview" ? (
+          <Overview />
+        ) : (
+          <Navigate to="list" replace />
+        )
+      }
+    />
+    <Route path="/:entity/overview" element={<Overview />} />
     <Route path="/:entity/:view/:id" element={<One />} />
     <Route path="/:entity/:view" element={<Many />} />
     <Route path="/:entity/charts" element={<Charts />} />
