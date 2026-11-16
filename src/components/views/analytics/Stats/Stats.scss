@@ -3,12 +3,28 @@
 $label-width: 270px;
 $label2-width: 100px;
 
+@media (max-width: $media-small) {
+  .stats-fields {
+    grid-template-columns: minmax(0, 1fr) !important;
+    .stats-nav {
+      flex-direction: row !important;
+      flex-wrap: wrap;
+      > button {
+        width: auto !important;
+      }
+    }
+  }
+}
+
 .evol-stats {
   .evo-label {
     margin-bottom: 7px;
   }
+  // - subtitle under the page title (like timestamps in Browse/Edit)
   .label-count {
-    margin-bottom: 10px;
+    margin: -24px 0 24px;
+    color: $color-text-secondary;
+    font-size: $label-font-size;
   }
 }
 .stat-field-title {
@@ -25,15 +41,58 @@ $label2-width: 100px;
   top: 18px;
   right: 20px;
 }
+// - 2 columns: list of fields (nav) on the left, stats of selected field on the right
 .stats-fields {
-  @include flex-holder();
-  gap: $gap;
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  .stats-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px;
+    border: $border;
+    border-radius: $radius;
+    background-color: $bgcolor-background;
+    > button {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: $gap;
+      width: 100%;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: transparent;
+      color: $color-text;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      .stats-nav-label {
+        @include ellipsis();
+      }
+      .stats-nav-type {
+        flex-shrink: 0;
+        color: $color-text-secondary;
+        font-size: 12px;
+      }
+      &:hover:not(.active) {
+        background-color: $bgcolor-header;
+      }
+      &.active {
+        background-color: $bgcolor-badge;
+        font-weight: 600;
+        cursor: default;
+      }
+    }
+  }
   .f-stats {
-    flex: 1 1 0px;
-    flex-grow: 1;
-    position: relative;
-    @include flex-item();
-    min-width: 340px;
+    // - stays in view while scrolling a long list of fields
+    position: sticky;
+    top: 70px; // top bar height (50px) + gap
+    margin: 0;
+    min-width: 0;
     padding: 10px 20px;
     .stat-values > div {
       margin-bottom: 10px;

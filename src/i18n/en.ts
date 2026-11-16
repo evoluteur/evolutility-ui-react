@@ -161,7 +161,7 @@ export const i18n_comments: Record<string, string> = {
 };
 
 export const i18n_stats: Record<string, string> = {
-  metaCount: "{0} records, {1} fields",
+  metaCount: "{0} records · {1} fields",
   collecsCount: ", {0} collections",
   statsTitle: "{0} Stats",
   weekUpdates: " records added or updated this week",
@@ -178,6 +178,7 @@ export const i18n_stats: Record<string, string> = {
   max: "Maximum",
   sum: "Sum", // "Total", ?
   noFit: "The data doesn't have any numeric fields necessary for stats.",
+  fields: "Fields",
   noData: "No data",
   emptyData: "The query returned no results.",
 };

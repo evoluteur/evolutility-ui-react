@@ -7,7 +7,7 @@
 // (c) 2026 Olivier Giulieri
 
 // #region ---------------- Imports ----------------
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getModel } from "utils/moMa";
 import { i18n_stats, i18n_comments } from "i18n/i18n";
@@ -88,6 +88,8 @@ const Stats = () => {
   const model = getModel(entity);
   const title = i18n_stats.statsTitle.replace("{0}", model?.title || "");
   const { data, isLoading, error } = useStats(entity as string);
+  // - field selected in the left nav (defaults to the first one)
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   useEffect(() => {
     document.title = title;
@@ -124,6 +126,9 @@ const Stats = () => {
       i18n_comments.comment,
       i18n_comments.comments,
     );
+    const statFields = model.fields.filter((f) => data[f.id] !== undefined);
+    const curField =
+      statFields.find((f) => f.id === selectedId) || statFields[0];
     body = (
       <div className="evol-stats">
         <div className="cols-2">
@@ -153,14 +158,25 @@ const Stats = () => {
               </div>
             )}
         </div>
-        <div className="stats-fields">
-          {model.fields?.map((f) => {
-            if (data[f.id] !== undefined) {
-              return statsField(data[f.id], f, data.count);
-            }
-            return null;
-          })}
-        </div>
+        {statFields.length > 0 && (
+          <div className="stats-fields">
+            <nav className="stats-nav" aria-label={i18n_stats.fields}>
+              {statFields.map((f) => (
+                <button
+                  key={f.id}
+                  type="button"
+                  className={f.id === curField?.id ? "active" : undefined}
+                  aria-current={f.id === curField?.id ? "true" : undefined}
+                  onClick={() => setSelectedId(f.id)}
+                >
+                  <span className="stats-nav-label">{f.label}</span>
+                  <span className="stats-nav-type">{f.type}</span>
+                </button>
+              ))}
+            </nav>
+            {curField && statsField(data[curField.id], curField, data.count)}
+          </div>
+        )}
       </div>
     );
   }
