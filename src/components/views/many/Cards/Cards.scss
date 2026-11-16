@@ -62,7 +62,8 @@
     z-index: 50;
     position: absolute;
     top: 0;
-    right: -50px;
+    right: -100px;
+    display: flex;
     visibility: hidden;
     padding: 0 4px 4px 4px;
     background-color: $bgcolor-background;
@@ -76,6 +77,11 @@
     @include icons-actions();
     i {
       margin: 5px 0 0 0;
+    }
+    > button {
+      padding: 0;
+      border: none;
+      background: transparent;
     }
   }
 }

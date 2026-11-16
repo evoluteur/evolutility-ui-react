@@ -10,6 +10,7 @@ import Icon from "components/ui/Icon/Icon";
 import { Link } from "react-router-dom";
 import { getModel } from "utils/moMa";
 import { pixPath } from "utils/format";
+import { i18n_actions } from "i18n/i18n";
 import { fieldTypes as ft } from "utils/dico";
 import FieldValue from "components/Field/browse/FieldValue";
 import type { Field, RecordData } from "types/model";
@@ -21,9 +22,11 @@ export interface CardProps {
   fields: Field[];
   /** Data (1 single record/Object). */
   data?: RecordData | null;
+  /** Callback for the delete button (no delete button if not specified). */
+  onDelete?: (data: RecordData) => void;
 }
 
-const Card = memo(({ entity, data, fields }: CardProps) => {
+const Card = memo(({ entity, data, fields, onDelete }: CardProps) => {
   const d = data || {};
   const m = getModel(entity)!;
   const linkBrowse = `../${entity}/${m.defaultViewOne || "browse"}/`;
@@ -45,9 +48,22 @@ const Card = memo(({ entity, data, fields }: CardProps) => {
                 </Link>
               </h2>
               <div className="card-actions noprint">
-                <Link to={linkEdit + d.id}>
-                  <Icon name="edit" size="small" />
+                <Link to={linkEdit + d.id} aria-label={i18n_actions.edit}>
+                  <Icon name="edit" size="small" tooltip={i18n_actions.edit} />
                 </Link>
+                {onDelete && !m.readOnly && (
+                  <button
+                    type="button"
+                    aria-label={i18n_actions.delete1}
+                    onClick={() => onDelete(d)}
+                  >
+                    <Icon
+                      name="delete"
+                      size="small"
+                      tooltip={i18n_actions.delete1}
+                    />
+                  </button>
+                )}
               </div>
             </div>
           );

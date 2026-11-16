@@ -200,6 +200,7 @@ export const i18n_errors: Record<string, string> = {
   badId: 'No data found for id="{0}".',
   badEntity: 'Model "{0}" not found.',
   badUpload: "Error uploading file.",
+  badDelete: "Couldn't delete {0}.",
 };
 
 export const i18n_404: Record<string, string> = {
