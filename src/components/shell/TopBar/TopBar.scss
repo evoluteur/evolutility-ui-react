@@ -38,6 +38,28 @@ $topbar-height: 50px;
     }
   }
 }
+.theme-toggle {
+  position: absolute;
+  right: 54px;
+  top: 10px;
+  padding: 2px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+  > svg {
+    fill: $color-almostwhite;
+  }
+  &:hover,
+  &:focus-visible {
+    > svg {
+      fill: $color-blue1;
+    }
+  }
+  @media (max-width: 600px) {
+    right: 10px;
+  }
+}
 .icons-always,
 .icons-context {
   height: $topbar-height;

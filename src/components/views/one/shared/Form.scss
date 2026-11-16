@@ -1,5 +1,7 @@
 // copied and modified from bootstrap-sass v3.4.1
 
+@import "variables";
+
 label {
   display: inline-block;
   max-width: 100%;
@@ -31,9 +33,9 @@ input[type="checkbox"]:focus {
   height: 38px;
   padding: 4px 6px;
   line-height: 1.428571429;
-  color: #555;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  color: var(--evo-text-input);
+  background-color: $bgcolor-input;
+  border: 1px solid $color-border-input;
   border-radius: 4px;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   transition:
@@ -48,12 +50,12 @@ input[type="checkbox"]:focus {
     0 0 8px rgba(102, 175, 233, 0.6);
 }
 .form-control::-moz-placeholder {
-  color: #999;
+  color: var(--evo-placeholder);
   opacity: 1;
 }
 .form-control:-ms-input-placeholder,
 .form-control::-webkit-input-placeholder {
-  color: #999;
+  color: var(--evo-placeholder);
 }
 // .form-control[disabled],
 // .form-control[readonly],
@@ -134,10 +136,10 @@ fieldset[disabled] .checkbox label {
   .checkbox label,
   .radio-inline label,
   .checkbox-inline label {
-    color: #a94442;
+    color: var(--evo-danger-text);
   }
   .form-control {
-    border-color: #a94442;
+    border-color: var(--evo-danger-text);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     &:focus {
       border-color: #843534;
@@ -147,9 +149,9 @@ fieldset[disabled] .checkbox label {
     }
   }
   .input-group-addon {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #a94442;
+    color: var(--evo-danger-text);
+    background-color: var(--evo-danger-bg);
+    border-color: var(--evo-danger-text);
   }
 }
 
@@ -174,10 +176,10 @@ fieldset[disabled] .checkbox label {
   font-weight: 400;
   line-height: 1;
   min-width: 31px;
-  color: #555;
+  color: var(--evo-text-input);
   text-align: center;
-  background-color: #eee;
-  border: 1px solid #ccc;
+  background-color: var(--evo-bg-addon);
+  border: 1px solid $color-border-input;
   border-radius: 4px;
   input[type="radio"],
   input[type="checkbox"] {
@@ -262,6 +264,6 @@ a.input-group-addon {
   text-decoration: none;
   cursor: pointer;
   &:hover {
-    background-color: #e0e0e0;
+    background-color: var(--evo-bg-addon-hover);
   }
 }

@@ -55,7 +55,7 @@ $chart-gap: 5px;
 }
 .chart-content {
   position: relative;
-  border: 1px solid white;
+  border: 1px solid $bgcolor-background;
   overflow: hidden;
   min-height: 100%;
   border-radius: $radius;
@@ -103,7 +103,7 @@ $chart-gap: 5px;
       cursor: default !important;
       border-color: $color-icon-active;
       > svg {
-        fill: $color-almostblack !important;
+        fill: $color-text !important;
       }
     }
     > svg {
@@ -129,7 +129,7 @@ $chart-gap: 5px;
   position: absolute;
   bottom: 40px;
   right: 22px;
-  background-color: white;
+  background-color: $bgcolor-background;
   height: 30px;
   width: 100px;
 }

@@ -15,6 +15,15 @@
       href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap"
       rel="stylesheet"
     />
+    <script>
+      // apply theme before first paint (avoids a light flash in dark mode)
+      try {
+        var t = localStorage.getItem("evol-theme");
+        if (t !== "dark" && t !== "light")
+          t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
     <title>Evolutility</title>
     <meta
       name="description"

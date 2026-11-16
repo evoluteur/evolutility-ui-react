@@ -1,5 +1,7 @@
 // copied and modified from bootstrap-sass v3.4.1
 
+@import "variables";
+
 * {
   box-sizing: border-box;
   &:before,
@@ -21,8 +23,8 @@ img {
 .img-thumbnail {
   padding: 0;
   line-height: 1.428571429;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: $bgcolor-background;
+  border: 1px solid $color-border;
   border-radius: 4px;
   display: inline-block;
   max-width: 100%;

@@ -1,4 +1,5 @@
 @import "variables";
+@import "theme";
 
 html {
   height: 100%; // IE
@@ -11,7 +12,8 @@ body {
   height: 100%; // IE
   font-size: $text-font-size;
   font-family: "Open Sans", sans-serif;
-  color: $color-almostblack;
+  color: $color-text;
+  background-color: $bgcolor-main;
 }
 p {
   font-size: $text-font-size;
@@ -30,7 +32,7 @@ h3 {
 /* TODO: for now here */
 
 .black {
-  color: $color-almostblack !important;
+  color: $color-text !important;
 }
 .grey {
   color: silver;

@@ -8,7 +8,7 @@
   max-height: calc(100vh - 60px);
   padding: 0;
   overflow: hidden auto;
-  background-color: #fff;
+  background-color: var(--evo-bg);
   border: $border;
   border-radius: $radius;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -58,8 +58,7 @@
     font-size: 21px;
     font-weight: bold;
     line-height: 1;
-    color: #000;
-    text-shadow: 0 1px 0 #fff;
+    color: var(--evo-text);
     cursor: pointer;
     background: none;
     border: 0;

@@ -3,11 +3,14 @@
 import { useMemo } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import type { ChartCommonProps } from "./chartProps";
-import { colors, labelColor, innerLabelColor } from "./chartOptions";
+import { colors, labelColor, innerLabelColor, gridColor } from "./chartOptions";
 
 const theme = {
   axis: {
     ticks: { text: { fill: labelColor } },
+  },
+  grid: {
+    line: { stroke: gridColor },
   },
 };
 

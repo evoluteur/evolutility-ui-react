@@ -6,7 +6,7 @@
   position: relative;
   padding: 15px;
   margin-bottom: 20px;
-  border: 1px solid silver;
+  border: 1px solid $color-border-hover;
   border-left-width: 12px;
   border-radius: $radius;
   > .alert-title {
@@ -35,46 +35,46 @@
 
 // the following are shared b/w Alert and Badge components
 .alert-success {
-  color: #3c763d;
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
+  color: var(--evo-success-text);
+  background-color: var(--evo-success-bg);
+  border-color: var(--evo-success-border);
   a {
-    color: #3c763d;
+    color: var(--evo-success-text);
   }
   > .alert-title > svg {
-    fill: #3c763d;
+    fill: var(--evo-success-text);
   }
 }
 .alert-info {
-  color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
+  color: var(--evo-info-text);
+  background-color: var(--evo-info-bg);
+  border-color: var(--evo-info-border);
   a {
-    color: #31708f;
+    color: var(--evo-info-text);
   }
   > .alert-title > svg {
-    fill: #31708f;
+    fill: var(--evo-info-text);
   }
 }
 .alert-warning {
-  color: #8a6d3b;
-  background-color: #fcf8e3;
-  border-color: #faebcc;
+  color: var(--evo-warning-text);
+  background-color: var(--evo-warning-bg);
+  border-color: var(--evo-warning-border);
   a {
-    color: #8a6d3b;
+    color: var(--evo-warning-text);
   }
   > .alert-title > svg {
-    fill: #8a6d3b;
+    fill: var(--evo-warning-text);
   }
 }
 .alert-danger {
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
+  color: var(--evo-danger-text);
+  background-color: var(--evo-danger-bg);
+  border-color: var(--evo-danger-border);
   a {
-    color: #a94442;
+    color: var(--evo-danger-text);
   }
   > .alert-title > svg {
-    fill: #a94442;
+    fill: var(--evo-danger-text);
   }
 }

@@ -13,7 +13,7 @@
     > div {
       display: inline-block;
       margin-left: 20px;
-      color: silver;
+      color: $color-text-secondary;
       &.visits {
         color: $color-text-secondary;
         min-width: 70px;

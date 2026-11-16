@@ -33,7 +33,7 @@
       max-width: 600px;
       width: 100%;
       border: $border;
-      box-shadow: 2px 2px 4px #aaaaaa;
+      box-shadow: 2px 2px 4px var(--evo-shadow);
     }
   }
   .toc-view {

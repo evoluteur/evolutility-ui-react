@@ -27,7 +27,7 @@
   }
   &:hover,
   &:focus {
-    color: #333;
+    color: var(--evo-btn-default-text);
     text-decoration: none;
   }
   &:active {
@@ -49,18 +49,18 @@ fieldset[disabled] a.btn {
   pointer-events: none;
 }
 .btn-default {
-  color: #333;
-  background-color: #fff;
-  border-color: #ccc;
+  color: var(--evo-btn-default-text);
+  background-color: var(--evo-btn-default-bg);
+  border-color: $color-border-input;
   > svg {
-    fill: #333 !important;
+    fill: var(--evo-btn-default-text) !important;
   }
   &:focus,
   &:hover,
   &:active {
-    color: #333;
-    background-color: #e6e6e6;
-    border-color: #8c8c8c;
+    color: var(--evo-btn-default-text);
+    background-color: var(--evo-btn-default-bg-hover);
+    border-color: var(--evo-btn-default-border-hover);
   }
 }
 .btn-default.disabled:hover,
@@ -69,8 +69,8 @@ fieldset[disabled] a.btn {
 .btn-default[disabled]:focus,
 fieldset[disabled] .btn-default:hover,
 fieldset[disabled] .btn-default:focus {
-  background-color: #fff;
-  border-color: #ccc;
+  background-color: var(--evo-btn-default-bg);
+  border-color: $color-border-input;
 }
 .btn-primary {
   color: #fff;

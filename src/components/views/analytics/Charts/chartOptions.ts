@@ -1,7 +1,10 @@
 export const colors = { scheme: "category10" } as const;
 
-export const labelColor = "#333333";
+// CSS variable so chart labels follow the light/dark theme
+export const labelColor = "var(--evo-chart-label)";
 export const innerLabelColor = "white";
+// - grid lines (subtle in dark mode)
+export const gridColor = "var(--evo-chart-grid)";
 
 const chartOptions = {
   colors,

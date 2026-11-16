@@ -19,7 +19,7 @@
     &:hover,
     &:focus {
       color: $color-link-hover;
-      background-color: #eee;
+      background-color: $bgcolor-hover;
       border-color: $color-border-hover;
     }
     &.active,
@@ -33,9 +33,9 @@
     &.disabled,
     &.disabled :hover,
     &.disabled :focus {
-      color: #777;
+      color: $color-disabled;
       cursor: not-allowed;
-      background-color: #fff;
+      background-color: $bgcolor-background;
       border: none;
       padding: 6px 0;
       min-width: 12px;

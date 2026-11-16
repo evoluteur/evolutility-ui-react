@@ -1,17 +1,23 @@
 $color-almostwhite: #fcfcfc;
 $color-almostblack: #0d0d0d;
 
-$bgcolor-main: $color-almostwhite;
-$bgcolor-background: white;
-$bgcolor-header: #fbfbfb;
-$bgcolor-badge: #ebebeb;
+// Themed colors: values are CSS custom properties defined in "theme.scss"
+// (light by default, dark with <html data-theme="dark">).
+$bgcolor-main: var(--evo-bg-main);
+$bgcolor-background: var(--evo-bg);
+$bgcolor-header: var(--evo-bg-header);
+$bgcolor-badge: var(--evo-bg-badge);
+$bgcolor-hover: var(--evo-bg-hover);
+$bgcolor-input: var(--evo-bg-input);
+$bgcolor-code: var(--evo-bg-code);
 
-$color-text: $color-almostblack;
-$color-text-secondary: grey;
-$color-label: grey;
-$color-border: #ddd;
-$color-border-hover: silver;
-$color-disabled: silver;
+$color-text: var(--evo-text);
+$color-text-secondary: var(--evo-text-secondary);
+$color-label: var(--evo-label);
+$color-border: var(--evo-border);
+$color-border-hover: var(--evo-border-hover);
+$color-border-input: var(--evo-border-input);
+$color-disabled: var(--evo-disabled);
 
 $bgcolor-panel-header: $bgcolor-header;
 $bgcolor-panel-footer: $bgcolor-header;
@@ -29,7 +35,7 @@ $gap: 10px;
 $text-font-size: 16px;
 $label-font-size: 14px;
 
-$color-text-footer: #607d8b;
+$color-text-footer: var(--evo-text-footer);
 
 // golden ratio
 $golden-ratio-big: 62%;
@@ -39,12 +45,12 @@ $golden-ratio-small: 38%;
 $color-nav: #bbdefb; //#23527c;//#FFE0B2;
 $color-nav-hover: white; //#337ab7; //#E0F7FA;
 $color-nav-active: #e0f7fa;
-$color-icon-hover: #0d47a1;
-$color-icon: #428bca;
+$color-icon-hover: var(--evo-icon-hover);
+$color-icon: var(--evo-icon);
 $color-help-icon: silver;
 
-$color-link: #337ab7;
-$color-link-hover: #23527c;
+$color-link: var(--evo-link);
+$color-link-hover: var(--evo-link-hover);
 
 $color-svg-hover: $color-blue1;
 
@@ -92,7 +98,7 @@ $icon-size: 16px;
       fill: $color-icon-hover;
     }
     &.active {
-      fill: $color-almostblack;
+      fill: $color-text;
       cursor: default;
     }
   }

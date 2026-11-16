@@ -3,8 +3,8 @@
 $color-hover: blue;
 
 .pretty-json {
-  background-color: #f5f5f5;
-  border: 1px solid silver;
+  background-color: var(--evo-bg-code);
+  border: 1px solid var(--evo-border);
   padding: 10px 10px 10px 30px;
   border-radius: 5px;
   .tab {
@@ -47,7 +47,7 @@ $color-hover: blue;
       height: $icon-size;
       border: 1px solid silver;
       border-radius: 2px;
-      background-color: $color-almostwhite;
+      background-color: $bgcolor-main;
       &:hover {
         fill: $color-hover;
         border-color: $color-hover;

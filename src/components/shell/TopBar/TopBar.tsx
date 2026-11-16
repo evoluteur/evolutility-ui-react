@@ -7,6 +7,7 @@ import { evoPath } from "utils/format";
 import config from "config";
 import ViewActions from "./ViewActions";
 import GitHubLink from "./GitHubLink";
+import ThemeToggle from "./ThemeToggle";
 
 import "./TopBar.scss";
 
@@ -40,6 +41,7 @@ const TopBar = () => {
           <ViewActions entity={entity} view={view} id={id} />
         </div>
       )}
+      <ThemeToggle />
       <GitHubLink />
     </nav>
   );
