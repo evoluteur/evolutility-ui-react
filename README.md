@@ -69,6 +69,8 @@ Configurations options are specified in the file [/src/config.ts](https://github
 | queryModels | Get models from JSON files or from the database through the API. (not implemented yet) |
 | withTimestamp | Tracks and shows timestamp for creation date and last update for every record. The DB tables need timestamp columns "updated_at" and "created_at" for the feature to work. (partial implementation) | true |
 
+Light and dark modes: the UI follows the OS setting by default, and the sun/moon button in the top bar switches between them (the choice is saved in the browser's localStorage).
+
 
 <a name="Views"></a>
 ## Views
