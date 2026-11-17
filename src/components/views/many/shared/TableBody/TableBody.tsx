@@ -4,6 +4,8 @@ import { pixPath } from "utils/format";
 import FieldValue from "components/Field/browse/FieldValue";
 import type { Field, RecordData } from "types/model";
 
+import "./TableBody.scss";
+
 export interface TableBodyProps {
   /** Array of field definitions */
   fields: Field[];

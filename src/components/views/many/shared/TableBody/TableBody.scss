@@ -1,0 +1,11 @@
+@import "variables";
+
+// - shared by the List view and the collections in Browse and Edit views
+.td-check {
+  padding-top: 0;
+  padding-bottom: 0;
+  > svg {
+    height: $icon-size;
+    width: $icon-size;
+  }
+}
