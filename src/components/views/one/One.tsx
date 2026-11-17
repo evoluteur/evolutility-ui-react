@@ -22,7 +22,7 @@ import ViewHeader from "components/views/ViewHeader/ViewHeader";
 import Timestamps from "./shared/Timestamps/Timestamps";
 import Alert from "components/ui/Alert/Alert";
 import Spinner from "components/ui/Spinner/Spinner";
-import type { Model, RecordData } from "types/model";
+import type { LovValue, Model, RecordData } from "types/model";
 import type { LovsResult } from "types/api";
 
 import "./One.scss";
@@ -57,7 +57,10 @@ const recordTitle = (
       if (m.titleFunction) {
         return m.titleFunction(Object.assign({}, data));
       }
-      return (m.titleField && data[m.titleField]) || capitalize(m.name);
+      const v = m.titleField ? data[m.titleField] : null;
+      // - lov fields values are objects { id, name }
+      const t = v && typeof v === "object" ? (v as LovValue).name : v;
+      return (t as string) || capitalize(m.name);
     }
     return m.title || "";
   }
@@ -133,7 +136,7 @@ const One = () => {
       logActivity(
         entity as string,
         id as string,
-        data[model.titleField],
+        recordTitle(model, data, false),
         "read",
       );
     }

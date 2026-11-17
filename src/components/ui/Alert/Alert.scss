@@ -21,7 +21,7 @@
       height: 24px;
     }
   }
-  a {
+  a:not(.btn) {
     text-decoration: underline;
   }
   > div,
@@ -38,7 +38,7 @@
   color: var(--evo-success-text);
   background-color: var(--evo-success-bg);
   border-color: var(--evo-success-border);
-  a {
+  a:not(.btn) {
     color: var(--evo-success-text);
   }
   > .alert-title > svg {
@@ -49,7 +49,7 @@
   color: var(--evo-info-text);
   background-color: var(--evo-info-bg);
   border-color: var(--evo-info-border);
-  a {
+  a:not(.btn) {
     color: var(--evo-info-text);
   }
   > .alert-title > svg {
@@ -60,7 +60,7 @@
   color: var(--evo-warning-text);
   background-color: var(--evo-warning-bg);
   border-color: var(--evo-warning-border);
-  a {
+  a:not(.btn) {
     color: var(--evo-warning-text);
   }
   > .alert-title > svg {
@@ -71,7 +71,7 @@
   color: var(--evo-danger-text);
   background-color: var(--evo-danger-bg);
   border-color: var(--evo-danger-border);
-  a {
+  a:not(.btn) {
     color: var(--evo-danger-text);
   }
   > .alert-title > svg {
