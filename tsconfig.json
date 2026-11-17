@@ -28,7 +28,6 @@
       "pages/*": ["./src/pages/*"],
       "routes/*": ["./src/routes/*"],
       "i18n/*": ["./src/i18n/*"],
-      "models/*": ["./src/models/*"],
       "dao/*": ["./src/dao/*"],
       "types/*": ["./src/types/*"],
       "react-crud-icons": ["./src/components/ui/Icon/Icon.tsx"]

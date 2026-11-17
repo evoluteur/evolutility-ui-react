@@ -71,6 +71,12 @@ export interface Field {
   chartObject?: string;
   aggregate?: string;
   fnValidate?: (field: Field, value: unknown) => string;
+  // - DB props (models from the server)
+  column?: string;
+  lovTable?: string;
+  // - field only used by the server (ignored by the UI) or only by the UI
+  onlyDB?: boolean;
+  onlyUI?: boolean;
 }
 
 export interface FieldGroup {

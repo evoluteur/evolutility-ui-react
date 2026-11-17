@@ -17,7 +17,6 @@ export default defineConfig({
       pages: src("pages"),
       routes: src("routes"),
       i18n: src("i18n"),
-      models: src("models"),
       dao: src("dao"),
       types: src("types"),
     },
@@ -36,7 +35,7 @@ export default defineConfig({
     setupFiles: "./src/setupTests.ts",
     coverage: {
       include: ["src/**/*.{ts,tsx}"],
-      exclude: ["src/models/**"],
+      exclude: ["src/fixtures/**"],
       reporter: ["text", "html"],
     },
   },

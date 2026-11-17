@@ -1,5 +1,5 @@
 /*
-  Evolutility UI model for To-Do List
+  Model for tests (the app gets its models from the server).
   https://github.com/evoluteur/evolutility-ui-react
 */
 

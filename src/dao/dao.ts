@@ -14,7 +14,15 @@
 import config from "config";
 import { i18n_errors } from "i18n/i18n";
 import { getModel } from "utils/moMa";
-import { ApiError, apiUrl, apiGet, apiPost, apiPatch, apiDelete } from "./api";
+import {
+  ApiError,
+  apiUrl,
+  apiGet,
+  apiPost,
+  apiPatch,
+  apiPut,
+  apiDelete,
+} from "./api";
 import {
   recordToRest,
   restToChart,
@@ -29,6 +37,9 @@ import type {
   RecordData,
 } from "types/model";
 import type {
+  ModelDef,
+  ModelVersion,
+  SaveModelResult,
   LovOption,
   LovsResult,
   ManyQueryOptions,
@@ -262,6 +273,49 @@ export async function getStats(
 }
 //#endregion
 
+//#region  ----- Models (stored on the server) ----------------------------
+
+// - all models (full models, as stored)
+export const getModelDefs = (signal?: AbortSignal) =>
+  apiGet<ModelDef[]>("meta/models", { signal });
+
+export const getModelDef = (id: string, signal?: AbortSignal) =>
+  apiGet<ModelDef>(`meta/models/${encodeURIComponent(id)}`, { signal });
+
+export const getModelHistory = (id: string, signal?: AbortSignal) =>
+  apiGet<ModelVersion[]>(`meta/models/${encodeURIComponent(id)}/history`, {
+    signal,
+  });
+
+export const getModelVersion = (
+  id: string,
+  version: number,
+  signal?: AbortSignal,
+) =>
+  apiGet<ModelDef>(`meta/models/${encodeURIComponent(id)}/history/${version}`, {
+    signal,
+  });
+
+// - create (isNew) or update a model; "dryRun" only checks it and lists
+//   the changes to the database
+export const saveModelDef = (
+  model: ModelDef,
+  { isNew = false, dryRun = false } = {},
+) => {
+  const params = dryRun ? { dryRun: true } : undefined;
+  return isNew
+    ? apiPost<SaveModelResult>("meta/models", { body: model, params })
+    : apiPut<SaveModelResult>(`meta/models/${encodeURIComponent(model.id)}`, {
+        body: model,
+        params,
+      });
+};
+
+// - delete a model (the server keeps its table and data)
+export const deleteModelDef = (id: string) =>
+  apiDelete<{ id: string }>(`meta/models/${encodeURIComponent(id)}`);
+//#endregion
+
 const dao = {
   getMany,
   getManyCSVUrl,
@@ -276,6 +330,12 @@ const dao = {
   getObjectSearch,
   getChart,
   getStats,
+  getModelDefs,
+  getModelDef,
+  getModelHistory,
+  getModelVersion,
+  saveModelDef,
+  deleteModelDef,
 };
 
 export default dao;

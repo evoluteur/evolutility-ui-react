@@ -112,7 +112,7 @@ const Metamodel = () => {
           <a
             target="wcm"
             rel="noopener noreferrer"
-            href="https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/winecellar.ts"
+            href="https://github.com/evoluteur/evolutility-models/blob/main/models/organizer/winecellar.ts"
           >
             Wine Cellar
           </a>

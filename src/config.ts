@@ -10,9 +10,6 @@ interface Config {
   // - Path to uploaded files
   filesUrl: string;
 
-  // - get models from server at startup (and add/replace json models)
-  queryModels: boolean;
-
   // - View shown at the object root url (ex: "/demos/todo/")
   entityRoot: "list" | "overview";
 
@@ -49,9 +46,6 @@ const config: Config = {
 
   // - Path to uploaded files
   filesUrl: "/pix/",
-
-  // - get models from server at startup (and add/replace json models)
-  queryModels: false,
 
   // - View shown at the object root url (ex: "/demos/todo/"): "list" or "overview"
   entityRoot: "list",

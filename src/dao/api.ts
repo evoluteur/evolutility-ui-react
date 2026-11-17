@@ -65,20 +65,28 @@ const jsonHeaders = {
   Accept: "application/json",
 };
 
-const errorMessage = async (response: Response): Promise<string> => {
+const errorDetails = async (
+  response: Response,
+): Promise<{ message: string; invalids?: InvalidField[] }> => {
   try {
     const body = await response.json();
     if (body?.error) {
-      return body.invalids?.length
-        ? `${body.error}: ${body.invalids
-            .map((i: InvalidField) => `${i.id} (${i.condition})`)
-            .join(", ")}.`
-        : String(body.error);
+      const invalids: InvalidField[] | undefined = body.invalids?.length
+        ? body.invalids
+        : undefined;
+      return {
+        message: invalids
+          ? `${body.error}: ${invalids
+              .map((i: InvalidField) => `${i.id} (${i.condition})`)
+              .join(", ")}.`
+          : String(body.error),
+        invalids,
+      };
     }
   } catch {
     // - response body is not JSON
   }
-  return `${response.status} ${response.statusText}.`;
+  return { message: `${response.status} ${response.statusText}.` };
 };
 
 async function request<T>(
@@ -102,7 +110,8 @@ async function request<T>(
     throw new ApiError((err as Error).message + ".");
   }
   if (!response.ok) {
-    throw new ApiError(await errorMessage(response), response.status);
+    const { message, invalids } = await errorDetails(response);
+    throw new ApiError(message, response.status, invalids);
   }
   if (response.status === 204) {
     return null as T;

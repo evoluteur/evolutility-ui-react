@@ -29,11 +29,11 @@ export interface DemoMenuItem {
   defaultViewMany: string;
 }
 
-export const demosMenu: DemoMenuItem[] = modelsArray.map(
-  ({ id, title: text, icon, defaultViewMany = "list" }) => ({
+// - computed on each call: models can change (loaded from the server, edited)
+export const getDemosMenu = (): DemoMenuItem[] =>
+  modelsArray.map(({ id, title: text, icon, defaultViewMany = "list" }) => ({
     id,
     text,
     icon,
     defaultViewMany,
-  }),
-);
+  }));

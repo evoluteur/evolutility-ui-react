@@ -129,3 +129,40 @@ describe("restToStats", () => {
     expect(stats.updated_at_week_count).toBe(3);
   });
 });
+
+describe("restToModel", () => {
+  it("drops DB-only fields and server props", async () => {
+    const { restToModel } = await import("./mapping");
+    const m = restToModel({
+      id: "m",
+      name: "m",
+      namePlural: "ms",
+      _version: 3,
+      _updatedAt: "2026-01-01",
+      fields: [
+        { id: "a", type: "text", label: "A", column: "a" },
+        { id: "b", type: "text", label: "B", onlyDB: true },
+      ],
+    });
+    expect(m.fields.map((f) => f.id)).toEqual(["a"]);
+    expect((m as unknown as Record<string, unknown>)._version).toBeUndefined();
+  });
+
+  it("turns titleFunction templates into functions", async () => {
+    const { restToModel } = await import("./mapping");
+    const m = restToModel({
+      id: "m",
+      name: "m",
+      namePlural: "ms",
+      titleFunction: "{wine.name} {drink_date}",
+      fields: [],
+    });
+    expect(
+      m.titleFunction?.({
+        wine: { id: 1, name: "Chablis" },
+        drink_date: "2026",
+      }),
+    ).toBe("Chablis 2026");
+    expect(m.titleFunction?.({})).toBe(" ");
+  });
+});

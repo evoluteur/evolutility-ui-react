@@ -5,7 +5,7 @@
   https://github.com/evoluteur/evolutility-ui-react
 */
 
-import type { RecordData, ChartDatum, LovListItem } from "./model";
+import type { RecordData, ChartDatum, LovListItem, ModelInput } from "./model";
 
 // - Query parameters accepted by the REST "list" end-point:
 //   pagination ("page", "pageSize"), sorting ("order" like "title.asc"),
@@ -50,3 +50,29 @@ export interface LovOption {
 }
 
 export type OneResult = RecordData;
+
+// - Model as stored on the server (JSON in table "evol_model"):
+//   UI and DB props together, "titleFunction" as a template ("{firstname} {lastname}").
+export type ModelDef = Omit<ModelInput, "titleFunction"> & {
+  titleFunction?: string | null;
+  table?: string;
+  pKey?: string;
+  // - version of the model (required to save changes)
+  _version?: number;
+  _updatedAt?: string;
+  [prop: string]: unknown;
+};
+
+// - Answer to saving a model (or checking it w/ "dryRun")
+export interface SaveModelResult {
+  model: ModelDef;
+  // - SQL run (or to run) to update the database
+  sql: string[];
+  warnings: string[];
+  dryRun: boolean;
+}
+
+export interface ModelVersion {
+  version: number;
+  savedAt: string;
+}

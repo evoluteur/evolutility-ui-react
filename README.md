@@ -15,8 +15,9 @@ Check out the [live demos](https://evoluteur.github.io/evodemo/#/demos).
 2. [Configuration](#Configuration)
 3. [Views](#Views) for [One](#ViewsOne), [Many](#ViewsMany) records, and for [Comfort](#ViewsComfort)
 4. [Models](#Models)
-5. [Backend](#Backend)
-6. [License](#License)
+5. [Designer](#Designer)
+6. [Backend](#Backend)
+7. [License](#License)
 
 <a name="Installation"></a>
 ## Installation
@@ -49,7 +50,7 @@ npm start
 
 In a web browser, go to the url [http://localhost:5173/](http://localhost:5173/).
 
-For the REST endpoints, you also need to install and run [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) which provides the matching REST endpoints based on the same metadata.
+For the REST endpoints, you also need to install and run [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) which provides the matching REST endpoints based on the same metadata (see [Backend](#Backend)). The UI gets its models from the server when it starts.
 
 
 <a name="Configuration"></a>
@@ -66,7 +67,6 @@ Configurations options are specified in the file [/src/config.ts](https://github
 | filesUrl   | Path to upload files to. | "/pix/" |
 | pageSize   | Page size in pagination.  | 50 |
 | withActivity | Tracks and shows records activity (last visited and most visited). Currently implemented w/ the browser's localStorage, it will be moved to the server later. | true |
-| queryModels | Get models from JSON files or from the database through the API. (not implemented yet) |
 | withTimestamp | Tracks and shows timestamp for creation date and last update for every record. The DB tables need timestamp columns "updated_at" and "created_at" for the feature to work. (partial implementation) | true |
 
 Light and dark modes: the UI follows the OS setting by default, and the sun/moon button in the top bar switches between them (the choice is saved in the browser's localStorage).
@@ -195,6 +195,8 @@ Each model describe an object and its list of fields. A single model is used for
 For any object, all UI views (List, Cards, Edit, Charts...) share the same model.
 All Fields are present in the Edit and Browse views. Fields can be flagged with "inMany" to be included in the List and Cards views, or "noCharts" and "noStats" to be excluded from the Charts or Stats views.
 
+Models are stored in the database of [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) (as JSON) and the UI gets them from the server when it starts. They are written in [Evolutility-Models](https://github.com/evoluteur/evolutility-models) and can be edited in the app with the [Designer](#Designer). Only models flagged as "active" are listed in the menus.
+
 
 ### Object
 
@@ -209,7 +211,7 @@ All Fields are present in the Edit and Browse views. Fields can be flagged with 
 | groups       | Array of [Groups](#Group). If not provided a single group will be used.   |
 | collections  | Array of [Collections](#Collection).      |
 | titleField      | Id of the field which value is used as record title. titleField can also be a function.                       |
-| titleFunction  | Function to calculate the record title based it's data. Example: titleFunction = (data, model) => data.firstname + " " + data.lastname;       | X   | X   |
+| titleFunction  | Template to calculate the record title from its data. Example: "{firstname} {lastname}". For fields of type "lov", use "{fieldid.name}" for the label of the value (ex: "{wine.name} {drink_date}").       | X   | X   |
 | defaultViewOne | To have List and Cards link to Edit instead of Browse, set defaultViewOne="edit". |
 
 
@@ -282,7 +284,7 @@ Multiple details tables can be specified with "collections".
 | header       | Text to be displayed before the collection.   |
 | footer       | Text to be displayed below the collection.    |
 
-Sample model using collections: [Wine Cellar](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/winecellar.js).
+Sample model using collections: [Wine Cellar](https://github.com/evoluteur/evolutility-models/blob/main/models/organizer/winecellar.ts).
 
 ### Sample model
 
@@ -394,33 +396,60 @@ The following example is the model for a simple graphic novels inventory app.
 
 ```
 
-More sample models: [To-do list](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/todo.js),
-[Address book](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/contact.js),
-[Restaurants list](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/restaurant.js),
-[Wine cellar](https://github.com/evoluteur/evolutility-ui-react/blob/main/src/models/organizer/winecellar.js).
+More sample models: [To-do list](https://github.com/evoluteur/evolutility-models/blob/main/models/organizer/todo.ts),
+[Address book](https://github.com/evoluteur/evolutility-models/blob/main/models/organizer/contact.ts),
+[Restaurants list](https://github.com/evoluteur/evolutility-models/blob/main/models/organizer/restaurant.ts),
+[Wine cellar](https://github.com/evoluteur/evolutility-models/blob/main/models/organizer/winecellar.ts).
+
+<a name="Designer"></a>
+## Designer
+
+The Designer edits the models stored on the server, directly in the app. It is at "/designer" (link in the side bar, and "edit" icon next to each object in the menu).
+
+- The list shows all models with their table, number of fields, version, and date of last change.
+- A model is edited as JSON. "Check changes" validates it and shows the changes to the database without saving. "Save" saves it and applies the changes.
+- Saving a new model creates its table, and adding a field adds a column. Nothing is ever dropped: removed fields keep their columns and data. Changing the type of a column is refused.
+- Changes apply right away (menus and views use the new model, no restart needed).
+- Older versions of a model can be loaded in the editor (and saved again to restore them).
+- If someone else saved the model in between, saving is refused: reload the model to get the latest version.
+
+Editing models requires the option "apiDesigner" in the server configuration.
 
 <a name="Backend"></a>
 ## Backend
 
-You will need to setup the REST backend [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) (Node.js, Express, and PostgreSQL) with the Evolutility demo database.
+You will need to setup the REST backend [Evolutility-Server-Node](https://github.com/evoluteur/evolutility-server-node) (Node.js, Express, and PostgreSQL) with the Evolutility demo database and models.
 
-1. Clone or download [evolutility-server-node](https://github.com/evoluteur/evolutility-server-node).
+1. Clone or download [evolutility-server-node](https://github.com/evoluteur/evolutility-server-node) and [evolutility-models](https://github.com/evoluteur/evolutility-models).
 2. Create a PostgreSQL database.
-3. In the server's ./config.ts file, set the "connectionString" and the "schema" to access your new database.
-4. From the server directory, run:
+3. From the evolutility-models directory, generate the SQL scripts and run them in order:
 
 ```bash
 # Install dependencies
 npm install
 
-# Create the demo tables and populate them w/ sample data
-npm run makedb
+# Generate the SQL scripts in "dist/db/sql/"
+npm run codegen:db
+
+# Create the demo tables w/ sample data, and store the models
+psql -d evolutility -f dist/db/sql/001_create_db_{datetime}.sql
+psql -d evolutility -f dist/db/sql/002_seed_data_{datetime}.sql
+psql -d evolutility -f dist/db/sql/003_create_models_{datetime}.sql
+psql -d evolutility -f dist/db/sql/004_seed_models_{datetime}.sql
+```
+
+4. In the server's ./config.ts file, set the "connectionString" and the "schema" to access your database.
+5. From the server directory, run:
+
+```bash
+# Install dependencies
+npm install
 
 # Run the REST API on http://localhost:2000/api/v1/
 npm start
 ```
 
-5. In Evolutility-UI-React, set the "apiPath" to the REST API url in the ./src/config.ts file.
+6. In Evolutility-UI-React, set the "apiPath" to the REST API url in the ./src/config.ts file.
 
 <a name="License"></a>
 ## License

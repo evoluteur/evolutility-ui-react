@@ -1,0 +1,51 @@
+.evo-designer {
+  padding: 0 20px 20px;
+  .page-title a {
+    color: inherit;
+  }
+  .evo-designer-version {
+    margin-left: 12px;
+    font-size: 0.6em;
+    color: var(--evo-text-secondary);
+  }
+  .evo-designer-models {
+    .e-icon {
+      height: 20px;
+      margin-right: 8px;
+    }
+    .align-right {
+      text-align: right;
+    }
+  }
+  .evo-designer-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0 14px;
+  }
+  .evo-designer-history {
+    width: auto;
+  }
+  .evo-designer-json {
+    font-family: Menlo, Consolas, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.4;
+    width: 100%;
+    min-height: 400px;
+    resize: vertical;
+    tab-size: 2;
+  }
+  .evo-designer-sql {
+    margin: 6px 0 0;
+    max-height: 300px;
+    overflow: auto;
+    white-space: pre-wrap;
+    background-color: var(--evo-bg-code);
+    color: var(--evo-text);
+  }
+  ul {
+    margin: 4px 0 0;
+    padding-left: 20px;
+  }
+}

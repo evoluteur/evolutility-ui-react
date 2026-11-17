@@ -9,6 +9,7 @@ import {
   updateOne,
 } from "./dao";
 import { apiPath } from "./api";
+import { removeModel, setModel } from "utils/moMa";
 
 interface FetchCall {
   url: string;
@@ -65,6 +66,19 @@ describe("getMany", () => {
 
 describe("getOne", () => {
   it("moves the sub-collections to the root of the record", async () => {
+    setModel({
+      id: "winecellar",
+      name: "wine",
+      namePlural: "wines",
+      fields: [{ id: "name", type: "text", label: "Name", inMany: true }],
+      collections: [
+        {
+          id: "wine_tastings",
+          title: "Tastings",
+          fields: [{ id: "comments", type: "text", label: "Comments" }],
+        },
+      ],
+    });
     mockFetch({
       id: 3,
       name: "Chateau Latour",
@@ -74,6 +88,7 @@ describe("getOne", () => {
     expect(calls[0].url).toBe(`${apiPath}winecellar/3`);
     expect(record.collections).toBeUndefined();
     expect(record.wine_tastings).toHaveLength(1);
+    removeModel("winecellar");
   });
 
   it("throws when the record is not found", async () => {
@@ -136,5 +151,66 @@ describe("getChart", () => {
     const data = await getChart("todo", "category");
     expect(calls[0].url).toBe(`${apiPath}todo/chart/category`);
     expect(data).toEqual([{ id: 1, label: "Home", value: 4 }]);
+  });
+});
+
+describe("models (Designer)", () => {
+  it("gets the models", async () => {
+    const { getModelDefs } = await import("./dao");
+    mockFetch([{ id: "todo", fields: [] }]);
+    const defs = await getModelDefs();
+    expect(calls[0].url).toBe(`${apiPath}meta/models`);
+    expect(defs[0].id).toBe("todo");
+  });
+
+  it("checks a new model w/ POST and dryRun", async () => {
+    const { saveModelDef } = await import("./dao");
+    mockFetch({ model: { id: "book" }, sql: [], warnings: [], dryRun: true });
+    await saveModelDef(
+      { id: "book", name: "b", namePlural: "bs", fields: [] },
+      { isNew: true, dryRun: true },
+    );
+    expect(calls[0].method).toBe("POST");
+    expect(calls[0].url).toBe(`${apiPath}meta/models?dryRun=true`);
+  });
+
+  it("saves a model w/ PUT and its version", async () => {
+    const { saveModelDef } = await import("./dao");
+    mockFetch({ model: { id: "todo" }, sql: [], warnings: [], dryRun: false });
+    await saveModelDef({
+      id: "todo",
+      name: "t",
+      namePlural: "ts",
+      fields: [],
+      _version: 4,
+    });
+    expect(calls[0].method).toBe("PUT");
+    expect(calls[0].url).toBe(`${apiPath}meta/models/todo`);
+    expect(JSON.parse(calls[0].body!)._version).toBe(4);
+  });
+
+  it("keeps the list of invalid props in the error", async () => {
+    const { saveModelDef } = await import("./dao");
+    mockFetch(
+      {
+        error: "Invalid model",
+        invalids: [{ id: "table", value: "a b", condition: "letters" }],
+      },
+      400,
+    );
+    await expect(
+      saveModelDef({ id: "x", name: "x", namePlural: "xs", fields: [] }),
+    ).rejects.toMatchObject({
+      status: 400,
+      invalids: [{ id: "table", value: "a b", condition: "letters" }],
+    });
+  });
+
+  it("deletes a model", async () => {
+    const { deleteModelDef } = await import("./dao");
+    mockFetch({ id: "book" });
+    await deleteModelDef("book");
+    expect(calls[0].method).toBe("DELETE");
+    expect(calls[0].url).toBe(`${apiPath}meta/models/book`);
   });
 });

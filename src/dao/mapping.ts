@@ -20,7 +20,8 @@ import type {
   Model,
   RecordData,
 } from "types/model";
-import type { StatsData } from "types/api";
+import type { ModelDef, StatsData } from "types/api";
+import type { ModelInput } from "types/model";
 
 //#region  ----- Records ----------------------------
 
@@ -181,7 +182,48 @@ export const restToStats = (model: Model, data: StatsData): StatsData => {
 };
 //#endregion
 
+//#region  ----- Models ----------------------------
+
+// - value of a property path in a record ("wine.name")
+const pathValue = (data: RecordData, path: string): unknown =>
+  path
+    .split(".")
+    .reduce<unknown>(
+      (v, p) => (v && typeof v === "object" ? (v as RecordData)[p] : undefined),
+      data,
+    );
+
+// - "{firstname} {lastname}" => (d) => d.firstname + " " + d.lastname
+export const templateToFunction =
+  (template: string) =>
+  (data: RecordData): string =>
+    template.replace(/\{([\w.]+)\}/g, (_, path: string) => {
+      const v = pathValue(data, path);
+      if (v === null || v === undefined) return "";
+      if (typeof v === "object") {
+        return String((v as { name?: unknown }).name ?? "");
+      }
+      return String(v);
+    });
+
+// - convert a model from the API (full model) into a UI model
+export const restToModel = (def: ModelDef): ModelInput => {
+  const m: Record<string, unknown> = structuredClone(def);
+  delete m._version;
+  delete m._updatedAt;
+  m.fields = (def.fields || []).filter((f) => !f.onlyDB);
+  if (typeof def.titleFunction === "string" && def.titleFunction) {
+    m.titleFunction = templateToFunction(def.titleFunction);
+  } else {
+    delete m.titleFunction;
+  }
+  return m as unknown as ModelInput;
+};
+//#endregion
+
 const mapping = {
+  restToModel,
+  templateToFunction,
   restToRecord,
   restToRecords,
   recordToRest,

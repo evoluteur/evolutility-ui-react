@@ -1,9 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 import classnames from "classnames";
 import Icon from "components/ui/Icon/Icon";
-import { i18n_nav } from "i18n/i18n";
+import { i18n_nav, i18n_designer } from "i18n/i18n";
+import { useModelsVersion } from "utils/moMa";
 import {
-  demosMenu,
+  getDemosMenu,
   docMenus,
   type DemoMenuItem,
   type DocMenuItem,
@@ -24,6 +25,9 @@ const ShortCuts = ({ entity }: { entity: string }) => (
     <Link to={`/${evoPath}/${entity}/list`} aria-label="List">
       <Icon name="list" size="small" theme="none" />
     </Link>
+    <Link to={`/designer/${entity}`} aria-label={i18n_designer.editModel}>
+      <Icon name="edit" size="small" theme="none" />
+    </Link>
   </div>
 );
 
@@ -40,6 +44,12 @@ const sLink = (
 );
 const hDemos = sLink("Demos", `/${evoPath}`, demoSVG);
 const hDocs = sLink("Documentation", "/docs", docSVG);
+const hDesigner = sLink(
+  i18n_designer.title,
+  "/designer",
+  pixPath + "doc/model.png",
+  "e-icon",
+);
 //#endregion
 
 export interface SideBarProps {
@@ -49,6 +59,7 @@ export interface SideBarProps {
 const SideBar = ({ onClickToggle }: SideBarProps) => {
   // const { entity, view } = useParams(); // not  outside of evolutility routes
   const [entity, view] = useLocation().pathname.slice(1).split("/");
+  useModelsVersion(); // - re-render when models change
   const menuLinkDemo = (menu: DemoMenuItem) => (
     <li className={classnames({ active: menu.id === entity })} key={menu.id}>
       {sLink(
@@ -72,15 +83,15 @@ const SideBar = ({ onClickToggle }: SideBarProps) => {
 
   let title, links, menus;
   if (!entity) {
-    links = [hDemos, hDocs];
+    links = [hDemos, hDocs, hDesigner];
   } else if (entity === "docs") {
     title = hDocs;
     menus = docMenus.map(menuLinkDoc);
-    links = hDemos;
+    links = [hDemos, hDesigner];
   } else {
     title = hDemos;
-    menus = demosMenu.map(menuLinkDemo);
-    links = hDocs;
+    menus = getDemosMenu().map(menuLinkDemo);
+    links = entity === "designer" ? hDocs : [hDocs, hDesigner];
   }
 
   return (

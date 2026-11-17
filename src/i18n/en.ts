@@ -207,6 +207,47 @@ export const i18n_errors: Record<string, string> = {
   badEntity: 'Model "{0}" not found.',
   badUpload: "Error uploading file.",
   badDelete: "Couldn't delete {0}.",
+  modelsError:
+    "Could not get the models from the server. Check that evolutility-server-node is running and its database has the models.",
+};
+
+// --- Designer (models stored on the server) ---
+export const i18n_designer: Record<string, string> = {
+  title: "Designer",
+  intro:
+    "Models stored on the server. Changes apply right away: new fields add columns to the tables (nothing is ever dropped).",
+  notFromServer: "Models could not be loaded from the server.",
+  newModel: "New model",
+  editModel: "Edit model",
+  model: "Model",
+  id: "Id",
+  table: "Table",
+  fields: "Fields",
+  version: "Version",
+  updated: "Last saved",
+  active: "Active",
+  check: "Check changes",
+  save: "Save",
+  saved: 'Model "{0}" saved (version {1}).',
+  created: 'Model "{0}" created.',
+  deleted: 'Model "{0}" deleted.',
+  delete: "Delete model",
+  deleteConfirm:
+    'Delete model "{0}"? Its table and data are kept in the database.',
+  invalidJSON: "Invalid JSON: {0}",
+  noChanges: "No changes to the database.",
+  sqlTitle: "Changes to the database",
+  warnings: "Warnings",
+  errors: "Errors",
+  history: "History",
+  loadVersion: "Load version...",
+  versionLoaded:
+    "Version {0} loaded in the editor. Save to make it the current version.",
+  conflict:
+    "This model was changed by someone else. Reload it to get the latest version.",
+  reload: "Reload",
+  viewData: "View data",
+  json: "JSON",
 };
 
 export const i18n_404: Record<string, string> = {
@@ -239,6 +280,7 @@ const allStrings = {
   i18n_upload,
   i18n_errors,
   i18n_404,
+  i18n_designer,
   // i18n_login,
 };
 

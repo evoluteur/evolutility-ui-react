@@ -15,6 +15,7 @@ import {
 } from "@tanstack/react-query";
 import {
   deleteOne,
+  deleteModelDef,
   getChart,
   getCollec,
   getLOVs,
@@ -22,12 +23,19 @@ import {
   getObjectSearch,
   getOne,
   getStats,
+  getModelDef,
+  getModelDefs,
+  getModelHistory,
+  getModelVersion,
   insertOne,
+  saveModelDef,
   updateOne,
 } from "./dao";
+import { restToModel } from "./mapping";
+import { setModel, removeModel } from "utils/moMa";
 import { staleTime } from "./queryClient";
 import type { RecordData } from "types/model";
-import type { ManyQueryOptions } from "types/api";
+import type { ManyQueryOptions, ModelDef } from "types/api";
 
 //#region  ----- Query keys ----------------------------
 
@@ -46,6 +54,10 @@ export const queryKeys = {
   chart: (entity: string, fieldId: string, options?: ManyQueryOptions) =>
     ["evol", entity, "chart", fieldId, options || {}] as const,
   stats: (entity: string) => ["evol", entity, "stats"] as const,
+  // - models stored on the server (Designer)
+  modelDefs: () => ["evol-meta", "models"] as const,
+  modelDef: (id: string) => ["evol-meta", "models", id] as const,
+  modelHistory: (id: string) => ["evol-meta", "models", id, "history"] as const,
 };
 //#endregion
 
@@ -118,6 +130,84 @@ export const useStats = (entity: string) =>
   });
 //#endregion
 
+//#region  ----- Models (Designer) ----------------------------
+
+// - models are edited: never served from the cache
+export const useModelDefs = () =>
+  useQuery({
+    queryKey: queryKeys.modelDefs(),
+    queryFn: ({ signal }) => getModelDefs(signal),
+    staleTime: 0,
+  });
+
+export const useModelDef = (id: string | undefined) =>
+  useQuery({
+    queryKey: queryKeys.modelDef(id || ""),
+    queryFn: ({ signal }) => getModelDef(id!, signal),
+    enabled: !!id,
+    staleTime: 0,
+  });
+
+export const useModelHistory = (id: string | undefined) =>
+  useQuery({
+    queryKey: queryKeys.modelHistory(id || ""),
+    queryFn: ({ signal }) => getModelHistory(id!, signal),
+    enabled: !!id,
+    staleTime: 0,
+  });
+
+// - get an old version of a model (to load it in the editor)
+export const useFetchModelVersion = () => {
+  const queryClient = useQueryClient();
+  return (id: string, version: number) =>
+    queryClient.fetchQuery({
+      queryKey: [...queryKeys.modelHistory(id), version],
+      queryFn: ({ signal }) => getModelVersion(id, version, signal),
+      staleTime: Infinity,
+    });
+};
+
+// - check or save a model; once saved, the views use it right away
+export const useSaveModelDef = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      model,
+      isNew = false,
+      dryRun = false,
+    }: {
+      model: ModelDef;
+      isNew?: boolean;
+      dryRun?: boolean;
+    }) => saveModelDef(model, { isNew, dryRun }),
+    onSuccess: (result) => {
+      if (!result.dryRun) {
+        const id = result.model.id;
+        setModel(restToModel(result.model));
+        queryClient.setQueryData(queryKeys.modelDef(id), result.model);
+        queryClient.invalidateQueries({ queryKey: queryKeys.modelDefs() });
+        queryClient.invalidateQueries({ queryKey: queryKeys.modelHistory(id) });
+        // - the records of the model may have new fields
+        queryClient.invalidateQueries({ queryKey: queryKeys.entity(id) });
+      }
+    },
+  });
+};
+
+export const useDeleteModelDef = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => deleteModelDef(id),
+    onSuccess: (_data, id) => {
+      removeModel(id);
+      queryClient.removeQueries({ queryKey: queryKeys.modelDef(id) });
+      queryClient.removeQueries({ queryKey: queryKeys.entity(id) });
+      queryClient.invalidateQueries({ queryKey: queryKeys.modelDefs() });
+    },
+  });
+};
+//#endregion
+
 //#region  ----- Mutations ----------------------------
 
 // - insert or update a record (then re-fetch the queries of the model)
@@ -156,6 +246,12 @@ const queries = {
   useStats,
   useSaveOne,
   useDeleteOne,
+  useModelDefs,
+  useModelDef,
+  useModelHistory,
+  useFetchModelVersion,
+  useSaveModelDef,
+  useDeleteModelDef,
 };
 
 export default queries;

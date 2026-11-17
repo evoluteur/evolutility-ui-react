@@ -20,6 +20,10 @@ import Home from "pages/Home/Home";
 import PageNotFound from "pages/PageNotFound/PageNotFound";
 import DocRoutes from "routes/DocRoutes";
 import DemoRoutes from "routes/DemoRoutes";
+import DesignerRoutes from "routes/DesignerRoutes";
+import Alert from "components/ui/Alert/Alert";
+import { i18n_errors } from "i18n/i18n";
+import { modelsError, useModelsVersion } from "utils/moMa";
 
 import "./App.scss";
 import "./App-custom.scss";
@@ -34,6 +38,7 @@ const AppRoutes = () => (
     <Route path="/" element={<Home />} />
     <Route path="/docs/*" element={<DocRoutes />} />
     <Route path={`/${evoPath}/*`} element={<DemoRoutes />} />
+    <Route path="/designer/*" element={<DesignerRoutes />} />
     <Route path="*" element={<PageNotFound />} />
   </Routes>
 );
@@ -46,6 +51,7 @@ const App = () => {
   };
 
   const css = classnames("app", { "side-collapsed": isCollapsed });
+  useModelsVersion(); // - re-render when models change (or fail to load)
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -63,6 +69,9 @@ const App = () => {
             />
           </Routes>
           <div className="page-content" role="main">
+            {modelsError && (
+              <Alert title={i18n_errors.modelsError} message={modelsError} />
+            )}
             <ErrorBoundary>
               <AppRoutes />
             </ErrorBoundary>

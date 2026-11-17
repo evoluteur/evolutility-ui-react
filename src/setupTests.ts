@@ -3,6 +3,8 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
+import { setModels } from "utils/moMa";
+import todo from "./fixtures/todo";
 
 globalThis.structuredClone = (v: unknown) => JSON.parse(JSON.stringify(v));
 
@@ -23,3 +25,6 @@ if (!HTMLDialogElement.prototype.showModal) {
     this.dispatchEvent(new Event("close"));
   };
 }
+
+// - models come from the server in the app: tests use a fixture
+setModels([todo]);
