@@ -1,13 +1,25 @@
 // Routes for Evolutility views
+import { lazy, Suspense, type ReactNode } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import config from "config";
+import Spinner from "components/ui/Spinner/Spinner";
 
 import One from "components/views/one/One";
 import Many from "components/views/many/Many";
-import Stats from "components/views/analytics/Stats/Stats";
-import Charts from "components/views/analytics/Charts/Charts";
-import Overview from "components/views/comfort/Overview/Overview";
-import Activity from "components/views/comfort/Activity/Activity";
+
+// - views w/ charts (nivo) and less used views: loaded when needed
+const Stats = lazy(() => import("components/views/analytics/Stats/Stats"));
+const Charts = lazy(() => import("components/views/analytics/Charts/Charts"));
+const Overview = lazy(
+  () => import("components/views/comfort/Overview/Overview"),
+);
+const Activity = lazy(
+  () => import("components/views/comfort/Activity/Activity"),
+);
+
+const later = (view: ReactNode) => (
+  <Suspense fallback={<Spinner />}>{view}</Suspense>
+);
 
 const EvolRoutes = () => (
   <Routes>
@@ -15,19 +27,19 @@ const EvolRoutes = () => (
       path="/:entity/"
       element={
         config.entityRoot === "overview" ? (
-          <Overview />
+          later(<Overview />)
         ) : (
           <Navigate to="list" replace />
         )
       }
     />
-    <Route path="/:entity/overview" element={<Overview />} />
+    <Route path="/:entity/overview" element={later(<Overview />)} />
     <Route path="/:entity/:view/:id" element={<One />} />
     <Route path="/:entity/:view" element={<Many />} />
-    <Route path="/:entity/charts" element={<Charts />} />
-    <Route path="/:entity/stats" element={<Stats />} />
+    <Route path="/:entity/charts" element={later(<Charts />)} />
+    <Route path="/:entity/stats" element={later(<Stats />)} />
     {config.withActivity && (
-      <Route path="/:entity/activity" element={<Activity />} />
+      <Route path="/:entity/activity" element={later(<Activity />)} />
     )}
   </Routes>
 );

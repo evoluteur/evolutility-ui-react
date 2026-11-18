@@ -2,7 +2,7 @@
 // https://github.com/evoluteur/evolutility-ui-react
 // (c) 2026 Olivier Giulieri
 
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import classnames from "classnames";
@@ -20,10 +20,9 @@ import AuthGate from "components/shell/AuthGate/AuthGate";
 import Home from "pages/Home/Home";
 import Login from "pages/Login/Login";
 import PageNotFound from "pages/PageNotFound/PageNotFound";
-import DocRoutes from "routes/DocRoutes";
 import DemoRoutes from "routes/DemoRoutes";
-import DesignerRoutes from "routes/DesignerRoutes";
 import Alert from "components/ui/Alert/Alert";
+import Spinner from "components/ui/Spinner/Spinner";
 import { i18n_errors } from "i18n/i18n";
 import { modelsError, useModelsVersion } from "utils/moMa";
 
@@ -35,6 +34,10 @@ import "components/ui/global.scss";
 
 const baseName = config.baseName || "/";
 
+// - documentation and Designer: loaded when needed
+const DocRoutes = lazy(() => import("routes/DocRoutes"));
+const DesignerRoutes = lazy(() => import("routes/DesignerRoutes"));
+
 // - login page for anonymous visitors (when the server allows them)
 const LoginRoute = () => {
   const navigate = useNavigate();
@@ -45,9 +48,23 @@ const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/login" element={<LoginRoute />} />
-    <Route path="/docs/*" element={<DocRoutes />} />
+    <Route
+      path="/docs/*"
+      element={
+        <Suspense fallback={<Spinner />}>
+          <DocRoutes />
+        </Suspense>
+      }
+    />
     <Route path={`/${evoPath}/*`} element={<DemoRoutes />} />
-    <Route path="/designer/*" element={<DesignerRoutes />} />
+    <Route
+      path="/designer/*"
+      element={
+        <Suspense fallback={<Spinner />}>
+          <DesignerRoutes />
+        </Suspense>
+      }
+    />
     <Route path="*" element={<PageNotFound />} />
   </Routes>
 );
