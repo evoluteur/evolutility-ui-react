@@ -226,7 +226,12 @@ const One = () => {
         view={view}
       />
       {!isNew && !isLoading && !error && data && (
-        <Timestamps created={data.created_at} updated={data.updated_at} />
+        <Timestamps
+          created={data.created_at}
+          updated={data.updated_at}
+          createdBy={data.created_by_txt}
+          updatedBy={data.updated_by_txt}
+        />
       )}
       {body()}
     </div>

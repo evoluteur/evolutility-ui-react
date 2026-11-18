@@ -33,4 +33,16 @@ describe("Timestamps widget tests", () => {
       expect(ts).toHaveTextContent(i18n.createdX.replace("{0}", ""));
     }
   });
+  it("shows who created and updated the record", () => {
+    const t1 = "2024-05-05T08:54:52.673864";
+    const t2 = "2025-11-11T08:54:52.673864";
+    render(
+      <Timestamps created={t1} updated={t2} createdBy="Bob" updatedBy="Ada" />,
+    );
+    const ts = screen.queryByTestId("timestamps");
+    if (showTimestamp && config.withWhoIs) {
+      expect(ts).toHaveTextContent(/Updated .* by Ada/);
+      expect(ts).toHaveTextContent(/Created .* by Bob/);
+    }
+  });
 });

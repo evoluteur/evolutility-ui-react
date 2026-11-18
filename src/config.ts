@@ -62,8 +62,9 @@ const config: Config = {
 
   // - Timestamp columns updated_at and created_at w/ date of record creation and last update
   withTimestamp: true,
-  // - "WhoIs" columns updated_by and created_by w/ userid of creator and last modifier
-  withWhoIs: false,
+  // - "WhoIs": show who created and last updated records (the server fills
+  //   the columns created_by and updated_by w/ the logged-in user)
+  withWhoIs: true,
   // - Track last viewed record names in localstorage
   withActivity: false,
   // max number of activity records tracked

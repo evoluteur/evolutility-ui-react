@@ -69,6 +69,7 @@ Configurations options are specified in the file [/src/config.ts](https://github
 | pageSize   | Page size in pagination.  | 50 |
 | withActivity | Tracks and shows records activity (last visited and most visited). Currently implemented w/ the browser's localStorage, it will be moved to the server later. | true |
 | withTimestamp | Tracks and shows timestamp for creation date and last update for every record. The DB tables need timestamp columns "updated_at" and "created_at" for the feature to work. (partial implementation) | true |
+| withWhoIs | Shows who created and last updated records ("Updated 2 days ago by Ada"). Needs the option "wWhoIs" on the server. | true |
 
 Light and dark modes: the UI follows the OS setting by default, and the sun/moon button in the top bar switches between them (the choice is saved in the browser's localStorage).
 
