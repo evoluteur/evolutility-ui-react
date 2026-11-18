@@ -27,14 +27,19 @@
   .evo-designer-history {
     width: auto;
   }
-  .evo-designer-json {
-    font-family: Menlo, Consolas, "Courier New", monospace;
-    font-size: 13px;
-    line-height: 1.4;
-    width: 100%;
-    min-height: 400px;
-    resize: vertical;
-    tab-size: 2;
+  .evo-designer-checking {
+    color: var(--evo-text-secondary);
+    font-style: italic;
+  }
+  // - one line, the SQL shows when opened
+  .evo-designer-changes {
+    padding: 6px 12px;
+    margin-bottom: 10px;
+    border-left-width: 6px;
+    > summary {
+      cursor: pointer;
+      font-weight: bold;
+    }
   }
   .evo-designer-sql {
     margin: 6px 0 0;

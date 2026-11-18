@@ -26,6 +26,7 @@ import {
   getModelDef,
   getModelDefs,
   getModelHistory,
+  getModelSchema,
   getModelVersion,
   insertOne,
   saveModelDef,
@@ -58,6 +59,7 @@ export const queryKeys = {
   modelDefs: () => ["evol-meta", "models"] as const,
   modelDef: (id: string) => ["evol-meta", "models", id] as const,
   modelHistory: (id: string) => ["evol-meta", "models", id, "history"] as const,
+  modelSchema: () => ["evol-meta", "schema"] as const,
 };
 //#endregion
 
@@ -156,6 +158,15 @@ export const useModelHistory = (id: string | undefined) =>
     staleTime: 0,
   });
 
+// - JSON Schema of the metamodel (doesn't change while the app runs)
+export const useModelSchema = () =>
+  useQuery({
+    queryKey: queryKeys.modelSchema(),
+    queryFn: ({ signal }) => getModelSchema(signal),
+    staleTime: Infinity,
+    retry: false,
+  });
+
 // - get an old version of a model (to load it in the editor)
 export const useFetchModelVersion = () => {
   const queryClient = useQueryClient();
@@ -249,6 +260,7 @@ const queries = {
   useModelDefs,
   useModelDef,
   useModelHistory,
+  useModelSchema,
   useFetchModelVersion,
   useSaveModelDef,
   useDeleteModelDef,

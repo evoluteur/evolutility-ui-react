@@ -234,9 +234,10 @@ export const i18n_designer: Record<string, string> = {
   delete: "Delete model",
   deleteConfirm:
     'Delete model "{0}"? Its table and data are kept in the database.',
-  invalidJSON: "Invalid JSON: {0}",
+  invalidJSON: "Invalid JSON5: {0}",
   noChanges: "No changes to the database.",
   sqlTitle: "Changes to the database",
+  sqlCount: "Changes to the database ({0})",
   warnings: "Warnings",
   errors: "Errors",
   history: "History",
@@ -247,7 +248,8 @@ export const i18n_designer: Record<string, string> = {
     "This model was changed by someone else. Reload it to get the latest version.",
   reload: "Reload",
   viewData: "View data",
-  json: "JSON",
+  json: "JSON5",
+  checking: "Checking...",
 };
 
 export const i18n_404: Record<string, string> = {

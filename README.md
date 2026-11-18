@@ -407,7 +407,9 @@ More sample models: [To-do list](https://github.com/evoluteur/evolutility-models
 The Designer edits the models stored on the server, directly in the app. It is at "/designer" (link in the side bar, and "edit" icon next to each object in the menu).
 
 - The list shows all models with their table, number of fields, version, and date of last change.
-- A model is edited as JSON. "Check changes" validates it and shows the changes to the database without saving. "Save" saves it and applies the changes.
+- A model is edited as [JSON5](https://json5.org/) (keys without quotes, comments, trailing commas) in a code editor ([CodeMirror](https://codemirror.net/)). It is stored as JSON, so comments are not kept after saving.
+- While typing, mistakes are underlined (unknown properties, wrong types, invalid table or column names...), property names are suggested (Ctrl+Space), and hovering a property shows its description. This uses the JSON Schema of the metamodel served by the server.
+- When you pause typing, the server checks the model and shows its errors, warnings, and the changes to the database ("Check changes" does it right away). "Save" saves the model and applies the changes.
 - Saving a new model creates its table, and adding a field adds a column. Nothing is ever dropped: removed fields keep their columns and data. Changing the type of a column is refused.
 - Changes apply right away (menus and views use the new model, no restart needed).
 - Older versions of a model can be loaded in the editor (and saved again to restore them).

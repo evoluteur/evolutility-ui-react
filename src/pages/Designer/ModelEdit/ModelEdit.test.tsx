@@ -4,6 +4,28 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ModelEdit from "./ModelEdit";
 
+// - CodeMirror is tested in its own component: a textarea is enough here
+vi.mock("components/ui/CodeEditor/CodeEditor", () => ({
+  default: ({
+    value,
+    onChange,
+    ariaLabel,
+  }: {
+    value: string;
+    onChange: (v: string) => void;
+    ariaLabel?: string;
+  }) => (
+    <textarea
+      aria-label={ariaLabel}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    />
+  ),
+}));
+
+const saves = () =>
+  calls.filter((c) => c.method === "POST" || c.method === "PUT");
+
 const calls: { url: string; method?: string; body?: string }[] = [];
 
 const mockFetch = (handler: (url: string, method?: string) => unknown) => {
@@ -51,13 +73,19 @@ describe("ModelEdit", () => {
     }));
     renderAt("/designer/new");
     expect(
-      (screen.getByLabelText("JSON") as HTMLTextAreaElement).value,
-    ).toContain('"id": "book"');
+      (screen.getByLabelText("JSON5") as HTMLTextAreaElement).value,
+    ).toContain('id: "book"');
     fireEvent.click(screen.getByText("Check changes"));
     expect(await screen.findByText(/CREATE TABLE IF NOT EXISTS/)).toBeTruthy();
+    // - collapsed, w/ the number of changes
+    const summary = screen.getByText("Changes to the database (1)");
+    const details = summary.closest("details")!;
+    expect(details.open).toBe(false);
+    fireEvent.click(summary);
+    expect(details.open).toBe(true);
     expect(screen.getByText('Table "book" will be created.')).toBeTruthy();
-    expect(calls[0].url).toContain("meta/models?dryRun=true");
-    expect(calls[0].method).toBe("POST");
+    expect(saves()[0].url).toContain("meta/models?dryRun=true");
+    expect(saves()[0].method).toBe("POST");
   });
 
   it("loads a model and saves it w/ its version", async () => {
@@ -90,7 +118,7 @@ describe("ModelEdit", () => {
     });
     renderAt("/designer/todo");
     const editor = (await screen.findByLabelText(
-      "JSON",
+      "JSON5",
     )) as HTMLTextAreaElement;
     expect(editor.value).not.toContain("_version");
     fireEvent.change(editor, {
@@ -108,12 +136,12 @@ describe("ModelEdit", () => {
   it("shows invalid JSON without calling the server", async () => {
     mockFetch(() => ({}));
     renderAt("/designer/new");
-    fireEvent.change(screen.getByLabelText("JSON"), {
+    fireEvent.change(screen.getByLabelText("JSON5"), {
       target: { value: "{ oops" },
     });
     fireEvent.click(screen.getByText("Save"));
-    expect(await screen.findByText(/Invalid JSON/)).toBeTruthy();
-    expect(calls.length).toBe(0);
+    expect(await screen.findByText(/Invalid JSON5/)).toBeTruthy();
+    expect(saves().length).toBe(0);
   });
 
   it("lists invalid properties returned by the server", async () => {
@@ -158,5 +186,35 @@ describe("ModelEdit", () => {
       expect(calls.some((c) => c.method === "DELETE")).toBe(true),
     );
     expect(dialog.open).toBe(false);
+  });
+
+  it("checks the model w/ the server after typing (live check)", async () => {
+    mockFetch(() => ({
+      model: { id: "book" },
+      sql: ["ALTER TABLE x"],
+      warnings: [],
+      dryRun: true,
+    }));
+    renderAt("/designer/new");
+    const editor = screen.getByLabelText("JSON5") as HTMLTextAreaElement;
+    fireEvent.change(editor, { target: { value: editor.value + " " } });
+    fireEvent.change(editor, { target: { value: editor.value + "  " } });
+    expect(saves().length).toBe(0); // - not before the pause
+    expect(
+      await screen.findByText("ALTER TABLE x", {}, { timeout: 3000 }),
+    ).toBeTruthy();
+    expect(saves().length).toBe(1); // - one check for both changes
+    expect(saves()[0].url).toContain("dryRun=true");
+  });
+
+  it("doesn't call the server while the text is not valid JSON5", async () => {
+    mockFetch(() => ({}));
+    renderAt("/designer/new");
+    fireEvent.change(screen.getByLabelText("JSON5"), {
+      target: { value: "{ oops" },
+    });
+    await new Promise((r) => setTimeout(r, 1300));
+    expect(saves().length).toBe(0);
+    expect(screen.queryByText(/Invalid JSON5/)).toBeNull(); // - shown in the editor
   });
 });

@@ -1,0 +1,23 @@
+.evo-code-editor {
+  border: 1px solid var(--evo-border-input);
+  border-radius: 4px;
+  overflow: hidden;
+  .cm-editor {
+    max-height: 75vh;
+    font-size: 13px;
+  }
+  .cm-content,
+  .cm-gutter {
+    min-height: 400px;
+  }
+  .cm-scroller {
+    font-family: Menlo, Consolas, "Courier New", monospace;
+    line-height: 1.4;
+  }
+  .cm-editor.cm-focused {
+    outline: none;
+  }
+  &:focus-within {
+    border-color: var(--evo-icon);
+  }
+}

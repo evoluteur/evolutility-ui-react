@@ -36,6 +36,7 @@ import type {
   LovListItem,
   RecordData,
 } from "types/model";
+import type { JSONSchema7 } from "json-schema";
 import type {
   ModelDef,
   ModelVersion,
@@ -275,6 +276,10 @@ export async function getStats(
 
 //#region  ----- Models (stored on the server) ----------------------------
 
+// - JSON Schema of the metamodel (to check models in the Designer)
+export const getModelSchema = (signal?: AbortSignal) =>
+  apiGet<JSONSchema7>("meta/schema", { signal });
+
 // - all models (full models, as stored)
 export const getModelDefs = (signal?: AbortSignal) =>
   apiGet<ModelDef[]>("meta/models", { signal });
@@ -330,6 +335,7 @@ const dao = {
   getObjectSearch,
   getChart,
   getStats,
+  getModelSchema,
   getModelDefs,
   getModelDef,
   getModelHistory,

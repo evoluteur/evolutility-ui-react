@@ -52,6 +52,14 @@
   --evo-danger-text: #a94442;
   --evo-danger-bg: #f2dede;
   --evo-danger-border: #ebccd1;
+
+  // - code editor (Designer)
+  --evo-code-key: #0451a5;
+  --evo-code-string: #a31515;
+  --evo-code-number: #098658;
+  --evo-code-keyword: #0000ff;
+  --evo-code-comment: #6a8a6a;
+  --evo-code-selection: #cce2ff;
 }
 
 [data-theme="dark"] {
@@ -105,6 +113,13 @@
   --evo-danger-text: #ef9a9a;
   --evo-danger-bg: #3a1e1e;
   --evo-danger-border: #5a2c2c;
+
+  --evo-code-key: #9cdcfe;
+  --evo-code-string: #ce9178;
+  --evo-code-number: #b5cea8;
+  --evo-code-keyword: #569cd6;
+  --evo-code-comment: #7f9f7f;
+  --evo-code-selection: #264f78;
 }
 
 // --- Third-party components in dark mode

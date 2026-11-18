@@ -33,6 +33,9 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: "./src/setupTests.ts",
+    // - "codemirror-json-schema" has imports w/o file extensions (Node can't
+    //   load them): let Vite process it
+    server: { deps: { inline: ["codemirror-json-schema"] } },
     coverage: {
       include: ["src/**/*.{ts,tsx}"],
       exclude: ["src/fixtures/**"],
