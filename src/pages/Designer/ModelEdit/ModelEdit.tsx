@@ -24,8 +24,13 @@ import Alert from "components/ui/Alert/Alert";
 import Button from "components/ui/Button/Button";
 import Modal from "components/ui/Modal/Modal";
 import Spinner from "components/ui/Spinner/Spinner";
-import CodeEditor from "components/ui/CodeEditor/CodeEditor";
-import { modelToText, newModelTemplate, textToModel } from "../designerUtils";
+import CodeEditor, { type Marker } from "components/ui/CodeEditor/CodeEditor";
+import {
+  invalidToPointer,
+  modelToText,
+  newModelTemplate,
+  textToModel,
+} from "../designerUtils";
 import type { ModelDef, SaveModelResult } from "types/api";
 
 import "../Designer.scss";
@@ -40,6 +45,7 @@ interface Feedback {
   result?: SaveModelResult;
   error?: string;
   invalids?: string[];
+  markers?: Marker[];
   conflict?: boolean;
   info?: string;
 }
@@ -132,6 +138,10 @@ const ModelEdit = () => {
     const apiErr = err as ApiError;
     setFeedback({
       error: apiErr.invalids ? apiErr.message.split(":")[0] : apiErr.message,
+      markers: apiErr.invalids?.map((i) => ({
+        path: invalidToPointer(i.id),
+        message: `${i.condition} (server)`,
+      })),
       invalids: apiErr.invalids?.map(
         (i) => `${i.id}: ${i.condition} (${JSON.stringify(i.value)})`,
       ),
@@ -353,6 +363,7 @@ const ModelEdit = () => {
         onChange={onChange}
         schema={schema}
         ariaLabel={i18n.json}
+        markers={feedback?.markers}
       />
     </div>
   );

@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { modelToText, sortProps, textToModel } from "./designerUtils";
+import {
+  invalidToPointer,
+  modelToText,
+  sortProps,
+  textToModel,
+} from "./designerUtils";
 import type { ModelDef } from "types/api";
 
 const model: ModelDef = {
@@ -105,5 +110,22 @@ describe("sortProps", () => {
   it("doesn't change values", () => {
     const m = { b: [3, { y: 1, x: 2 }], a: "x", id: 1 };
     expect(sortProps(m)).toEqual(m);
+  });
+});
+
+describe("invalidToPointer", () => {
+  it("converts the paths of the server to JSON pointers", () => {
+    expect(invalidToPointer("table")).toBe("/table");
+    expect(invalidToPointer("fields[2].id")).toBe("/fields/2/id");
+    expect(invalidToPointer("fields[2] (title).column")).toBe(
+      "/fields/2/column",
+    );
+    expect(invalidToPointer("fields[0] (genre).list[1].id")).toBe(
+      "/fields/0/list/1/id",
+    );
+    expect(invalidToPointer("collections[0].orderBy")).toBe(
+      "/collections/0/orderBy",
+    );
+    expect(invalidToPointer("model")).toBe("");
   });
 });

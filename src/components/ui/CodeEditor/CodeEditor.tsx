@@ -11,15 +11,23 @@
 import { useEffect, useRef } from "react";
 import { EditorView, basicSetup } from "codemirror";
 import { keymap } from "@codemirror/view";
-import { Annotation } from "@codemirror/state";
+import { Annotation, StateEffect, StateField } from "@codemirror/state";
+import { linter, type Diagnostic } from "@codemirror/lint";
 import { indentWithTab } from "@codemirror/commands";
 import { HighlightStyle, syntaxHighlighting } from "@codemirror/language";
 import { tags as t } from "@lezer/highlight";
 import { json5Schema } from "codemirror-json-schema/json5";
-import { updateSchema } from "codemirror-json-schema";
+import { getJsonPointers, updateSchema } from "codemirror-json-schema";
 import type { JSONSchema7 } from "json-schema";
 
 import "./CodeEditor.scss";
+
+// - error from outside the editor (ex: the server), at a JSON pointer
+export interface Marker {
+  /** JSON pointer of the property (ex: "/fields/2/column") */
+  path: string;
+  message: string;
+}
 
 export interface CodeEditorProps {
   /** Text in the editor */
@@ -30,10 +38,66 @@ export interface CodeEditorProps {
   schema?: JSONSchema7 | null;
   /** Accessible name of the editor */
   ariaLabel?: string;
+  /** Errors to underline at properties (ex: errors from the server) */
+  markers?: Marker[];
 }
 
 // - changes made by the "value" prop (not by the user)
 const fromProps = Annotation.define<boolean>();
+
+// - markers, kept in the editor state
+const setMarkers = StateEffect.define<Marker[]>();
+const markersField = StateField.define<Marker[]>({
+  create: () => [],
+  update: (value, tr) =>
+    tr.effects.reduce((v, e) => (e.is(setMarkers) ? e.value : v), value),
+});
+
+// - underline each marker at its property (positions found again on each
+//   change: the marker follows its property). If the property is gone, its
+//   closest parent is underlined.
+const markersLinter = linter(
+  (view) => {
+    const markers = view.state.field(markersField);
+    if (!markers.length) return [];
+    let pointers: ReturnType<typeof getJsonPointers>;
+    try {
+      pointers = getJsonPointers(view.state, "json5");
+    } catch {
+      return [];
+    }
+    return markers.map((m): Diagnostic => {
+      let path = m.path;
+      let pos = pointers.get(path);
+      while (!pos && path) {
+        path = path.slice(0, path.lastIndexOf("/"));
+        pos = pointers.get(path);
+      }
+      const p = (pos || {}) as Partial<{
+        keyFrom: number;
+        keyTo: number;
+        valueFrom: number;
+        valueTo: number;
+      }>;
+      const from = p.keyFrom ?? p.valueFrom ?? 0;
+      const to = p.valueTo ?? p.keyTo ?? Math.min(1, view.state.doc.length);
+      return {
+        from,
+        to,
+        severity: "error",
+        source: "server",
+        message: m.message,
+      };
+    });
+  },
+  {
+    delay: 0,
+    needsRefresh: (update) =>
+      update.transactions.some((tr) =>
+        tr.effects.some((e) => e.is(setMarkers)),
+      ),
+  },
+);
 
 const highlightStyle = HighlightStyle.define([
   { tag: t.propertyName, color: "var(--evo-code-key)" },
@@ -80,6 +144,7 @@ const CodeEditor = ({
   onChange,
   schema,
   ariaLabel,
+  markers,
 }: CodeEditorProps) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<EditorView | null>(null);
@@ -98,6 +163,8 @@ const CodeEditor = ({
         basicSetup,
         keymap.of([indentWithTab]),
         json5Schema(),
+        markersField,
+        markersLinter,
         syntaxHighlighting(highlightStyle),
         theme,
         EditorView.contentAttributes.of(
@@ -131,6 +198,10 @@ const CodeEditor = ({
       });
     }
   }, [value]);
+
+  useEffect(() => {
+    viewRef.current?.dispatch({ effects: setMarkers.of(markers || []) });
+  }, [markers]);
 
   // - the schema can arrive after the editor is created
   useEffect(() => {

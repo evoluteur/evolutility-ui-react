@@ -10,14 +10,17 @@ vi.mock("components/ui/CodeEditor/CodeEditor", () => ({
     value,
     onChange,
     ariaLabel,
+    markers,
   }: {
     value: string;
     onChange: (v: string) => void;
     ariaLabel?: string;
+    markers?: { path: string; message: string }[];
   }) => (
     <textarea
       aria-label={ariaLabel}
       value={value}
+      data-markers={JSON.stringify(markers || [])}
       onChange={(e) => onChange(e.target.value)}
     />
   ),
@@ -157,6 +160,10 @@ describe("ModelEdit", () => {
     expect(
       await screen.findByText('fields[0].column: letters only ("a b")'),
     ).toBeTruthy();
+    // - also underlined in the editor, at the property
+    expect(
+      JSON.parse(screen.getByLabelText("JSON5").getAttribute("data-markers")!),
+    ).toEqual([{ path: "/fields/0/column", message: "letters only (server)" }]);
   });
 
   it("asks for confirmation in a dialog before deleting", async () => {

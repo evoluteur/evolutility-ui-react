@@ -48,6 +48,17 @@ export const sortProps = (value: unknown): unknown => {
   return sorted;
 };
 
+// - path of an invalid property from the server -> JSON pointer
+//   "fields[2] (title).column" -> "/fields/2/column", "model" -> ""
+export const invalidToPointer = (id: string): string => {
+  if (id === "model") return "";
+  const clean = id.replace(/\s*\([^)]*\)/g, "");
+  const parts = clean.match(/[^.[\]]+/g) || [];
+  return parts
+    .map((p) => "/" + p.replace(/~/g, "~0").replace(/\//g, "~1"))
+    .join("");
+};
+
 // - model as text for the editor (w/o the props managed by the server)
 export const modelToText = (m: ModelDef | null | undefined): string => {
   if (!m) return "";
