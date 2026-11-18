@@ -24,6 +24,7 @@ describe("SideBar by role", () => {
     expect(screen.getAllByLabelText("Add").length).toBeGreaterThan(0);
     expect(screen.getAllByLabelText("Edit model").length).toBeGreaterThan(0);
     expect(screen.getByTestId("sidebar")).toHaveTextContent("Designer");
+    expect(screen.getByTestId("sidebar")).toHaveTextContent("Users");
   });
 
   it("hides them from viewers", () => {
@@ -36,5 +37,6 @@ describe("SideBar by role", () => {
     expect(screen.queryAllByLabelText("Add")).toHaveLength(0);
     expect(screen.queryAllByLabelText("Edit model")).toHaveLength(0);
     expect(screen.getByTestId("sidebar")).not.toHaveTextContent("Designer");
+    expect(screen.getByTestId("sidebar")).not.toHaveTextContent("Users");
   });
 });

@@ -39,7 +39,10 @@ import type {
 import type { JSONSchema7 } from "json-schema";
 import type {
   AuthUser,
+  Role,
   Session,
+  UserInfo,
+  UserSaveResult,
   ModelDef,
   ModelVersion,
   SaveModelResult,
@@ -287,6 +290,31 @@ export const login = (email: string, password: string) =>
   apiPost<{ user: AuthUser }>("auth/login", { body: { email, password } });
 
 export const logout = () => apiPost<{ ok: boolean }>("auth/logout");
+
+// - users (admin role)
+export const getUsers = (signal?: AbortSignal) =>
+  apiGet<UserInfo[]>("auth/users", { signal });
+
+export const createUser = (user: {
+  email: string;
+  name?: string;
+  role: Role;
+  password?: string;
+}) => apiPost<UserSaveResult>("auth/users", { body: user });
+
+export const updateUser = (
+  id: number,
+  changes: {
+    name?: string;
+    role?: Role;
+    active?: boolean;
+    password?: string;
+    resetPassword?: boolean;
+  },
+) => apiPatch<UserSaveResult>(`auth/users/${id}`, { body: changes });
+
+export const deleteUser = (id: number) =>
+  apiDelete<{ id: number }>(`auth/users/${id}`);
 //#endregion
 
 // - JSON Schema of the metamodel (to check models in the Designer)
@@ -351,6 +379,10 @@ const dao = {
   getSession,
   login,
   logout,
+  getUsers,
+  createUser,
+  updateUser,
+  deleteUser,
   getModelSchema,
   getModelDefs,
   getModelDef,

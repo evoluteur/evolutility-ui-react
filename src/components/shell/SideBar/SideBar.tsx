@@ -1,9 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import classnames from "classnames";
 import Icon from "components/ui/Icon/Icon";
-import { i18n_nav, i18n_designer } from "i18n/i18n";
+import { i18n_nav, i18n_designer, i18n_users } from "i18n/i18n";
 import { useModelsVersion } from "utils/moMa";
-import { useCan } from "utils/session";
+import { useCan, useSession } from "utils/session";
 import {
   getDemosMenu,
   docMenus,
@@ -64,6 +64,12 @@ const hDesigner = sLink(
   pixPath + "doc/model.png",
   "e-icon",
 );
+const hUsers = sLink(
+  i18n_users.title,
+  "/users",
+  pixPath + "user.png",
+  "e-icon",
+);
 //#endregion
 
 export interface SideBarProps {
@@ -77,6 +83,9 @@ const SideBar = ({ onClickToggle }: SideBarProps) => {
   const canAdd = useCan("editor");
   const canDesign = useCan("admin");
   const designer = canDesign ? hDesigner : null;
+  // - users: admins, when the server has logins
+  const session = useSession();
+  const users = canDesign && session.authEnabled ? hUsers : null;
   const menuLinkDemo = (menu: DemoMenuItem) => (
     <li className={classnames({ active: menu.id === entity })} key={menu.id}>
       {sLink(
@@ -100,15 +109,15 @@ const SideBar = ({ onClickToggle }: SideBarProps) => {
 
   let title, links, menus;
   if (!entity) {
-    links = [hDemos, hDocs, designer];
+    links = [hDemos, hDocs, designer, users];
   } else if (entity === "docs") {
     title = hDocs;
     menus = docMenus.map(menuLinkDoc);
-    links = [hDemos, designer];
+    links = [hDemos, designer, users];
   } else {
     title = hDemos;
     menus = getDemosMenu().map(menuLinkDemo);
-    links = entity === "designer" ? hDocs : [hDocs, designer];
+    links = entity === "designer" ? [hDocs, users] : [hDocs, designer, users];
   }
 
   return (

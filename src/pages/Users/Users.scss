@@ -1,0 +1,44 @@
+.evo-users {
+  padding: 0 20px 20px;
+  .evo-users-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 12px;
+    margin: 10px 0 20px;
+    padding: 14px;
+    border: 1px solid var(--evo-border);
+    border-radius: 6px;
+    > label {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      color: var(--evo-label);
+      min-width: 180px;
+    }
+  }
+  .evo-users-form-buttons {
+    display: flex;
+    gap: 8px;
+  }
+  .evo-users-list {
+    td {
+      vertical-align: middle;
+    }
+    select {
+      width: auto;
+    }
+    tr.inactive td {
+      color: var(--evo-text-secondary);
+    }
+  }
+  .evo-users-me {
+    color: var(--evo-text-secondary);
+  }
+  .evo-users-actions {
+    white-space: nowrap;
+    > button + button {
+      margin-left: 6px;
+    }
+  }
+}

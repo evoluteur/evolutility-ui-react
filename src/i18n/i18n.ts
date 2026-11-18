@@ -23,3 +23,4 @@ export const i18n_errors = allStrings.i18n_errors;
 export const i18n_404 = allStrings.i18n_404;
 export const i18n_designer = allStrings.i18n_designer;
 export const i18n_login = allStrings.i18n_login;
+export const i18n_users = allStrings.i18n_users;

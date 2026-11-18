@@ -90,6 +90,19 @@ export interface Session {
   role: Role | null;
 }
 
+// - User as listed in the Users screen (admin)
+export interface UserInfo extends AuthUser {
+  active: boolean;
+  lastLoginAt: string | null;
+  createdAt: string | null;
+}
+
+// - Answer to creating or updating a user (password: only when generated)
+export interface UserSaveResult {
+  user: UserInfo;
+  password?: string;
+}
+
 export interface ModelVersion {
   version: number;
   savedAt: string;

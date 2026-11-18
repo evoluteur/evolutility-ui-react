@@ -37,6 +37,7 @@ const baseName = config.baseName || "/";
 // - documentation and Designer: loaded when needed
 const DocRoutes = lazy(() => import("routes/DocRoutes"));
 const DesignerRoutes = lazy(() => import("routes/DesignerRoutes"));
+const Users = lazy(() => import("pages/Users/Users"));
 
 // - login page for anonymous visitors (when the server allows them)
 const LoginRoute = () => {
@@ -57,6 +58,14 @@ const AppRoutes = () => (
       }
     />
     <Route path={`/${evoPath}/*`} element={<DemoRoutes />} />
+    <Route
+      path="/users"
+      element={
+        <Suspense fallback={<Spinner />}>
+          <Users />
+        </Suspense>
+      }
+    />
     <Route
       path="/designer/*"
       element={

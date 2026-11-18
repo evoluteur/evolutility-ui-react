@@ -257,6 +257,36 @@ export const i18n_404: Record<string, string> = {
   badRoute: "Invalid route",
   msg: "Oops! The page you are looking for isn't here.",
 };
+// --- users (admin) ---
+export const i18n_users: Record<string, string> = {
+  title: "Users",
+  intro:
+    "People who can log in, and what they can do: viewer (read), editor (also add, edit, and delete records), admin (also edit models and users).",
+  newUser: "New user",
+  email: "Email",
+  name: "Name",
+  role: "Role",
+  active: "Active",
+  lastLogin: "Last login",
+  never: "never",
+  password: "Password",
+  passwordHelp: "Leave empty to generate one.",
+  create: "Create",
+  cancel: "Cancel",
+  newPassword: "New password",
+  delete: "Delete",
+  deleteConfirm: 'Delete the user "{0}"? Their login ends right away.',
+  you: "you",
+  created: 'User "{0}" created.',
+  updated: 'User "{0}" updated.',
+  deleted: 'User "{0}" deleted.',
+  passwordShown:
+    'Password for "{0}": {1} (shown only once: copy it now, and send it to the user safely).',
+  viewer: "viewer",
+  editor: "editor",
+  admin: "admin",
+};
+
 // --- login ---
 export const i18n_login: Record<string, string> = {
   title: "Login",
@@ -287,6 +317,7 @@ const allStrings = {
   i18n_404,
   i18n_designer,
   i18n_login,
+  i18n_users,
 };
 
 export default allStrings;

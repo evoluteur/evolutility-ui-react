@@ -30,6 +30,10 @@ import {
   getSession,
   login,
   logout,
+  getUsers,
+  createUser,
+  updateUser,
+  deleteUser,
   getModelVersion,
   insertOne,
   saveModelDef,
@@ -67,6 +71,7 @@ export const queryKeys = {
   // - all models, loaded at startup (and after login)
   modelsBoot: (userId: number | null) => ["evol-meta", "boot", userId] as const,
   session: () => ["evol-auth", "session"] as const,
+  users: () => ["evol-auth", "users"] as const,
 };
 //#endregion
 
@@ -180,6 +185,38 @@ export const useLogout = () => {
     },
   });
 };
+
+// - users (admin role)
+export const useUsers = () =>
+  useQuery({
+    queryKey: queryKeys.users(),
+    queryFn: ({ signal }) => getUsers(signal),
+    staleTime: 0,
+  });
+
+const useUsersMutation = <T>(fn: (args: T) => Promise<unknown>) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: fn,
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: queryKeys.users() }),
+  });
+};
+
+export const useCreateUser = () => useUsersMutation(createUser);
+
+export const useUpdateUser = () =>
+  useUsersMutation(
+    ({
+      id,
+      changes,
+    }: {
+      id: number;
+      changes: Parameters<typeof updateUser>[1];
+    }) => updateUser(id, changes),
+  );
+
+export const useDeleteUser = () => useUsersMutation(deleteUser);
 
 // - load all the models (once logged in, if a login is needed)
 export const useModelsBoot = (enabled: boolean, userId: number | null) =>
@@ -330,6 +367,10 @@ const queries = {
   useLogin,
   useLogout,
   useModelsBoot,
+  useUsers,
+  useCreateUser,
+  useUpdateUser,
+  useDeleteUser,
   useModelDefs,
   useModelDef,
   useModelHistory,

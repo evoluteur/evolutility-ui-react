@@ -429,7 +429,9 @@ Users have a role (see [Users and Login](https://github.com/evoluteur/evolutilit
 - editor: also add, edit, and delete records,
 - admin: also edit models (Designer).
 
-Actions the role can't do are hidden (the server refuses them anyway). If the server allows anonymous visitors ("anonymousRole"), the app opens without login and shows a "Log in" link instead.
+Actions the role can't do are hidden (the server refuses them anyway).
+
+Admins manage users in the "Users" screen ("/users", link in the side bar): create users (with a password, or a generated one shown once), change their role, deactivate them, give them a new password, or delete them. If the server allows anonymous visitors ("anonymousRole"), the app opens without login and shows a "Log in" link instead.
 
 <a name="Backend"></a>
 ## Backend
