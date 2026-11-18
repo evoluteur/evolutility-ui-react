@@ -93,3 +93,38 @@ $topbar-height: 50px;
     display: none;
   }
 }
+
+// - user logged in, w/ "Log out" (or "Log in"), left of the theme toggle
+.evo-user {
+  position: absolute;
+  right: 96px;
+  top: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: $color-almostwhite !important;
+  font-size: 14px;
+  white-space: nowrap;
+  > span {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  > button {
+    border: 1px solid #757575;
+    border-radius: 4px;
+    background: none;
+    color: $color-almostwhite;
+    padding: 1px 8px;
+    cursor: pointer;
+    &:hover {
+      background-color: #424242;
+    }
+  }
+  @media (max-width: 600px) {
+    right: 46px;
+    > span {
+      display: none;
+    }
+  }
+}

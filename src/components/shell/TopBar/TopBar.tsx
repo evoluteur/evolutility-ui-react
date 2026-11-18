@@ -8,6 +8,7 @@ import config from "config";
 import ViewActions from "./ViewActions";
 import GitHubLink from "./GitHubLink";
 import ThemeToggle from "./ThemeToggle";
+import UserMenu from "./UserMenu";
 
 import "./TopBar.scss";
 
@@ -41,6 +42,7 @@ const TopBar = () => {
           <ViewActions entity={entity} view={view} id={id} />
         </div>
       )}
+      <UserMenu />
       <ThemeToggle />
       <GitHubLink />
     </nav>

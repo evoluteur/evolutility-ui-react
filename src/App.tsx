@@ -3,7 +3,7 @@
 // (c) 2026 Olivier Giulieri
 
 import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import classnames from "classnames";
 import { ToastContainer, Slide } from "react-toastify";
@@ -16,7 +16,9 @@ import TopBar from "components/shell/TopBar/TopBar";
 import Footer from "components/shell/Footer/Footer";
 import ErrorBoundary from "components/ErrorBoundary";
 
+import AuthGate from "components/shell/AuthGate/AuthGate";
 import Home from "pages/Home/Home";
+import Login from "pages/Login/Login";
 import PageNotFound from "pages/PageNotFound/PageNotFound";
 import DocRoutes from "routes/DocRoutes";
 import DemoRoutes from "routes/DemoRoutes";
@@ -33,9 +35,16 @@ import "components/ui/global.scss";
 
 const baseName = config.baseName || "/";
 
+// - login page for anonymous visitors (when the server allows them)
+const LoginRoute = () => {
+  const navigate = useNavigate();
+  return <Login onLogin={() => navigate("/")} />;
+};
+
 const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<Home />} />
+    <Route path="/login" element={<LoginRoute />} />
     <Route path="/docs/*" element={<DocRoutes />} />
     <Route path={`/${evoPath}/*`} element={<DemoRoutes />} />
     <Route path="/designer/*" element={<DesignerRoutes />} />
@@ -57,26 +66,28 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <div className={css} data-testid="app">
         <BrowserRouter basename={baseName}>
-          <Routes>
-            <Route
-              path="*"
-              element={
-                <>
-                  <TopBar />
-                  <SideBar onClickToggle={onClickToggle} />
-                </>
-              }
-            />
-          </Routes>
-          <div className="page-content" role="main">
-            {modelsError && (
-              <Alert title={i18n_errors.modelsError} message={modelsError} />
-            )}
-            <ErrorBoundary>
-              <AppRoutes />
-            </ErrorBoundary>
-          </div>
-          <Footer />
+          <AuthGate>
+            <Routes>
+              <Route
+                path="*"
+                element={
+                  <>
+                    <TopBar />
+                    <SideBar onClickToggle={onClickToggle} />
+                  </>
+                }
+              />
+            </Routes>
+            <div className="page-content" role="main">
+              {modelsError && (
+                <Alert title={i18n_errors.modelsError} message={modelsError} />
+              )}
+              <ErrorBoundary>
+                <AppRoutes />
+              </ErrorBoundary>
+            </div>
+            <Footer />
+          </AuthGate>
         </BrowserRouter>
         <ToastContainer autoClose={2000} transition={Slide} />
       </div>

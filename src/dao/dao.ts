@@ -38,6 +38,8 @@ import type {
 } from "types/model";
 import type { JSONSchema7 } from "json-schema";
 import type {
+  AuthUser,
+  Session,
   ModelDef,
   ModelVersion,
   SaveModelResult,
@@ -276,6 +278,17 @@ export async function getStats(
 
 //#region  ----- Models (stored on the server) ----------------------------
 
+//#region  ----- Login ----------------------------
+
+export const getSession = (signal?: AbortSignal) =>
+  apiGet<Session>("auth/me", { signal });
+
+export const login = (email: string, password: string) =>
+  apiPost<{ user: AuthUser }>("auth/login", { body: { email, password } });
+
+export const logout = () => apiPost<{ ok: boolean }>("auth/logout");
+//#endregion
+
 // - JSON Schema of the metamodel (to check models in the Designer)
 export const getModelSchema = (signal?: AbortSignal) =>
   apiGet<JSONSchema7>("meta/schema", { signal });
@@ -335,6 +348,9 @@ const dao = {
   getObjectSearch,
   getChart,
   getStats,
+  getSession,
+  login,
+  logout,
   getModelSchema,
   getModelDefs,
   getModelDef,

@@ -1,6 +1,7 @@
 import Alert from "components/ui/Alert/Alert";
 import Button from "components/ui/Button/Button";
 import { i18n_msg as i18n } from "i18n/i18n";
+import { useCan } from "utils/session";
 import type { Model } from "types/model";
 
 import "./EmptyState.scss";
@@ -12,6 +13,7 @@ export interface EmptyStateProps {
 }
 
 const EmptyState = ({ model, hasFilters = false }: EmptyStateProps) => {
+  const canWrite = useCan("editor");
   let msg = hasFilters ? i18n.noData : i18n.empty;
   msg = msg.replaceAll("{0}", model.namePlural);
   const content = (
@@ -20,7 +22,7 @@ const EmptyState = ({ model, hasFilters = false }: EmptyStateProps) => {
 
       {hasFilters && <div className="too-much">{i18n.newCriteria}</div>}
 
-      {!hasFilters && (
+      {!hasFilters && canWrite && (
         <Button
           url={"../" + model.id + "/edit/0"}
           icon="add"

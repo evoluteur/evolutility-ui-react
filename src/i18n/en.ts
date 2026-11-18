@@ -257,15 +257,18 @@ export const i18n_404: Record<string, string> = {
   badRoute: "Invalid route",
   msg: "Oops! The page you are looking for isn't here.",
 };
-/*
-    i18n_login: {
-        title: 'Login',
-        user: 'User',
-        password: 'Password',
-        btnLogin: 'Login',
-        invalid: 'Invalid username/password combination.',
-    },
-*/
+// --- login ---
+export const i18n_login: Record<string, string> = {
+  title: "Login",
+  intro: "Log in to use the apps.",
+  email: "Email",
+  password: "Password",
+  btnLogin: "Log in",
+  loggingIn: "Logging in...",
+  logout: "Log out",
+  login: "Log in",
+  required: "Email and password are required.",
+};
 
 const allStrings = {
   locale,
@@ -283,7 +286,7 @@ const allStrings = {
   i18n_errors,
   i18n_404,
   i18n_designer,
-  // i18n_login,
+  i18n_login,
 };
 
 export default allStrings;

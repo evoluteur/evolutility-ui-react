@@ -27,13 +27,17 @@ import {
   getModelDefs,
   getModelHistory,
   getModelSchema,
+  getSession,
+  login,
+  logout,
   getModelVersion,
   insertOne,
   saveModelDef,
   updateOne,
 } from "./dao";
 import { restToModel } from "./mapping";
-import { setModel, removeModel } from "utils/moMa";
+import { setModel, setModels, setModelsError, removeModel } from "utils/moMa";
+import { setSession } from "utils/session";
 import { staleTime } from "./queryClient";
 import type { RecordData } from "types/model";
 import type { ManyQueryOptions, ModelDef } from "types/api";
@@ -60,6 +64,9 @@ export const queryKeys = {
   modelDef: (id: string) => ["evol-meta", "models", id] as const,
   modelHistory: (id: string) => ["evol-meta", "models", id, "history"] as const,
   modelSchema: () => ["evol-meta", "schema"] as const,
+  // - all models, loaded at startup (and after login)
+  modelsBoot: (userId: number | null) => ["evol-meta", "boot", userId] as const,
+  session: () => ["evol-auth", "session"] as const,
 };
 //#endregion
 
@@ -129,6 +136,68 @@ export const useStats = (entity: string) =>
     queryKey: queryKeys.stats(entity),
     queryFn: ({ signal }) => getStats(entity, signal),
     enabled: !!entity,
+  });
+//#endregion
+
+//#region  ----- Login ----------------------------
+
+// - who is logged in (also kept in utils/session for the components)
+export const useSession = () =>
+  useQuery({
+    queryKey: queryKeys.session(),
+    queryFn: async ({ signal }) => {
+      const s = await getSession(signal);
+      setSession(s);
+      return s;
+    },
+    staleTime: Infinity,
+    retry: false,
+  });
+
+// - log in, then the models are loaded again (for this user)
+export const useLogin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ email, password }: { email: string; password: string }) =>
+      login(email, password),
+    onSuccess: ({ user }) => {
+      const s = { authEnabled: true, user, role: user.role };
+      setSession(s);
+      queryClient.setQueryData(queryKeys.session(), s);
+    },
+  });
+};
+
+// - log out: forget everything that was loaded for this user
+export const useLogout = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: logout,
+    onSuccess: () => {
+      queryClient.removeQueries({ queryKey: ["evol"] });
+      queryClient.removeQueries({ queryKey: ["evol-meta"] });
+      queryClient.invalidateQueries({ queryKey: queryKeys.session() });
+    },
+  });
+};
+
+// - load all the models (once logged in, if a login is needed)
+export const useModelsBoot = (enabled: boolean, userId: number | null) =>
+  useQuery({
+    queryKey: queryKeys.modelsBoot(userId),
+    queryFn: async ({ signal }) => {
+      try {
+        const defs = await getModelDefs(signal);
+        setModels((defs || []).map(restToModel));
+      } catch (err) {
+        console.error("Could not get the models from the server.", err);
+        setModelsError((err as Error).message);
+      }
+      return true;
+    },
+    enabled,
+    staleTime: Infinity,
+    retry: false,
   });
 //#endregion
 
@@ -257,6 +326,10 @@ const queries = {
   useStats,
   useSaveOne,
   useDeleteOne,
+  useSession,
+  useLogin,
+  useLogout,
+  useModelsBoot,
   useModelDefs,
   useModelDef,
   useModelHistory,

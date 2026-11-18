@@ -8,7 +8,7 @@
   (c) 2026 Olivier Giulieri
 */
 
-import { QueryClient } from "@tanstack/react-query";
+import { MutationCache, QueryCache, QueryClient } from "@tanstack/react-query";
 import config from "config";
 
 const { useCache, cacheDuration } = config;
@@ -19,7 +19,18 @@ export const staleTime = useCache ? (cacheDuration || 180) * 1000 : 0;
 // - time (in milliseconds) unused data stays in memory
 export const gcTime = Math.max(staleTime, 5 * 60 * 1000);
 
-export const queryClient = new QueryClient({
+// - session expired (or logged out elsewhere): check the session again, the
+//   app then shows the login page
+const sessionKey = ["evol-auth", "session"];
+const onError = (err: unknown) => {
+  if ((err as { status?: number })?.status === 401) {
+    queryClient.invalidateQueries({ queryKey: sessionKey });
+  }
+};
+
+export const queryClient: QueryClient = new QueryClient({
+  queryCache: new QueryCache({ onError }),
+  mutationCache: new MutationCache({ onError }),
   defaultOptions: {
     queries: {
       staleTime,

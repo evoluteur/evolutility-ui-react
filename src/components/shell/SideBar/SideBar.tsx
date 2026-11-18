@@ -3,6 +3,7 @@ import classnames from "classnames";
 import Icon from "components/ui/Icon/Icon";
 import { i18n_nav, i18n_designer } from "i18n/i18n";
 import { useModelsVersion } from "utils/moMa";
+import { useCan } from "utils/session";
 import {
   getDemosMenu,
   docMenus,
@@ -17,17 +18,30 @@ import docSVG from "./svg/book.svg";
 import "./SideBar.scss";
 
 // #region ------- Helpers ---------
-const ShortCuts = ({ entity }: { entity: string }) => (
+// - links shown only if the role allows them (editor: add, admin: edit model)
+const ShortCuts = ({
+  entity,
+  canAdd,
+  canDesign,
+}: {
+  entity: string;
+  canAdd: boolean;
+  canDesign: boolean;
+}) => (
   <div className="x-icons">
-    <Link to={`/${evoPath}/${entity}/edit/0`} aria-label="Add">
-      <Icon name="add2" size="small" theme="none" />
-    </Link>
+    {canAdd && (
+      <Link to={`/${evoPath}/${entity}/edit/0`} aria-label="Add">
+        <Icon name="add2" size="small" theme="none" />
+      </Link>
+    )}
     <Link to={`/${evoPath}/${entity}/list`} aria-label="List">
       <Icon name="list" size="small" theme="none" />
     </Link>
-    <Link to={`/designer/${entity}`} aria-label={i18n_designer.editModel}>
-      <Icon name="edit" size="small" theme="none" />
-    </Link>
+    {canDesign && (
+      <Link to={`/designer/${entity}`} aria-label={i18n_designer.editModel}>
+        <Icon name="edit" size="small" theme="none" />
+      </Link>
+    )}
   </div>
 );
 
@@ -60,6 +74,9 @@ const SideBar = ({ onClickToggle }: SideBarProps) => {
   // const { entity, view } = useParams(); // not  outside of evolutility routes
   const [entity, view] = useLocation().pathname.slice(1).split("/");
   useModelsVersion(); // - re-render when models change
+  const canAdd = useCan("editor");
+  const canDesign = useCan("admin");
+  const designer = canDesign ? hDesigner : null;
   const menuLinkDemo = (menu: DemoMenuItem) => (
     <li className={classnames({ active: menu.id === entity })} key={menu.id}>
       {sLink(
@@ -68,7 +85,7 @@ const SideBar = ({ onClickToggle }: SideBarProps) => {
         pixPath + menu.icon,
         "e-icon",
       )}
-      <ShortCuts entity={menu.id} />
+      <ShortCuts entity={menu.id} canAdd={canAdd} canDesign={canDesign} />
     </li>
   );
 
@@ -83,15 +100,15 @@ const SideBar = ({ onClickToggle }: SideBarProps) => {
 
   let title, links, menus;
   if (!entity) {
-    links = [hDemos, hDocs, hDesigner];
+    links = [hDemos, hDocs, designer];
   } else if (entity === "docs") {
     title = hDocs;
     menus = docMenus.map(menuLinkDoc);
-    links = [hDemos, hDesigner];
+    links = [hDemos, designer];
   } else {
     title = hDemos;
     menus = getDemosMenu().map(menuLinkDemo);
-    links = entity === "designer" ? hDocs : [hDocs, hDesigner];
+    links = entity === "designer" ? hDocs : [hDocs, designer];
   }
 
   return (

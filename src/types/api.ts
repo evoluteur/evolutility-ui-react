@@ -72,6 +72,24 @@ export interface SaveModelResult {
   dryRun: boolean;
 }
 
+// - Login
+export type Role = "viewer" | "editor" | "admin";
+
+export interface AuthUser {
+  id: number;
+  email: string;
+  name?: string | null;
+  role: Role;
+}
+
+// - Answer of "auth/me": the user (null if not logged in) and the role of
+//   the requests (the user's role, or the role given to anonymous visitors)
+export interface Session {
+  authEnabled: boolean;
+  user: AuthUser | null;
+  role: Role | null;
+}
+
 export interface ModelVersion {
   version: number;
   savedAt: string;

@@ -102,6 +102,8 @@ async function request<T>(
       headers: jsonHeaders,
       body: body === undefined ? undefined : JSON.stringify(body),
       signal,
+      // - send the session cookie (login) to the API
+      credentials: "include",
     });
   } catch (err) {
     if ((err as Error)?.name === "AbortError") {

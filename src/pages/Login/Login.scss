@@ -1,0 +1,25 @@
+.evo-login {
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;
+  > form {
+    width: 100%;
+    max-width: 360px;
+    padding: 24px 28px;
+    border: 1px solid var(--evo-border);
+    border-radius: 8px;
+    background-color: var(--evo-bg);
+    > h1 {
+      margin-top: 0;
+    }
+    > label {
+      display: block;
+      margin: 14px 0 4px;
+      color: var(--evo-label);
+    }
+    > button {
+      margin-top: 20px;
+      width: 100%;
+    }
+  }
+}

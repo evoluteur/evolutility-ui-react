@@ -8,6 +8,7 @@
 import { useState, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "components/ui/Modal/Modal";
+import { useCan } from "utils/session";
 import { toast } from "react-toastify";
 import Icon from "components/ui/Icon/Icon";
 import { evoPath, capitalize } from "utils/format";
@@ -62,6 +63,7 @@ const ViewActions = ({ entity, id }: ViewActionsProps) => {
   const navigate = useNavigate();
   const isNew = id === "0";
   const deleteOne = useDeleteOne(entity);
+  const canWrite = useCan("editor");
 
   const confirmDelete = () => {
     setDeleteConfirmation(true);
@@ -108,7 +110,7 @@ const ViewActions = ({ entity, id }: ViewActionsProps) => {
     );
 
   const actionIcons: ReactNode[] = [];
-  if (m && !m.readOnly) {
+  if (m && !m.readOnly && canWrite) {
     const label = newEntity(m);
     actionIcons.push(
       <Link to={`/${evoPath}/${entity}/edit/0`} key="new" aria-label={label}>
@@ -116,7 +118,7 @@ const ViewActions = ({ entity, id }: ViewActionsProps) => {
       </Link>,
     );
   }
-  if (id && !isNew) {
+  if (id && !isNew && canWrite) {
     actionIcons.push(buttonLink(menuItems.del, confirmDelete));
   }
 

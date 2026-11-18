@@ -16,8 +16,9 @@ Check out the [live demos](https://evoluteur.github.io/evodemo/#/demos).
 3. [Views](#Views) for [One](#ViewsOne), [Many](#ViewsMany) records, and for [Comfort](#ViewsComfort)
 4. [Models](#Models)
 5. [Designer](#Designer)
-6. [Backend](#Backend)
-7. [License](#License)
+6. [Login](#Login)
+7. [Backend](#Backend)
+8. [License](#License)
 
 <a name="Installation"></a>
 ## Installation
@@ -415,7 +416,20 @@ The Designer edits the models stored on the server, directly in the app. It is a
 - Older versions of a model can be loaded in the editor (and saved again to restore them).
 - If someone else saved the model in between, saving is refused: reload the model to get the latest version.
 
-Editing models requires the option "apiDesigner" in the server configuration.
+Editing models requires the option "apiDesigner" in the server configuration, and the admin role.
+
+<a name="Login"></a>
+## Login
+
+When the server requires a login, the app shows a login page first, then loads the models. The user and a "Log out" button are shown in the top bar. When the session expires, the login page is shown again. After a successful login, the browser offers to save the password (Chrome and Edge are told explicitly, w/ the Credential Management API, which needs HTTPS or localhost).
+
+Users have a role (see [Users and Login](https://github.com/evoluteur/evolutility-server-node#Auth) in the server documentation):
+
+- viewer: read records,
+- editor: also add, edit, and delete records,
+- admin: also edit models (Designer).
+
+Actions the role can't do are hidden (the server refuses them anyway). If the server allows anonymous visitors ("anonymousRole"), the app opens without login and shows a "Log in" link instead.
 
 <a name="Backend"></a>
 ## Backend
@@ -438,6 +452,7 @@ psql -d evolutility -f dist/db/sql/001_create_db_{datetime}.sql
 psql -d evolutility -f dist/db/sql/002_seed_data_{datetime}.sql
 psql -d evolutility -f dist/db/sql/003_create_models_{datetime}.sql
 psql -d evolutility -f dist/db/sql/004_seed_models_{datetime}.sql
+psql -d evolutility -f dist/db/sql/005_create_users_{datetime}.sql
 ```
 
 4. In the server's ./config.ts file, set the "connectionString" and the "schema" to access your database.
@@ -446,6 +461,11 @@ psql -d evolutility -f dist/db/sql/004_seed_models_{datetime}.sql
 ```bash
 # Install dependencies
 npm install
+
+# Create your user (the password is shown once)
+npm run user:add -- you@example.com admin
+# or with your name and password
+npm run user:add -- you@example.com admin --name="Your Name" --password=a-long-password
 
 # Run the REST API on http://localhost:2000/api/v1/
 npm start
