@@ -1,6 +1,6 @@
 @import "variables";
 
-$bgcolor-menu-hover: #1a75c4; // #1e88e5;
+$bgcolor-menu-hover: var(--evo-sidebar-hover);
 $nav-width: 190px;
 $nav-width-collapsed: 50px;
 $nav-trans-time: 0.1s;
@@ -17,6 +17,7 @@ $topbar-height: 50px;
   overflow: hidden;
   transition: width $nav-trans-time ease;
   color: $color-almostwhite;
+  --evo-sidebar-hover: #1a75c4; // #1e88e5;
   border-right: 1px solid #e0e0e0;
   background: #1976d2 url("./spirals.png");
   user-select: none;
@@ -201,4 +202,11 @@ a.skipNav {
 #afterNav {
   height: 0;
   width: 0;
+}
+
+// - dark mode: same spirals, darker
+[data-theme="dark"] .evo-sidebar {
+  --evo-sidebar-hover: #1f4a78;
+  border-right-color: var(--evo-border);
+  background: #16324f url("./spirals-dark.png");
 }
