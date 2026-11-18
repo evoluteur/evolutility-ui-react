@@ -9,13 +9,7 @@
 */
 
 // #region ---------------- Imports ----------------
-import {
-  useEffect,
-  useState,
-  useMemo,
-  useCallback,
-  type MouseEvent,
-} from "react";
+import { useEffect, useMemo, useCallback, type MouseEvent } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 
 import { i18n_msg, i18n_errors } from "i18n/i18n";
@@ -52,8 +46,6 @@ const Many = () => {
   const { search } = useLocation();
   const navigate = useNavigate();
   const model = getModel(entity);
-  const [sortDirection, setSortDirection] = useState("asc");
-  const [sortField, setSortField] = useState(model?.fields?.[0]?.id);
   const title =
     view === "cards"
       ? i18n_msg.cardsTitle.replace("{0}", capitalize(model?.namePlural || ""))
@@ -63,6 +55,11 @@ const Many = () => {
     () => (url.parseQuery(search) || {}) as ManyQueryOptions,
     [search],
   );
+
+  // - sort from the url ("?order=title.desc"), first field by default
+  const [orderField, orderDirection] = String(query.order || "").split(".");
+  const sortField = query.order ? orderField : model?.fields?.[0]?.id;
+  const sortDirection = query.order ? orderDirection || "asc" : "asc";
 
   const { data, isPending, error } = useMany(entity as string, query);
   const rows = data && data.entity === entity ? data.rows : null;
@@ -79,13 +76,6 @@ const Many = () => {
   }, [title]);
 
   useEffect(() => {
-    if (!query.order) {
-      setSortDirection("asc");
-      setSortField(model?.fields?.[0]?.id);
-    }
-  }, [entity, search]);
-
-  useEffect(() => {
     window.scrollTo(0, 0);
   }, [entity, search]);
 
@@ -97,9 +87,7 @@ const Many = () => {
         direc = sortDirection === "asc" ? "desc" : "asc";
       } else {
         direc = "asc";
-        setSortField(fid);
       }
-      setSortDirection(direc);
       const newQuery: ManyQueryOptions = {
         ...query,
         order: fid + "." + direc,
