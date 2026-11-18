@@ -15,10 +15,11 @@ import {
   useSaveModelDef,
 } from "dao/queries";
 import { ApiError } from "dao/api";
-import { i18n_designer as i18n } from "i18n/i18n";
+import { i18n_actions, i18n_designer as i18n } from "i18n/i18n";
 import { evoPath } from "utils/format";
 import Alert from "components/ui/Alert/Alert";
 import Button from "components/ui/Button/Button";
+import Modal from "components/ui/Modal/Modal";
 import Spinner from "components/ui/Spinner/Spinner";
 import { modelToText, newModelTemplate, textToModel } from "../designerUtils";
 import type { ModelDef, SaveModelResult } from "types/api";
@@ -57,6 +58,7 @@ const ModelEdit = () => {
   const text =
     edited && edited.source === source ? edited.text : modelToText(source);
   const [feedback, setFeedback] = useState<Feedback | null>(null);
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
 
   useEffect(() => {
     document.title = `Evolutility ${i18n.title} - ${isNew ? i18n.newModel : id}`;
@@ -114,16 +116,17 @@ const ModelEdit = () => {
     );
   };
 
+  const closeModal = () => setDeleteConfirmation(false);
+
   const onDelete = () => {
-    if (window.confirm(fill(i18n.deleteConfirm, id))) {
-      deleteModel.mutate(id, {
-        onSuccess: () => {
-          toast.success(fill(i18n.deleted, id));
-          navigate("/designer");
-        },
-        onError,
-      });
-    }
+    closeModal();
+    deleteModel.mutate(id, {
+      onSuccess: () => {
+        toast.success(fill(i18n.deleted, id));
+        navigate("/designer");
+      },
+      onError,
+    });
   };
 
   const onReload = () => {
@@ -202,7 +205,11 @@ const ModelEdit = () => {
                 ))}
               </select>
             )}
-            <Button label={i18n.delete} icon="delete" onClick={onDelete} />
+            <Button
+              label={i18n.delete}
+              icon="delete"
+              onClick={() => setDeleteConfirmation(true)}
+            />
           </>
         )}
         {(saveModel.isPending || deleteModel.isPending) && <Spinner />}
@@ -258,6 +265,25 @@ const ModelEdit = () => {
           }
         />
       )}
+
+      <Modal
+        isOpen={deleteConfirmation}
+        onClose={closeModal}
+        title={i18n.delete}
+        width={360}
+        footer={
+          <>
+            <Button
+              onClick={closeModal}
+              type="default"
+              label={i18n_actions.cancel}
+            />
+            <Button onClick={onDelete} type="primary" label={i18n_actions.ok} />
+          </>
+        }
+      >
+        {fill(i18n.deleteConfirm, id)}
+      </Modal>
 
       <textarea
         className="form-control evo-designer-json"

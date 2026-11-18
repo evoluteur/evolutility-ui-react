@@ -130,4 +130,33 @@ describe("ModelEdit", () => {
       await screen.findByText('fields[0].column: letters only ("a b")'),
     ).toBeTruthy();
   });
+
+  it("asks for confirmation in a dialog before deleting", async () => {
+    const fields = [
+      { id: "title", type: "text", label: "Title", inMany: true },
+    ];
+    mockFetch((url, method) => {
+      if (url.includes("/history")) return [];
+      if (method === "DELETE") return { id: "todo" };
+      return {
+        id: "todo",
+        name: "task",
+        namePlural: "tasks",
+        fields,
+        _version: 1,
+      };
+    });
+    renderAt("/designer/todo");
+    const [deleteButton] = await screen.findAllByText("Delete model");
+    fireEvent.click(deleteButton.closest("button")!);
+    const dialog = screen.getByTestId("modal") as HTMLDialogElement;
+    expect(dialog.open).toBe(true);
+    expect(dialog).toHaveTextContent('Delete model "todo"?');
+    expect(calls.some((c) => c.method === "DELETE")).toBe(false);
+    fireEvent.click(screen.getByText("OK"));
+    await vi.waitFor(() =>
+      expect(calls.some((c) => c.method === "DELETE")).toBe(true),
+    );
+    expect(dialog.open).toBe(false);
+  });
 });
