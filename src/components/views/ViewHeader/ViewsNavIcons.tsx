@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Icon from "components/ui/Icon/Icon";
 import { getModel } from "utils/moMa";
+import { useCan } from "utils/session";
 import { views, modelViewsAnalytics, type ViewInfo } from "utils/dicoViews";
 
 export interface ViewsNavIconsProps {
@@ -20,12 +21,14 @@ const ViewsNavIcons = ({
   entity,
   params = "",
 }: ViewsNavIconsProps) => {
+  const canWrite = useCan("editor");
   let iconViews: ViewInfo[] = [];
   if (view === "overview" || view === "activity") {
     return null;
   }
   if (view === "edit" || view === "browse") {
-    if (!id || id === "0") {
+    // - no toggle w/ Browse only (role w/o editing)
+    if (!id || id === "0" || !canWrite) {
       return null;
     } else {
       iconViews = [views.edit, views.browse];

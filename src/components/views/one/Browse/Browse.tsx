@@ -9,6 +9,7 @@
 import { useParams } from "react-router-dom";
 import { i18n_actions } from "i18n/i18n";
 import { fieldId2Field } from "utils/dico";
+import { useCan } from "utils/session";
 import Button from "components/ui/Button/Button";
 import Field from "components/Field/Field";
 import Panel from "components/ui/Panel/Panel";
@@ -26,6 +27,7 @@ export interface BrowseProps {
 
 const Browse = ({ entity, model, data }: BrowseProps) => {
   const { id = 0 } = useParams<{ id: string }>();
+  const canWrite = useCan("editor");
 
   const fnFieldReadOnly = (f: FieldDef | undefined) => {
     if (f) {
@@ -76,12 +78,14 @@ const Browse = ({ entity, model, data }: BrowseProps) => {
             type="default"
             label={i18n_actions.cancel}
           />
-          <Button
-            icon="edit"
-            url={`../${entity}/edit/${id}`}
-            type="primary"
-            label={i18n_actions.edit}
-          />
+          {canWrite && !model.readOnly && (
+            <Button
+              icon="edit"
+              url={`../${entity}/edit/${id}`}
+              type="primary"
+              label={i18n_actions.edit}
+            />
+          )}
         </div>
       </div>
     </div>

@@ -23,6 +23,7 @@ import PageNotFound from "pages/PageNotFound/PageNotFound";
 import DemoRoutes from "routes/DemoRoutes";
 import Alert from "components/ui/Alert/Alert";
 import Spinner from "components/ui/Spinner/Spinner";
+import RequireRole from "components/shell/RequireRole/RequireRole";
 import { i18n_errors } from "i18n/i18n";
 import { modelsError, useModelsVersion } from "utils/moMa";
 
@@ -61,17 +62,21 @@ const AppRoutes = () => (
     <Route
       path="/users"
       element={
-        <Suspense fallback={<Spinner />}>
-          <Users />
-        </Suspense>
+        <RequireRole role="admin">
+          <Suspense fallback={<Spinner />}>
+            <Users />
+          </Suspense>
+        </RequireRole>
       }
     />
     <Route
       path="/designer/*"
       element={
-        <Suspense fallback={<Spinner />}>
-          <DesignerRoutes />
-        </Suspense>
+        <RequireRole role="admin">
+          <Suspense fallback={<Spinner />}>
+            <DesignerRoutes />
+          </Suspense>
+        </RequireRole>
       }
     />
     <Route path="*" element={<PageNotFound />} />

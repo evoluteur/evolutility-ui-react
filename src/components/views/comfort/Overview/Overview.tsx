@@ -3,6 +3,7 @@ import { useState, useEffect, type ReactNode, type ChangeEvent } from "react";
 import { Link, useParams } from "react-router-dom";
 import Icon from "components/ui/Icon/Icon";
 import { getModel } from "utils/moMa";
+import { useCan } from "utils/session";
 import { fieldInCharts } from "utils/dico";
 import { views } from "utils/dicoViews";
 import { capitalize } from "utils/format";
@@ -41,9 +42,11 @@ const ViewLink = ({
 const Actions = ({
   model: m,
   urlBegin,
+  canWrite,
 }: {
   model: Model;
   urlBegin: string;
+  canWrite: boolean;
 }) => (
   <div className="ovw-actions">
     <div>
@@ -54,20 +57,23 @@ const Actions = ({
       {!m.noCharts && <ViewLink urlBegin={urlBegin} {...views.charts} />}
       {!m.noStats && <ViewLink urlBegin={urlBegin} {...views.stats} />}
     </div>
-    <div>
-      <ViewLink
-        urlBegin={urlBegin}
-        id="edit/0"
-        label={"New " + m.name}
-        icon="add"
-      />
-    </div>
+    {canWrite && !m.readOnly && (
+      <div>
+        <ViewLink
+          urlBegin={urlBegin}
+          id="edit/0"
+          label={"New " + m.name}
+          icon="add"
+        />
+      </div>
+    )}
   </div>
 );
 
 const Overview = () => {
   const { entity } = useParams<{ entity: string }>();
   const m = getModel(entity);
+  const canWrite = useCan("editor");
   const title = capitalize(m?.namePlural) + " " + i18n.overview;
 
   useEffect(() => {
@@ -99,7 +105,7 @@ const Overview = () => {
     const placeHolder = i18n.searchX.replace("{0}", m.namePlural);
     const body = (
       <div className="ovw-body">
-        <Actions model={m} urlBegin={urlBegin} />
+        <Actions model={m} urlBegin={urlBegin} canWrite={canWrite} />
         <SearchBox entity={entity as string} placeHolder={placeHolder} />
         <div className="ovw-text"></div>
         <div className="cols-2">

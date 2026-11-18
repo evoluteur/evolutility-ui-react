@@ -9,6 +9,7 @@ import { memo } from "react";
 import Icon from "components/ui/Icon/Icon";
 import { Link } from "react-router-dom";
 import { getModel } from "utils/moMa";
+import { useCan } from "utils/session";
 import { pixPath } from "utils/format";
 import { i18n_actions } from "i18n/i18n";
 import { fieldTypes as ft } from "utils/dico";
@@ -31,6 +32,7 @@ const Card = memo(({ entity, data, fields, onDelete }: CardProps) => {
   const m = getModel(entity)!;
   const linkBrowse = `../${entity}/${m.defaultViewOne || "browse"}/`;
   const linkEdit = `../${entity}/edit/`;
+  const canWrite = useCan("editor");
 
   return (
     <div className="panel">
@@ -48,10 +50,16 @@ const Card = memo(({ entity, data, fields, onDelete }: CardProps) => {
                 </Link>
               </h2>
               <div className="card-actions noprint">
-                <Link to={linkEdit + d.id} aria-label={i18n_actions.edit}>
-                  <Icon name="edit" size="small" tooltip={i18n_actions.edit} />
-                </Link>
-                {onDelete && !m.readOnly && (
+                {canWrite && (
+                  <Link to={linkEdit + d.id} aria-label={i18n_actions.edit}>
+                    <Icon
+                      name="edit"
+                      size="small"
+                      tooltip={i18n_actions.edit}
+                    />
+                  </Link>
+                )}
+                {onDelete && !m.readOnly && canWrite && (
                   <button
                     type="button"
                     aria-label={i18n_actions.delete1}

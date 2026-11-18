@@ -208,6 +208,8 @@ export const i18n_errors: Record<string, string> = {
   badEntity: 'Model "{0}" not found.',
   badUpload: "Error uploading file.",
   badDelete: "Couldn't delete {0}.",
+  notAllowed: "Not allowed",
+  roleNeeded: "This page needs the {0} role.",
   modelsError:
     "Could not get the models from the server. Check that evolutility-server-node is running and its database has the models.",
 };
