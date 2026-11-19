@@ -27,10 +27,12 @@ interface AlertProps {
 
 const Alert = memo(({ title = null, message, type = "danger" }: AlertProps) => (
   <div className={"alert alert-" + type} role="alert" data-testid="alert">
-    <h3 className="alert-title">
-      {title && icon(type)}
-      <strong>{title}</strong>
-    </h3>
+    {title && (
+      <h3 className="alert-title">
+        {icon(type)}
+        <strong>{title}</strong>
+      </h3>
+    )}
     <div>{message}</div>
   </div>
 ));
