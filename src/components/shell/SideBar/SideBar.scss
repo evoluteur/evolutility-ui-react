@@ -204,9 +204,9 @@ a.skipNav {
   width: 0;
 }
 
-// - dark mode: same spirals, darker
+// - dark mode: plain dark background
 [data-theme="dark"] .evo-sidebar {
   --evo-sidebar-hover: #1f4a78;
   border-right-color: var(--evo-border);
-  background: #16324f url("./spirals-dark.png");
+  background: #16324f;
 }
