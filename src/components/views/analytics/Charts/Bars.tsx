@@ -3,7 +3,13 @@
 import { useMemo } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import type { ChartCommonProps } from "./chartProps";
-import { colors, labelColor, innerLabelColor, gridColor } from "./chartOptions";
+import {
+  colors,
+  labelColor,
+  innerLabelColor,
+  gridColor,
+  tooltipTheme,
+} from "./chartOptions";
 
 const theme = {
   axis: {
@@ -12,6 +18,7 @@ const theme = {
   grid: {
     line: { stroke: gridColor },
   },
+  tooltip: tooltipTheme,
 };
 
 const Bars = ({ data = [], showLegend = true }: ChartCommonProps) => {
@@ -71,6 +78,12 @@ const Bars = ({ data = [], showLegend = true }: ChartCommonProps) => {
             : []
         }
         theme={theme}
+        tooltip={({ id, value, color }) => (
+          <div className="evo-chart-tooltip">
+            <span className="chip" style={{ background: color }} />
+            {id}: <strong>{value}</strong>
+          </div>
+        )}
         animate={false}
         role="application"
         ariaLabel="Bar chart"

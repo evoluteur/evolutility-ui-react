@@ -2,7 +2,14 @@
 
 import { ResponsivePie } from "@nivo/pie";
 import type { ChartCommonProps } from "./chartProps";
-import { colors, labelColor, innerLabelColor } from "./chartOptions";
+import {
+  colors,
+  labelColor,
+  innerLabelColor,
+  tooltipTheme,
+} from "./chartOptions";
+
+const theme = { tooltip: tooltipTheme };
 
 const Pie = ({ data = [], showLegend = true }: ChartCommonProps) => {
   const pData =
@@ -19,6 +26,7 @@ const Pie = ({ data = [], showLegend = true }: ChartCommonProps) => {
         padAngle={0.7}
         cornerRadius={3}
         colors={colors}
+        theme={theme}
         borderWidth={1}
         borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
         arcLinkLabelsSkipAngle={10}

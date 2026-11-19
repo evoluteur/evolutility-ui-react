@@ -173,3 +173,22 @@ $chart-gap: 5px;
   height: 30px;
   width: 100px;
 }
+
+// - bar tooltip: same look as nivo's pie tooltip ("label: value")
+.evo-chart-tooltip {
+  background: var(--evo-bg);
+  color: var(--evo-text);
+  border: 1px solid var(--evo-border);
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  padding: 5px 9px;
+  display: flex;
+  align-items: center;
+  white-space: pre;
+  .chip {
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin-right: 7px;
+  }
+}
